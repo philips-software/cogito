@@ -1,7 +1,8 @@
 //  Copyright © 2017 Konkinklijke Philips Nederland N.V. All rights reserved.
 
-import XCTest
+import Quick
+import Nimble
 @testable import Cogito
 
-class CogitoTests: XCTestCase {
+class CogitoSpec: QuickSpec {
 }

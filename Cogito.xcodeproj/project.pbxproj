@@ -12,7 +12,9 @@
 		027603F41F6ACD1600788B0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F21F6ACD1600788B0A /* Main.storyboard */; };
 		027603F61F6ACD1600788B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027603F51F6ACD1600788B0A /* Assets.xcassets */; };
 		027603F91F6ACD1600788B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F71F6ACD1600788B0A /* LaunchScreen.storyboard */; };
-		027604041F6ACD1600788B0A /* CogitoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027604031F6ACD1600788B0A /* CogitoTests.swift */; };
+		027604041F6ACD1600788B0A /* CogitoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027604031F6ACD1600788B0A /* CogitoSpec.swift */; };
+		664F351D3708D4E7628F31DC /* Pods_CogitoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26098C2F14620C30766F58FF /* Pods_CogitoTests.framework */; };
+		702184F6BDE2F6D4C3CD88A8 /* Pods_Cogito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AFE203118FADCF2E95B010C /* Pods_Cogito.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,8 +36,14 @@
 		027603F81F6ACD1600788B0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		027603FA1F6ACD1600788B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		027603FF1F6ACD1600788B0A /* CogitoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CogitoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		027604031F6ACD1600788B0A /* CogitoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CogitoTests.swift; sourceTree = "<group>"; };
+		027604031F6ACD1600788B0A /* CogitoSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CogitoSpec.swift; sourceTree = "<group>"; };
 		027604051F6ACD1600788B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		141F8738BF2843FFB9828AEE /* Pods-CogitoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CogitoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CogitoTests/Pods-CogitoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		26098C2F14620C30766F58FF /* Pods_CogitoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CogitoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AFE203118FADCF2E95B010C /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9AAD33D66EF87AF87DDAE06 /* Pods-Cogito.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito/Pods-Cogito.release.xcconfig"; sourceTree = "<group>"; };
+		D0DF703A555EAB68DC71524C /* Pods-CogitoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CogitoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CogitoTests/Pods-CogitoTests.release.xcconfig"; sourceTree = "<group>"; };
+		FC1AB853969A167D69175A44 /* Pods-Cogito.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito/Pods-Cogito.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				702184F6BDE2F6D4C3CD88A8 /* Pods_Cogito.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				664F351D3708D4E7628F31DC /* Pods_CogitoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +72,8 @@
 				027603ED1F6ACD1600788B0A /* Cogito */,
 				027604021F6ACD1600788B0A /* CogitoTests */,
 				027603EC1F6ACD1600788B0A /* Products */,
+				3A79E7E0844C09F4AC7EC7BF /* Pods */,
+				3BEF5E13AE8729DDFC9A3B0D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,10 +102,30 @@
 		027604021F6ACD1600788B0A /* CogitoTests */ = {
 			isa = PBXGroup;
 			children = (
-				027604031F6ACD1600788B0A /* CogitoTests.swift */,
+				027604031F6ACD1600788B0A /* CogitoSpec.swift */,
 				027604051F6ACD1600788B0A /* Info.plist */,
 			);
 			path = CogitoTests;
+			sourceTree = "<group>";
+		};
+		3A79E7E0844C09F4AC7EC7BF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FC1AB853969A167D69175A44 /* Pods-Cogito.debug.xcconfig */,
+				B9AAD33D66EF87AF87DDAE06 /* Pods-Cogito.release.xcconfig */,
+				141F8738BF2843FFB9828AEE /* Pods-CogitoTests.debug.xcconfig */,
+				D0DF703A555EAB68DC71524C /* Pods-CogitoTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		3BEF5E13AE8729DDFC9A3B0D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4AFE203118FADCF2E95B010C /* Pods_Cogito.framework */,
+				26098C2F14620C30766F58FF /* Pods_CogitoTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -103,9 +135,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 027604081F6ACD1600788B0A /* Build configuration list for PBXNativeTarget "Cogito" */;
 			buildPhases = (
+				CA0176377132D37BDE0F55E2 /* [CP] Check Pods Manifest.lock */,
 				027603E71F6ACD1600788B0A /* Sources */,
 				027603E81F6ACD1600788B0A /* Frameworks */,
 				027603E91F6ACD1600788B0A /* Resources */,
+				5B2F56C6A3FB98B6C88F89EE /* [CP] Embed Pods Frameworks */,
+				2B39218DB54D282527639761 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -120,9 +155,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0276040B1F6ACD1600788B0A /* Build configuration list for PBXNativeTarget "CogitoTests" */;
 			buildPhases = (
+				9788FC492981DABF39A24A24 /* [CP] Check Pods Manifest.lock */,
 				027603FB1F6ACD1600788B0A /* Sources */,
 				027603FC1F6ACD1600788B0A /* Frameworks */,
 				027603FD1F6ACD1600788B0A /* Resources */,
+				2F34023F9E01FFE1B41956DB /* [CP] Embed Pods Frameworks */,
+				EA17E78540700FACA6325702 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -194,6 +232,110 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2B39218DB54D282527639761 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cogito/Pods-Cogito-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2F34023F9E01FFE1B41956DB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CogitoTests/Pods-CogitoTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CogitoTests/Pods-CogitoTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B2F56C6A3FB98B6C88F89EE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cogito/Pods-Cogito-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9788FC492981DABF39A24A24 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CogitoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA0176377132D37BDE0F55E2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cogito-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA17E78540700FACA6325702 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CogitoTests/Pods-CogitoTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		027603E71F6ACD1600788B0A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -208,7 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				027604041F6ACD1600788B0A /* CogitoTests.swift in Sources */,
+				027604041F6ACD1600788B0A /* CogitoSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +493,7 @@
 		};
 		027604091F6ACD1600788B0A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC1AB853969A167D69175A44 /* Pods-Cogito.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -366,6 +509,7 @@
 		};
 		0276040A1F6ACD1600788B0A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9AAD33D66EF87AF87DDAE06 /* Pods-Cogito.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -381,6 +525,7 @@
 		};
 		0276040C1F6ACD1600788B0A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 141F8738BF2843FFB9828AEE /* Pods-CogitoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -398,6 +543,7 @@
 		};
 		0276040D1F6ACD1600788B0A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0DF703A555EAB68DC71524C /* Pods-CogitoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
