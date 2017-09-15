@@ -3,6 +3,7 @@ platform :ios, '11.0'
 target 'Cogito' do
   use_frameworks!
 
+  pod 'ReSwift', :git => 'https://github.com/svdo/ReSwift', :branch => 'mjarvis/swift-4'
 
   target 'CogitoTests' do
     inherit! :search_paths
