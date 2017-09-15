@@ -38,6 +38,7 @@
 		027603FF1F6ACD1600788B0A /* CogitoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CogitoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		027604031F6ACD1600788B0A /* CogitoSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CogitoSpec.swift; sourceTree = "<group>"; };
 		027604051F6ACD1600788B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0276040E1F6BFF6D00788B0A /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		141F8738BF2843FFB9828AEE /* Pods-CogitoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CogitoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CogitoTests/Pods-CogitoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		26098C2F14620C30766F58FF /* Pods_CogitoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CogitoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AFE203118FADCF2E95B010C /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +70,7 @@
 		027603E21F6ACD1600788B0A = {
 			isa = PBXGroup;
 			children = (
+				0276040E1F6BFF6D00788B0A /* Readme.md */,
 				027603ED1F6ACD1600788B0A /* Cogito */,
 				027604021F6ACD1600788B0A /* CogitoTests */,
 				027603EC1F6ACD1600788B0A /* Products */,
