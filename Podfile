@@ -4,6 +4,7 @@ target 'Cogito' do
   use_frameworks!
 
   pod 'ReSwift', :git => 'https://github.com/svdo/ReSwift', :branch => 'mjarvis/swift-4'
+  pod 'MarqueeLabel', '~> 3.1'
 
   target 'CogitoTests' do
     inherit! :search_paths
