@@ -4,5 +4,8 @@ import Quick
 import Nimble
 @testable import Cogito
 
-class CogitoSpec: QuickSpec {
+class KeyStoreReducerSpec: QuickSpec {
+    override func spec() {
+
+    }
 }
