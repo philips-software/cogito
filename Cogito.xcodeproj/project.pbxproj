@@ -13,6 +13,9 @@
 		027603F61F6ACD1600788B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027603F51F6ACD1600788B0A /* Assets.xcassets */; };
 		027603F91F6ACD1600788B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F71F6ACD1600788B0A /* LaunchScreen.storyboard */; };
 		027604041F6ACD1600788B0A /* CogitoSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027604031F6ACD1600788B0A /* CogitoSpec.swift */; };
+		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
+		02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792321F6FFBF700DC5973 /* AppReducer.swift */; };
+		02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792341F6FFBFF00DC5973 /* AppStore.swift */; };
 		664F351D3708D4E7628F31DC /* Pods_CogitoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26098C2F14620C30766F58FF /* Pods_CogitoTests.framework */; };
 		702184F6BDE2F6D4C3CD88A8 /* Pods_Cogito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AFE203118FADCF2E95B010C /* Pods_Cogito.framework */; };
 /* End PBXBuildFile section */
@@ -39,6 +42,9 @@
 		027604031F6ACD1600788B0A /* CogitoSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CogitoSpec.swift; sourceTree = "<group>"; };
 		027604051F6ACD1600788B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0276040E1F6BFF6D00788B0A /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		02E792301F6FFBAD00DC5973 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		02E792321F6FFBF700DC5973 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
+		02E792341F6FFBFF00DC5973 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		141F8738BF2843FFB9828AEE /* Pods-CogitoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CogitoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CogitoTests/Pods-CogitoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		26098C2F14620C30766F58FF /* Pods_CogitoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CogitoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AFE203118FADCF2E95B010C /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +97,9 @@
 		027603ED1F6ACD1600788B0A /* Cogito */ = {
 			isa = PBXGroup;
 			children = (
+				02E792341F6FFBFF00DC5973 /* AppStore.swift */,
+				02E792301F6FFBAD00DC5973 /* AppState.swift */,
+				02E792321F6FFBF700DC5973 /* AppReducer.swift */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
 				027603F01F6ACD1600788B0A /* ViewController.swift */,
 				027603F21F6ACD1600788B0A /* Main.storyboard */,
@@ -348,7 +357,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
+				02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */,
 				027603F11F6ACD1600788B0A /* ViewController.swift in Sources */,
+				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
