@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0205E3671F7012E1003A9787 /* Geth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3661F7012E1003A9787 /* Geth.swift */; };
+		0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3661F7012E1003A9787 /* KeyStore.swift */; };
 		0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3681F71481C003A9787 /* KeyStoreActions.swift */; };
 		0205E36B1F71489E003A9787 /* KeyStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E36A1F71489E003A9787 /* KeyStoreMock.swift */; };
 		027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603EE1F6ACD1600788B0A /* AppDelegate.swift */; };
@@ -34,7 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0205E3661F7012E1003A9787 /* Geth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geth.swift; sourceTree = "<group>"; };
+		0205E3661F7012E1003A9787 /* KeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStore.swift; sourceTree = "<group>"; };
 		0205E3681F71481C003A9787 /* KeyStoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreActions.swift; sourceTree = "<group>"; };
 		0205E36A1F71489E003A9787 /* KeyStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreMock.swift; sourceTree = "<group>"; };
 		027603EB1F6ACD1600788B0A /* Cogito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cogito.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,7 +113,6 @@
 				027603F51F6ACD1600788B0A /* Assets.xcassets */,
 				027603F71F6ACD1600788B0A /* LaunchScreen.storyboard */,
 				027603FA1F6ACD1600788B0A /* Info.plist */,
-				0205E3661F7012E1003A9787 /* Geth.swift */,
 			);
 			path = Cogito;
 			sourceTree = "<group>";
@@ -139,6 +138,7 @@
 		02E792371F6FFDF000DC5973 /* KeyStore */ = {
 			isa = PBXGroup;
 			children = (
+				0205E3661F7012E1003A9787 /* KeyStore.swift */,
 				0205E3681F71481C003A9787 /* KeyStoreActions.swift */,
 			);
 			path = KeyStore;
@@ -384,7 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
-				0205E3671F7012E1003A9787 /* Geth.swift in Sources */,
+				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
 				02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */,
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
 				027603F11F6ACD1600788B0A /* ViewController.swift in Sources */,
