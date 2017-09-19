@@ -3,7 +3,7 @@
 import ReSwift
 
 struct AppState: StateType {
-
+    let keyStore: KeyStoreState
 }
 
-let initialAppState = AppState()
+let initialAppState = AppState(keyStore: initialKeyStoreState)
