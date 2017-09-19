@@ -3,6 +3,7 @@
 import ReSwift
 
 func appReducer(action: Action, state: AppState?) -> AppState {
-    let state = state ?? initialAppState
-    return state
+    return AppState(
+        keyStore: keyStoreReducer(action: action, state: state?.keyStore)
+    )
 }
