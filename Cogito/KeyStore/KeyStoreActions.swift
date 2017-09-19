@@ -7,7 +7,7 @@ import Geth
 struct KeyStoreActions {
     let keyStoreType: KeyStore.Type
 
-    init(_ keyStoreType: KeyStore.Type) {
+    init(_ keyStoreType: KeyStore.Type = GethKeyStore.self) {
         self.keyStoreType = keyStoreType
     }
 
