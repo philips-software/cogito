@@ -12,7 +12,7 @@ struct KeyStoreActions {
     }
 
     func create() -> ThunkAction<AppState> {
-        return ThunkAction(action: { (dispatch, getState) in
+        return ThunkAction(action: { (dispatch, _) in
             let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                                          .userDomainMask,
                                                                          true)[0]
