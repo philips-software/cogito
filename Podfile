@@ -5,6 +5,7 @@ target 'Cogito' do
 
   pod 'ReSwift', :git => 'https://github.com/ReSwift/ReSwift', :branch => 'mjarvis/swift-4'
   pod 'ReSwiftThunk', :git => 'https://github.com/mikecole20/ReSwiftThunk.git', :branch => 'swift4.0'
+  pod 'Geth', '~> 1.7.1-unstable.10951'
 
   target 'CogitoTests' do
     inherit! :search_paths
