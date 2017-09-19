@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0205E3671F7012E1003A9787 /* Geth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3661F7012E1003A9787 /* Geth.swift */; };
+		0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3681F71481C003A9787 /* KeyStoreActions.swift */; };
+		0205E36B1F71489E003A9787 /* KeyStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E36A1F71489E003A9787 /* KeyStoreMock.swift */; };
 		027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603EE1F6ACD1600788B0A /* AppDelegate.swift */; };
 		027603F11F6ACD1600788B0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603F01F6ACD1600788B0A /* ViewController.swift */; };
 		027603F41F6ACD1600788B0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F21F6ACD1600788B0A /* Main.storyboard */; };
@@ -15,7 +18,7 @@
 		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
 		02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792321F6FFBF700DC5973 /* AppReducer.swift */; };
 		02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792341F6FFBFF00DC5973 /* AppStore.swift */; };
-		02E792391F6FFE1100DC5973 /* KeyStoreReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792381F6FFE1100DC5973 /* KeyStoreReducerSpec.swift */; };
+		02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792381F6FFE1100DC5973 /* KeyStoreActionsSpec.swift */; };
 		664F351D3708D4E7628F31DC /* Pods_CogitoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26098C2F14620C30766F58FF /* Pods_CogitoTests.framework */; };
 		702184F6BDE2F6D4C3CD88A8 /* Pods_Cogito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AFE203118FADCF2E95B010C /* Pods_Cogito.framework */; };
 /* End PBXBuildFile section */
@@ -31,6 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0205E3661F7012E1003A9787 /* Geth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geth.swift; sourceTree = "<group>"; };
+		0205E3681F71481C003A9787 /* KeyStoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreActions.swift; sourceTree = "<group>"; };
+		0205E36A1F71489E003A9787 /* KeyStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreMock.swift; sourceTree = "<group>"; };
 		027603EB1F6ACD1600788B0A /* Cogito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cogito.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		027603EE1F6ACD1600788B0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		027603F01F6ACD1600788B0A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -44,7 +50,7 @@
 		02E792301F6FFBAD00DC5973 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		02E792321F6FFBF700DC5973 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		02E792341F6FFBFF00DC5973 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
-		02E792381F6FFE1100DC5973 /* KeyStoreReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreReducerSpec.swift; sourceTree = "<group>"; };
+		02E792381F6FFE1100DC5973 /* KeyStoreActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreActionsSpec.swift; sourceTree = "<group>"; };
 		141F8738BF2843FFB9828AEE /* Pods-CogitoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CogitoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CogitoTests/Pods-CogitoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		26098C2F14620C30766F58FF /* Pods_CogitoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CogitoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AFE203118FADCF2E95B010C /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +113,7 @@
 				027603F51F6ACD1600788B0A /* Assets.xcassets */,
 				027603F71F6ACD1600788B0A /* LaunchScreen.storyboard */,
 				027603FA1F6ACD1600788B0A /* Info.plist */,
+				0205E3661F7012E1003A9787 /* Geth.swift */,
 			);
 			path = Cogito;
 			sourceTree = "<group>";
@@ -123,7 +130,8 @@
 		02E792361F6FFDD600DC5973 /* KeyStore */ = {
 			isa = PBXGroup;
 			children = (
-				02E792381F6FFE1100DC5973 /* KeyStoreReducerSpec.swift */,
+				02E792381F6FFE1100DC5973 /* KeyStoreActionsSpec.swift */,
+				0205E36A1F71489E003A9787 /* KeyStoreMock.swift */,
 			);
 			path = KeyStore;
 			sourceTree = "<group>";
@@ -131,6 +139,7 @@
 		02E792371F6FFDF000DC5973 /* KeyStore */ = {
 			isa = PBXGroup;
 			children = (
+				0205E3681F71481C003A9787 /* KeyStoreActions.swift */,
 			);
 			path = KeyStore;
 			sourceTree = "<group>";
@@ -217,6 +226,7 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						TestTargetID = 027603EA1F6ACD1600788B0A;
 					};
 				};
 			};
@@ -374,7 +384,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
+				0205E3671F7012E1003A9787 /* Geth.swift in Sources */,
 				02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */,
+				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
 				027603F11F6ACD1600788B0A /* ViewController.swift in Sources */,
 				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
@@ -385,7 +397,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02E792391F6FFE1100DC5973 /* KeyStoreReducerSpec.swift in Sources */,
+				02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */,
+				0205E36B1F71489E003A9787 /* KeyStoreMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +576,7 @@
 			baseConfigurationReference = 141F8738BF2843FFB9828AEE /* Pods-CogitoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWTEZ4CYM6;
@@ -573,6 +587,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cogito.app/Cogito";
 			};
 			name = Debug;
 		};
@@ -581,6 +596,7 @@
 			baseConfigurationReference = D0DF703A555EAB68DC71524C /* Pods-CogitoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWTEZ4CYM6;
@@ -590,6 +606,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cogito.app/Cogito";
 			};
 			name = Release;
 		};
