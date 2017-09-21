@@ -29,7 +29,6 @@ class StorePersister: StoreSubscriber {
             let encoder = JSONEncoder()
             let encodedState = try encoder.encode(store.state)
             try encodedState.write(to: stateUrl, options: .atomicWrite)
-            print("Saved new state to disk (\(stateUrl.path))")
         } catch let e {
             print("Failed to write state to disk: \(e).")
         }
