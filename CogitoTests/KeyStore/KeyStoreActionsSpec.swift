@@ -23,7 +23,7 @@ class KeyStoreActionsSpec: QuickSpec {
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                                         .userDomainMask,
                                                                         true)[0]
-            expect(fulfilled.keyStore.path) == documentDirectory
+            expect(fulfilled.keyStore.path) == documentDirectory + "/main.keystore"
             expect(fulfilled.keyStore.scryptN) == GethStandardScryptN
             expect(fulfilled.keyStore.scryptP) == GethStandardScryptP
         }

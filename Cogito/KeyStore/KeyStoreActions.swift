@@ -16,7 +16,7 @@ struct KeyStoreActions {
             let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                                          .userDomainMask,
                                                                          true)[0]
-            let keyStore = self.keyStoreType.init(path: documentsDirectory,
+            let keyStore = self.keyStoreType.init(path: documentsDirectory + "/main.keystore",
                                                   scryptN: GethStandardScryptN,
                                                   scryptP: GethStandardScryptP)
             dispatch(Fulfilled(keyStore: keyStore))
