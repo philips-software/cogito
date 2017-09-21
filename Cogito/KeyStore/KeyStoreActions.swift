@@ -7,7 +7,7 @@ import Geth
 struct KeyStoreActions {
     let keyStoreType: KeyStore.Type
 
-    init(_ keyStoreType: KeyStore.Type = GethKeyStore.self) {
+    init(_ keyStoreType: KeyStore.Type = GethKeyStoreWrapper.self) {
         self.keyStoreType = keyStoreType
     }
 
@@ -16,9 +16,9 @@ struct KeyStoreActions {
             let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                                          .userDomainMask,
                                                                          true)[0]
-            let keyStore = self.keyStoreType.create(path: documentsDirectory,
-                                                    scryptN: GethStandardScryptN,
-                                                    scryptP: GethStandardScryptP)
+            let keyStore = self.keyStoreType.init(path: documentsDirectory,
+                                                  scryptN: GethStandardScryptN,
+                                                  scryptP: GethStandardScryptP)
             dispatch(Fulfilled(keyStore: keyStore))
         })
     }

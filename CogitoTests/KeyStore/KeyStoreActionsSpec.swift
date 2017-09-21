@@ -14,19 +14,18 @@ class KeyStoreActionsSpec: QuickSpec {
             let dispatch: DispatchFunction = { (action) in
                 dispatchedAction = action
             }
-            let action = KeyStoreActions(KeyStoreMock.self).create()
+            let action = KeyStoreActions(KeyStore.self).create()
             action.action(dispatch, { return nil })
-            guard let fulfilled = dispatchedAction as? KeyStoreActions.Fulfilled,
-                  let keyStoreMock = fulfilled.keyStore as? KeyStoreMock else {
+            guard let fulfilled = dispatchedAction as? KeyStoreActions.Fulfilled else {
                 fail("incorrect type of \(dispatchedAction!)")
                 return
             }
             let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                                         .userDomainMask,
                                                                         true)[0]
-            expect(keyStoreMock.path) == documentDirectory
-            expect(keyStoreMock.scryptN) == GethStandardScryptN
-            expect(keyStoreMock.scryptP) == GethStandardScryptP
+            expect(fulfilled.keyStore.path) == documentDirectory
+            expect(fulfilled.keyStore.scryptN) == GethStandardScryptN
+            expect(fulfilled.keyStore.scryptP) == GethStandardScryptP
         }
     }
 }

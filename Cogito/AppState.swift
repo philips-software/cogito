@@ -2,7 +2,7 @@
 
 import ReSwift
 
-struct AppState: StateType {
+struct AppState: StateType, Codable {
     let keyStore: KeyStoreState
 }
 
