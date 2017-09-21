@@ -6,7 +6,7 @@ import Nimble
 
 class KeyStoreStateSpec: QuickSpec {
     override func spec() {
-        fit("can be coded") {
+        it("can be coded") {
             let keyStore = KeyStore(path: "some path", scryptN: 42, scryptP: 24)
             let state = KeyStoreState(keyStore: keyStore)
             let encoder = JSONEncoder()
