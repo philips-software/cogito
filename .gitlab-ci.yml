@@ -3,9 +3,11 @@ stages:
 
 build_project:
   stage: build
+  before_script:
+    - bundle install --gemfile=.doesntworkinprojectroot/Gemfile
   script:
     - xcodebuild build test -workspace Cogito.xcworkspace -scheme CogitoTests -destination 'platform=iOS Simulator,name=iPhone X,OS=11.0' | xcpretty
   after_script:
-    - slather coverage
+    - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec slather coverage
   tags:
     - ppf-cios
