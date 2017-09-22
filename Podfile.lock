@@ -5,6 +5,7 @@ PODS:
   - ReSwift (4.0.0)
   - ReSwiftThunk (0.1.1):
     - ReSwift (~> 4.0)
+  - SwiftLint (0.21.0)
 
 DEPENDENCIES:
   - Geth (~> 1.7.1-unstable.10951)
@@ -12,6 +13,7 @@ DEPENDENCIES:
   - Quick (from `https://github.com/Quick/Quick`)
   - ReSwift (from `https://github.com/ReSwift/ReSwift`, branch `mjarvis/swift-4`)
   - ReSwiftThunk (from `https://github.com/mikecole20/ReSwiftThunk.git`, branch `swift4.0`)
+  - SwiftLint (= 0.21.0)
 
 EXTERNAL SOURCES:
   Nimble:
@@ -45,7 +47,8 @@ SPEC CHECKSUMS:
   Quick: 4700beb8056662b579facd79eaca7f04fb3d48e6
   ReSwift: 85cb57267026cf4df4f6b05306bfce8ef74842c0
   ReSwiftThunk: 9b2ed720b51deabb4d49e7b6e76a618d1e4eb6f6
+  SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
 
-PODFILE CHECKSUM: 11fd316ab890955fc32b2885f5c6953a9200b6ae
+PODFILE CHECKSUM: 20b2ae419c64b4c8291b6b36e71febee009326a1
 
 COCOAPODS: 1.3.1
