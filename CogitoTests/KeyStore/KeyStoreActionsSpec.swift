@@ -14,7 +14,7 @@ class KeyStoreActionsSpec: QuickSpec {
             let dispatch: DispatchFunction = { (action) in
                 dispatchedAction = action
             }
-            let action = KeyStoreActions(KeyStore.self).create()
+            let action = KeyStoreActions.create()
             action.action(dispatch, { return nil })
             guard let fulfilled = dispatchedAction as? KeyStoreActions.Fulfilled else {
                 fail("incorrect type of \(dispatchedAction!)")
