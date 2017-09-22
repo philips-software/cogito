@@ -6,24 +6,31 @@ class KeyStore: Codable {
     let path: String
     let scryptN: Int
     let scryptP: Int
+    lazy var wrapped = GethKeyStore(path, scryptN: scryptN, scryptP: scryptP)
 
     required init(path: String, scryptN: Int, scryptP: Int) {
         self.path = path
         self.scryptN = scryptN
         self.scryptP = scryptP
     }
-}
-
-class GethKeyStoreWrapper: KeyStore {
-    var wrapped: GethKeyStore!
-
-    required init(path: String, scryptN: Int, scryptP: Int) {
-        super.init(path: path, scryptN: scryptN, scryptP: scryptP)
-        wrapped = GethKeyStore(path, scryptN: scryptN, scryptP: scryptP)
-    }
 
     required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-        wrapped = GethKeyStore(path, scryptN: scryptN, scryptP: scryptP)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        path = try container.decode(type(of: self.path), forKey: .path)
+        scryptN = try container.decode(type(of: self.scryptN), forKey: .scryptN)
+        scryptP = try container.decode(type(of: self.scryptP), forKey: .scryptP)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(path, forKey: .path)
+        try container.encode(scryptN, forKey: .scryptN)
+        try container.encode(scryptP, forKey: .scryptP)
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case path
+        case scryptN
+        case scryptP
     }
 }

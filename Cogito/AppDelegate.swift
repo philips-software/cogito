@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             abort()
         }
         if appStore.state.keyStore.keyStore == nil {
-            appStore.dispatch(KeyStoreActions().create())
+            appStore.dispatch(KeyStoreActions.create())
         }
 
         return true
