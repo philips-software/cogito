@@ -5,5 +5,7 @@ build_project:
   stage: build
   script:
     - xcodebuild build test -workspace Cogito.xcworkspace -scheme CogitoTests -destination 'platform=iOS Simulator,name=iPhone X,OS=11.0' | xcpretty
+  after_script:
+    - slather coverage
   tags:
     - ppf-cios
