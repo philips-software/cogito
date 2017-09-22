@@ -5,6 +5,6 @@ build_project:
   stage: build
   script:
     - xcodebuild clean -workspace Cogito.xcworkspace -scheme Cogito | xcpretty
-    - xcodebuild test -workspace Cogito.xcworkspace -scheme CogitoTests -destination 'platform=iOS Simulator,name=iPhone 6s,OS=10.2' | xcpretty -s
+    - xcodebuild test -workspace Cogito.xcworkspace -scheme CogitoTests -destination 'platform=iOS Simulator,name=iPhone X,OS=11.0' | xcpretty
   tags:
     - ppf-cios
