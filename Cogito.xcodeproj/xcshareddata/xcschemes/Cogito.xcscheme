@@ -13,6 +13,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "027603EA1F6ACD1600788B0A"
+               BuildableName = "Cogito.app"
+               BlueprintName = "Cogito"
+               ReferencedContainer = "container:Cogito.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "027603FE1F6ACD1600788B0A"
                BuildableName = "CogitoTests.xctest"
                BlueprintName = "CogitoTests"
@@ -40,6 +54,15 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "027603EA1F6ACD1600788B0A"
+            BuildableName = "Cogito.app"
+            BlueprintName = "Cogito"
+            ReferencedContainer = "container:Cogito.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -54,15 +77,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "027603FE1F6ACD1600788B0A"
-            BuildableName = "CogitoTests.xctest"
-            BlueprintName = "CogitoTests"
+            BlueprintIdentifier = "027603EA1F6ACD1600788B0A"
+            BuildableName = "Cogito.app"
+            BlueprintName = "Cogito"
             ReferencedContainer = "container:Cogito.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -72,6 +96,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "027603EA1F6ACD1600788B0A"
+            BuildableName = "Cogito.app"
+            BlueprintName = "Cogito"
+            ReferencedContainer = "container:Cogito.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
