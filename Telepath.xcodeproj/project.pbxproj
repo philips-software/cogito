@@ -13,6 +13,8 @@
 		5CF521D61F78F4780004C494 /* TelepathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF521D51F78F4780004C494 /* TelepathTests.swift */; };
 		5CF521D81F78F4780004C494 /* Telepath.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CF521CA1F78F4780004C494 /* Telepath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E3A32103C9A72F3502EB30C /* Pods_TelepathTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC370C03743B0C138797582 /* Pods_TelepathTests.framework */; };
+		D7A4719DD3DAA5CF8B9CE4BB /* Pods_Telepath_TelepathTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C99DC5547D076047ECFB312 /* Pods_Telepath_TelepathTests.framework */; };
+		E9C59C1D35C7FE1C50B56865 /* Pods_Telepath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE5C7D7BB85F6D83112AA7C /* Pods_Telepath.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F782C97C726546042A6BEA6 /* Pods-Telepath.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath.release.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath/Pods-Telepath.release.xcconfig"; sourceTree = "<group>"; };
+		2C99DC5547D076047ECFB312 /* Pods_Telepath_TelepathTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telepath_TelepathTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC99AF91F78FE0400ED602C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5CC99AFA1F78FE0400ED602C /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		5CF521C71F78F4780004C494 /* Telepath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Telepath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,7 +38,11 @@
 		5CF521D01F78F4780004C494 /* TelepathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TelepathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CF521D51F78F4780004C494 /* TelepathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathTests.swift; sourceTree = "<group>"; };
 		5CF521D71F78F4780004C494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FD7015D1867C9DA47331959 /* Pods-Telepath-TelepathTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath-TelepathTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8804EC974452348E2D78AF70 /* Pods-TelepathTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TelepathTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TelepathTests/Pods-TelepathTests.debug.xcconfig"; sourceTree = "<group>"; };
+		984CD0788EBC5DC48254E71C /* Pods-Telepath-TelepathTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath-TelepathTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests.release.xcconfig"; sourceTree = "<group>"; };
+		9DF6D5F1B6D18BBD658740C7 /* Pods-Telepath.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath/Pods-Telepath.debug.xcconfig"; sourceTree = "<group>"; };
+		BEE5C7D7BB85F6D83112AA7C /* Pods_Telepath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telepath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFFADCA5CB789BB71D5633D /* Pods-TelepathTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TelepathTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TelepathTests/Pods-TelepathTests.release.xcconfig"; sourceTree = "<group>"; };
 		DCC370C03743B0C138797582 /* Pods_TelepathTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TelepathTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -44,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9C59C1D35C7FE1C50B56865 /* Pods_Telepath.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +62,7 @@
 			files = (
 				5CF521D11F78F4780004C494 /* Telepath.framework in Frameworks */,
 				6E3A32103C9A72F3502EB30C /* Pods_TelepathTests.framework in Frameworks */,
+				D7A4719DD3DAA5CF8B9CE4BB /* Pods_Telepath_TelepathTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +114,10 @@
 			children = (
 				8804EC974452348E2D78AF70 /* Pods-TelepathTests.debug.xcconfig */,
 				CAFFADCA5CB789BB71D5633D /* Pods-TelepathTests.release.xcconfig */,
+				9DF6D5F1B6D18BBD658740C7 /* Pods-Telepath.debug.xcconfig */,
+				0F782C97C726546042A6BEA6 /* Pods-Telepath.release.xcconfig */,
+				5FD7015D1867C9DA47331959 /* Pods-Telepath-TelepathTests.debug.xcconfig */,
+				984CD0788EBC5DC48254E71C /* Pods-Telepath-TelepathTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -112,6 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				DCC370C03743B0C138797582 /* Pods_TelepathTests.framework */,
+				BEE5C7D7BB85F6D83112AA7C /* Pods_Telepath.framework */,
+				2C99DC5547D076047ECFB312 /* Pods_Telepath_TelepathTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -134,10 +150,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5CF521DB1F78F4780004C494 /* Build configuration list for PBXNativeTarget "Telepath" */;
 			buildPhases = (
+				468F0CF6FFC51BA7C2DACBB7 /* [CP] Check Pods Manifest.lock */,
 				5CF521C21F78F4780004C494 /* Sources */,
 				5CF521C31F78F4780004C494 /* Frameworks */,
 				5CF521C41F78F4780004C494 /* Headers */,
 				5CF521C51F78F4780004C494 /* Resources */,
+				163832F9B6D89FD554728021 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -227,24 +245,59 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		163832F9B6D89FD554728021 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Telepath/Pods-Telepath-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		368DC371F705168B0D523E30 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TelepathTests/Pods-TelepathTests-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RNCryptor/RNCryptor.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCryptor.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TelepathTests/Pods-TelepathTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		468F0CF6FFC51BA7C2DACBB7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Telepath-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7593D17E46CCC3AEE7F058BC /* [CP] Check Pods Manifest.lock */ = {
@@ -258,7 +311,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TelepathTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Telepath-TelepathTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -277,7 +330,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TelepathTests/Pods-TelepathTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -424,6 +477,7 @@
 		};
 		5CF521DC1F78F4780004C494 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9DF6D5F1B6D18BBD658740C7 /* Pods-Telepath.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -445,6 +499,7 @@
 		};
 		5CF521DD1F78F4780004C494 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F782C97C726546042A6BEA6 /* Pods-Telepath.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -466,7 +521,7 @@
 		};
 		5CF521DF1F78F4780004C494 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8804EC974452348E2D78AF70 /* Pods-TelepathTests.debug.xcconfig */;
+			baseConfigurationReference = 5FD7015D1867C9DA47331959 /* Pods-Telepath-TelepathTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWTEZ4CYM6;
@@ -481,7 +536,7 @@
 		};
 		5CF521E01F78F4780004C494 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CAFFADCA5CB789BB71D5633D /* Pods-TelepathTests.release.xcconfig */;
+			baseConfigurationReference = 984CD0788EBC5DC48254E71C /* Pods-Telepath-TelepathTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWTEZ4CYM6;

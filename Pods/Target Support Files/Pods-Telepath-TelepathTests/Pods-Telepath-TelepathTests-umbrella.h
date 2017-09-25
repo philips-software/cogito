@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_TelepathTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_TelepathTestsVersionString[];
+FOUNDATION_EXPORT double Pods_Telepath_TelepathTestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_Telepath_TelepathTestsVersionString[];
 
