@@ -2,6 +2,7 @@
 
 import UIKit
 import ReSwift
+import Geth
 
 typealias LaunchOptions = [UIApplicationLaunchOptionsKey: Any]?
 
@@ -10,17 +11,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var storePersister: StorePersister?
+    var gethNode: GethNode?
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: LaunchOptions = nil) -> Bool {
-        do {
-            let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-            let url = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("state.json")
-            storePersister = try StorePersister(store: appStore, persistAt: url)
-        } catch let e {
-            print("Failed to create store persister; bailing out. Error: \(e)")
+        storePersister = StorePersister.default
+        if storePersister == nil {
             abort()
         }
+
         if appStore.state.keyStore.keyStore == nil {
             appStore.dispatch(KeyStoreActions.create())
         }
