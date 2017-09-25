@@ -6,6 +6,21 @@ class StorePersister: StoreSubscriber {
     let store: Store<AppState>
     let stateUrl: URL
 
+    static private var defaultPersister: StorePersister?
+    static var `default`: StorePersister? {
+        if let d = defaultPersister {
+            return d
+        }
+        do {
+            let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            let url = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("state.json")
+            defaultPersister = try StorePersister(store: appStore, persistAt: url)
+        } catch let e {
+            print("Failed to create default store persister. Error: \(e)")
+        }
+        return defaultPersister
+    }
+
     init(store: Store<AppState>, persistAt stateUrl: URL) throws {
         self.store = store
         self.stateUrl = stateUrl

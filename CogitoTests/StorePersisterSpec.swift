@@ -30,6 +30,14 @@ class StorePersisterSpec: QuickSpec {
             }.toNot(throwError())
         }
 
+        it("has a default instance") {
+            let defaultPersister = StorePersister.default
+            expect(defaultPersister).toNot(beNil())
+
+            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            expect(defaultPersister?.stateUrl.path) == path + "/state.json"
+        }
+
         context("when file contains invalid JSON") {
             beforeEach {
                 expect {
