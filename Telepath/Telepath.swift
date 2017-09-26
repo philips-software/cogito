@@ -4,19 +4,19 @@ import RNCryptor
 public struct Telepath {
     let queue: QueuingService
 
-    func openSecureChannel(id: UInt64, key: AES256Key) -> SecureChannel {
-        return SecureChannel(queue: queue, id: id, key: key)
+    func openSecureChannel(id: UInt64, keys: ChannelKeys) -> SecureChannel {
+        return SecureChannel(queue: queue, id: id, keys: keys)
     }
 }
 
 public struct SecureChannel {
     let queue: QueuingService
     let id: UInt64
-    let key: AES256Key
+    let keys: ChannelKeys
 
     func send(message: String) throws {
         let plainText = message.data(using: .utf8)!
-        let cypherText = RNCryptor.encrypt(key: key, plainText: plainText)
+        let cypherText = keys.encrypt(plainText: plainText)
         try queue.send(queueId: id, message: cypherText)
     }
 }
@@ -27,16 +27,22 @@ public protocol QueuingService {
     func receive(queueId: UInt64) throws -> Data?
 }
 
-public typealias AES256Key = Data
+public struct ChannelKeys {
+    let encryptionKey: AES256Key
+    let hmacKey: HMACKey
+}
 
-extension RNCryptor {
-    static func encrypt(key: Data, plainText: Data) -> Data {
-        let encryptor = EncryptorV3(encryptionKey: key, hmacKey: key)
+public typealias AES256Key = Data
+public typealias HMACKey = Data
+
+extension ChannelKeys {
+    func encrypt(plainText: Data) -> Data {
+        let encryptor = RNCryptor.EncryptorV3(encryptionKey: encryptionKey, hmacKey: hmacKey)
         return encryptor.encrypt(data: plainText)
     }
 
-    static func decrypt(key: Data, cypherText: Data) -> Data? {
-        let decryptor = DecryptorV3(encryptionKey: key, hmacKey: key)
-        return try? decryptor.decrypt(data: cypherText)
+    func decrypt(cypherText: Data) throws -> Data {
+        let decryptor = RNCryptor.DecryptorV3(encryptionKey: encryptionKey, hmacKey: hmacKey)
+        return try decryptor.decrypt(data: cypherText)
     }
 }
