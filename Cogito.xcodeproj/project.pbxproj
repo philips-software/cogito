@@ -31,6 +31,9 @@
 		0298D4381F7A456A0070998D /* Geth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4361F7A45680070998D /* Geth.swift */; };
 		0298D43A1F7A46A30070998D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4391F7A46A30070998D /* Node.swift */; };
 		0298D43B1F7A47890070998D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4391F7A46A30070998D /* Node.swift */; };
+		02BE32C91F7A4DF9006C7287 /* PeerReporterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */; };
+		02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CA1F7A511A006C7287 /* PeerReporter.swift */; };
+		02BE32CC1F7A511D006C7287 /* PeerReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CA1F7A511A006C7287 /* PeerReporter.swift */; };
 		02CD30A41F73F251006BA756 /* StorePersister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A31F73F251006BA756 /* StorePersister.swift */; };
 		02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */; };
 		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
@@ -71,6 +74,8 @@
 		0298D4341F7A45150070998D /* GethSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethSpec.swift; sourceTree = "<group>"; };
 		0298D4361F7A45680070998D /* Geth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geth.swift; sourceTree = "<group>"; };
 		0298D4391F7A46A30070998D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerReporterSpec.swift; sourceTree = "<group>"; };
+		02BE32CA1F7A511A006C7287 /* PeerReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerReporter.swift; sourceTree = "<group>"; };
 		02CD30A31F73F251006BA756 /* StorePersister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersister.swift; sourceTree = "<group>"; };
 		02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersisterSpec.swift; sourceTree = "<group>"; };
 		02E792301F6FFBAD00DC5973 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -161,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				0298D4341F7A45150070998D /* GethSpec.swift */,
+				02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */,
 			);
 			path = Geth;
 			sourceTree = "<group>";
@@ -170,6 +176,7 @@
 			children = (
 				0298D4361F7A45680070998D /* Geth.swift */,
 				0298D4391F7A46A30070998D /* Node.swift */,
+				02BE32CA1F7A511A006C7287 /* PeerReporter.swift */,
 			);
 			path = Geth;
 			sourceTree = "<group>";
@@ -463,6 +470,7 @@
 				027603F11F6ACD1600788B0A /* ViewController.swift in Sources */,
 				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
 				029691551F7166EE00654BD0 /* KeyStoreState.swift in Sources */,
+				02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */,
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,7 +489,9 @@
 				0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */,
 				0298D42D1F7A43C90070998D /* AppReducer.swift in Sources */,
 				0298D4271F7A43C90070998D /* KeyStore.swift in Sources */,
+				02BE32CC1F7A511D006C7287 /* PeerReporter.swift in Sources */,
 				0298D4381F7A456A0070998D /* Geth.swift in Sources */,
+				02BE32C91F7A4DF9006C7287 /* PeerReporterSpec.swift in Sources */,
 				0298D43B1F7A47890070998D /* Node.swift in Sources */,
 				C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */,
 				0298D42E1F7A43C90070998D /* StorePersister.swift in Sources */,
