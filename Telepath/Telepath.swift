@@ -4,8 +4,8 @@ import RNCryptor
 public struct Telepath {
     let queue: QueuingService
 
-    public func openSecureChannel(id: ChannelID, keys: ChannelKeys) -> SecureChannel {
-        return SecureChannel(queue: queue, id: id, keys: keys)
+    public func connect(channel: ChannelID, keys: ChannelKeys) -> SecureChannel {
+        return SecureChannel(queue: queue, id: channel, keys: keys)
     }
 }
 

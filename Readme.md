@@ -13,12 +13,12 @@ Because both the browser and phone are likely to be behind distinct [NAT][1], we
 
 Setting up a secure channel is done using these steps:
 
-1.  The web app requests a secure connection to the identity app by invoking the `openSecureChannel` function on the javascript library.
-2.  The `openSecureChannel` function generates a random symmetric session key (`S`) and a random channel id (`I`).
-3.  The web app displays a QR code containing the key `S` and channel id `I`.
+1.  The web app requests a secure connection to the identity app by invoking the `createChannel` function on the javascript library.
+2.  The `createChannel` function generates a random channel id (`I`) and a pair of random symmetric keys for encryption (`E`) and message authentication (`A`).
+3.  The web app displays a QR code containing the channel id `I`, and keys `E` and `A`.
 4.  The owner of the phone opens the app, points the camera to the QR code.
-5.  The phone app extracts `S` and `I` from the QR code.
-6.  Both phone and web app can now communicate on channel `I`. They encrypt their messages using the key `S`.
+5.  The phone app extracts the channel id and the two keys from the QR code.
+6.  Both phone and web app can now communicate on channel `I`. They encrypt their messages using the key `E` and ensure message integrity with key `A`.
 
 [1]: https://en.wikipedia.org/wiki/Network_address_translation
 

@@ -25,7 +25,7 @@ class TelepathTests: QuickSpec {
             var channel: SecureChannel!
 
             beforeEach {
-                channel = telepath.openSecureChannel(id: channelId, keys: channelKeys)
+                channel = telepath.connect(channel: channelId, keys: channelKeys)
             }
 
             it("sends a message") {
