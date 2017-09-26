@@ -13,6 +13,10 @@ class PeerReporter {
         self.pollInterval = pollInterval
     }
 
+    deinit {
+        timer?.invalidate()
+    }
+
     func start() {
         timer = Timer.scheduledTimer(withTimeInterval: pollInterval, repeats: true) { [weak self] _ in
             guard let this = self else { return }
