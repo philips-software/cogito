@@ -9,7 +9,6 @@ target 'Cogito' do
   pod 'SwiftLint', '0.21.0'
 
   target 'CogitoTests' do
-    inherit! :search_paths
     pod 'Quick', :git => 'https://github.com/Quick/Quick'
     pod 'Nimble', :git => 'https://github.com/Quick/Nimble'
   end

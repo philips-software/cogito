@@ -2,7 +2,6 @@
 
 import Quick
 import Nimble
-@testable import Cogito
 import ReSwift
 import ReSwiftThunk
 import Geth
