@@ -4,6 +4,7 @@ import ReSwift
 
 struct AppState: StateType, Codable {
     let keyStore: KeyStoreState
+    let geth: GethState
 }
 
-let initialAppState = AppState(keyStore: initialKeyStoreState)
+let initialAppState = AppState(keyStore: initialKeyStoreState, geth: initialGethState)
