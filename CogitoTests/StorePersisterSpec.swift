@@ -61,7 +61,8 @@ class StorePersisterSpec: QuickSpec {
                             "scryptP":1
                         },
                         "keyStoreType":"KeyStore"
-                    }
+                    },
+                    "geth": {}
                 }
                 """
         context("when file contains valid JSON") {
@@ -90,7 +91,7 @@ class StorePersisterSpec: QuickSpec {
 
             it("does not save the state") {
                 let newStore = KeyStore(path: "new path", scryptN: 2, scryptP: 2)
-                store.state = AppState(keyStore: KeyStoreState(keyStore: newStore))
+                store.state = appState(keyStore: KeyStoreState(keyStore: newStore))
                 expect { () -> Void in
                     let savedContents = String(data: try Data(contentsOf: url), encoding: .utf8)
                     expect(savedContents).to(contain("some path"))
@@ -106,7 +107,7 @@ class StorePersisterSpec: QuickSpec {
 
                 it("saves the state when it changes") {
                     let newStore = KeyStore(path: "new path", scryptN: 2, scryptP: 2)
-                    store.state = AppState(keyStore: KeyStoreState(keyStore: newStore))
+                    store.state = appState(keyStore: KeyStoreState(keyStore: newStore))
                     expect { () -> Void in
                         let savedContents = String(data: try Data(contentsOf: url), encoding: .utf8)
                         expect(savedContents).to(contain("new path"))
@@ -122,7 +123,7 @@ class StorePersisterSpec: QuickSpec {
 
                     it("does not save the state") {
                         let newStore = KeyStore(path: "new path", scryptN: 3, scryptP: 3)
-                        store.state = AppState(keyStore: KeyStoreState(keyStore: newStore))
+                        store.state = appState(keyStore: KeyStoreState(keyStore: newStore))
                         expect { () -> Void in
                             let savedContents = String(data: try Data(contentsOf: url), encoding: .utf8)
                             expect(savedContents).to(contain("some path"))
