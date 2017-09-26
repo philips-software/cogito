@@ -1,0 +1,25 @@
+//  Copyright © 2017 Konkinklijke Philips Nederland N.V. All rights reserved.
+
+import Quick
+import Nimble
+import Geth
+
+class GethSpec: QuickSpec {
+    override func spec() {
+        var geth: Geth!
+
+        beforeEach {
+            geth = Geth()
+        }
+
+        it("uses the right data dir") {
+            let cachesDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+            expect(geth.node.dataDir) == cachesDir + "/rinkeby"
+        }
+
+        it("configures for Rinkeby") {
+            expect(geth.node.config.ethereumNetworkID()) == 4
+            expect(geth.node.config.ethereumGenesis()) == GethRinkebyGenesis()
+        }
+    }
+}

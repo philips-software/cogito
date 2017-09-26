@@ -26,6 +26,11 @@
 		0298D42D1F7A43C90070998D /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792321F6FFBF700DC5973 /* AppReducer.swift */; };
 		0298D42E1F7A43C90070998D /* StorePersister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A31F73F251006BA756 /* StorePersister.swift */; };
 		0298D42F1F7A43C90070998D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603F01F6ACD1600788B0A /* ViewController.swift */; };
+		0298D4351F7A45150070998D /* GethSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4341F7A45150070998D /* GethSpec.swift */; };
+		0298D4371F7A45680070998D /* Geth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4361F7A45680070998D /* Geth.swift */; };
+		0298D4381F7A456A0070998D /* Geth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4361F7A45680070998D /* Geth.swift */; };
+		0298D43A1F7A46A30070998D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4391F7A46A30070998D /* Node.swift */; };
+		0298D43B1F7A47890070998D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4391F7A46A30070998D /* Node.swift */; };
 		02CD30A41F73F251006BA756 /* StorePersister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A31F73F251006BA756 /* StorePersister.swift */; };
 		02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */; };
 		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
@@ -63,6 +68,9 @@
 		0276040E1F6BFF6D00788B0A /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		029691521F7166AC00654BD0 /* KeyStoreReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreReducer.swift; sourceTree = "<group>"; };
 		029691541F7166EE00654BD0 /* KeyStoreState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreState.swift; sourceTree = "<group>"; };
+		0298D4341F7A45150070998D /* GethSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethSpec.swift; sourceTree = "<group>"; };
+		0298D4361F7A45680070998D /* Geth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geth.swift; sourceTree = "<group>"; };
+		0298D4391F7A46A30070998D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		02CD30A31F73F251006BA756 /* StorePersister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersister.swift; sourceTree = "<group>"; };
 		02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersisterSpec.swift; sourceTree = "<group>"; };
 		02E792301F6FFBAD00DC5973 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -122,6 +130,7 @@
 		027603ED1F6ACD1600788B0A /* Cogito */ = {
 			isa = PBXGroup;
 			children = (
+				0298D4331F7A45040070998D /* Geth */,
 				02E792371F6FFDF000DC5973 /* KeyStore */,
 				02E792341F6FFBFF00DC5973 /* AppStore.swift */,
 				02E792301F6FFBAD00DC5973 /* AppState.swift */,
@@ -141,10 +150,28 @@
 			isa = PBXGroup;
 			children = (
 				02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */,
+				0298D4321F7A44EF0070998D /* Geth */,
 				02E792361F6FFDD600DC5973 /* KeyStore */,
 				027604051F6ACD1600788B0A /* Info.plist */,
 			);
 			path = CogitoTests;
+			sourceTree = "<group>";
+		};
+		0298D4321F7A44EF0070998D /* Geth */ = {
+			isa = PBXGroup;
+			children = (
+				0298D4341F7A45150070998D /* GethSpec.swift */,
+			);
+			path = Geth;
+			sourceTree = "<group>";
+		};
+		0298D4331F7A45040070998D /* Geth */ = {
+			isa = PBXGroup;
+			children = (
+				0298D4361F7A45680070998D /* Geth.swift */,
+				0298D4391F7A46A30070998D /* Node.swift */,
+			);
+			path = Geth;
 			sourceTree = "<group>";
 		};
 		02E792361F6FFDD600DC5973 /* KeyStore */ = {
@@ -427,6 +454,8 @@
 			files = (
 				029691531F7166AC00654BD0 /* KeyStoreReducer.swift in Sources */,
 				02CD30A41F73F251006BA756 /* StorePersister.swift in Sources */,
+				0298D4371F7A45680070998D /* Geth.swift in Sources */,
+				0298D43A1F7A46A30070998D /* Node.swift in Sources */,
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
 				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
 				02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */,
@@ -444,6 +473,7 @@
 			files = (
 				0298D42F1F7A43C90070998D /* ViewController.swift in Sources */,
 				0298D4291F7A43C90070998D /* KeyStoreReducer.swift in Sources */,
+				0298D4351F7A45150070998D /* GethSpec.swift in Sources */,
 				0298D42A1F7A43C90070998D /* KeyStoreState.swift in Sources */,
 				02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */,
 				0298D42C1F7A43C90070998D /* AppState.swift in Sources */,
@@ -451,6 +481,8 @@
 				0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */,
 				0298D42D1F7A43C90070998D /* AppReducer.swift in Sources */,
 				0298D4271F7A43C90070998D /* KeyStore.swift in Sources */,
+				0298D4381F7A456A0070998D /* Geth.swift in Sources */,
+				0298D43B1F7A47890070998D /* Node.swift in Sources */,
 				C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */,
 				0298D42E1F7A43C90070998D /* StorePersister.swift in Sources */,
 				0298D42B1F7A43C90070998D /* AppStore.swift in Sources */,
