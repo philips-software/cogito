@@ -11,6 +11,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var storePersister: StorePersister?
+    var geth: Geth?
+    var syncProgressReporter: SyncProgressReporter!
+    var peerReporter: PeerReporter!
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: LaunchOptions = nil) -> Bool {
@@ -27,6 +30,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(e)
                 abort()
             }
+        }
+
+        geth = Geth()
+        do {
+            try geth!.node.start()
+
+            peerReporter = PeerReporter(node: geth!.node, pollInterval: 1)
+            peerReporter.onPeerCountAvailable = { count in
+                appStore.dispatch(PeersUpdated(count: count))
+            }
+            peerReporter.start()
+
+            let ethereumClient = try geth!.node.ethereumClient()
+            syncProgressReporter = SyncProgressReporter(ethereumClient: ethereumClient, pollInterval: 1)
+            syncProgressReporter.onSyncProgressAvailable = { progress in
+                appStore.dispatch(SyncProgressUpdated(progress: progress))
+            }
+            syncProgressReporter.start()
+        } catch let e {
+            print(e)
+            abort()
         }
 
         return true

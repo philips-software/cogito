@@ -10,6 +10,7 @@ class Node: NodeType {
     let dataDir: String
     let config: GethNodeConfig
     lazy var gethNode: GethNode = GethNode(dataDir, config: config)
+    private var _ethereumClient: EthereumClient?
 
     var peerCount: Int {
         return gethNode.getPeersInfo()!.size()
@@ -22,5 +23,11 @@ class Node: NodeType {
 
     func start() throws {
         try gethNode.start()
+    }
+
+    func ethereumClient() throws -> EthereumClient {
+        if let client = _ethereumClient { return client }
+        _ethereumClient = try EthereumClient(node: gethNode)
+        return _ethereumClient!
     }
 }
