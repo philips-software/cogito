@@ -28,12 +28,22 @@ class TelepathTests: QuickSpec {
                 channel = telepath.connect(channel: channelId, keys: channelKeys)
             }
 
-            it("sends a message") {
-                try! channel.send(message: "a message")
-                let cypherText = queue.latestSentMessage!
-                let plainText = try! channelKeys.decrypt(cypherText: cypherText)
-                expect(String(data: plainText, encoding: .utf8)) == "a message"
-                expect(queue.latestQueueId) == channelId
+            context("when sending a message") {
+                let message = "a message"
+
+                beforeEach {
+                    try! channel.send(message: "a message")
+                }
+
+                it("encrypts the message") {
+                    let cypherText = queue.latestSentMessage!
+                    let plainText = try! channelKeys.decrypt(cypherText: cypherText)
+                    expect(String(data: plainText, encoding: .utf8)) == message
+                }
+
+                it("it uses the correct queue") {
+                    expect(queue.latestQueueId) == channelId
+                }
             }
         }
     }
