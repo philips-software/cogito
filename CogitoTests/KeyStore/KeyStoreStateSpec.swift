@@ -2,7 +2,6 @@
 
 import Quick
 import Nimble
-@testable import Cogito
 
 class KeyStoreStateSpec: QuickSpec {
     override func spec() {
