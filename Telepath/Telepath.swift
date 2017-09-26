@@ -4,14 +4,14 @@ import RNCryptor
 public struct Telepath {
     let queue: QueuingService
 
-    func openSecureChannel(id: UInt64, keys: ChannelKeys) -> SecureChannel {
+    func openSecureChannel(id: QueueID, keys: ChannelKeys) -> SecureChannel {
         return SecureChannel(queue: queue, id: id, keys: keys)
     }
 }
 
 public struct SecureChannel {
     let queue: QueuingService
-    let id: UInt64
+    let id: QueueID
     let keys: ChannelKeys
 
     func send(message: String) throws {
@@ -22,8 +22,8 @@ public struct SecureChannel {
 }
 
 public protocol QueuingService {
-    func send(queueId: UInt64, message: Data) throws
-    func receive(queueId: UInt64) throws -> Data?
+    func send(queueId: QueueID, message: Data) throws
+    func receive(queueId: QueueID) throws -> Data?
 }
 
 public struct ChannelKeys {
@@ -31,6 +31,7 @@ public struct ChannelKeys {
     let hmacKey: HMACKey
 }
 
+public typealias QueueID = String
 public typealias AES256Key = Data
 public typealias HMACKey = Data
 

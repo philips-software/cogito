@@ -16,7 +16,7 @@ class TelepathTests: QuickSpec {
         }
 
         context("when a secure channel is opened") {
-            let channelId: UInt64 = 42
+            let channelId: QueueID = "channel id"
             let channelKeys = ChannelKeys(
                 encryptionKey: RNCryptor.randomData(ofLength: 32),
                 hmacKey: RNCryptor.randomData(ofLength: 32)
@@ -40,15 +40,15 @@ class TelepathTests: QuickSpec {
 }
 
 class QueuingServiceMock: QueuingService {
-    var latestQueueId: UInt64?
+    var latestQueueId: QueueID?
     var latestSentMessage: Data?
 
-    func send(queueId: UInt64, message: Data) throws {
+    func send(queueId: QueueID, message: Data) throws {
         latestQueueId = queueId
         latestSentMessage = message
     }
 
-    func receive(queueId: UInt64) throws -> Data? {
+    func receive(queueId: QueueID) throws -> Data? {
         return nil
     }
 }
