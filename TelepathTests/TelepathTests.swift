@@ -43,10 +43,6 @@ class QueuingServiceMock: QueuingService {
     var latestQueueId: UInt64?
     var latestSentMessage: Data?
 
-    func createQueue(id: UInt64) {
-
-    }
-
     func send(queueId: UInt64, message: Data) throws {
         latestQueueId = queueId
         latestSentMessage = message

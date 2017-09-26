@@ -22,7 +22,6 @@ public struct SecureChannel {
 }
 
 public protocol QueuingService {
-    func createQueue(id: UInt64) throws
     func send(queueId: UInt64, message: Data) throws
     func receive(queueId: UInt64) throws -> Data?
 }
