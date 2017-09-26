@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C9F22F31F792C68007C013E /* Telepath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F22F21F792C68007C013E /* Telepath.swift */; };
 		5CC99AFB1F78FE0400ED602C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5CC99AF91F78FE0400ED602C /* Podfile */; };
 		5CC99AFC1F78FE0400ED602C /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 5CC99AFA1F78FE0400ED602C /* Readme.md */; };
 		5CF521D11F78F4780004C494 /* Telepath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF521C71F78F4780004C494 /* Telepath.framework */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		0F782C97C726546042A6BEA6 /* Pods-Telepath.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath.release.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath/Pods-Telepath.release.xcconfig"; sourceTree = "<group>"; };
+		5C9F22F21F792C68007C013E /* Telepath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telepath.swift; sourceTree = "<group>"; };
 		2C99DC5547D076047ECFB312 /* Pods_Telepath_TelepathTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telepath_TelepathTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC99AF91F78FE0400ED602C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5CC99AFA1F78FE0400ED602C /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				5CF521CA1F78F4780004C494 /* Telepath.h */,
 				5CF521CB1F78F4780004C494 /* Info.plist */,
+				5C9F22F21F792C68007C013E /* Telepath.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				TargetAttributes = {
 					5CF521C61F78F4780004C494 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					5CF521CF1F78F4780004C494 = {
@@ -340,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C9F22F31F792C68007C013E /* Telepath.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +484,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9DF6D5F1B6D18BBD658740C7 /* Pods-Telepath.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -492,6 +498,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.philips.Telepath;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -501,6 +508,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0F782C97C726546042A6BEA6 /* Pods-Telepath.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -523,6 +531,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5FD7015D1867C9DA47331959 /* Pods-Telepath-TelepathTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWTEZ4CYM6;
 				INFOPLIST_FILE = TelepathTests/Info.plist;
@@ -538,6 +547,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 984CD0788EBC5DC48254E71C /* Pods-Telepath-TelepathTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWTEZ4CYM6;
 				INFOPLIST_FILE = TelepathTests/Info.plist;
