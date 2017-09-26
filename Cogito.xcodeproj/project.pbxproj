@@ -34,6 +34,11 @@
 		02BE32C91F7A4DF9006C7287 /* PeerReporterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */; };
 		02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CA1F7A511A006C7287 /* PeerReporter.swift */; };
 		02BE32CC1F7A511D006C7287 /* PeerReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CA1F7A511A006C7287 /* PeerReporter.swift */; };
+		02BE32CE1F7A5C55006C7287 /* SyncProgressReporterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CD1F7A5C55006C7287 /* SyncProgressReporterSpec.swift */; };
+		02BE32D01F7A6D92006C7287 /* SyncProgressReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CF1F7A6D92006C7287 /* SyncProgressReporter.swift */; };
+		02BE32D11F7A6DD0006C7287 /* SyncProgressReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CF1F7A6D92006C7287 /* SyncProgressReporter.swift */; };
+		02BE32D31F7A8165006C7287 /* EthereumClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32D21F7A8165006C7287 /* EthereumClient.swift */; };
+		02BE32D41F7A8165006C7287 /* EthereumClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32D21F7A8165006C7287 /* EthereumClient.swift */; };
 		02CD30A41F73F251006BA756 /* StorePersister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A31F73F251006BA756 /* StorePersister.swift */; };
 		02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */; };
 		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
@@ -76,6 +81,9 @@
 		0298D4391F7A46A30070998D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerReporterSpec.swift; sourceTree = "<group>"; };
 		02BE32CA1F7A511A006C7287 /* PeerReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerReporter.swift; sourceTree = "<group>"; };
+		02BE32CD1F7A5C55006C7287 /* SyncProgressReporterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProgressReporterSpec.swift; sourceTree = "<group>"; };
+		02BE32CF1F7A6D92006C7287 /* SyncProgressReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProgressReporter.swift; sourceTree = "<group>"; };
+		02BE32D21F7A8165006C7287 /* EthereumClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumClient.swift; sourceTree = "<group>"; };
 		02CD30A31F73F251006BA756 /* StorePersister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersister.swift; sourceTree = "<group>"; };
 		02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersisterSpec.swift; sourceTree = "<group>"; };
 		02E792301F6FFBAD00DC5973 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -167,6 +175,7 @@
 			children = (
 				0298D4341F7A45150070998D /* GethSpec.swift */,
 				02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */,
+				02BE32CD1F7A5C55006C7287 /* SyncProgressReporterSpec.swift */,
 			);
 			path = Geth;
 			sourceTree = "<group>";
@@ -177,6 +186,8 @@
 				0298D4361F7A45680070998D /* Geth.swift */,
 				0298D4391F7A46A30070998D /* Node.swift */,
 				02BE32CA1F7A511A006C7287 /* PeerReporter.swift */,
+				02BE32CF1F7A6D92006C7287 /* SyncProgressReporter.swift */,
+				02BE32D21F7A8165006C7287 /* EthereumClient.swift */,
 			);
 			path = Geth;
 			sourceTree = "<group>";
@@ -465,7 +476,9 @@
 				0298D43A1F7A46A30070998D /* Node.swift in Sources */,
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
 				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
+				02BE32D01F7A6D92006C7287 /* SyncProgressReporter.swift in Sources */,
 				02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */,
+				02BE32D31F7A8165006C7287 /* EthereumClient.swift in Sources */,
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
 				027603F11F6ACD1600788B0A /* ViewController.swift in Sources */,
 				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
@@ -479,9 +492,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02BE32CE1F7A5C55006C7287 /* SyncProgressReporterSpec.swift in Sources */,
 				0298D42F1F7A43C90070998D /* ViewController.swift in Sources */,
+				02BE32D11F7A6DD0006C7287 /* SyncProgressReporter.swift in Sources */,
 				0298D4291F7A43C90070998D /* KeyStoreReducer.swift in Sources */,
 				0298D4351F7A45150070998D /* GethSpec.swift in Sources */,
+				02BE32D41F7A8165006C7287 /* EthereumClient.swift in Sources */,
 				0298D42A1F7A43C90070998D /* KeyStoreState.swift in Sources */,
 				02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */,
 				0298D42C1F7A43C90070998D /* AppState.swift in Sources */,
