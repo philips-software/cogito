@@ -10,17 +10,12 @@ class KeyStoreStateSpec: QuickSpec {
             let state = KeyStoreState(keyStore: keyStore)
             let encoder = JSONEncoder()
             var encodedData: Data? = nil
-            expect { () -> Void in
+            expect {
                 encodedData = try encoder.encode(state)
-                print("\(String(data: encodedData!, encoding: .utf8)!)")
             }.toNot(throwError())
-            guard let encoded = encodedData else {
-                fail("encodedData is nil")
-                return
-            }
             expect { () -> Void in
                 let decoder = JSONDecoder()
-                let decodedState = try decoder.decode(KeyStoreState.self, from: encoded)
+                let decodedState = try decoder.decode(KeyStoreState.self, from: encodedData!)
                 expect(decodedState.keyStore?.path) == "some path"
                 expect(decodedState.keyStore?.scryptN) == 42
                 expect(decodedState.keyStore?.scryptP) == 24
