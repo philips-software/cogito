@@ -4,7 +4,7 @@ import RNCryptor
 public struct Telepath {
     let queue: QueuingService
 
-    func openSecureChannel(id: QueueID, keys: ChannelKeys) -> SecureChannel {
+    public func openSecureChannel(id: ChannelID, keys: ChannelKeys) -> SecureChannel {
         return SecureChannel(queue: queue, id: id, keys: keys)
     }
 }
@@ -21,17 +21,12 @@ public struct SecureChannel {
     }
 }
 
-public protocol QueuingService {
-    func send(queueId: QueueID, message: Data) throws
-    func receive(queueId: QueueID) throws -> Data?
-}
-
 public struct ChannelKeys {
     let encryptionKey: AES256Key
     let hmacKey: HMACKey
 }
 
-public typealias QueueID = String
+public typealias ChannelID = String
 public typealias AES256Key = Data
 public typealias HMACKey = Data
 

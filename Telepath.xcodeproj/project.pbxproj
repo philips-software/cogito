@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5C9F22F31F792C68007C013E /* Telepath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F22F21F792C68007C013E /* Telepath.swift */; };
+		5CAA828D1F7A909E0000A9D9 /* QueuingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */; };
 		5CC99AFB1F78FE0400ED602C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5CC99AF91F78FE0400ED602C /* Podfile */; };
 		5CC99AFC1F78FE0400ED602C /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 5CC99AFA1F78FE0400ED602C /* Readme.md */; };
 		5CF521D11F78F4780004C494 /* Telepath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF521C71F78F4780004C494 /* Telepath.framework */; };
@@ -30,8 +31,9 @@
 
 /* Begin PBXFileReference section */
 		0F782C97C726546042A6BEA6 /* Pods-Telepath.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath.release.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath/Pods-Telepath.release.xcconfig"; sourceTree = "<group>"; };
-		5C9F22F21F792C68007C013E /* Telepath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telepath.swift; sourceTree = "<group>"; };
 		2C99DC5547D076047ECFB312 /* Pods_Telepath_TelepathTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telepath_TelepathTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C9F22F21F792C68007C013E /* Telepath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telepath.swift; sourceTree = "<group>"; };
+		5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueuingService.swift; sourceTree = "<group>"; };
 		5CC99AF91F78FE0400ED602C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5CC99AFA1F78FE0400ED602C /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		5CF521C71F78F4780004C494 /* Telepath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Telepath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +101,7 @@
 				5CF521CA1F78F4780004C494 /* Telepath.h */,
 				5CF521CB1F78F4780004C494 /* Info.plist */,
 				5C9F22F21F792C68007C013E /* Telepath.swift */,
+				5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CAA828D1F7A909E0000A9D9 /* QueuingService.swift in Sources */,
 				5C9F22F31F792C68007C013E /* Telepath.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
