@@ -45,6 +45,32 @@ class TelepathTests: QuickSpec {
                     expect(queue.latestQueueId) == channelId
                 }
             }
+
+            context("when receiving a message") {
+                let message = "a message"
+
+                var receivedMessage: String?
+
+                beforeEach {
+                    let plainText = message.data(using: .utf8)!
+                    let cypherText = channelKeys.encrypt(plainText: plainText)
+                    queue.messageToReturn = cypherText
+                    try! receivedMessage = channel.receive()
+                }
+
+                it("decrypts the message") {
+                    expect(receivedMessage) == message
+                }
+
+                it("uses the correct queue") {
+                    expect(queue.latestQueueId) == channelId
+                }
+            }
+
+            it("indicates when no message is available") {
+                queue.messageToReturn = nil
+                expect(try! channel.receive()).to(beNil())
+            }
         }
     }
 }
@@ -53,12 +79,15 @@ class QueuingServiceMock: QueuingService {
     var latestQueueId: QueueID?
     var latestSentMessage: Data?
 
+    var messageToReturn: Data?
+
     func send(queueId: QueueID, message: Data) throws {
         latestQueueId = queueId
         latestSentMessage = message
     }
 
     func receive(queueId: QueueID) throws -> Data? {
-        return nil
+        latestQueueId = queueId
+        return messageToReturn
     }
 }

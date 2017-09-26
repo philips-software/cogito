@@ -19,6 +19,14 @@ public struct SecureChannel {
         let cypherText = keys.encrypt(plainText: plainText)
         try queue.send(queueId: id, message: cypherText)
     }
+
+    func receive() throws -> String? {
+        guard let cypherText = try queue.receive(queueId: id) else {
+            return nil
+        }
+        let plainText = try keys.decrypt(cypherText: cypherText)
+        return String(data: plainText, encoding: .utf8)
+    }
 }
 
 public struct ChannelKeys {
