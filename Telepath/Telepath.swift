@@ -2,21 +2,21 @@
 import RNCryptor
 
 public struct Telepath {
-    let queue: QueuingService
+    let queuing: QueuingService
 
     public func connect(channel: ChannelID, keys: ChannelKeys) -> SecureChannel {
-        return SecureChannel(queue: queue, id: channel, keys: keys)
+        return SecureChannel(queuing: queuing, id: channel, keys: keys)
     }
 }
 
 public struct SecureChannel {
-    let queue: QueuingService
+    let queuing: QueuingService
     let keys: ChannelKeys
     let receivingQueue: QueueID
     let sendingQueue: QueueID
 
-    init(queue: QueuingService, id: ChannelID, keys: ChannelKeys) {
-        self.queue = queue
+    init(queuing: QueuingService, id: ChannelID, keys: ChannelKeys) {
+        self.queuing = queuing
         self.keys = keys
         self.receivingQueue = id + ".red"
         self.sendingQueue = id + ".blue"
@@ -25,11 +25,11 @@ public struct SecureChannel {
     func send(message: String) throws {
         let plainText = message.data(using: .utf8)!
         let cypherText = keys.encrypt(plainText: plainText)
-        try queue.send(queueId: sendingQueue, message: cypherText)
+        try queuing.send(queueId: sendingQueue, message: cypherText)
     }
 
     func receive() throws -> String? {
-        guard let cypherText = try queue.receive(queueId: receivingQueue) else {
+        guard let cypherText = try queuing.receive(queueId: receivingQueue) else {
             return nil
         }
         let plainText = try keys.decrypt(cypherText: cypherText)

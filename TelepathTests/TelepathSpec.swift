@@ -8,11 +8,11 @@ import RNCryptor
 class TelepathSpec: QuickSpec {
     override func spec() {
         var telepath: Telepath!
-        var queue: QueuingServiceMock!
+        var queuing: QueuingServiceMock!
 
         beforeEach {
-            queue = QueuingServiceMock()
-            telepath = Telepath(queue: queue)
+            queuing = QueuingServiceMock()
+            telepath = Telepath(queuing: queuing)
         }
 
         context("when a secure channel is opened") {
@@ -36,13 +36,13 @@ class TelepathSpec: QuickSpec {
                 }
 
                 it("encrypts the message") {
-                    let cypherText = queue.latestSentMessage!
+                    let cypherText = queuing.latestSentMessage!
                     let plainText = try! channelKeys.decrypt(cypherText: cypherText)
                     expect(String(data: plainText, encoding: .utf8)) == message
                 }
 
                 it("it uses the blue queue") {
-                    expect(queue.latestQueueId) == channelId + ".blue"
+                    expect(queuing.latestQueueId) == channelId + ".blue"
                 }
             }
 
@@ -54,7 +54,7 @@ class TelepathSpec: QuickSpec {
                 beforeEach {
                     let plainText = message.data(using: .utf8)!
                     let cypherText = channelKeys.encrypt(plainText: plainText)
-                    queue.messageToReturn = cypherText
+                    queuing.messageToReturn = cypherText
                     try! receivedMessage = channel.receive()
                 }
 
@@ -63,29 +63,29 @@ class TelepathSpec: QuickSpec {
                 }
 
                 it("uses the red queue") {
-                    expect(queue.latestQueueId) == channelId + ".red"
+                    expect(queuing.latestQueueId) == channelId + ".red"
                 }
             }
 
             it("indicates when no message is available") {
-                queue.messageToReturn = nil
+                queuing.messageToReturn = nil
                 expect(try! channel.receive()).to(beNil())
             }
 
             it("throws when there's an error while sending") {
                 struct SomeError : Error {}
-                queue.sendError = SomeError()
+                queuing.sendError = SomeError()
                 expect { try channel.send(message: "some message") }.to(throwError())
             }
 
             it("throws when there's an error while receiving") {
                 struct SomeError : Error {}
-                queue.receiveError = SomeError()
+                queuing.receiveError = SomeError()
                 expect { try channel.receive() }.to(throwError())
             }
 
             it("throws when there's an error while decrypting") {
-                queue.messageToReturn = "invalid data".data(using: .utf8)
+                queuing.messageToReturn = "invalid data".data(using: .utf8)
                 expect { try channel.receive() }.to(throwError())
             }
         }
