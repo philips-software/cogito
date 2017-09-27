@@ -1,0 +1,9 @@
+stages:
+  - build
+
+build_project:
+  stage: build
+  script:
+    - xcodebuild build test -workspace Telepath.xcworkspace -scheme TelepathTests -destination 'platform=iOS Simulator,name=iPhone X,OS=11.0' | xcpretty
+  tags:
+    - ppf-cios
