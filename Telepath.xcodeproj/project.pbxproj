@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		454975F1243813271C739FA9 /* Pods_Telepath_TelepathTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4BF1752A35E8B846AEDDF /* Pods_Telepath_TelepathTests.framework */; };
 		52EA394D90FA1BD55FD6D7D0 /* Pods_Telepath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893E0DFF64A9DA89C3F0EB6A /* Pods_Telepath.framework */; };
+		5C3C1D541F7BBFCE001E5563 /* UrlCodecSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C1D531F7BBFCE001E5563 /* UrlCodecSpec.swift */; };
+		5C3C1D561F7BC159001E5563 /* UrlCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C1D551F7BC159001E5563 /* UrlCodec.swift */; };
 		5C9F22F31F792C68007C013E /* Telepath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F22F21F792C68007C013E /* Telepath.swift */; };
 		5CAA828D1F7A909E0000A9D9 /* QueuingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */; };
 		5CC99AFB1F78FE0400ED602C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5CC99AF91F78FE0400ED602C /* Podfile */; };
@@ -32,6 +34,8 @@
 		22F4BF1752A35E8B846AEDDF /* Pods_Telepath_TelepathTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telepath_TelepathTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3282E434BDF2C5AEABE3548D /* Pods-Telepath.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath/Pods-Telepath.debug.xcconfig"; sourceTree = "<group>"; };
 		50E96DB6A72961DE52059338 /* Pods-Telepath-TelepathTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath-TelepathTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests.release.xcconfig"; sourceTree = "<group>"; };
+		5C3C1D531F7BBFCE001E5563 /* UrlCodecSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlCodecSpec.swift; sourceTree = "<group>"; };
+		5C3C1D551F7BC159001E5563 /* UrlCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlCodec.swift; sourceTree = "<group>"; };
 		5C9F22F21F792C68007C013E /* Telepath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telepath.swift; sourceTree = "<group>"; };
 		5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueuingService.swift; sourceTree = "<group>"; };
 		5CAA828E1F7B970B0000A9D9 /* .gitlab-ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".gitlab-ci.yml"; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 				5CF521CB1F78F4780004C494 /* Info.plist */,
 				5C9F22F21F792C68007C013E /* Telepath.swift */,
 				5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */,
+				5C3C1D551F7BC159001E5563 /* UrlCodec.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 			children = (
 				5CF521D51F78F4780004C494 /* TelepathSpec.swift */,
 				5CF521D71F78F4780004C494 /* Info.plist */,
+				5C3C1D531F7BBFCE001E5563 /* UrlCodecSpec.swift */,
 			);
 			path = TelepathTests;
 			sourceTree = "<group>";
@@ -346,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CAA828D1F7A909E0000A9D9 /* QueuingService.swift in Sources */,
+				5C3C1D561F7BC159001E5563 /* UrlCodec.swift in Sources */,
 				5C9F22F31F792C68007C013E /* Telepath.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CF521D61F78F4780004C494 /* TelepathSpec.swift in Sources */,
+				5C3C1D541F7BBFCE001E5563 /* UrlCodecSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
