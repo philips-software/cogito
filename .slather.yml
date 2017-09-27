@@ -1,0 +1,3 @@
+xcodeproj: Telepath.xcodeproj
+workspace: Telepath.xcworkspace
+scheme: TelepathTests

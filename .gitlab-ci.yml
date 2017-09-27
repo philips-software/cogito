@@ -3,7 +3,11 @@ stages:
 
 build_project:
   stage: build
+  before_script:
+    - bundle install --gemfile=.ruby-dependencies/Gemfile
   script:
     - xcodebuild build test -workspace Telepath.xcworkspace -scheme TelepathTests -destination 'platform=iOS Simulator,name=iPhone X,OS=11.0' | xcpretty
+  after_script:
+    - BUNDLE_GEMFILE=.ruby-dependencies/Gemfile bundle exec slather coverage
   tags:
     - ppf-cios
