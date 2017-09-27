@@ -1,4 +1,4 @@
-//  Copyright © 2017 Philips. All rights reserved.
+//Copyright © 2017 Philips. All rights reserved.
 
 import Quick
 import Nimble

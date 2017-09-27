@@ -1,4 +1,5 @@
 //Copyright © 2017 Philips. All rights reserved.
+
 import RNCryptor
 
 public struct Telepath {
