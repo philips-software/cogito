@@ -16,7 +16,7 @@ class TelepathTests: QuickSpec {
         }
 
         context("when a secure channel is opened") {
-            let channelId: QueueID = "channel id"
+            let channelId: QueueID = "channel_id"
             let channelKeys = ChannelKeys(
                 encryptionKey: RNCryptor.randomData(ofLength: 32),
                 hmacKey: RNCryptor.randomData(ofLength: 32)
@@ -41,8 +41,8 @@ class TelepathTests: QuickSpec {
                     expect(String(data: plainText, encoding: .utf8)) == message
                 }
 
-                it("it uses the correct queue") {
-                    expect(queue.latestQueueId) == channelId
+                it("it uses the blue queue") {
+                    expect(queue.latestQueueId) == channelId + ".blue"
                 }
             }
 
@@ -62,8 +62,8 @@ class TelepathTests: QuickSpec {
                     expect(receivedMessage) == message
                 }
 
-                it("uses the correct queue") {
-                    expect(queue.latestQueueId) == channelId
+                it("uses the red queue") {
+                    expect(queue.latestQueueId) == channelId + ".red"
                 }
             }
 

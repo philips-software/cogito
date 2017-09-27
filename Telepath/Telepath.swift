@@ -11,17 +11,25 @@ public struct Telepath {
 
 public struct SecureChannel {
     let queue: QueuingService
-    let id: QueueID
     let keys: ChannelKeys
+    let receivingQueue: QueueID
+    let sendingQueue: QueueID
+
+    init(queue: QueuingService, id: ChannelID, keys: ChannelKeys) {
+        self.queue = queue
+        self.keys = keys
+        self.receivingQueue = id + ".red"
+        self.sendingQueue = id + ".blue"
+    }
 
     func send(message: String) throws {
         let plainText = message.data(using: .utf8)!
         let cypherText = keys.encrypt(plainText: plainText)
-        try queue.send(queueId: id, message: cypherText)
+        try queue.send(queueId: sendingQueue, message: cypherText)
     }
 
     func receive() throws -> String? {
-        guard let cypherText = try queue.receive(queueId: id) else {
+        guard let cypherText = try queue.receive(queueId: receivingQueue) else {
             return nil
         }
         let plainText = try keys.decrypt(cypherText: cypherText)

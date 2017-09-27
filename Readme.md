@@ -9,7 +9,14 @@ Setting up a secure channel between the mobile device and a browser is done usin
 
 Telepath consists of a javascript library that can be used in web apps, and an iOS library for mobile apps.
 
-Because both the browser and phone are likely to be behind distinct [NAT][1], we provide a server with a public ip address to facilitate peer-to-peer communication between them. This is a fairly simple server that only holds end-to-end encrypted messages in queues. 
+Because both the browser and phone are likely to be behind distinct [NAT][1], we use a service with a public ip address to facilitate peer-to-peer communication between them. This is a fairly simple service that only holds end-to-end encrypted messages in queues.
+
+The channel supports bi-directional communication; both from the web app to the mobile app, and vice-versa. A channel therefore consists of two channels, which we’ve named ‘blue’ and ‘red’. The red channel is used to send messages from the web app to the mobile app, and the blue channel is used for the reverse route.
+
+    -------------                             ------------
+    |    web    |  ---------- red ----------> |  mobile  |
+    |    app    |  <--------- blue ---------- |    app   |
+    -------------                             ------------
 
 Setting up a secure channel is done using these steps:
 
