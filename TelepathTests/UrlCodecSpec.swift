@@ -3,8 +3,6 @@
 import Quick
 import Nimble
 import RNCryptor
-import SwiftyBase64
-import SwiftBytes
 @testable import Telepath
 
 class UrlCodecSpec: QuickSpec {
