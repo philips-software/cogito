@@ -71,6 +71,23 @@ class TelepathSpec: QuickSpec {
                 queue.messageToReturn = nil
                 expect(try! channel.receive()).to(beNil())
             }
+
+            it("throws when there's an error while sending") {
+                struct SomeError : Error {}
+                queue.sendError = SomeError()
+                expect { try channel.send(message: "some message") }.to(throwError())
+            }
+
+            it("throws when there's an error while receiving") {
+                struct SomeError : Error {}
+                queue.receiveError = SomeError()
+                expect { try channel.receive() }.to(throwError())
+            }
+
+            it("throws when there's an error while decrypting") {
+                queue.messageToReturn = "invalid data".data(using: .utf8)
+                expect { try channel.receive() }.to(throwError())
+            }
         }
     }
 }
@@ -80,13 +97,21 @@ class QueuingServiceMock: QueuingService {
     var latestSentMessage: Data?
 
     var messageToReturn: Data?
+    var sendError: Error?
+    var receiveError: Error?
 
     func send(queueId: QueueID, message: Data) throws {
+        if let error = sendError {
+            throw error
+        }
         latestQueueId = queueId
         latestSentMessage = message
     }
 
     func receive(queueId: QueueID) throws -> Data? {
+        if let error = receiveError {
+            throw error
+        }
         latestQueueId = queueId
         return messageToReturn
     }
