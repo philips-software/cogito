@@ -1,5 +1,6 @@
 Telepath
 ========
+[![build status](https://gitlab.ta.philips.com/blockchain-lab/telepath/badges/master/build.svg)](https://gitlab.ta.philips.com/blockchain-lab/telepath/commits/master)
 
 Provides a secure channel for communication between a web app running in a browser and an app running on a mobile device.
 
