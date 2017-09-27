@@ -2,11 +2,13 @@ PODS:
   - Nimble (7.0.1)
   - Quick (1.1.0)
   - RNCryptor (5.0.1)
+  - SwiftyBase64 (1.1.1)
 
 DEPENDENCIES:
   - Nimble (from `https://github.com/Quick/Nimble`)
   - Quick (from `https://github.com/Quick/Quick`)
   - RNCryptor (~> 5.0)
+  - SwiftyBase64 (~> 1.1)
 
 EXTERNAL SOURCES:
   Nimble:
@@ -26,7 +28,8 @@ SPEC CHECKSUMS:
   Nimble: 1b6670c36e5750169b9e4cc2e9cfa82a7603c69e
   Quick: 4700beb8056662b579facd79eaca7f04fb3d48e6
   RNCryptor: 2e352a488779d1a9184ab629be22a7c5bc84acb5
+  SwiftyBase64: 8de4de96a08454e742fdda614dff12d2c62ecbe9
 
-PODFILE CHECKSUM: 90121e66ce7c31978dcc917f914de238f1c19f18
+PODFILE CHECKSUM: 78ece3729c98607efe318b0d9985a69d7fbad386
 
 COCOAPODS: 1.3.1
