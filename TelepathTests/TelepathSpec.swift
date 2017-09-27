@@ -5,7 +5,7 @@ import Nimble
 import RNCryptor
 @testable import Telepath
 
-class TelepathTests: QuickSpec {
+class TelepathSpec: QuickSpec {
     override func spec() {
         var telepath: Telepath!
         var queue: QueuingServiceMock!

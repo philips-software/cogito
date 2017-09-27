@@ -12,7 +12,7 @@
 		5CC99AFB1F78FE0400ED602C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5CC99AF91F78FE0400ED602C /* Podfile */; };
 		5CC99AFC1F78FE0400ED602C /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 5CC99AFA1F78FE0400ED602C /* Readme.md */; };
 		5CF521D11F78F4780004C494 /* Telepath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF521C71F78F4780004C494 /* Telepath.framework */; };
-		5CF521D61F78F4780004C494 /* TelepathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF521D51F78F4780004C494 /* TelepathTests.swift */; };
+		5CF521D61F78F4780004C494 /* TelepathSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF521D51F78F4780004C494 /* TelepathSpec.swift */; };
 		5CF521D81F78F4780004C494 /* Telepath.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CF521CA1F78F4780004C494 /* Telepath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6E3A32103C9A72F3502EB30C /* Pods_TelepathTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCC370C03743B0C138797582 /* Pods_TelepathTests.framework */; };
 		D7A4719DD3DAA5CF8B9CE4BB /* Pods_Telepath_TelepathTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C99DC5547D076047ECFB312 /* Pods_Telepath_TelepathTests.framework */; };
@@ -40,7 +40,7 @@
 		5CF521CA1F78F4780004C494 /* Telepath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Telepath.h; sourceTree = "<group>"; };
 		5CF521CB1F78F4780004C494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CF521D01F78F4780004C494 /* TelepathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TelepathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5CF521D51F78F4780004C494 /* TelepathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathTests.swift; sourceTree = "<group>"; };
+		5CF521D51F78F4780004C494 /* TelepathSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathSpec.swift; sourceTree = "<group>"; };
 		5CF521D71F78F4780004C494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5FD7015D1867C9DA47331959 /* Pods-Telepath-TelepathTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath-TelepathTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8804EC974452348E2D78AF70 /* Pods-TelepathTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TelepathTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TelepathTests/Pods-TelepathTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 		5CF521D41F78F4780004C494 /* TelepathTests */ = {
 			isa = PBXGroup;
 			children = (
-				5CF521D51F78F4780004C494 /* TelepathTests.swift */,
+				5CF521D51F78F4780004C494 /* TelepathSpec.swift */,
 				5CF521D71F78F4780004C494 /* Info.plist */,
 			);
 			path = TelepathTests;
@@ -356,7 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CF521D61F78F4780004C494 /* TelepathTests.swift in Sources */,
+				5CF521D61F78F4780004C494 /* TelepathSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
