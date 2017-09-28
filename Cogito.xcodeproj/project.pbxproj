@@ -20,6 +20,14 @@
 		028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EED1F7CE12A0015C4AF /* SyncProgress.swift */; };
 		028F4EF51F7CF7EB0015C4AF /* ViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EF41F7CF7EB0015C4AF /* ViewControllerSpec.swift */; };
 		028F4EF61F7CF8330015C4AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F21F6ACD1600788B0A /* Main.storyboard */; };
+		028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EF91F7D34280015C4AF /* CreateIdentityViewController.swift */; };
+		028F4EFB1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EF91F7D34280015C4AF /* CreateIdentityViewController.swift */; };
+		028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EFC1F7D3B5C0015C4AF /* CreateIdentityActions.swift */; };
+		028F4EFE1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EFC1F7D3B5C0015C4AF /* CreateIdentityActions.swift */; };
+		028F4F001F7D3B640015C4AF /* CreateIdentityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EFF1F7D3B640015C4AF /* CreateIdentityState.swift */; };
+		028F4F011F7D3B640015C4AF /* CreateIdentityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EFF1F7D3B640015C4AF /* CreateIdentityState.swift */; };
+		028F4F031F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4F021F7D3B6C0015C4AF /* CreateIdentityReducer.swift */; };
+		028F4F041F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4F021F7D3B6C0015C4AF /* CreateIdentityReducer.swift */; };
 		029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245131F7AA00C00F2C0C1 /* GethActions.swift */; };
 		029245151F7AA00C00F2C0C1 /* GethActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245131F7AA00C00F2C0C1 /* GethActions.swift */; };
 		029245171F7AA13F00F2C0C1 /* GethReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245161F7AA13F00F2C0C1 /* GethReducer.swift */; };
@@ -89,6 +97,10 @@
 		028F4EEB1F7AA64D0015C4AF /* GethReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethReducerSpec.swift; sourceTree = "<group>"; };
 		028F4EED1F7CE12A0015C4AF /* SyncProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProgress.swift; sourceTree = "<group>"; };
 		028F4EF41F7CF7EB0015C4AF /* ViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSpec.swift; sourceTree = "<group>"; };
+		028F4EF91F7D34280015C4AF /* CreateIdentityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityViewController.swift; sourceTree = "<group>"; };
+		028F4EFC1F7D3B5C0015C4AF /* CreateIdentityActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityActions.swift; sourceTree = "<group>"; };
+		028F4EFF1F7D3B640015C4AF /* CreateIdentityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityState.swift; sourceTree = "<group>"; };
+		028F4F021F7D3B6C0015C4AF /* CreateIdentityReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityReducer.swift; sourceTree = "<group>"; };
 		029245131F7AA00C00F2C0C1 /* GethActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethActions.swift; sourceTree = "<group>"; };
 		029245161F7AA13F00F2C0C1 /* GethReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethReducer.swift; sourceTree = "<group>"; };
 		029245191F7AA17300F2C0C1 /* GethState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethState.swift; sourceTree = "<group>"; };
@@ -166,6 +178,7 @@
 				028F4EF01F7CE22D0015C4AF /* GethState */,
 				0298D4331F7A45040070998D /* Geth */,
 				02E792371F6FFDF000DC5973 /* KeyStore */,
+				028F4EF71F7D34030015C4AF /* Create identity */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
 				027603F01F6ACD1600788B0A /* ViewController.swift */,
 				027603F21F6ACD1600788B0A /* Main.storyboard */,
@@ -183,6 +196,7 @@
 				028F4EF11F7CE25F0015C4AF /* GethState */,
 				0298D4321F7A44EF0070998D /* Geth */,
 				02E792361F6FFDD600DC5973 /* KeyStore */,
+				028F4EF81F7D340D0015C4AF /* Create identity */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
 				027604051F6ACD1600788B0A /* Info.plist */,
 				028F4EF41F7CF7EB0015C4AF /* ViewControllerSpec.swift */,
@@ -225,6 +239,24 @@
 				02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */,
 			);
 			path = Global;
+			sourceTree = "<group>";
+		};
+		028F4EF71F7D34030015C4AF /* Create identity */ = {
+			isa = PBXGroup;
+			children = (
+				028F4EF91F7D34280015C4AF /* CreateIdentityViewController.swift */,
+				028F4EFC1F7D3B5C0015C4AF /* CreateIdentityActions.swift */,
+				028F4EFF1F7D3B640015C4AF /* CreateIdentityState.swift */,
+				028F4F021F7D3B6C0015C4AF /* CreateIdentityReducer.swift */,
+			);
+			path = "Create identity";
+			sourceTree = "<group>";
+		};
+		028F4EF81F7D340D0015C4AF /* Create identity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Create identity";
 			sourceTree = "<group>";
 		};
 		0298D4321F7A44EF0070998D /* Geth */ = {
@@ -546,12 +578,15 @@
 				029245171F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
 				0298D4371F7A45680070998D /* Geth.swift in Sources */,
 				0298D43A1F7A46A30070998D /* Node.swift in Sources */,
+				028F4F001F7D3B640015C4AF /* CreateIdentityState.swift in Sources */,
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
 				029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
+				028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
 				02BE32D01F7A6D92006C7287 /* SyncProgressReporter.swift in Sources */,
 				0292451A1F7AA17300F2C0C1 /* GethState.swift in Sources */,
 				02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */,
+				028F4F031F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
 				02BE32D31F7A8165006C7287 /* EthereumClient.swift in Sources */,
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
 				027603F11F6ACD1600788B0A /* ViewController.swift in Sources */,
@@ -559,6 +594,7 @@
 				029691551F7166EE00654BD0 /* KeyStoreState.swift in Sources */,
 				02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */,
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
+				028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
 				028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -576,6 +612,8 @@
 				028F4EEC1F7AA64D0015C4AF /* GethReducerSpec.swift in Sources */,
 				0298D4291F7A43C90070998D /* KeyStoreReducer.swift in Sources */,
 				0298D4351F7A45150070998D /* GethSpec.swift in Sources */,
+				028F4EFB1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
+				028F4F011F7D3B640015C4AF /* CreateIdentityState.swift in Sources */,
 				02BE32D41F7A8165006C7287 /* EthereumClient.swift in Sources */,
 				0298D42A1F7A43C90070998D /* KeyStoreState.swift in Sources */,
 				02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */,
@@ -591,9 +629,11 @@
 				C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */,
 				0298D42E1F7A43C90070998D /* StorePersister.swift in Sources */,
 				0292451D1F7AA3B100F2C0C1 /* AppStateHelper.swift in Sources */,
+				028F4EFE1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0298D42B1F7A43C90070998D /* AppStore.swift in Sources */,
 				0298D4281F7A43C90070998D /* KeyStoreActions.swift in Sources */,
 				029245181F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
+				028F4F041F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
 				028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,18 +10,23 @@ class StorePersisterSpec: QuickSpec {
         var store: Store<AppState>!
         var url: URL!
 
+        func deleteStore() {
+            if FileManager.default.fileExists(atPath: url.path) {
+                expect {
+                    try FileManager.default.removeItem(at: url)
+                    }.toNot(throwError())
+            }
+        }
+
         beforeEach {
             store = Store(reducer: {(_, _) in return initialAppState }, state: nil)
             let dir = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
             url = URL(fileURLWithPath: dir).appendingPathComponent("store.json")
+            deleteStore()
         }
 
         afterEach {
-            if FileManager.default.fileExists(atPath: url.path) {
-                expect {
-                    try FileManager.default.removeItem(at: url)
-                }.toNot(throwError())
-            }
+            deleteStore()
         }
 
         it("can be constructed") {
@@ -62,7 +67,10 @@ class StorePersisterSpec: QuickSpec {
                         },
                         "keyStoreType":"KeyStore"
                     },
-                    "geth": {}
+                    "geth": {},
+                    "createIdentity": {
+                        "description": ""
+                    }
                 }
                 """
         context("when file contains valid JSON") {

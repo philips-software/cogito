@@ -5,6 +5,7 @@ import ReSwift
 func appReducer(action: Action, state: AppState?) -> AppState {
     return AppState(
         keyStore: keyStoreReducer(action: action, state: state?.keyStore),
-        geth: gethReducer(action: action, state: state?.geth)
+        geth: gethReducer(action: action, state: state?.geth),
+        createIdentity: createIdentityReducer(action: action, state: state?.createIdentity)
     )
 }
