@@ -15,14 +15,15 @@ class ViewControllerSpec: QuickSpec {
             expect(viewController.view).toNot(beNil())
         }
 
-        it("show no progress bar and idle label when sync progress is nil") {
+        it("show proper UI when sync progress is nil") {
             let state = appState(geth: GethState(peersCount: 0, syncProgress: nil))
             viewController.connection.newState(state: state)
             expect(viewController.syncProgressBar.isHidden).to(beTrue())
+            expect(viewController.syncActivityIndicator.isHidden).to(beTrue())
             expect(viewController.syncProgressLabel.text) == "idle"
         }
 
-        it("shows progress bar and label when sync progress is not nil") {
+        it("shows proper UI when sync progress is not nil") {
             let start = 100
             let cur = 500
             let total = 1000
@@ -30,8 +31,10 @@ class ViewControllerSpec: QuickSpec {
             let state = appState(geth: GethState(peersCount: 0, syncProgress: syncProgress))
             viewController.connection.newState(state: state)
             expect(viewController.syncProgressBar.isHidden).to(beFalse())
+            expect(viewController.syncActivityIndicator.isHidden).to(beFalse())
             expect(viewController.syncProgressBar.progress) == Float(cur-start)/Float(total-start)
-            expect(viewController.syncProgressLabel.text) == "- \(total-cur)"
+            let percentage = String(format: "%.2f", 100 * syncProgress.fractionComplete)
+            expect(viewController.syncProgressLabel.text) == "- \(total-cur) (\(percentage)%)"
         }
 
         it("show the peer count") {

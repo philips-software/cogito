@@ -9,18 +9,20 @@ class ViewController: UIViewController, Connectable {
     @IBOutlet weak var peerCountLabel: UILabel!
     @IBOutlet weak var syncProgressLabel: UILabel!
     @IBOutlet weak var syncProgressBar: UIProgressView!
+    @IBOutlet weak var syncActivityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         connection.bind(\Props.peerCount, to: peerCountLabel.rx.text) { String($0) }
         connection.bind(\Props.syncProgress, to: syncProgressLabel.rx.text) { progress in
             guard let p = progress else { return "idle" }
-            return "- \(p.total - p.current)"
+            return "- \(p.total - p.current) (\(String(format: "%.2f", 100.0 * p.fractionComplete))%)"
         }
         connection.bind(\Props.syncProgress, to: syncProgressBar.rx.isHidden) { $0 == nil }
+        connection.bind(\Props.syncProgress, to: syncActivityIndicator.rx.isAnimating) { $0 != nil }
         connection.bind(\Props.syncProgress, to: syncProgressBar.rx.progress) { progress in
             guard let p = progress else { return 0 }
-            return Float(p.current - p.start) / Float(p.total - p.start)
+            return p.fractionComplete
         }
     }
 
