@@ -23,5 +23,21 @@ class GethReducerSpec: QuickSpec {
             let state = gethReducer(action: action, state: nil)
             expect(state.syncProgress).to(beNil())
         }
+
+        it("doesn't set sync progress to nil when sync is not complete") {
+            let initialState = GethState(peersCount: 0,
+                                         syncProgress: SyncProgress(start: 0, current: 1, total: 2))
+            let action = SyncProgressUpdated(progress: nil)
+            let state = gethReducer(action: action, state: initialState)
+            expect(state.syncProgress).toNot(beNil())
+        }
+
+        it("sets sync progress to nil when it is complete") {
+            let initialState = GethState(peersCount: 0,
+                                         syncProgress: SyncProgress(start: 0, current: 2, total: 2))
+            let action = SyncProgressUpdated(progress: nil)
+            let state = gethReducer(action: action, state: initialState)
+            expect(state.syncProgress).to(beNil())
+        }
     }
 }
