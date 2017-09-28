@@ -18,6 +18,7 @@
 		5CF521D11F78F4780004C494 /* Telepath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF521C71F78F4780004C494 /* Telepath.framework */; };
 		5CF521D61F78F4780004C494 /* TelepathSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF521D51F78F4780004C494 /* TelepathSpec.swift */; };
 		5CF521D81F78F4780004C494 /* Telepath.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CF521CA1F78F4780004C494 /* Telepath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CF7567D1F7CE5630088C2AD /* Base64url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF7567C1F7CE5630088C2AD /* Base64url.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		5CF521D01F78F4780004C494 /* TelepathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TelepathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CF521D51F78F4780004C494 /* TelepathSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathSpec.swift; sourceTree = "<group>"; };
 		5CF521D71F78F4780004C494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CF7567C1F7CE5630088C2AD /* Base64url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base64url.swift; sourceTree = "<group>"; };
 		893E0DFF64A9DA89C3F0EB6A /* Pods_Telepath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telepath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF418475E584D354329CCFB4 /* Pods-Telepath.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath.release.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath/Pods-Telepath.release.xcconfig"; sourceTree = "<group>"; };
 		F4EBE1B79B6DF5C8C6647AF2 /* Pods-Telepath-TelepathTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath-TelepathTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				5C9F22F21F792C68007C013E /* Telepath.swift */,
 				5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */,
 				5C3C1D551F7BC159001E5563 /* UrlCodec.swift */,
+				5CF7567C1F7CE5630088C2AD /* Base64url.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 			files = (
 				5CAA828D1F7A909E0000A9D9 /* QueuingService.swift in Sources */,
 				5C3C1D561F7BC159001E5563 /* UrlCodec.swift in Sources */,
+				5CF7567D1F7CE5630088C2AD /* Base64url.swift in Sources */,
 				5C9F22F31F792C68007C013E /* Telepath.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

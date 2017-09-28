@@ -45,12 +45,12 @@ class UrlCodecSpec: QuickSpec {
             }
             
             it("encodes the encryption key") {
-                let encodedEncryptionKey = encryptionKey.encodeForUrlFragment()
+                let encodedEncryptionKey = encryptionKey.base64urlEncodedString()
                 expect(encoded.fragment).to(contain("E=\(encodedEncryptionKey)"))
             }
             
             it("encodes the message authentication key") {
-                let encodedHmacKey = hmacKey.encodeForUrlFragment()
+                let encodedHmacKey = hmacKey.base64urlEncodedString()
                 expect(encoded.fragment).to(contain("A=\(encodedHmacKey)"))
             }
         }
