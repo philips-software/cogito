@@ -4,4 +4,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var peerCountLabel: UILabel!
+    @IBOutlet weak var syncProgressLabel: UILabel!
+    @IBOutlet weak var syncProgressBar: UIProgressView!
+
 }
