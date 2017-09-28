@@ -2,12 +2,6 @@
 
 import Geth
 
-struct SyncProgress {
-    let start: Int
-    let current: Int
-    let total: Int
-}
-
 protocol EthereumClientType {
     func syncProgress() -> SyncProgress?
 }
