@@ -2,16 +2,35 @@
 
 import UIKit
 import ReSwift
+import ReRxSwift
 
-class CreateIdentityViewController: UIViewController {
+class CreateIdentityViewController: UIViewController, Connectable {
 
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var createButton: UIButton!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        connection.bind(\Props.description, to: createButton.rx.isEnabled) { $0 != "" }
+        connection.bind(\Props.description, to: descriptionField.rx.text)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        connection.connect()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        connection.disconnect()
+    }
+
     @IBAction func editingEnded() {
+        actions.setDescription(descriptionField.text ?? "")
     }
 
     @IBAction func createTapped() {
+        actions.createIdentity()
     }
 
     struct Props {
@@ -21,6 +40,9 @@ class CreateIdentityViewController: UIViewController {
         let setDescription: (String) -> Void
         let createIdentity: () -> Void
     }
+    let connection = Connection(store: appStore,
+                                mapStateToProps: mapStateToProps,
+                                mapDispatchToActions: mapDispatchToActions)
 }
 
 private func mapStateToProps(state: AppState) -> CreateIdentityViewController.Props {
