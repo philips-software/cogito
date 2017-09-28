@@ -18,6 +18,8 @@
 		028F4EEC1F7AA64D0015C4AF /* GethReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EEB1F7AA64D0015C4AF /* GethReducerSpec.swift */; };
 		028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EED1F7CE12A0015C4AF /* SyncProgress.swift */; };
 		028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EED1F7CE12A0015C4AF /* SyncProgress.swift */; };
+		028F4EF51F7CF7EB0015C4AF /* ViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EF41F7CF7EB0015C4AF /* ViewControllerSpec.swift */; };
+		028F4EF61F7CF8330015C4AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F21F6ACD1600788B0A /* Main.storyboard */; };
 		029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245131F7AA00C00F2C0C1 /* GethActions.swift */; };
 		029245151F7AA00C00F2C0C1 /* GethActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245131F7AA00C00F2C0C1 /* GethActions.swift */; };
 		029245171F7AA13F00F2C0C1 /* GethReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245161F7AA13F00F2C0C1 /* GethReducer.swift */; };
@@ -86,6 +88,7 @@
 		0276040E1F6BFF6D00788B0A /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		028F4EEB1F7AA64D0015C4AF /* GethReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethReducerSpec.swift; sourceTree = "<group>"; };
 		028F4EED1F7CE12A0015C4AF /* SyncProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProgress.swift; sourceTree = "<group>"; };
+		028F4EF41F7CF7EB0015C4AF /* ViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSpec.swift; sourceTree = "<group>"; };
 		029245131F7AA00C00F2C0C1 /* GethActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethActions.swift; sourceTree = "<group>"; };
 		029245161F7AA13F00F2C0C1 /* GethReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethReducer.swift; sourceTree = "<group>"; };
 		029245191F7AA17300F2C0C1 /* GethState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethState.swift; sourceTree = "<group>"; };
@@ -182,6 +185,7 @@
 				02E792361F6FFDD600DC5973 /* KeyStore */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
 				027604051F6ACD1600788B0A /* Info.plist */,
+				028F4EF41F7CF7EB0015C4AF /* ViewControllerSpec.swift */,
 			);
 			path = CogitoTests;
 			sourceTree = "<group>";
@@ -387,6 +391,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				028F4EF61F7CF8330015C4AF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02BE32CE1F7A5C55006C7287 /* SyncProgressReporterSpec.swift in Sources */,
+				028F4EF51F7CF7EB0015C4AF /* ViewControllerSpec.swift in Sources */,
 				029245151F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
 				0298D42F1F7A43C90070998D /* ViewController.swift in Sources */,
 				0292451B1F7AA17300F2C0C1 /* GethState.swift in Sources */,
