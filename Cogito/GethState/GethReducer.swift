@@ -8,7 +8,14 @@ func gethReducer(action: Action, state: GethState?) -> GethState {
     case let action as PeersUpdated:
         state.peersCount = action.count
     case let action as SyncProgressUpdated:
-        state.syncProgress = action.progress
+        if action.progress == nil {
+            if let lastProgress = state.syncProgress,
+                lastProgress.current == lastProgress.total {
+                state.syncProgress = nil
+            }
+        } else {
+            state.syncProgress = action.progress
+        }
     default:
         break
     }
