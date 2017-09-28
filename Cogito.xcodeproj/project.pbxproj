@@ -159,14 +159,11 @@
 		027603ED1F6ACD1600788B0A /* Cogito */ = {
 			isa = PBXGroup;
 			children = (
+				028F4EF21F7CE37E0015C4AF /* Global */,
 				028F4EF01F7CE22D0015C4AF /* GethState */,
 				0298D4331F7A45040070998D /* Geth */,
 				02E792371F6FFDF000DC5973 /* KeyStore */,
-				02E792341F6FFBFF00DC5973 /* AppStore.swift */,
-				02E792301F6FFBAD00DC5973 /* AppState.swift */,
-				02E792321F6FFBF700DC5973 /* AppReducer.swift */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
-				02CD30A31F73F251006BA756 /* StorePersister.swift */,
 				027603F01F6ACD1600788B0A /* ViewController.swift */,
 				027603F21F6ACD1600788B0A /* Main.storyboard */,
 				027603F51F6ACD1600788B0A /* Assets.xcassets */,
@@ -179,9 +176,9 @@
 		027604021F6ACD1600788B0A /* CogitoTests */ = {
 			isa = PBXGroup;
 			children = (
-				02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */,
-				0298D4321F7A44EF0070998D /* Geth */,
+				028F4EF31F7CE3A10015C4AF /* Global */,
 				028F4EF11F7CE25F0015C4AF /* GethState */,
+				0298D4321F7A44EF0070998D /* Geth */,
 				02E792361F6FFDD600DC5973 /* KeyStore */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
 				027604051F6ACD1600788B0A /* Info.plist */,
@@ -205,6 +202,25 @@
 				028F4EEB1F7AA64D0015C4AF /* GethReducerSpec.swift */,
 			);
 			path = GethState;
+			sourceTree = "<group>";
+		};
+		028F4EF21F7CE37E0015C4AF /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				02E792341F6FFBFF00DC5973 /* AppStore.swift */,
+				02E792301F6FFBAD00DC5973 /* AppState.swift */,
+				02E792321F6FFBF700DC5973 /* AppReducer.swift */,
+				02CD30A31F73F251006BA756 /* StorePersister.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		028F4EF31F7CE3A10015C4AF /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */,
+			);
+			path = Global;
 			sourceTree = "<group>";
 		};
 		0298D4321F7A44EF0070998D /* Geth */ = {
