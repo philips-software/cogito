@@ -102,14 +102,20 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/ReRxSwift/ReRxSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReSwiftThunk/ReSwiftThunk.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Quick/Quick.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/ReRxSwift/ReRxSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReSwiftThunk/ReSwiftThunk.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Quick/Quick.framework"
 fi
