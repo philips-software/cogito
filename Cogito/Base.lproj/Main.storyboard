@@ -46,16 +46,21 @@
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ck5-ic-qsN">
                                 <rect key="frame" x="16" y="78" width="343" height="2"/>
                             </progressView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YOH-04-cJJ">
+                                <rect key="frame" x="339" y="49" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="cah-t9-UjB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="2gg-ke-Q0h"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YOH-04-cJJ" secondAttribute="trailing" constant="16" id="9Vd-In-HfO"/>
                             <constraint firstItem="Ck5-ic-qsN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="BT9-gF-PHv"/>
                             <constraint firstItem="Ck5-ic-qsN" firstAttribute="top" secondItem="FpB-lq-rKm" secondAttribute="bottom" constant="8" id="D3a-xV-vX9"/>
                             <constraint firstItem="FpB-lq-rKm" firstAttribute="top" secondItem="cah-t9-UjB" secondAttribute="bottom" constant="8" id="DAK-LN-QeK"/>
+                            <constraint firstItem="YOH-04-cJJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ter-0c-iwG" secondAttribute="trailing" constant="8" id="JqG-I8-D2w"/>
                             <constraint firstItem="FpB-lq-rKm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="KUl-v7-AaE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LnB-ol-chg" secondAttribute="trailing" constant="16" id="OE0-El-ALG"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ter-0c-iwG" secondAttribute="trailing" constant="16" id="OHa-nU-llP"/>
+                            <constraint firstItem="YOH-04-cJJ" firstAttribute="centerY" secondItem="Ter-0c-iwG" secondAttribute="centerY" id="SeO-QL-RRJ"/>
                             <constraint firstItem="Ter-0c-iwG" firstAttribute="baseline" secondItem="FpB-lq-rKm" secondAttribute="baseline" id="Uvu-22-vnb"/>
                             <constraint firstItem="LnB-ol-chg" firstAttribute="leading" secondItem="cah-t9-UjB" secondAttribute="trailing" constant="8" id="YWF-fR-kuR"/>
                             <constraint firstItem="Ter-0c-iwG" firstAttribute="leading" secondItem="FpB-lq-rKm" secondAttribute="trailing" constant="8" id="apK-1z-Lie"/>
@@ -67,6 +72,7 @@
                     </view>
                     <connections>
                         <outlet property="peerCountLabel" destination="LnB-ol-chg" id="mt8-w3-SWK"/>
+                        <outlet property="syncActivityIndicator" destination="YOH-04-cJJ" id="kC0-op-417"/>
                         <outlet property="syncProgressBar" destination="Ck5-ic-qsN" id="TxD-po-cHE"/>
                         <outlet property="syncProgressLabel" destination="Ter-0c-iwG" id="wwa-Hy-aoh"/>
                     </connections>

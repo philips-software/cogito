@@ -4,6 +4,10 @@ struct SyncProgress {
     let start: Int
     let current: Int
     let total: Int
+
+    var fractionComplete: Float {
+        return Float(current - start) / Float(total - start)
+    }
 }
 
 extension SyncProgress: Equatable {
