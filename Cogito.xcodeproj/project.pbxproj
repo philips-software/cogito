@@ -28,6 +28,7 @@
 		028F4F011F7D3B640015C4AF /* CreateIdentityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EFF1F7D3B640015C4AF /* CreateIdentityState.swift */; };
 		028F4F031F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4F021F7D3B6C0015C4AF /* CreateIdentityReducer.swift */; };
 		028F4F041F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4F021F7D3B6C0015C4AF /* CreateIdentityReducer.swift */; };
+		028F4F061F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4F051F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift */; };
 		029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245131F7AA00C00F2C0C1 /* GethActions.swift */; };
 		029245151F7AA00C00F2C0C1 /* GethActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245131F7AA00C00F2C0C1 /* GethActions.swift */; };
 		029245171F7AA13F00F2C0C1 /* GethReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245161F7AA13F00F2C0C1 /* GethReducer.swift */; };
@@ -101,6 +102,7 @@
 		028F4EFC1F7D3B5C0015C4AF /* CreateIdentityActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityActions.swift; sourceTree = "<group>"; };
 		028F4EFF1F7D3B640015C4AF /* CreateIdentityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityState.swift; sourceTree = "<group>"; };
 		028F4F021F7D3B6C0015C4AF /* CreateIdentityReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityReducer.swift; sourceTree = "<group>"; };
+		028F4F051F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityViewControllerSpec.swift; sourceTree = "<group>"; };
 		029245131F7AA00C00F2C0C1 /* GethActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethActions.swift; sourceTree = "<group>"; };
 		029245161F7AA13F00F2C0C1 /* GethReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethReducer.swift; sourceTree = "<group>"; };
 		029245191F7AA17300F2C0C1 /* GethState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethState.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 		028F4EF81F7D340D0015C4AF /* Create identity */ = {
 			isa = PBXGroup;
 			children = (
+				028F4F051F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift */,
 			);
 			path = "Create identity";
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				029245151F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
 				0298D42F1F7A43C90070998D /* ViewController.swift in Sources */,
 				0292451B1F7AA17300F2C0C1 /* GethState.swift in Sources */,
+				028F4F061F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift in Sources */,
 				02BE32D11F7A6DD0006C7287 /* SyncProgressReporter.swift in Sources */,
 				028F4EEC1F7AA64D0015C4AF /* GethReducerSpec.swift in Sources */,
 				0298D4291F7A43C90070998D /* KeyStoreReducer.swift in Sources */,
