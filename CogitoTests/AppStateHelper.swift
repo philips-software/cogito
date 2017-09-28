@@ -3,6 +3,7 @@
 import Foundation
 
 func appState(keyStore: KeyStoreState = initialKeyStoreState,
-              geth: GethState = initialGethState) -> AppState {
-    return AppState(keyStore: keyStore, geth: geth)
+              geth: GethState = initialGethState,
+              createIdentity: CreateIdentityState = initialCreateIdentityState) -> AppState {
+    return AppState(keyStore: keyStore, geth: geth, createIdentity: createIdentity)
 }
