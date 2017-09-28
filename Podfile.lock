@@ -46,7 +46,7 @@ CHECKOUT OPTIONS:
     :commit: c498edf4aabb694a5b8a861ec3d69f0c5ab57d9e
     :git: https://github.com/Quick/Quick
   ReRxSwift:
-    :commit: 2eaa2ab40718162f9b0ab5623c08c688887fed1f
+    :commit: 1102bfd053ae17b8362fdb96de8d4303abf4bed3
     :git: https://github.com/svdo/ReRxSwift
   ReSwift:
     :commit: 365d05d0acb7ce7808b0d344e7db31d19eedfdf2
