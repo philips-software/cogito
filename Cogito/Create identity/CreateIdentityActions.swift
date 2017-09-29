@@ -10,6 +10,4 @@ struct CreateIdentityActions {
     }
 
     struct CreateIdentity: Action {}
-
-    struct Cancel: Action {}
 }
