@@ -58,6 +58,6 @@ private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> Creat
     return CreateIdentityViewController.Actions(
         setDescription: { desc in dispatch(CreateIdentityActions.SetDescription(description: desc)) },
         createIdentity: { dispatch(CreateIdentityActions.CreateIdentity()) },
-        cancel: {}
+        cancel: { dispatch(CreateIdentityActions.Cancel()) }
     )
 }
