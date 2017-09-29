@@ -7,5 +7,29 @@ Provides a secure channel for communication between a web app running in a brows
 
 For an overview of what Telepath is, please visit the [main telepath repo][2].
 
+### Usage
+
+```swift
+import Telepath
+```
+
+Instantiating a Telepath instance given a Queuing Service:
+
+```swift
+let telepath = Telepath(queuing: queuingService)
+```
+
+Connecting to a secure channel when you have the channel id, and its keys:
+
+```swift
+let channel = telepath.connect(channel: channelId, keys: channelKeys)
+```
+
+Connecting to a secure channel when you received a Telepath URL (e.g. through a QR Code):
+
+```swift
+let channel = telepath.connect(url: telepathURL)
+```
+
 [1]: https://en.wikipedia.org/wiki/Network_address_translation
 [2]: https://gitlab.ta.philips.com/blockchain-lab/telepath
