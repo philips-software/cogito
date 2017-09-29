@@ -1,4 +1,4 @@
-//  Copyright © 2017 Konkinklijke Philips Nederland N.V. All rights reserved.
+//  Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
 
 struct SyncProgress {
     let start: Int

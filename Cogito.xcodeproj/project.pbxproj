@@ -386,7 +386,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = "Konkinklijke Philips Nederland N.V.";
+				ORGANIZATIONNAME = "Koninklijke Philips Nederland N.V.";
 				TargetAttributes = {
 					027603EA1F6ACD1600788B0A = {
 						CreatedOnToolsVersion = 9.0;
