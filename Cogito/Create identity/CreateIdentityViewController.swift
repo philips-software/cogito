@@ -25,7 +25,7 @@ class CreateIdentityViewController: UIViewController, Connectable {
         connection.disconnect()
     }
 
-    @IBAction func editingEnded() {
+    @IBAction func editingChanged() {
         actions.setDescription(descriptionField.text ?? "")
     }
 
