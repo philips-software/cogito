@@ -38,7 +38,7 @@ class CreateIdentityViewControllerSpec: QuickSpec {
                 cancel: {}
             )
             viewController.descriptionField.text = "me"
-            viewController.editingEnded()
+            viewController.editingChanged()
             expect(descriptionSet) == "me"
         }
 
