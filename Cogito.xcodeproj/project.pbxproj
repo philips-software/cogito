@@ -62,6 +62,7 @@
 		02BE32D41F7A8165006C7287 /* EthereumClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32D21F7A8165006C7287 /* EthereumClient.swift */; };
 		02CD30A41F73F251006BA756 /* StorePersister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A31F73F251006BA756 /* StorePersister.swift */; };
 		02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */; };
+		02CD80541F7D494900AA5C3A /* CreateIdentityReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */; };
 		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
 		02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792321F6FFBF700DC5973 /* AppReducer.swift */; };
 		02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792341F6FFBFF00DC5973 /* AppStore.swift */; };
@@ -119,6 +120,7 @@
 		02BE32D21F7A8165006C7287 /* EthereumClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumClient.swift; sourceTree = "<group>"; };
 		02CD30A31F73F251006BA756 /* StorePersister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersister.swift; sourceTree = "<group>"; };
 		02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersisterSpec.swift; sourceTree = "<group>"; };
+		02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityReducerSpec.swift; sourceTree = "<group>"; };
 		02E792301F6FFBAD00DC5973 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		02E792321F6FFBF700DC5973 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		02E792341F6FFBFF00DC5973 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				028F4F051F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift */,
+				02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */,
 			);
 			path = "Create identity";
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				02BE32D11F7A6DD0006C7287 /* SyncProgressReporter.swift in Sources */,
 				028F4EEC1F7AA64D0015C4AF /* GethReducerSpec.swift in Sources */,
 				0298D4291F7A43C90070998D /* KeyStoreReducer.swift in Sources */,
+				02CD80541F7D494900AA5C3A /* CreateIdentityReducerSpec.swift in Sources */,
 				0298D4351F7A45150070998D /* GethSpec.swift in Sources */,
 				028F4EFB1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
 				028F4F011F7D3B640015C4AF /* CreateIdentityState.swift in Sources */,

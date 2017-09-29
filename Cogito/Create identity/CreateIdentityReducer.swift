@@ -3,6 +3,12 @@
 import ReSwift
 
 func createIdentityReducer(action: Action, state: CreateIdentityState?) -> CreateIdentityState {
-    let state = state ?? initialCreateIdentityState
+    var state = state ?? initialCreateIdentityState
+    switch action {
+        case let action as CreateIdentityActions.SetDescription:
+            state.description = action.description
+        default:
+            break
+    }
     return state
 }
