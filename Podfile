@@ -8,6 +8,7 @@ target 'Cogito' do
   pod 'Geth', '~> 1.7.1-unstable.10951'
   pod 'SwiftLint', '0.21.0'
   pod 'ReRxSwift', :git => 'https://github.com/svdo/ReRxSwift', :branch => 'master'
+  pod 'KeychainAccess', '~> 3.1'
 
   target 'CogitoTests' do
     pod 'Quick', :git => 'https://github.com/Quick/Quick'
