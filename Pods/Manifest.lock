@@ -3,12 +3,14 @@ PODS:
   - Quick (1.1.0)
   - RNCryptor (5.0.1)
   - STRegex (1.1.0)
+  - SwiftLint (0.21.0)
 
 DEPENDENCIES:
   - Nimble (from `https://github.com/Quick/Nimble`)
   - Quick (from `https://github.com/Quick/Quick`)
   - RNCryptor (~> 5.0)
   - STRegex (~> 1.1)
+  - SwiftLint (= 0.21.0)
 
 EXTERNAL SOURCES:
   Nimble:
@@ -29,7 +31,8 @@ SPEC CHECKSUMS:
   Quick: 4700beb8056662b579facd79eaca7f04fb3d48e6
   RNCryptor: 2e352a488779d1a9184ab629be22a7c5bc84acb5
   STRegex: eb1f4c2fe9e2f0265b8df8634774cd8cd8914018
+  SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
 
-PODFILE CHECKSUM: c417393dedca666ebb23766beb168873fd081085
+PODFILE CHECKSUM: 0079648a57d3eea8a64abffa72f902e590a5479f
 
 COCOAPODS: 1.3.1
