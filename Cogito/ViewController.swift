@@ -45,10 +45,13 @@ class ViewController: UIViewController, Connectable {
         let peerCount: Int
         let syncProgress: SyncProgress?
     }
-    struct Actions {}
+    struct Actions {
+        let resetCreateIdentity: () -> Void
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let child = segue.destination as? CreateIdentityViewController {
+            actions.resetCreateIdentity()
             child.onDone = {
                 child.dismiss(animated: true)
             }
@@ -63,6 +66,8 @@ private func mapStateToProps(state: AppState) -> ViewController.Props {
     )
 }
 
-private func mapDispatchToActions(dispatch: DispatchFunction) -> ViewController.Actions {
-    return ViewController.Actions()
+private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> ViewController.Actions {
+    return ViewController.Actions(
+        resetCreateIdentity: { dispatch(CreateIdentityActions.Reset()) }
+    )
 }

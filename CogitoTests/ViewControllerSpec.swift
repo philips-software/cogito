@@ -42,5 +42,20 @@ class ViewControllerSpec: QuickSpec {
             viewController.connection.newState(state: state)
             expect(viewController.peerCountLabel.text) == "42"
         }
+
+        it("calls reset action when opening createIdentity view controller") {
+            var resetCalled = false
+            viewController.connection.actions = ViewController.Actions(
+                resetCreateIdentity: { resetCalled = true }
+            )
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: type(of: self)))
+            let createIdentityViewController = storyboard.instantiateViewController(withIdentifier: "CreateIdentity")
+                as! CreateIdentityViewController // swiftlint:disable:this force_cast
+            let segue = UIStoryboardSegue(identifier: nil,
+                                          source: viewController,
+                                          destination: createIdentityViewController)
+            viewController.prepare(for: segue, sender: nil)
+            expect(resetCalled).to(beTrue())
+        }
     }
 }
