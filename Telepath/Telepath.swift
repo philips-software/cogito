@@ -8,6 +8,11 @@ public struct Telepath {
     public func connect(channel: ChannelID, keys: ChannelKeys) -> SecureChannel {
         return SecureChannel(queuing: queuing, id: channel, keys: keys)
     }
+
+    public func connect(url: URL) throws -> SecureChannel {
+        let (id, keys) = try UrlCodec().decode(url: url)
+        return SecureChannel(queuing: queuing, id: id, keys: keys)
+    }
 }
 
 public struct SecureChannel {
@@ -56,5 +61,22 @@ extension ChannelKeys {
     func decrypt(cypherText: Data) throws -> Data {
         let decryptor = RNCryptor.DecryptorV3(encryptionKey: encryptionKey, hmacKey: hmacKey)
         return try decryptor.decrypt(data: cypherText)
+    }
+}
+
+extension ChannelKeys: Equatable {
+    public static func ==(lhs: ChannelKeys, rhs: ChannelKeys) -> Bool {
+        return
+            lhs.encryptionKey == rhs.encryptionKey &&
+            lhs.hmacKey == rhs.hmacKey
+    }
+}
+
+extension SecureChannel: Equatable {
+    public static func ==(lhs: SecureChannel, rhs: SecureChannel) -> Bool {
+        return
+            lhs.receivingQueue == rhs.receivingQueue &&
+            lhs.sendingQueue == rhs.sendingQueue &&
+            lhs.keys == rhs.keys
     }
 }

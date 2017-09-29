@@ -10,18 +10,17 @@ class TelepathSpec: QuickSpec {
         var telepath: Telepath!
         var queuing: QueuingServiceMock!
 
+        let channelId: QueueID = "channel_id"
+        let encryptionKey = RNCryptor.randomData(ofLength: 32)
+        let hmacKey = RNCryptor.randomData(ofLength: 32)
+        let channelKeys = ChannelKeys(encryptionKey: encryptionKey, hmacKey: hmacKey)
+
         beforeEach {
             queuing = QueuingServiceMock()
             telepath = Telepath(queuing: queuing)
         }
 
         context("when a secure channel is opened") {
-            let channelId: QueueID = "channel_id"
-            let channelKeys = ChannelKeys(
-                encryptionKey: RNCryptor.randomData(ofLength: 32),
-                hmacKey: RNCryptor.randomData(ofLength: 32)
-            )
-
             var channel: SecureChannel!
 
             beforeEach {
@@ -88,6 +87,17 @@ class TelepathSpec: QuickSpec {
                 queuing.messageToReturn = "invalid data".data(using: .utf8)
                 expect { try channel.receive() }.to(throwError())
             }
+        }
+
+        it("can open a channel using a telepath URL") {
+            let url = UrlCodec().encode(
+                scheme: "scheme",
+                channelId: channelId,
+                keys: channelKeys
+            )
+            let channel1 = telepath.connect(channel: channelId, keys: channelKeys)
+            let channel2 = try! telepath.connect(url: url)
+            expect(channel2) == channel1
         }
     }
 }
