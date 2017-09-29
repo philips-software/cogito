@@ -114,7 +114,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7OW-sz-nkP">
-                                <rect key="frame" x="137" y="247" width="46" height="30"/>
+                                <rect key="frame" x="137" y="269.5" width="46" height="30"/>
                                 <state key="normal" title="Create"/>
                                 <connections>
                                     <action selector="createTapped" destination="3az-Sw-11m" eventType="touchUpInside" id="Sam-AU-jee"/>
@@ -123,7 +123,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sbb-dk-kin">
                                 <rect key="frame" x="260" y="20" width="44" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="D8S-XN-zBA"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="D8S-XN-zBA"/>
                                     <constraint firstAttribute="height" constant="44" id="ZBt-Zh-En1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
@@ -134,6 +134,12 @@
                                     <action selector="cancelTapped" destination="3az-Sw-11m" eventType="touchUpInside" id="PTI-30-J8b"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(this will be public)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uu8-ko-fhE">
+                                <rect key="frame" x="107" y="202" width="107.5" height="14.5"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -142,9 +148,12 @@
                             <constraint firstItem="tgR-KK-H6i" firstAttribute="centerX" secondItem="ecr-8f-LU9" secondAttribute="centerX" id="5h8-hh-BMB"/>
                             <constraint firstItem="tgR-KK-H6i" firstAttribute="top" secondItem="gdd-5a-FBe" secondAttribute="top" constant="70" id="BzB-rH-1Jt"/>
                             <constraint firstItem="y8H-LX-7mp" firstAttribute="leading" secondItem="gdd-5a-FBe" secondAttribute="leading" constant="16" id="D6I-Ke-mET"/>
-                            <constraint firstItem="7OW-sz-nkP" firstAttribute="top" secondItem="y8H-LX-7mp" secondAttribute="bottom" constant="53" id="Hg9-ll-w9f"/>
+                            <constraint firstItem="7OW-sz-nkP" firstAttribute="top" secondItem="Uu8-ko-fhE" secondAttribute="bottom" constant="53" id="Hg9-ll-w9f"/>
+                            <constraint firstItem="Sbb-dk-kin" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ecr-8f-LU9" secondAttribute="leading" constant="20" symbolic="YES" id="Jbw-ym-Yoa"/>
                             <constraint firstItem="gdd-5a-FBe" firstAttribute="trailing" secondItem="y8H-LX-7mp" secondAttribute="trailing" constant="16" id="Lrq-xO-oLx"/>
+                            <constraint firstItem="Uu8-ko-fhE" firstAttribute="top" secondItem="y8H-LX-7mp" secondAttribute="bottom" constant="8" id="hXh-ro-EpM"/>
                             <constraint firstItem="gdd-5a-FBe" firstAttribute="trailing" secondItem="Sbb-dk-kin" secondAttribute="trailing" constant="16" id="iQW-71-3cG"/>
+                            <constraint firstItem="Uu8-ko-fhE" firstAttribute="centerX" secondItem="ecr-8f-LU9" secondAttribute="centerX" id="rIs-YE-MBW"/>
                             <constraint firstItem="Sbb-dk-kin" firstAttribute="top" secondItem="gdd-5a-FBe" secondAttribute="top" id="tLu-b2-2QG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gdd-5a-FBe"/>
