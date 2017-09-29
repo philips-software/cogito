@@ -8,9 +8,7 @@ import RNCryptor
 class SecureChannelSpec: QuickSpec {
     override func spec() {
         let channelId: QueueID = "channel_id"
-        let encryptionKey = RNCryptor.randomData(ofLength: 32)
-        let hmacKey = RNCryptor.randomData(ofLength: 32)
-        let channelKeys = ChannelKeys(encryptionKey: encryptionKey, hmacKey: hmacKey)
+        let channelKeys = ChannelKeys.example()
 
         var channel: SecureChannel!
         var queuing: QueuingServiceMock!

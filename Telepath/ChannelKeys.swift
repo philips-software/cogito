@@ -2,6 +2,11 @@
 public struct ChannelKeys {
     let encryptionKey: AES256Key
     let hmacKey: HMACKey
+
+    public init(encryptionKey: AES256Key, hmacKey: HMACKey) {
+        self.encryptionKey = encryptionKey
+        self.hmacKey = hmacKey
+    }
 }
 
 public typealias AES256Key = Data
