@@ -32,6 +32,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+//        startGeth()
+
+        return true
+    }
+
+    func applicationWillResignActive(_ application: UIApplication) {
+        storePersister?.stop()
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        storePersister?.start()
+    }
+
+    func startGeth() {
         geth = Geth()
         do {
             try geth!.node.start()
@@ -52,15 +66,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(e)
             abort()
         }
-
-        return true
-    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        storePersister?.stop()
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        storePersister?.start()
     }
 }
