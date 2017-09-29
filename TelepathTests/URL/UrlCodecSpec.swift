@@ -2,7 +2,6 @@
 
 import Quick
 import Nimble
-import RNCryptor
 import Regex
 @testable import Telepath
 
@@ -10,10 +9,7 @@ class UrlCodecSpec: QuickSpec {
     override func spec() {
         let scheme = "somescheme"
         let channelId: ChannelID = "channel id abcd/+#1234"
-        let channelKeys = ChannelKeys(
-            encryptionKey: RNCryptor.randomData(ofLength: 32),
-            hmacKey: RNCryptor.randomData(ofLength: 32)
-        )
+        let channelKeys = ChannelKeys.example()
 
         let codec = UrlCodec()
 
