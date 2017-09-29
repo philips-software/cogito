@@ -11,6 +11,8 @@
 		52EA394D90FA1BD55FD6D7D0 /* Pods_Telepath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893E0DFF64A9DA89C3F0EB6A /* Pods_Telepath.framework */; };
 		5C3C1D541F7BBFCE001E5563 /* UrlCodecSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C1D531F7BBFCE001E5563 /* UrlCodecSpec.swift */; };
 		5C3C1D561F7BC159001E5563 /* UrlCodec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C1D551F7BC159001E5563 /* UrlCodec.swift */; };
+		5C4048801F7E375000B19C9D /* SecureChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C40487F1F7E375000B19C9D /* SecureChannel.swift */; };
+		5C4048821F7E379700B19C9D /* ChannelKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4048811F7E379700B19C9D /* ChannelKeys.swift */; };
 		5C9F22F31F792C68007C013E /* Telepath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F22F21F792C68007C013E /* Telepath.swift */; };
 		5CAA828D1F7A909E0000A9D9 /* QueuingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */; };
 		5CC99AFB1F78FE0400ED602C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5CC99AF91F78FE0400ED602C /* Podfile */; };
@@ -39,6 +41,8 @@
 		50E96DB6A72961DE52059338 /* Pods-Telepath-TelepathTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath-TelepathTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests.release.xcconfig"; sourceTree = "<group>"; };
 		5C3C1D531F7BBFCE001E5563 /* UrlCodecSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlCodecSpec.swift; sourceTree = "<group>"; };
 		5C3C1D551F7BC159001E5563 /* UrlCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlCodec.swift; sourceTree = "<group>"; };
+		5C40487F1F7E375000B19C9D /* SecureChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureChannel.swift; sourceTree = "<group>"; };
+		5C4048811F7E379700B19C9D /* ChannelKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelKeys.swift; sourceTree = "<group>"; };
 		5C9F22F21F792C68007C013E /* Telepath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telepath.swift; sourceTree = "<group>"; };
 		5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueuingService.swift; sourceTree = "<group>"; };
 		5CAA828E1F7B970B0000A9D9 /* .gitlab-ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".gitlab-ci.yml"; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				5C9F22F21F792C68007C013E /* Telepath.swift */,
+				5C40487F1F7E375000B19C9D /* SecureChannel.swift */,
+				5C4048811F7E379700B19C9D /* ChannelKeys.swift */,
 				5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */,
 				5CF32CFF1F7D4DA800F887F4 /* URL */,
 				5CF521CA1F78F4780004C494 /* Telepath.h */,
@@ -378,6 +384,8 @@
 				5C3C1D561F7BC159001E5563 /* UrlCodec.swift in Sources */,
 				5CF756811F7CF9250088C2AD /* UrlParameterParser.swift in Sources */,
 				5CF7567D1F7CE5630088C2AD /* Base64url.swift in Sources */,
+				5C4048801F7E375000B19C9D /* SecureChannel.swift in Sources */,
+				5C4048821F7E379700B19C9D /* ChannelKeys.swift in Sources */,
 				5C9F22F31F792C68007C013E /* Telepath.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
