@@ -1,9 +1,7 @@
 //Copyright © 2017 Philips. All rights reserved.
 
 struct UrlCodec {
-    let scheme: String
-    
-    func encode(channelId: ChannelID, keys: ChannelKeys) -> URL {
+    func encode(scheme: String, channelId: ChannelID, keys: ChannelKeys) -> URL {
         var result = "\(scheme)://telepath/connect#"
         result += "I=\(channelId.encodeForUrlFragment())&"
         result += "E=\(keys.encryptionKey.base64urlEncodedString())&"
@@ -22,9 +20,6 @@ struct UrlCodec {
     }
 
     private func checkUrl(_ url: URL) throws {
-        guard url.scheme == scheme else {
-            throw DecodeError.invalidUrlScheme
-        }
         guard url.host == "telepath" else {
             throw DecodeError.invalidHostname
         }
@@ -74,7 +69,6 @@ struct UrlCodec {
         case missingAuthenticationKey
         case invalidEncryptionKey
         case invalidAuthenticationKey
-        case invalidUrlScheme
         case invalidHostname
         case invalidPath
     }

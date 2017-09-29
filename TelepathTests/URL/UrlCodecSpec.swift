@@ -15,13 +15,17 @@ class UrlCodecSpec: QuickSpec {
             hmacKey: RNCryptor.randomData(ofLength: 32)
         )
 
-        let codec = UrlCodec(scheme: scheme)
+        let codec = UrlCodec()
 
         context("when encoding") {
             var encoded: URL!
-            
+
             beforeEach {
-                encoded = codec.encode(channelId: channelId, keys: channelKeys)
+                encoded = codec.encode(
+                    scheme: scheme,
+                    channelId: channelId,
+                    keys: channelKeys
+                )
             }
             
             it("uses the correct URL scheme") {
@@ -54,7 +58,11 @@ class UrlCodecSpec: QuickSpec {
             var decodedChannelKeys: ChannelKeys!
 
             beforeEach {
-                let encoded = codec.encode(channelId: channelId, keys: channelKeys)
+                let encoded = codec.encode(
+                    scheme: scheme,
+                    channelId: channelId,
+                    keys: channelKeys
+                )
                 let decoded = try! codec.decode(url: encoded)
                 decodedChannelId = decoded.channelId
                 decodedChannelKeys = decoded.channelKeys
@@ -72,7 +80,12 @@ class UrlCodecSpec: QuickSpec {
 
         describe("decoding errors") {
             typealias DecodeError = UrlCodec.DecodeError
-            let correctUrl = codec.encode(channelId: channelId, keys: channelKeys)
+
+            let correctUrl = codec.encode(
+                scheme: scheme,
+                channelId: channelId,
+                keys: channelKeys
+            )
 
             it("rejects URLs with missing fragment") {
                 let wrongUrl = correctUrl.replacingAll(matching: "#.*$", with: "")!
@@ -109,12 +122,6 @@ class UrlCodecSpec: QuickSpec {
                 let wrongKey = "A=wrong!"
                 let wrongUrl = correctUrl.replacingAll(matching: "A=.*$", with: wrongKey)!
                 let error = DecodeError.invalidAuthenticationKey
-                expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
-            }
-
-            it("rejects the wrong scheme") {
-                let wrongUrl = correctUrl.replacingAll(matching: "^.*:", with: "wrong")!
-                let error = DecodeError.invalidUrlScheme
                 expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
             }
 
