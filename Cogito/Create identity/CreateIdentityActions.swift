@@ -3,9 +3,13 @@
 import ReSwift
 
 struct CreateIdentityActions {
+    struct Start: Action {}
+
     struct SetDescription: Action {
         let description: String
     }
 
     struct CreateIdentity: Action {}
+
+    struct Cancel: Action {}
 }
