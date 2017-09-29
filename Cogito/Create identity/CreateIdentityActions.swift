@@ -3,7 +3,7 @@
 import ReSwift
 
 struct CreateIdentityActions {
-    struct Start: Action {}
+    struct Reset: Action {}
 
     struct SetDescription: Action {
         let description: String

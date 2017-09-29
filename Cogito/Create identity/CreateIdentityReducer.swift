@@ -7,6 +7,8 @@ func createIdentityReducer(action: Action, state: CreateIdentityState?) -> Creat
     switch action {
         case let action as CreateIdentityActions.SetDescription:
             state.description = action.description
+        case _ as CreateIdentityActions.Reset:
+            state.description = ""
         default:
             break
     }

@@ -10,5 +10,12 @@ class CreateIdentityReducerSpec: QuickSpec {
             let state = createIdentityReducer(action: action, state: nil)
             expect(state.description) == "me"
         }
+
+        it("handles Reset") {
+            let state = CreateIdentityState(description: "me")
+            let action = CreateIdentityActions.Reset()
+            let nextState = createIdentityReducer(action: action, state: state)
+            expect(nextState.description) == ""
+        }
     }
 }
