@@ -49,12 +49,3 @@ extension ChannelKeys {
         return try decryptor.decrypt(data: cypherText)
     }
 }
-
-extension SecureChannel: Equatable {
-    public static func ==(lhs: SecureChannel, rhs: SecureChannel) -> Bool {
-        return
-            lhs.receivingQueue == rhs.receivingQueue &&
-                lhs.sendingQueue == rhs.sendingQueue &&
-                lhs.keys == rhs.keys
-    }
-}
