@@ -6,5 +6,5 @@ import ReSwiftThunk
 let appStore = Store<AppState>(
     reducer: appReducer,
     state: nil,
-    middleware: [ThunkMiddleware()]
+    middleware: [ThunkMiddleware(), ActionLogger()]
 )

@@ -63,6 +63,8 @@
 		02CD30A41F73F251006BA756 /* StorePersister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A31F73F251006BA756 /* StorePersister.swift */; };
 		02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */; };
 		02CD80541F7D494900AA5C3A /* CreateIdentityReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */; };
+		02CD80581F7E30D100AA5C3A /* ActionLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD80571F7E30D100AA5C3A /* ActionLogger.swift */; };
+		02CD80591F7E318100AA5C3A /* ActionLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD80571F7E30D100AA5C3A /* ActionLogger.swift */; };
 		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
 		02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792321F6FFBF700DC5973 /* AppReducer.swift */; };
 		02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792341F6FFBFF00DC5973 /* AppStore.swift */; };
@@ -121,6 +123,7 @@
 		02CD30A31F73F251006BA756 /* StorePersister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersister.swift; sourceTree = "<group>"; };
 		02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersisterSpec.swift; sourceTree = "<group>"; };
 		02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityReducerSpec.swift; sourceTree = "<group>"; };
+		02CD80571F7E30D100AA5C3A /* ActionLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionLogger.swift; sourceTree = "<group>"; };
 		02E792301F6FFBAD00DC5973 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		02E792321F6FFBF700DC5973 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		02E792341F6FFBFF00DC5973 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -233,6 +236,7 @@
 				02E792301F6FFBAD00DC5973 /* AppState.swift */,
 				02E792321F6FFBF700DC5973 /* AppReducer.swift */,
 				02CD30A31F73F251006BA756 /* StorePersister.swift */,
+				02CD80571F7E30D100AA5C3A /* ActionLogger.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -597,6 +601,7 @@
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
 				027603F11F6ACD1600788B0A /* ViewController.swift in Sources */,
 				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
+				02CD80581F7E30D100AA5C3A /* ActionLogger.swift in Sources */,
 				029691551F7166EE00654BD0 /* KeyStoreState.swift in Sources */,
 				02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */,
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
@@ -633,6 +638,7 @@
 				02BE32CC1F7A511D006C7287 /* PeerReporter.swift in Sources */,
 				0298D4381F7A456A0070998D /* Geth.swift in Sources */,
 				02BE32C91F7A4DF9006C7287 /* PeerReporterSpec.swift in Sources */,
+				02CD80591F7E318100AA5C3A /* ActionLogger.swift in Sources */,
 				0298D43B1F7A47890070998D /* Node.swift in Sources */,
 				C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */,
 				0298D42E1F7A43C90070998D /* StorePersister.swift in Sources */,
