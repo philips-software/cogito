@@ -33,12 +33,17 @@ class CreateIdentityViewController: UIViewController, Connectable {
         actions.createIdentity()
     }
 
+    @IBAction func cancelTapped() {
+        actions.cancel()
+    }
+
     struct Props {
         let description: String
     }
     struct Actions {
         let setDescription: (String) -> Void
         let createIdentity: () -> Void
+        let cancel: () -> Void
     }
     let connection = Connection(store: appStore,
                                 mapStateToProps: mapStateToProps,
@@ -52,6 +57,7 @@ private func mapStateToProps(state: AppState) -> CreateIdentityViewController.Pr
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> CreateIdentityViewController.Actions {
     return CreateIdentityViewController.Actions(
         setDescription: { desc in dispatch(CreateIdentityActions.SetDescription(description: desc)) },
-        createIdentity: { dispatch(CreateIdentityActions.CreateIdentity()) }
+        createIdentity: { dispatch(CreateIdentityActions.CreateIdentity()) },
+        cancel: {}
     )
 }

@@ -34,7 +34,8 @@ class CreateIdentityViewControllerSpec: QuickSpec {
             var descriptionSet: String?
             viewController.connection.actions = CreateIdentityViewController.Actions(
                 setDescription: { desc in descriptionSet = desc },
-                createIdentity: {}
+                createIdentity: {},
+                cancel: {}
             )
             viewController.descriptionField.text = "me"
             viewController.editingEnded()
@@ -45,8 +46,19 @@ class CreateIdentityViewControllerSpec: QuickSpec {
             var actionCalled = false
             viewController.connection.actions = CreateIdentityViewController.Actions(
                 setDescription: { _ in },
-                createIdentity: { actionCalled = true })
+                createIdentity: { actionCalled = true },
+                cancel: { actionCalled = true })
             viewController.createTapped()
+            expect(actionCalled).to(beTrue())
+        }
+
+        it("triggers action when cancel button is tapped") {
+            var actionCalled = false
+            viewController.connection.actions = CreateIdentityViewController.Actions(
+                setDescription: { _ in },
+                createIdentity: { },
+                cancel: { actionCalled = true })
+            viewController.cancelTapped()
             expect(actionCalled).to(beTrue())
         }
     }
