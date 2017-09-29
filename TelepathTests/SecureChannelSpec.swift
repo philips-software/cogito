@@ -63,13 +63,13 @@ class SecureChannelSpec: QuickSpec {
         }
 
         it("throws when there's an error while sending") {
-            struct SomeError : Error {}
+            struct SomeError: Error {}
             queuing.sendError = SomeError()
             expect { try channel.send(message: "some message") }.to(throwError())
         }
 
         it("throws when there's an error while receiving") {
-            struct SomeError : Error {}
+            struct SomeError: Error {}
             queuing.receiveError = SomeError()
             expect { try channel.receive() }.to(throwError())
         }

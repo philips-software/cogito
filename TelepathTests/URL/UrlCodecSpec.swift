@@ -27,32 +27,32 @@ class UrlCodecSpec: QuickSpec {
                     keys: channelKeys
                 )
             }
-            
+
             it("uses the correct URL scheme") {
                 expect(encoded.scheme) == scheme
             }
-            
+
             it("uses predefined host and path") {
                 expect(encoded.host) == "telepath"
                 expect(encoded.path) == "/connect"
             }
-            
+
             it("encodes the channel id") {
                 let encodedChannelId = channelId.encodeForUrlFragment()
                 expect(encoded.fragment).to(contain("I=\(encodedChannelId)"))
             }
-            
+
             it("encodes the encryption key") {
                 let encodedEncryptionKey = channelKeys.encryptionKey.base64urlEncodedString()
                 expect(encoded.fragment).to(contain("E=\(encodedEncryptionKey)"))
             }
-            
+
             it("encodes the message authentication key") {
                 let encodedHmacKey = channelKeys.hmacKey.base64urlEncodedString()
                 expect(encoded.fragment).to(contain("A=\(encodedHmacKey)"))
             }
         }
-        
+
         context("when decoding") {
             var decodedChannelId: ChannelID!
             var decodedChannelKeys: ChannelKeys!
@@ -92,7 +92,7 @@ class UrlCodecSpec: QuickSpec {
                 let error = DecodeError.missingParameters
                 expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
             }
-            
+
             it("rejects URLs with missing channel id") {
                 let wrongUrl = correctUrl.replacingAll(matching: "I=[^&]*&", with: "")!
                 let error = DecodeError.missingChannelId

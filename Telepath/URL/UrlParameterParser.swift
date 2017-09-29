@@ -18,7 +18,7 @@ private func parseKeyValuePair(_ pair: Substring) -> (key: String, value: String
     guard components.count == 2 else {
         return nil
     }
-    guard let key = components.first?.removingPercentEncoding else  {
+    guard let key = components.first?.removingPercentEncoding else {
         return nil
     }
     guard let value = components.last?.removingPercentEncoding else {

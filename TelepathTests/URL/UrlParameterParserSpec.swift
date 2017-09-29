@@ -22,7 +22,7 @@ class UrlParameterParserSpec: QuickSpec {
 
         it("ignores empty keys") {
             expect(parseUrlParameters("=")) == [:]
-            expect(parseUrlParameters("=1&B=2")) == [ "B" : "2" ]
+            expect(parseUrlParameters("=1&B=2")) == [ "B": "2" ]
         }
 
         it("handles parameter values containing '='") {
