@@ -5,12 +5,14 @@ import RNCryptor
 public struct SecureChannel {
     let queuing: QueuingService
     let keys: ChannelKeys
+    let id: ChannelID
     let receivingQueue: QueueID
     let sendingQueue: QueueID
 
     init(queuing: QueuingService, id: ChannelID, keys: ChannelKeys) {
         self.queuing = queuing
         self.keys = keys
+        self.id = id
         self.receivingQueue = id + ".red"
         self.sendingQueue = id + ".blue"
     }

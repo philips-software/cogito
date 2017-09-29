@@ -7,86 +7,23 @@ import RNCryptor
 
 class TelepathSpec: QuickSpec {
     override func spec() {
-        var telepath: Telepath!
-        var queuing: QueuingServiceMock!
-
         let channelId: QueueID = "channel_id"
         let encryptionKey = RNCryptor.randomData(ofLength: 32)
         let hmacKey = RNCryptor.randomData(ofLength: 32)
         let channelKeys = ChannelKeys(encryptionKey: encryptionKey, hmacKey: hmacKey)
+
+        var telepath: Telepath!
+        var queuing: QueuingServiceMock!
 
         beforeEach {
             queuing = QueuingServiceMock()
             telepath = Telepath(queuing: queuing)
         }
 
-        context("when a secure channel is opened") {
-            var channel: SecureChannel!
-
-            beforeEach {
-                channel = telepath.connect(channel: channelId, keys: channelKeys)
-            }
-
-            context("when sending a message") {
-                let message = "a message"
-
-                beforeEach {
-                    try! channel.send(message: "a message")
-                }
-
-                it("encrypts the message") {
-                    let cypherText = queuing.latestSentMessage!
-                    let plainText = try! channelKeys.decrypt(cypherText: cypherText)
-                    expect(String(data: plainText, encoding: .utf8)) == message
-                }
-
-                it("it uses the blue queue") {
-                    expect(queuing.latestQueueId) == channelId + ".blue"
-                }
-            }
-
-            context("when receiving a message") {
-                let message = "a message"
-
-                var receivedMessage: String?
-
-                beforeEach {
-                    let plainText = message.data(using: .utf8)!
-                    let cypherText = channelKeys.encrypt(plainText: plainText)
-                    queuing.messageToReturn = cypherText
-                    try! receivedMessage = channel.receive()
-                }
-
-                it("decrypts the message") {
-                    expect(receivedMessage) == message
-                }
-
-                it("uses the red queue") {
-                    expect(queuing.latestQueueId) == channelId + ".red"
-                }
-            }
-
-            it("indicates when no message is available") {
-                queuing.messageToReturn = nil
-                expect(try! channel.receive()).to(beNil())
-            }
-
-            it("throws when there's an error while sending") {
-                struct SomeError : Error {}
-                queuing.sendError = SomeError()
-                expect { try channel.send(message: "some message") }.to(throwError())
-            }
-
-            it("throws when there's an error while receiving") {
-                struct SomeError : Error {}
-                queuing.receiveError = SomeError()
-                expect { try channel.receive() }.to(throwError())
-            }
-
-            it("throws when there's an error while decrypting") {
-                queuing.messageToReturn = "invalid data".data(using: .utf8)
-                expect { try channel.receive() }.to(throwError())
-            }
+        it("can open a channel using a channel id and keys") {
+            let channel = telepath.connect(channel: channelId, keys: channelKeys)
+            expect(channel.id) == channelId
+            expect(channel.keys) == channelKeys
         }
 
         it("can open a channel using a telepath URL") {
@@ -95,9 +32,9 @@ class TelepathSpec: QuickSpec {
                 channelId: channelId,
                 keys: channelKeys
             )
-            let channel1 = telepath.connect(channel: channelId, keys: channelKeys)
-            let channel2 = try! telepath.connect(url: url)
-            expect(channel2) == channel1
+            let channel = try! telepath.connect(url: url)
+            expect(channel.id) == channelId
+            expect(channel.keys) == channelKeys
         }
     }
 }
