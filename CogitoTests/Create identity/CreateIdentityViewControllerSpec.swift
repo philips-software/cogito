@@ -34,8 +34,7 @@ class CreateIdentityViewControllerSpec: QuickSpec {
             var descriptionSet: String?
             viewController.connection.actions = CreateIdentityViewController.Actions(
                 setDescription: { desc in descriptionSet = desc },
-                createIdentity: {},
-                cancel: {}
+                createIdentity: {}
             )
             viewController.descriptionField.text = "me"
             viewController.editingChanged()
@@ -46,20 +45,27 @@ class CreateIdentityViewControllerSpec: QuickSpec {
             var actionCalled = false
             viewController.connection.actions = CreateIdentityViewController.Actions(
                 setDescription: { _ in },
-                createIdentity: { actionCalled = true },
-                cancel: { actionCalled = true })
+                createIdentity: { actionCalled = true })
             viewController.createTapped()
             expect(actionCalled).to(beTrue())
         }
 
-        it("triggers action when cancel button is tapped") {
-            var actionCalled = false
-            viewController.connection.actions = CreateIdentityViewController.Actions(
-                setDescription: { _ in },
-                createIdentity: { },
-                cancel: { actionCalled = true })
+        it("triggers onDone when cancel button is tapped") {
+            var done = false
+            viewController.onDone = {
+                done = true
+            }
             viewController.cancelTapped()
-            expect(actionCalled).to(beTrue())
+            expect(done).to(beTrue())
+        }
+
+        it("triggers onDone when create button is tapped") {
+            var done = false
+            viewController.onDone = {
+                done = true
+            }
+            viewController.createTapped()
+            expect(done).to(beTrue())
         }
     }
 }

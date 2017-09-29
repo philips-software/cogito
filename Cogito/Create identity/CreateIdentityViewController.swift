@@ -9,6 +9,8 @@ class CreateIdentityViewController: UIViewController, Connectable {
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var createButton: UIButton!
 
+    var onDone: () -> Void = {}
+
     override func viewDidLoad() {
         super.viewDidLoad()
         connection.bind(\Props.description, to: createButton.rx.isEnabled) { $0 != "" }
@@ -31,10 +33,11 @@ class CreateIdentityViewController: UIViewController, Connectable {
 
     @IBAction func createTapped() {
         actions.createIdentity()
+        onDone()
     }
 
     @IBAction func cancelTapped() {
-        actions.cancel()
+        onDone()
     }
 
     struct Props {
@@ -43,7 +46,6 @@ class CreateIdentityViewController: UIViewController, Connectable {
     struct Actions {
         let setDescription: (String) -> Void
         let createIdentity: () -> Void
-        let cancel: () -> Void
     }
     let connection = Connection(store: appStore,
                                 mapStateToProps: mapStateToProps,
@@ -57,7 +59,6 @@ private func mapStateToProps(state: AppState) -> CreateIdentityViewController.Pr
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> CreateIdentityViewController.Actions {
     return CreateIdentityViewController.Actions(
         setDescription: { desc in dispatch(CreateIdentityActions.SetDescription(description: desc)) },
-        createIdentity: { dispatch(CreateIdentityActions.CreateIdentity()) },
-        cancel: { dispatch(CreateIdentityActions.Cancel()) }
+        createIdentity: { dispatch(CreateIdentityActions.CreateIdentity()) }
     )
 }

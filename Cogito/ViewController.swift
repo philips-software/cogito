@@ -46,6 +46,14 @@ class ViewController: UIViewController, Connectable {
         let syncProgress: SyncProgress?
     }
     struct Actions {}
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let child = segue.destination as? CreateIdentityViewController {
+            child.onDone = {
+                child.dismiss(animated: true)
+            }
+        }
+    }
 }
 
 private func mapStateToProps(state: AppState) -> ViewController.Props {
