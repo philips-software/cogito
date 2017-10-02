@@ -7,6 +7,7 @@ class KeyStore: Codable {
     let scryptN: Int
     let scryptP: Int
     lazy var wrapped = GethKeyStore(path, scryptN: scryptN, scryptP: scryptP)
+    let appPassword = AppPassword()
 
     required init(path: String, scryptN: Int, scryptP: Int) {
         self.path = path
@@ -26,7 +27,7 @@ class KeyStore: Codable {
             onComplete(nil, "failed to open key store")
             return
         }
-        AppPassword().use { (password, error) in
+        appPassword.use { (password, error) in
             if let p = password {
                 do {
                     let gethAccount = try gethKeyStore.newAccount(p)

@@ -7,14 +7,16 @@ import KeychainAccess
 class AppPasswordSpec: QuickSpec {
     override func spec() {
         var keychainMock: KeychainMock!
+        var appPassword: AppPassword!
 
         beforeEach {
             keychainMock = KeychainMock()
+            appPassword = AppPassword(keychain: keychainMock)
         }
 
         it("provides a password and stores it") {
             var providedPassword: String?
-            AppPassword(keychain: keychainMock).use { (password, error) in
+            appPassword.use { (password, error) in
                 expect(password).toNot(beNil())
                 expect(error).to(beNil())
                 providedPassword = password
@@ -31,7 +33,7 @@ class AppPasswordSpec: QuickSpec {
 
             it("provides the stored password") {
                 var providedPassword: String?
-                AppPassword(keychain: keychainMock).use { (password, error) in
+                appPassword.use { (password, error) in
                     expect(password).toNot(beNil())
                     expect(error).to(beNil())
                     providedPassword = password

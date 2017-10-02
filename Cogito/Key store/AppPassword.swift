@@ -11,16 +11,28 @@ class AppPassword {
         self.keychain = keychain
     }
 
-    func use(_ withPassword: (_ password: String?, _ error: String?) -> Void) {
-        var password = loadPassword()
-        if password == nil {
-            password = keychain.generatePassword()
-            if let error = store(password: password!) {
-                withPassword(nil, error)
-                return
+    func use(_ withPassword: @escaping (_ password: String?, _ error: String?) -> Void) {
+        let callback = { (password, error) in
+            DispatchQueue.main.async {
+                withPassword(password, error)
             }
         }
-        withPassword(password!, nil)
+
+        DispatchQueue.global().async { [weak self] in
+            guard let this = self else {
+                callback(nil, nil)
+                return
+            }
+            var password = this.loadPassword()
+            if password == nil {
+                password = this.keychain.generatePassword()
+                if let error = this.store(password: password!) {
+                    callback(nil, error)
+                    return
+                }
+            }
+            callback(password!, nil)
+        }
     }
 
     private func loadPassword() -> String? {
