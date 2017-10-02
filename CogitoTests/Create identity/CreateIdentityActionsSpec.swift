@@ -27,30 +27,56 @@ class CreateIdentityActionsSpec: QuickSpec {
             expect(dispatchChecker.count) == 1
         }
 
-        it("calls newAccount on keystore from state") {
-            let keyStore = KeyStoreMock(path: "", scryptN: 0, scryptP: 0)
-            testState = appState(keyStore: KeyStoreState(keyStore: keyStore))
-            createAction.action({ _ in }, getState)
-            expect(keyStore.newAccountCallCount) == 1
+        context("given proper state") {
+            var keyStore: KeyStoreMock!
+
+            beforeEach {
+                keyStore = KeyStoreMock(path: "", scryptN: 0, scryptP: 0)
+                testState = appState(keyStore: KeyStoreState(keyStore: keyStore))
+            }
+
+            it("calls newAccount on keystore from state") {
+                createAction.action({ _ in }, getState)
+                expect(keyStore.newAccountCallCount) == 1
+            }
+
+            it("dispatches fulfilled with new account address") {
+                let dispatchChecker = DispatchChecker<CreateIdentityActions.Fulfilled>()
+                let account = Account()
+                keyStore.newAccountReturn = account
+                createAction.action(dispatchChecker.dispatch, getState)
+                expect(dispatchChecker.count) == 1
+                expect(dispatchChecker.actions[0].account) === account
+            }
+
+            it("dispatches rejected when new account fails") {
+                let dispatchChecker = DispatchChecker<CreateIdentityActions.Rejected>()
+                createAction.action(dispatchChecker.dispatch, getState)
+                expect(dispatchChecker.count) == 1
+            }
         }
     }
 }
 
 private class KeyStoreMock: KeyStore {
     var newAccountCallCount = 0
-    override func newAccount() {
+    var newAccountReturn: Account?
+
+    override func newAccount() -> Account? {
         newAccountCallCount += 1
+        return newAccountReturn
     }
 }
 
 class DispatchChecker<ActionType> {
-    var count = 0
+    var actions = [ActionType]()
+    var count: Int { return actions.count }
     var dispatch: DispatchFunction!
 
     init() {
         dispatch = { action in
-            if action is ActionType {
-                self.count += 1
+            if let action = action as? ActionType {
+                self.actions.append(action)
             }
         }
     }

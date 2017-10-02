@@ -21,15 +21,16 @@ class KeyStore: Codable {
         scryptP = try container.decode(type(of: self.scryptP), forKey: .scryptP)
     }
 
-    func newAccount() {
+    func newAccount() -> Account? {
         do {
             guard let gethKeyStore = wrapped else {
-                return // todo
+                return nil // todo
             }
             _ = try gethKeyStore.newAccount("")
         } catch _ {
             // todo
         }
+        return nil
     }
 
     func encode(to encoder: Encoder) throws {
