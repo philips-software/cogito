@@ -49,3 +49,9 @@ class KeyStore: Codable {
         case scryptP
     }
 }
+
+extension KeyStore: Equatable {
+    static func == (lhs: KeyStore, rhs: KeyStore) -> Bool {
+        return lhs.path == rhs.path && lhs.scryptN == rhs.scryptN && lhs.scryptP == rhs.scryptP
+    }
+}
