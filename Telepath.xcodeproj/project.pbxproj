@@ -16,6 +16,7 @@
 		5C4048841F7E385C00B19C9D /* SecureChannelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4048831F7E385C00B19C9D /* SecureChannelSpec.swift */; };
 		5C4048861F7E3AB100B19C9D /* QueuingServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4048851F7E3AB100B19C9D /* QueuingServiceMock.swift */; };
 		5C4048881F7E3B1E00B19C9D /* ChannelKeysExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4048871F7E3B1E00B19C9D /* ChannelKeysExample.swift */; };
+		5C990A1F1F82613300FF8F9F /* Base64urlSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C990A1E1F82613300FF8F9F /* Base64urlSpec.swift */; };
 		5C9F22F31F792C68007C013E /* Telepath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F22F21F792C68007C013E /* Telepath.swift */; };
 		5CAA828D1F7A909E0000A9D9 /* QueuingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */; };
 		5CC99AFB1F78FE0400ED602C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5CC99AF91F78FE0400ED602C /* Podfile */; };
@@ -51,6 +52,7 @@
 		5C4048851F7E3AB100B19C9D /* QueuingServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueuingServiceMock.swift; sourceTree = "<group>"; };
 		5C4048871F7E3B1E00B19C9D /* ChannelKeysExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelKeysExample.swift; sourceTree = "<group>"; };
 		5C40488A1F7E437A00B19C9D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		5C990A1E1F82613300FF8F9F /* Base64urlSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base64urlSpec.swift; sourceTree = "<group>"; };
 		5C9F22F21F792C68007C013E /* Telepath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telepath.swift; sourceTree = "<group>"; };
 		5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueuingService.swift; sourceTree = "<group>"; };
 		5CAA828E1F7B970B0000A9D9 /* .gitlab-ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".gitlab-ci.yml"; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		5CF32D001F7D4DC600F887F4 /* URL */ = {
 			isa = PBXGroup;
 			children = (
+				5C990A1E1F82613300FF8F9F /* Base64urlSpec.swift */,
 				5C3C1D531F7BBFCE001E5563 /* UrlCodecSpec.swift */,
 				5CF7567E1F7CF9110088C2AD /* UrlParameterParserSpec.swift */,
 			);
@@ -427,6 +430,7 @@
 				5C4048841F7E385C00B19C9D /* SecureChannelSpec.swift in Sources */,
 				5CF7567F1F7CF9110088C2AD /* UrlParameterParserSpec.swift in Sources */,
 				5C3C1D541F7BBFCE001E5563 /* UrlCodecSpec.swift in Sources */,
+				5C990A1F1F82613300FF8F9F /* Base64urlSpec.swift in Sources */,
 				5C4048881F7E3B1E00B19C9D /* ChannelKeysExample.swift in Sources */,
 				5C4048861F7E3AB100B19C9D /* QueuingServiceMock.swift in Sources */,
 			);
