@@ -23,11 +23,13 @@ struct CreateIdentityActions {
                 dispatch(Rejected(message: "key store not found"))
                 return
             }
-            guard let account = keyStore.newAccount() else {
-                dispatch(Rejected(message: "failed to create account"))
-                return
+            keyStore.newAccount { (account, error) in
+                guard let account = account else {
+                    dispatch(Rejected(message: error ?? "failed to create account"))
+                    return
+                }
+                dispatch(Fulfilled(account: account))
             }
-            dispatch(Fulfilled(account: account))
         })
     }
 

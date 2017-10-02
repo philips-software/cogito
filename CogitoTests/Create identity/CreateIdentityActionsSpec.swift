@@ -37,7 +37,7 @@ class CreateIdentityActionsSpec: QuickSpec {
 
             it("calls newAccount on keystore from state") {
                 createAction.action({ _ in }, getState)
-                expect(keyStore.newAccountCallCount) == 1
+                expect(keyStore.newAccountCallCount).toEventually(equal(1))
             }
 
             it("dispatches fulfilled with new account address") {
@@ -45,14 +45,14 @@ class CreateIdentityActionsSpec: QuickSpec {
                 let account = Account()
                 keyStore.newAccountReturn = account
                 createAction.action(dispatchChecker.dispatch, getState)
-                expect(dispatchChecker.count) == 1
-                expect(dispatchChecker.actions[0].account) === account
+                expect(dispatchChecker.count).toEventually(equal(1))
+                expect(dispatchChecker.actions[0].account).toEventually(beIdenticalTo(account))
             }
 
             it("dispatches rejected when new account fails") {
                 let dispatchChecker = DispatchChecker<CreateIdentityActions.Rejected>()
                 createAction.action(dispatchChecker.dispatch, getState)
-                expect(dispatchChecker.count) == 1
+                expect(dispatchChecker.count).toEventually(equal(1))
             }
         }
     }
@@ -61,10 +61,13 @@ class CreateIdentityActionsSpec: QuickSpec {
 private class KeyStoreMock: KeyStore {
     var newAccountCallCount = 0
     var newAccountReturn: Account?
+    var newAccountError: String?
 
-    override func newAccount() -> Account? {
+    override func newAccount(onComplete: @escaping (_ account: Account?, _ error: String?) -> Void) {
         newAccountCallCount += 1
-        return newAccountReturn
+        DispatchQueue.global().async { [unowned self] in
+            onComplete(self.newAccountReturn, self.newAccountError)
+        }
     }
 }
 
