@@ -68,6 +68,6 @@ extension Keychain: KeychainType {
     }
 
     func generatePassword() -> String {
-        return ""
+        return "todo"  //todo
     }
 }
