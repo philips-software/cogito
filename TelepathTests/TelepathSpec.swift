@@ -25,7 +25,7 @@ class TelepathSpec: QuickSpec {
 
         it("can open a channel using a telepath URL") {
             let url = UrlCodec().encode(
-                scheme: "scheme",
+                baseUrl: URL(string: "https://example.com")!,
                 channelId: channelId,
                 keys: channelKeys
             )

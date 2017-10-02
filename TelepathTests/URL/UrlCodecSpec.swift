@@ -7,7 +7,7 @@ import Regex
 
 class UrlCodecSpec: QuickSpec {
     override func spec() {
-        let scheme = "somescheme"
+        let baseUrl = URL(string: "https://example.com/")!
         let channelId: ChannelID = "channel id abcd/+#1234"
         let channelKeys = ChannelKeys.example()
 
@@ -18,19 +18,18 @@ class UrlCodecSpec: QuickSpec {
 
             beforeEach {
                 encoded = codec.encode(
-                    scheme: scheme,
+                    baseUrl: baseUrl,
                     channelId: channelId,
                     keys: channelKeys
                 )
             }
 
-            it("uses the correct URL scheme") {
-                expect(encoded.scheme) == scheme
+            it("uses the correct base URL") {
+                expect(encoded.baseURL) == baseUrl
             }
 
-            it("uses predefined host and path") {
-                expect(encoded.host) == "telepath"
-                expect(encoded.path) == "/connect"
+            it("uses correct relative path") {
+                expect(Array(encoded.pathComponents.suffix(2))) == ["telepath", "connect"]
             }
 
             it("encodes the channel id") {
@@ -55,7 +54,7 @@ class UrlCodecSpec: QuickSpec {
 
             beforeEach {
                 let encoded = codec.encode(
-                    scheme: scheme,
+                    baseUrl: baseUrl,
                     channelId: channelId,
                     keys: channelKeys
                 )
@@ -78,7 +77,7 @@ class UrlCodecSpec: QuickSpec {
             typealias DecodeError = UrlCodec.DecodeError
 
             let correctUrl = codec.encode(
-                scheme: scheme,
+                baseUrl: baseUrl,
                 channelId: channelId,
                 keys: channelKeys
             )
@@ -121,14 +120,8 @@ class UrlCodecSpec: QuickSpec {
                 expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
             }
 
-            it("rejects the wrong host") {
+            it("rejects the wrong relative path") {
                 let wrongUrl = correctUrl.replacingAll(matching: "telepath", with: "wrong")!
-                let error = DecodeError.invalidHostname
-                expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
-            }
-
-            it("rejects the wrong path") {
-                let wrongUrl = correctUrl.replacingAll(matching: "connect", with: "wrong")!
                 let error = DecodeError.invalidPath
                 expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
             }

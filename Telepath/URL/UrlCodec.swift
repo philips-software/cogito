@@ -1,12 +1,12 @@
 //Copyright © 2017 Philips. All rights reserved.
 
 struct UrlCodec {
-    func encode(scheme: String, channelId: ChannelID, keys: ChannelKeys) -> URL {
-        var result = "\(scheme)://telepath/connect#"
+    func encode(baseUrl: URL, channelId: ChannelID, keys: ChannelKeys) -> URL {
+        var result = "telepath/connect#"
         result += "I=\(channelId.encodeForUrlFragment())&"
         result += "E=\(keys.encryptionKey.base64urlEncodedString())&"
         result += "A=\(keys.hmacKey.base64urlEncodedString())"
-        return URL(string: result)!
+        return URL(string: result, relativeTo:baseUrl)!
     }
 
     func decode(url: URL) throws -> (channelId: ChannelID, channelKeys: ChannelKeys) {
@@ -20,10 +20,7 @@ struct UrlCodec {
     }
 
     private func checkUrl(_ url: URL) throws {
-        guard url.host == "telepath" else {
-            throw DecodeError.invalidHostname
-        }
-        guard url.path == "/connect" else {
+        guard url.pathComponents.suffix(2) == ["telepath", "connect"] else {
             throw DecodeError.invalidPath
         }
     }
@@ -69,7 +66,6 @@ struct UrlCodec {
         case missingAuthenticationKey
         case invalidEncryptionKey
         case invalidAuthenticationKey
-        case invalidHostname
         case invalidPath
     }
 }
