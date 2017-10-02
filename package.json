@@ -1,0 +1,12 @@
+{
+  "name": "telepath-js",
+  "version": "0.1.0",
+  "description": "Secure communication channel between mobile app and web app",
+  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/telepath-js",
+  "private": "true",
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "engines": {
+    "node": ">=7.6.0"
+  }
+}
