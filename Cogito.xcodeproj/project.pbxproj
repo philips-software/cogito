@@ -10,6 +10,7 @@
 		0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3661F7012E1003A9787 /* KeyStore.swift */; };
 		0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3681F71481C003A9787 /* KeyStoreActions.swift */; };
 		0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */; };
+		022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */; };
 		027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603EE1F6ACD1600788B0A /* AppDelegate.swift */; };
 		027603F11F6ACD1600788B0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603F01F6ACD1600788B0A /* ViewController.swift */; };
 		027603F41F6ACD1600788B0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F21F6ACD1600788B0A /* Main.storyboard */; };
@@ -88,6 +89,7 @@
 		0205E3661F7012E1003A9787 /* KeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStore.swift; sourceTree = "<group>"; };
 		0205E3681F71481C003A9787 /* KeyStoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreActions.swift; sourceTree = "<group>"; };
 		0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreReducerSpec.swift; sourceTree = "<group>"; };
+		022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityActionsSpec.swift; sourceTree = "<group>"; };
 		027603EB1F6ACD1600788B0A /* Cogito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cogito.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		027603EE1F6ACD1600788B0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		027603F01F6ACD1600788B0A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 			children = (
 				028F4F051F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift */,
 				02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */,
+				022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */,
 			);
 			path = "Create identity";
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */,
 				0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */,
 				0298D42D1F7A43C90070998D /* AppReducer.swift in Sources */,
+				022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */,
 				0298D4271F7A43C90070998D /* KeyStore.swift in Sources */,
 				02BE32CC1F7A511D006C7287 /* PeerReporter.swift in Sources */,
 				0298D4381F7A456A0070998D /* Geth.swift in Sources */,
