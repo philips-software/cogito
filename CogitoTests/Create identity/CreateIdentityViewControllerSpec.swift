@@ -3,6 +3,7 @@
 import Quick
 import Nimble
 import UIKit
+import Geth
 
 class CreateIdentityViewControllerSpec: QuickSpec {
     override func spec() {
@@ -15,17 +16,27 @@ class CreateIdentityViewControllerSpec: QuickSpec {
             expect(viewController.view).toNot(beNil())
         }
 
+        func createIdentityState(description: String = "",
+                                 pending: Bool = false,
+                                 newAccount: GethAccount? = nil,
+                                 error: String? = nil) -> CreateIdentityState {
+            return CreateIdentityState(description: description,
+                                       pending: pending,
+                                       newAccount: newAccount,
+                                       error: error)
+        }
+
         it("enables/disables create button based on entered description") {
-            var state = appState(createIdentity: CreateIdentityState(description: ""))
+            var state = appState(createIdentity: createIdentityState(description: ""))
             viewController.connection.newState(state: state)
             expect(viewController.createButton.isEnabled).to(beFalse())
-            state = appState(createIdentity: CreateIdentityState(description: "me"))
+            state = appState(createIdentity: createIdentityState(description: "me"))
             viewController.connection.newState(state: state)
             expect(viewController.createButton.isEnabled).to(beTrue())
         }
 
         it("sets the description based on the state") {
-            let state = appState(createIdentity: CreateIdentityState(description: "me"))
+            let state = appState(createIdentity: createIdentityState(description: "me"))
             viewController.connection.newState(state: state)
             expect(viewController.descriptionField.text) == "me"
         }
