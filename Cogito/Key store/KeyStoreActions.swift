@@ -11,7 +11,7 @@ struct KeyStoreActions {
                                                                          .userDomainMask,
                                                                          true)[0]
             let keyStore = KeyStore(path: documentsDirectory + "/main.keystore",
-                                    scryptN: GethStandardScryptN,
+                                    scryptN: GethStandardScryptN / 4,
                                     scryptP: GethStandardScryptP)
             dispatch(Fulfilled(keyStore: keyStore))
         })

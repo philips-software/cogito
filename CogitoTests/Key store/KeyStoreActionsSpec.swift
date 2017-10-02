@@ -29,8 +29,8 @@ class KeyStoreActionsSpec: QuickSpec {
             }
 
             it("uses the standard key derivation parameters") {
-                expect(fulfilled.keyStore.scryptN) == GethStandardScryptN
-                expect(fulfilled.keyStore.scryptP) == GethStandardScryptP
+                expect(fulfilled.keyStore.scryptN) == 65536
+                expect(fulfilled.keyStore.scryptP) == 1
             }
         }
     }
