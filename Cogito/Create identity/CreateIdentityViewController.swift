@@ -15,6 +15,23 @@ class CreateIdentityViewController: UIViewController, Connectable {
         super.viewDidLoad()
         connection.bind(\Props.description, to: createButton.rx.isEnabled) { $0 != "" }
         connection.bind(\Props.description, to: descriptionField.rx.text)
+        connection.subscribe(\Props.fulfilled) { [unowned self] fulfilled in
+            if fulfilled {
+                self.onDone()
+            }
+        }
+        connection.subscribe(\Props.error) { [unowned self] error in
+            if let e = error {
+                print("[error] createIdentity error: \(e)")
+                let alert = UIAlertController(
+                    title: "Failed to create account",
+                    message: "Not sure why this happened. The only options I can give" +
+                             " are to retry or contact the developer, I'm afraid.",
+                    preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
+                self.present(alert, animated: true)
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -32,8 +49,8 @@ class CreateIdentityViewController: UIViewController, Connectable {
     }
 
     @IBAction func createTapped() {
+        descriptionField.resignFirstResponder()
         actions.createIdentity()
-        onDone()
     }
 
     @IBAction func cancelTapped() {
@@ -42,6 +59,9 @@ class CreateIdentityViewController: UIViewController, Connectable {
 
     struct Props {
         let description: String
+        let pending: Bool
+        let fulfilled: Bool
+        let error: String?
     }
     struct Actions {
         let setDescription: (String) -> Void
@@ -53,7 +73,12 @@ class CreateIdentityViewController: UIViewController, Connectable {
 }
 
 private func mapStateToProps(state: AppState) -> CreateIdentityViewController.Props {
-    return CreateIdentityViewController.Props(description: state.createIdentity.description)
+    return CreateIdentityViewController.Props(
+        description: state.createIdentity.description,
+        pending: state.createIdentity.pending,
+        fulfilled: state.createIdentity.newAccount != nil,
+        error: state.createIdentity.error
+    )
 }
 
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> CreateIdentityViewController.Actions {
