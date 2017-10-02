@@ -73,6 +73,7 @@
 		C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */; };
 		C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */; };
 		C00B57208B78184BB19798CD /* AppPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B57766800CB3EFBE971EC /* AppPassword.swift */; };
+		C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5F8B50D233D21FB7153C /* KeyStoreSpec.swift */; };
 		C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B57766800CB3EFBE971EC /* AppPassword.swift */; };
 		C5BA5E19747B73A161EF0D57 /* Pods_Cogito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */; };
 		D0885FE16CB0CF89FA9AE774 /* Pods_Cogito_CogitoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53940EFC96526AFDFA7CD5FC /* Pods_Cogito_CogitoTests.framework */; };
@@ -142,6 +143,7 @@
 		C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreStateSpec.swift; sourceTree = "<group>"; };
 		C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPasswordSpec.swift; sourceTree = "<group>"; };
 		C00B57766800CB3EFBE971EC /* AppPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPassword.swift; sourceTree = "<group>"; };
+		C00B5F8B50D233D21FB7153C /* KeyStoreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +308,7 @@
 				02E792381F6FFE1100DC5973 /* KeyStoreActionsSpec.swift */,
 				0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */,
 				C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */,
+				C00B5F8B50D233D21FB7153C /* KeyStoreSpec.swift */,
 				C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */,
 			);
 			path = "Key store";
@@ -666,6 +669,7 @@
 				029245181F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
 				028F4F041F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
 				028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
+				C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */,
 				C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */,
 				C00B57208B78184BB19798CD /* AppPassword.swift in Sources */,
 			);
