@@ -70,12 +70,13 @@ class CreateIdentityViewControllerSpec: QuickSpec {
             expect(done).to(beTrue())
         }
 
-        it("triggers onDone when create button is tapped") {
+        it("triggers onDone when fulfilled") {
             var done = false
             viewController.onDone = {
                 done = true
             }
-            viewController.createTapped()
+            let state = appState(createIdentity: createIdentityState(newAccount: GethAccount()))
+            viewController.connection.newState(state: state)
             expect(done).to(beTrue())
         }
     }
