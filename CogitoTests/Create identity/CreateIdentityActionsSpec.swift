@@ -4,6 +4,7 @@ import Quick
 import Nimble
 import ReSwift
 import ReSwiftThunk
+import Geth
 
 class CreateIdentityActionsSpec: QuickSpec {
     override func spec() {
@@ -42,7 +43,7 @@ class CreateIdentityActionsSpec: QuickSpec {
 
             it("dispatches fulfilled with new account address") {
                 let dispatchChecker = DispatchChecker<CreateIdentityActions.Fulfilled>()
-                let account = Account()
+                let account = GethAccount()
                 keyStore.newAccountReturn = account
                 createAction.action(dispatchChecker.dispatch, getState)
                 expect(dispatchChecker.count).toEventually(equal(1))
@@ -60,10 +61,10 @@ class CreateIdentityActionsSpec: QuickSpec {
 
 private class KeyStoreMock: KeyStore {
     var newAccountCallCount = 0
-    var newAccountReturn: Account?
+    var newAccountReturn: GethAccount?
     var newAccountError: String?
 
-    override func newAccount(onComplete: @escaping (_ account: Account?, _ error: String?) -> Void) {
+    override func newAccount(onComplete: @escaping (_ account: GethAccount?, _ error: String?) -> Void) {
         newAccountCallCount += 1
         DispatchQueue.global().async { [unowned self] in
             onComplete(self.newAccountReturn, self.newAccountError)
