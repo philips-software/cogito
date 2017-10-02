@@ -181,10 +181,10 @@
 		027603ED1F6ACD1600788B0A /* Cogito */ = {
 			isa = PBXGroup;
 			children = (
-				028F4EF21F7CE37E0015C4AF /* Global */,
-				028F4EF01F7CE22D0015C4AF /* GethState */,
+				028F4EF21F7CE37E0015C4AF /* Global state */,
+				028F4EF01F7CE22D0015C4AF /* Geth state */,
 				0298D4331F7A45040070998D /* Geth */,
-				02E792371F6FFDF000DC5973 /* KeyStore */,
+				02E792371F6FFDF000DC5973 /* Key store */,
 				028F4EF71F7D34030015C4AF /* Create identity */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
 				027603F01F6ACD1600788B0A /* ViewController.swift */,
@@ -200,9 +200,9 @@
 			isa = PBXGroup;
 			children = (
 				028F4EF31F7CE3A10015C4AF /* Global */,
-				028F4EF11F7CE25F0015C4AF /* GethState */,
+				028F4EF11F7CE25F0015C4AF /* Geth state */,
 				0298D4321F7A44EF0070998D /* Geth */,
-				02E792361F6FFDD600DC5973 /* KeyStore */,
+				02E792361F6FFDD600DC5973 /* Key store */,
 				028F4EF81F7D340D0015C4AF /* Create identity */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
 				027604051F6ACD1600788B0A /* Info.plist */,
@@ -211,25 +211,25 @@
 			path = CogitoTests;
 			sourceTree = "<group>";
 		};
-		028F4EF01F7CE22D0015C4AF /* GethState */ = {
+		028F4EF01F7CE22D0015C4AF /* Geth state */ = {
 			isa = PBXGroup;
 			children = (
 				029245131F7AA00C00F2C0C1 /* GethActions.swift */,
 				029245161F7AA13F00F2C0C1 /* GethReducer.swift */,
 				029245191F7AA17300F2C0C1 /* GethState.swift */,
 			);
-			path = GethState;
+			path = "Geth state";
 			sourceTree = "<group>";
 		};
-		028F4EF11F7CE25F0015C4AF /* GethState */ = {
+		028F4EF11F7CE25F0015C4AF /* Geth state */ = {
 			isa = PBXGroup;
 			children = (
 				028F4EEB1F7AA64D0015C4AF /* GethReducerSpec.swift */,
 			);
-			path = GethState;
+			path = "Geth state";
 			sourceTree = "<group>";
 		};
-		028F4EF21F7CE37E0015C4AF /* Global */ = {
+		028F4EF21F7CE37E0015C4AF /* Global state */ = {
 			isa = PBXGroup;
 			children = (
 				02E792341F6FFBFF00DC5973 /* AppStore.swift */,
@@ -238,7 +238,7 @@
 				02CD30A31F73F251006BA756 /* StorePersister.swift */,
 				02CD80571F7E30D100AA5C3A /* ActionLogger.swift */,
 			);
-			path = Global;
+			path = "Global state";
 			sourceTree = "<group>";
 		};
 		028F4EF31F7CE3A10015C4AF /* Global */ = {
@@ -292,17 +292,17 @@
 			path = Geth;
 			sourceTree = "<group>";
 		};
-		02E792361F6FFDD600DC5973 /* KeyStore */ = {
+		02E792361F6FFDD600DC5973 /* Key store */ = {
 			isa = PBXGroup;
 			children = (
 				02E792381F6FFE1100DC5973 /* KeyStoreActionsSpec.swift */,
 				0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */,
 				C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */,
 			);
-			path = KeyStore;
+			path = "Key store";
 			sourceTree = "<group>";
 		};
-		02E792371F6FFDF000DC5973 /* KeyStore */ = {
+		02E792371F6FFDF000DC5973 /* Key store */ = {
 			isa = PBXGroup;
 			children = (
 				0205E3661F7012E1003A9787 /* KeyStore.swift */,
@@ -310,7 +310,7 @@
 				029691521F7166AC00654BD0 /* KeyStoreReducer.swift */,
 				029691541F7166EE00654BD0 /* KeyStoreState.swift */,
 			);
-			path = KeyStore;
+			path = "Key store";
 			sourceTree = "<group>";
 		};
 		889FB079C347A157FEFC695F /* Pods */ = {
