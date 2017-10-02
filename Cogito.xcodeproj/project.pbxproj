@@ -11,8 +11,6 @@
 		0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3681F71481C003A9787 /* KeyStoreActions.swift */; };
 		0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */; };
 		022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */; };
-		0221241B1F823ADB005A668A /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0221241A1F823ADB005A668A /* Account.swift */; };
-		0221241C1F823ADB005A668A /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0221241A1F823ADB005A668A /* Account.swift */; };
 		027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603EE1F6ACD1600788B0A /* AppDelegate.swift */; };
 		027603F11F6ACD1600788B0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603F01F6ACD1600788B0A /* ViewController.swift */; };
 		027603F41F6ACD1600788B0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F21F6ACD1600788B0A /* Main.storyboard */; };
@@ -92,7 +90,6 @@
 		0205E3681F71481C003A9787 /* KeyStoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreActions.swift; sourceTree = "<group>"; };
 		0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreReducerSpec.swift; sourceTree = "<group>"; };
 		022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityActionsSpec.swift; sourceTree = "<group>"; };
-		0221241A1F823ADB005A668A /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		027603EB1F6ACD1600788B0A /* Cogito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cogito.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		027603EE1F6ACD1600788B0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		027603F01F6ACD1600788B0A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -315,7 +312,6 @@
 				0205E3681F71481C003A9787 /* KeyStoreActions.swift */,
 				029691521F7166AC00654BD0 /* KeyStoreReducer.swift */,
 				029691541F7166EE00654BD0 /* KeyStoreState.swift */,
-				0221241A1F823ADB005A668A /* Account.swift */,
 			);
 			path = "Key store";
 			sourceTree = "<group>";
@@ -614,7 +610,6 @@
 				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
 				02CD80581F7E30D100AA5C3A /* ActionLogger.swift in Sources */,
 				029691551F7166EE00654BD0 /* KeyStoreState.swift in Sources */,
-				0221241B1F823ADB005A668A /* Account.swift in Sources */,
 				02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */,
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
 				028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
@@ -634,7 +629,6 @@
 				028F4F061F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift in Sources */,
 				02BE32D11F7A6DD0006C7287 /* SyncProgressReporter.swift in Sources */,
 				028F4EEC1F7AA64D0015C4AF /* GethReducerSpec.swift in Sources */,
-				0221241C1F823ADB005A668A /* Account.swift in Sources */,
 				0298D4291F7A43C90070998D /* KeyStoreReducer.swift in Sources */,
 				02CD80541F7D494900AA5C3A /* CreateIdentityReducerSpec.swift in Sources */,
 				0298D4351F7A45150070998D /* GethSpec.swift in Sources */,

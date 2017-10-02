@@ -21,16 +21,18 @@ class KeyStore: Codable {
         scryptP = try container.decode(type(of: self.scryptP), forKey: .scryptP)
     }
 
-    func newAccount(onComplete: @escaping (_ account: Account?, _ error: String?) -> Void) {
+    func newAccount(onComplete: @escaping (_ account: GethAccount?, _ error: String?) -> Void) {
         do {
             guard let gethKeyStore = wrapped else {
-                onComplete(nil, nil) // todo
+                onComplete(nil, "failed to open key store")
                 return
             }
-            _ = try gethKeyStore.newAccount("")
-            onComplete(nil, nil) // todo
-        } catch _ {
-            onComplete(nil, nil) // todo
+            let password = "" // todo
+            let gethAccount = try gethKeyStore.newAccount(password)
+            onComplete(gethAccount, nil)
+        } catch let e {
+            let message = (e as NSError).description
+            onComplete(nil, message)
         }
     }
 

@@ -2,6 +2,7 @@
 
 import ReSwift
 import ReSwiftThunk
+import Geth
 
 // In this file we disable SwiftLint `identifier_name`, because we don't want
 // to make a syntactic difference between normal actions and thunks; from the
@@ -38,6 +39,6 @@ struct CreateIdentityActions {
         let message: String
     }
     struct Fulfilled: Action {
-        let account: Account
+        let account: GethAccount
     }
 }
