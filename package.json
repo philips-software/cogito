@@ -6,7 +6,14 @@
   "private": "true",
   "license": "UNLICENSED",
   "main": "index.js",
+  "scripts": {
+    "test": "yarn run mocha 'test/**/*.js'"
+  },
   "engines": {
     "node": ">=7.6.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3"
   }
 }
