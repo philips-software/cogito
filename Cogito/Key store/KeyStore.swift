@@ -22,17 +22,21 @@ class KeyStore: Codable {
     }
 
     func newAccount(onComplete: @escaping (_ account: GethAccount?, _ error: String?) -> Void) {
-        do {
-            guard let gethKeyStore = wrapped else {
-                onComplete(nil, "failed to open key store")
-                return
+        guard let gethKeyStore = wrapped else {
+            onComplete(nil, "failed to open key store")
+            return
+        }
+        AppPassword().use { (password, error) in
+            if let p = password {
+                do {
+                    let gethAccount = try gethKeyStore.newAccount(p)
+                    onComplete(gethAccount, nil)
+                } catch let e {
+                    onComplete(nil, e.localizedDescription)
+                }
+            } else {
+                onComplete(nil, error)
             }
-            let password = "" // todo
-            let gethAccount = try gethKeyStore.newAccount(password)
-            onComplete(gethAccount, nil)
-        } catch let e {
-            let message = (e as NSError).description
-            onComplete(nil, message)
         }
     }
 
