@@ -12,6 +12,10 @@
 import RxSwift
 #endif
 import UIKit
+    
+extension UIScrollView: HasDelegate {
+    public typealias Delegate = UIScrollViewDelegate
+}
 
 /// For more information take a look at `DelegateProxyType`.
 open class RxScrollViewDelegateProxy
@@ -22,18 +26,18 @@ open class RxScrollViewDelegateProxy
     /// Typed parent object.
     public weak private(set) var scrollView: UIScrollView?
 
-    /// - parameter parentObject: Parent object for delegate proxy.
-    public init(parentObject: ParentObject) {
-        self.scrollView = parentObject
-        super.init(parentObject: parentObject, delegateProxy: RxScrollViewDelegateProxy.self)
+    /// - parameter scrollView: Parent object for delegate proxy.
+    public init(scrollView: ParentObject) {
+        self.scrollView = scrollView
+        super.init(parentObject: scrollView, delegateProxy: RxScrollViewDelegateProxy.self)
     }
 
     // Register known implementations
     public static func registerKnownImplementations() {
-        self.register { RxScrollViewDelegateProxy(parentObject: $0) }
-        self.register { RxTableViewDelegateProxy(parentObject: $0) }
-        self.register { RxCollectionViewDelegateProxy(parentObject: $0) }
-        self.register { RxTextViewDelegateProxy(parentObject: $0) }
+        self.register { RxScrollViewDelegateProxy(scrollView: $0) }
+        self.register { RxTableViewDelegateProxy(tableView: $0) }
+        self.register { RxCollectionViewDelegateProxy(collectionView: $0) }
+        self.register { RxTextViewDelegateProxy(textView: $0) }
     }
 
     fileprivate var _contentOffsetBehaviorSubject: BehaviorSubject<CGPoint>?
@@ -74,18 +78,6 @@ open class RxScrollViewDelegateProxy
             subject.on(.next(()))
         }
         self._forwardToDelegate?.scrollViewDidScroll?(scrollView)
-    }
-    
-    // MARK: delegate proxy
-
-    /// For more information take a look at `DelegateProxyType`.
-    open class func setCurrentDelegate(_ delegate: UIScrollViewDelegate?, to object: ParentObject) {
-        object.delegate = delegate
-    }
-
-    /// For more information take a look at `DelegateProxyType`.
-    open class func currentDelegate(for object: ParentObject) -> UIScrollViewDelegate? {
-        return object.delegate
     }
     
     deinit {
