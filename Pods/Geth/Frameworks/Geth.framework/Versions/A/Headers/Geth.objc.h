@@ -616,6 +616,11 @@ Note that the receipt is not available for pending transactions.
  */
 - (GethReceipt*)getTransactionReceipt:(GethContext*)ctx hash:(GethHash*)hash error:(NSError**)error;
 /**
+ * GetTransactionSender returns the sender address of a transaction. The transaction must
+be included in blockchain at the given block and index.
+ */
+- (GethAddress*)getTransactionSender:(GethContext*)ctx tx:(GethTransaction*)tx blockhash:(GethHash*)blockhash index:(long)index error:(NSError**)error;
+/**
  * PendingCallContract executes a message call transaction using the EVM.
 The state seen by the contract call is the pending state.
  */
@@ -1405,11 +1410,17 @@ valid Ethereum transaction.
 - (NSData*)encodeRLP:(NSError**)error;
 - (GethBigInt*)getCost;
 - (NSData*)getData;
+/**
+ * Deprecated: use EthereumClient.TransactionSender
+ */
 - (GethAddress*)getFrom:(GethBigInt*)chainID error:(NSError**)error;
 - (int64_t)getGas;
 - (GethBigInt*)getGasPrice;
 - (GethHash*)getHash;
 - (int64_t)getNonce;
+/**
+ * Deprecated: GetSigHash cannot know which signer to use.
+ */
 - (GethHash*)getSigHash;
 - (GethAddress*)getTo;
 - (GethBigInt*)getValue;

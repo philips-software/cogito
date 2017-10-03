@@ -13,6 +13,10 @@
     import RxSwift
 #endif
 
+extension UIPickerView: HasDataSource {
+    public typealias DataSource = UIPickerViewDataSource
+}
+
 fileprivate let pickerViewDataSourceNotSet = PickerViewDataSourceNotSet()
 
 final fileprivate class PickerViewDataSourceNotSet: NSObject, UIPickerViewDataSource {
@@ -34,15 +38,15 @@ public class RxPickerViewDataSourceProxy
     /// Typed parent object.
     public weak private(set) var pickerView: UIPickerView?
 
-    /// - parameter parentObject: Parent object for delegate proxy.
-    public init(parentObject: ParentObject) {
-        self.pickerView = parentObject
-        super.init(parentObject: parentObject, delegateProxy: RxPickerViewDataSourceProxy.self)
+    /// - parameter pickerView: Parent object for delegate proxy.
+    public init(pickerView: ParentObject) {
+        self.pickerView = pickerView
+        super.init(parentObject: pickerView, delegateProxy: RxPickerViewDataSourceProxy.self)
     }
 
     // Register known implementations
     public static func registerKnownImplementations() {
-        self.register { RxPickerViewDataSourceProxy(parentObject: $0) }
+        self.register { RxPickerViewDataSourceProxy(pickerView: $0) }
     }
 
     private weak var _requiredMethodsDataSource: UIPickerViewDataSource? = pickerViewDataSourceNotSet
@@ -57,18 +61,6 @@ public class RxPickerViewDataSourceProxy
     /// Required delegate method implementation.
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return (_requiredMethodsDataSource ?? pickerViewDataSourceNotSet).pickerView(pickerView, numberOfRowsInComponent: component)
-    }
-    
-    // MARK: proxy
-    
-    /// For more information take a look at `DelegateProxyType`.
-    public class func setCurrentDelegate(_ delegate: UIPickerViewDataSource?, to object: UIPickerView) {
-        object.dataSource = delegate
-    }
-    
-    /// For more information take a look at `DelegateProxyType`.
-    public class func currentDelegate(for object: UIPickerView) -> UIPickerViewDataSource? {
-        return object.dataSource
     }
     
     /// For more information take a look at `DelegateProxyType`.

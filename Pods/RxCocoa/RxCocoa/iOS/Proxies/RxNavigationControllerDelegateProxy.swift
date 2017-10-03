@@ -13,6 +13,10 @@
         import RxSwift
     #endif
 
+    extension UINavigationController: HasDelegate {
+        public typealias Delegate = UINavigationControllerDelegate
+    }
+
     /// For more information take a look at `DelegateProxyType`.
     open class RxNavigationControllerDelegateProxy
         : DelegateProxy<UINavigationController, UINavigationControllerDelegate>
@@ -22,25 +26,15 @@
         /// Typed parent object.
         public weak private(set) var navigationController: UINavigationController?
 
-        /// - parameter parentObject: Parent object for delegate proxy.
-        public init(parentObject: ParentObject) {
-            self.navigationController = parentObject
-            super.init(parentObject: parentObject, delegateProxy: RxNavigationControllerDelegateProxy.self)
+        /// - parameter navigationController: Parent object for delegate proxy.
+        public init(navigationController: ParentObject) {
+            self.navigationController = navigationController
+            super.init(parentObject: navigationController, delegateProxy: RxNavigationControllerDelegateProxy.self)
         }
 
         // Register known implementations
         public static func registerKnownImplementations() {
-            self.register { RxNavigationControllerDelegateProxy(parentObject: $0) }
-        }
-
-        /// For more information take a look at `DelegateProxyType`.
-        open class func currentDelegate(for object: ParentObject) -> UINavigationControllerDelegate? {
-            return object.delegate
-        }
-
-        /// For more information take a look at `DelegateProxyType`.
-        open class func setCurrentDelegate(_ delegate: UINavigationControllerDelegate?, to object: ParentObject) {
-            object.delegate = delegate
+            self.register { RxNavigationControllerDelegateProxy(navigationController: $0) }
         }
     }
 #endif

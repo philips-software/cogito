@@ -13,6 +13,10 @@ import UIKit
 import RxSwift
 #endif
 
+extension UICollectionView: HasDataSource {
+    public typealias DataSource = UICollectionViewDataSource
+}
+
 let collectionViewDataSourceNotSet = CollectionViewDataSourceNotSet()
 
 final class CollectionViewDataSourceNotSet
@@ -40,15 +44,15 @@ open class RxCollectionViewDataSourceProxy
     /// Typed parent object.
     public weak private(set) var collectionView: UICollectionView?
 
-    /// - parameter parentObject: Parent object for delegate proxy.
-    public init(parentObject: ParentObject) {
-        self.collectionView = parentObject
-        super.init(parentObject: parentObject, delegateProxy: RxCollectionViewDataSourceProxy.self)
+    /// - parameter collectionView: Parent object for delegate proxy.
+    public init(collectionView: ParentObject) {
+        self.collectionView = collectionView
+        super.init(parentObject: collectionView, delegateProxy: RxCollectionViewDataSourceProxy.self)
     }
 
     // Register known implementations
     public static func registerKnownImplementations() {
-        self.register { RxCollectionViewDataSourceProxy(parentObject: $0) }
+        self.register { RxCollectionViewDataSourceProxy(collectionView: $0) }
     }
 
     private weak var _requiredMethodsDataSource: UICollectionViewDataSource? = collectionViewDataSourceNotSet
@@ -63,18 +67,6 @@ open class RxCollectionViewDataSourceProxy
     /// Required delegate method implementation.
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return (_requiredMethodsDataSource ?? collectionViewDataSourceNotSet).collectionView(collectionView, cellForItemAt: indexPath)
-    }
-    
-    // MARK: proxy
-
-    /// For more information take a look at `DelegateProxyType`.
-    open class func setCurrentDelegate(_ delegate: UICollectionViewDataSource?, to object: ParentObject) {
-        object.dataSource = delegate
-    }
-
-    /// For more information take a look at `DelegateProxyType`.
-    open class func currentDelegate(for object: ParentObject) -> UICollectionViewDataSource? {
-        return object.dataSource
     }
 
     /// For more information take a look at `DelegateProxyType`.
