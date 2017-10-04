@@ -7,3 +7,5 @@ Cogito
 *Cogito, ergo sum*
 
 Identity management app.
+
+For an overview of the architecture, please refer to the [Cogito white paper](https://gitlab.ta.philips.com/blockchain-lab/Cogito/raw/master/Documentation/Architecture.pdf).
