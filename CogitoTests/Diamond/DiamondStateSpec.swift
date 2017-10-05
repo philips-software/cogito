@@ -3,7 +3,7 @@
 import Quick
 import Nimble
 
-class HomeViewControllerSpec: QuickSpec {
+class DiamondStateSpec: QuickSpec {
     override func spec() {
     }
 }

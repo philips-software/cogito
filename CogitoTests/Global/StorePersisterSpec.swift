@@ -70,7 +70,8 @@ class StorePersisterSpec: QuickSpec {
                     "geth": {},
                     "createIdentity": {
                         "description": ""
-                    }
+                    },
+                    "diamond": {}
                 }
                 """
         context("when file contains valid JSON") {

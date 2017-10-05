@@ -58,6 +58,14 @@
 		02A15AF41F864F4B00A94163 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02A15AF31F864F4B00A94163 /* Home.storyboard */; };
 		02A15AF51F864F4B00A94163 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02A15AF31F864F4B00A94163 /* Home.storyboard */; };
 		02A15AF71F864F8700A94163 /* HomeViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AF61F864F8700A94163 /* HomeViewControllerSpec.swift */; };
+		02A15AFB1F86719400A94163 /* DiamondState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AFA1F86719400A94163 /* DiamondState.swift */; };
+		02A15AFC1F86719500A94163 /* DiamondState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AFA1F86719400A94163 /* DiamondState.swift */; };
+		02A15AFE1F8671D200A94163 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AFD1F8671D200A94163 /* Identity.swift */; };
+		02A15AFF1F8671D200A94163 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AFD1F8671D200A94163 /* Identity.swift */; };
+		02A15B011F8672C000A94163 /* DiamondReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15B001F8672C000A94163 /* DiamondReducer.swift */; };
+		02A15B021F8672C000A94163 /* DiamondReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15B001F8672C000A94163 /* DiamondReducer.swift */; };
+		02A15B041F86732500A94163 /* DiamondStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15B031F86732500A94163 /* DiamondStateSpec.swift */; };
+		02A15B061F86733000A94163 /* DiamondReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15B051F86733000A94163 /* DiamondReducerSpec.swift */; };
 		02BE32C91F7A4DF9006C7287 /* PeerReporterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */; };
 		02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CA1F7A511A006C7287 /* PeerReporter.swift */; };
 		02BE32CC1F7A511D006C7287 /* PeerReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CA1F7A511A006C7287 /* PeerReporter.swift */; };
@@ -130,6 +138,11 @@
 		02A15AED1F864F0900A94163 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		02A15AF31F864F4B00A94163 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		02A15AF61F864F8700A94163 /* HomeViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerSpec.swift; sourceTree = "<group>"; };
+		02A15AFA1F86719400A94163 /* DiamondState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondState.swift; sourceTree = "<group>"; };
+		02A15AFD1F8671D200A94163 /* Identity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
+		02A15B001F8672C000A94163 /* DiamondReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondReducer.swift; sourceTree = "<group>"; };
+		02A15B031F86732500A94163 /* DiamondStateSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondStateSpec.swift; sourceTree = "<group>"; };
+		02A15B051F86733000A94163 /* DiamondReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondReducerSpec.swift; sourceTree = "<group>"; };
 		02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerReporterSpec.swift; sourceTree = "<group>"; };
 		02BE32CA1F7A511A006C7287 /* PeerReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerReporter.swift; sourceTree = "<group>"; };
 		02BE32CD1F7A5C55006C7287 /* SyncProgressReporterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProgressReporterSpec.swift; sourceTree = "<group>"; };
@@ -204,6 +217,7 @@
 				028F4EF01F7CE22D0015C4AF /* Geth state */,
 				0298D4331F7A45040070998D /* Geth */,
 				02E792371F6FFDF000DC5973 /* Key store */,
+				02A15AF81F86714800A94163 /* Diamond */,
 				02A15AEB1F864E9D00A94163 /* Home */,
 				028F4EF71F7D34030015C4AF /* Create identity */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
@@ -223,6 +237,7 @@
 				028F4EF11F7CE25F0015C4AF /* Geth state */,
 				0298D4321F7A44EF0070998D /* Geth */,
 				02E792361F6FFDD600DC5973 /* Key store */,
+				02A15AF91F86715800A94163 /* Diamond */,
 				02A15AEC1F864EAB00A94163 /* Home */,
 				028F4EF81F7D340D0015C4AF /* Create identity */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
@@ -330,6 +345,25 @@
 				02A15AF61F864F8700A94163 /* HomeViewControllerSpec.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		02A15AF81F86714800A94163 /* Diamond */ = {
+			isa = PBXGroup;
+			children = (
+				02A15AFA1F86719400A94163 /* DiamondState.swift */,
+				02A15AFD1F8671D200A94163 /* Identity.swift */,
+				02A15B001F8672C000A94163 /* DiamondReducer.swift */,
+			);
+			path = Diamond;
+			sourceTree = "<group>";
+		};
+		02A15AF91F86715800A94163 /* Diamond */ = {
+			isa = PBXGroup;
+			children = (
+				02A15B031F86732500A94163 /* DiamondStateSpec.swift */,
+				02A15B051F86733000A94163 /* DiamondReducerSpec.swift */,
+			);
+			path = Diamond;
 			sourceTree = "<group>";
 		};
 		02E792361F6FFDD600DC5973 /* Key store */ = {
@@ -640,10 +674,12 @@
 				02CD30A41F73F251006BA756 /* StorePersister.swift in Sources */,
 				029245171F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
 				0298D4371F7A45680070998D /* Geth.swift in Sources */,
+				02A15AFB1F86719400A94163 /* DiamondState.swift in Sources */,
 				0298D43A1F7A46A30070998D /* Node.swift in Sources */,
 				028F4F001F7D3B640015C4AF /* CreateIdentityState.swift in Sources */,
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
 				029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
+				02A15B011F8672C000A94163 /* DiamondReducer.swift in Sources */,
 				028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
 				02BE32D01F7A6D92006C7287 /* SyncProgressReporter.swift in Sources */,
@@ -662,6 +698,7 @@
 				028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
 				028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */,
+				02A15AFE1F8671D200A94163 /* Identity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,6 +714,7 @@
 				028F4F061F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift in Sources */,
 				02BE32D11F7A6DD0006C7287 /* SyncProgressReporter.swift in Sources */,
 				028F4EEC1F7AA64D0015C4AF /* GethReducerSpec.swift in Sources */,
+				02A15B061F86733000A94163 /* DiamondReducerSpec.swift in Sources */,
 				0298D4291F7A43C90070998D /* KeyStoreReducer.swift in Sources */,
 				02CD80541F7D494900AA5C3A /* CreateIdentityReducerSpec.swift in Sources */,
 				0298D4351F7A45150070998D /* GethSpec.swift in Sources */,
@@ -695,6 +733,7 @@
 				0298D4381F7A456A0070998D /* Geth.swift in Sources */,
 				02BE32C91F7A4DF9006C7287 /* PeerReporterSpec.swift in Sources */,
 				02CD80591F7E318100AA5C3A /* ActionLogger.swift in Sources */,
+				02A15AFC1F86719500A94163 /* DiamondState.swift in Sources */,
 				0298D43B1F7A47890070998D /* Node.swift in Sources */,
 				C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */,
 				0298D42E1F7A43C90070998D /* StorePersister.swift in Sources */,
@@ -703,13 +742,16 @@
 				028F4EFE1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0298D42B1F7A43C90070998D /* AppStore.swift in Sources */,
 				0298D4281F7A43C90070998D /* KeyStoreActions.swift in Sources */,
+				02A15B041F86732500A94163 /* DiamondStateSpec.swift in Sources */,
 				029245181F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
 				028F4F041F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
 				028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				02A15AF01F864F0900A94163 /* HomeViewController.swift in Sources */,
+				02A15AFF1F8671D200A94163 /* Identity.swift in Sources */,
 				C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */,
 				C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */,
 				C00B57208B78184BB19798CD /* AppPassword.swift in Sources */,
+				02A15B021F8672C000A94163 /* DiamondReducer.swift in Sources */,
 				C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
