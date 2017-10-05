@@ -23,8 +23,44 @@ abstract:
 
 Use Case: Signing Data with OpenID Connect-backed Identity
 ----------------------------------------------------------
+Cogito can sign data on behalf of a (web) app, while giving the
+guarantee that the signing identity is authenticated by an OpenID
+Connect server. The diagram "Signing data with Cogito" provides a
+high-level overview of the interactions that are relevant for this
+use case.
 
 ![Signing data with Cogito](Signing.png)
+
+1. As usual in such settings, the web app authenticates the user
+   with the OpenID Connect Server, either using the [OpenID Connect
+   Authorization Code Flow][OpenIDAuthCode], or using the [Implicit
+   Flow][OIDCImplicit]. When successful, the web app obtains an
+   access token and an identity token. The identity token is a
+   [JWT][JWT] that contains a `sub` field: the identifier of the
+   authenticated user in the OpenID Connect server.
+2. The user wants to sign data using their Cogito identity. So
+   the web app refers the user to Cogito, using a QR code to setup
+   a secure communication channel between the web app and Cogito.
+   The secure channel is built using [Telepath][Telepath]. Cogito
+   requires both the data to be signed, as well as the `sub` field
+   from the user's identity token.
+3. Cogito now starts a standard [OpenID Connect Implicit
+   Flow][OIDCImplicit] to establish that the user is authenticated
+   with the OpenID Connect server. When successful, Cogito receives
+   an identity token from the OpenID Connect server. Cogito ensures
+   that the identity has the same `sub` value as the one received
+   in the signing request.
+4. Now that the user is authenticated with Cogito and the `sub`
+   is verified, Cogito signs the data using the keys it has for the
+   identity, and returns the signature to the web app through
+   Telepath.
+
+The third step above, the authentication between Cogito and the
+OpenID Connect server, is done only once. We refer to this as an
+_attestation_: the OpenID Connect server gives the user's identity
+an attestation that it is a valid user in the OpenID Connect server.
+The section "Attestation from OpenID Connect Server" provides
+more detail about this step.
 
 
 Attestations
@@ -74,3 +110,6 @@ These are the steps displayed in the sequence diagram:
 
 
 [OIDCImplicit]: https://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth
+[OpenIDAuthCode]: https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth
+[JWT]: https://jwt.io
+[Telepath]: TODO
