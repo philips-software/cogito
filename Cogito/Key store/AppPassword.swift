@@ -1,8 +1,10 @@
 //  Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
 
 import KeychainAccess
+import Security
 
 private let appPasswordKey = "appPassword"
+private let passwordLength = 16
 
 class AppPassword {
     let keychain: KeychainType
@@ -25,7 +27,12 @@ class AppPassword {
             }
             var password = this.loadPassword()
             if password == nil {
-                password = this.keychain.generatePassword()
+                do {
+                    password = try this.keychain.generatePassword()
+                } catch let e {
+                    callback(nil, e.localizedDescription)
+                    return
+                }
                 if let error = this.store(password: password!) {
                     callback(nil, error)
                     return
@@ -65,7 +72,7 @@ protocol KeychainType {
                            authenticationPolicy: AuthenticationPolicy) -> KeychainType
     func get(_ key: String) throws -> String?
     func set(_ value: String, key: String) throws
-    func generatePassword() -> String
+    func generatePassword() throws -> String
 }
 
 extension Keychain: KeychainType {
@@ -79,7 +86,22 @@ extension Keychain: KeychainType {
                                   authenticationPolicy: authenticationPolicy)
     }
 
-    func generatePassword() -> String {
-        return "todo"  //todo
+    func generatePassword() throws -> String {
+        var bytes = [UInt8](repeating: 0, count: passwordLength)
+        let result = SecRandomCopyBytes(kSecRandomDefault, passwordLength, &bytes)
+        guard result == errSecSuccess else {
+            throw GeneratePasswordError(resultCode: result)
+        }
+        return Data(bytes: bytes).hexEncodedString()
     }
+}
+
+extension Data {
+    func hexEncodedString() -> String {
+        return map { String(format: "%02hhx", $0) }.joined()
+    }
+}
+
+struct GeneratePasswordError: Error {
+    let resultCode: Int32
 }
