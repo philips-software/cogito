@@ -5,17 +5,15 @@ import ReSwift
 struct DiamondState: Codable {
     let facets: [Identity]
 
-    init() {
-        facets = []
-    }
-
-    init(from decoder: Decoder) throws {
-        facets = []
-    }
-
-    func encode(to encoder: Encoder) throws {
-
+    init(facets: [Identity]) {
+        self.facets = facets
     }
 }
 
-let initialDiamondState = DiamondState()
+extension DiamondState: Equatable {
+    static func == (lhs: DiamondState, rhs: DiamondState) -> Bool {
+        return lhs.facets == rhs.facets
+    }
+}
+
+let initialDiamondState = DiamondState(facets: [])
