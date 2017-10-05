@@ -7,6 +7,8 @@ import QRCodeReader
 class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var previewContainer: UIView!
+    @IBOutlet weak var leftShutter: UIView!
+    @IBOutlet weak var rightShutter: UIView!
 
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
@@ -19,11 +21,10 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
 
         let readerVC = QRCodeReaderViewController(builder: builder)
         addChildViewController(readerVC)
-        previewContainer.addSubview(readerVC.view)
+        previewContainer.insertSubview(readerVC.view, at: 0)
         readerVC.view.frame = CGRect(x: 0, y: 0,
                                      width: previewContainer.frame.size.width,
                                      height: previewContainer.frame.size.height)
-        readerVC.delegate = self
         return readerVC
     }()
 
@@ -36,22 +37,48 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        readerVC.stopScanning()
+        readerVC.delegate = self
     }
 
     @IBAction func openScanner() {
-        readerVC.startScanning()
+        startScanning()
     }
 
     @IBAction func closeScanner() {
+        stopScanning()
+    }
+
+    private func startScanning() {
+        readerVC.startScanning()
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       usingSpringWithDamping: 1,
+                       initialSpringVelocity: 0,
+                       options: .beginFromCurrentState,
+                       animations: {
+                        self.leftShutter.frame.origin.x = -self.leftShutter.frame.size.width
+                        self.rightShutter.frame.origin.x = self.rightShutter.superview!.frame.size.width
+        })
+    }
+
+    private func stopScanning() {
         readerVC.stopScanning()
+        UIView.animate(withDuration: 0.3,
+                       delay: 0,
+                       usingSpringWithDamping: 1,
+                       initialSpringVelocity: 0,
+                       options: .beginFromCurrentState,
+                       animations: {
+                        self.leftShutter.frame.origin.x = 0
+                        self.rightShutter.frame.origin.x = self.rightShutter.superview!.frame.size.width / 2
+        })
     }
 
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
-        reader.stopScanning()
+        stopScanning()
     }
 
     func readerDidCancel(_ reader: QRCodeReaderViewController) {
-        reader.stopScanning()
+        stopScanning()
     }
 }
