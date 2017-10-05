@@ -2,7 +2,7 @@ platform :ios, '11.0'
 use_frameworks!
 
 target 'Telepath' do
-  pod 'RNCryptor', '~> 5.0'
+  pod 'Sodium', '~> 0.5'
 
   target 'TelepathTests' do
     # Latest versions from master needed for Swift 4 compatibility:
