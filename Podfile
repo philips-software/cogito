@@ -9,6 +9,7 @@ target 'Cogito' do
   pod 'SwiftLint', '0.21.0'
   pod 'ReRxSwift', :git => 'https://github.com/svdo/ReRxSwift', :branch => 'master'
   pod 'KeychainAccess', '~> 3.1'
+  pod 'QRCodeReader.swift', '~> 8.0'
 
   pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0'
   pod 'RxCocoa', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0'
