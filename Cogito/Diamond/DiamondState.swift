@@ -3,7 +3,7 @@
 import ReSwift
 
 struct DiamondState: Codable {
-    let facets: [Identity]
+    var facets: [Identity]
 
     init(facets: [Identity]) {
         self.facets = facets
