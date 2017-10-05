@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oxI-YO-us9">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="ryG-zE-RLB">
+            <objects>
+                <viewController storyboardIdentifier="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oxI-YO-us9" customClass="HomeViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Eu8-li-WJV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yOe-r5-WdH">
+                                <rect key="frame" x="147.5" y="533" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="yOe-r5-WdH" secondAttribute="height" multiplier="1:1" id="JkN-AE-dq8"/>
+                                    <constraint firstAttribute="width" constant="80" id="ZYm-qF-YR0"/>
+                                    <constraint firstAttribute="height" constant="80" id="qkz-RH-Gw8"/>
+                                </constraints>
+                                <state key="normal" image="CogitoQR">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yOe-r5-WdH" firstAttribute="centerX" secondItem="Eu8-li-WJV" secondAttribute="centerX" id="2Le-Cz-dRB"/>
+                            <constraint firstItem="LEQ-Qq-yAf" firstAttribute="bottom" secondItem="yOe-r5-WdH" secondAttribute="bottom" constant="54" id="lrs-iX-bSs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LEQ-Qq-yAf"/>
+                    </view>
+                    <connections>
+                        <outlet property="cameraButton" destination="yOe-r5-WdH" id="9BQ-bN-ZQc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ucf-bs-p2T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-271.19999999999999" y="162.3688155922039"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="CogitoQR" width="50" height="50"/>
+    </resources>
+</document>

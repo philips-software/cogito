@@ -53,6 +53,11 @@
 		0298D4381F7A456A0070998D /* Geth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4361F7A45680070998D /* Geth.swift */; };
 		0298D43A1F7A46A30070998D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4391F7A46A30070998D /* Node.swift */; };
 		0298D43B1F7A47890070998D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4391F7A46A30070998D /* Node.swift */; };
+		02A15AEF1F864F0900A94163 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AED1F864F0900A94163 /* HomeViewController.swift */; };
+		02A15AF01F864F0900A94163 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AED1F864F0900A94163 /* HomeViewController.swift */; };
+		02A15AF41F864F4B00A94163 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02A15AF31F864F4B00A94163 /* Home.storyboard */; };
+		02A15AF51F864F4B00A94163 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02A15AF31F864F4B00A94163 /* Home.storyboard */; };
+		02A15AF71F864F8700A94163 /* HomeViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AF61F864F8700A94163 /* HomeViewControllerSpec.swift */; };
 		02BE32C91F7A4DF9006C7287 /* PeerReporterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */; };
 		02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CA1F7A511A006C7287 /* PeerReporter.swift */; };
 		02BE32CC1F7A511D006C7287 /* PeerReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CA1F7A511A006C7287 /* PeerReporter.swift */; };
@@ -122,6 +127,9 @@
 		0298D4341F7A45150070998D /* GethSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethSpec.swift; sourceTree = "<group>"; };
 		0298D4361F7A45680070998D /* Geth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geth.swift; sourceTree = "<group>"; };
 		0298D4391F7A46A30070998D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		02A15AED1F864F0900A94163 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		02A15AF31F864F4B00A94163 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		02A15AF61F864F8700A94163 /* HomeViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerSpec.swift; sourceTree = "<group>"; };
 		02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerReporterSpec.swift; sourceTree = "<group>"; };
 		02BE32CA1F7A511A006C7287 /* PeerReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerReporter.swift; sourceTree = "<group>"; };
 		02BE32CD1F7A5C55006C7287 /* SyncProgressReporterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProgressReporterSpec.swift; sourceTree = "<group>"; };
@@ -196,6 +204,7 @@
 				028F4EF01F7CE22D0015C4AF /* Geth state */,
 				0298D4331F7A45040070998D /* Geth */,
 				02E792371F6FFDF000DC5973 /* Key store */,
+				02A15AEB1F864E9D00A94163 /* Home */,
 				028F4EF71F7D34030015C4AF /* Create identity */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
 				027603F01F6ACD1600788B0A /* ViewController.swift */,
@@ -214,6 +223,7 @@
 				028F4EF11F7CE25F0015C4AF /* Geth state */,
 				0298D4321F7A44EF0070998D /* Geth */,
 				02E792361F6FFDD600DC5973 /* Key store */,
+				02A15AEC1F864EAB00A94163 /* Home */,
 				028F4EF81F7D340D0015C4AF /* Create identity */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
 				027604051F6ACD1600788B0A /* Info.plist */,
@@ -303,6 +313,23 @@
 				02BE32CF1F7A6D92006C7287 /* SyncProgressReporter.swift */,
 			);
 			path = Geth;
+			sourceTree = "<group>";
+		};
+		02A15AEB1F864E9D00A94163 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				02A15AED1F864F0900A94163 /* HomeViewController.swift */,
+				02A15AF31F864F4B00A94163 /* Home.storyboard */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		02A15AEC1F864EAB00A94163 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				02A15AF61F864F8700A94163 /* HomeViewControllerSpec.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		02E792361F6FFDD600DC5973 /* Key store */ = {
@@ -442,6 +469,7 @@
 				027603F91F6ACD1600788B0A /* LaunchScreen.storyboard in Resources */,
 				027603F61F6ACD1600788B0A /* Assets.xcassets in Resources */,
 				027603F41F6ACD1600788B0A /* Main.storyboard in Resources */,
+				02A15AF41F864F4B00A94163 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				028F4EF61F7CF8330015C4AF /* Main.storyboard in Resources */,
+				02A15AF51F864F4B00A94163 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -614,6 +643,7 @@
 				028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
 				02BE32D01F7A6D92006C7287 /* SyncProgressReporter.swift in Sources */,
+				02A15AEF1F864F0900A94163 /* HomeViewController.swift in Sources */,
 				0292451A1F7AA17300F2C0C1 /* GethState.swift in Sources */,
 				02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */,
 				028F4F031F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
@@ -665,12 +695,14 @@
 				C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */,
 				0298D42E1F7A43C90070998D /* StorePersister.swift in Sources */,
 				0292451D1F7AA3B100F2C0C1 /* AppStateHelper.swift in Sources */,
+				02A15AF71F864F8700A94163 /* HomeViewControllerSpec.swift in Sources */,
 				028F4EFE1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0298D42B1F7A43C90070998D /* AppStore.swift in Sources */,
 				0298D4281F7A43C90070998D /* KeyStoreActions.swift in Sources */,
 				029245181F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
 				028F4F041F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
 				028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
+				02A15AF01F864F0900A94163 /* HomeViewController.swift in Sources */,
 				C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */,
 				C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */,
 				C00B57208B78184BB19798CD /* AppPassword.swift in Sources */,
