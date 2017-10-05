@@ -6,10 +6,12 @@ struct AppState: StateType, Codable {
     let keyStore: KeyStoreState
     let geth: GethState
     let createIdentity: CreateIdentityState
+    let diamond: DiamondState
 }
 
 let initialAppState = AppState(
     keyStore: initialKeyStoreState,
     geth: initialGethState,
-    createIdentity: initialCreateIdentityState
+    createIdentity: initialCreateIdentityState,
+    diamond: initialDiamondState
 )

@@ -4,6 +4,10 @@ import Foundation
 
 func appState(keyStore: KeyStoreState = initialKeyStoreState,
               geth: GethState = initialGethState,
-              createIdentity: CreateIdentityState = initialCreateIdentityState) -> AppState {
-    return AppState(keyStore: keyStore, geth: geth, createIdentity: createIdentity)
+              createIdentity: CreateIdentityState = initialCreateIdentityState,
+              diamond: DiamondState = initialDiamondState) -> AppState {
+    return AppState(keyStore: keyStore,
+                    geth: geth,
+                    createIdentity: createIdentity,
+                    diamond: diamond)
 }
