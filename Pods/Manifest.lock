@@ -2,6 +2,7 @@ PODS:
   - Geth (1.7.1-unstable.11080)
   - KeychainAccess (3.1.0)
   - Nimble (7.0.2)
+  - QRCodeReader.swift (8.0.2)
   - Quick (1.2.0)
   - ReRxSwift (0.1.0):
     - ReSwift (~> 4.0)
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - Geth (~> 1.7.1-unstable.10951)
   - KeychainAccess (~> 3.1)
   - Nimble (from `https://github.com/Quick/Nimble`)
+  - QRCodeReader.swift (~> 8.0)
   - Quick (from `https://github.com/Quick/Quick`)
   - ReRxSwift (from `https://github.com/svdo/ReRxSwift`, branch `master`)
   - ReSwift (from `https://github.com/ReSwift/ReSwift`, branch `master`)
@@ -75,6 +77,7 @@ SPEC CHECKSUMS:
   Geth: e6cf04b0d04f267df5daa554a9fa7e0618de26db
   KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
   Nimble: 5c3b8c4b0229d95c2c7b0005e2edf244937dbb04
+  QRCodeReader.swift: 823f2e02867df25e7ae32034a16ea60e6bb218e4
   Quick: 65081c7ab6eb85f9b65dbecbaf88793ce9ce47bc
   ReRxSwift: 43e87ce023d32c9de72c03dd9b5381b49933e48a
   ReSwift: 85cb57267026cf4df4f6b05306bfce8ef74842c0
@@ -83,6 +86,6 @@ SPEC CHECKSUMS:
   RxSwift: 9488787dfac649ffc1c4fddf3a3b4d6823d0b392
   SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
 
-PODFILE CHECKSUM: daee8f96f94a52dae0944eb578bf5e314594be51
+PODFILE CHECKSUM: 013501653266b4eb84401cc1c2cf7a352478da9b
 
 COCOAPODS: 1.3.1
