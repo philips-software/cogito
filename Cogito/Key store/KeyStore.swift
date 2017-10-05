@@ -23,6 +23,7 @@ class KeyStore: Codable {
     }
 
     func newAccount(onComplete: @escaping (_ account: GethAccount?, _ error: String?) -> Void) {
+        print("[debug] creating new account in key store at \(path)")
         guard let gethKeyStore = wrapped else {
             onComplete(nil, "failed to open key store")
             return

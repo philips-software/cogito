@@ -29,6 +29,8 @@ struct CreateIdentityActions {
                     dispatch(Rejected(message: error ?? "failed to create account"))
                     return
                 }
+                let address = account.getAddress().getHex()!
+                print("[debug] account created: \(address)")
                 dispatch(Fulfilled(account: account))
             }
         })
