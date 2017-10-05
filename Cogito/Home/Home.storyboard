@@ -29,17 +29,32 @@
                                 <state key="normal" image="CogitoQR">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="closeScanner" destination="oxI-YO-us9" eventType="touchUpOutside" id="Owa-re-HJm"/>
+                                    <action selector="closeScanner" destination="oxI-YO-us9" eventType="touchUpInside" id="YNL-gp-fkd"/>
+                                    <action selector="openScanner" destination="oxI-YO-us9" eventType="touchDown" id="16k-IK-FQw"/>
+                                </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CwC-Mr-8i1">
+                                <rect key="frame" x="67" y="213.5" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="d0r-vR-AWg"/>
+                                    <constraint firstAttribute="height" constant="240" id="shP-px-laY"/>
+                                </constraints>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yOe-r5-WdH" firstAttribute="centerX" secondItem="Eu8-li-WJV" secondAttribute="centerX" id="2Le-Cz-dRB"/>
+                            <constraint firstItem="CwC-Mr-8i1" firstAttribute="centerY" secondItem="Eu8-li-WJV" secondAttribute="centerY" id="ND2-xm-uTv"/>
+                            <constraint firstItem="CwC-Mr-8i1" firstAttribute="centerX" secondItem="Eu8-li-WJV" secondAttribute="centerX" id="WNz-Mz-le7"/>
                             <constraint firstItem="LEQ-Qq-yAf" firstAttribute="bottom" secondItem="yOe-r5-WdH" secondAttribute="bottom" constant="54" id="lrs-iX-bSs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LEQ-Qq-yAf"/>
                     </view>
                     <connections>
                         <outlet property="cameraButton" destination="yOe-r5-WdH" id="9BQ-bN-ZQc"/>
+                        <outlet property="previewContainer" destination="CwC-Mr-8i1" id="i84-fV-Pl9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ucf-bs-p2T" userLabel="First Responder" sceneMemberID="firstResponder"/>
