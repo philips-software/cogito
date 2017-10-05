@@ -71,7 +71,9 @@ class StorePersisterSpec: QuickSpec {
                     "createIdentity": {
                         "description": ""
                     },
-                    "diamond": {}
+                    "diamond": {
+                        "facets": []
+                    }
                 }
                 """
         context("when file contains valid JSON") {
