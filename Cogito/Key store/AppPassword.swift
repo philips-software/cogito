@@ -7,7 +7,7 @@ private let appPasswordKey = "appPassword"
 class AppPassword {
     let keychain: KeychainType
 
-    init(keychain: KeychainType = Keychain(service: "com.philips.cogito")) {
+    init(keychain: KeychainType = Keychain()) {
         self.keychain = keychain
     }
 
