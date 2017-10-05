@@ -56,8 +56,8 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
                        initialSpringVelocity: 0,
                        options: .beginFromCurrentState,
                        animations: {
-                        self.leftShutter.frame.origin.x = -self.leftShutter.frame.size.width
-                        self.rightShutter.frame.origin.x = self.rightShutter.superview!.frame.size.width
+            self.leftShutter.frame.origin.x = -self.leftShutter.frame.size.width
+            self.rightShutter.frame.origin.x = self.rightShutter.superview!.frame.size.width
         })
     }
 
@@ -69,8 +69,8 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
                        initialSpringVelocity: 0,
                        options: .beginFromCurrentState,
                        animations: {
-                        self.leftShutter.frame.origin.x = 0
-                        self.rightShutter.frame.origin.x = self.rightShutter.superview!.frame.size.width / 2
+            self.leftShutter.frame.origin.x = 0
+            self.rightShutter.frame.origin.x = self.rightShutter.superview!.frame.size.width / 2
         })
     }
 
