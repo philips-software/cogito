@@ -16,5 +16,8 @@
     "chai": "^4.1.2",
     "mocha": "^3.5.3",
     "testdouble": "^3.2.6"
+  },
+  "dependencies": {
+    "libsodium-wrappers": "^0.5.4"
   }
 }
