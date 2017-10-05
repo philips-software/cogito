@@ -112,4 +112,4 @@ These are the steps displayed in the sequence diagram:
 [OIDCImplicit]: https://openid.net/specs/openid-connect-core-1_0.html#ImplicitFlowAuth
 [OpenIDAuthCode]: https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth
 [JWT]: https://jwt.io
-[Telepath]: TODO
+[Telepath]: https://gitlab.ta.philips.com/blockchain-lab/telepath
