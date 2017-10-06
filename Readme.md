@@ -7,6 +7,10 @@ Provides a secure channel for communication between a web app running in a brows
 
 For an overview of what Telepath is, please visit the [main telepath repo][2].
 
+### Known Limitations
+
+Currently uses independent encryption of messages. A recipient can therefore not detect if some messages have been duplicated, deleted or reordered.
+
 ### Usage
 
 ```swift
