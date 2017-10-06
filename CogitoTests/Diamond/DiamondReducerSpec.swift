@@ -19,7 +19,7 @@ class DiamondReducerSpec: QuickSpec {
                                     scryptP: GethLightScryptP)
             expect {
                 account0 = try keyStore.newAccount("some pass")
-                }.toNot(throwError())
+            }.toNot(throwError())
         }
 
         afterEach {
@@ -31,14 +31,21 @@ class DiamondReducerSpec: QuickSpec {
             }
         }
 
-        context("when a new identity is created") {
-            it("adds the correspoding facet to the diamond") {
-                let action = CreateIdentityActions.Fulfilled(account: account0)
-                let state = diamondReducer(action: action, state: nil)
-                expect(state.facets.count) == 1
-                expect(state.facets[0]) == Identity(description: "my id",
-                                                    gethAddress: account0.getAddress()!)
-            }
+        it("handles CreateFacet") {
+            let action = DiamondActions.CreateFacet(description: "my id", account: account0)
+            let newState = diamondReducer(action: action, state: nil)
+            expect(newState.facets.count) == 1
+            expect(newState.facets[0]) == Identity(description: "my id",
+                                                   gethAddress: account0.getAddress()!)
+            expect(newState.selectedFacet) == 0
+        }
+
+        it("doesn't change selectedFacet when one was already selected") {
+            var state = DiamondState(facets: [])
+            state.selectedFacet = 1
+            let action = DiamondActions.CreateFacet(description: "my id", account: account0)
+            let newState = diamondReducer(action: action, state: state)
+            expect(newState.selectedFacet) == 1
         }
     }
 }

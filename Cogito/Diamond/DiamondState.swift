@@ -4,9 +4,11 @@ import ReSwift
 
 struct DiamondState: Codable {
     var facets: [Identity]
+    var selectedFacet: Int
 
     init(facets: [Identity]) {
         self.facets = facets
+        selectedFacet = facets.count > 0 ? 0 : -1
     }
 }
 
