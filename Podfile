@@ -5,7 +5,7 @@ target 'Cogito' do
 
   pod 'ReSwift', :git => 'https://github.com/ReSwift/ReSwift', :branch => 'master'
   pod 'ReSwiftThunk', :git => 'https://github.com/mikecole20/ReSwiftThunk.git', :branch => 'swift4.0'
-  pod 'Geth', '~> 1.7.1-unstable.10951'
+  pod 'Geth', '~> 1.7.1'
   pod 'SwiftLint', '0.21.0'
   pod 'ReRxSwift', :git => 'https://github.com/svdo/ReRxSwift', :branch => 'master'
   pod 'KeychainAccess', '~> 3.1'
