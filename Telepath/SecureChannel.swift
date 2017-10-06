@@ -4,14 +4,14 @@ import Sodium
 
 public struct SecureChannel {
     let queuing: QueuingService
-    let keys: ChannelKeys
+    let key: ChannelKey
     let id: ChannelID
     let receivingQueue: QueueID
     let sendingQueue: QueueID
 
-    init(queuing: QueuingService, id: ChannelID, keys: ChannelKeys) {
+    init(queuing: QueuingService, id: ChannelID, key: ChannelKey) {
         self.queuing = queuing
-        self.keys = keys
+        self.key = key
         self.id = id
         self.receivingQueue = id + ".red"
         self.sendingQueue = id + ".blue"
@@ -19,7 +19,7 @@ public struct SecureChannel {
 
     func send(message: String) throws {
         let plainText = message.data(using: .utf8)!
-        let cypherText = keys.encrypt(plainText: plainText)
+        let cypherText = key.encrypt(plainText: plainText)
         try queuing.send(queueId: sendingQueue, message: cypherText)
     }
 
@@ -27,20 +27,20 @@ public struct SecureChannel {
         guard let cypherText = try queuing.receive(queueId: receivingQueue) else {
             return nil
         }
-        let plainText = try keys.decrypt(cypherText: cypherText)
+        let plainText = try key.decrypt(cypherText: cypherText)
         return String(data: plainText, encoding: .utf8)
     }
 }
 
-extension ChannelKeys {
+extension ChannelKey {
     func encrypt(plainText: Data) -> Data {
         let box = Sodium().secretBox
-        return box.seal(message: plainText, secretKey: encryptionKey)!
+        return box.seal(message: plainText, secretKey: self)!
     }
 
     func decrypt(cypherText: Data) throws -> Data {
         let box = Sodium().secretBox
-        let opened = box.open(nonceAndAuthenticatedCipherText: cypherText, secretKey: encryptionKey)
+        let opened = box.open(nonceAndAuthenticatedCipherText: cypherText, secretKey: self)
         guard let result = opened else {
             throw Errors.decryptionFailed
         }

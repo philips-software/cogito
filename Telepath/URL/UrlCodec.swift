@@ -1,20 +1,20 @@
 //Copyright © 2017 Philips. All rights reserved.
 
 struct UrlCodec {
-    func encode(baseUrl: URL, channelId: ChannelID, keys: ChannelKeys) -> URL {
+    func encode(baseUrl: URL, channelId: ChannelID, key: ChannelKey) -> URL {
         var result = "telepath/connect#"
         result += "I=\(channelId.encodeForUrlFragment())&"
-        result += "E=\(keys.encryptionKey.base64urlEncodedString())"
+        result += "E=\(key.base64urlEncodedString())"
         return URL(string: result, relativeTo:baseUrl)!
     }
 
-    func decode(url: URL) throws -> (channelId: ChannelID, channelKeys: ChannelKeys) {
+    func decode(url: URL) throws -> (channelId: ChannelID, channelKey: ChannelKey) {
         try checkUrl(url)
         let fragment = try extractFragment(url: url)
         let parameters = parseUrlParameters(fragment)
         let channelId = try extractChannelId(parameters: parameters)
         let encryptionKey = try extractEncryptionKey(parameters: parameters)
-        return (channelId, ChannelKeys(encryptionKey: encryptionKey))
+        return (channelId, encryptionKey)
     }
 
     private func checkUrl(_ url: URL) throws {

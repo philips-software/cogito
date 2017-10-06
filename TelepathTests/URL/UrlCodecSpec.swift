@@ -9,7 +9,7 @@ class UrlCodecSpec: QuickSpec {
     override func spec() {
         let baseUrl = URL(string: "https://example.com/")!
         let channelId: ChannelID = "channel id abcd/+#1234"
-        let channelKeys = ChannelKeys.example()
+        let channelKey = ChannelKey.example()
 
         let codec = UrlCodec()
 
@@ -20,7 +20,7 @@ class UrlCodecSpec: QuickSpec {
                 encoded = codec.encode(
                     baseUrl: baseUrl,
                     channelId: channelId,
-                    keys: channelKeys
+                    key: channelKey
                 )
             }
 
@@ -38,24 +38,24 @@ class UrlCodecSpec: QuickSpec {
             }
 
             it("encodes the encryption key") {
-                let encodedEncryptionKey = channelKeys.encryptionKey.base64urlEncodedString()
+                let encodedEncryptionKey = channelKey.base64urlEncodedString()
                 expect(encoded.fragment).to(contain("E=\(encodedEncryptionKey)"))
             }
         }
 
         context("when decoding") {
             var decodedChannelId: ChannelID!
-            var decodedChannelKeys: ChannelKeys!
+            var decodedChannelKey: ChannelKey!
 
             beforeEach {
                 let encoded = codec.encode(
                     baseUrl: baseUrl,
                     channelId: channelId,
-                    keys: channelKeys
+                    key: channelKey
                 )
                 let decoded = try! codec.decode(url: encoded)
                 decodedChannelId = decoded.channelId
-                decodedChannelKeys = decoded.channelKeys
+                decodedChannelKey = decoded.channelKey
             }
 
             it("extracts the correct channeld id") {
@@ -63,7 +63,7 @@ class UrlCodecSpec: QuickSpec {
             }
 
             it("extracts the correct encryption key") {
-                expect(decodedChannelKeys.encryptionKey) == channelKeys.encryptionKey
+                expect(decodedChannelKey) == channelKey
             }
         }
 
@@ -73,7 +73,7 @@ class UrlCodecSpec: QuickSpec {
             let correctUrl = codec.encode(
                 baseUrl: baseUrl,
                 channelId: channelId,
-                keys: channelKeys
+                key: channelKey
             )
 
             it("rejects URLs with missing fragment") {

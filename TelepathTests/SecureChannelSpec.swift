@@ -7,14 +7,14 @@ import Nimble
 class SecureChannelSpec: QuickSpec {
     override func spec() {
         let channelId: QueueID = "channel_id"
-        let channelKeys = ChannelKeys.example()
+        let channelKey = ChannelKey.example()
 
         var channel: SecureChannel!
         var queuing: QueuingServiceMock!
 
         beforeEach {
             queuing = QueuingServiceMock()
-            channel = SecureChannel(queuing: queuing, id: channelId, keys: channelKeys)
+            channel = SecureChannel(queuing: queuing, id: channelId, key: channelKey)
         }
 
         context("when sending a message") {
@@ -26,7 +26,7 @@ class SecureChannelSpec: QuickSpec {
 
             it("encrypts the message") {
                 let cypherText = queuing.latestSentMessage!
-                let plainText = try! channelKeys.decrypt(cypherText: cypherText)
+                let plainText = try! channelKey.decrypt(cypherText: cypherText)
                 expect(String(data: plainText, encoding: .utf8)) == message
             }
 
@@ -42,7 +42,7 @@ class SecureChannelSpec: QuickSpec {
 
             beforeEach {
                 let plainText = message.data(using: .utf8)!
-                let cypherText = channelKeys.encrypt(plainText: plainText)
+                let cypherText = channelKey.encrypt(plainText: plainText)
                 queuing.messageToReturn = cypherText
                 try! receivedMessage = channel.receive()
             }

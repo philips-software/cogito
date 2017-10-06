@@ -7,7 +7,7 @@ import Nimble
 class TelepathSpec: QuickSpec {
     override func spec() {
         let channelId: QueueID = "channel_id"
-        let channelKeys = ChannelKeys.example()
+        let channelKey = ChannelKey.example()
 
         var telepath: Telepath!
         var queuing: QueuingServiceMock!
@@ -17,21 +17,21 @@ class TelepathSpec: QuickSpec {
             telepath = Telepath(queuing: queuing)
         }
 
-        it("can open a channel using a channel id and keys") {
-            let channel = telepath.connect(channel: channelId, keys: channelKeys)
+        it("can open a channel using a channel id and key") {
+            let channel = telepath.connect(channel: channelId, key: channelKey)
             expect(channel.id) == channelId
-            expect(channel.keys) == channelKeys
+            expect(channel.key) == channelKey
         }
 
         it("can open a channel using a telepath URL") {
             let url = UrlCodec().encode(
                 baseUrl: URL(string: "https://example.com")!,
                 channelId: channelId,
-                keys: channelKeys
+                key: channelKey
             )
             let channel = try! telepath.connect(url: url)
             expect(channel.id) == channelId
-            expect(channel.keys) == channelKeys
+            expect(channel.key) == channelKey
         }
     }
 }
