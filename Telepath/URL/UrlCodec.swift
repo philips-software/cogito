@@ -4,8 +4,7 @@ struct UrlCodec {
     func encode(baseUrl: URL, channelId: ChannelID, keys: ChannelKeys) -> URL {
         var result = "telepath/connect#"
         result += "I=\(channelId.encodeForUrlFragment())&"
-        result += "E=\(keys.encryptionKey.base64urlEncodedString())&"
-        result += "A=\(keys.hmacKey.base64urlEncodedString())"
+        result += "E=\(keys.encryptionKey.base64urlEncodedString())"
         return URL(string: result, relativeTo:baseUrl)!
     }
 
@@ -15,8 +14,7 @@ struct UrlCodec {
         let parameters = parseUrlParameters(fragment)
         let channelId = try extractChannelId(parameters: parameters)
         let encryptionKey = try extractEncryptionKey(parameters: parameters)
-        let hmacKey = try extractAuthenticationKey(parameters: parameters)
-        return (channelId, ChannelKeys(encryptionKey: encryptionKey, hmacKey: hmacKey))
+        return (channelId, ChannelKeys(encryptionKey: encryptionKey))
     }
 
     private func checkUrl(_ url: URL) throws {
@@ -49,23 +47,11 @@ struct UrlCodec {
         return key
     }
 
-    private func extractAuthenticationKey(parameters: [String: String]) throws -> Data {
-        guard let encodedKey = parameters["A"] else {
-            throw DecodeError.missingAuthenticationKey
-        }
-        guard let key = Data(base64urlEncoded: encodedKey) else {
-            throw DecodeError.invalidAuthenticationKey
-        }
-        return key
-    }
-
     enum DecodeError: Error {
         case missingParameters
         case missingChannelId
         case missingEncryptionKey
-        case missingAuthenticationKey
         case invalidEncryptionKey
-        case invalidAuthenticationKey
         case invalidPath
     }
 }

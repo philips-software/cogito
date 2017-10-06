@@ -2,7 +2,6 @@
 
 import Quick
 import Nimble
-import RNCryptor
 @testable import Telepath
 
 class SecureChannelSpec: QuickSpec {

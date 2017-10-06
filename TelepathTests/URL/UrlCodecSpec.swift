@@ -41,11 +41,6 @@ class UrlCodecSpec: QuickSpec {
                 let encodedEncryptionKey = channelKeys.encryptionKey.base64urlEncodedString()
                 expect(encoded.fragment).to(contain("E=\(encodedEncryptionKey)"))
             }
-
-            it("encodes the message authentication key") {
-                let encodedHmacKey = channelKeys.hmacKey.base64urlEncodedString()
-                expect(encoded.fragment).to(contain("A=\(encodedHmacKey)"))
-            }
         }
 
         context("when decoding") {
@@ -67,9 +62,8 @@ class UrlCodecSpec: QuickSpec {
                 expect(decodedChannelId) == channelId
             }
 
-            it("extracts the correct encryption keys") {
+            it("extracts the correct encryption key") {
                 expect(decodedChannelKeys.encryptionKey) == channelKeys.encryptionKey
-                expect(decodedChannelKeys.hmacKey) == channelKeys.hmacKey
             }
         }
 
@@ -95,28 +89,15 @@ class UrlCodecSpec: QuickSpec {
             }
 
             it("rejects URLS with missing encryption key") {
-                let wrongUrl = correctUrl.replacingAll(matching: "&E=[^&]*&", with: "&")!
+                let wrongUrl = correctUrl.replacingAll(matching: "&E=[^&]*$", with: "&")!
                 let error = DecodeError.missingEncryptionKey
-                expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
-            }
-
-            it("rejects URLs with missing authentication key") {
-                let wrongUrl = correctUrl.replacingAll(matching: "&A=.*$", with: "&")!
-                let error = DecodeError.missingAuthenticationKey
                 expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
             }
 
             it("rejects encryption key that is not base64url encoded") {
                 let wrongKey = "&E=invalid!&"
-                let wrongUrl = correctUrl.replacingAll(matching: "&E=[^&]*&", with: wrongKey)!
+                let wrongUrl = correctUrl.replacingAll(matching: "&E=[^&]*$", with: wrongKey)!
                 let error = DecodeError.invalidEncryptionKey
-                expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
-            }
-
-            it("rejects authentication key that is not base64url encoded") {
-                let wrongKey = "&A=wrong!"
-                let wrongUrl = correctUrl.replacingAll(matching: "&A=.*$", with: wrongKey)!
-                let error = DecodeError.invalidAuthenticationKey
                 expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
             }
 

@@ -1,6 +1,6 @@
 //Copyright © 2017 Philips. All rights reserved.
 
-import RNCryptor
+import Sodium
 
 public struct SecureChannel {
     let queuing: QueuingService
@@ -34,18 +34,20 @@ public struct SecureChannel {
 
 extension ChannelKeys {
     func encrypt(plainText: Data) -> Data {
-        let encryptor = RNCryptor.EncryptorV3(
-            encryptionKey: encryptionKey,
-            hmacKey: hmacKey
-        )
-        return encryptor.encrypt(data: plainText)
+        let box = Sodium().secretBox
+        return box.seal(message: plainText, secretKey: encryptionKey)!
     }
 
     func decrypt(cypherText: Data) throws -> Data {
-        let decryptor = RNCryptor.DecryptorV3(
-            encryptionKey: encryptionKey,
-            hmacKey: hmacKey
-        )
-        return try decryptor.decrypt(data: cypherText)
+        let box = Sodium().secretBox
+        let opened = box.open(nonceAndAuthenticatedCipherText: cypherText, secretKey: encryptionKey)
+        guard let result = opened else {
+            throw Errors.decryptionFailed
+        }
+        return result
+    }
+
+    enum Errors: Error {
+        case decryptionFailed
     }
 }
