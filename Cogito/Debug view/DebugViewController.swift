@@ -4,7 +4,7 @@ import UIKit
 import ReSwift
 import ReRxSwift
 
-class ViewController: UIViewController, Connectable {
+class DebugViewController: UIViewController, Connectable {
 
     @IBOutlet weak var peerCountLabel: UILabel!
     @IBOutlet weak var syncProgressLabel: UILabel!
@@ -57,17 +57,21 @@ class ViewController: UIViewController, Connectable {
             }
         }
     }
+
+    @IBAction func close() {
+        dismiss(animated: true)
+    }
 }
 
-private func mapStateToProps(state: AppState) -> ViewController.Props {
-    return ViewController.Props(
+private func mapStateToProps(state: AppState) -> DebugViewController.Props {
+    return DebugViewController.Props(
         peerCount: state.geth.peersCount,
         syncProgress: state.geth.syncProgress
     )
 }
 
-private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> ViewController.Actions {
-    return ViewController.Actions(
+private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> DebugViewController.Actions {
+    return DebugViewController.Actions(
         resetCreateIdentity: { dispatch(CreateIdentityActions.Reset()) }
     )
 }

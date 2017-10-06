@@ -9,9 +9,9 @@ class DebugViewControllerSpec: QuickSpec {
         var viewController: DebugViewController!
 
         beforeEach {
-            let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: type(of: self)))
+            let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: type(of: self)))
             // swiftlint:disable:next force_cast
-            viewController = storyboard.instantiateInitialViewController() as! ViewController
+            viewController = storyboard.instantiateInitialViewController() as! DebugViewController
             expect(viewController.view).toNot(beNil())
         }
 
@@ -48,7 +48,7 @@ class DebugViewControllerSpec: QuickSpec {
             viewController.connection.actions = DebugViewController.Actions(
                 resetCreateIdentity: { resetCalled = true }
             )
-            let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: type(of: self)))
+            let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: type(of: self)))
             let createIdentityViewController = storyboard.instantiateViewController(withIdentifier: "CreateIdentity")
                 as! CreateIdentityViewController // swiftlint:disable:this force_cast
             let segue = UIStoryboardSegue(identifier: nil,

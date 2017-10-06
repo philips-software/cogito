@@ -10,7 +10,7 @@ class CreateIdentityViewControllerSpec: QuickSpec {
         var viewController: CreateIdentityViewController!
 
         beforeEach {
-            let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: type(of: self)))
+            let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: type(of: self)))
             viewController = storyboard.instantiateViewController(withIdentifier: "CreateIdentity")
                 as! CreateIdentityViewController // swiftlint:disable:this force_cast
             expect(viewController.view).toNot(beNil())

@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var geth: Geth?
     var syncProgressReporter: SyncProgressReporter!
     var peerReporter: PeerReporter!
+    var debugGestureHandler: DebugGestureHandler!
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: LaunchOptions = nil) -> Bool {
@@ -33,6 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
 //        startGeth()
+        debugGestureHandler = DebugGestureHandler()
+        debugGestureHandler.installGestureRecognizer(on: window!)
 
         return true
     }
