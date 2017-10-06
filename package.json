@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "main": "index.js",
   "scripts": {
-    "test": "yarn run mocha 'test/**/*.js'"
+    "test": "yarn run standard && yarn run mocha 'test/**/*.js'"
   },
   "engines": {
     "node": ">=7.6.0"
