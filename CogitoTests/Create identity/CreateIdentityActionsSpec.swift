@@ -33,12 +33,26 @@ class CreateIdentityActionsSpec: QuickSpec {
 
             beforeEach {
                 keyStore = KeyStoreMock(path: "", scryptN: 0, scryptP: 0)
-                testState = appState(keyStore: KeyStoreState(keyStore: keyStore))
+                testState = appState(keyStore: KeyStoreState(keyStore: keyStore),
+                                     createIdentity: CreateIdentityState(description: "desc",
+                                                                         pending: true,
+                                                                         newAccount: nil,
+                                                                         error: nil))
             }
 
             it("calls newAccount on keystore from state") {
                 createAction.action({ _ in }, getState)
                 expect(keyStore.newAccountCallCount).toEventually(equal(1))
+            }
+
+            it("dispatches DiamondActions.CreateFacet") {
+                let dispatchChecker = DispatchChecker<DiamondActions.CreateFacet>()
+                let account = GethAccount()
+                keyStore.newAccountReturn = account
+                createAction.action(dispatchChecker.dispatch, getState)
+                expect(dispatchChecker.count).toEventually(equal(1))
+                expect(dispatchChecker.actions[0].description).toEventually(equal("desc"))
+                expect(dispatchChecker.actions[0].account).toEventually(beIdenticalTo(account))
             }
 
             it("dispatches fulfilled with new account address") {

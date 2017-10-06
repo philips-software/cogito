@@ -31,6 +31,8 @@ struct CreateIdentityActions {
                 }
                 let address = account.getAddress().getHex()!
                 print("[debug] account created: \(address)")
+                dispatch(DiamondActions.CreateFacet(description: state.createIdentity.description,
+                                                    account: account))
                 dispatch(Fulfilled(account: account))
             }
         })
