@@ -19,10 +19,10 @@ Instantiating a Telepath instance given a Queuing Service:
 let telepath = Telepath(queuing: queuingService)
 ```
 
-Connecting to a secure channel when you have the channel id, and its keys:
+Connecting to a secure channel when you have the channel id, and its key:
 
 ```swift
-let channel = telepath.connect(channel: channelId, keys: channelKeys)
+let channel = telepath.connect(channel: channelId, key: channelKey)
 ```
 
 Connecting to a secure channel when you received a Telepath URL (e.g. through a QR Code):
