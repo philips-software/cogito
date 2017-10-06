@@ -17,13 +17,13 @@ class CreateIdentityActionsSpec: QuickSpec {
         }
 
         it("dispatches pending") {
-            let dispatchChecker = DispatchChecker<CreateIdentityActions.Pending>()
+            let dispatchChecker = DispatchRecorder<CreateIdentityActions.Pending>()
             createAction.action(dispatchChecker.dispatch, getState)
             expect(dispatchChecker.count) == 1
         }
 
         it("dispatches rejected when state doesn't have key store") {
-            let dispatchChecker = DispatchChecker<CreateIdentityActions.Rejected>()
+            let dispatchChecker = DispatchRecorder<CreateIdentityActions.Rejected>()
             createAction.action(dispatchChecker.dispatch, getState)
             expect(dispatchChecker.count) == 1
         }
@@ -46,7 +46,7 @@ class CreateIdentityActionsSpec: QuickSpec {
             }
 
             it("dispatches DiamondActions.CreateFacet") {
-                let dispatchChecker = DispatchChecker<DiamondActions.CreateFacet>()
+                let dispatchChecker = DispatchRecorder<DiamondActions.CreateFacet>()
                 let account = GethAccount()
                 keyStore.newAccountReturn = account
                 createAction.action(dispatchChecker.dispatch, getState)
@@ -56,7 +56,7 @@ class CreateIdentityActionsSpec: QuickSpec {
             }
 
             it("dispatches fulfilled with new account address") {
-                let dispatchChecker = DispatchChecker<CreateIdentityActions.Fulfilled>()
+                let dispatchChecker = DispatchRecorder<CreateIdentityActions.Fulfilled>()
                 let account = GethAccount()
                 keyStore.newAccountReturn = account
                 createAction.action(dispatchChecker.dispatch, getState)
@@ -65,7 +65,7 @@ class CreateIdentityActionsSpec: QuickSpec {
             }
 
             it("dispatches rejected when new account fails") {
-                let dispatchChecker = DispatchChecker<CreateIdentityActions.Rejected>()
+                let dispatchChecker = DispatchRecorder<CreateIdentityActions.Rejected>()
                 createAction.action(dispatchChecker.dispatch, getState)
                 expect(dispatchChecker.count).toEventually(equal(1))
             }
@@ -82,20 +82,6 @@ private class KeyStoreMock: KeyStore {
         newAccountCallCount += 1
         DispatchQueue.global().async { [unowned self] in
             onComplete(self.newAccountReturn, self.newAccountError)
-        }
-    }
-}
-
-class DispatchChecker<ActionType> {
-    var actions = [ActionType]()
-    var count: Int { return actions.count }
-    var dispatch: DispatchFunction!
-
-    init() {
-        dispatch = { action in
-            if let action = action as? ActionType {
-                self.actions.append(action)
-            }
         }
     }
 }
