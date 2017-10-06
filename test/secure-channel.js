@@ -1,5 +1,8 @@
-const expect = require('chai').expect
+const chai = require('chai')
+const chaiAsPromised = require('chai-as-promised')
+const expect = chai.expect
 const td = require('testdouble')
+const anything = td.matchers.anything
 const sodium = require('libsodium-wrappers')
 const random = sodium.randombytes_buf
 const nonceSize = sodium.crypto_secretbox_NONCEBYTES
@@ -8,9 +11,14 @@ const decrypt = sodium.crypto_secretbox_open_easy
 const encrypt = sodium.crypto_secretbox_easy
 const { SecureChannel } = require('../lib/secure-channel')
 
+chai.use(chaiAsPromised)
+
 describe('secure-channel', function () {
   const channelId = 'channel_id'
   const key = random(keySize)
+  const blueQueue = `${channelId}.blue`
+  const redQueue = `${channelId}.red`
+  const message = 'a message'
 
   let channel
   let queuing
@@ -21,15 +29,13 @@ describe('secure-channel', function () {
   })
 
   context('when sending a message', function () {
-    const message = 'a message'
-
     beforeEach(function () {
       channel.send(message)
     })
 
     it('encrypts the message', function () {
       const captor = td.matchers.captor()
-      td.verify(queuing.send(td.matchers.anything(), captor.capture()))
+      td.verify(queuing.send(anything(), captor.capture()))
       const nonceAndCypherText = captor.value
       const nonce = nonceAndCypherText.slice(0, nonceSize)
       const cypherText = nonceAndCypherText.slice(nonceSize)
@@ -37,14 +43,11 @@ describe('secure-channel', function () {
     })
 
     it('uses the red queue', function () {
-      td.verify(queuing.send(channelId + '.red', td.matchers.anything()))
+      td.verify(queuing.send(redQueue, anything()))
     })
   })
 
   context('when receiving a message (on the blue queue)', function () {
-    const message = 'a message'
-    const blueQueue = `${channelId}.blue`
-
     let receivedMessage
 
     beforeEach(async function () {
@@ -58,5 +61,20 @@ describe('secure-channel', function () {
     it('decrypts the message', function () {
       expect(receivedMessage).to.equal(message)
     })
+  })
+
+  it('throws when there is an error while sending', function () {
+    td.when(queuing.send(anything(), anything())).thenThrow('an error')
+    expect(() => channel.send('a message')).to.throw()
+  })
+
+  it('throws when there is an error while receiving', async function () {
+    td.when(queuing.receive(blueQueue)).thenReject('an error')
+    await expect(channel.receive()).to.be.rejected
+  })
+
+  it('throws when there is an error while decrypting', async function () {
+    td.when(queuing.receive(blueQueue)).thenResolve('invalid data')
+    await expect(channel.receive()).to.be.rejected
   })
 })
