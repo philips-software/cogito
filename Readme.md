@@ -1,6 +1,8 @@
 Telepath for Javascript
 =======================
 
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
 Provides a secure channel for communication between a web app running in a browser and an app running on a mobile device.
 
 For an overview of what Telepath is, please visit the [main telepath repo][1].
