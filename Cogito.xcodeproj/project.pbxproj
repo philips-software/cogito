@@ -89,7 +89,9 @@
 		C00B57208B78184BB19798CD /* AppPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B57766800CB3EFBE971EC /* AppPassword.swift */; };
 		C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5412CBC3B026E362474C /* CreateIdentityStateSpec.swift */; };
 		C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5F8B50D233D21FB7153C /* KeyStoreSpec.swift */; };
+		C00B5D39FC0D970348A5E0C6 /* DiamondActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5F53B99BC5464AF8BE3E /* DiamondActions.swift */; };
 		C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B57766800CB3EFBE971EC /* AppPassword.swift */; };
+		C00B5F4394A34E4348285CB9 /* DiamondActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5F53B99BC5464AF8BE3E /* DiamondActions.swift */; };
 		C5BA5E19747B73A161EF0D57 /* Pods_Cogito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */; };
 		D0885FE16CB0CF89FA9AE774 /* Pods_Cogito_CogitoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53940EFC96526AFDFA7CD5FC /* Pods_Cogito_CogitoTests.framework */; };
 /* End PBXBuildFile section */
@@ -168,6 +170,7 @@
 		C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPasswordSpec.swift; sourceTree = "<group>"; };
 		C00B5412CBC3B026E362474C /* CreateIdentityStateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateIdentityStateSpec.swift; sourceTree = "<group>"; };
 		C00B57766800CB3EFBE971EC /* AppPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPassword.swift; sourceTree = "<group>"; };
+		C00B5F53B99BC5464AF8BE3E /* DiamondActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiamondActions.swift; sourceTree = "<group>"; };
 		C00B5F8B50D233D21FB7153C /* KeyStoreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreSpec.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -354,6 +357,7 @@
 				02A15AFA1F86719400A94163 /* DiamondState.swift */,
 				02A15AFD1F8671D200A94163 /* Identity.swift */,
 				02A15B001F8672C000A94163 /* DiamondReducer.swift */,
+				C00B5F53B99BC5464AF8BE3E /* DiamondActions.swift */,
 			);
 			path = Diamond;
 			sourceTree = "<group>";
@@ -719,6 +723,7 @@
 				028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */,
 				02A15AFE1F8671D200A94163 /* Identity.swift in Sources */,
+				C00B5D39FC0D970348A5E0C6 /* DiamondActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,6 +778,7 @@
 				C00B57208B78184BB19798CD /* AppPassword.swift in Sources */,
 				02A15B021F8672C000A94163 /* DiamondReducer.swift in Sources */,
 				C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */,
+				C00B5F4394A34E4348285CB9 /* DiamondActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -72,7 +72,8 @@ class StorePersisterSpec: QuickSpec {
                         "description": ""
                     },
                     "diamond": {
-                        "facets": []
+                        "facets": [],
+                        "selectedFacet": -1
                     }
                 }
                 """

@@ -42,7 +42,8 @@ class DiamondStateSpec: QuickSpec {
             }.toNot(throwError())
             let encoded = String(data: encodedData, encoding: .utf8)
             let address = account0.getAddress()!.getHex()!
-            expect(encoded) == "{\"facets\":[{\"gethAddress\":\"\(address)\",\"description\":\"first identity\"}]}"
+            expect(encoded) == "{\"selectedFacet\":0,\"facets\":[{\"gethAddress\":\"\(address)\"," +
+                               "\"description\":\"first identity\"}]}"
 
             let decoder = JSONDecoder()
             var decodedState: DiamondState!
