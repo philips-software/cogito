@@ -11,55 +11,73 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Debug View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="DebugViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of connected peers:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cah-t9-UjB">
-                                <rect key="frame" x="16" y="20" width="220" height="21"/>
+                                <rect key="frame" x="16" y="90" width="220" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnB-ol-chg">
-                                <rect key="frame" x="244" y="20" width="11" height="21"/>
+                                <rect key="frame" x="244" y="90" width="11" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sync progress:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpB-lq-rKm">
-                                <rect key="frame" x="16" y="49" width="115" height="21"/>
+                                <rect key="frame" x="16" y="119" width="115" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="idle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ter-0c-iwG">
-                                <rect key="frame" x="139" y="49" width="28" height="21"/>
+                                <rect key="frame" x="139" y="119" width="28" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ck5-ic-qsN">
-                                <rect key="frame" x="16" y="78" width="288" height="2"/>
+                                <rect key="frame" x="16" y="148" width="288" height="2"/>
                             </progressView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YOH-04-cJJ">
-                                <rect key="frame" x="284" y="49" width="20" height="20"/>
+                                <rect key="frame" x="284" y="119" width="20" height="20"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCw-7t-a0t">
-                                <rect key="frame" x="92" y="120" width="136" height="30"/>
+                                <rect key="frame" x="92" y="190" width="136" height="30"/>
                                 <state key="normal" title="Create New Identity"/>
                                 <connections>
                                     <segue destination="3az-Sw-11m" kind="presentation" id="ZBM-fE-asm"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="up2-rU-YT4">
+                                <rect key="frame" x="260" y="20" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="Gal-Wp-hiA"/>
+                                    <constraint firstAttribute="height" constant="44" id="NQz-Ci-MaP"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="NTl-Mk-eNX"/>
+                                    <constraint firstAttribute="width" constant="44" id="WSu-eU-aab"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelTapped" destination="3az-Sw-11m" eventType="touchUpInside" id="Ua3-KU-9fd"/>
+                                    <action selector="close" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZGf-bv-Ypq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="cah-t9-UjB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="2gg-ke-Q0h"/>
+                            <constraint firstItem="cah-t9-UjB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="70" id="2gg-ke-Q0h"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="up2-rU-YT4" secondAttribute="trailing" constant="16" id="6ln-ee-zRT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YOH-04-cJJ" secondAttribute="trailing" constant="16" id="9Vd-In-HfO"/>
                             <constraint firstItem="Ck5-ic-qsN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="BT9-gF-PHv"/>
                             <constraint firstItem="Ck5-ic-qsN" firstAttribute="top" secondItem="FpB-lq-rKm" secondAttribute="bottom" constant="8" id="D3a-xV-vX9"/>
@@ -68,6 +86,7 @@
                             <constraint firstItem="FpB-lq-rKm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="KUl-v7-AaE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LnB-ol-chg" secondAttribute="trailing" constant="16" id="OE0-El-ALG"/>
                             <constraint firstItem="YOH-04-cJJ" firstAttribute="centerY" secondItem="Ter-0c-iwG" secondAttribute="centerY" id="SeO-QL-RRJ"/>
+                            <constraint firstItem="up2-rU-YT4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Tuo-mf-E1Q"/>
                             <constraint firstItem="Ter-0c-iwG" firstAttribute="baseline" secondItem="FpB-lq-rKm" secondAttribute="baseline" id="Uvu-22-vnb"/>
                             <constraint firstItem="LnB-ol-chg" firstAttribute="leading" secondItem="cah-t9-UjB" secondAttribute="trailing" constant="8" id="YWF-fR-kuR"/>
                             <constraint firstItem="Ter-0c-iwG" firstAttribute="leading" secondItem="FpB-lq-rKm" secondAttribute="trailing" constant="8" id="apK-1z-Lie"/>
