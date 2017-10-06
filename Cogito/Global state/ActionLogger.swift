@@ -6,7 +6,7 @@ public func ActionLogger<S>() -> Middleware<S> { // swiftlint:disable:this ident
     return { dispatch, getState in
         return { next in
             return { action in
-                print("Action: ", action)
+                print("[debug] Action: ", action)
                 return next(action)
             }
         }
