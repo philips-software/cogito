@@ -10,7 +10,7 @@ const nonceSize = sodium.crypto_secretbox_NONCEBYTES
 const keySize = sodium.crypto_secretbox_KEYBYTES
 const decrypt = sodium.crypto_secretbox_open_easy
 const encrypt = sodium.crypto_secretbox_easy
-const { SecureChannel } = require('../lib/secure-channel')
+const SecureChannel = require('../lib/secure-channel')
 
 chai.use(chaiAsPromised)
 
