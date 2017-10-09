@@ -18,17 +18,20 @@ class SelectedFacetViewController: UIViewController, Connectable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         headerButton.titleLabel?.textAlignment = .center
-        connection.bind(\Props.selectedFacet, to: headerButton.rx.title(for: .normal)) { [unowned self] in
-            ($0 != nil && !self.firstFacetWasCreated()) ? "I am." : "Who am I?"
-        }
-        connection.bind(\Props.selectedFacet, to: facetLabel.rx.isHidden) { [unowned self] in
-            !($0 != nil && !self.firstFacetWasCreated())
-        }
+        connection.subscribe(\Props.createdNewAccount) { _ in self.configureUI() }
+        connection.subscribe(\Props.selectedFacet) { _ in self.configureUI() }
         connection.bind(\Props.selectedFacet, to: headerButton.rx.isUserInteractionEnabled) {
             $0 == nil
         }
         connection.bind(\Props.selectedFacet, to: facetLabel.rx.text) { $0?.description ?? "" }
+    }
+
+    func configureUI() {
+        let initialState = props.selectedFacet == nil || firstFacetWasCreated()
+        self.headerButton.setTitle(initialState ? "Who am I?" : "I am.", for: .normal)
+        self.facetLabel.isHidden = initialState
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +44,13 @@ class SelectedFacetViewController: UIViewController, Connectable {
 
         if firstFacetWasCreated() {
             transitionToSelectedFacet()
+        }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if presentedViewController == nil {
+            connection.disconnect()
         }
     }
 
@@ -90,11 +100,6 @@ class SelectedFacetViewController: UIViewController, Connectable {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay) { [weak self] in
             self?.headerButton.titleLabel?.text = title
         }
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        connection.disconnect()
     }
 
     @IBAction func whoAmITouched() {
