@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oxI-YO-us9">
-    <device id="retina3_5" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -16,6 +16,9 @@
         <array key="AmericanTypewriter.ttc">
             <string>AmericanTypewriter-Bold</string>
         </array>
+        <array key="SnellRoundhand.ttc">
+            <string>SnellRoundhand</string>
+        </array>
     </customFonts>
     <scenes>
         <!--Home View Controller-->
@@ -23,11 +26,11 @@
             <objects>
                 <viewController storyboardIdentifier="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oxI-YO-us9" customClass="HomeViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Eu8-li-WJV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yOe-r5-WdH">
-                                <rect key="frame" x="120" y="346" width="80" height="80"/>
+                                <rect key="frame" x="120" y="434" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="yOe-r5-WdH" secondAttribute="height" multiplier="1:1" id="JkN-AE-dq8"/>
                                     <constraint firstAttribute="width" constant="80" id="ZYm-qF-YR0"/>
@@ -43,7 +46,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eVQ-pT-zH8">
-                                <rect key="frame" x="40" y="120" width="240" height="240"/>
+                                <rect key="frame" x="40" y="164" width="240" height="240"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwF-Cd-Nvb">
                                         <rect key="frame" x="0.0" y="0.0" width="120" height="240"/>
@@ -69,7 +72,7 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mSh-jx-ojF">
-                                <rect key="frame" x="16" y="20" width="288" height="100"/>
+                                <rect key="frame" x="16" y="48" width="288" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="HTC-9Z-sqG"/>
                                 </constraints>
@@ -81,7 +84,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yOe-r5-WdH" firstAttribute="centerX" secondItem="Eu8-li-WJV" secondAttribute="centerX" id="2Le-Cz-dRB"/>
-                            <constraint firstItem="mSh-jx-ojF" firstAttribute="top" secondItem="Eu8-li-WJV" secondAttribute="topMargin" id="AIE-lY-02Y"/>
+                            <constraint firstItem="eVQ-pT-zH8" firstAttribute="top" secondItem="mSh-jx-ojF" secondAttribute="bottom" constant="16" id="5WA-0I-BLH"/>
                             <constraint firstItem="mSh-jx-ojF" firstAttribute="trailing" secondItem="Eu8-li-WJV" secondAttribute="trailingMargin" id="Mmh-9a-ucH"/>
                             <constraint firstItem="eVQ-pT-zH8" firstAttribute="centerY" secondItem="Eu8-li-WJV" secondAttribute="centerY" id="PQb-u9-czS"/>
                             <constraint firstItem="eVQ-pT-zH8" firstAttribute="centerX" secondItem="Eu8-li-WJV" secondAttribute="centerX" id="ekw-gB-Hgp"/>
@@ -109,8 +112,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="288" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5r-3P-nfz">
-                                <rect key="frame" x="98" y="33.5" width="92" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5r-3P-nfz">
+                                <rect key="frame" x="0.0" y="6" width="288" height="33"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
                                 <state key="normal" title="Who am I?">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -119,20 +122,34 @@
                                     <action selector="whoAmITouched" destination="ju4-HT-AXO" eventType="touchUpInside" id="7l4-5u-0T8"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="abcfjk" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcs-gR-jth">
+                                <rect key="frame" x="0.0" y="47" width="288" height="38"/>
+                                <fontDescription key="fontDescription" name="SnellRoundhand" family="Snell Roundhand" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="b5r-3P-nfz" firstAttribute="centerY" secondItem="Qgj-aA-LR8" secondAttribute="centerY" id="0FG-29-eq9"/>
+                            <constraint firstItem="b5r-3P-nfz" firstAttribute="trailing" secondItem="VqY-Nu-4ni" secondAttribute="trailing" id="DTL-uF-RaQ"/>
+                            <constraint firstItem="VqY-Nu-4ni" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vcs-gR-jth" secondAttribute="bottom" constant="6" id="JOz-Li-2eY"/>
+                            <constraint firstItem="b5r-3P-nfz" firstAttribute="top" secondItem="VqY-Nu-4ni" secondAttribute="top" constant="6" id="Lyq-vg-gMj"/>
+                            <constraint firstItem="vcs-gR-jth" firstAttribute="trailing" secondItem="VqY-Nu-4ni" secondAttribute="trailing" id="OEp-UX-trQ"/>
+                            <constraint firstItem="vcs-gR-jth" firstAttribute="top" secondItem="b5r-3P-nfz" secondAttribute="bottom" constant="8" id="VR8-ky-8Rr"/>
+                            <constraint firstItem="vcs-gR-jth" firstAttribute="leading" secondItem="VqY-Nu-4ni" secondAttribute="leading" id="d3x-8M-OBM"/>
                             <constraint firstItem="b5r-3P-nfz" firstAttribute="centerX" secondItem="Qgj-aA-LR8" secondAttribute="centerX" id="esf-k0-OKR"/>
+                            <constraint firstItem="b5r-3P-nfz" firstAttribute="leading" secondItem="VqY-Nu-4ni" secondAttribute="leading" id="lMo-te-63e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VqY-Nu-4ni"/>
                     </view>
                     <connections>
+                        <outlet property="facetLabel" destination="vcs-gR-jth" id="gJD-5I-s8F"/>
                         <outlet property="headerButton" destination="b5r-3P-nfz" id="OP2-FW-9i6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yx2-9b-gRV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="140.625" y="125"/>
         </scene>
     </scenes>
     <resources>
