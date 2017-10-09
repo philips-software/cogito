@@ -3,8 +3,13 @@
 import UIKit
 import AVFoundation
 import QRCodeReader
+import ReSwift
+import ReRxSwift
 
-class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
+class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, Connectable {
+    let connection = Connection(store: appStore,
+                                mapStateToProps: mapStateToProps,
+                                mapDispatchToActions: mapDispatchToActions)
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var previewContainer: UIView!
     @IBOutlet weak var leftShutter: UIView!
@@ -45,63 +50,82 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
         ellipseAnimation.layer.addSublayer(rectShape)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        connection.connect()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         readerVC.delegate = self
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        connection.disconnect()
+    }
+
     @IBAction func scanButtonDown() {
-//        startScanning()
+        if props.selectedFacet != nil {
+            startScanning()
+        }
     }
 
     @IBAction func scanButtonUpInside() {
-        stopScanning()
+        if props.selectedFacet != nil {
+            stopScanning()
+        } else {
+            cameraButton.isUserInteractionEnabled = false
+            rectShape.frame = ellipseAnimation.bounds
+            let distance = cameraButton.frame.midY - selectedFacetView.frame.midY - 10 // trial and error
+            let startShape = UIBezierPath(ovalIn: CGRect(x: rectShape.frame.midX,
+                                                         y: rectShape.frame.midY - 28, // offset of 'who am I' label
+                                                         width: 0, height: 0))
+            let endShape = UIBezierPath(ovalIn: CGRect(x: 0,
+                                                       y: 0 - 28,
+                                                       width: rectShape.frame.size.width,
+                                                       height: rectShape.frame.size.height))
+            rectShape.path = startShape.cgPath
 
-        rectShape.frame = ellipseAnimation.bounds
-        let distance = cameraButton.frame.midY - selectedFacetView.frame.midY - 10 // trial and error
-        let startShape = UIBezierPath(ovalIn: CGRect(x: rectShape.frame.midX,
-                                                     y: rectShape.frame.midY - 28,
-                                                     width: 0, height: 0))
-        let endShape = UIBezierPath(ovalIn: CGRect(x: 0,
-                                                   y: 0 - 28,
-                                                   width: rectShape.frame.size.width,
-                                                   height: rectShape.frame.size.height))
-        rectShape.path = startShape.cgPath
-
-        self.animationHeight.constant = distance
-        UIView.animate(withDuration: 1, delay: 0,
-                       options: .curveLinear,
-                       animations: {
-                           self.view.layoutIfNeeded()
-                       },
-                       completion: { _ in
-                           self.animationHeight.constant = 1
-                           self.animationBottom.constant = -distance + self.rectShape.frame.size.height/2
-                           self.ellipseAnimation.isHidden = false
-                           UIView.animate(withDuration: 1, delay: 0,
-                                          options: .curveEaseOut,
-                                          animations: {
-                                              self.view.layoutIfNeeded()
-                                              self.lineAnimation.alpha = 0
-                                              self.ellipseAnimation.alpha = 0
-                                          }, completion: { _ in
-                               self.lineAnimation.alpha = 1
-                               self.animationBottom.constant = 0
-                               self.ellipseAnimation.alpha = 1
-                               self.ellipseAnimation.isHidden = true
+            self.animationHeight.constant = distance
+            let duration = 0.8
+            UIView.animate(withDuration: duration, delay: 0,
+                           options: .curveLinear,
+                           animations: {
+                               self.view.layoutIfNeeded()
+                           },
+                           completion: { _ in
+                               self.animationHeight.constant = 0
+                               self.animationBottom.constant = -distance + self.rectShape.frame.size.height / 2
+                               self.ellipseAnimation.isHidden = false
+                               UIView.animate(withDuration: duration, delay: 0,
+                                              options: .curveEaseOut,
+                                              animations: {
+                                                  self.view.layoutIfNeeded()
+                                                  self.lineAnimation.alpha = 0
+                                                  self.ellipseAnimation.alpha = 0
+                                              }, completion: { _ in
+                                   self.lineAnimation.alpha = 1
+                                   self.animationBottom.constant = 0
+                                   self.ellipseAnimation.alpha = 1
+                                   self.ellipseAnimation.isHidden = true
+                                   self.cameraButton.isUserInteractionEnabled = true
+                               })
+                               let animation = CABasicAnimation(keyPath: "path")
+                               animation.toValue = endShape.cgPath
+                               animation.duration = duration
+                               animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+                               animation.fillMode = kCAFillModeBoth
+                               animation.isRemovedOnCompletion = false
+                               self.rectShape.add(animation, forKey: animation.keyPath)
                            })
-                           let animation = CABasicAnimation(keyPath: "path")
-                           animation.toValue = endShape.cgPath
-                           animation.duration = 1
-                           animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-                           animation.fillMode = kCAFillModeBoth
-                           animation.isRemovedOnCompletion = false
-                           self.rectShape.add(animation, forKey: animation.keyPath)
-                       })
+        }
     }
 
     @IBAction func scanButtonUpOutside() {
-        stopScanning()
+        if props.selectedFacet != nil {
+            stopScanning()
+        }
     }
 
     private func startScanning() {
@@ -112,9 +136,9 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
                        initialSpringVelocity: 0,
                        options: .beginFromCurrentState,
                        animations: {
-            self.leftShutter.frame.origin.x = -self.leftShutter.frame.size.width
-            self.rightShutter.frame.origin.x = self.rightShutter.superview!.frame.size.width
-        })
+                           self.leftShutter.frame.origin.x = -self.leftShutter.frame.size.width
+                           self.rightShutter.frame.origin.x = self.rightShutter.superview!.frame.size.width
+                       })
     }
 
     private func stopScanning() {
@@ -125,9 +149,9 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
                        initialSpringVelocity: 0,
                        options: .beginFromCurrentState,
                        animations: {
-            self.leftShutter.frame.origin.x = 0
-            self.rightShutter.frame.origin.x = self.rightShutter.superview!.frame.size.width / 2
-        })
+                           self.leftShutter.frame.origin.x = 0
+                           self.rightShutter.frame.origin.x = self.rightShutter.superview!.frame.size.width / 2
+                       })
     }
 
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
@@ -137,4 +161,28 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     func readerDidCancel(_ reader: QRCodeReaderViewController) {
         stopScanning()
     }
+
+    struct Props {
+        let selectedFacet: Identity?
+    }
+
+    struct Actions {
+    }
+}
+
+private func mapStateToProps(state: AppState) -> HomeViewController.Props {
+    let selectedFacet: Identity?
+    if state.diamond.selectedFacet >= 0 {
+        selectedFacet = state.diamond.facets[state.diamond.selectedFacet]
+    } else {
+        selectedFacet = nil
+    }
+    return HomeViewController.Props(
+        selectedFacet: selectedFacet
+    )
+}
+
+private func mapDispatchToActions(dispatch: @escaping DispatchFunction)
+        -> HomeViewController.Actions {
+    return HomeViewController.Actions()
 }

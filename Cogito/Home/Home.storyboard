@@ -81,11 +81,11 @@
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMb-jd-YdP" userLabel="Line animation">
-                                <rect key="frame" x="159.5" y="433" width="1" height="1"/>
+                                <rect key="frame" x="159.5" y="434" width="1" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="Gmd-Wj-jG4"/>
-                                    <constraint firstAttribute="height" constant="1" id="ZqW-n9-doh"/>
+                                    <constraint firstAttribute="height" id="ZqW-n9-doh"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hk3-Y8-rqC" userLabel="Ellipse animation">
