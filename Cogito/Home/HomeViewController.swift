@@ -87,7 +87,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 
     private func startScanning() {
         readerVC.startScanning()
-        UIView.animate(withDuration: 0.3,
+        UIView.animate(withDuration: 0.1,
                        delay: 0,
                        usingSpringWithDamping: 1,
                        initialSpringVelocity: 0,
@@ -100,7 +100,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 
     private func stopScanning() {
         readerVC.stopScanning()
-        UIView.animate(withDuration: 0.3,
+        UIView.animate(withDuration: 1,
                        delay: 0,
                        usingSpringWithDamping: 1,
                        initialSpringVelocity: 0,
