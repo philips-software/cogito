@@ -1,6 +1,5 @@
 /* eslint-env mocha */
 const chai = require('chai')
-const chaiAsPromised = require('chai-as-promised')
 const expect = chai.expect
 const td = require('testdouble')
 const anything = td.matchers.anything
@@ -11,8 +10,6 @@ const keySize = sodium.crypto_secretbox_KEYBYTES
 const decrypt = sodium.crypto_secretbox_open_easy
 const encrypt = sodium.crypto_secretbox_easy
 const SecureChannel = require('../lib/secure-channel')
-
-chai.use(chaiAsPromised)
 
 describe('secure-channel', function () {
   const channelId = 'channel_id'
