@@ -9,6 +9,12 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     @IBOutlet weak var previewContainer: UIView!
     @IBOutlet weak var leftShutter: UIView!
     @IBOutlet weak var rightShutter: UIView!
+    @IBOutlet weak var lineAnimation: UIView!
+    @IBOutlet weak var animationHeight: NSLayoutConstraint!
+    @IBOutlet weak var animationBottom: NSLayoutConstraint!
+    @IBOutlet weak var selectedFacetView: UIView!
+    @IBOutlet weak var ellipseAnimation: UIView!
+    let rectShape = CAShapeLayer()
 
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
@@ -33,6 +39,10 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
         cameraButton.layer.borderColor = UIColor.darkGray.cgColor
         cameraButton.layer.borderWidth = 2
         cameraButton.layer.cornerRadius = cameraButton.bounds.size.width / 2
+
+        rectShape.fillColor = UIColor.clear.cgColor
+        rectShape.strokeColor = UIColor.black.cgColor
+        ellipseAnimation.layer.addSublayer(rectShape)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -41,11 +51,53 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
     }
 
     @IBAction func scanButtonDown() {
-        startScanning()
+//        startScanning()
     }
 
     @IBAction func scanButtonUpInside() {
         stopScanning()
+
+        rectShape.frame = ellipseAnimation.bounds
+        let distance = cameraButton.frame.midY - selectedFacetView.frame.midY - 10 // trial and error
+        let startShape = UIBezierPath(ovalIn: CGRect(x: rectShape.frame.midX,
+                                                     y: rectShape.frame.midY - 28,
+                                                     width: 0, height: 0))
+        let endShape = UIBezierPath(ovalIn: CGRect(x: 0,
+                                                   y: 0 - 28,
+                                                   width: rectShape.frame.size.width,
+                                                   height: rectShape.frame.size.height))
+        rectShape.path = startShape.cgPath
+
+        self.animationHeight.constant = distance
+        UIView.animate(withDuration: 1, delay: 0,
+                       options: .curveLinear,
+                       animations: {
+                           self.view.layoutIfNeeded()
+                       },
+                       completion: { _ in
+                           self.animationHeight.constant = 1
+                           self.animationBottom.constant = -distance + self.rectShape.frame.size.height/2
+                           self.ellipseAnimation.isHidden = false
+                           UIView.animate(withDuration: 1, delay: 0,
+                                          options: .curveEaseOut,
+                                          animations: {
+                                              self.view.layoutIfNeeded()
+                                              self.lineAnimation.alpha = 0
+                                              self.ellipseAnimation.alpha = 0
+                                          }, completion: { _ in
+                               self.lineAnimation.alpha = 1
+                               self.animationBottom.constant = 0
+                               self.ellipseAnimation.alpha = 1
+                               self.ellipseAnimation.isHidden = true
+                           })
+                           let animation = CABasicAnimation(keyPath: "path")
+                           animation.toValue = endShape.cgPath
+                           animation.duration = 1
+                           animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+                           animation.fillMode = kCAFillModeBoth
+                           animation.isRemovedOnCompletion = false
+                           self.rectShape.add(animation, forKey: animation.keyPath)
+                       })
     }
 
     @IBAction func scanButtonUpOutside() {
