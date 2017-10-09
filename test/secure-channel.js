@@ -68,11 +68,11 @@ describe('secure-channel', function () {
 
   it('throws when there is an error while receiving', async function () {
     td.when(queuing.receive(blueQueue)).thenReject('an error')
-    await expect(channel.receive()).to.be.rejected
+    await expect(channel.receive()).to.be.rejected()
   })
 
   it('throws when there is an error while decrypting', async function () {
     td.when(queuing.receive(blueQueue)).thenResolve('invalid data')
-    await expect(channel.receive()).to.be.rejected
+    await expect(channel.receive()).to.be.rejected()
   })
 })
