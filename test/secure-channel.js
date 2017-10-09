@@ -21,6 +21,10 @@ describe('secure-channel', function () {
     channel = new SecureChannel({ queuing, id: channelId, key })
   })
 
+  afterEach(function () {
+    td.reset()
+  })
+
   context('when sending a message', function () {
     beforeEach(function () {
       channel.send(message)
