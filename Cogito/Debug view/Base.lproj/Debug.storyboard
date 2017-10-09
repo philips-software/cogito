@@ -59,10 +59,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="up2-rU-YT4">
                                 <rect key="frame" x="260" y="20" width="44" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="Gal-Wp-hiA"/>
                                     <constraint firstAttribute="height" constant="44" id="NQz-Ci-MaP"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="NTl-Mk-eNX"/>
-                                    <constraint firstAttribute="width" constant="44" id="WSu-eU-aab"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="WSu-eU-aab"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <state key="normal" title="X">
@@ -177,7 +176,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gdd-5a-FBe"/>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="showCloseButton" value="YES"/>
+                    </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="closeButton" destination="Sbb-dk-kin" id="SbL-6Y-PpQ"/>
                         <outlet property="createButton" destination="7OW-sz-nkP" id="Djr-N7-Iq0"/>
                         <outlet property="descriptionField" destination="y8H-LX-7mp" id="4Kg-et-7Ax"/>
                     </connections>
