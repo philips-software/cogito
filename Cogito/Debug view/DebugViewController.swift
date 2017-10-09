@@ -41,14 +41,6 @@ class DebugViewController: UIViewController, Connectable {
         mapStateToProps: mapStateToProps,
         mapDispatchToActions: mapDispatchToActions)
 
-    struct Props {
-        let peerCount: Int
-        let syncProgress: SyncProgress?
-    }
-    struct Actions {
-        let resetCreateIdentity: () -> Void
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let child = segue.destination as? CreateIdentityViewController {
             actions.resetCreateIdentity()
@@ -61,6 +53,20 @@ class DebugViewController: UIViewController, Connectable {
     @IBAction func close() {
         dismiss(animated: true)
     }
+
+    @IBAction func resetAppState() {
+        actions.resetAppState()
+        dismiss(animated: true)
+    }
+
+    struct Props {
+        let peerCount: Int
+        let syncProgress: SyncProgress?
+    }
+    struct Actions {
+        let resetCreateIdentity: () -> Void
+        let resetAppState: () -> Void
+    }
 }
 
 private func mapStateToProps(state: AppState) -> DebugViewController.Props {
@@ -72,6 +78,7 @@ private func mapStateToProps(state: AppState) -> DebugViewController.Props {
 
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> DebugViewController.Actions {
     return DebugViewController.Actions(
-        resetCreateIdentity: { dispatch(CreateIdentityActions.Reset()) }
+        resetCreateIdentity: { dispatch(CreateIdentityActions.Reset()) },
+        resetAppState: { dispatch(ResetApp()) }
     )
 }
