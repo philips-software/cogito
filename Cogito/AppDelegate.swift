@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         if appStore.state.keyStore.keyStore == nil {
-            appStore.dispatch(KeyStoreActions.create())
+            appStore.dispatch(KeyStoreActions.Create())
         }
 
 //        startGeth()
