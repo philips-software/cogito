@@ -101,10 +101,10 @@
             </objects>
             <point key="canvasLocation" x="-558" y="125"/>
         </scene>
-        <!--Selected Identity View Controller-->
+        <!--Selected Facet View Controller-->
         <scene sceneID="dSG-qH-RC5">
             <objects>
-                <viewController storyboardIdentifier="SelectedIdentity" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ju4-HT-AXO" customClass="SelectedIdentityViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectedFacet" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ju4-HT-AXO" customClass="SelectedFacetViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qgj-aA-LR8">
                         <rect key="frame" x="0.0" y="0.0" width="288" height="100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -125,7 +125,11 @@
                             <constraint firstItem="b5r-3P-nfz" firstAttribute="centerY" secondItem="Qgj-aA-LR8" secondAttribute="centerY" id="0FG-29-eq9"/>
                             <constraint firstItem="b5r-3P-nfz" firstAttribute="centerX" secondItem="Qgj-aA-LR8" secondAttribute="centerX" id="esf-k0-OKR"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="VqY-Nu-4ni"/>
                     </view>
+                    <connections>
+                        <outlet property="headerButton" destination="b5r-3P-nfz" id="OP2-FW-9i6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yx2-9b-gRV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
