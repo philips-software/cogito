@@ -3,27 +3,31 @@
 import Geth
 
 class KeyStore: Codable {
-    let path: String
+    let name: String
     let scryptN: Int
     let scryptP: Int
-    lazy var wrapped = GethKeyStore(path, scryptN: scryptN, scryptP: scryptP)
+    lazy var wrapped = GethKeyStore(storeUrl.path, scryptN: scryptN, scryptP: scryptP)
+    var storeUrl: URL {
+        let base = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        return base.appendingPathComponent(name)
+    }
     let appPassword = AppPassword()
 
-    required init(path: String, scryptN: Int, scryptP: Int) {
-        self.path = path
+    required init(name: String, scryptN: Int, scryptP: Int) {
+        self.name = name
         self.scryptN = scryptN
         self.scryptP = scryptP
     }
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        path = try container.decode(type(of: self.path), forKey: .path)
+        name = try container.decode(type(of: self.name), forKey: .name)
         scryptN = try container.decode(type(of: self.scryptN), forKey: .scryptN)
         scryptP = try container.decode(type(of: self.scryptP), forKey: .scryptP)
     }
 
     func newAccount(onComplete: @escaping (_ account: GethAccount?, _ error: String?) -> Void) {
-        print("[debug] creating new account in key store at \(path)")
+        print("[debug] creating new account in key store at \(storeUrl)")
         guard let gethKeyStore = wrapped else {
             onComplete(nil, "failed to open key store")
             return
@@ -44,13 +48,13 @@ class KeyStore: Codable {
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(path, forKey: .path)
+        try container.encode(name, forKey: .name)
         try container.encode(scryptN, forKey: .scryptN)
         try container.encode(scryptP, forKey: .scryptP)
     }
 
     enum CodingKeys: String, CodingKey {
-        case path
+        case name
         case scryptN
         case scryptP
     }
@@ -58,6 +62,6 @@ class KeyStore: Codable {
 
 extension KeyStore: Equatable {
     static func == (lhs: KeyStore, rhs: KeyStore) -> Bool {
-        return lhs.path == rhs.path && lhs.scryptN == rhs.scryptN && lhs.scryptP == rhs.scryptP
+        return lhs.name == rhs.name && lhs.scryptN == rhs.scryptN && lhs.scryptP == rhs.scryptP
     }
 }

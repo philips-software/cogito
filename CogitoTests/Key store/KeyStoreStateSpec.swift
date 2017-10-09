@@ -6,7 +6,7 @@ import Nimble
 class KeyStoreStateSpec: QuickSpec {
     override func spec() {
         it("can be coded") {
-            let keyStore = KeyStore(path: "some path", scryptN: 42, scryptP: 24)
+            let keyStore = KeyStore(name: "some name", scryptN: 42, scryptP: 24)
             let state = KeyStoreState(keyStore: keyStore)
             let encoder = JSONEncoder()
             var encodedData: Data? = nil
@@ -16,7 +16,7 @@ class KeyStoreStateSpec: QuickSpec {
             expect { () -> Void in
                 let decoder = JSONDecoder()
                 let decodedState = try decoder.decode(KeyStoreState.self, from: encodedData!)
-                expect(decodedState.keyStore?.path) == "some path"
+                expect(decodedState.keyStore?.name) == "some name"
                 expect(decodedState.keyStore?.scryptN) == 42
                 expect(decodedState.keyStore?.scryptP) == 24
             }.toNot(throwError())
