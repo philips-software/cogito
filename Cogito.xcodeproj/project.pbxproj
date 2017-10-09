@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02021D191F8BC5FF0092DD89 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02021D181F8BC5FF0092DD89 /* AppActions.swift */; };
+		02021D1A1F8BC5FF0092DD89 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02021D181F8BC5FF0092DD89 /* AppActions.swift */; };
 		0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3661F7012E1003A9787 /* KeyStore.swift */; };
 		0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3681F71481C003A9787 /* KeyStoreActions.swift */; };
 		0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */; };
@@ -115,6 +117,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02021D181F8BC5FF0092DD89 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		0205E3661F7012E1003A9787 /* KeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStore.swift; sourceTree = "<group>"; };
 		0205E3681F71481C003A9787 /* KeyStoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreActions.swift; sourceTree = "<group>"; };
 		0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreReducerSpec.swift; sourceTree = "<group>"; };
@@ -292,6 +295,7 @@
 				02E792321F6FFBF700DC5973 /* AppReducer.swift */,
 				02CD30A31F73F251006BA756 /* StorePersister.swift */,
 				02CD80571F7E30D100AA5C3A /* ActionLogger.swift */,
+				02021D181F8BC5FF0092DD89 /* AppActions.swift */,
 			);
 			path = "Global state";
 			sourceTree = "<group>";
@@ -730,6 +734,7 @@
 				0298D43A1F7A46A30070998D /* Node.swift in Sources */,
 				028F4F001F7D3B640015C4AF /* CreateIdentityState.swift in Sources */,
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
+				02021D191F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
 				02A15B011F8672C000A94163 /* DiamondReducer.swift in Sources */,
 				028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
@@ -782,6 +787,7 @@
 				0298D42C1F7A43C90070998D /* AppState.swift in Sources */,
 				02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */,
 				0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */,
+				02021D1A1F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */,
 				0298D42D1F7A43C90070998D /* AppReducer.swift in Sources */,
 				022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */,

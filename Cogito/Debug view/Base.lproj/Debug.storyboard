@@ -72,6 +72,13 @@
                                     <action selector="close" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZGf-bv-Ypq"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UM-XJ-ZOF">
+                                <rect key="frame" x="106.5" y="228" width="107" height="30"/>
+                                <state key="normal" title="Reset app state"/>
+                                <connections>
+                                    <action selector="resetAppState" destination="BYZ-38-t0r" eventType="touchUpInside" id="SqB-aV-qoP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -90,9 +97,11 @@
                             <constraint firstItem="LnB-ol-chg" firstAttribute="leading" secondItem="cah-t9-UjB" secondAttribute="trailing" constant="8" id="YWF-fR-kuR"/>
                             <constraint firstItem="Ter-0c-iwG" firstAttribute="leading" secondItem="FpB-lq-rKm" secondAttribute="trailing" constant="8" id="apK-1z-Lie"/>
                             <constraint firstItem="up2-rU-YT4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="bZi-9y-p34"/>
+                            <constraint firstItem="5UM-XJ-ZOF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bx1-gi-hd0"/>
                             <constraint firstItem="cah-t9-UjB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="eIS-t7-NAE"/>
                             <constraint firstItem="lCw-7t-a0t" firstAttribute="top" secondItem="Ck5-ic-qsN" secondAttribute="bottom" constant="40" id="jbf-db-j3j"/>
                             <constraint firstItem="LnB-ol-chg" firstAttribute="baseline" secondItem="cah-t9-UjB" secondAttribute="baseline" id="jq2-Tb-PbP"/>
+                            <constraint firstItem="5UM-XJ-ZOF" firstAttribute="top" secondItem="lCw-7t-a0t" secondAttribute="bottom" constant="8" id="o9R-r8-GvX"/>
                             <constraint firstItem="Ck5-ic-qsN" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="wyS-9z-qYD"/>
                             <constraint firstItem="lCw-7t-a0t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ylx-ic-9ph"/>
                         </constraints>
