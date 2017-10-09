@@ -53,7 +53,7 @@ describe('secure-channel', function () {
 
     beforeEach(async function () {
       const nonce = Buffer.from(random(nonceSize))
-      const cypherText = encrypt(Buffer.from(message), nonce, key)
+      const cypherText = Buffer.from(encrypt(Buffer.from(message), nonce, key))
       const nonceAndCypherText = Buffer.concat([nonce, cypherText])
       td.when(queuing.receive(blueQueue)).thenResolve(nonceAndCypherText)
       receivedMessage = await channel.receive()
