@@ -13,4 +13,40 @@ For an overview of what Telepath is, please visit the [main telepath repo][1].
 
 Currently uses independent encryption of messages. A recipient can therefore not detect if some messages have been duplicated, deleted or reordered.
 
-[1]: https://gitlab.ta.philips.com/blockchain-lab/telepath
+### Usage
+
+```javascript
+import Telepath from 'telepath-js'
+const telepath = new Telepath({ queuing: queuingService })
+```
+
+Creating a new channel with a random id and a random encryption key:
+
+```javascript
+const channel = telepath.createChannel()
+```
+
+Connecting a mobile app to the channel can be done by creating a connect URL.
+This URL can be displayed in a QR code. The QR code can be scanned by the mobile
+app and used to connect to this channel. The telepath library does not include
+functionality for displaying QR codes, you can use a QR code component such as
+[qrcode.react][2] for this purpose.
+
+```javascript
+const connectUrl = channel.createConnectUrl(appBaseUrl)
+```
+
+Sending messages:
+
+```javascript
+channel.send("a message")
+```
+
+Receiving messages. The `receive` method returns a promise:
+
+```javascript
+const receivedMessage = await channel.receive()
+```
+
+[1]: https://gitlab.ta.philips.com/blockchain-lab/
+[2]: https://www.npmjs.com/package/qrcode.react
