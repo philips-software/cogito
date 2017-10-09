@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Ol-B3-zM5">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="dbV-Uh-UZl">
+            <objects>
+                <navigationController id="6Ol-B3-zM5" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5jM-VO-4gb">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Rnt-Ce-Akv" kind="relationship" relationship="rootViewController" id="iVm-Ez-wrx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ycA-Fd-Bfn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1506" y="40"/>
+        </scene>
+        <!--Who am I?-->
+        <scene sceneID="6Ng-HE-xqm">
+            <objects>
+                <viewController storyboardIdentifier="Explanation" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Rnt-Ce-Akv" customClass="InitialExplanationViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hVI-sI-FWQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uL-Mh-7Cr">
+                                <rect key="frame" x="16" y="64" width="343" height="545"/>
+                                <string key="text">You are different.
+
+You are who you want to be.
+
+Sometimes you are an expert on something. Sometimes you're a novice. Sometimes you may be a musician, sometimes a sportsman. When you work, you are somebody else than when you are at home or with your family.
+
+Cogito allows you to choose who you are.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELa-oS-cxo">
+                                <rect key="frame" x="131" y="617" width="113" height="30"/>
+                                <state key="normal" title="Let's get started"/>
+                                <connections>
+                                    <segue destination="wTc-Hd-r6m" kind="show" id="Ej6-1m-XCX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6uL-Mh-7Cr" firstAttribute="top" secondItem="rFv-7w-PqC" secondAttribute="top" id="EL3-ma-89V"/>
+                            <constraint firstItem="rFv-7w-PqC" firstAttribute="trailing" secondItem="6uL-Mh-7Cr" secondAttribute="trailing" constant="16" id="GXL-ub-9sF"/>
+                            <constraint firstItem="ELa-oS-cxo" firstAttribute="top" secondItem="6uL-Mh-7Cr" secondAttribute="bottom" constant="8" id="aGw-mz-p6K"/>
+                            <constraint firstItem="6uL-Mh-7Cr" firstAttribute="leading" secondItem="rFv-7w-PqC" secondAttribute="leading" constant="16" id="bJT-j7-PcN"/>
+                            <constraint firstItem="rFv-7w-PqC" firstAttribute="bottom" secondItem="ELa-oS-cxo" secondAttribute="bottom" constant="20" id="f2Q-t8-0Ya"/>
+                            <constraint firstItem="ELa-oS-cxo" firstAttribute="centerX" secondItem="hVI-sI-FWQ" secondAttribute="centerX" id="o0G-3l-bdS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rFv-7w-PqC"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Who am I?" id="I3T-Hx-5p8">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="LGg-d1-L6w">
+                            <connections>
+                                <action selector="cancel:" destination="Rnt-Ce-Akv" id="uly-Yf-fgS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M47-D0-Oc2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-634.39999999999998" y="39.130434782608695"/>
+        </scene>
+        <!--Create Identity View Controller-->
+        <scene sceneID="Q7f-Yk-6Oi">
+            <objects>
+                <viewController storyboardIdentifier="CreateIdentity" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wTc-Hd-r6m" customClass="CreateIdentityViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YQZ-hK-7D4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Describe your first &quot;you&quot;:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZV0-kh-bRm">
+                                <rect key="frame" x="92" y="134" width="192" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. &quot;work&quot; or &quot;sportsclub&quot;" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BaB-Qh-vRu">
+                                <rect key="frame" x="16" y="208" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editingChanged" destination="wTc-Hd-r6m" eventType="editingChanged" id="OAk-FL-n5I"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hC8-Yl-N8c">
+                                <rect key="frame" x="164.5" y="313.5" width="46" height="30"/>
+                                <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="createTapped" destination="wTc-Hd-r6m" eventType="touchUpInside" id="97G-YY-LJM"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(this will be private, only you will see this)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxo-zM-d1I">
+                                <rect key="frame" x="69.5" y="246" width="236" height="15"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bxo-zM-d1I" firstAttribute="centerX" secondItem="YQZ-hK-7D4" secondAttribute="centerX" id="0p3-Of-4Hc"/>
+                            <constraint firstItem="hC8-Yl-N8c" firstAttribute="centerX" secondItem="YQZ-hK-7D4" secondAttribute="centerX" id="5Q8-NV-AaB"/>
+                            <constraint firstItem="hC8-Yl-N8c" firstAttribute="top" secondItem="bxo-zM-d1I" secondAttribute="bottom" constant="53" id="7we-o0-eJe"/>
+                            <constraint firstItem="ZV0-kh-bRm" firstAttribute="centerX" secondItem="YQZ-hK-7D4" secondAttribute="centerX" id="FZp-gK-eYV"/>
+                            <constraint firstItem="BaB-Qh-vRu" firstAttribute="leading" secondItem="LKO-n4-gnX" secondAttribute="leading" constant="16" id="OZL-Ah-acc"/>
+                            <constraint firstItem="ZV0-kh-bRm" firstAttribute="top" secondItem="LKO-n4-gnX" secondAttribute="top" constant="70" id="Xd4-a5-wpf"/>
+                            <constraint firstItem="bxo-zM-d1I" firstAttribute="top" secondItem="BaB-Qh-vRu" secondAttribute="bottom" constant="8" id="c3W-Gb-BuZ"/>
+                            <constraint firstItem="BaB-Qh-vRu" firstAttribute="top" secondItem="ZV0-kh-bRm" secondAttribute="bottom" constant="53" id="cBn-CC-RQm"/>
+                            <constraint firstItem="LKO-n4-gnX" firstAttribute="trailing" secondItem="BaB-Qh-vRu" secondAttribute="trailing" constant="16" id="eMX-w0-gY7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LKO-n4-gnX"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="showCloseButton" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="createButton" destination="hC8-Yl-N8c" id="MvL-Sc-ae8"/>
+                        <outlet property="descriptionField" destination="BaB-Qh-vRu" id="fO4-av-ZO8"/>
+                    </connections>
+                </viewController>
+                <barButtonItem systemItem="cancel" id="TPz-Jx-N2l"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Loc-1A-0Qq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="225" y="39"/>
+        </scene>
+    </scenes>
+</document>

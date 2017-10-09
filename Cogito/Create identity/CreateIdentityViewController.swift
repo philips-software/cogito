@@ -8,6 +8,13 @@ class CreateIdentityViewController: UIViewController, Connectable {
 
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton?
+
+    @IBInspectable var showCloseButton: Bool = false {
+        didSet {
+            closeButton?.isHidden = !showCloseButton
+        }
+    }
 
     var onDone: () -> Void = {}
 
@@ -34,8 +41,14 @@ class CreateIdentityViewController: UIViewController, Connectable {
         }
     }
 
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        closeButton?.isHidden = !showCloseButton
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        closeButton?.isHidden = !showCloseButton
         connection.connect()
     }
 

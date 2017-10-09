@@ -79,6 +79,14 @@
 		02CD80541F7D494900AA5C3A /* CreateIdentityReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */; };
 		02CD80581F7E30D100AA5C3A /* ActionLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD80571F7E30D100AA5C3A /* ActionLogger.swift */; };
 		02CD80591F7E318100AA5C3A /* ActionLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD80571F7E30D100AA5C3A /* ActionLogger.swift */; };
+		02D0C0D41F8B59790001223E /* SelectedFacetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0D31F8B59790001223E /* SelectedFacetViewController.swift */; };
+		02D0C0D51F8B59790001223E /* SelectedFacetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0D31F8B59790001223E /* SelectedFacetViewController.swift */; };
+		02D0C0D81F8B59E80001223E /* InitialSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02D0C0D71F8B59E80001223E /* InitialSetup.storyboard */; };
+		02D0C0D91F8B59E80001223E /* InitialSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02D0C0D71F8B59E80001223E /* InitialSetup.storyboard */; };
+		02D0C0DB1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */; };
+		02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */; };
+		02D0C0DE1F8B6A810001223E /* InitialCreateIdentityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DD1F8B6A810001223E /* InitialCreateIdentityViewController.swift */; };
+		02D0C0DF1F8B6A810001223E /* InitialCreateIdentityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DD1F8B6A810001223E /* InitialCreateIdentityViewController.swift */; };
 		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
 		02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792321F6FFBF700DC5973 /* AppReducer.swift */; };
 		02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792341F6FFBFF00DC5973 /* AppStore.swift */; };
@@ -156,6 +164,10 @@
 		02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersisterSpec.swift; sourceTree = "<group>"; };
 		02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityReducerSpec.swift; sourceTree = "<group>"; };
 		02CD80571F7E30D100AA5C3A /* ActionLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionLogger.swift; sourceTree = "<group>"; };
+		02D0C0D31F8B59790001223E /* SelectedFacetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFacetViewController.swift; sourceTree = "<group>"; };
+		02D0C0D71F8B59E80001223E /* InitialSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialSetup.storyboard; sourceTree = "<group>"; };
+		02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialExplanationViewController.swift; sourceTree = "<group>"; };
+		02D0C0DD1F8B6A810001223E /* InitialCreateIdentityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialCreateIdentityViewController.swift; sourceTree = "<group>"; };
 		02E792301F6FFBAD00DC5973 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		02E792321F6FFBF700DC5973 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		02E792341F6FFBFF00DC5973 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -226,6 +238,7 @@
 				02E792371F6FFDF000DC5973 /* Key store */,
 				02A15AF81F86714800A94163 /* Diamond */,
 				02A15AEB1F864E9D00A94163 /* Home */,
+				02D0C0D61F8B59C30001223E /* Initial setup wizard */,
 				02F0CA071F8754F5000C428F /* Debug view */,
 				028F4EF71F7D34030015C4AF /* Create identity */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
@@ -342,6 +355,7 @@
 			children = (
 				02A15AED1F864F0900A94163 /* HomeViewController.swift */,
 				02A15AF31F864F4B00A94163 /* Home.storyboard */,
+				02D0C0D31F8B59790001223E /* SelectedFacetViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -380,6 +394,16 @@
 				028F4EF41F7CF7EB0015C4AF /* DebugViewControllerSpec.swift */,
 			);
 			path = "Debug view";
+			sourceTree = "<group>";
+		};
+		02D0C0D61F8B59C30001223E /* Initial setup wizard */ = {
+			isa = PBXGroup;
+			children = (
+				02D0C0D71F8B59E80001223E /* InitialSetup.storyboard */,
+				02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */,
+				02D0C0DD1F8B6A810001223E /* InitialCreateIdentityViewController.swift */,
+			);
+			path = "Initial setup wizard";
 			sourceTree = "<group>";
 		};
 		02E792361F6FFDD600DC5973 /* Key store */ = {
@@ -527,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				027603F91F6ACD1600788B0A /* LaunchScreen.storyboard in Resources */,
+				02D0C0D81F8B59E80001223E /* InitialSetup.storyboard in Resources */,
 				027603F61F6ACD1600788B0A /* Assets.xcassets in Resources */,
 				027603F41F6ACD1600788B0A /* Debug.storyboard in Resources */,
 				02A15AF41F864F4B00A94163 /* Home.storyboard in Resources */,
@@ -539,6 +564,7 @@
 			files = (
 				028F4EF61F7CF8330015C4AF /* Debug.storyboard in Resources */,
 				02A15AF51F864F4B00A94163 /* Home.storyboard in Resources */,
+				02D0C0D91F8B59E80001223E /* InitialSetup.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +724,7 @@
 			files = (
 				029691531F7166AC00654BD0 /* KeyStoreReducer.swift in Sources */,
 				02CD30A41F73F251006BA756 /* StorePersister.swift in Sources */,
+				02D0C0DB1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */,
 				029245171F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
 				0298D4371F7A45680070998D /* Geth.swift in Sources */,
 				02A15AFB1F86719400A94163 /* DiamondState.swift in Sources */,
@@ -717,12 +744,14 @@
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
 				027603F11F6ACD1600788B0A /* DebugViewController.swift in Sources */,
 				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
+				02D0C0D41F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
 				02CD80581F7E30D100AA5C3A /* ActionLogger.swift in Sources */,
 				029691551F7166EE00654BD0 /* KeyStoreState.swift in Sources */,
 				02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */,
 				02F0CA091F875515000C428F /* DebugGestureHandler.swift in Sources */,
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
 				028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
+				02D0C0DE1F8B6A810001223E /* InitialCreateIdentityViewController.swift in Sources */,
 				028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */,
 				02A15AFE1F8671D200A94163 /* Identity.swift in Sources */,
@@ -754,6 +783,7 @@
 				0298D42C1F7A43C90070998D /* AppState.swift in Sources */,
 				02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */,
 				0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */,
+				02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */,
 				0298D42D1F7A43C90070998D /* AppReducer.swift in Sources */,
 				022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */,
 				0298D4271F7A43C90070998D /* KeyStore.swift in Sources */,
@@ -775,6 +805,8 @@
 				028F4F041F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
 				028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				02A15AF01F864F0900A94163 /* HomeViewController.swift in Sources */,
+				02D0C0D51F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
+				02D0C0DF1F8B6A810001223E /* InitialCreateIdentityViewController.swift in Sources */,
 				02A15AFF1F8671D200A94163 /* Identity.swift in Sources */,
 				C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */,
 				C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */,
