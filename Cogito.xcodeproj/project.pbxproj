@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		02021D191F8BC5FF0092DD89 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02021D181F8BC5FF0092DD89 /* AppActions.swift */; };
 		02021D1A1F8BC5FF0092DD89 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02021D181F8BC5FF0092DD89 /* AppActions.swift */; };
+		02021D3E1F8C16370092DD89 /* AppActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02021D3D1F8C16360092DD89 /* AppActionsSpec.swift */; };
 		0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3661F7012E1003A9787 /* KeyStore.swift */; };
 		0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3681F71481C003A9787 /* KeyStoreActions.swift */; };
 		0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */; };
@@ -118,6 +119,7 @@
 
 /* Begin PBXFileReference section */
 		02021D181F8BC5FF0092DD89 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
+		02021D3D1F8C16360092DD89 /* AppActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActionsSpec.swift; sourceTree = "<group>"; };
 		0205E3661F7012E1003A9787 /* KeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStore.swift; sourceTree = "<group>"; };
 		0205E3681F71481C003A9787 /* KeyStoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreActions.swift; sourceTree = "<group>"; };
 		0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreReducerSpec.swift; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */,
+				02021D3D1F8C16360092DD89 /* AppActionsSpec.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -806,6 +809,7 @@
 				0298D42B1F7A43C90070998D /* AppStore.swift in Sources */,
 				0298D4281F7A43C90070998D /* KeyStoreActions.swift in Sources */,
 				02A15B041F86732500A94163 /* DiamondStateSpec.swift in Sources */,
+				02021D3E1F8C16370092DD89 /* AppActionsSpec.swift in Sources */,
 				029245181F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
 				028F4F041F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
 				028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,

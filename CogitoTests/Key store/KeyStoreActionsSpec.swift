@@ -16,7 +16,7 @@ class KeyStoreActionsSpec: QuickSpec {
                 let dispatch: DispatchFunction = { (action) in
                     dispatchedAction = action
                 }
-                let action = KeyStoreActions.create()
+                let action = KeyStoreActions.Create()
                 action.action(dispatch, { return nil })
                 fulfilled = dispatchedAction as? KeyStoreActions.Fulfilled
             }
