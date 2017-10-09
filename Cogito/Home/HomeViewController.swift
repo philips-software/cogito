@@ -40,11 +40,15 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate {
         readerVC.delegate = self
     }
 
-    @IBAction func openScanner() {
+    @IBAction func scanButtonDown() {
         startScanning()
     }
 
-    @IBAction func closeScanner() {
+    @IBAction func scanButtonUpInside() {
+        stopScanning()
+    }
+
+    @IBAction func scanButtonUpOutside() {
         stopScanning()
     }
 
