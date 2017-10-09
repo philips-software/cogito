@@ -10,6 +10,7 @@
 		02021D191F8BC5FF0092DD89 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02021D181F8BC5FF0092DD89 /* AppActions.swift */; };
 		02021D1A1F8BC5FF0092DD89 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02021D181F8BC5FF0092DD89 /* AppActions.swift */; };
 		02021D3E1F8C16370092DD89 /* AppActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02021D3D1F8C16360092DD89 /* AppActionsSpec.swift */; };
+		02021D401F8C1C770092DD89 /* AppReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02021D3F1F8C1C770092DD89 /* AppReducerSpec.swift */; };
 		0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3661F7012E1003A9787 /* KeyStore.swift */; };
 		0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3681F71481C003A9787 /* KeyStoreActions.swift */; };
 		0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */; };
@@ -120,6 +121,7 @@
 /* Begin PBXFileReference section */
 		02021D181F8BC5FF0092DD89 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		02021D3D1F8C16360092DD89 /* AppActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActionsSpec.swift; sourceTree = "<group>"; };
+		02021D3F1F8C1C770092DD89 /* AppReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducerSpec.swift; sourceTree = "<group>"; };
 		0205E3661F7012E1003A9787 /* KeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStore.swift; sourceTree = "<group>"; };
 		0205E3681F71481C003A9787 /* KeyStoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreActions.swift; sourceTree = "<group>"; };
 		0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreReducerSpec.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 			children = (
 				02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */,
 				02021D3D1F8C16360092DD89 /* AppActionsSpec.swift */,
+				02021D3F1F8C1C770092DD89 /* AppReducerSpec.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -795,6 +798,7 @@
 				0298D42D1F7A43C90070998D /* AppReducer.swift in Sources */,
 				022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */,
 				0298D4271F7A43C90070998D /* KeyStore.swift in Sources */,
+				02021D401F8C1C770092DD89 /* AppReducerSpec.swift in Sources */,
 				02BE32CC1F7A511D006C7287 /* PeerReporter.swift in Sources */,
 				0298D4381F7A456A0070998D /* Geth.swift in Sources */,
 				02BE32C91F7A4DF9006C7287 /* PeerReporterSpec.swift in Sources */,

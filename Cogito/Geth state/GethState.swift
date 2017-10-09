@@ -17,4 +17,11 @@ struct GethState: Codable {
     func encode(to encoder: Encoder) throws {}
 }
 
+extension GethState: Equatable {
+    static func == (lhs: GethState, rhs: GethState) -> Bool {
+        return lhs.peersCount == rhs.peersCount &&
+               lhs.syncProgress == rhs.syncProgress
+    }
+}
+
 let initialGethState = GethState(peersCount: 0, syncProgress: nil)

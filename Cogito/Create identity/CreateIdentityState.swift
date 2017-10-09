@@ -33,6 +33,15 @@ struct CreateIdentityState: Codable {
     }
 }
 
+extension CreateIdentityState: Equatable {
+    static func == (lhs: CreateIdentityState, rhs: CreateIdentityState) -> Bool {
+        return lhs.description == rhs.description &&
+               lhs.pending == rhs.pending &&
+               lhs.newAccount === rhs.newAccount &&
+               lhs.error == rhs.error
+    }
+}
+
 let initialCreateIdentityState = CreateIdentityState(
     description: "",
     pending: false,

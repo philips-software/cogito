@@ -9,6 +9,15 @@ struct AppState: StateType, Codable {
     let diamond: DiamondState
 }
 
+extension AppState: Equatable {
+    static func == (lhs: AppState, rhs: AppState) -> Bool {
+        return lhs.keyStore == rhs.keyStore &&
+               lhs.geth == rhs.geth &&
+               lhs.createIdentity == rhs.createIdentity &&
+               lhs.diamond == rhs.diamond
+    }
+}
+
 let initialAppState = AppState(
     keyStore: initialKeyStoreState,
     geth: initialGethState,
