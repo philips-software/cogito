@@ -80,24 +80,49 @@
                                     <segue destination="ju4-HT-AXO" kind="embed" id="9C9-Qp-y3n"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMb-jd-YdP" userLabel="Line animation">
+                                <rect key="frame" x="159.5" y="433" width="1" height="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="1" id="Gmd-Wj-jG4"/>
+                                    <constraint firstAttribute="height" constant="1" id="ZqW-n9-doh"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hk3-Y8-rqC" userLabel="Ellipse animation">
+                                <rect key="frame" x="16" y="48" width="288" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="GKr-Pv-xsK"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yOe-r5-WdH" firstAttribute="centerX" secondItem="Eu8-li-WJV" secondAttribute="centerX" id="2Le-Cz-dRB"/>
+                            <constraint firstItem="iMb-jd-YdP" firstAttribute="bottom" secondItem="yOe-r5-WdH" secondAttribute="top" id="4tu-yn-Rp0"/>
                             <constraint firstItem="eVQ-pT-zH8" firstAttribute="top" secondItem="mSh-jx-ojF" secondAttribute="bottom" constant="16" id="5WA-0I-BLH"/>
+                            <constraint firstItem="hk3-Y8-rqC" firstAttribute="centerX" secondItem="mSh-jx-ojF" secondAttribute="centerX" id="IIV-3b-KUW"/>
                             <constraint firstItem="mSh-jx-ojF" firstAttribute="trailing" secondItem="Eu8-li-WJV" secondAttribute="trailingMargin" id="Mmh-9a-ucH"/>
                             <constraint firstItem="eVQ-pT-zH8" firstAttribute="centerY" secondItem="Eu8-li-WJV" secondAttribute="centerY" id="PQb-u9-czS"/>
                             <constraint firstItem="eVQ-pT-zH8" firstAttribute="centerX" secondItem="Eu8-li-WJV" secondAttribute="centerX" id="ekw-gB-Hgp"/>
+                            <constraint firstItem="iMb-jd-YdP" firstAttribute="centerX" secondItem="yOe-r5-WdH" secondAttribute="centerX" id="jLE-gI-fSB"/>
                             <constraint firstItem="LEQ-Qq-yAf" firstAttribute="bottom" secondItem="yOe-r5-WdH" secondAttribute="bottom" constant="54" id="lrs-iX-bSs"/>
                             <constraint firstItem="mSh-jx-ojF" firstAttribute="leading" secondItem="Eu8-li-WJV" secondAttribute="leadingMargin" id="suL-SJ-9Au"/>
+                            <constraint firstItem="hk3-Y8-rqC" firstAttribute="centerY" secondItem="mSh-jx-ojF" secondAttribute="centerY" id="uzg-gy-6h5"/>
+                            <constraint firstItem="hk3-Y8-rqC" firstAttribute="width" secondItem="mSh-jx-ojF" secondAttribute="width" id="zHG-cU-DMR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LEQ-Qq-yAf"/>
                     </view>
                     <connections>
+                        <outlet property="animationBottom" destination="4tu-yn-Rp0" id="j41-ad-3yU"/>
+                        <outlet property="animationHeight" destination="ZqW-n9-doh" id="43R-Ci-6Nq"/>
                         <outlet property="cameraButton" destination="yOe-r5-WdH" id="9BQ-bN-ZQc"/>
+                        <outlet property="ellipseAnimation" destination="hk3-Y8-rqC" id="TCa-ZU-bqg"/>
                         <outlet property="leftShutter" destination="pwF-Cd-Nvb" id="bCS-1M-poO"/>
+                        <outlet property="lineAnimation" destination="iMb-jd-YdP" id="0T3-e9-hxP"/>
                         <outlet property="previewContainer" destination="eVQ-pT-zH8" id="AR1-H3-gmm"/>
                         <outlet property="rightShutter" destination="2sf-jc-wxj" id="pXx-WU-rma"/>
+                        <outlet property="selectedFacetView" destination="mSh-jx-ojF" id="vaj-YW-BZh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ucf-bs-p2T" userLabel="First Responder" sceneMemberID="firstResponder"/>
