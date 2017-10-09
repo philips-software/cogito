@@ -39,8 +39,21 @@ class AppPasswordSpec: QuickSpec {
                     providedPassword = password
                 }
                 expect(providedPassword).toEventuallyNot(beNil())
+                expect(providedPassword).toEventually(equal("some password"))
                 expect(keychainMock.getCount).toEventually(equal(1))
                 expect(keychainMock.setCount).toEventually(equal(0))
+            }
+
+            it("returns new password after reset") {
+                expect { try appPassword.reset() }.toNot(throwError())
+                var providedPassword: String?
+                appPassword.use { (password, error) in
+                    expect(password).toNot(beNil())
+                    expect(error).to(beNil())
+                    providedPassword = password
+                }
+                expect(keychainMock.removeCount).toEventually(equal(1))
+                expect(providedPassword).toEventuallyNot(equal("some password"))
             }
         }
     }
@@ -50,6 +63,7 @@ class KeychainMock: KeychainType {
     var data = [String: String]()
     var getCount = 0
     var setCount = 0
+    var removeCount = 0
     var generatePasswordCount = 0
 
     func withAuthenticationPrompt(_ authenticationPrompt: String) -> KeychainType {
@@ -69,6 +83,11 @@ class KeychainMock: KeychainType {
     func set(_ value: String, key: String) throws {
         setCount += 1
         data[key] = value
+    }
+
+    func remove(_ key: String) throws {
+        removeCount += 1
+        data.removeValue(forKey: key)
     }
 
     func generatePassword() -> String {

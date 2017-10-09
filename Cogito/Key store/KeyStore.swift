@@ -26,6 +26,14 @@ class KeyStore: Codable {
         scryptP = try container.decode(type(of: self.scryptP), forKey: .scryptP)
     }
 
+    func reset() throws {
+        if FileManager.default.fileExists(atPath: storeUrl.path) {
+            try FileManager.default.removeItem(at: storeUrl)
+        }
+        try appPassword.reset()
+        wrapped = nil
+    }
+
     func newAccount(onComplete: @escaping (_ account: GethAccount?, _ error: String?) -> Void) {
         print("[debug] creating new account in key store at \(storeUrl)")
         guard let gethKeyStore = wrapped else {
