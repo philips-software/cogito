@@ -3,12 +3,7 @@ const chai = require('chai')
 const expect = chai.expect
 const td = require('testdouble')
 const anything = td.matchers.anything
-const sodium = require('libsodium-wrappers')
-const random = sodium.randombytes_buf
-const nonceSize = sodium.crypto_secretbox_NONCEBYTES
-const keySize = sodium.crypto_secretbox_KEYBYTES
-const decrypt = sodium.crypto_secretbox_open_easy
-const encrypt = sodium.crypto_secretbox_easy
+const { random, encrypt, decrypt, keySize, nonceSize } = require('../lib/crypto')
 const SecureChannel = require('../lib/secure-channel')
 
 describe('secure-channel', function () {
