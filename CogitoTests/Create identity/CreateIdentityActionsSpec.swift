@@ -32,7 +32,7 @@ class CreateIdentityActionsSpec: QuickSpec {
             var keyStore: KeyStoreMock!
 
             beforeEach {
-                keyStore = KeyStoreMock(path: "", scryptN: 0, scryptP: 0)
+                keyStore = KeyStoreMock(name: "", scryptN: 0, scryptP: 0)
                 testState = appState(keyStore: KeyStoreState(keyStore: keyStore),
                                      createIdentity: CreateIdentityState(description: "desc",
                                                                          pending: true,

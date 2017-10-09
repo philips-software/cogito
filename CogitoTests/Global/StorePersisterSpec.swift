@@ -61,7 +61,7 @@ class StorePersisterSpec: QuickSpec {
                 {
                     "keyStore":{
                         "keyStore":{
-                            "path":"some path",
+                            "name":"some name",
                             "scryptN":1,
                             "scryptP":1
                         },
@@ -102,11 +102,11 @@ class StorePersisterSpec: QuickSpec {
             }
 
             it("does not save the state") {
-                let newStore = KeyStore(path: "new path", scryptN: 2, scryptP: 2)
+                let newStore = KeyStore(name: "new name", scryptN: 2, scryptP: 2)
                 store.state = appState(keyStore: KeyStoreState(keyStore: newStore))
                 expect { () -> Void in
                     let savedContents = String(data: try Data(contentsOf: url), encoding: .utf8)
-                    expect(savedContents).to(contain("some path"))
+                    expect(savedContents).to(contain("some name"))
                     expect(savedContents).to(contain("\"scryptN\":1"))
                     expect(savedContents).to(contain("\"scryptP\":1"))
                 }.toNot(throwError())
@@ -118,11 +118,11 @@ class StorePersisterSpec: QuickSpec {
                 }
 
                 it("saves the state when it changes") {
-                    let newStore = KeyStore(path: "new path", scryptN: 2, scryptP: 2)
+                    let newStore = KeyStore(name: "new name", scryptN: 2, scryptP: 2)
                     store.state = appState(keyStore: KeyStoreState(keyStore: newStore))
                     expect { () -> Void in
                         let savedContents = String(data: try Data(contentsOf: url), encoding: .utf8)
-                        expect(savedContents).to(contain("new path"))
+                        expect(savedContents).to(contain("new name"))
                         expect(savedContents).to(contain("\"scryptN\":2"))
                         expect(savedContents).to(contain("\"scryptP\":2"))
                     }.toNot(throwError())
@@ -134,11 +134,11 @@ class StorePersisterSpec: QuickSpec {
                     }
 
                     it("does not save the state") {
-                        let newStore = KeyStore(path: "new path", scryptN: 3, scryptP: 3)
+                        let newStore = KeyStore(name: "new name", scryptN: 3, scryptP: 3)
                         store.state = appState(keyStore: KeyStoreState(keyStore: newStore))
                         expect { () -> Void in
                             let savedContents = String(data: try Data(contentsOf: url), encoding: .utf8)
-                            expect(savedContents).to(contain("some path"))
+                            expect(savedContents).to(contain("some name"))
                             expect(savedContents).to(contain("\"scryptN\":1"))
                             expect(savedContents).to(contain("\"scryptP\":1"))
                         }.toNot(throwError())

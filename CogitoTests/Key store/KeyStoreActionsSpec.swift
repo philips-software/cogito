@@ -25,7 +25,7 @@ class KeyStoreActionsSpec: QuickSpec {
                 let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                                             .userDomainMask,
                                                                             true)[0]
-                expect(fulfilled.keyStore.path) == documentDirectory + "/main.keystore"
+                expect(fulfilled.keyStore.storeUrl.path) == documentDirectory + "/main.keystore"
             }
 
             it("uses the standard key derivation parameters") {
