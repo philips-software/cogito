@@ -114,7 +114,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     private func showExplanatoryAnimation() {
         cameraButton.isUserInteractionEnabled = false
         rectShape.frame = ellipseAnimation.bounds
-        let distance = cameraButton.frame.midY - selectedFacetView.frame.midY - 10 // trial and error
+        let distance = cameraButton.frame.midY - selectedFacetView.frame.midY - 5 // trial and error
         let startShape = UIBezierPath(ovalIn: CGRect(x: rectShape.frame.midX,
                                                      y: rectShape.frame.midY - 28, // offset of 'who am I' label
                                                      width: 0, height: 0))
