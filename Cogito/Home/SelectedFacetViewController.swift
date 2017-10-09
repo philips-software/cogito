@@ -14,6 +14,8 @@ class SelectedFacetViewController: UIViewController, Connectable {
     @IBOutlet weak var headerButton: UIButton!
     @IBOutlet weak var facetLabel: UILabel!
 
+    override var prefersStatusBarHidden: Bool { return true }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         headerButton.titleLabel?.textAlignment = .center
