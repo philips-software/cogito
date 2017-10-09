@@ -51,7 +51,7 @@ Cogito allows you to choose who you are.</string>
                                 <rect key="frame" x="131" y="617" width="113" height="30"/>
                                 <state key="normal" title="Let's get started"/>
                                 <connections>
-                                    <segue destination="wTc-Hd-r6m" kind="show" id="Ej6-1m-XCX"/>
+                                    <segue destination="wTc-Hd-r6m" kind="show" identifier="GetStarted" id="Ej6-1m-XCX"/>
                                 </connections>
                             </button>
                         </subviews>

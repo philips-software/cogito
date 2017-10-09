@@ -85,8 +85,6 @@
 		02D0C0D91F8B59E80001223E /* InitialSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02D0C0D71F8B59E80001223E /* InitialSetup.storyboard */; };
 		02D0C0DB1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */; };
 		02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */; };
-		02D0C0DE1F8B6A810001223E /* InitialCreateIdentityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DD1F8B6A810001223E /* InitialCreateIdentityViewController.swift */; };
-		02D0C0DF1F8B6A810001223E /* InitialCreateIdentityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DD1F8B6A810001223E /* InitialCreateIdentityViewController.swift */; };
 		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
 		02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792321F6FFBF700DC5973 /* AppReducer.swift */; };
 		02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792341F6FFBFF00DC5973 /* AppStore.swift */; };
@@ -167,7 +165,6 @@
 		02D0C0D31F8B59790001223E /* SelectedFacetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFacetViewController.swift; sourceTree = "<group>"; };
 		02D0C0D71F8B59E80001223E /* InitialSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialSetup.storyboard; sourceTree = "<group>"; };
 		02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialExplanationViewController.swift; sourceTree = "<group>"; };
-		02D0C0DD1F8B6A810001223E /* InitialCreateIdentityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialCreateIdentityViewController.swift; sourceTree = "<group>"; };
 		02E792301F6FFBAD00DC5973 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		02E792321F6FFBF700DC5973 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		02E792341F6FFBFF00DC5973 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -401,7 +398,6 @@
 			children = (
 				02D0C0D71F8B59E80001223E /* InitialSetup.storyboard */,
 				02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */,
-				02D0C0DD1F8B6A810001223E /* InitialCreateIdentityViewController.swift */,
 			);
 			path = "Initial setup wizard";
 			sourceTree = "<group>";
@@ -751,7 +747,6 @@
 				02F0CA091F875515000C428F /* DebugGestureHandler.swift in Sources */,
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
 				028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
-				02D0C0DE1F8B6A810001223E /* InitialCreateIdentityViewController.swift in Sources */,
 				028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */,
 				02A15AFE1F8671D200A94163 /* Identity.swift in Sources */,
@@ -806,7 +801,6 @@
 				028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				02A15AF01F864F0900A94163 /* HomeViewController.swift in Sources */,
 				02D0C0D51F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
-				02D0C0DF1F8B6A810001223E /* InitialCreateIdentityViewController.swift in Sources */,
 				02A15AFF1F8671D200A94163 /* Identity.swift in Sources */,
 				C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */,
 				C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */,
