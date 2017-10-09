@@ -4,6 +4,7 @@ const expect = chai.expect
 const td = require('testdouble')
 const anything = td.matchers.anything
 const { random, encrypt, decrypt, keySize, nonceSize } = require('../lib/crypto')
+const base64url = require('base64url')
 const SecureChannel = require('../lib/secure-channel')
 
 describe('secure-channel', function () {
@@ -60,18 +61,27 @@ describe('secure-channel', function () {
     })
   })
 
-  it('throws when there is an error while sending', function () {
-    td.when(queuing.send(anything(), anything())).thenThrow('an error')
-    expect(() => channel.send('a message')).to.throw()
+  describe('errors', function () {
+    it('throws when there is an error while sending', function () {
+      td.when(queuing.send(anything(), anything())).thenThrow('an error')
+      expect(() => channel.send('a message')).to.throw()
+    })
+
+    it('throws when there is an error while receiving', async function () {
+      td.when(queuing.receive(blueQueue)).thenReject('an error')
+      await expect(channel.receive()).to.be.rejected()
+    })
+
+    it('throws when there is an error while decrypting', async function () {
+      td.when(queuing.receive(blueQueue)).thenResolve('invalid data')
+      await expect(channel.receive()).to.be.rejected()
+    })
   })
 
-  it('throws when there is an error while receiving', async function () {
-    td.when(queuing.receive(blueQueue)).thenReject('an error')
-    await expect(channel.receive()).to.be.rejected()
-  })
-
-  it('throws when there is an error while decrypting', async function () {
-    td.when(queuing.receive(blueQueue)).thenResolve('invalid data')
-    await expect(channel.receive()).to.be.rejected()
+  it('encodes the channel id and key in a URL', function () {
+    const baseUrl = 'https://example.com'
+    const encodedKey = base64url.encode(key)
+    const url = `${baseUrl}/telepath/connect#I=${channelId}&E=${encodedKey}`
+    expect(channel.createConnectUrl(baseUrl)).to.equal(url)
   })
 })
