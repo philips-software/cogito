@@ -25,12 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if appStore.state.keyStore.keyStore == nil {
             appStore.dispatch(KeyStoreActions.create())
-            do {
-                try appStore.state.keyStore.keyStore!.wrapped!.newAccount("test")
-            } catch let e {
-                print(e)
-                abort()
-            }
         }
 
 //        startGeth()
