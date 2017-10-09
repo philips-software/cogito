@@ -33,6 +33,7 @@ class SelectedFacetViewController: UIViewController, Connectable {
     }
 
     @IBAction func whoAmITouched() {
+        actions.resetCreateIdentity()
         let storyboard = UIStoryboard(name: "InitialSetup", bundle: Bundle(for: type(of: self)))
         let setupVC = storyboard.instantiateInitialViewController()
         present(setupVC!, animated: true)
@@ -42,7 +43,9 @@ class SelectedFacetViewController: UIViewController, Connectable {
         let selectedFacet: Identity?
     }
 
-    struct Actions {}
+    struct Actions {
+        let resetCreateIdentity: () -> Void
+    }
 }
 
 private func mapStateToProps(state: AppState) -> SelectedFacetViewController.Props {
@@ -55,6 +58,9 @@ private func mapStateToProps(state: AppState) -> SelectedFacetViewController.Pro
     return SelectedFacetViewController.Props(selectedFacet: selectedFacet)
 }
 
-private func mapDispatchToActions(dispatch: DispatchFunction) -> SelectedFacetViewController.Actions {
-    return SelectedFacetViewController.Actions()
+private func mapDispatchToActions(dispatch: @escaping DispatchFunction)
+    -> SelectedFacetViewController.Actions {
+    return SelectedFacetViewController.Actions(
+        resetCreateIdentity: { dispatch(CreateIdentityActions.Reset()) }
+    )
 }

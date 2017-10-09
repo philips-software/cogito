@@ -4,6 +4,7 @@ import Quick
 import Nimble
 import UIKit
 import Geth
+import ReSwift
 
 class SelectedFacetViewControllerSpec: QuickSpec {
     override func spec() {
@@ -14,6 +15,38 @@ class SelectedFacetViewControllerSpec: QuickSpec {
             viewController = storyboard.instantiateViewController(withIdentifier: "SelectedFacet")
                 as! SelectedFacetViewController // swiftlint:disable:this force_cast
             expect(viewController.view).toNot(beNil())
+        }
+
+        describe("map state to props") {
+            it("maps selected facet when there is no facet") {
+                let state = appState(diamond: DiamondState(facets: []))
+                viewController.connection.newState(state: state)
+                expect(viewController.props.selectedFacet).to(beNil())
+            }
+
+            it("maps selected facet when there is one") {
+                let address = GethAddress(fromHex: "0x0000000000000000000000000000000000000000")!
+                let identity = Identity(description: "test", gethAddress: address)
+                let state = appState(diamond: DiamondState(facets: [identity]))
+                viewController.connection.newState(state: state)
+                expect(viewController.props.selectedFacet) == identity
+            }
+        }
+
+        describe("map dispatch to actions") {
+            var testStore: Store<AppState>!
+
+            beforeEach {
+                testStore = Store<AppState>(reducer: { (_, _) in return initialAppState }, state: nil)
+                viewController.connection.store = testStore
+            }
+
+            it("maps resetCreateIdentity") {
+                let dispatchRecorder = DispatchRecorder<CreateIdentityActions.Reset>()
+                testStore.dispatchFunction = dispatchRecorder.dispatch
+                viewController.actions.resetCreateIdentity()
+                expect(dispatchRecorder.count) == 1
+            }
         }
 
         context("when selectedFacet is nil") {
@@ -40,21 +73,13 @@ class SelectedFacetViewControllerSpec: QuickSpec {
             }
         }
 
-        describe("map state to props") {
-            it("maps selected facet when there is no facet") {
-                let state = appState(diamond: DiamondState(facets: []))
-                viewController.connection.newState(state: state)
-                expect(viewController.props.selectedFacet).to(beNil())
-            }
-
-            it("maps selected facet when there is one") {
-                let address = GethAddress(fromHex: "0x0000000000000000000000000000000000000000")!
-                let identity = Identity(description: "test", gethAddress: address)
-                let state = appState(diamond: DiamondState(facets: [identity]))
-                viewController.connection.newState(state: state)
-                expect(viewController.props.selectedFacet) == identity
-            }
+        it("resets create identity when wizard is started") {
+            var resetCalled = false
+            viewController.connection.actions = SelectedFacetViewController.Actions(resetCreateIdentity: {
+                resetCalled = true
+            })
+            viewController.whoAmITouched()
+            expect(resetCalled).to(beTrue())
         }
-
     }
 }
