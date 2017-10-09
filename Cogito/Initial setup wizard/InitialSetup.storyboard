@@ -96,7 +96,7 @@ Cogito allows you to choose who you are.</string>
                                 <rect key="frame" x="16" y="208" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES" textContentType="nickname"/>
                                 <connections>
                                     <action selector="editingChanged" destination="wTc-Hd-r6m" eventType="editingChanged" id="OAk-FL-n5I"/>
                                 </connections>
