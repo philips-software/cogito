@@ -22,5 +22,17 @@ class KeyStoreSpec: QuickSpec {
             }.toNot(throwError())
             expect(decodedKeyStore) == keyStore
         }
+
+        it("can be reset") {
+            let keyStore = KeyStore(name: "some name", scryptN: 1, scryptP: 2)
+            expect {
+                try FileManager.default.createDirectory(at: keyStore.storeUrl,
+                                                        withIntermediateDirectories: false,
+                                                        attributes: [:])
+            }.toNot(throwError())
+            expect(FileManager.default.fileExists(atPath: keyStore.storeUrl.path)).to(beTrue())
+            expect { try keyStore.reset() }.toNot(throwError())
+            expect(FileManager.default.fileExists(atPath: keyStore.storeUrl.path)).to(beFalse())
+        }
     }
 }

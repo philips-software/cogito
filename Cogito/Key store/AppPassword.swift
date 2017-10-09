@@ -64,6 +64,10 @@ class AppPassword {
             return e.localizedDescription
         }
     }
+
+    func reset() throws {
+        try keychain.remove(appPasswordKey)
+    }
 }
 
 protocol KeychainType {
@@ -73,6 +77,7 @@ protocol KeychainType {
     func get(_ key: String) throws -> String?
     func set(_ value: String, key: String) throws
     func generatePassword() throws -> String
+    func remove(_ key: String) throws
 }
 
 extension Keychain: KeychainType {
