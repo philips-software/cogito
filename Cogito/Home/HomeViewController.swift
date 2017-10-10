@@ -220,7 +220,8 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         let startShape = UIBezierPath(roundedRect: startRect, cornerRadius: 4)
         let endShape = UIBezierPath(roundedRect: endRect, cornerRadius: 4)
         rectShape.path = startShape.cgPath
-        UIView.animate(withDuration: self.animationDuration,
+        let hintDuration = self.animationDuration/6*5
+        UIView.animate(withDuration: hintDuration,
                        delay: 0,
                        options: [.beginFromCurrentState, .curveEaseOut],
                        animations: {
@@ -232,7 +233,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         })
         let animation = CABasicAnimation(keyPath: "path")
         animation.toValue = endShape.cgPath
-        animation.duration = self.animationDuration
+        animation.duration = hintDuration
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
         self.rectShape.add(animation, forKey: animation.keyPath)
     }
