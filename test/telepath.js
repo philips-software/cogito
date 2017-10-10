@@ -25,11 +25,11 @@ describe('telepath', function () {
 
     let channel
 
-    beforeEach(function () {
+    beforeEach(async function () {
       const idSize = 18
       td.when(crypto.random(idSize)).thenReturn(randomId)
       td.when(crypto.random(crypto.keySize)).thenReturn(randomKey)
-      channel = telepath.createChannel()
+      channel = await telepath.createChannel()
     })
 
     it('uses the queuing service', function () {
@@ -42,6 +42,14 @@ describe('telepath', function () {
 
     it('has a random key', function () {
       expect(channel.key).to.equal(randomKey)
+    })
+
+    it('creates the red queue', function () {
+      td.verify(queuing.createQueue(`${channel.id}.red`))
+    })
+
+    it('creates the blue queue', function () {
+      td.verify(queuing.createQueue(`${channel.id}.blue`))
     })
   })
 })
