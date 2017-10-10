@@ -138,7 +138,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5r-3P-nfz">
-                                <rect key="frame" x="0.0" y="6" width="288" height="33"/>
+                                <rect key="frame" x="94" y="6" width="100" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="P9H-aY-5Jq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
                                 <state key="normal" title="Who am I?">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -156,14 +159,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="b5r-3P-nfz" firstAttribute="trailing" secondItem="VqY-Nu-4ni" secondAttribute="trailing" id="DTL-uF-RaQ"/>
                             <constraint firstItem="VqY-Nu-4ni" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vcs-gR-jth" secondAttribute="bottom" constant="6" id="JOz-Li-2eY"/>
                             <constraint firstItem="b5r-3P-nfz" firstAttribute="top" secondItem="VqY-Nu-4ni" secondAttribute="top" constant="6" id="Lyq-vg-gMj"/>
                             <constraint firstItem="vcs-gR-jth" firstAttribute="trailing" secondItem="VqY-Nu-4ni" secondAttribute="trailing" id="OEp-UX-trQ"/>
                             <constraint firstItem="vcs-gR-jth" firstAttribute="top" secondItem="b5r-3P-nfz" secondAttribute="bottom" constant="8" id="VR8-ky-8Rr"/>
                             <constraint firstItem="vcs-gR-jth" firstAttribute="leading" secondItem="VqY-Nu-4ni" secondAttribute="leading" id="d3x-8M-OBM"/>
                             <constraint firstItem="b5r-3P-nfz" firstAttribute="centerX" secondItem="Qgj-aA-LR8" secondAttribute="centerX" id="esf-k0-OKR"/>
-                            <constraint firstItem="b5r-3P-nfz" firstAttribute="leading" secondItem="VqY-Nu-4ni" secondAttribute="leading" id="lMo-te-63e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VqY-Nu-4ni"/>
                     </view>
