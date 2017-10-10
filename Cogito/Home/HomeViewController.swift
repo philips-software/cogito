@@ -18,7 +18,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     @IBOutlet weak var animationHeight: NSLayoutConstraint!
     @IBOutlet weak var animationBottom: NSLayoutConstraint!
     @IBOutlet weak var selectedFacetView: UIView!
-    @IBOutlet weak var ellipseAnimation: UIView!
+    @IBOutlet weak var borderAnimation: UIView!
     let rectShape = CAShapeLayer()
     var embeddedSelectedFacetController: SelectedFacetViewController!
 
@@ -49,7 +49,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         rectShape.fillColor = UIColor.clear.cgColor
         rectShape.strokeColor = UIColor.black.cgColor
         rectShape.lineWidth = 0.5
-        ellipseAnimation.layer.addSublayer(rectShape)
+        borderAnimation.layer.addSublayer(rectShape)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -129,7 +129,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     var animationsInProgress = 0
 
     private func startExplanatoryAnimation() {
-        rectShape.frame = ellipseAnimation.bounds
+        rectShape.frame = borderAnimation.bounds
         let embeddedHeaderViewOffsetFromCenter = selectedFacetView.bounds.midY
             - embeddedSelectedFacetController.headerButton.frame.midY
         let distance = cameraButton.frame.minY - selectedFacetView.frame.midY + embeddedHeaderViewOffsetFromCenter
@@ -157,7 +157,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
                 self.animationHeight.constant = 0
                 self.animationBottom.constant = -(self.cameraButton.frame.minY -
                     self.selectedFacetView.frame.maxY + embeddedHeaderViewOffsetFromCenter)
-                self.ellipseAnimation.isHidden = false
+                self.borderAnimation.isHidden = false
                 self.animationsInProgress += 1
                 UIView.animate(withDuration: self.animationDuration,
                                delay: 0,
@@ -165,13 +165,13 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
                                animations: {
                                 self.view.layoutIfNeeded()
                                 self.lineAnimation.alpha = 0
-                                self.ellipseAnimation.alpha = 0
+                                self.borderAnimation.alpha = 0
                 }, completion: { _ in
                     self.animationsInProgress -= 1
                     self.lineAnimation.alpha = 1
                     self.animationBottom.constant = 0
-                    self.ellipseAnimation.alpha = 1
-                    self.ellipseAnimation.isHidden = true
+                    self.borderAnimation.alpha = 1
+                    self.borderAnimation.isHidden = true
                     self.cameraButton.isUserInteractionEnabled = true
                 })
                 let animation = CABasicAnimation(keyPath: "path")
@@ -206,8 +206,8 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 
     private func showHintAnimation() {
         self.cameraButton.isUserInteractionEnabled = true
-        self.ellipseAnimation.isHidden = false
-        self.ellipseAnimation.alpha = 1
+        self.borderAnimation.isHidden = false
+        self.borderAnimation.alpha = 1
         let embeddedHeaderViewOffsetFromCenter = selectedFacetView.bounds.midY
             - embeddedSelectedFacetController.headerButton.frame.midY
         let startRect = CGRect(x: embeddedSelectedFacetController.headerButton.frame.origin.x,
@@ -224,10 +224,10 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
                        delay: 0,
                        options: [.beginFromCurrentState, .curveEaseOut],
                        animations: {
-                        self.ellipseAnimation.alpha = 0
+                        self.borderAnimation.alpha = 0
         }, completion: { _ in
-            self.ellipseAnimation.alpha = 1
-            self.ellipseAnimation.isHidden = true
+            self.borderAnimation.alpha = 1
+            self.borderAnimation.isHidden = true
             self.cameraButton.isUserInteractionEnabled = true
         })
         let animation = CABasicAnimation(keyPath: "path")

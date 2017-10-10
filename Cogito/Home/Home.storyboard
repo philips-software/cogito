@@ -88,7 +88,7 @@
                                     <constraint firstAttribute="height" id="ZqW-n9-doh"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hk3-Y8-rqC" userLabel="Ellipse animation">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hk3-Y8-rqC" userLabel="Border animation">
                                 <rect key="frame" x="16" y="48" width="288" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -116,8 +116,8 @@
                     <connections>
                         <outlet property="animationBottom" destination="4tu-yn-Rp0" id="j41-ad-3yU"/>
                         <outlet property="animationHeight" destination="ZqW-n9-doh" id="43R-Ci-6Nq"/>
+                        <outlet property="borderAnimation" destination="hk3-Y8-rqC" id="YrO-HS-1rF"/>
                         <outlet property="cameraButton" destination="yOe-r5-WdH" id="9BQ-bN-ZQc"/>
-                        <outlet property="ellipseAnimation" destination="hk3-Y8-rqC" id="TCa-ZU-bqg"/>
                         <outlet property="leftShutter" destination="pwF-Cd-Nvb" id="bCS-1M-poO"/>
                         <outlet property="lineAnimation" destination="iMb-jd-YdP" id="0T3-e9-hxP"/>
                         <outlet property="previewContainer" destination="eVQ-pT-zH8" id="AR1-H3-gmm"/>
