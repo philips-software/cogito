@@ -20,6 +20,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     @IBOutlet weak var selectedFacetView: UIView!
     @IBOutlet weak var ellipseAnimation: UIView!
     let rectShape = CAShapeLayer()
+    var embeddedSelectedFacetController: SelectedFacetViewController!
 
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
@@ -115,12 +116,14 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     private func showExplanatoryAnimation() {
         cameraButton.isUserInteractionEnabled = false
         rectShape.frame = ellipseAnimation.bounds
+        let embeddedHeaderViewOffsetFromCenter = selectedFacetView.bounds.midY
+            - embeddedSelectedFacetController.headerButton.frame.midY
         let distance = cameraButton.frame.midY - selectedFacetView.frame.midY - 5 // trial and error
         let startShape = UIBezierPath(ovalIn: CGRect(x: rectShape.frame.midX,
-                                                     y: rectShape.frame.midY - 28, // offset of 'who am I' label
+                                                     y: rectShape.frame.midY - embeddedHeaderViewOffsetFromCenter,
                                                      width: 0, height: 0))
         let endShape = UIBezierPath(ovalIn: CGRect(x: 0,
-                                                   y: 0 - 28,
+                                                   y: 0 - embeddedHeaderViewOffsetFromCenter,
                                                    width: rectShape.frame.size.width,
                                                    height: rectShape.frame.size.height))
         rectShape.path = startShape.cgPath
@@ -165,6 +168,12 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 
     func readerDidCancel(_ reader: QRCodeReaderViewController) {
         stopScanning()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let selectedFacetViewController = segue.destination as? SelectedFacetViewController {
+            embeddedSelectedFacetController = selectedFacetViewController
+        }
     }
 
     struct Props {
