@@ -77,7 +77,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         if props.selectedFacet != nil {
             startScanning()
         } else if explanatoryAnimationFinished {
-            wiggleButton()
+            showHintAnimation()
         } else {
             startExplanatoryAnimation()
         }
@@ -178,8 +178,6 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
                 animation.toValue = endShape.cgPath
                 animation.duration = self.animationDuration
                 animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-                animation.fillMode = kCAFillModeBoth
-                animation.isRemovedOnCompletion = false
                 self.rectShape.add(animation, forKey: animation.keyPath)
                 DispatchQueue.main.asyncAfter(deadline: .now() + self.animationDuration/6) {
                     let layer = self.embeddedSelectedFacetController.headerButton.layer
@@ -206,16 +204,37 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         }, completion: { _ in self.animationsInProgress -= 1 })
     }
 
-    private func wiggleButton() {
-        self.embeddedSelectedFacetController.headerButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi/8)
-        UIView.animate(withDuration: animationDuration,
+    private func showHintAnimation() {
+        self.cameraButton.isUserInteractionEnabled = true
+        self.ellipseAnimation.isHidden = false
+        self.ellipseAnimation.alpha = 1
+        let embeddedHeaderViewOffsetFromCenter = selectedFacetView.bounds.midY
+            - embeddedSelectedFacetController.headerButton.frame.midY
+        let startRect = CGRect(x: embeddedSelectedFacetController.headerButton.frame.origin.x,
+                               y: embeddedSelectedFacetController.headerButton.frame.origin.y,
+                               width: embeddedSelectedFacetController.headerButton.frame.size.width,
+                               height: embeddedSelectedFacetController.headerButton.frame.size.height)
+        let endRect = CGRect(x: 0, y: -embeddedHeaderViewOffsetFromCenter,
+                             width: rectShape.frame.size.width,
+                             height: rectShape.frame.size.height)
+        let startShape = UIBezierPath(roundedRect: startRect, cornerRadius: 4)
+        let endShape = UIBezierPath(roundedRect: endRect, cornerRadius: 4)
+        rectShape.path = startShape.cgPath
+        UIView.animate(withDuration: self.animationDuration,
                        delay: 0,
-                       usingSpringWithDamping: 0.3,
-                       initialSpringVelocity: 0,
-                       options: .beginFromCurrentState,
+                       options: [.beginFromCurrentState, .curveEaseOut],
                        animations: {
-            self.embeddedSelectedFacetController.headerButton.transform = CGAffineTransform(rotationAngle: 0)
+                        self.ellipseAnimation.alpha = 0
+        }, completion: { _ in
+            self.ellipseAnimation.alpha = 1
+            self.ellipseAnimation.isHidden = true
+            self.cameraButton.isUserInteractionEnabled = true
         })
+        let animation = CABasicAnimation(keyPath: "path")
+        animation.toValue = endShape.cgPath
+        animation.duration = self.animationDuration
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        self.rectShape.add(animation, forKey: animation.keyPath)
     }
 
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
