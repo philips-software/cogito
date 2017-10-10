@@ -146,9 +146,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         animationsInProgress += 1
         UIView.animate(withDuration: animationDuration,
                        delay: 0,
-                       usingSpringWithDamping: 1,
-                       initialSpringVelocity: 0,
-                       options: .beginFromCurrentState,
+                       options: [.beginFromCurrentState, .curveLinear],
                        animations: {
                         self.view.layoutIfNeeded()
         }, completion: { _ in
@@ -196,11 +194,13 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     private func stopExplanatoryAnimation() {
         self.animationHeight.constant = 0
         animationsInProgress += 1
+        if let presentationFrame = self.lineAnimation.layer.presentation()?.frame {
+            self.lineAnimation.frame = presentationFrame
+        }
+        self.lineAnimation.layer.removeAllAnimations()
         UIView.animate(withDuration: animationDuration,
                        delay: 0,
-                       usingSpringWithDamping: 1,
-                       initialSpringVelocity: 0,
-                       options: .beginFromCurrentState,
+                       options: [.beginFromCurrentState, .curveLinear],
                        animations: {
                         self.view.layoutIfNeeded()
         }, completion: { _ in self.animationsInProgress -= 1 })
