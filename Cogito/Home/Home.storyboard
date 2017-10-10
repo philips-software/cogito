@@ -84,7 +84,7 @@
                                 <rect key="frame" x="159.5" y="434" width="1" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="1" id="Gmd-Wj-jG4"/>
+                                    <constraint firstAttribute="width" constant="0.5" id="Gmd-Wj-jG4"/>
                                     <constraint firstAttribute="height" id="ZqW-n9-doh"/>
                                 </constraints>
                             </view>
