@@ -50,18 +50,13 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         rectShape.strokeColor = UIColor.black.cgColor
         rectShape.lineWidth = 0.5
         ellipseAnimation.layer.addSublayer(rectShape)
-
-        connection.subscribe(\Props.selectedFacet) { [weak self] selectedFacet in
-            if selectedFacet == nil {
-                self?.explanatoryAnimationFinished = false
-            }
-            self?.embeddedSelectedFacetController.headerButton.layer.borderWidth = 0
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         connection.connect()
+        embeddedSelectedFacetController.headerButton.layer.borderWidth = 0
+        explanatoryAnimationFinished = false
     }
 
     override func viewDidAppear(_ animated: Bool) {
