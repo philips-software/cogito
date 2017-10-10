@@ -118,12 +118,11 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         rectShape.frame = ellipseAnimation.bounds
         let embeddedHeaderViewOffsetFromCenter = selectedFacetView.bounds.midY
             - embeddedSelectedFacetController.headerButton.frame.midY
-        let distance = cameraButton.frame.midY - selectedFacetView.frame.midY - 5 // trial and error
+        let distance = cameraButton.frame.minY - selectedFacetView.frame.midY + embeddedHeaderViewOffsetFromCenter
         let startShape = UIBezierPath(ovalIn: CGRect(x: rectShape.frame.midX,
                                                      y: rectShape.frame.midY - embeddedHeaderViewOffsetFromCenter,
                                                      width: 0, height: 0))
-        let endShape = UIBezierPath(ovalIn: CGRect(x: 0,
-                                                   y: 0 - embeddedHeaderViewOffsetFromCenter,
+        let endShape = UIBezierPath(ovalIn: CGRect(x: 0, y: -embeddedHeaderViewOffsetFromCenter,
                                                    width: rectShape.frame.size.width,
                                                    height: rectShape.frame.size.height))
         rectShape.path = startShape.cgPath
@@ -132,12 +131,11 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         let duration = 0.8
         UIView.animate(withDuration: duration, delay: 0,
                        options: .curveLinear,
-                       animations: {
-                           self.view.layoutIfNeeded()
-                       },
+                       animations: { self.view.layoutIfNeeded() },
                        completion: { _ in
                            self.animationHeight.constant = 0
-                           self.animationBottom.constant = -distance + self.rectShape.frame.size.height / 2
+                           self.animationBottom.constant = -(self.cameraButton.frame.minY -
+                               self.selectedFacetView.frame.maxY + embeddedHeaderViewOffsetFromCenter)
                            self.ellipseAnimation.isHidden = false
                            UIView.animate(withDuration: duration, delay: 0,
                                           options: .curveEaseOut,
@@ -155,9 +153,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
                            let animation = CABasicAnimation(keyPath: "path")
                            animation.toValue = endShape.cgPath
                            animation.duration = duration
-                           animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-                           animation.fillMode = kCAFillModeBoth
-                           animation.isRemovedOnCompletion = false
+                           animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
                            self.rectShape.add(animation, forKey: animation.keyPath)
                        })
     }
