@@ -70,6 +70,8 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     @IBAction func scanButtonDown() {
         if props.selectedFacet != nil {
             startScanning()
+        } else {
+            startExplanatoryAnimation()
         }
     }
 
@@ -77,13 +79,15 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         if props.selectedFacet != nil {
             stopScanning()
         } else {
-            showExplanatoryAnimation()
+            stopExplanatoryAnimation()
         }
     }
 
     @IBAction func scanButtonUpOutside() {
         if props.selectedFacet != nil {
             stopScanning()
+        } else {
+            stopExplanatoryAnimation()
         }
     }
 
@@ -111,6 +115,83 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
                            self.leftShutter.frame.origin.x = 0
                            self.rightShutter.frame.origin.x = self.rightShutter.superview!.frame.size.width / 2
                        })
+    }
+
+    private func startExplanatoryAnimation() {
+        rectShape.frame = ellipseAnimation.bounds
+        let embeddedHeaderViewOffsetFromCenter = selectedFacetView.bounds.midY
+            - embeddedSelectedFacetController.headerButton.frame.midY
+        let distance = cameraButton.frame.minY - selectedFacetView.frame.midY + embeddedHeaderViewOffsetFromCenter
+//        let startShape = UIBezierPath(ovalIn: CGRect(x: rectShape.frame.midX,
+//                                                     y: rectShape.frame.midY - embeddedHeaderViewOffsetFromCenter,
+//                                                     width: 0, height: 0))
+//        let endShape = UIBezierPath(ovalIn: CGRect(x: 0, y: -embeddedHeaderViewOffsetFromCenter,
+//                                                   width: rectShape.frame.size.width,
+//                                                   height: rectShape.frame.size.height))
+        let startShape = UIBezierPath(roundedRect: CGRect(x: rectShape.frame.midX,
+                                                     y: rectShape.frame.midY - embeddedHeaderViewOffsetFromCenter,
+                                                     width: 0, height: 0), cornerRadius: 4)
+        let endShape = UIBezierPath(roundedRect: CGRect(x: embeddedSelectedFacetController.headerButton.frame.origin.x,
+                                                        y: 0,
+                                                   width: embeddedSelectedFacetController.headerButton.frame.size.width,
+                                                   height: embeddedSelectedFacetController.headerButton.frame.size.height),
+                                    cornerRadius: 4)
+        rectShape.path = startShape.cgPath
+        self.animationHeight.constant = distance
+        let duration = 0.8
+        UIView.animate(withDuration: duration,
+                       delay: 0,
+                       usingSpringWithDamping: 1,
+                       initialSpringVelocity: 0,
+                       options: .beginFromCurrentState,
+                       animations: {
+                        self.view.layoutIfNeeded()
+        }, completion: { _ in
+            let finished = self.animationHeight.constant == distance
+            if finished {
+                self.cameraButton.isUserInteractionEnabled = false
+                self.animationHeight.constant = 0
+                self.animationBottom.constant = -(self.cameraButton.frame.minY -
+                    self.selectedFacetView.frame.maxY + embeddedHeaderViewOffsetFromCenter)
+                self.ellipseAnimation.isHidden = false
+                UIView.animate(withDuration: duration,
+                               delay: 0,
+                               usingSpringWithDamping: 1,
+                               initialSpringVelocity: 0,
+                               options: .beginFromCurrentState,
+                               animations: {
+                                self.view.layoutIfNeeded()
+                                self.lineAnimation.alpha = 0
+//                                self.ellipseAnimation.alpha = 0
+                }, completion: { _ in
+                    self.lineAnimation.alpha = 1
+                    self.animationBottom.constant = 0
+                    self.ellipseAnimation.alpha = 1
+//                    self.ellipseAnimation.isHidden = true
+                    self.cameraButton.isUserInteractionEnabled = true
+                })
+                let animation = CABasicAnimation(keyPath: "path")
+                animation.toValue = endShape.cgPath
+                animation.duration = duration
+                animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+                animation.fillMode = kCAFillModeBoth
+                animation.isRemovedOnCompletion = false
+                self.rectShape.add(animation, forKey: animation.keyPath)
+            }
+        })
+    }
+
+    private func stopExplanatoryAnimation() {
+        self.animationHeight.constant = 0
+        let duration = 1.2
+        UIView.animate(withDuration: duration,
+                       delay: 0,
+                       usingSpringWithDamping: 1,
+                       initialSpringVelocity: 0,
+                       options: .beginFromCurrentState,
+                       animations: {
+                        self.view.layoutIfNeeded()
+        })
     }
 
     private func showExplanatoryAnimation() {
