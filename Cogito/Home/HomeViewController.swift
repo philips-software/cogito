@@ -118,7 +118,8 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     }
 
     let animationDuration = 0.8
-    
+    var animationsInProgress = 0
+
     private func startExplanatoryAnimation() {
         rectShape.frame = ellipseAnimation.bounds
         let embeddedHeaderViewOffsetFromCenter = selectedFacetView.bounds.midY
@@ -134,6 +135,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         let endShape = UIBezierPath(roundedRect: endRect, cornerRadius: 4)
         rectShape.path = startShape.cgPath
         self.animationHeight.constant = distance
+        animationsInProgress += 1
         UIView.animate(withDuration: animationDuration,
                        delay: 0,
                        usingSpringWithDamping: 1,
@@ -142,13 +144,15 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
                        animations: {
                         self.view.layoutIfNeeded()
         }, completion: { _ in
-            let finished = self.animationHeight.constant == distance && self.animationBottom.constant == 0
+            self.animationsInProgress -= 1
+            let finished = self.animationsInProgress == 0
             if finished {
                 self.cameraButton.isUserInteractionEnabled = false
                 self.animationHeight.constant = 0
                 self.animationBottom.constant = -(self.cameraButton.frame.minY -
                     self.selectedFacetView.frame.maxY + embeddedHeaderViewOffsetFromCenter)
                 self.ellipseAnimation.isHidden = false
+                self.animationsInProgress += 1
                 UIView.animate(withDuration: self.animationDuration,
                                delay: 0,
                                options: [.beginFromCurrentState, .curveEaseOut],
@@ -157,6 +161,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
                                 self.lineAnimation.alpha = 0
                                 self.ellipseAnimation.alpha = 0
                 }, completion: { _ in
+                    self.animationsInProgress -= 1
                     self.lineAnimation.alpha = 1
                     self.animationBottom.constant = 0
                     self.ellipseAnimation.alpha = 1
@@ -176,6 +181,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 
     private func stopExplanatoryAnimation() {
         self.animationHeight.constant = 0
+        animationsInProgress += 1
         UIView.animate(withDuration: animationDuration,
                        delay: 0,
                        usingSpringWithDamping: 1,
@@ -183,7 +189,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
                        options: .beginFromCurrentState,
                        animations: {
                         self.view.layoutIfNeeded()
-        })
+        }, completion: { _ in self.animationsInProgress -= 1 })
     }
 
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
