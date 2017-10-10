@@ -20,10 +20,11 @@ import Telepath from 'telepath-js'
 const telepath = new Telepath({ queuing: queuingService })
 ```
 
-Creating a new channel with a random id and a random encryption key:
+Creating a new channel with a random id and a random encryption key. Returns a
+promise:
 
 ```javascript
-const channel = telepath.createChannel()
+const channel = await telepath.createChannel()
 ```
 
 Connecting a mobile app to the channel can be done by creating a connect URL.
