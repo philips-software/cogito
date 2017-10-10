@@ -48,5 +48,5 @@ Receiving messages. The `receive` method returns a promise:
 const receivedMessage = await channel.receive()
 ```
 
-[1]: https://gitlab.ta.philips.com/blockchain-lab/
+[1]: https://gitlab.ta.philips.com/blockchain-lab/telepath
 [2]: https://www.npmjs.com/package/qrcode.react
