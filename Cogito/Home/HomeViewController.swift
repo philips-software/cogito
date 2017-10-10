@@ -205,7 +205,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     }
 
     private func showHintAnimation() {
-        self.cameraButton.isUserInteractionEnabled = true
+        self.cameraButton.isUserInteractionEnabled = false
         self.borderAnimation.isHidden = false
         self.borderAnimation.alpha = 1
         let embeddedHeaderViewOffsetFromCenter = selectedFacetView.bounds.midY
