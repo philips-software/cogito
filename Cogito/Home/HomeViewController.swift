@@ -47,6 +47,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 
         rectShape.fillColor = UIColor.clear.cgColor
         rectShape.strokeColor = UIColor.black.cgColor
+        rectShape.lineWidth = 0.5
         ellipseAnimation.layer.addSublayer(rectShape)
     }
 
