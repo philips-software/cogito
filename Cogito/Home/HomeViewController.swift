@@ -50,6 +50,13 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         rectShape.strokeColor = UIColor.black.cgColor
         rectShape.lineWidth = 0.5
         ellipseAnimation.layer.addSublayer(rectShape)
+
+        connection.subscribe(\Props.selectedFacet) { [weak self] selectedFacet in
+            if selectedFacet == nil {
+                self?.explanatoryAnimationFinished = false
+            }
+            self?.embeddedSelectedFacetController.headerButton.layer.borderWidth = 0
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -64,12 +71,18 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        connection.disconnect()
+        if presentedViewController == nil {
+            connection.disconnect()
+        }
     }
+
+    var explanatoryAnimationFinished = false
 
     @IBAction func scanButtonDown() {
         if props.selectedFacet != nil {
             startScanning()
+        } else if explanatoryAnimationFinished {
+            wiggleButton()
         } else {
             startExplanatoryAnimation()
         }
@@ -78,7 +91,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     @IBAction func scanButtonUpInside() {
         if props.selectedFacet != nil {
             stopScanning()
-        } else {
+        } else if !self.explanatoryAnimationFinished {
             stopExplanatoryAnimation()
         }
     }
@@ -145,8 +158,8 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
                         self.view.layoutIfNeeded()
         }, completion: { _ in
             self.animationsInProgress -= 1
-            let finished = self.animationsInProgress == 0
-            if finished {
+            self.explanatoryAnimationFinished = self.animationsInProgress == 0
+            if self.explanatoryAnimationFinished {
                 self.cameraButton.isUserInteractionEnabled = false
                 self.animationHeight.constant = 0
                 self.animationBottom.constant = -(self.cameraButton.frame.minY -
@@ -175,6 +188,12 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
                 animation.fillMode = kCAFillModeBoth
                 animation.isRemovedOnCompletion = false
                 self.rectShape.add(animation, forKey: animation.keyPath)
+                DispatchQueue.main.asyncAfter(deadline: .now() + self.animationDuration/6) {
+                    let layer = self.embeddedSelectedFacetController.headerButton.layer
+                    layer.cornerRadius = 4
+                    layer.borderColor = UIColor.black.cgColor
+                    layer.borderWidth = 1
+                }
             }
         })
     }
@@ -190,6 +209,18 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
                        animations: {
                         self.view.layoutIfNeeded()
         }, completion: { _ in self.animationsInProgress -= 1 })
+    }
+
+    private func wiggleButton() {
+        self.embeddedSelectedFacetController.headerButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi/8)
+        UIView.animate(withDuration: animationDuration,
+                       delay: 0,
+                       usingSpringWithDamping: 0.3,
+                       initialSpringVelocity: 0,
+                       options: .beginFromCurrentState,
+                       animations: {
+            self.embeddedSelectedFacetController.headerButton.transform = CGAffineTransform(rotationAngle: 0)
+        })
     }
 
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
