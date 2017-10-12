@@ -29,13 +29,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yOe-r5-WdH">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yOe-r5-WdH" customClass="CameraButton" customModule="Cogito" customModuleProvider="target">
                                 <rect key="frame" x="120" y="434" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="yOe-r5-WdH" secondAttribute="height" multiplier="1:1" id="JkN-AE-dq8"/>
                                     <constraint firstAttribute="width" constant="80" id="ZYm-qF-YR0"/>
                                     <constraint firstAttribute="height" constant="80" id="qkz-RH-Gw8"/>
                                 </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" image="CogitoQR">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
@@ -179,6 +180,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CogitoQR" width="50" height="50"/>
+        <image name="CogitoQR" width="54" height="54"/>
     </resources>
 </document>
