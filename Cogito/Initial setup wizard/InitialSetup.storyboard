@@ -35,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uL-Mh-7Cr">
-                                <rect key="frame" x="16" y="64" width="343" height="545"/>
+                                <rect key="frame" x="16" y="64" width="343" height="539"/>
                                 <string key="text">You are different.
 
 You are who you want to be.
@@ -48,7 +48,8 @@ Cogito allows you to choose who you are.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELa-oS-cxo">
-                                <rect key="frame" x="131" y="617" width="113" height="30"/>
+                                <rect key="frame" x="117.5" y="611" width="140" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Let's get started"/>
                                 <connections>
                                     <segue destination="wTc-Hd-r6m" kind="show" identifier="GetStarted" id="Ej6-1m-XCX"/>
@@ -102,7 +103,8 @@ Cogito allows you to choose who you are.</string>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hC8-Yl-N8c">
-                                <rect key="frame" x="164.5" y="313.5" width="46" height="30"/>
+                                <rect key="frame" x="158.5" y="313.5" width="58" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Create"/>
                                 <connections>
                                     <action selector="createTapped" destination="wTc-Hd-r6m" eventType="touchUpInside" id="97G-YY-LJM"/>
