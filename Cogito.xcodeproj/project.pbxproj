@@ -78,6 +78,8 @@
 		02BE32D31F7A8165006C7287 /* EthereumClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32D21F7A8165006C7287 /* EthereumClient.swift */; };
 		02BE32D41F7A8165006C7287 /* EthereumClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32D21F7A8165006C7287 /* EthereumClient.swift */; };
 		02C305471F87596200351B4A /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603F01F6ACD1600788B0A /* DebugViewController.swift */; };
+		02C7420A1F8F5B6E007AE227 /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C742091F8F5B6E007AE227 /* CameraButton.swift */; };
+		02C7420B1F8F5B6E007AE227 /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C742091F8F5B6E007AE227 /* CameraButton.swift */; };
 		02CD30A41F73F251006BA756 /* StorePersister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A31F73F251006BA756 /* StorePersister.swift */; };
 		02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */; };
 		02CD80541F7D494900AA5C3A /* CreateIdentityReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */; };
@@ -166,6 +168,7 @@
 		02BE32CD1F7A5C55006C7287 /* SyncProgressReporterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProgressReporterSpec.swift; sourceTree = "<group>"; };
 		02BE32CF1F7A6D92006C7287 /* SyncProgressReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProgressReporter.swift; sourceTree = "<group>"; };
 		02BE32D21F7A8165006C7287 /* EthereumClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumClient.swift; sourceTree = "<group>"; };
+		02C742091F8F5B6E007AE227 /* CameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
 		02CD30A31F73F251006BA756 /* StorePersister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersister.swift; sourceTree = "<group>"; };
 		02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersisterSpec.swift; sourceTree = "<group>"; };
 		02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityReducerSpec.swift; sourceTree = "<group>"; };
@@ -365,6 +368,7 @@
 				02A15AED1F864F0900A94163 /* HomeViewController.swift */,
 				02A15AF31F864F4B00A94163 /* Home.storyboard */,
 				02D0C0D31F8B59790001223E /* SelectedFacetViewController.swift */,
+				02C742091F8F5B6E007AE227 /* CameraButton.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -758,6 +762,7 @@
 				02CD80581F7E30D100AA5C3A /* ActionLogger.swift in Sources */,
 				029691551F7166EE00654BD0 /* KeyStoreState.swift in Sources */,
 				02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */,
+				02C7420A1F8F5B6E007AE227 /* CameraButton.swift in Sources */,
 				02F0CA091F875515000C428F /* DebugGestureHandler.swift in Sources */,
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
 				028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
@@ -806,6 +811,7 @@
 				02A15AFC1F86719500A94163 /* DiamondState.swift in Sources */,
 				0298D43B1F7A47890070998D /* Node.swift in Sources */,
 				C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */,
+				02C7420B1F8F5B6E007AE227 /* CameraButton.swift in Sources */,
 				0298D42E1F7A43C90070998D /* StorePersister.swift in Sources */,
 				0292451D1F7AA3B100F2C0C1 /* AppStateHelper.swift in Sources */,
 				02A15AF71F864F8700A94163 /* HomeViewControllerSpec.swift in Sources */,

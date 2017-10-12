@@ -42,10 +42,6 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        cameraButton.layer.borderColor = UIColor.darkGray.cgColor
-        cameraButton.layer.borderWidth = 2
-        cameraButton.layer.cornerRadius = cameraButton.bounds.size.width / 2
-
         rectShape.fillColor = UIColor.clear.cgColor
         rectShape.strokeColor = UIColor.black.cgColor
         rectShape.lineWidth = 0.5
