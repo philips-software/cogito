@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "main": "index.js",
   "scripts": {
+    "start": "node ./index",
     "test": "mocha test/**/*.js"
   },
   "engines": {
