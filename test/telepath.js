@@ -43,13 +43,5 @@ describe('Telepath', function () {
     it('has a random key', function () {
       expect(channel.key).to.equal(randomKey)
     })
-
-    it('creates the red queue', function () {
-      td.verify(queuing.createQueue(`${channel.id}.red`))
-    })
-
-    it('creates the blue queue', function () {
-      td.verify(queuing.createQueue(`${channel.id}.blue`))
-    })
   })
 })
