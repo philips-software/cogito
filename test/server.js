@@ -3,6 +3,9 @@ const request = require('supertest')
 const createServer = require('../lib/server')
 
 describe('Server', function () {
+  const queueId = 'a_queue_id'
+  const message = 'a message'
+
   let server
 
   beforeEach(function () {
@@ -10,9 +13,6 @@ describe('Server', function () {
   })
 
   context('when a message has been sent', function () {
-    const queueId = 'a_queue_id'
-    const message = 'a message'
-
     beforeEach(async function () {
       await request(server)
         .post(`/${queueId}`)
@@ -25,5 +25,12 @@ describe('Server', function () {
         .expect(200)
         .expect(message)
     })
+  })
+
+  it('delivers messages in fifo order', async function () {
+    await request(server).post(`/${queueId}`).send('message 1')
+    await request(server).post(`/${queueId}`).send('message 2')
+    await request(server).get(`/${queueId}`).expect('message 1')
+    await request(server).get(`/${queueId}`).expect('message 2')
   })
 })
