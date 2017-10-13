@@ -21,6 +21,8 @@
 		5CAA828D1F7A909E0000A9D9 /* QueuingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */; };
 		5CC99AFB1F78FE0400ED602C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5CC99AF91F78FE0400ED602C /* Podfile */; };
 		5CC99AFC1F78FE0400ED602C /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = 5CC99AFA1F78FE0400ED602C /* Readme.md */; };
+		5CD810EF1F91064800CCD769 /* QueuingServiceClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD810EE1F91064800CCD769 /* QueuingServiceClientSpec.swift */; };
+		5CD810F11F91074400CCD769 /* QueuingServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD810F01F91074400CCD769 /* QueuingServiceClient.swift */; };
 		5CF521D11F78F4780004C494 /* Telepath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF521C71F78F4780004C494 /* Telepath.framework */; };
 		5CF521D61F78F4780004C494 /* TelepathSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF521D51F78F4780004C494 /* TelepathSpec.swift */; };
 		5CF521D81F78F4780004C494 /* Telepath.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CF521CA1F78F4780004C494 /* Telepath.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -58,6 +60,8 @@
 		5CAA828E1F7B970B0000A9D9 /* .gitlab-ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".gitlab-ci.yml"; sourceTree = "<group>"; };
 		5CC99AF91F78FE0400ED602C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5CC99AFA1F78FE0400ED602C /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		5CD810EE1F91064800CCD769 /* QueuingServiceClientSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueuingServiceClientSpec.swift; sourceTree = "<group>"; };
+		5CD810F01F91074400CCD769 /* QueuingServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueuingServiceClient.swift; sourceTree = "<group>"; };
 		5CF521C71F78F4780004C494 /* Telepath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Telepath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CF521CA1F78F4780004C494 /* Telepath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Telepath.h; sourceTree = "<group>"; };
 		5CF521CB1F78F4780004C494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 				5C40487F1F7E375000B19C9D /* SecureChannel.swift */,
 				5C4048811F7E379700B19C9D /* ChannelKey.swift */,
 				5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */,
+				5CD810F01F91074400CCD769 /* QueuingServiceClient.swift */,
 				5CF32CFF1F7D4DA800F887F4 /* URL */,
 				5CF521CA1F78F4780004C494 /* Telepath.h */,
 				5CF521CB1F78F4780004C494 /* Info.plist */,
@@ -156,6 +161,7 @@
 			children = (
 				5CF521D51F78F4780004C494 /* TelepathSpec.swift */,
 				5C4048831F7E385C00B19C9D /* SecureChannelSpec.swift */,
+				5CD810EE1F91064800CCD769 /* QueuingServiceClientSpec.swift */,
 				5CF32D001F7D4DC600F887F4 /* URL */,
 				5C4048851F7E3AB100B19C9D /* QueuingServiceMock.swift */,
 				5C4048871F7E3B1E00B19C9D /* ChannelKeyExample.swift */,
@@ -415,6 +421,7 @@
 				5CAA828D1F7A909E0000A9D9 /* QueuingService.swift in Sources */,
 				5C3C1D561F7BC159001E5563 /* UrlCodec.swift in Sources */,
 				5CF756811F7CF9250088C2AD /* UrlParameterParser.swift in Sources */,
+				5CD810F11F91074400CCD769 /* QueuingServiceClient.swift in Sources */,
 				5CF7567D1F7CE5630088C2AD /* Base64url.swift in Sources */,
 				5C4048801F7E375000B19C9D /* SecureChannel.swift in Sources */,
 				5C4048821F7E379700B19C9D /* ChannelKey.swift in Sources */,
@@ -428,6 +435,7 @@
 			files = (
 				5CF521D61F78F4780004C494 /* TelepathSpec.swift in Sources */,
 				5C4048841F7E385C00B19C9D /* SecureChannelSpec.swift in Sources */,
+				5CD810EF1F91064800CCD769 /* QueuingServiceClientSpec.swift in Sources */,
 				5CF7567F1F7CF9110088C2AD /* UrlParameterParserSpec.swift in Sources */,
 				5C3C1D541F7BBFCE001E5563 /* UrlCodecSpec.swift in Sources */,
 				5C990A1F1F82613300FF8F9F /* Base64urlSpec.swift in Sources */,
