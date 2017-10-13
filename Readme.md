@@ -1,5 +1,8 @@
 Telepath Queuing Service
 ========================
+[![build status](https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service/badges/master/build.svg)](https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service/commits/master)
+[![coverage report](https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service/badges/master/coverage.svg)](https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service/commits/master)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 Simple Queueing Service for use with Telepath. Allows two Telepath clients to
 communicate when they are behind distinct NAT.
