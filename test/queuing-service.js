@@ -28,4 +28,19 @@ describe('Queuing Service', function () {
     nock(`${baseUrl}`).post(`/${queueId}`, message).reply(500)
     await expect(queuing.send(queueId, message)).to.be.rejected()
   })
+
+  it('can receive a message', async function () {
+    nock(`${baseUrl}`).get(`/${queueId}`).reply(200, message)
+    await expect(queuing.receive(queueId)).to.eventually.equal(message)
+  })
+
+  it('returns null when queue is empty', async function () {
+    nock(`${baseUrl}`).get(`/${queueId}`).reply(204)
+    await expect(queuing.receive(queueId)).to.eventually.be.null()
+  })
+
+  it('throws when receiving fails', async function () {
+    nock(`${baseUrl}`).get(`/${queueId}`).reply(500)
+    await expect(queuing.receive(queueId)).to.be.rejected()
+  })
 })
