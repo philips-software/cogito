@@ -7,7 +7,7 @@ const { random, encrypt, decrypt, keySize, nonceSize } = require('../lib/crypto'
 const base64url = require('base64url')
 const SecureChannel = require('../lib/secure-channel')
 
-describe('secure-channel', function () {
+describe('Secure Channel', function () {
   const channelId = 'channel_id'
   const key = random(keySize)
   const blueQueue = `${channelId}.blue`

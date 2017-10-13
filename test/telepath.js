@@ -6,7 +6,7 @@ const base64url = require('base64url')
 const crypto = td.replace('../lib/crypto')
 const Telepath = require('../lib/telepath')
 
-describe('telepath', function () {
+describe('Telepath', function () {
   let telepath
   let queuing
 
