@@ -15,9 +15,12 @@ Currently uses independent encryption of messages. A recipient can therefore not
 
 ### Usage
 
+Create an instance of the Telepath class, providing the URL of the queuing
+service:
+
 ```javascript
 import Telepath from 'telepath-js'
-const telepath = new Telepath({ queuing: queuingService })
+const telepath = new Telepath('https://queuing.example.com')
 ```
 
 Creating a new channel with a random id and a random encryption key. Returns a

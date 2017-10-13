@@ -11,8 +11,9 @@ describe('Telepath', function () {
   let queuing
 
   beforeEach(function () {
+    telepath = new Telepath('https://queuing.example.com')
     queuing = td.object()
-    telepath = new Telepath({ queuing })
+    telepath.queuing = queuing
   })
 
   afterEach(function () {
