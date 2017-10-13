@@ -17,6 +17,7 @@
     "chai-as-promised": "^7.1.1",
     "dirty-chai": "^2.0.1",
     "mocha": "^3.5.3",
+    "nock": "^9.0.22",
     "nyc": "^11.2.1",
     "standard": "^10.0.3",
     "testdouble": "^3.2.6"
