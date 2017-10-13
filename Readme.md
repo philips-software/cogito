@@ -46,7 +46,8 @@ Sending messages:
 channel.send('a message')
 ```
 
-Receiving messages. The `receive` method returns a promise:
+Receiving messages. The `receive` method returns a promise. It resolves to
+`null` when no message is waiting.
 
 ```javascript
 const receivedMessage = await channel.receive()

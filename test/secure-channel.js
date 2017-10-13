@@ -78,6 +78,11 @@ describe('Secure Channel', function () {
     })
   })
 
+  it('receives null when no message is waiting', async function () {
+    td.when(queuing.receiv(blueQueue)).thenResolve(null)
+    await expect(channel.receive()).to.eventually.be.null()
+  })
+
   it('encodes the channel id and key in a URL', function () {
     const baseUrl = 'https://example.com'
     const encodedKey = base64url.encode(key)
