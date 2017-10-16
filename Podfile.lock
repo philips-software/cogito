@@ -14,7 +14,10 @@ PODS:
   - RxCocoa (4.0.0-beta.1):
     - RxSwift (~> 4.0.0-beta.1)
   - RxSwift (4.0.0-beta.1)
+  - Sodium (0.5)
   - SwiftLint (0.21.0)
+  - Telepath (0.1.0):
+    - Sodium (~> 0.5)
 
 DEPENDENCIES:
   - Geth (~> 1.7.1)
@@ -28,6 +31,7 @@ DEPENDENCIES:
   - RxCocoa (from `https://github.com/ReactiveX/RxSwift`, branch `rxswift4.0-swift4.0`)
   - RxSwift (from `https://github.com/ReactiveX/RxSwift`, branch `rxswift4.0-swift4.0`)
   - SwiftLint (= 0.21.0)
+  - Telepath (from `https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git`)
 
 EXTERNAL SOURCES:
   Nimble:
@@ -49,6 +53,8 @@ EXTERNAL SOURCES:
   RxSwift:
     :branch: rxswift4.0-swift4.0
     :git: https://github.com/ReactiveX/RxSwift
+  Telepath:
+    :git: https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git
 
 CHECKOUT OPTIONS:
   Nimble:
@@ -72,6 +78,9 @@ CHECKOUT OPTIONS:
   RxSwift:
     :commit: aacfcc894bd3bc3ea1b03d483720973ea0e02905
     :git: https://github.com/ReactiveX/RxSwift
+  Telepath:
+    :commit: 2b4f7f9fded8bd73c1c820ad70998f389cf4ee15
+    :git: https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git
 
 SPEC CHECKSUMS:
   Geth: 5d7ab4565680bc976b81cf8cdab653067807ed01
@@ -84,8 +93,10 @@ SPEC CHECKSUMS:
   ReSwiftThunk: 9b2ed720b51deabb4d49e7b6e76a618d1e4eb6f6
   RxCocoa: 009b86b0b158d4a7e4a5fc29bbdc0688c44fa3bb
   RxSwift: 9488787dfac649ffc1c4fddf3a3b4d6823d0b392
+  Sodium: a3a17f2ba2dc1b83547e13db0075e7c5d426fc55
   SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
+  Telepath: 14b8a4ad40df8c1f25ddc49ae7e1db3f1c427b7e
 
-PODFILE CHECKSUM: a337a51d14cded16424e593388ec765443af356f
+PODFILE CHECKSUM: 879faec36f6b00a2891c04a732c2d72b593804aa
 
 COCOAPODS: 1.3.1
