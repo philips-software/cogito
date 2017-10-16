@@ -17,10 +17,10 @@ public struct SecureChannel {
         self.sendingQueue = id + ".blue"
     }
 
-    func send(message: String) throws {
+    func send(message: String, completion: @escaping (Error?) -> Void) {
         let plainText = message.data(using: .utf8)!
         let cypherText = key.encrypt(plainText: plainText)
-        try queuing.send(queueId: sendingQueue, message: cypherText)
+        queuing.send(queueId: sendingQueue, message: cypherText, completion: completion)
     }
 
     func receive() throws -> String? {

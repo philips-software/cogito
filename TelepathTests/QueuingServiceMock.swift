@@ -10,12 +10,14 @@ class QueuingServiceMock: QueuingService {
     var sendError: Error?
     var receiveError: Error?
 
-    func send(queueId: QueueID, message: Data) throws {
-        if let error = sendError {
-            throw error
-        }
+    func send(queueId: QueueID, message: Data, completion: @escaping (Error?) -> Void) {
         latestQueueId = queueId
         latestSentMessage = message
+        if let error = sendError {
+            completion(error)
+        } else {
+            completion(nil)
+        }
     }
 
     func receive(queueId: QueueID) throws -> Data? {

@@ -25,10 +25,12 @@ class QueuingServiceClientSpec: QuickSpec {
             waitUntil { done in
                 self.stub(http(.post, uri: "\(baseUrl)/\(queueId)")) { request in
                     expect(Data(reading: request.httpBodyStream!)) == message
-                    done()
                     return http(200)(request)
                 }
-                try! queuing.send(queueId: queueId, message: message)
+                queuing.send(queueId: queueId, message: message) { error in
+                    expect(error).to(beNil())
+                    done()
+                }
             }
         }
     }

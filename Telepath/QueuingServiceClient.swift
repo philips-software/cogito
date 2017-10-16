@@ -1,17 +1,20 @@
 //Copyright © 2017 Philips. All rights reserved.
 
 public struct QueuingServiceClient: QueuingService {
+
     let url: String
 
     public init(url: String) {
         self.url = url
     }
 
-    public func send(queueId: QueueID, message: Data) throws {
+    public func send(queueId: QueueID, message: Data, completion: @escaping (Error?) -> Void) {
         let queueUrl = URL(string: "\(url)/\(queueId)")
         var request = URLRequest(url: queueUrl!)
         request.httpMethod = "POST"
-        let task = URLSession.shared.uploadTask(with: request, from: message)
+        let task = URLSession.shared.uploadTask(with: request, from: message) { _, _, _ in
+            completion(nil)
+        }
         task.resume()
     }
 

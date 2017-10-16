@@ -21,7 +21,9 @@ class SecureChannelSpec: QuickSpec {
             let message = "a message"
 
             beforeEach {
-                try! channel.send(message: "a message")
+                waitUntil { done in
+                    channel.send(message: message) { _ in done() }
+                }
             }
 
             it("encrypts the message") {
@@ -64,7 +66,12 @@ class SecureChannelSpec: QuickSpec {
         it("throws when there's an error while sending") {
             struct SomeError: Error {}
             queuing.sendError = SomeError()
-            expect { try channel.send(message: "some message") }.to(throwError())
+            waitUntil { done in
+                channel.send(message: "some message") { error in
+                    expect(error).toNot(beNil())
+                    done()
+                }
+            }
         }
 
         it("throws when there's an error while receiving") {
