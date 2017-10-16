@@ -17,10 +17,10 @@ Currently uses independent encryption of messages. A recipient can therefore not
 import Telepath
 ```
 
-Instantiating a Telepath instance given a Queuing Service:
+Instantiating a Telepath instance. You need the URL of a running [Queuing Service][3].
 
 ```swift
-let telepath = Telepath(queuing: queuingService)
+let telepath = Telepath(queuingServiceUrl: "https://....")
 ```
 
 Connecting to a secure channel when you have the channel id, and its key:
@@ -53,3 +53,4 @@ channel.receive { message: String?, error: Error? in
 
 [1]: https://en.wikipedia.org/wiki/Network_address_translation
 [2]: https://gitlab.ta.philips.com/blockchain-lab/telepath
+[3]: https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service

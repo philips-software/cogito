@@ -8,13 +8,16 @@ class TelepathSpec: QuickSpec {
     override func spec() {
         let channelId: QueueID = "channel_id"
         let channelKey = ChannelKey.example()
-
+        let queuingServiceUrl = "https://queuing.example.com"
         var telepath: Telepath!
-        var queuing: QueuingServiceMock!
 
         beforeEach {
-            queuing = QueuingServiceMock()
-            telepath = Telepath(queuing: queuing)
+            telepath = Telepath(queuingServiceUrl: queuingServiceUrl)
+        }
+
+        it("connects to the correct queuing service") {
+            expect(telepath.queuing as? QueuingServiceClient).toNot(beNil())
+            expect((telepath.queuing as? QueuingServiceClient)?.url) == queuingServiceUrl
         }
 
         it("can open a channel using a channel id and key") {
@@ -23,13 +26,13 @@ class TelepathSpec: QuickSpec {
             expect(channel.key) == channelKey
         }
 
-        it("can open a channel using a telepath URL") {
-            let url = UrlCodec().encode(
+        it("can open a channel using a telepath connection URL") {
+            let connectionUrl = UrlCodec().encode(
                 baseUrl: URL(string: "https://example.com")!,
                 channelId: channelId,
                 key: channelKey
             )
-            let channel = try! telepath.connect(url: url)
+            let channel = try! telepath.connect(url: connectionUrl)
             expect(channel.id) == channelId
             expect(channel.key) == channelKey
         }

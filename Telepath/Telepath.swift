@@ -3,6 +3,10 @@
 public struct Telepath {
     let queuing: QueuingService
 
+    public init(queuingServiceUrl: String) {
+        queuing = QueuingServiceClient(url: queuingServiceUrl)
+    }
+
     public func connect(channel: ChannelID, key: ChannelKey) -> SecureChannel {
         return SecureChannel(queuing: queuing, id: channel, key: key)
     }
