@@ -16,8 +16,9 @@ class TelepathSpec: QuickSpec {
         }
 
         it("connects to the correct queuing service") {
-            expect(telepath.queuing as? QueuingServiceClient).toNot(beNil())
-            expect((telepath.queuing as? QueuingServiceClient)?.url) == queuingServiceUrl
+            let queuing = telepath.queuing as? QueuingServiceClient
+            expect(queuing).toNot(beNil())
+            expect(queuing?.url) == queuingServiceUrl
         }
 
         it("can open a channel using a channel id and key") {
