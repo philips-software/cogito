@@ -33,6 +33,17 @@ class QueuingServiceClientSpec: QuickSpec {
                 }
             }
         }
+
+        it("returns error when http post fails") {
+            let someError = NSError(domain: "", code: 0, userInfo: nil)
+            waitUntil { done in
+                self.stub(http(.post, uri: "\(baseUrl)/\(queueId)"), failure(someError))
+                queuing.send(queueId: queueId, message: message) { error in
+                    expect(error).toNot(beNil())
+                    done()
+                }
+            }
+        }
     }
 }
 

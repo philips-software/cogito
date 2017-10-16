@@ -12,7 +12,11 @@ public struct QueuingServiceClient: QueuingService {
         let queueUrl = URL(string: "\(url)/\(queueId)")
         var request = URLRequest(url: queueUrl!)
         request.httpMethod = "POST"
-        let task = URLSession.shared.uploadTask(with: request, from: message) { _, _, _ in
+        let task = URLSession.shared.uploadTask(with: request, from: message) { _, _, error in
+            guard error == nil else {
+                completion(error)
+                return
+            }
             completion(nil)
         }
         task.resume()
