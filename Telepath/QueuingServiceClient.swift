@@ -32,7 +32,19 @@ public struct QueuingServiceClient: QueuingService {
 
     public func receive(queueId: QueueID, completion: @escaping (Data?, Error?) -> Void) {
         let queueUrl = URL(string: "\(url)/\(queueId)")!
-        let task = URLSession.shared.dataTask(with: queueUrl) { data, _, _ in
+        let task = URLSession.shared.dataTask(with: queueUrl) { data, response, error in
+            guard error == nil else {
+                completion(nil, Failure.connectionError(cause: error!))
+                return
+            }
+            guard let response = response as? HTTPURLResponse else {
+                completion(nil, Failure.invalidResponse)
+                return
+            }
+            guard 200..<300 ~= response.statusCode else {
+                completion(nil, Failure.httpError(statusCode: response.statusCode))
+                return
+            }
             completion(data, nil)
         }
         task.resume()

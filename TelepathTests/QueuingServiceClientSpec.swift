@@ -34,23 +34,25 @@ class QueuingServiceClientSpec: QuickSpec {
             }
         }
 
-        it("returns error when http post fails") {
-            let someError = NSError(domain: "", code: 0, userInfo: nil)
-            waitUntil { done in
-                self.stub(http(.post, uri: "\(baseUrl)/\(queueId)"), failure(someError))
-                queuing.send(queueId: queueId, message: message) { error in
-                    expect(error).toNot(beNil())
-                    done()
+        describe("send errors") {
+            it("returns error when connection fails") {
+                let someError = NSError(domain: "", code: 0, userInfo: nil)
+                waitUntil { done in
+                    self.stub(http(.post, uri: "\(baseUrl)/\(queueId)"), failure(someError))
+                    queuing.send(queueId: queueId, message: message) { error in
+                        expect(error).toNot(beNil())
+                        done()
+                    }
                 }
             }
-        }
 
-        it("returns error when http post was unsuccessfull") {
-            waitUntil { done in
-                self.stub(http(.post, uri: "\(baseUrl)/\(queueId)"), http(500))
-                queuing.send(queueId: queueId, message: message) { error in
-                    expect(error).toNot(beNil())
-                    done()
+            it("returns error when http post was unsuccessfull") {
+                waitUntil { done in
+                    self.stub(http(.post, uri: "\(baseUrl)/\(queueId)"), http(500))
+                    queuing.send(queueId: queueId, message: message) { error in
+                        expect(error).toNot(beNil())
+                        done()
+                    }
                 }
             }
         }
@@ -65,6 +67,29 @@ class QueuingServiceClientSpec: QuickSpec {
                     expect(error).to(beNil())
                     expect(receivedMessage) == message
                     done()
+                }
+            }
+        }
+
+        describe("receive errors") {
+            it("returns error when connection fails") {
+                let someError = NSError(domain: "", code: 0, userInfo: nil)
+                waitUntil { done in
+                    self.stub(http(.get, uri: "\(baseUrl)/\(queueId)"), failure(someError))
+                    queuing.receive(queueId: queueId) { _, error in
+                        expect(error).toNot(beNil())
+                        done()
+                    }
+                }
+            }
+
+            it("returns error when http get was unsuccessfull") {
+                waitUntil { done in
+                    self.stub(http(.get, uri: "\(baseUrl)/\(queueId)"), http(500))
+                    queuing.receive(queueId: queueId) { _, error in
+                        expect(error).toNot(beNil())
+                        done()
+                    }
                 }
             }
         }
