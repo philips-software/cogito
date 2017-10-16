@@ -13,19 +13,7 @@ public struct QueuingServiceClient: QueuingService {
         var request = URLRequest(url: queueUrl)
         request.httpMethod = "POST"
         let task = URLSession.shared.uploadTask(with: request, from: message) { _, response, error in
-            guard error == nil else {
-                completion(Failure.connectionError(cause: error!))
-                return
-            }
-            guard let response = response as? HTTPURLResponse else {
-                completion(Failure.invalidResponse)
-                return
-            }
-            guard 200..<300 ~= response.statusCode else {
-                completion(Failure.httpError(statusCode: response.statusCode))
-                return
-            }
-            completion(nil)
+            completion(self.checkValidity(response: response, error: error))
         }
         task.resume()
     }
@@ -33,21 +21,26 @@ public struct QueuingServiceClient: QueuingService {
     public func receive(queueId: QueueID, completion: @escaping (Data?, Error?) -> Void) {
         let queueUrl = URL(string: "\(url)/\(queueId)")!
         let task = URLSession.shared.dataTask(with: queueUrl) { data, response, error in
-            guard error == nil else {
-                completion(nil, Failure.connectionError(cause: error!))
-                return
+            if let failure = self.checkValidity(response: response, error: error) {
+                completion(nil, failure)
+            } else {
+                completion(data, nil)
             }
-            guard let response = response as? HTTPURLResponse else {
-                completion(nil, Failure.invalidResponse)
-                return
-            }
-            guard 200..<300 ~= response.statusCode else {
-                completion(nil, Failure.httpError(statusCode: response.statusCode))
-                return
-            }
-            completion(data, nil)
         }
         task.resume()
+    }
+
+    private func checkValidity(response: URLResponse?, error: Error?) -> Failure? {
+        guard error == nil else {
+            return Failure.connectionError(cause: error!)
+        }
+        guard let response = response as? HTTPURLResponse else {
+            return Failure.invalidResponse
+        }
+        guard 200..<300 ~= response.statusCode else {
+            return Failure.httpError(statusCode: response.statusCode)
+        }
+        return nil
     }
 
     public enum Failure: Error {
