@@ -61,9 +61,13 @@ class CreateIdentityViewController: UIViewController, Connectable {
         actions.setDescription(descriptionField.text ?? "")
     }
 
+    @IBAction func editingDidEnd() {
+        actions.setDescription(descriptionField.text ?? "")
+    }
+
     @IBAction func createTapped() {
         descriptionField.resignFirstResponder()
-        actions.createIdentity()
+        self.actions.createIdentity()
     }
 
     @IBAction func cancelTapped() {
