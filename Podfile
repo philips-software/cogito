@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'Cogito' do
   use_frameworks!
@@ -10,6 +10,7 @@ target 'Cogito' do
   pod 'ReRxSwift', :git => 'https://github.com/svdo/ReRxSwift', :branch => 'master'
   pod 'KeychainAccess', '~> 3.1'
   pod 'QRCodeReader.swift', '~> 8.0'
+  pod 'Telepath', :git => 'https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git'
 
   pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0'
   pod 'RxCocoa', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0'
