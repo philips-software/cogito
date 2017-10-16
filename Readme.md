@@ -35,5 +35,21 @@ Connecting to a secure channel when you received a Telepath URL (e.g. through a 
 let channel = telepath.connect(url: telepathURL)
 ```
 
+Sending messages:
+
+```swift
+channel.send(message: "a message") { error: Error? in
+    // ...
+}
+```
+
+Receiving messages. Received message is `nil` when no message is waiting.
+
+```swift
+channel.receive { message: String?, error: Error? in
+    // ...
+}
+```
+
 [1]: https://en.wikipedia.org/wiki/Network_address_translation
 [2]: https://gitlab.ta.philips.com/blockchain-lab/telepath
