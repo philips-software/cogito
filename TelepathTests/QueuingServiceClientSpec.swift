@@ -44,6 +44,16 @@ class QueuingServiceClientSpec: QuickSpec {
                 }
             }
         }
+
+        it("returns error when http post was unsuccessfull") {
+            waitUntil { done in
+                self.stub(http(.post, uri: "\(baseUrl)/\(queueId)"), http(500))
+                queuing.send(queueId: queueId, message: message) { error in
+                    expect(error).toNot(beNil())
+                    done()
+                }
+            }
+        }
     }
 }
 
