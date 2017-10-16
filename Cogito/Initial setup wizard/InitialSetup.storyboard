@@ -100,6 +100,7 @@ Cogito allows you to choose who you are.</string>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES" textContentType="nickname"/>
                                 <connections>
                                     <action selector="editingChanged" destination="wTc-Hd-r6m" eventType="editingChanged" id="OAk-FL-n5I"/>
+                                    <action selector="editingDidEnd" destination="wTc-Hd-r6m" eventType="editingDidEnd" id="qmH-cj-JCW"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hC8-Yl-N8c">
