@@ -46,7 +46,12 @@ class SecureChannelSpec: QuickSpec {
                 let plainText = message.data(using: .utf8)!
                 let cypherText = channelKey.encrypt(plainText: plainText)
                 queuing.messageToReturn = cypherText
-                try! receivedMessage = channel.receive()
+                waitUntil { done in
+                    channel.receive { message, _ in
+                        receivedMessage = message
+                        done()
+                    }
+                }
             }
 
             it("decrypts the message") {
@@ -60,7 +65,12 @@ class SecureChannelSpec: QuickSpec {
 
         it("indicates when no message is available") {
             queuing.messageToReturn = nil
-            expect(try! channel.receive()).to(beNil())
+            waitUntil { done in
+                channel.receive { message, _ in
+                    expect(message).to(beNil())
+                    done()
+                }
+            }
         }
 
         it("throws when there's an error while sending") {
@@ -74,15 +84,25 @@ class SecureChannelSpec: QuickSpec {
             }
         }
 
-        it("throws when there's an error while receiving") {
+        it("indicates when there's an error while receiving") {
             struct SomeError: Error {}
             queuing.receiveError = SomeError()
-            expect { try channel.receive() }.to(throwError())
+            waitUntil { done in
+                channel.receive { _, error in
+                    expect(error).toNot(beNil())
+                    done()
+                }
+            }
         }
 
-        it("throws when there's an error while decrypting") {
+        it("indicates when there's an error while decrypting") {
             queuing.messageToReturn = "invalid data".data(using: .utf8)
-            expect { try channel.receive() }.to(throwError())
+            waitUntil { done in
+                channel.receive { _, error in
+                    expect(error).toNot(beNil())
+                    done()
+                }
+            }
         }
     }
 }

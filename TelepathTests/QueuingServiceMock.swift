@@ -20,11 +20,12 @@ class QueuingServiceMock: QueuingService {
         }
     }
 
-    func receive(queueId: QueueID) throws -> Data? {
-        if let error = receiveError {
-            throw error
-        }
+    func receive(queueId: QueueID, completion: @escaping (Data?, Error?) -> Void) {
         latestQueueId = queueId
-        return messageToReturn
+        if let error = receiveError {
+            completion(nil, error)
+        } else {
+            completion(messageToReturn, nil)
+        }
     }
 }

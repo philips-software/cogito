@@ -54,6 +54,20 @@ class QueuingServiceClientSpec: QuickSpec {
                 }
             }
         }
+
+        it("can receive a message") {
+            waitUntil { done in
+                self.stub(
+                    http(.get, uri: "\(baseUrl)/\(queueId)"),
+                    http(200, headers: nil, download: .content(message))
+                )
+                queuing.receive(queueId: queueId) { receivedMessage, error in
+                    expect(error).to(beNil())
+                    expect(receivedMessage) == message
+                    done()
+                }
+            }
+        }
     }
 }
 

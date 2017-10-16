@@ -9,8 +9,8 @@ public struct QueuingServiceClient: QueuingService {
     }
 
     public func send(queueId: QueueID, message: Data, completion: @escaping (Error?) -> Void) {
-        let queueUrl = URL(string: "\(url)/\(queueId)")
-        var request = URLRequest(url: queueUrl!)
+        let queueUrl = URL(string: "\(url)/\(queueId)")!
+        var request = URLRequest(url: queueUrl)
         request.httpMethod = "POST"
         let task = URLSession.shared.uploadTask(with: request, from: message) { _, response, error in
             guard error == nil else {
@@ -30,8 +30,12 @@ public struct QueuingServiceClient: QueuingService {
         task.resume()
     }
 
-    public func receive(queueId: QueueID) throws -> Data? {
-        return nil
+    public func receive(queueId: QueueID, completion: @escaping (Data?, Error?) -> Void) {
+        let queueUrl = URL(string: "\(url)/\(queueId)")!
+        let task = URLSession.shared.dataTask(with: queueUrl) { data, _, _ in
+            completion(data, nil)
+        }
+        task.resume()
     }
 
     public enum Failure: Error {

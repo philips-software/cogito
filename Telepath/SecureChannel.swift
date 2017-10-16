@@ -20,15 +20,37 @@ public struct SecureChannel {
     func send(message: String, completion: @escaping (Error?) -> Void) {
         let plainText = message.data(using: .utf8)!
         let cypherText = key.encrypt(plainText: plainText)
-        queuing.send(queueId: sendingQueue, message: cypherText, completion: completion)
+        queuing.send(queueId: sendingQueue, message: cypherText) { error in
+            guard error == nil else {
+                completion(Failure.sendingFailed(cause: error!))
+                return
+            }
+            completion(nil)
+        }
     }
 
-    func receive() throws -> String? {
-        guard let cypherText = try queuing.receive(queueId: receivingQueue) else {
-            return nil
+    func receive(completion: @escaping (String?, Error?) -> Void) {
+        queuing.receive(queueId: receivingQueue) { data, error in
+            guard error == nil else {
+                completion(nil, Failure.receivingFailed(cause: error!))
+                return
+            }
+            guard let cypherText = data else {
+                completion(nil, nil)
+                return
+            }
+            guard let plainText = try? self.key.decrypt(cypherText: cypherText) else {
+                completion(nil, Failure.decryptionFailed)
+                return
+            }
+            completion(String(data: plainText, encoding: .utf8), nil)
         }
-        let plainText = try key.decrypt(cypherText: cypherText)
-        return String(data: plainText, encoding: .utf8)
+    }
+
+    enum Failure: Error {
+        case sendingFailed(cause: Error)
+        case receivingFailed(cause: Error)
+        case decryptionFailed
     }
 }
 
