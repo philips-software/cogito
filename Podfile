@@ -3,7 +3,7 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'Telepath' do
-  pod 'Sodium', '~> 0.5'
+  podspec
 
   target 'TelepathTests' do
     # Latest versions from master needed for Swift 4 compatibility:

@@ -45,6 +45,7 @@
 		22F4BF1752A35E8B846AEDDF /* Pods_Telepath_TelepathTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telepath_TelepathTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3282E434BDF2C5AEABE3548D /* Pods-Telepath.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath/Pods-Telepath.debug.xcconfig"; sourceTree = "<group>"; };
 		50E96DB6A72961DE52059338 /* Pods-Telepath-TelepathTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath-TelepathTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests.release.xcconfig"; sourceTree = "<group>"; };
+		5C1AA3211F94FFC400697FE8 /* Telepath.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Telepath.podspec; sourceTree = "<group>"; };
 		5C2F83F51F7E461500C8DD31 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		5C3C1D531F7BBFCE001E5563 /* UrlCodecSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlCodecSpec.swift; sourceTree = "<group>"; };
 		5C3C1D551F7BC159001E5563 /* UrlCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlCodec.swift; sourceTree = "<group>"; };
@@ -122,6 +123,7 @@
 			children = (
 				5CC99AFA1F78FE0400ED602C /* Readme.md */,
 				5CC99AF91F78FE0400ED602C /* Podfile */,
+				5C1AA3211F94FFC400697FE8 /* Telepath.podspec */,
 				5CAA828E1F7B970B0000A9D9 /* .gitlab-ci.yml */,
 				5C40488A1F7E437A00B19C9D /* .swiftlint.yml */,
 				5CF521C91F78F4780004C494 /* Telepath */,
