@@ -8,7 +8,11 @@ public struct QueuingServiceClient: QueuingService {
     }
 
     public func send(queueId: QueueID, message: Data) throws {
-
+        let queueUrl = URL(string: "\(url)/\(queueId)")
+        var request = URLRequest(url: queueUrl!)
+        request.httpMethod = "POST"
+        let task = URLSession.shared.uploadTask(with: request, from: message)
+        task.resume()
     }
 
     public func receive(queueId: QueueID) throws -> Data? {
