@@ -17,7 +17,7 @@ public struct SecureChannel {
         self.sendingQueue = id + ".blue"
     }
 
-    func send(message: String, completion: @escaping (Error?) -> Void) {
+    public func send(message: String, completion: @escaping (Error?) -> Void) {
         let plainText = message.data(using: .utf8)!
         let cypherText = key.encrypt(plainText: plainText)
         queuing.send(queueId: sendingQueue, message: cypherText) { error in
@@ -29,7 +29,7 @@ public struct SecureChannel {
         }
     }
 
-    func receive(completion: @escaping (String?, Error?) -> Void) {
+    public func receive(completion: @escaping (String?, Error?) -> Void) {
         queuing.receive(queueId: receivingQueue) { data, error in
             guard error == nil else {
                 completion(nil, Failure.receivingFailed(cause: error!))
