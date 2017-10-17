@@ -142,7 +142,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         animationsInProgress += 1
         UIView.animate(withDuration: animationDuration,
                        delay: 0,
-                       options: [.beginFromCurrentState, .curveLinear],
+                       options: [.beginFromCurrentState, .curveEaseOut],
                        animations: {
                         self.view.layoutIfNeeded()
         }, completion: { _ in
