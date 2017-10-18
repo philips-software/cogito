@@ -62,9 +62,9 @@ describe('Secure Channel', function () {
   })
 
   describe('errors', function () {
-    it('throws when there is an error while sending', function () {
-      td.when(queuing.send(anything(), anything())).thenThrow('an error')
-      expect(() => channel.send('a message')).to.throw()
+    it('throws when there is an error while sending', async function () {
+      td.when(queuing.send(anything(), anything())).thenReject('an error')
+      await expect(channel.send('a message')).to.be.rejected()
     })
 
     it('throws when there is an error while receiving', async function () {

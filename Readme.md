@@ -43,7 +43,7 @@ const connectUrl = channel.createConnectUrl(appBaseUrl)
 Sending messages:
 
 ```javascript
-channel.send('a message')
+await channel.send('a message')
 ```
 
 Receiving messages. The `receive` method returns a promise. It resolves to
