@@ -6,7 +6,16 @@
   "private": true,
   "license": "UNLICENSED",
   "main": "index.js",
+  "scripts": {
+    "test": "standard && nyc mocha test/**/*.js"
+  },
   "engines": {
     "node": ">=7.6.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1",
+    "standard": "^10.0.3"
   }
 }
