@@ -1,0 +1,12 @@
+{
+  "name": "cogito-web3",
+  "version": "0.1.0",
+  "description": "An Ethereum web3 provider that signs transactions with the Cogito app",
+  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito-web3",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "engines": {
+    "node": ">=7.6.0"
+  }
+}
