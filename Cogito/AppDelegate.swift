@@ -3,6 +3,7 @@
 import UIKit
 import ReSwift
 import Geth
+import Branch
 
 typealias LaunchOptions = [UIApplicationLaunchOptionsKey: Any]?
 
@@ -30,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        startGeth()
         debugGestureHandler = DebugGestureHandler()
         debugGestureHandler.installGestureRecognizer(on: window!)
+
+        startBranchSession(launchOptions: launchOptions)
 
         return true
     }
@@ -63,5 +66,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(e)
             abort()
         }
+    }
+
+    func startBranchSession(launchOptions: LaunchOptions) {
+        guard let branch = Branch.getInstance() else {
+            print("could not get Branch instance")
+            abort()
+        }
+        branch.initSession(launchOptions: launchOptions, andRegisterDeepLinkHandler: {params, error in
+            if error == nil {
+                // params are the deep linked params associated with the link that the user
+                // clicked -> was re-directed to this app
+                // params will be empty if no data found
+                // ... insert custom logic here ...
+                print("params: %@", params as? [String: AnyObject] ?? {})
+            }
+        })
+    }
+
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        // pass the url to the handle deep link call
+        let branchHandled = Branch.getInstance().application(application,
+                                                             open: url,
+                                                             sourceApplication: sourceApplication,
+                                                             annotation: annotation
+        )
+        if !branchHandled {
+            // If not handled by Branch, do other deep link routing for the Facebook SDK, Pinterest SDK, etc
+        }
+
+        // do other deep link routing for the Facebook SDK, Pinterest SDK, etc
+        return true
+    }
+
+    // Respond to Universal Links
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        // pass the url to the handle deep link call
+        Branch.getInstance().continue(userActivity)
+
+        return true
     }
 }

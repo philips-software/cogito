@@ -127,6 +127,7 @@
 		0205E3661F7012E1003A9787 /* KeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStore.swift; sourceTree = "<group>"; };
 		0205E3681F71481C003A9787 /* KeyStoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreActions.swift; sourceTree = "<group>"; };
 		0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreReducerSpec.swift; sourceTree = "<group>"; };
+		0212E0301F99FFD300EEDE34 /* Cogito.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cogito.entitlements; sourceTree = "<group>"; };
 		022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityActionsSpec.swift; sourceTree = "<group>"; };
 		027603EB1F6ACD1600788B0A /* Cogito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cogito.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		027603EE1F6ACD1600788B0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -241,6 +242,7 @@
 		027603ED1F6ACD1600788B0A /* Cogito */ = {
 			isa = PBXGroup;
 			children = (
+				0212E0301F99FFD300EEDE34 /* Cogito.entitlements */,
 				028F4EF21F7CE37E0015C4AF /* Global state */,
 				028F4EF01F7CE22D0015C4AF /* Geth state */,
 				0298D4331F7A45040070998D /* Geth */,
@@ -531,6 +533,11 @@
 					027603EA1F6ACD1600788B0A = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 					027603FE1F6ACD1600788B0A = {
 						CreatedOnToolsVersion = 9.0;
@@ -992,6 +999,7 @@
 			baseConfigurationReference = 522B6D6F55AAD6AA150A5F61 /* Pods-Cogito.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Cogito/Cogito.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWTEZ4CYM6;
 				ENABLE_BITCODE = NO;
@@ -1009,6 +1017,7 @@
 			baseConfigurationReference = 4E01CAF19EC1DDC9775320D9 /* Pods-Cogito.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Cogito/Cogito.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWTEZ4CYM6;
 				ENABLE_BITCODE = NO;
