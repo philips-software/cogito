@@ -9,7 +9,7 @@ describe('Poller', function () {
 
   beforeEach(function () {
     pollFunction = td.function()
-    poller = new Poller({ pollFunction })
+    poller = new Poller({ pollFunction, interval: 0 })
   })
 
   afterEach(function () {
@@ -29,5 +29,11 @@ describe('Poller', function () {
   it('returns null when result remains null', async function () {
     td.when(pollFunction()).thenResolve(null)
     await expect(poller.poll()).to.eventually.be.null()
+  })
+
+  it('has sensible defaults', function () {
+    const poller = new Poller({ pollFunction })
+    expect(poller.retries).to.equal(10)
+    expect(poller.interval).to.equal(100)
   })
 })
