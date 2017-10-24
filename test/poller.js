@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 const expect = require('chai').expect
 const td = require('testdouble')
+const delay = require('../lib/delay')
 const Poller = require('../lib/poller')
 
 describe('Poller', function () {
@@ -44,6 +45,19 @@ describe('Poller', function () {
     const poll2 = poller.poll()
     await expect(poll1).to.eventually.equal(1)
     await expect(poll2).to.eventually.equal(2)
+  })
+
+  it('does not invoke poll function concurrently', async function () {
+    td.when(pollFunction()).thenDo(async function slow () {
+      expect(slow.isRunning).to.not.be.true()
+      slow.isRunning = true
+      await delay(10)
+      slow.isRunning = false
+    })
+    const poll1 = poller.poll()
+    const poll2 = poller.poll()
+    await poll1
+    await poll2
   })
 
   it('throws when the poll function throws', async function () {
