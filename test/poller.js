@@ -39,6 +39,11 @@ describe('Poller', function () {
     await expect(poll2).to.eventually.equal(2)
   })
 
+  it('throws when the poll function throws', async function () {
+    td.when(pollFunction()).thenReject(new Error('an error'))
+    await expect(poller.poll()).to.eventually.be.rejected()
+  })
+
   it('has sensible defaults', function () {
     const poller = new Poller({ pollFunction })
     expect(poller.retries).to.equal(10)
