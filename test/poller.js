@@ -31,6 +31,14 @@ describe('Poller', function () {
     await expect(poller.poll()).to.eventually.be.null()
   })
 
+  it('handles polls in the right order', async function () {
+    td.when(pollFunction()).thenResolve(null, 1, null, 2)
+    const poll1 = poller.poll()
+    const poll2 = poller.poll()
+    await expect(poll1).to.eventually.equal(1)
+    await expect(poll2).to.eventually.equal(2)
+  })
+
   it('has sensible defaults', function () {
     const poller = new Poller({ pollFunction })
     expect(poller.retries).to.equal(10)
