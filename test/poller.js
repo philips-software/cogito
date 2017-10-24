@@ -65,6 +65,14 @@ describe('Poller', function () {
     await expect(poller.poll()).to.eventually.be.rejected()
   })
 
+  it('recovers when the poll function throws', async function () {
+    td.when(pollFunction(), { times: 1 }).thenReject()
+    const poll1 = poller.poll()
+    const poll2 = poller.poll()
+    await expect(poll1).to.eventually.be.rejected()
+    await expect(poll2).to.eventually.be.fulfilled()
+  })
+
   it('has sensible defaults', function () {
     const poller = new Poller({ pollFunction })
     expect(poller.retries).to.equal(10)
