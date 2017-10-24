@@ -4,12 +4,14 @@ const td = require('testdouble')
 const Poller = require('../lib/poller')
 
 describe('Poller', function () {
+  const retries = 5
+
   let poller
   let pollFunction
 
   beforeEach(function () {
     pollFunction = td.function()
-    poller = new Poller({ pollFunction, interval: 0 })
+    poller = new Poller({ pollFunction, retries, interval: 0 })
   })
 
   afterEach(function () {
@@ -29,6 +31,11 @@ describe('Poller', function () {
   it('returns null when result remains null', async function () {
     td.when(pollFunction()).thenResolve(null)
     await expect(poller.poll()).to.eventually.be.null()
+  })
+
+  it('stops polling after a number of retries', async function () {
+    await poller.poll()
+    td.verify(pollFunction(), { times: retries })
   })
 
   it('handles polls in the right order', async function () {
