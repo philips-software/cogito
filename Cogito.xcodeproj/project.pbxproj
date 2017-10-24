@@ -17,8 +17,9 @@
 		0212E0351F9E397C00EEDE34 /* SignTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */; };
 		0212E0361F9E397C00EEDE34 /* SignTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */; };
 		022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */; };
-		0270D7131F9E3BBE00CC9038 /* SignTransactionExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* SignTransactionExplanationViewController.swift */; };
-		0270D7141F9E3BBE00CC9038 /* SignTransactionExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* SignTransactionExplanationViewController.swift */; };
+		0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
+		0270D7141F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
+		0270D7161F9F146A00CC9038 /* ExplanationViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */; };
 		027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603EE1F6ACD1600788B0A /* AppDelegate.swift */; };
 		027603F11F6ACD1600788B0A /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603F01F6ACD1600788B0A /* DebugViewController.swift */; };
 		027603F41F6ACD1600788B0A /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F21F6ACD1600788B0A /* Debug.storyboard */; };
@@ -134,7 +135,8 @@
 		0212E0301F99FFD300EEDE34 /* Cogito.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cogito.entitlements; sourceTree = "<group>"; };
 		0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignTransaction.storyboard; sourceTree = "<group>"; };
 		022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityActionsSpec.swift; sourceTree = "<group>"; };
-		0270D7121F9E3BBE00CC9038 /* SignTransactionExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTransactionExplanationViewController.swift; sourceTree = "<group>"; };
+		0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
+		0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewControllerSpec.swift; sourceTree = "<group>"; };
 		027603EB1F6ACD1600788B0A /* Cogito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cogito.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		027603EE1F6ACD1600788B0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		027603F01F6ACD1600788B0A /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
@@ -228,7 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */,
-				0270D7121F9E3BBE00CC9038 /* SignTransactionExplanationViewController.swift */,
+				0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */,
 			);
 			path = "Sign transaction";
 			sourceTree = "<group>";
@@ -236,6 +238,7 @@
 		0212E0331F9E393A00EEDE34 /* Sign transaction */ = {
 			isa = PBXGroup;
 			children = (
+				0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */,
 			);
 			path = "Sign transaction";
 			sourceTree = "<group>";
@@ -802,7 +805,7 @@
 				02BE32D31F7A8165006C7287 /* EthereumClient.swift in Sources */,
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
 				027603F11F6ACD1600788B0A /* DebugViewController.swift in Sources */,
-				0270D7131F9E3BBE00CC9038 /* SignTransactionExplanationViewController.swift in Sources */,
+				0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */,
 				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
 				02D0C0D41F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
 				02CD80581F7E30D100AA5C3A /* ActionLogger.swift in Sources */,
@@ -827,7 +830,7 @@
 				028F4EF51F7CF7EB0015C4AF /* DebugViewControllerSpec.swift in Sources */,
 				02C305471F87596200351B4A /* DebugViewController.swift in Sources */,
 				029245151F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
-				0270D7141F9E3BBE00CC9038 /* SignTransactionExplanationViewController.swift in Sources */,
+				0270D7141F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */,
 				0292451B1F7AA17300F2C0C1 /* GethState.swift in Sources */,
 				028F4F061F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift in Sources */,
 				02BE32D11F7A6DD0006C7287 /* SyncProgressReporter.swift in Sources */,
@@ -868,6 +871,7 @@
 				02A15B041F86732500A94163 /* DiamondStateSpec.swift in Sources */,
 				02021D3E1F8C16370092DD89 /* AppActionsSpec.swift in Sources */,
 				029245181F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
+				0270D7161F9F146A00CC9038 /* ExplanationViewControllerSpec.swift in Sources */,
 				028F4F041F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
 				028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				02A15AF01F864F0900A94163 /* HomeViewController.swift in Sources */,

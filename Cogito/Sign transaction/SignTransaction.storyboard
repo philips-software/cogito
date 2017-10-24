@@ -28,11 +28,24 @@
         <!--Signature required-->
         <scene sceneID="lGC-2f-ySM">
             <objects>
-                <viewController storyboardIdentifier="SignatureRequired" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zYe-bO-UOX" customClass="SignTransactionExplanationViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Explanation" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zYe-bO-UOX" customClass="ExplanationViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ndi-vO-tCJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LqP-Yj-8jZ">
+                                <rect key="frame" x="16" y="114" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="d6B-Fa-2XX" firstAttribute="trailing" secondItem="LqP-Yj-8jZ" secondAttribute="trailing" constant="16" id="L5j-HH-yGD"/>
+                            <constraint firstItem="LqP-Yj-8jZ" firstAttribute="leading" secondItem="d6B-Fa-2XX" secondAttribute="leading" constant="16" id="WhB-FW-Vnq"/>
+                            <constraint firstItem="LqP-Yj-8jZ" firstAttribute="top" secondItem="d6B-Fa-2XX" secondAttribute="top" constant="50" id="cxk-Cp-73d"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="d6B-Fa-2XX"/>
                     </view>
                     <navigationItem key="navigationItem" title="Signature required" id="4QQ-ag-00q">
@@ -42,10 +55,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="explanationLabel" destination="LqP-Yj-8jZ" id="N8e-oM-uka"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ve7-sD-1Xd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="554" y="107"/>
+            <point key="canvasLocation" x="552.79999999999995" y="106.59670164917542"/>
         </scene>
     </scenes>
 </document>
