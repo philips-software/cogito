@@ -34,17 +34,58 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LqP-Yj-8jZ">
-                                <rect key="frame" x="16" y="114" width="343" height="21"/>
+                                <rect key="frame" x="16" y="114" width="343" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0HZ-lZ-qO4">
+                                <rect key="frame" x="127.5" y="159.5" width="119" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Login with &lt;&gt;"/>
+                                <connections>
+                                    <action selector="startAttestation" destination="zYe-bO-UOX" eventType="touchUpInside" id="UhP-mT-0cO"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cc9-Cr-5du">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6RG-5o-HXO">
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
+                                        <color key="backgroundColor" red="0.81599999999999995" green="0.25900000000000001" blue="0.19600000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Reject">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="reject" destination="zYe-bO-UOX" eventType="touchUpInside" id="QCE-0E-deJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Grw-XV-eLZ">
+                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="50"/>
+                                        <color key="backgroundColor" red="0.111" green="0.749" blue="0.247" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Sign">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sign" destination="zYe-bO-UOX" eventType="touchUpInside" id="pyB-HO-lAO"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="EEz-z2-Rm6"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="d6B-Fa-2XX" firstAttribute="trailing" secondItem="cc9-Cr-5du" secondAttribute="trailing" id="0XX-n0-2NW"/>
+                            <constraint firstItem="0HZ-lZ-qO4" firstAttribute="centerX" secondItem="Ndi-vO-tCJ" secondAttribute="centerX" id="7wz-6O-2kB"/>
+                            <constraint firstItem="0HZ-lZ-qO4" firstAttribute="top" secondItem="LqP-Yj-8jZ" secondAttribute="bottom" constant="25" id="8RT-uN-Neh"/>
+                            <constraint firstItem="cc9-Cr-5du" firstAttribute="leading" secondItem="d6B-Fa-2XX" secondAttribute="leading" id="JWy-om-x3o"/>
                             <constraint firstItem="d6B-Fa-2XX" firstAttribute="trailing" secondItem="LqP-Yj-8jZ" secondAttribute="trailing" constant="16" id="L5j-HH-yGD"/>
                             <constraint firstItem="LqP-Yj-8jZ" firstAttribute="leading" secondItem="d6B-Fa-2XX" secondAttribute="leading" constant="16" id="WhB-FW-Vnq"/>
                             <constraint firstItem="LqP-Yj-8jZ" firstAttribute="top" secondItem="d6B-Fa-2XX" secondAttribute="top" constant="50" id="cxk-Cp-73d"/>
+                            <constraint firstItem="d6B-Fa-2XX" firstAttribute="bottom" secondItem="cc9-Cr-5du" secondAttribute="bottom" id="mpE-mt-MoM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="d6B-Fa-2XX"/>
                     </view>
@@ -57,6 +98,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="explanationLabel" destination="LqP-Yj-8jZ" id="N8e-oM-uka"/>
+                        <outlet property="rejectButton" destination="6RG-5o-HXO" id="uJP-qj-imU"/>
+                        <outlet property="signButton" destination="Grw-XV-eLZ" id="opq-0T-qMs"/>
+                        <outlet property="startAttestationButton" destination="0HZ-lZ-qO4" id="uVl-pj-OEJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ve7-sD-1Xd" userLabel="First Responder" sceneMemberID="firstResponder"/>
