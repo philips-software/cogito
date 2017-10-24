@@ -61,12 +61,15 @@ class ExplanationViewController: UIViewController, Connectable {
     }
 
     @IBAction func startAttestation() {
+        actions.startAttestation()
     }
 
     @IBAction func sign() {
+        actions.sign()
     }
 
     @IBAction func reject() {
+        actions.reject()
     }
 
     struct Props {
@@ -75,11 +78,13 @@ class ExplanationViewController: UIViewController, Connectable {
         let organization: String?
         let hasValidAttestation: Bool?
     }
+
     struct Actions {
         let sign: () -> Void
         let reject: () -> Void
         let startAttestation: () -> Void
     }
+
     let connection = Connection(store: appStore,
                                 mapStateToProps: mapStateToProps,
                                 mapDispatchToActions: mapDispatchToActions)
@@ -96,8 +101,8 @@ private func mapStateToProps(state: AppState) -> ExplanationViewController.Props
 
 private func mapDispatchToActions(dispatch: DispatchFunction) -> ExplanationViewController.Actions {
     return ExplanationViewController.Actions(
-        sign: {},
-        reject: {},
-        startAttestation: {}
+        sign: { print("not implemented yet") },
+        reject: { print("not implemented yet") },
+        startAttestation: { print("not implemented yet") }
     )
 }

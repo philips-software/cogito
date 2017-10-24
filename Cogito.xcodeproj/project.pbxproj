@@ -20,6 +20,12 @@
 		0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
 		0270D7141F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
 		0270D7161F9F146A00CC9038 /* ExplanationViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */; };
+		0270D71A1F9F58CA00CC9038 /* AttestationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7191F9F58CA00CC9038 /* AttestationActions.swift */; };
+		0270D71B1F9F58CA00CC9038 /* AttestationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7191F9F58CA00CC9038 /* AttestationActions.swift */; };
+		0270D71D1F9F5A5F00CC9038 /* AttestationActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D71C1F9F5A5F00CC9038 /* AttestationActionsSpec.swift */; };
+		0270D71F1F9F6C6D00CC9038 /* OpenIDAttestationHandlerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D71E1F9F6C6D00CC9038 /* OpenIDAttestationHandlerSpec.swift */; };
+		0270D7211F9F6C7E00CC9038 /* OpenIDAttestationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7201F9F6C7E00CC9038 /* OpenIDAttestationHandler.swift */; };
+		0270D7221F9F6C7E00CC9038 /* OpenIDAttestationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7201F9F6C7E00CC9038 /* OpenIDAttestationHandler.swift */; };
 		027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603EE1F6ACD1600788B0A /* AppDelegate.swift */; };
 		027603F11F6ACD1600788B0A /* DebugViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603F01F6ACD1600788B0A /* DebugViewController.swift */; };
 		027603F41F6ACD1600788B0A /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F21F6ACD1600788B0A /* Debug.storyboard */; };
@@ -137,6 +143,10 @@
 		022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityActionsSpec.swift; sourceTree = "<group>"; };
 		0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
 		0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewControllerSpec.swift; sourceTree = "<group>"; };
+		0270D7191F9F58CA00CC9038 /* AttestationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActions.swift; sourceTree = "<group>"; };
+		0270D71C1F9F5A5F00CC9038 /* AttestationActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActionsSpec.swift; sourceTree = "<group>"; };
+		0270D71E1F9F6C6D00CC9038 /* OpenIDAttestationHandlerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenIDAttestationHandlerSpec.swift; sourceTree = "<group>"; };
+		0270D7201F9F6C7E00CC9038 /* OpenIDAttestationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenIDAttestationHandler.swift; sourceTree = "<group>"; };
 		027603EB1F6ACD1600788B0A /* Cogito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cogito.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		027603EE1F6ACD1600788B0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		027603F01F6ACD1600788B0A /* DebugViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewController.swift; sourceTree = "<group>"; };
@@ -243,6 +253,24 @@
 			path = "Sign transaction";
 			sourceTree = "<group>";
 		};
+		0270D7171F9F445F00CC9038 /* Attestations */ = {
+			isa = PBXGroup;
+			children = (
+				0270D7191F9F58CA00CC9038 /* AttestationActions.swift */,
+				0270D7201F9F6C7E00CC9038 /* OpenIDAttestationHandler.swift */,
+			);
+			path = Attestations;
+			sourceTree = "<group>";
+		};
+		0270D7181F9F446C00CC9038 /* Attestations */ = {
+			isa = PBXGroup;
+			children = (
+				0270D71C1F9F5A5F00CC9038 /* AttestationActionsSpec.swift */,
+				0270D71E1F9F6C6D00CC9038 /* OpenIDAttestationHandlerSpec.swift */,
+			);
+			path = Attestations;
+			sourceTree = "<group>";
+		};
 		027603E21F6ACD1600788B0A = {
 			isa = PBXGroup;
 			children = (
@@ -267,7 +295,6 @@
 		027603ED1F6ACD1600788B0A /* Cogito */ = {
 			isa = PBXGroup;
 			children = (
-				0212E0301F99FFD300EEDE34 /* Cogito.entitlements */,
 				028F4EF21F7CE37E0015C4AF /* Global state */,
 				028F4EF01F7CE22D0015C4AF /* Geth state */,
 				0298D4331F7A45040070998D /* Geth */,
@@ -278,10 +305,12 @@
 				02F0CA071F8754F5000C428F /* Debug view */,
 				028F4EF71F7D34030015C4AF /* Create identity */,
 				0212E0321F9E392500EEDE34 /* Sign transaction */,
+				0270D7171F9F445F00CC9038 /* Attestations */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
 				027603F51F6ACD1600788B0A /* Assets.xcassets */,
 				027603F71F6ACD1600788B0A /* LaunchScreen.storyboard */,
 				027603FA1F6ACD1600788B0A /* Info.plist */,
+				0212E0301F99FFD300EEDE34 /* Cogito.entitlements */,
 			);
 			path = Cogito;
 			sourceTree = "<group>";
@@ -298,6 +327,7 @@
 				02C305461F87592800351B4A /* Debug view */,
 				028F4EF81F7D340D0015C4AF /* Create identity */,
 				0212E0331F9E393A00EEDE34 /* Sign transaction */,
+				0270D7181F9F446C00CC9038 /* Attestations */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
 				027604051F6ACD1600788B0A /* Info.plist */,
 				C00B5FFF481EB4982C21280E /* DispatchRecorder.swift */,
@@ -795,6 +825,7 @@
 				02021D191F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
 				02A15B011F8672C000A94163 /* DiamondReducer.swift in Sources */,
+				0270D71A1F9F58CA00CC9038 /* AttestationActions.swift in Sources */,
 				028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
 				02BE32D01F7A6D92006C7287 /* SyncProgressReporter.swift in Sources */,
@@ -802,6 +833,7 @@
 				0292451A1F7AA17300F2C0C1 /* GethState.swift in Sources */,
 				02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */,
 				028F4F031F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
+				0270D7211F9F6C7E00CC9038 /* OpenIDAttestationHandler.swift in Sources */,
 				02BE32D31F7A8165006C7287 /* EthereumClient.swift in Sources */,
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
 				027603F11F6ACD1600788B0A /* DebugViewController.swift in Sources */,
@@ -828,6 +860,7 @@
 			files = (
 				02BE32CE1F7A5C55006C7287 /* SyncProgressReporterSpec.swift in Sources */,
 				028F4EF51F7CF7EB0015C4AF /* DebugViewControllerSpec.swift in Sources */,
+				0270D7221F9F6C7E00CC9038 /* OpenIDAttestationHandler.swift in Sources */,
 				02C305471F87596200351B4A /* DebugViewController.swift in Sources */,
 				029245151F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
 				0270D7141F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */,
@@ -843,6 +876,7 @@
 				028F4F011F7D3B640015C4AF /* CreateIdentityState.swift in Sources */,
 				02BE32D41F7A8165006C7287 /* EthereumClient.swift in Sources */,
 				0298D42A1F7A43C90070998D /* KeyStoreState.swift in Sources */,
+				0270D71F1F9F6C6D00CC9038 /* OpenIDAttestationHandlerSpec.swift in Sources */,
 				02D0C0E11F8B73B20001223E /* SelectedFacetViewControllerSpec.swift in Sources */,
 				02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */,
 				0298D42C1F7A43C90070998D /* AppState.swift in Sources */,
@@ -865,6 +899,7 @@
 				0298D42E1F7A43C90070998D /* StorePersister.swift in Sources */,
 				0292451D1F7AA3B100F2C0C1 /* AppStateHelper.swift in Sources */,
 				02A15AF71F864F8700A94163 /* HomeViewControllerSpec.swift in Sources */,
+				0270D71D1F9F5A5F00CC9038 /* AttestationActionsSpec.swift in Sources */,
 				028F4EFE1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0298D42B1F7A43C90070998D /* AppStore.swift in Sources */,
 				0298D4281F7A43C90070998D /* KeyStoreActions.swift in Sources */,
@@ -873,6 +908,7 @@
 				029245181F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
 				0270D7161F9F146A00CC9038 /* ExplanationViewControllerSpec.swift in Sources */,
 				028F4F041F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
+				0270D71B1F9F58CA00CC9038 /* AttestationActions.swift in Sources */,
 				028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				02A15AF01F864F0900A94163 /* HomeViewController.swift in Sources */,
 				02D0C0D51F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
