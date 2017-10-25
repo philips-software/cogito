@@ -4,8 +4,8 @@ Cogito Web3
 [![coverage report](https://gitlab.ta.philips.com/blockchain-lab/cogito-web3/badges/master/coverage.svg)](https://gitlab.ta.philips.com/blockchain-lab/cogito-web3/commits/master)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-An Ethereum [Web3][1] provider that uses the Cogito app to manage accounts and
-signing. Requires a [Telepath channel][2] to be set up for communication with the
+An Ethereum [Web3][1] provider that uses the [Cogito app][2] to manage accounts and
+signing. Requires a [Telepath channel][3] to be set up for communication with the
 Cogito app.
 
 Usage
@@ -23,4 +23,5 @@ const web3 = new Web3(provider)
 ```
 
 [1]: https://github.com/ethereum/web3.js
-[2]: https://gitlab.ta.philips.com/blockchain-lab/telepath
+[2]: https://gitlab.ta.philips.com/blockchain-lab/Cogito
+[3]: https://gitlab.ta.philips.com/blockchain-lab/telepath
