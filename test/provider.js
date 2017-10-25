@@ -8,7 +8,6 @@ const anything = td.matchers.anything
 const contains = td.matchers.contains
 const Web3 = require('web3')
 const CogitoProvider = require('../lib/provider')
-const promisify = require('util.promisify')
 
 chai.use(chaiAsPromised)
 chai.use(dirtyChai)
@@ -24,8 +23,6 @@ describe('provider', function () {
     telepathChannel = td.object()
     cogitoProvider = new CogitoProvider({ originalProvider, telepathChannel })
     web3 = new Web3(cogitoProvider)
-    web3.eth.getAccounts = promisify(web3.eth.getAccounts)
-    web3.eth.getBlockNumber = promisify(web3.eth.getBlockNumber)
   })
 
   context('when cogito provides accounts', function () {
@@ -39,14 +36,20 @@ describe('provider', function () {
       })
     })
 
-    it('returns the cogito accounts', async function () {
-      expect(await web3.eth.getAccounts()).to.eql(accounts)
+    it('returns the cogito accounts', function (done) {
+      web3.eth.getAccounts(function (_, result) {
+        expect(result).to.eql(accounts)
+        done()
+      })
     })
   })
 
-  it('throws when requesting accounts via telepath fails', async function () {
+  it('throws when requesting accounts via telepath fails', function (done) {
     td.when(telepathChannel.send(anything())).thenReject(new Error('an error'))
-    await expect(web3.eth.getAccounts()).to.eventually.be.rejected()
+    web3.eth.getAccounts(function (error, _) {
+      expect(error).to.not.be.null()
+      done()
+    })
   })
 
   context('when cogito provides signatures', function () {
@@ -89,11 +92,12 @@ describe('provider', function () {
     })
   })
 
-  it('passes requests to the original provider', async function () {
-    td.when(originalProvider.sendAsync(anything(), anything()))
-      .thenDo(function (payload, callback) {
-        callback(null, { jsonrpc: '2.0', id: payload.id, result: 42 })
-      })
-    expect(await web3.eth.getBlockNumber()).to.equal(42)
+  it('passes requests to the original provider', function (done) {
+    td.when(originalProvider.sendAsync(anything()))
+      .thenCallback(null, { jsonrpc: '2.0', result: 42, id: 1 })
+    web3.eth.getBlockNumber(function (_, result) {
+      expect(result).to.equal(42)
+      done()
+    })
   })
 })
