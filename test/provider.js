@@ -1,11 +1,17 @@
 /* eslint-env mocha */
-const expect = require('chai').expect
+const chai = require('chai')
+const expect = chai.expect
+const chaiAsPromised = require('chai-as-promised')
+const dirtyChai = require('dirty-chai')
 const td = require('testdouble')
 const anything = td.matchers.anything
 const contains = td.matchers.contains
 const Web3 = require('web3')
 const CogitoProvider = require('../lib/provider')
 const promisify = require('util.promisify')
+
+chai.use(chaiAsPromised)
+chai.use(dirtyChai)
 
 describe('provider', function () {
   let cogitoProvider
@@ -36,6 +42,11 @@ describe('provider', function () {
     it('returns the cogito accounts', async function () {
       expect(await web3.eth.getAccounts()).to.eql(accounts)
     })
+  })
+
+  it('throws when requesting accounts via telepath fails', async function () {
+    td.when(telepathChannel.send(anything())).thenReject(new Error('an error'))
+    await expect(web3.eth.getAccounts()).to.eventually.be.rejected()
   })
 
   context('when cogito provides signatures', function () {
