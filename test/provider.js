@@ -80,6 +80,15 @@ describe('provider', function () {
     })
   })
 
+  it('throws when signing via telepath fails', function (done) {
+    const transaction = { from: '0x1234567890123456789012345678901234567890' }
+    td.when(telepathChannel.send(anything())).thenReject(new Error('an error'))
+    web3.eth.sendTransaction(transaction, function (error, _) {
+      expect(error).to.not.be.null()
+      done()
+    })
+  })
+
   it('passes requests to the original provider', async function () {
     td.when(originalProvider.sendAsync(anything(), anything()))
       .thenDo(function (payload, callback) {
