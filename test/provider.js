@@ -22,17 +22,23 @@ describe('provider', function () {
     web3.eth.getBlockNumber = promisify(web3.eth.getBlockNumber)
   })
 
-  it('requests ethereum accounts via telepath', async function () {
+  context('when cogito provides accounts', function () {
     const accounts = [ '0x1234', '0xabcd' ]
-    const request = JSON.stringify({ method: 'accounts' })
-    const response = JSON.stringify({ result: accounts })
-    td.when(telepathChannel.send(request)).thenDo(function () {
-      td.when(telepathChannel.receive(), { times: 1 }).thenResolve(response)
+
+    beforeEach(function () {
+      const request = JSON.stringify({ method: 'accounts' })
+      const response = JSON.stringify({ result: accounts })
+      td.when(telepathChannel.send(request)).thenDo(function () {
+        td.when(telepathChannel.receive(), { times: 1 }).thenResolve(response)
+      })
     })
-    expect(await web3.eth.getAccounts()).to.eql(accounts)
+
+    it('returns the cogito accounts', async function () {
+      expect(await web3.eth.getAccounts()).to.eql(accounts)
+    })
   })
 
-  context('when using cogito for signatures', function () {
+  context('when cogito provides signatures', function () {
     const transaction = { from: '0x1234567890123456789012345678901234567890' }
     const signed = '0xSignedTransaction'
 
