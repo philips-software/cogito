@@ -21,17 +21,14 @@ describe('provider', function () {
     web3.eth.getBlockNumber = promisify(web3.eth.getBlockNumber)
   })
 
-  context('when retrieving ethereum accounts', function () {
+  it('requests ethereum accounts via telepath', async function () {
     const accounts = [ '0x1234', '0xabcd' ]
-
-    it('requests them via telepath', async function () {
-      const request = JSON.stringify({ method: 'accounts' })
-      const response = JSON.stringify({ result: accounts })
-      td.when(telepathChannel.send(request)).thenDo(function () {
-        td.when(telepathChannel.receive(), { times: 1 }).thenResolve(response)
-      })
-      expect(await web3.eth.getAccounts()).to.eql(accounts)
+    const request = JSON.stringify({ method: 'accounts' })
+    const response = JSON.stringify({ result: accounts })
+    td.when(telepathChannel.send(request)).thenDo(function () {
+      td.when(telepathChannel.receive(), { times: 1 }).thenResolve(response)
     })
+    expect(await web3.eth.getAccounts()).to.eql(accounts)
   })
 
   it('passes requests to the original provider', async function () {
