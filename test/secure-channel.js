@@ -46,18 +46,24 @@ describe('Secure Channel', function () {
   })
 
   context('when receiving a message (on the blue queue)', function () {
-    let receivedMessage
+    function whenReceiving (...messages) {
+      td.when(queuing.receive(blueQueue)).thenResolve(...messages)
+    }
 
-    beforeEach(async function () {
+    function enc (message) {
       const nonce = Buffer.from(random(nonceSize))
       const cypherText = Buffer.from(encrypt(Buffer.from(message), nonce, key))
-      const nonceAndCypherText = Buffer.concat([nonce, cypherText])
-      td.when(queuing.receive(blueQueue)).thenResolve(nonceAndCypherText)
-      receivedMessage = await channel.receive()
+      return Buffer.concat([nonce, cypherText])
+    }
+
+    it('decrypts the message', async function () {
+      whenReceiving(enc(message))
+      expect(await channel.receive()).to.equal(message)
     })
 
-    it('decrypts the message', function () {
-      expect(receivedMessage).to.equal(message)
+    it('waits for a message to become available', async function () {
+      whenReceiving(null, null, enc(message))
+      expect(await channel.receive()).to.equal(message)
     })
   })
 
