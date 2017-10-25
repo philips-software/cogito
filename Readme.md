@@ -46,8 +46,9 @@ Sending messages:
 await channel.send('a message')
 ```
 
-Receiving messages. The `receive` method returns a promise. It resolves to
-`null` when no message is waiting.
+Receiving messages. The `receive` method returns a promise. The queuing service
+will be polled for at least 10 minutes. If no message is available after this
+time it will return `null`.
 
 ```javascript
 const receivedMessage = await channel.receive()
