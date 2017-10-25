@@ -51,7 +51,7 @@ describe('Poller', function () {
     td.when(pollFunction()).thenDo(async function slow () {
       expect(slow.isRunning).to.not.be.true()
       slow.isRunning = true
-      await delay(10)
+      await delay(1)
       slow.isRunning = false
     })
     const poll1 = poller.poll()
