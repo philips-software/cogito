@@ -20,6 +20,8 @@ describe('Secure Channel', function () {
   beforeEach(function () {
     queuing = td.object()
     channel = new SecureChannel({ queuing, id: channelId, key })
+    channel.poller.interval = 0
+    channel.poller.retries = 10
   })
 
   afterEach(function () {
@@ -87,6 +89,12 @@ describe('Secure Channel', function () {
   it('receives null when no message is waiting', async function () {
     td.when(queuing.receiv(blueQueue)).thenResolve(null)
     await expect(channel.receive()).to.eventually.be.null()
+  })
+
+  it('has sensible polling parameters', function () {
+    const channel = new SecureChannel({})
+    expect(channel.poller.interval).to.equal(100) // 100 ms
+    expect(channel.poller.retries).to.equal(6000) // at least 10 minutes
   })
 
   it('encodes the channel id and key in a URL', function () {
