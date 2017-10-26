@@ -8,7 +8,7 @@ class TelepathSpec: QuickSpec {
     override func spec() {
         let channelId: QueueID = "channel_id"
         let channelKey = ChannelKey.example()
-        let queuingServiceUrl = "https://queuing.example.com"
+        let queuingServiceUrl = URL(string: "https://queuing.example.com")!
         var telepath: Telepath!
 
         beforeEach {

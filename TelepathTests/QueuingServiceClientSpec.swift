@@ -7,7 +7,7 @@ import Mockingjay
 
 class QueuingServiceClientSpec: QuickSpec {
     override func spec() {
-        let baseUrl = "https://queueing.exampe.com"
+        let baseUrl = URL(string: "https://queueing.exampe.com")!
         let queueId = "a_queue_id"
         let message = "a message".data(using: .utf8)!
 
