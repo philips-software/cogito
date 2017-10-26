@@ -14,3 +14,8 @@ For an overview of the architecture, please refer to the [Cogito white paper](ht
 You are a _diamond_ with many _facets_. The diamond is you
 as a person, all aspects of you. In a specific context, you show a
 specific facet of your diamond to the world, not all of you.
+
+
+Open Issues
+-----------
+The library used for handling the JWTs from the OpenID Connect provider does not check the JWT signature.
