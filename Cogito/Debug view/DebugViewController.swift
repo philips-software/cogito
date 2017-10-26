@@ -10,6 +10,7 @@ class DebugViewController: UIViewController, Connectable {
     @IBOutlet weak var syncProgressLabel: UILabel!
     @IBOutlet weak var syncProgressBar: UIProgressView!
     @IBOutlet weak var syncActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var oidcRealmUrlField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +60,15 @@ class DebugViewController: UIViewController, Connectable {
         dismiss(animated: true)
     }
 
+    @IBAction func startOidcAttestation() {
+        guard let text = oidcRealmUrlField.text,
+              let url = URL(string: text) else {
+            print("invalid OpenID Connect URL")
+            return
+        }
+        actions.startOpenIdConnectAttestation(url)
+    }
+
     struct Props {
         let peerCount: Int
         let syncProgress: SyncProgress?
@@ -66,6 +76,7 @@ class DebugViewController: UIViewController, Connectable {
     struct Actions {
         let resetCreateIdentity: () -> Void
         let resetAppState: () -> Void
+        let startOpenIdConnectAttestation: (URL) -> Void
     }
 }
 
@@ -79,6 +90,9 @@ private func mapStateToProps(state: AppState) -> DebugViewController.Props {
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> DebugViewController.Actions {
     return DebugViewController.Actions(
         resetCreateIdentity: { dispatch(CreateIdentityActions.Reset()) },
-        resetAppState: { dispatch(ResetApp()) }
+        resetAppState: { dispatch(ResetApp()) },
+        startOpenIdConnectAttestation: { url in
+            dispatch(AttestationActions().StartAttestation(oidcRealmUrl: url))
+        }
     )
 }

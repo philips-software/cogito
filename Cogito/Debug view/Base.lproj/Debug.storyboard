@@ -4,8 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -79,21 +78,39 @@
                                     <action selector="resetAppState" destination="BYZ-38-t0r" eventType="touchUpInside" id="SqB-aV-qoP"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="http://ec2-35-158-20-161.eu-central-1.compute.amazonaws.com:8080/auth/realms/master" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8mj-FC-Dc3">
+                                <rect key="frame" x="16" y="266" width="288" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="URL" textContentType="url"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2e-EX-yQE">
+                                <rect key="frame" x="45" y="304" width="230" height="30"/>
+                                <state key="normal" title="Start OpenID Connect Attestation"/>
+                                <connections>
+                                    <action selector="startOidcAttestation" destination="BYZ-38-t0r" eventType="touchUpInside" id="dIk-6A-lLt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="cah-t9-UjB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="70" id="2gg-ke-Q0h"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="up2-rU-YT4" secondAttribute="trailing" constant="16" id="6ln-ee-zRT"/>
+                            <constraint firstItem="8mj-FC-Dc3" firstAttribute="top" secondItem="5UM-XJ-ZOF" secondAttribute="bottom" constant="8" id="7ZY-Wc-bPT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YOH-04-cJJ" secondAttribute="trailing" constant="16" id="9Vd-In-HfO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8mj-FC-Dc3" secondAttribute="trailing" constant="16" id="B5h-eS-M2l"/>
                             <constraint firstItem="Ck5-ic-qsN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="BT9-gF-PHv"/>
                             <constraint firstItem="Ck5-ic-qsN" firstAttribute="top" secondItem="FpB-lq-rKm" secondAttribute="bottom" constant="8" id="D3a-xV-vX9"/>
                             <constraint firstItem="FpB-lq-rKm" firstAttribute="top" secondItem="cah-t9-UjB" secondAttribute="bottom" constant="8" id="DAK-LN-QeK"/>
+                            <constraint firstItem="M2e-EX-yQE" firstAttribute="top" secondItem="8mj-FC-Dc3" secondAttribute="bottom" constant="8" id="GUr-Qq-BYN"/>
                             <constraint firstItem="YOH-04-cJJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ter-0c-iwG" secondAttribute="trailing" constant="8" id="JqG-I8-D2w"/>
                             <constraint firstItem="FpB-lq-rKm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="KUl-v7-AaE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LnB-ol-chg" secondAttribute="trailing" constant="16" id="OE0-El-ALG"/>
                             <constraint firstItem="YOH-04-cJJ" firstAttribute="centerY" secondItem="Ter-0c-iwG" secondAttribute="centerY" id="SeO-QL-RRJ"/>
+                            <constraint firstItem="M2e-EX-yQE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sml-ba-w6j"/>
                             <constraint firstItem="up2-rU-YT4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Tuo-mf-E1Q"/>
                             <constraint firstItem="Ter-0c-iwG" firstAttribute="baseline" secondItem="FpB-lq-rKm" secondAttribute="baseline" id="Uvu-22-vnb"/>
+                            <constraint firstItem="8mj-FC-Dc3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="VKY-5s-tNu"/>
                             <constraint firstItem="LnB-ol-chg" firstAttribute="leading" secondItem="cah-t9-UjB" secondAttribute="trailing" constant="8" id="YWF-fR-kuR"/>
                             <constraint firstItem="Ter-0c-iwG" firstAttribute="leading" secondItem="FpB-lq-rKm" secondAttribute="trailing" constant="8" id="apK-1z-Lie"/>
                             <constraint firstItem="up2-rU-YT4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="bZi-9y-p34"/>
@@ -108,6 +125,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="oidcRealmUrlField" destination="8mj-FC-Dc3" id="DD7-ug-TwX"/>
                         <outlet property="peerCountLabel" destination="LnB-ol-chg" id="mt8-w3-SWK"/>
                         <outlet property="syncActivityIndicator" destination="YOH-04-cJJ" id="kC0-op-417"/>
                         <outlet property="syncProgressBar" destination="Ck5-ic-qsN" id="TxD-po-cHE"/>
@@ -116,7 +134,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
+            <point key="canvasLocation" x="135" y="132.04225352112675"/>
         </scene>
         <!--Create Identity View Controller-->
         <scene sceneID="UQa-Qj-A1E">
