@@ -1,9 +1,11 @@
 //Copyright © 2017 Philips. All rights reserved.
 
+import Foundation
+
 public struct Telepath {
     let queuing: QueuingService
 
-    public init(queuingServiceUrl: String) {
+    public init(queuingServiceUrl: URL) {
         queuing = QueuingServiceClient(url: queuingServiceUrl)
     }
 

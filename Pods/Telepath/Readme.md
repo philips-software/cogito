@@ -20,7 +20,7 @@ import Telepath
 Instantiating a Telepath instance. You need the URL of a running [Queuing Service][3].
 
 ```swift
-let telepath = Telepath(queuingServiceUrl: "https://....")
+let telepath = Telepath(queuingServiceUrl: URL(string: "https://...."))
 ```
 
 Connecting to a secure channel when you have the channel id, and its key:
