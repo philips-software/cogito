@@ -7,6 +7,7 @@ struct AppState: StateType, Codable {
     let geth: GethState
     let createIdentity: CreateIdentityState
     let diamond: DiamondState
+    let telepath: TelepathState
 }
 
 extension AppState: Equatable {
@@ -14,7 +15,8 @@ extension AppState: Equatable {
         return lhs.keyStore == rhs.keyStore &&
                lhs.geth == rhs.geth &&
                lhs.createIdentity == rhs.createIdentity &&
-               lhs.diamond == rhs.diamond
+               lhs.diamond == rhs.diamond &&
+               lhs.telepath == rhs.telepath
     }
 }
 
@@ -22,5 +24,6 @@ let initialAppState = AppState(
     keyStore: initialKeyStoreState,
     geth: initialGethState,
     createIdentity: initialCreateIdentityState,
-    diamond: initialDiamondState
+    diamond: initialDiamondState,
+    telepath: initialTelepathState
 )
