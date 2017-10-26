@@ -124,7 +124,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     let animationDuration = 0.8
     var animationsInProgress = 0
 
-    private func startExplanatoryAnimation() {
+    private func startExplanatoryAnimation() { // swiftlint:disable:this function_body_length
         rectShape.frame = borderAnimation.bounds
         let embeddedHeaderViewOffsetFromCenter = selectedFacetView.bounds.midY
             - embeddedSelectedFacetController.headerButton.frame.midY

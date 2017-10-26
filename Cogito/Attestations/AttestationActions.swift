@@ -6,20 +6,20 @@ import ReSwiftThunk
 struct AttestationActions {
     func StartAttestation(oidcRealmUrl: URL) -> ThunkAction<AppState> { // swiftlint:disable:this identifier_name
         return ThunkAction(action: { dispatch, _ in
-            dispatch(Pending())
-            let handler = OpenIDAttestationHandler(
+            let handler = OpenIDAttestationStarter(
                 oidcRealmUrl: oidcRealmUrl,
-                onSuccess: { token in dispatch(Fulfilled(token: token)) },
+                onSuccess: { dispatch(Started()) },
                 onError: { error in dispatch(Rejected(error: error)) })
+            dispatch(Pending(nonce: handler.nonce))
             handler.run()
         })
     }
 
-    struct Pending: Action {}
-
-    struct Fulfilled: Action {
-        let token: JWT
+    struct Pending: Action {
+        let nonce: String
     }
+
+    struct Started: Action {}
 
     struct Rejected: Action {
         let error: String
