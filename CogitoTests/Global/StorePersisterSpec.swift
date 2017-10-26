@@ -77,7 +77,10 @@ class StorePersisterSpec: QuickSpec {
                     },
                     "telepath": {
                         "connectUrl": "http://example.com"
-                    }
+                    },
+                    "attestations": {
+                        "pendingNonces": []
+                    },
                 }
                 """
         context("when file contains valid JSON") {

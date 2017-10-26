@@ -11,7 +11,8 @@ func appReducer(action: Action, state: AppState?) -> AppState {
             geth: gethReducer(action: action, state: state?.geth),
             createIdentity: createIdentityReducer(action: action, state: state?.createIdentity),
             diamond: diamondReducer(action: action, state: state?.diamond),
-            telepath: telepathReducer(action, state?.telepath)
+            telepath: telepathReducer(action, state?.telepath),
+            attestations: attestationsReducer(action: action, state: state?.attestations)
         )
     }
 }

@@ -19,13 +19,17 @@ struct AttestationActions {
     }
 
     static func Finish(params: [String:String]) -> ThunkAction<AppState> {
-        return ThunkAction(action: { dispatch, _ in
+        return ThunkAction(action: { dispatch, getState in
             if let idToken = params["id_token"] {
                 do {
                     let jwt = try JWTDecode.decode(jwt: idToken)
-                    print(jwt)
-                    print(jwt.claim(name: "nonce"))
-                    dispatch(Fulfilled(idToken: idToken))
+                    if let nonce = jwt.claim(name: "nonce").string,
+                        let state = getState(),
+                        state.attestations.pendingNonces.contains(nonce) {
+                        dispatch(Fulfilled(idToken: idToken))
+                    } else {
+                        dispatch(FinishRejected(error: "unexpected nonce"))
+                    }
                 } catch let e {
                     dispatch(FinishRejected(error: e.localizedDescription))
                 }

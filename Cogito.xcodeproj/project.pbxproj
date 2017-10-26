@@ -69,6 +69,10 @@
 		0298D4381F7A456A0070998D /* Geth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4361F7A45680070998D /* Geth.swift */; };
 		0298D43A1F7A46A30070998D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4391F7A46A30070998D /* Node.swift */; };
 		0298D43B1F7A47890070998D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0298D4391F7A46A30070998D /* Node.swift */; };
+		029CDFFC1FA22DEB00281369 /* AttestationsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CDFFA1FA22DEB00281369 /* AttestationsState.swift */; };
+		029CDFFD1FA22DEB00281369 /* AttestationsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CDFFB1FA22DEB00281369 /* AttestationsReducer.swift */; };
+		029CDFFE1FA22E1200281369 /* AttestationsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CDFFB1FA22DEB00281369 /* AttestationsReducer.swift */; };
+		029CDFFF1FA22E1200281369 /* AttestationsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CDFFA1FA22DEB00281369 /* AttestationsState.swift */; };
 		02A15AEF1F864F0900A94163 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AED1F864F0900A94163 /* HomeViewController.swift */; };
 		02A15AF01F864F0900A94163 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AED1F864F0900A94163 /* HomeViewController.swift */; };
 		02A15AF41F864F4B00A94163 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02A15AF31F864F4B00A94163 /* Home.storyboard */; };
@@ -186,6 +190,8 @@
 		0298D4341F7A45150070998D /* GethSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethSpec.swift; sourceTree = "<group>"; };
 		0298D4361F7A45680070998D /* Geth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geth.swift; sourceTree = "<group>"; };
 		0298D4391F7A46A30070998D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		029CDFFA1FA22DEB00281369 /* AttestationsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttestationsState.swift; sourceTree = "<group>"; };
+		029CDFFB1FA22DEB00281369 /* AttestationsReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttestationsReducer.swift; sourceTree = "<group>"; };
 		02A15AED1F864F0900A94163 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		02A15AF31F864F4B00A94163 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		02A15AF61F864F8700A94163 /* HomeViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerSpec.swift; sourceTree = "<group>"; };
@@ -273,6 +279,8 @@
 			isa = PBXGroup;
 			children = (
 				0270D7191F9F58CA00CC9038 /* AttestationActions.swift */,
+				029CDFFB1FA22DEB00281369 /* AttestationsReducer.swift */,
+				029CDFFA1FA22DEB00281369 /* AttestationsState.swift */,
 				0270D7201F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift */,
 			);
 			path = Attestations;
@@ -884,6 +892,7 @@
 				0270D7211F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift in Sources */,
 				02BE32D31F7A8165006C7287 /* EthereumClient.swift in Sources */,
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
+				029CDFFD1FA22DEB00281369 /* AttestationsReducer.swift in Sources */,
 				027603F11F6ACD1600788B0A /* DebugViewController.swift in Sources */,
 				0230F9471FA1E5F3006A36FC /* LaunchActions.swift in Sources */,
 				0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */,
@@ -896,6 +905,7 @@
 				02C7420A1F8F5B6E007AE227 /* CameraButton.swift in Sources */,
 				02F0CA091F875515000C428F /* DebugGestureHandler.swift in Sources */,
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
+				029CDFFC1FA22DEB00281369 /* AttestationsState.swift in Sources */,
 				028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
 				028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */,
@@ -929,6 +939,7 @@
 				0270D71F1F9F6C6D00CC9038 /* OpenIDAttestationStarterSpec.swift in Sources */,
 				02D0C0E11F8B73B20001223E /* SelectedFacetViewControllerSpec.swift in Sources */,
 				5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */,
+				029CDFFE1FA22E1200281369 /* AttestationsReducer.swift in Sources */,
 				02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */,
 				0298D42C1F7A43C90070998D /* AppState.swift in Sources */,
 				02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */,
@@ -955,6 +966,7 @@
 				0270D71D1F9F5A5F00CC9038 /* AttestationActionsSpec.swift in Sources */,
 				028F4EFE1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0298D42B1F7A43C90070998D /* AppStore.swift in Sources */,
+				029CDFFF1FA22E1200281369 /* AttestationsState.swift in Sources */,
 				0298D4281F7A43C90070998D /* KeyStoreActions.swift in Sources */,
 				02A15B041F86732500A94163 /* DiamondStateSpec.swift in Sources */,
 				02021D3E1F8C16370092DD89 /* AppActionsSpec.swift in Sources */,

@@ -26,6 +26,15 @@ class AttestationActionsSpec: QuickSpec {
                 finishAction.action(dispatchRecorder.dispatch, { return nil })
                 expect(dispatchRecorder.count) == 1
             }
+
+            it("dispatches FinishRejected when token has correct nonce") {
+                let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
+                let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
+                finishAction.action(dispatchRecorder.dispatch, {
+                    return appState(attestations: AttestationsState(pendingNonces: [validNonce]))
+                })
+                expect(dispatchRecorder.count) == 1
+            }
         }
     }
 }
