@@ -20,6 +20,7 @@ target 'Cogito' do
     pod 'Quick', :git => 'https://github.com/Quick/Quick'
     pod 'Nimble', :git => 'https://github.com/Quick/Nimble'
     pod 'Mockingjay', git: 'https://github.com/metaltoad/Mockingjay.git', branch: 'mt-swift4'
+    pod 'URITemplate', :inhibit_warnings => true
   end
 
 end
