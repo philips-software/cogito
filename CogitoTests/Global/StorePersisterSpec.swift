@@ -74,6 +74,9 @@ class StorePersisterSpec: QuickSpec {
                     "diamond": {
                         "facets": [],
                         "selectedFacet": -1
+                    },
+                    "telepath": {
+                        "connectUrl": "http://example.com"
                     }
                 }
                 """
