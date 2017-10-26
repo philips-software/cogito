@@ -77,18 +77,20 @@ struct OpenIDAttestationStarter {
             .appendingPathComponent(".well-known", isDirectory: true)
             .appendingPathComponent("openid-configuration", isDirectory: false)
         let task = URLSession.shared.dataTask(with: configUrl) { data, _, error in
-            if let data = data {
-                do {
-                    if let config = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                        completion(config, nil)
-                        return
-                    }
-                } catch {}
-            }
+            DispatchQueue.main.async {
+                if let data = data {
+                    do {
+                        if let config = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                            completion(config, nil)
+                            return
+                        }
+                    } catch {}
+                }
 
-            let unspecificError = "failed to retrieve OpenID configuration; incorrect server URL?"
-            let errorMessage = error?.localizedDescription ?? unspecificError
-            completion(nil, errorMessage)
+                let unspecificError = "failed to retrieve OpenID configuration; incorrect server URL?"
+                let errorMessage = error?.localizedDescription ?? unspecificError
+                completion(nil, errorMessage)
+            }
         }
         task.resume()
     }
