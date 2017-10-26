@@ -2,14 +2,14 @@
 
 public struct QueuingServiceClient: QueuingService {
 
-    let url: String
+    let url: URL
 
-    public init(url: String) {
+    public init(url: URL) {
         self.url = url
     }
 
     public func send(queueId: QueueID, message: Data, completion: @escaping (Error?) -> Void) {
-        let queueUrl = URL(string: "\(url)/\(queueId)")!
+        let queueUrl = url.appendingPathComponent(queueId)
         var request = URLRequest(url: queueUrl)
         request.httpMethod = "POST"
         let task = URLSession.shared.uploadTask(with: request, from: message) { _, response, error in
@@ -19,7 +19,7 @@ public struct QueuingServiceClient: QueuingService {
     }
 
     public func receive(queueId: QueueID, completion: @escaping (Data?, Error?) -> Void) {
-        let queueUrl = URL(string: "\(url)/\(queueId)")!
+        let queueUrl = url.appendingPathComponent(queueId)
         let task = URLSession.shared.dataTask(with: queueUrl) { data, response, error in
             if let failure = self.checkValidity(response: response, error: error) {
                 completion(nil, failure)

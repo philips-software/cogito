@@ -22,7 +22,7 @@ class TelepathChannel: Codable {
     }
 
     func connect() throws {
-        let telepath = Telepath(queuingServiceUrl: queuingServiceUrl.absoluteString)
+        let telepath = Telepath(queuingServiceUrl: queuingServiceUrl)
         self.channel = try telepath.connect(url: connectUrl)
     }
 
