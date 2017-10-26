@@ -92,7 +92,7 @@ private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> Debug
         resetCreateIdentity: { dispatch(CreateIdentityActions.Reset()) },
         resetAppState: { dispatch(ResetApp()) },
         startOpenIdConnectAttestation: { url in
-            dispatch(AttestationActions().StartAttestation(oidcRealmUrl: url))
+            dispatch(AttestationActions.StartAttestation(oidcRealmUrl: url))
         }
     )
 }

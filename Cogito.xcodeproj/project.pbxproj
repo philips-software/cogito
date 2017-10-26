@@ -17,6 +17,8 @@
 		0212E0351F9E397C00EEDE34 /* SignTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */; };
 		0212E0361F9E397C00EEDE34 /* SignTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */; };
 		022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */; };
+		0230F9471FA1E5F3006A36FC /* LaunchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F9461FA1E5F3006A36FC /* LaunchActions.swift */; };
+		0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */; };
 		0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
 		0270D7141F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
 		0270D7161F9F146A00CC9038 /* ExplanationViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */; };
@@ -116,6 +118,7 @@
 		5C48E2401FA1F8BB00B8BF6E /* TelepathActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */; };
 		5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */; };
 		C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */; };
+		C00B52429CD6E478242F31F6 /* LaunchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F9461FA1E5F3006A36FC /* LaunchActions.swift */; };
 		C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */; };
 		C00B57208B78184BB19798CD /* AppPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B57766800CB3EFBE971EC /* AppPassword.swift */; };
 		C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5412CBC3B026E362474C /* CreateIdentityStateSpec.swift */; };
@@ -148,6 +151,8 @@
 		0212E0301F99FFD300EEDE34 /* Cogito.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cogito.entitlements; sourceTree = "<group>"; };
 		0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignTransaction.storyboard; sourceTree = "<group>"; };
 		022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityActionsSpec.swift; sourceTree = "<group>"; };
+		0230F9461FA1E5F3006A36FC /* LaunchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchActions.swift; sourceTree = "<group>"; };
+		0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchActionsSpec.swift; sourceTree = "<group>"; };
 		0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
 		0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewControllerSpec.swift; sourceTree = "<group>"; };
 		0270D7191F9F58CA00CC9038 /* AttestationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActions.swift; sourceTree = "<group>"; };
@@ -319,6 +324,7 @@
 				0270D7171F9F445F00CC9038 /* Attestations */,
 				5C48E23E1FA1F8A900B8BF6E /* Telepath */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
+				0230F9461FA1E5F3006A36FC /* LaunchActions.swift */,
 				027603F51F6ACD1600788B0A /* Assets.xcassets */,
 				027603F71F6ACD1600788B0A /* LaunchScreen.storyboard */,
 				027603FA1F6ACD1600788B0A /* Info.plist */,
@@ -341,9 +347,10 @@
 				0212E0331F9E393A00EEDE34 /* Sign transaction */,
 				0270D7181F9F446C00CC9038 /* Attestations */,
 				5C48E23B1FA1D06900B8BF6E /* Telepath */,
+				0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
-				027604051F6ACD1600788B0A /* Info.plist */,
 				C00B5FFF481EB4982C21280E /* DispatchRecorder.swift */,
+				027604051F6ACD1600788B0A /* Info.plist */,
 			);
 			path = CogitoTests;
 			sourceTree = "<group>";
@@ -874,6 +881,7 @@
 				02BE32D31F7A8165006C7287 /* EthereumClient.swift in Sources */,
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
 				027603F11F6ACD1600788B0A /* DebugViewController.swift in Sources */,
+				0230F9471FA1E5F3006A36FC /* LaunchActions.swift in Sources */,
 				0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */,
 				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
 				02D0C0D41F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
@@ -924,6 +932,7 @@
 				02021D1A1F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				5C20A0F61FA1FAED00B443C9 /* TelepathActions.swift in Sources */,
 				02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */,
+				0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */,
 				0298D42D1F7A43C90070998D /* AppReducer.swift in Sources */,
 				022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */,
 				0298D4271F7A43C90070998D /* KeyStore.swift in Sources */,
@@ -962,6 +971,7 @@
 				C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */,
 				C00B5F4394A34E4348285CB9 /* DiamondActions.swift in Sources */,
 				C00B5E26A7AC55AC03FD717B /* DispatchRecorder.swift in Sources */,
+				C00B52429CD6E478242F31F6 /* LaunchActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

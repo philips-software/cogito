@@ -75,11 +75,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         branch.initSession(launchOptions: launchOptions, andRegisterDeepLinkHandler: {params, error in
             if error == nil {
-                // params are the deep linked params associated with the link that the user
-                // clicked -> was re-directed to this app
-                // params will be empty if no data found
-                // ... insert custom logic here ...
-                print("params: %@", params as? [String: AnyObject] ?? {})
+                guard let params = params as? [String: AnyObject] else {
+                    return
+                }
+                print("params:", params)
+                if let action = LaunchActions.create(forBranchParams: params) {
+                    appStore.dispatch(action)
+                }
             }
         })
     }

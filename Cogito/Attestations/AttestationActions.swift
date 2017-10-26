@@ -3,15 +3,27 @@
 import ReSwift
 import ReSwiftThunk
 
+// swiftlint:disable identifier_name
+
 struct AttestationActions {
-    func StartAttestation(oidcRealmUrl: URL) -> ThunkAction<AppState> { // swiftlint:disable:this identifier_name
+    static func StartAttestation(oidcRealmUrl: URL) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, _ in
             let handler = OpenIDAttestationStarter(
                 oidcRealmUrl: oidcRealmUrl,
                 onSuccess: { dispatch(Started()) },
-                onError: { error in dispatch(Rejected(error: error)) })
+                onError: { error in dispatch(StartRejected(error: error)) })
             dispatch(Pending(nonce: handler.nonce))
             handler.run()
+        })
+    }
+
+    static func Finish(params: [String:String]) -> ThunkAction<AppState> {
+        return ThunkAction(action: { dispatch, _ in
+            if let idToken = params["id_token"] {
+                dispatch(Fulfilled(idToken: idToken))
+            } else {
+                dispatch(FinishRejected())
+            }
         })
     }
 
@@ -21,7 +33,15 @@ struct AttestationActions {
 
     struct Started: Action {}
 
-    struct Rejected: Action {
+    struct StartRejected: Action {
         let error: String
+    }
+
+    struct Fulfilled: Action {
+        let idToken: String
+    }
+
+    struct FinishRejected: Action {
+
     }
 }
