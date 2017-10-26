@@ -19,6 +19,7 @@ target 'Cogito' do
   target 'CogitoTests' do
     pod 'Quick', :git => 'https://github.com/Quick/Quick'
     pod 'Nimble', :git => 'https://github.com/Quick/Nimble'
+    pod 'Mockingjay', git: 'https://github.com/metaltoad/Mockingjay.git', branch: 'mt-swift4'
   end
 
 end
