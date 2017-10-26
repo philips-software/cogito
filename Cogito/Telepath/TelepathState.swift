@@ -5,7 +5,7 @@ import Foundation
 struct TelepathState: Equatable, Codable {
     var connectUrl: URL?
 
-    static func ==(lhs: TelepathState, rhs: TelepathState) -> Bool {
+    static func == (lhs: TelepathState, rhs: TelepathState) -> Bool {
         return lhs.connectUrl == rhs.connectUrl
     }
 }
