@@ -6,10 +6,12 @@ func appState(keyStore: KeyStoreState = initialKeyStoreState,
               geth: GethState = initialGethState,
               createIdentity: CreateIdentityState = initialCreateIdentityState,
               diamond: DiamondState = initialDiamondState,
-              telepath: TelepathState = initialTelepathState) -> AppState {
+              telepath: TelepathState = initialTelepathState,
+              attestations: AttestationsState = initialAttestationsState) -> AppState {
     return AppState(keyStore: keyStore,
                     geth: geth,
                     createIdentity: createIdentity,
                     diamond: diamond,
-                    telepath: telepath)
+                    telepath: telepath,
+                    attestations: attestations)
 }
