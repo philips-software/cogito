@@ -103,6 +103,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Branch/Branch.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/JWTDecode/JWTDecode.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReRxSwift/ReRxSwift.framework"
@@ -115,6 +116,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Branch/Branch.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/JWTDecode/JWTDecode.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReRxSwift/ReRxSwift.framework"

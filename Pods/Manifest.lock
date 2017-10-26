@@ -3,6 +3,7 @@ PODS:
     - Branch/Core (= 0.19.5)
   - Branch/Core (0.19.5)
   - Geth (1.7.1)
+  - JWTDecode (2.1.1)
   - KeychainAccess (3.1.0)
   - Mockingjay (2.0.2):
     - Mockingjay/Core (= 2.0.2)
@@ -33,6 +34,7 @@ PODS:
 DEPENDENCIES:
   - Branch
   - Geth (~> 1.7.1)
+  - JWTDecode
   - KeychainAccess (~> 3.1)
   - Mockingjay (from `https://github.com/metaltoad/Mockingjay.git`, branch `mt-swift4`)
   - Nimble (from `https://github.com/Quick/Nimble`)
@@ -105,6 +107,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Branch: 25312ed2f58a569df58e6560238433c2a9d58e99
   Geth: 5d7ab4565680bc976b81cf8cdab653067807ed01
+  JWTDecode: 83e8b381aafe27158d9f692cbdca2b12d61d460c
   KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
   Mockingjay: e44b65b6b4b919ad228929db83cb6b1d69fff623
   Nimble: 5c3b8c4b0229d95c2c7b0005e2edf244937dbb04
@@ -120,6 +123,6 @@ SPEC CHECKSUMS:
   Telepath: 14b8a4ad40df8c1f25ddc49ae7e1db3f1c427b7e
   URITemplate: d822aaa2f8ec9dcffffd13baa58bf9ee007e96cb
 
-PODFILE CHECKSUM: fe31d6812b257c9fc482e4f5d5d0c081ba92c2a6
+PODFILE CHECKSUM: fe056b9d516dcd5462fbb29f5e3904eae18d503d
 
 COCOAPODS: 1.3.1
