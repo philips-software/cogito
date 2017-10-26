@@ -22,6 +22,7 @@ struct AttestationActions {
         return ThunkAction(action: { dispatch, getState in
             if let idToken = params["id_token"] {
                 do {
+                    // todo this JWTDecode library does not check the JWT signature!
                     let jwt = try JWTDecode.decode(jwt: idToken)
                     if let nonce = jwt.claim(name: "nonce").string,
                         let state = getState(),
