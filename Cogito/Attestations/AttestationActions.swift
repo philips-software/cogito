@@ -2,6 +2,7 @@
 
 import ReSwift
 import ReSwiftThunk
+import JWTDecode
 
 // swiftlint:disable identifier_name
 
@@ -20,9 +21,16 @@ struct AttestationActions {
     static func Finish(params: [String:String]) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, _ in
             if let idToken = params["id_token"] {
-                dispatch(Fulfilled(idToken: idToken))
+                do {
+                    let jwt = try JWTDecode.decode(jwt: idToken)
+                    print(jwt)
+                    print(jwt.claim(name: "nonce"))
+                    dispatch(Fulfilled(idToken: idToken))
+                } catch let e {
+                    dispatch(FinishRejected(error: e.localizedDescription))
+                }
             } else {
-                dispatch(FinishRejected())
+                dispatch(FinishRejected(error: "id token missing"))
             }
         })
     }
@@ -42,6 +50,6 @@ struct AttestationActions {
     }
 
     struct FinishRejected: Action {
-
+        let error: String
     }
 }
