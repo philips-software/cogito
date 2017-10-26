@@ -119,6 +119,9 @@
 		5C20A0F91FA1FC5300B443C9 /* TelepathReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */; };
 		5C20A0FB1FA1FC6500B443C9 /* TelepathState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A0FA1FA1FC6500B443C9 /* TelepathState.swift */; };
 		5C20A0FC1FA1FC7C00B443C9 /* TelepathState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A0FA1FA1FC6500B443C9 /* TelepathState.swift */; };
+		5C20A1031FA224C000B443C9 /* TelepathChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A1021FA224C000B443C9 /* TelepathChannel.swift */; };
+		5C20A1041FA224D700B443C9 /* TelepathChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A1021FA224C000B443C9 /* TelepathChannel.swift */; };
+		5C20A1061FA224E000B443C9 /* TelepathChannelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A1051FA224E000B443C9 /* TelepathChannelSpec.swift */; };
 		5C48E2401FA1F8BB00B8BF6E /* TelepathActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */; };
 		5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */; };
 		C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */; };
@@ -225,6 +228,8 @@
 		53940EFC96526AFDFA7CD5FC /* Pods_Cogito_CogitoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito_CogitoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducer.swift; sourceTree = "<group>"; };
 		5C20A0FA1FA1FC6500B443C9 /* TelepathState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathState.swift; sourceTree = "<group>"; };
+		5C20A1021FA224C000B443C9 /* TelepathChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathChannel.swift; sourceTree = "<group>"; };
+		5C20A1051FA224E000B443C9 /* TelepathChannelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathChannelSpec.swift; sourceTree = "<group>"; };
 		5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathActions.swift; sourceTree = "<group>"; };
 		5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducerSpec.swift; sourceTree = "<group>"; };
 		8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -544,6 +549,7 @@
 			isa = PBXGroup;
 			children = (
 				5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */,
+				5C20A1051FA224E000B443C9 /* TelepathChannelSpec.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -554,6 +560,7 @@
 				5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */,
 				5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */,
 				5C20A0FA1FA1FC6500B443C9 /* TelepathState.swift */,
+				5C20A1021FA224C000B443C9 /* TelepathChannel.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -907,6 +914,7 @@
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
 				029CDFFC1FA22DEB00281369 /* AttestationsState.swift in Sources */,
 				028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
+				5C20A1031FA224C000B443C9 /* TelepathChannel.swift in Sources */,
 				028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */,
 				02A15AFE1F8671D200A94163 /* Identity.swift in Sources */,
@@ -929,6 +937,7 @@
 				02BE32D11F7A6DD0006C7287 /* SyncProgressReporter.swift in Sources */,
 				028F4EEC1F7AA64D0015C4AF /* GethReducerSpec.swift in Sources */,
 				02A15B061F86733000A94163 /* DiamondReducerSpec.swift in Sources */,
+				5C20A1061FA224E000B443C9 /* TelepathChannelSpec.swift in Sources */,
 				0298D4291F7A43C90070998D /* KeyStoreReducer.swift in Sources */,
 				02CD80541F7D494900AA5C3A /* CreateIdentityReducerSpec.swift in Sources */,
 				0298D4351F7A45150070998D /* GethSpec.swift in Sources */,
@@ -948,6 +957,7 @@
 				5C20A0F61FA1FAED00B443C9 /* TelepathActions.swift in Sources */,
 				02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */,
 				0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */,
+				5C20A1041FA224D700B443C9 /* TelepathChannel.swift in Sources */,
 				0298D42D1F7A43C90070998D /* AppReducer.swift in Sources */,
 				022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */,
 				0298D4271F7A43C90070998D /* KeyStore.swift in Sources */,
