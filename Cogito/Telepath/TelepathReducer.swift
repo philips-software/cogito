@@ -5,8 +5,8 @@ import ReSwift
 func telepathReducer(_ action: Action, _ state: TelepathState?) -> TelepathState {
     var nextState = state ?? initialTelepathState
     switch action {
-    case let connect as TelepathActions.Connect:
-        nextState.connectUrl = connect.url
+    case let connected as TelepathActions.Connected:
+        nextState.channel = connected.channel
     default:
         break
     }

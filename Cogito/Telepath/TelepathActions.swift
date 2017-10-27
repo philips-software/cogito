@@ -4,7 +4,7 @@ import Foundation
 import ReSwift
 
 struct TelepathActions {
-    struct Connect: Action {
-        let url: URL
+    struct Connected: Action {
+        let channel: TelepathChannel
     }
 }
