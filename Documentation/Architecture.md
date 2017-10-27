@@ -21,6 +21,16 @@ abstract:
   identity from an OpenID Connect server."
 ---
 
+Introduction
+------------
+TODO:
+
+* self-sovereign identity: create and manage your identity yourself,
+  you're in control.
+* be able to back your identity using claims from others...
+* ... including OpenID Connect servers for e.g. corporate style claims
+  ('this person is indeed our employee')
+
 Use Case: Signing Data with OpenID Connect-backed Identity
 ----------------------------------------------------------
 Cogito can sign data on behalf of a (web) app, while giving the
@@ -42,7 +52,7 @@ use case.
    the web app refers the user to Cogito, using a QR code to setup
    a secure communication channel between the web app and Cogito.
    The secure channel is built using [Telepath][Telepath]. Cogito
-   requires both the data to be signed, as well as the `sub` field
+   requires both the data to be signed and the `sub` field
    from the user's identity token.
 3. Cogito now starts a standard [OpenID Connect Implicit
    Flow][OIDCImplicit] to establish that the user is authenticated
@@ -61,6 +71,14 @@ _attestation_: the OpenID Connect server gives the user's identity
 an attestation that it is a valid user in the OpenID Connect server.
 The section "Attestation from OpenID Connect Server" provides
 more detail about this step.
+
+### Usability
+
+A disadvantage from usability point of view, is that the user has to
+log in to the OpenID Connect Server twice: once from the web app, and
+once from the Cogito app. Inside the Cogito app, this is needed only
+once (and when the token expires). Since this needs to be done the
+first time though, the initial user experience is suboptimal.
 
 
 Attestations
