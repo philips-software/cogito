@@ -124,6 +124,8 @@
 		5C20A1061FA224E000B443C9 /* TelepathChannelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A1051FA224E000B443C9 /* TelepathChannelSpec.swift */; };
 		5C48E2401FA1F8BB00B8BF6E /* TelepathActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */; };
 		5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */; };
+		5C7C23941FA35093009E9CE7 /* TelepathDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C23931FA35093009E9CE7 /* TelepathDefaults.swift */; };
+		5C7C23951FA35093009E9CE7 /* TelepathDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C23931FA35093009E9CE7 /* TelepathDefaults.swift */; };
 		5C9331981FA324460056869F /* TelepathChannelExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9331961FA324460056869F /* TelepathChannelExample.swift */; };
 		C00B505E972138AEEFC08864 /* AttestationsReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */; };
 		5C93319A1FA325C30056869F /* TelepathActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9331991FA325C30056869F /* TelepathActionsSpec.swift */; };
@@ -235,6 +237,7 @@
 		5C20A1051FA224E000B443C9 /* TelepathChannelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathChannelSpec.swift; sourceTree = "<group>"; };
 		5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathActions.swift; sourceTree = "<group>"; };
 		5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducerSpec.swift; sourceTree = "<group>"; };
+		5C7C23931FA35093009E9CE7 /* TelepathDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathDefaults.swift; sourceTree = "<group>"; };
 		5C9331961FA324460056869F /* TelepathChannelExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelepathChannelExample.swift; sourceTree = "<group>"; };
 		5C9331991FA325C30056869F /* TelepathActionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelepathActionsSpec.swift; sourceTree = "<group>"; };
 		8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -570,6 +573,7 @@
 				5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */,
 				5C20A0FA1FA1FC6500B443C9 /* TelepathState.swift */,
 				5C20A1021FA224C000B443C9 /* TelepathChannel.swift */,
+				5C7C23931FA35093009E9CE7 /* TelepathDefaults.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -922,6 +926,7 @@
 				02F0CA091F875515000C428F /* DebugGestureHandler.swift in Sources */,
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
 				029CDFFC1FA22DEB00281369 /* AttestationsState.swift in Sources */,
+				5C7C23941FA35093009E9CE7 /* TelepathDefaults.swift in Sources */,
 				028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
 				5C20A1031FA224C000B443C9 /* TelepathChannel.swift in Sources */,
 				028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
@@ -1003,6 +1008,7 @@
 				C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */,
 				C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */,
 				C00B57208B78184BB19798CD /* AppPassword.swift in Sources */,
+				5C7C23951FA35093009E9CE7 /* TelepathDefaults.swift in Sources */,
 				02A15B021F8672C000A94163 /* DiamondReducer.swift in Sources */,
 				5C9331981FA324460056869F /* TelepathChannelExample.swift in Sources */,
 				C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */,
