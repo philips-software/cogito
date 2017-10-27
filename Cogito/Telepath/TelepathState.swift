@@ -4,6 +4,7 @@ import Foundation
 
 struct TelepathState: Equatable, Codable {
     var channel: TelepathChannel?
+    var connectionError: String?
 
     static func == (lhs: TelepathState, rhs: TelepathState) -> Bool {
         return lhs.channel == rhs.channel
