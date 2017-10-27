@@ -12,5 +12,13 @@ class TelepathReducerSpec: QuickSpec {
             let nextState = telepathReducer(action, nil)
             expect(nextState.channel) == channel
         }
+
+        it("stores connection errors in the state") {
+            struct SomeError: Error {}
+            let error = SomeError()
+            let action = TelepathActions.ConnectRejected(error: error)
+            let nextState = telepathReducer(action, nil)
+            expect(nextState.connectionError) == error.localizedDescription
+        }
     }
 }
