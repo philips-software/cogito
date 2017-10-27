@@ -11,6 +11,7 @@ class DebugViewController: UIViewController, Connectable {
     @IBOutlet weak var syncProgressBar: UIProgressView!
     @IBOutlet weak var syncActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var oidcRealmUrlField: UITextField!
+    @IBOutlet weak var oidcSubjectField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,12 +62,16 @@ class DebugViewController: UIViewController, Connectable {
     }
 
     @IBAction func startOidcAttestation() {
-        guard let text = oidcRealmUrlField.text,
-              let url = URL(string: text) else {
+        guard let urlText = oidcRealmUrlField.text,
+              let url = URL(string: urlText) else {
             print("invalid OpenID Connect URL")
             return
         }
-        actions.startOpenIdConnectAttestation(url)
+        guard let subject = oidcSubjectField.text else {
+            print("invalid OpenID Connect subject")
+            return
+        }
+        actions.startOpenIdConnectAttestation(url, subject)
     }
 
     struct Props {
@@ -76,7 +81,7 @@ class DebugViewController: UIViewController, Connectable {
     struct Actions {
         let resetCreateIdentity: () -> Void
         let resetAppState: () -> Void
-        let startOpenIdConnectAttestation: (URL) -> Void
+        let startOpenIdConnectAttestation: (URL, String) -> Void
     }
 }
 
@@ -91,8 +96,8 @@ private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> Debug
     return DebugViewController.Actions(
         resetCreateIdentity: { dispatch(CreateIdentityActions.Reset()) },
         resetAppState: { dispatch(ResetApp()) },
-        startOpenIdConnectAttestation: { url in
-            dispatch(AttestationActions.StartAttestation(oidcRealmUrl: url))
+        startOpenIdConnectAttestation: { url, subject in
+            dispatch(AttestationActions.StartAttestation(oidcRealmUrl: url, subject:subject))
         }
     )
 }
