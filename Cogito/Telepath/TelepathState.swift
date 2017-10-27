@@ -3,10 +3,10 @@
 import Foundation
 
 struct TelepathState: Equatable, Codable {
-    var connectUrl: URL?
+    var channel: TelepathChannel?
 
     static func == (lhs: TelepathState, rhs: TelepathState) -> Bool {
-        return lhs.connectUrl == rhs.connectUrl
+        return lhs.channel == rhs.channel
     }
 }
 

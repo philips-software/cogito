@@ -5,12 +5,12 @@ import Nimble
 
 class TelepathReducerSpec: QuickSpec {
     override func spec() {
-        let connectUrl = URL(string: "https://cogito.example.com/#I=1234&E=abcd")!
+        let channel = TelepathChannel.example
 
-        it("stores the connect url in the state") {
-            let action = TelepathActions.Connect(url: connectUrl)
+        it("stores the channel in the state") {
+            let action = TelepathActions.Connected(channel: channel)
             let nextState = telepathReducer(action, nil)
-            expect(nextState.connectUrl) == connectUrl
+            expect(nextState.channel) == channel
         }
     }
 }
