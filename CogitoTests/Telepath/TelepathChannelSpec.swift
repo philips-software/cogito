@@ -5,16 +5,12 @@ import Nimble
 
 class TelepathChannelSpec: QuickSpec {
     override func spec() {
-        let queuingServiceUrl = URL(string: "http://telepath.example.com")!
         let connectUrl = URL(string: "http://example.com/telepath/connect#I=1234&E=abcd")!
 
         var channel: TelepathChannel!
 
         beforeEach {
-            channel = try? TelepathChannel(
-                queuingServiceUrl: queuingServiceUrl,
-                connectUrl: connectUrl
-            )
+            channel = try? TelepathChannel(connectUrl: connectUrl)
         }
 
         it("encapsulates a secure channel") {
@@ -22,10 +18,9 @@ class TelepathChannelSpec: QuickSpec {
         }
 
         it("throws when connect url is invalid") {
-            expect { try TelepathChannel(
-                queuingServiceUrl: queuingServiceUrl,
-                connectUrl: URL(string: "http://invalid.connect.url")!
-            ) }.to(throwError())
+            expect {
+                try TelepathChannel(connectUrl: URL(string: "http://invalid.connect.url")!)
+            }.to(throwError())
         }
 
         it("can be encoded") {

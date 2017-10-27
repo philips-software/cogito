@@ -4,9 +4,7 @@ import Foundation
 
 extension TelepathChannel {
     static var example: TelepathChannel {
-        return try! TelepathChannel(
-            queuingServiceUrl: URL(string: "https://telepath.example.com")!,
-            connectUrl: URL(string: "https://cogito.example.com/telepath/connect#I=1234&E=abcd")!
-        )
+        let connectUrl = URL(string: "https://cogito.example.com/telepath/connect#I=1234&E=abcd")!
+        return try! TelepathChannel(connectUrl: connectUrl)
     }
 }
