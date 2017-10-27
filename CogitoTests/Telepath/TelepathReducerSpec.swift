@@ -8,7 +8,7 @@ class TelepathReducerSpec: QuickSpec {
         let channel = TelepathChannel.example
 
         it("stores the channel in the state") {
-            let action = TelepathActions.Connected(channel: channel)
+            let action = TelepathActions.ConnectFulfilled(channel: channel)
             let nextState = telepathReducer(action, nil)
             expect(nextState.channel) == channel
         }
