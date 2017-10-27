@@ -24,4 +24,12 @@ struct TelepathActions {
     struct ConnectRejected: Action {
         let error: Error
     }
+
+    struct ReceiveFulfilled: Action {
+        let message: String
+    }
+
+    struct ReceiveRejected: Action {
+        let error: Error
+    }
 }
