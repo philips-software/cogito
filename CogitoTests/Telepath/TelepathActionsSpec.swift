@@ -10,14 +10,14 @@ class TelepathActionsSpec: QuickSpec {
         )!
 
         it("connects to a channel") {
-            let recorder = DispatchRecorder<TelepathActions.Connected>()
+            let recorder = DispatchRecorder<TelepathActions.ConnectFulfilled>()
             let action = TelepathActions.Connect(url: connectUrl)
             action.action(recorder.dispatch, { return nil })
             expect(recorder.count) == 1
         }
 
         it("reports an error when connecting to a channel fails") {
-            let recorder = DispatchRecorder<TelepathActions.ConnectionFailed>()
+            let recorder = DispatchRecorder<TelepathActions.ConnectRejected>()
             let action = TelepathActions.Connect(url: URL(string: "http://invalid")!)
             action.action(recorder.dispatch, { return nil })
             expect(recorder.count) == 1

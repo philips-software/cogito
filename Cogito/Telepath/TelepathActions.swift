@@ -15,18 +15,18 @@ struct TelepathActions {
                     queuingServiceUrl: queuingServiceUrl,
                     connectUrl: url
                 )
-                dispatch(Connected(channel: channel))
+                dispatch(ConnectFulfilled(channel: channel))
             } catch let error {
-                dispatch(ConnectionFailed(error: error))
+                dispatch(ConnectRejected(error: error))
             }
         })
     }
 
-    struct Connected: Action {
+    struct ConnectFulfilled: Action {
         let channel: TelepathChannel
     }
 
-    struct ConnectionFailed: Action {
+    struct ConnectRejected: Action {
         let error: Error
     }
 }
