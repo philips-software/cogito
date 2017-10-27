@@ -3,6 +3,12 @@
 import ReSwift
 
 func attestationsReducer(action: Action, state: AttestationsState?) -> AttestationsState {
-    let state = state ?? initialAttestationsState
+    var state = state ?? initialAttestationsState
+    switch action {
+    case let action as AttestationActions.Pending:
+        state.pending[action.nonce] = action.subject
+    default:
+        break
+    }
     return state
 }
