@@ -15,7 +15,7 @@ class TelepathReceiverSpec: QuickSpec {
             receiver = TelepathReceiver(store: store)
         }
 
-        it("subscribes to changes to the connect url") {
+        it("subscribes to changes to the telepath channel") {
             receiver.start()
             expect(store.latestSubscriber) === receiver
         }
