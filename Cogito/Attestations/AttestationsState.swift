@@ -1,14 +1,17 @@
 //  Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
 
+typealias Nonce = String
+typealias Subject = String
+
 struct AttestationsState: Codable {
-    let pendingNonces: [String]
+    var pending: [Nonce:Subject]
 }
 
 extension AttestationsState: Equatable {
     static func == (lhs: AttestationsState, rhs: AttestationsState) -> Bool {
-        return lhs.pendingNonces == rhs.pendingNonces
+        return lhs.pending == rhs.pending
     }
 
 }
 
-let initialAttestationsState = AttestationsState(pendingNonces: [])
+let initialAttestationsState = AttestationsState(pending: [:])

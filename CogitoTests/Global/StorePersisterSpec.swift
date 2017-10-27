@@ -79,7 +79,7 @@ class StorePersisterSpec: QuickSpec {
                         "connectUrl": "http://example.com"
                     },
                     "attestations": {
-                        "pendingNonces": []
+                        "pending": {}
                     },
                 }
                 """
