@@ -3,11 +3,15 @@
 import Foundation
 import Telepath
 
-class TelepathChannel: Codable {
+protocol TelepathChannelType {
+    func receive(completion: @escaping (String?, Error?) -> Void)
+}
+
+class TelepathChannel: TelepathChannelType, Codable {
     let connectUrl: URL
     var channel: SecureChannel!
 
-    required init(connectUrl: URL) throws {
+    init(connectUrl: URL) throws {
         self.connectUrl = connectUrl
         try connect()
     }
@@ -18,8 +22,12 @@ class TelepathChannel: Codable {
         try connect()
     }
 
-    func connect() throws {
+    private func connect() throws {
         self.channel = try Telepath().connect(url: connectUrl)
+    }
+
+    func receive(completion: @escaping (String?, Error?) -> Void) {
+        self.channel?.receive(completion: completion)
     }
 
     enum CodingKeys: String, CodingKey {
