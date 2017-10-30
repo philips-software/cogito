@@ -114,6 +114,7 @@
 		02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792341F6FFBFF00DC5973 /* AppStore.swift */; };
 		02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792381F6FFE1100DC5973 /* KeyStoreActionsSpec.swift */; };
 		02F0CA091F875515000C428F /* DebugGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F0CA081F875515000C428F /* DebugGestureHandler.swift */; };
+		5C04E4471FA77C0D00A70C60 /* StoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04E4461FA77C0C00A70C60 /* StoreSpy.swift */; };
 		5C20A0F61FA1FAED00B443C9 /* TelepathActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */; };
 		5C20A0F81FA1FBDD00B443C9 /* TelepathReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */; };
 		5C20A0F91FA1FC5300B443C9 /* TelepathReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */; };
@@ -235,6 +236,7 @@
 		4E01CAF19EC1DDC9775320D9 /* Pods-Cogito.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito/Pods-Cogito.release.xcconfig"; sourceTree = "<group>"; };
 		522B6D6F55AAD6AA150A5F61 /* Pods-Cogito.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito/Pods-Cogito.debug.xcconfig"; sourceTree = "<group>"; };
 		53940EFC96526AFDFA7CD5FC /* Pods_Cogito_CogitoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito_CogitoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C04E4461FA77C0C00A70C60 /* StoreSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreSpy.swift; sourceTree = "<group>"; };
 		5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducer.swift; sourceTree = "<group>"; };
 		5C20A0FA1FA1FC6500B443C9 /* TelepathState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathState.swift; sourceTree = "<group>"; };
 		5C20A1021FA224C000B443C9 /* TelepathChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathChannel.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
 				C00B5FFF481EB4982C21280E /* DispatchRecorder.swift */,
+				5C04E4461FA77C0C00A70C60 /* StoreSpy.swift */,
 				5C7C23971FA37CF9009E9CE7 /* ExampleError.swift */,
 				027604051F6ACD1600788B0A /* Info.plist */,
 			);
@@ -1001,6 +1004,7 @@
 				0298D42E1F7A43C90070998D /* StorePersister.swift in Sources */,
 				0292451D1F7AA3B100F2C0C1 /* AppStateHelper.swift in Sources */,
 				02A15AF71F864F8700A94163 /* HomeViewControllerSpec.swift in Sources */,
+				5C04E4471FA77C0D00A70C60 /* StoreSpy.swift in Sources */,
 				0270D71D1F9F5A5F00CC9038 /* AttestationActionsSpec.swift in Sources */,
 				028F4EFE1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0298D42B1F7A43C90070998D /* AppStore.swift in Sources */,
