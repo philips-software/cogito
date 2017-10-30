@@ -76,7 +76,7 @@ class StorePersisterSpec: QuickSpec {
                         "selectedFacet": -1
                     },
                     "telepath": {
-                        "connectUrl": "http://example.com"
+                        "receivedMessages": []
                     },
                     "attestations": {
                         "pending": {}

@@ -9,6 +9,8 @@ func telepathReducer(_ action: Action, _ state: TelepathState?) -> TelepathState
         nextState.channel = connected.channel
     case let failure as TelepathActions.ConnectRejected:
         nextState.connectionError = failure.error.localizedDescription
+    case let received as TelepathActions.ReceiveFulfilled:
+        nextState.receivedMessages.append(received.message)
     default:
         break
     }
