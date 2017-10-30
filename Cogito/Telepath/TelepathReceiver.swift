@@ -7,7 +7,7 @@ class TelepathReceiver: StoreSubscriber {
     let pollInterval: TimeInterval
     var timer: Timer?
 
-    init(store: Store<AppState>, pollInterval: TimeInterval = 1) {
+    init(store: Store<AppState>, pollInterval: TimeInterval = 0.5) {
         self.store = store
         self.pollInterval = pollInterval
     }
