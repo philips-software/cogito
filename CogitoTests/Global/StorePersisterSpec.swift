@@ -73,7 +73,7 @@ class StorePersisterSpec: QuickSpec {
                     },
                     "diamond": {
                         "facets": [],
-                        "selectedFacet": -1
+                        "selectedFacet": null
                     },
                     "telepath": {
                         "receivedMessages": []

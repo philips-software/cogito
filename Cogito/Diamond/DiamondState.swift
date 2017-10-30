@@ -3,19 +3,24 @@
 import ReSwift
 
 struct DiamondState: Codable {
-    var facets: [Identity]
-    var selectedFacet: Int
+    var facets: [UUID: Identity]
+    var selectedFacet: UUID?
+
+    init(facets: [UUID: Identity]) {
+        self.facets = facets
+        selectedFacet = facets.values.first?.identifier
+    }
 
     init(facets: [Identity]) {
-        self.facets = facets
-        selectedFacet = facets.count > 0 ? 0 : -1
+        let facetsWithIdentifiers = facets.map { ($0.identifier, $0) }
+        self.init(facets: [UUID: Identity](uniqueKeysWithValues: facetsWithIdentifiers))
     }
 }
 
 extension DiamondState: Equatable {
     static func == (lhs: DiamondState, rhs: DiamondState) -> Bool {
-        return lhs.facets == rhs.facets
+        return lhs.facets == rhs.facets && lhs.selectedFacet == rhs.selectedFacet
     }
 }
 
-let initialDiamondState = DiamondState(facets: [])
+let initialDiamondState = DiamondState(facets: [:])

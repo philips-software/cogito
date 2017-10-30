@@ -10,10 +10,10 @@ func diamondReducer(action: Action, state: DiamondState?) -> DiamondState {
         var newFacets = state.facets
         let identity = Identity(description: createFacet.description,
                                 gethAddress: createFacet.account.getAddress()!)
-        newFacets.append(identity)
+        newFacets[identity.identifier] = identity
         state.facets = newFacets
-        if state.selectedFacet < 0 {
-            state.selectedFacet = 0
+        if state.selectedFacet == nil {
+            state.selectedFacet = identity.identifier
         }
     default:
         break

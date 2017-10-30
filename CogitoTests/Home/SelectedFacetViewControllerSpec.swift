@@ -9,8 +9,11 @@ import ReSwift
 class SelectedFacetViewControllerSpec: QuickSpec {
     override func spec() {
         let testAddress = GethAddress(fromHex: "0x0000000000000000000000000000000000000000")!
+        let testAddress2 = GethAddress(fromHex: "0x2222222222222222222222222222222222222222")!
         let testIdentity = Identity(description: "testdesc",
                                     gethAddress: testAddress)
+        let testIdentity2 = Identity(description: "testdesc2",
+                                     gethAddress: testAddress2)
         var viewController: SelectedFacetViewController!
 
         beforeEach {
@@ -54,7 +57,7 @@ class SelectedFacetViewControllerSpec: QuickSpec {
             it("maps facets") {
                 let state = appState(diamond: DiamondState(facets: [testIdentity]))
                 viewController.connection.newState(state: state)
-                expect(viewController.props.facets) == [testIdentity]
+                expect(viewController.props.facets) == state.diamond.facets
             }
         }
 
@@ -79,7 +82,7 @@ class SelectedFacetViewControllerSpec: QuickSpec {
                 viewController.props = SelectedFacetViewController.Props(
                     selectedFacet: nil,
                     createdNewAccount: nil,
-                    facets: [])
+                    facets: [:])
             }
 
             it("has correct header button title and is touchable") {
@@ -98,7 +101,10 @@ class SelectedFacetViewControllerSpec: QuickSpec {
                 viewController.props = SelectedFacetViewController.Props(
                     selectedFacet: testIdentity,
                     createdNewAccount: nil,
-                    facets: [testIdentity, testIdentity])
+                    facets: [UUID: Identity](uniqueKeysWithValues: [
+                        (testIdentity.identifier, testIdentity),
+                        (testIdentity2.identifier, testIdentity2)
+                    ]))
             }
 
             it("has correct header button title and is not touchable") {
@@ -124,22 +130,25 @@ class SelectedFacetViewControllerSpec: QuickSpec {
         it("knows if the first facets was just created") {
             viewController.props = SelectedFacetViewController.Props(selectedFacet: nil,
                                                                      createdNewAccount: nil,
-                                                                     facets: [])
+                                                                     facets: [:])
             expect(viewController.firstFacetWasCreated()).to(beFalse())
 
             viewController.props = SelectedFacetViewController.Props(selectedFacet: testIdentity,
                                                                      createdNewAccount: nil,
-                                                                     facets: [testIdentity])
+                                                                     facets: [testIdentity.identifier: testIdentity])
             expect(viewController.firstFacetWasCreated()).to(beFalse())
 
             viewController.props = SelectedFacetViewController.Props(selectedFacet: testIdentity,
                                                                      createdNewAccount: GethAccount()!,
-                                                                     facets: [testIdentity])
+                                                                     facets: [testIdentity.identifier: testIdentity])
             expect(viewController.firstFacetWasCreated()).to(beTrue())
 
             viewController.props = SelectedFacetViewController.Props(selectedFacet: testIdentity,
                                                                      createdNewAccount: GethAccount()!,
-                                                                     facets: [testIdentity, testIdentity])
+                                                                     facets: [
+                                                                         testIdentity.identifier: testIdentity,
+                                                                         testIdentity2.identifier: testIdentity2
+                                                                     ])
             expect(viewController.firstFacetWasCreated()).to(beFalse())
         }
     }

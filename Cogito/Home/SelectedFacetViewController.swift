@@ -112,7 +112,7 @@ class SelectedFacetViewController: UIViewController, Connectable {
     struct Props {
         let selectedFacet: Identity?
         let createdNewAccount: GethAccount?
-        let facets: [Identity]
+        let facets: [UUID:Identity]
     }
 
     struct Actions {
@@ -122,8 +122,8 @@ class SelectedFacetViewController: UIViewController, Connectable {
 
 private func mapStateToProps(state: AppState) -> SelectedFacetViewController.Props {
     let selectedFacet: Identity?
-    if state.diamond.selectedFacet >= 0 {
-        selectedFacet = state.diamond.facets[state.diamond.selectedFacet]
+    if let selectedIdentifier = state.diamond.selectedFacet {
+        selectedFacet = state.diamond.facets[selectedIdentifier]
     } else {
         selectedFacet = nil
     }
