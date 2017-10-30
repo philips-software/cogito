@@ -14,8 +14,7 @@ class TelepathReducerSpec: QuickSpec {
         }
 
         it("stores connection errors in the state") {
-            struct SomeError: Error {}
-            let error = SomeError()
+            let error = ExampleError(message: "an error")
             let action = TelepathActions.ConnectRejected(error: error)
             let nextState = telepathReducer(action, nil)
             expect(nextState.connectionError) == error.localizedDescription
@@ -26,6 +25,13 @@ class TelepathReducerSpec: QuickSpec {
             let action = TelepathActions.ReceiveFulfilled(message: message)
             let nextState = telepathReducer(action, nil)
             expect(nextState.receivedMessages) == [message]
+        }
+
+        it("stores error while receiving in state") {
+            let error = ExampleError(message: "an error")
+            let action = TelepathActions.ReceiveRejected(error: error)
+            let nextState = telepathReducer(action, nil)
+            expect(nextState.receiveError) == error.localizedDescription
         }
     }
 }

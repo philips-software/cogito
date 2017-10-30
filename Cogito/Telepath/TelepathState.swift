@@ -6,15 +6,18 @@ struct TelepathState: Equatable, Codable {
     var channel: TelepathChannel?
     var connectionError: String?
     var receivedMessages: [String] = []
+    var receiveError: String?
 
     init(
         channel: TelepathChannel? = nil,
         connectionError: String? = nil,
-        receivedMessages: [String] = []
+        receivedMessages: [String] = [],
+        receiveError: String? = nil
     ) {
         self.channel = channel
         self.connectionError = connectionError
         self.receivedMessages = receivedMessages
+        self.receiveError = receiveError
     }
 
     static func == (lhs: TelepathState, rhs: TelepathState) -> Bool {
