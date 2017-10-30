@@ -235,6 +235,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     }
 
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
+        actions.connectToTelepathChannel(result.value)
         stopScanning()
     }
 
@@ -253,6 +254,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     }
 
     struct Actions {
+        let connectToTelepathChannel: (String) -> Void
     }
 }
 
@@ -270,5 +272,11 @@ private func mapStateToProps(state: AppState) -> HomeViewController.Props {
 
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction)
         -> HomeViewController.Actions {
-    return HomeViewController.Actions()
+    return HomeViewController.Actions(
+        connectToTelepathChannel: { urlString in
+            if let url = URL(string: urlString) {
+                dispatch(TelepathActions.Connect(url: url))
+            }
+        }
+    )
 }
