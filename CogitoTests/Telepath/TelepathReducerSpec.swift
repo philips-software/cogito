@@ -20,5 +20,12 @@ class TelepathReducerSpec: QuickSpec {
             let nextState = telepathReducer(action, nil)
             expect(nextState.connectionError) == error.localizedDescription
         }
+
+        it("stores received messages in the state") {
+            let message = "a message"
+            let action = TelepathActions.ReceiveFulfilled(message: message)
+            let nextState = telepathReducer(action, nil)
+            expect(nextState.receivedMessages) == [message]
+        }
     }
 }
