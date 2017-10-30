@@ -44,6 +44,10 @@ class TelepathReceiverSpec: QuickSpec {
             expect(store.actions.count).toEventually(beGreaterThan(5))
         }
 
+        it("has a sensible polling interval") {
+            expect(TelepathReceiver(store: store).pollInterval) == 0.5
+        }
+
         it("reports errors while receiving") {
             let error = ExampleError(message: "an error")
             channel.receiveError = error
