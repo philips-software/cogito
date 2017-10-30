@@ -12,6 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var storePersister: StorePersister?
+    var telepathReceiver: TelepathReceiver?
     var geth: Geth?
     var syncProgressReporter: SyncProgressReporter!
     var peerReporter: PeerReporter!
@@ -23,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if storePersister == nil {
             abort()
         }
+
+        telepathReceiver = TelepathReceiver(store: appStore)
 
         if appStore.state.keyStore.keyStore == nil {
             appStore.dispatch(KeyStoreActions.Create())
@@ -38,11 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
+        telepathReceiver?.stop()
         storePersister?.stop()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         storePersister?.start()
+        telepathReceiver?.start()
     }
 
     func startGeth() {
