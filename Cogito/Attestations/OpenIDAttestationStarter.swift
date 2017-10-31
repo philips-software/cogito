@@ -16,13 +16,13 @@ extension UIApplication: URLOpening {}
 
 struct OpenIDAttestationStarter {
     let oidcRealmUrl: URL
-    let onSuccess: () -> Void
+    let onSuccess: (Nonce) -> Void
     let onError: (String) -> Void
     let nonce: String
     let urlOpener: URLOpening
 
     init(oidcRealmUrl: URL,
-         onSuccess: @escaping () -> Void,
+         onSuccess: @escaping (Nonce) -> Void,
          onError: @escaping (String) -> Void,
          urlOpener: URLOpening = UIApplication.shared) {
         self.oidcRealmUrl = oidcRealmUrl
@@ -46,7 +46,7 @@ struct OpenIDAttestationStarter {
                self.urlOpener.canOpenURL(url) {
                 self.urlOpener.open(url, options: [:]) { success in
                     if success {
-                        self.onSuccess()
+                        self.onSuccess(self.nonce)
                     } else {
                         self.onError("failed to open browser for OpenID Connect authorization")
                     }

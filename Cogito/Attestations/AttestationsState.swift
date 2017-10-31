@@ -17,12 +17,20 @@ struct PendingAttestation: Codable {
     let nonce: Nonce
     let subject: Subject
     let identity: Identity
+    var status: Status
+
+    enum Status: String, Codable {
+        case pending
+        case started
+    }
 }
 
 extension PendingAttestation: Equatable {
     static func == (lhs: PendingAttestation, rhs: PendingAttestation) -> Bool {
-        return lhs.nonce == rhs.nonce && lhs.subject == rhs.subject && lhs.identity ==
-                                                                       rhs.identity
+        return lhs.nonce == rhs.nonce &&
+               lhs.subject == rhs.subject &&
+               lhs.identity == rhs.identity &&
+               lhs.status == rhs.status
     }
 }
 

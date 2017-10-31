@@ -17,7 +17,7 @@ class OpenIDAttestationHandlerSpec: QuickSpec {
         it("calls onError when openid config cannot be retrieved") {
             var receivedError: String?
             handler = OpenIDAttestationStarter(oidcRealmUrl: URL(string: realmUrl)!,
-                                               onSuccess: {},
+                                               onSuccess: { _ in },
                                                onError: { error in
                                                    receivedError = error
                                                })
@@ -28,7 +28,7 @@ class OpenIDAttestationHandlerSpec: QuickSpec {
 
         it("constructs proper URL given openid configuration") {
             handler = OpenIDAttestationStarter(oidcRealmUrl: URL(string: realmUrl)!,
-                                               onSuccess: {},
+                                               onSuccess: { _ in },
                                                onError: { _ in })
             let authUrl = handler.implicitFlowUrl(openIdConfiguration: openIdConfiguration)!
             let components = URLComponents(url: authUrl, resolvingAgainstBaseURL: false)!
@@ -45,7 +45,7 @@ class OpenIDAttestationHandlerSpec: QuickSpec {
 
         it("loads the OpenID Connect configuration") {
             handler = OpenIDAttestationStarter(oidcRealmUrl: URL(string: realmUrl)!,
-                                               onSuccess: {},
+                                               onSuccess: { _ in },
                                                onError: { _ in })
             self.stub(uri(realmUrl + "/.well-known/openid-configuration"), json(openIdConfiguration))
             var configuration: [String: Any]?
@@ -65,7 +65,7 @@ class OpenIDAttestationHandlerSpec: QuickSpec {
 
         it("reports an error when it cannot load OpenID Connect configuration") {
             handler = OpenIDAttestationStarter(oidcRealmUrl: URL(string: realmUrl)!,
-                                               onSuccess: {},
+                                               onSuccess: { _ in },
                                                onError: { _ in })
             self.stub(uri(realmUrl + "/.well-known/openid-configuration"), http(404))
             var reportedError: String?
@@ -83,7 +83,7 @@ class OpenIDAttestationHandlerSpec: QuickSpec {
                 successReported = false
                 errorReported = false
                 handler = OpenIDAttestationStarter(oidcRealmUrl: URL(string: realmUrl)!,
-                                                   onSuccess: { successReported = true },
+                                                   onSuccess: { _ in successReported = true },
                                                    onError: { _ in errorReported = true })
             }
 
@@ -124,7 +124,7 @@ class OpenIDAttestationHandlerSpec: QuickSpec {
                         beforeEach {
                             urlOpener = MockURLOpener(canOpen: false, openResult: false)
                             handler = OpenIDAttestationStarter(oidcRealmUrl: URL(string: realmUrl)!,
-                                                               onSuccess: { successReported = true },
+                                                               onSuccess: { _ in successReported = true },
                                                                onError: { _ in errorReported = true },
                                                                urlOpener: urlOpener)
                         }
@@ -140,7 +140,7 @@ class OpenIDAttestationHandlerSpec: QuickSpec {
                         beforeEach {
                             urlOpener = MockURLOpener(canOpen: true, openResult: false)
                             handler = OpenIDAttestationStarter(oidcRealmUrl: URL(string: realmUrl)!,
-                                                               onSuccess: { successReported = true },
+                                                               onSuccess: { _ in successReported = true },
                                                                onError: { _ in errorReported = true },
                                                                urlOpener: urlOpener)
                         }
@@ -155,7 +155,7 @@ class OpenIDAttestationHandlerSpec: QuickSpec {
                         beforeEach {
                             urlOpener = MockURLOpener(canOpen: true, openResult: true)
                             handler = OpenIDAttestationStarter(oidcRealmUrl: URL(string: realmUrl)!,
-                                                               onSuccess: { successReported = true },
+                                                               onSuccess: { _ in successReported = true },
                                                                onError: { _ in errorReported = true },
                                                                urlOpener: urlOpener)
                         }

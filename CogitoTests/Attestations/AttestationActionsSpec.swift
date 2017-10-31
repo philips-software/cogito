@@ -35,7 +35,8 @@ class AttestationActionsSpec: QuickSpec {
                     return appState(attestations: AttestationsState(
                         pending: [validNonce: PendingAttestation(nonce: validNonce,
                                                                  subject: "incorrect subject",
-                                                                 identity: identity)])
+                                                                 identity: identity,
+                                                                 status: .started)])
                     )
                 })
                 expect(dispatchRecorder.count) == 1
@@ -49,7 +50,8 @@ class AttestationActionsSpec: QuickSpec {
                     return appState(attestations: AttestationsState(
                         pending: [validNonce: PendingAttestation(nonce: validNonce,
                                                                  subject: validSubject,
-                                                                 identity: identity)])
+                                                                 identity: identity,
+                                                                 status: .started)])
                     )
                 })
                 expect(dispatchRecorder.count) == 1
