@@ -30,21 +30,9 @@ class TelepathReceiver: StoreSubscriber {
 
     func newState(state channel: TelepathChannelType?) {
         timer?.invalidate()
-        if let channel = channel {
+        if channel != nil {
             timer = Timer.scheduledTimer(withTimeInterval: pollInterval, repeats: true) { [weak self] _ in
-                self?.poll(channel: channel)
-            }
-        }
-    }
-
-    private func poll(channel: TelepathChannelType) {
-        channel.receive { [weak self] message, error in
-            if let error = error {
-                let action = TelepathActions.ReceiveRejected(error: error)
-                self?.store.dispatch(action)
-            } else if let message = message {
-                let action = TelepathActions.ReceiveFulfilled(message: message)
-                self?.store.dispatch(action)
+                self?.store.dispatch(TelepathActions.Receive())
             }
         }
     }
