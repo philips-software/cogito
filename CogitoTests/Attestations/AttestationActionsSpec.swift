@@ -60,6 +60,25 @@ class AttestationActionsSpec: QuickSpec {
                 })
                 expect(dispatchRecorder.count) == 1
             }
+
+            it("also dispatches DiamondActions.AddAttestation") {
+                let identity = Identity(description: "test identity", address: Address.testAddress1)
+                let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
+                let dispatchRecorder = DispatchRecorder<DiamondActions.AddJWTAttestation>()
+                finishAction.action(dispatchRecorder.dispatch, {
+                    return appState(attestations: AttestationsState(
+                        open: [validNonce: AttestationInProgress(nonce: validNonce,
+                                                                 subject: validSubject,
+                                                                 identity: identity,
+                                                                 status: .started,
+                                                                 error: nil,
+                                                                 idToken: nil)])
+                    )
+                })
+                expect(dispatchRecorder.count) == 1
+                expect(dispatchRecorder.actions.first!.identity) == identity
+                expect(dispatchRecorder.actions.first!.idToken) == validToken
+            }
         }
     }
 }
