@@ -25,6 +25,19 @@ struct TelepathActions {
         let error: Error
     }
 
+    // swiftlint:disable identifier_name
+    static func Receive() -> ThunkAction<AppState> {
+        return ThunkAction { dispatch, getState in
+            getState()?.telepath.channel?.receive { message, error in
+                if let error = error {
+                    dispatch(TelepathActions.ReceiveRejected(error: error))
+                } else if let message = message {
+                    dispatch(TelepathActions.ReceiveFulfilled(message: message))
+                }
+            }
+        }
+    }
+
     struct ReceiveFulfilled: Action {
         let message: String
     }
