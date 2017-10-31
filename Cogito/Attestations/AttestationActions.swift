@@ -7,13 +7,15 @@ import JWTDecode
 // swiftlint:disable identifier_name
 
 struct AttestationActions {
-    static func StartAttestation(oidcRealmUrl: URL, subject: String) -> ThunkAction<AppState> {
+    static func StartAttestation(for identity: Identity,
+                                 oidcRealmUrl: URL,
+                                 subject: String) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, _ in
             let handler = OpenIDAttestationStarter(
                 oidcRealmUrl: oidcRealmUrl,
                 onSuccess: { dispatch(Started()) },
                 onError: { error in dispatch(StartRejected(error: error)) })
-            dispatch(Pending(nonce: handler.nonce, subject: subject))
+            dispatch(Pending(identity: identity, nonce: handler.nonce, subject: subject))
             handler.run()
         })
     }
@@ -27,7 +29,8 @@ struct AttestationActions {
                     if let nonce = jwt.claim(name: "nonce").string,
                         let state = getState(),
                         let subject = jwt.subject,
-                        state.attestations.pending[nonce] == subject {
+                        let pendingAttestation = state.attestations.pending[nonce],
+                        pendingAttestation.subject == subject {
                         dispatch(Fulfilled(idToken: idToken))
                     } else {
                         dispatch(FinishRejected(error: "unexpected nonce or subject"))
@@ -42,6 +45,7 @@ struct AttestationActions {
     }
 
     struct Pending: Action {
+        let identity: Identity
         let nonce: String
         let subject: String
     }

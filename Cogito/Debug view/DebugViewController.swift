@@ -71,24 +71,32 @@ class DebugViewController: UIViewController, Connectable {
             print("invalid OpenID Connect subject")
             return
         }
-        actions.startOpenIdConnectAttestation(url, subject)
+        guard let identity = props.selectedIdentity else {
+            print("no identity was selected")
+            return
+        }
+        actions.startOpenIdConnectAttestation(identity, url, subject)
     }
 
     struct Props {
         let peerCount: Int
         let syncProgress: SyncProgress?
+        let selectedIdentity: Identity?
     }
     struct Actions {
         let resetCreateIdentity: () -> Void
         let resetAppState: () -> Void
-        let startOpenIdConnectAttestation: (URL, String) -> Void
+        let startOpenIdConnectAttestation: (Identity, URL, String) -> Void
     }
 }
 
 private func mapStateToProps(state: AppState) -> DebugViewController.Props {
     return DebugViewController.Props(
         peerCount: state.geth.peersCount,
-        syncProgress: state.geth.syncProgress
+        syncProgress: state.geth.syncProgress,
+        selectedIdentity: state.diamond.selectedFacet != nil
+            ? state.diamond.facets[state.diamond.selectedFacet!]
+            : nil
     )
 }
 
@@ -96,8 +104,8 @@ private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> Debug
     return DebugViewController.Actions(
         resetCreateIdentity: { dispatch(CreateIdentityActions.Reset()) },
         resetAppState: { dispatch(ResetApp()) },
-        startOpenIdConnectAttestation: { url, subject in
-            dispatch(AttestationActions.StartAttestation(oidcRealmUrl: url, subject:subject))
+        startOpenIdConnectAttestation: { identity, url, subject in
+            dispatch(AttestationActions.StartAttestation(for: identity, oidcRealmUrl: url, subject:subject))
         }
     )
 }

@@ -6,7 +6,9 @@ func attestationsReducer(action: Action, state: AttestationsState?) -> Attestati
     var state = state ?? initialAttestationsState
     switch action {
     case let action as AttestationActions.Pending:
-        state.pending[action.nonce] = action.subject
+        state.pending[action.nonce] = PendingAttestation(nonce: action.nonce,
+                                                         subject: action.subject,
+                                                         identity: action.identity)
     default:
         break
     }
