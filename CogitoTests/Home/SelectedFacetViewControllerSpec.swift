@@ -8,12 +8,12 @@ import ReSwift
 
 class SelectedFacetViewControllerSpec: QuickSpec {
     override func spec() {
-        let testAddress = GethAddress(fromHex: "0x0000000000000000000000000000000000000000")!
-        let testAddress2 = GethAddress(fromHex: "0x2222222222222222222222222222222222222222")!
+        let testAddress = Address.testAddress
+        let testAddress2 = Address.testAddress2
         let testIdentity = Identity(description: "testdesc",
-                                    gethAddress: testAddress)
+                                    address: testAddress)
         let testIdentity2 = Identity(description: "testdesc2",
-                                     gethAddress: testAddress2)
+                                     address: testAddress2)
         var viewController: SelectedFacetViewController!
 
         beforeEach {

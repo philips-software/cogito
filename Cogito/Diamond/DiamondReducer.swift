@@ -8,8 +8,9 @@ func diamondReducer(action: Action, state: DiamondState?) -> DiamondState {
     switch action {
     case let createFacet as DiamondActions.CreateFacet:
         var newFacets = state.facets
+        let gethAddress = createFacet.account.getAddress()!
         let identity = Identity(description: createFacet.description,
-                                gethAddress: createFacet.account.getAddress()!)
+                                address: Address(from: gethAddress))
         newFacets[identity.identifier] = identity
         state.facets = newFacets
         if state.selectedFacet == nil {

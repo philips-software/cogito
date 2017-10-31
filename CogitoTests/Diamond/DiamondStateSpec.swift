@@ -21,7 +21,8 @@ class DiamondStateSpec: QuickSpec {
             expect {
                 account0 = try keyStore.newAccount("some pass")
             }.toNot(throwError())
-            identity0 = Identity(description: "first identity", gethAddress: account0.getAddress()!)
+            let address = Address(from: account0.getAddress()!)
+            identity0 = Identity(description: "first identity", address: address)
         }
 
         afterEach {
@@ -45,7 +46,7 @@ class DiamondStateSpec: QuickSpec {
             expect(encoded) == "{\"selectedFacet\":\"\(identity0.identifier)\"," +
                                "\"facets\":[\"\(identity0.identifier)\",{" +
                                "\"description\":\"first identity\"," +
-                               "\"gethAddress\":\"\(address)\"," +
+                               "\"address\":{\"value\":\"\(address)\"}," +
                                "\"identifier\":\"\(identity0.identifier)\"}" +
                                "]}"
 
