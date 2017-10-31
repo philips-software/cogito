@@ -14,7 +14,7 @@ struct AttestationActions {
             let handler = OpenIDAttestationStarter(
                 oidcRealmUrl: oidcRealmUrl,
                 onSuccess: { nonce in dispatch(Started(nonce: nonce)) },
-                onError: { error in dispatch(StartRejected(error: error)) })
+                onError: { nonce, error in dispatch(StartRejected(nonce: nonce, error: error)) })
             dispatch(Pending(identity: identity, nonce: handler.nonce, subject: subject))
             handler.run()
         })
@@ -55,6 +55,7 @@ struct AttestationActions {
     }
 
     struct StartRejected: Action {
+        let nonce: String
         let error: String
     }
 

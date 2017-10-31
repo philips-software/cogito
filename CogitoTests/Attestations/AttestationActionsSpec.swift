@@ -36,7 +36,8 @@ class AttestationActionsSpec: QuickSpec {
                         open: [validNonce: AttestationInProgress(nonce: validNonce,
                                                                  subject: "incorrect subject",
                                                                  identity: identity,
-                                                                 status: .started)])
+                                                                 status: .started,
+                                                                 error: "the error message")])
                     )
                 })
                 expect(dispatchRecorder.count) == 1
@@ -51,7 +52,8 @@ class AttestationActionsSpec: QuickSpec {
                         open: [validNonce: AttestationInProgress(nonce: validNonce,
                                                                  subject: validSubject,
                                                                  identity: identity,
-                                                                 status: .started)])
+                                                                 status: .started,
+                                                                 error: "the error message")])
                     )
                 })
                 expect(dispatchRecorder.count) == 1
