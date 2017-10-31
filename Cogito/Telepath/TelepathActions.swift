@@ -32,4 +32,8 @@ struct TelepathActions {
     struct ReceiveRejected: Action {
         let error: Error
     }
+
+    struct Send: Action {
+        let message: String
+    }
 }
