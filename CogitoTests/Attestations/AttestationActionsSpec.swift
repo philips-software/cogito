@@ -44,7 +44,7 @@ class AttestationActionsSpec: QuickSpec {
                 expect(dispatchRecorder.count) == 1
             }
 
-            it("dispatches FinishRejected when token has correct nonce") {
+            it("dispatches Fulfilled when token has correct nonce") {
                 let identity = Identity(description: "test identity", address: Address.testAddress1)
                 let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
                 let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
@@ -54,7 +54,7 @@ class AttestationActionsSpec: QuickSpec {
                                                                  subject: validSubject,
                                                                  identity: identity,
                                                                  status: .started,
-                                                                 error: "the error message",
+                                                                 error: nil,
                                                                  idToken: nil)])
                     )
                 })
