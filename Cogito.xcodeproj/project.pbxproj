@@ -115,6 +115,11 @@
 		02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792381F6FFE1100DC5973 /* KeyStoreActionsSpec.swift */; };
 		02F0CA091F875515000C428F /* DebugGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F0CA081F875515000C428F /* DebugGestureHandler.swift */; };
 		5C04E4471FA77C0D00A70C60 /* StoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04E4461FA77C0C00A70C60 /* StoreSpy.swift */; };
+		5C04E44A1FA77CA400A70C60 /* AccountServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04E4491FA77CA400A70C60 /* AccountServiceSpec.swift */; };
+		5C04E44D1FA77D1C00A70C60 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04E44C1FA77D1C00A70C60 /* AccountService.swift */; };
+		5C04E44E1FA77D1F00A70C60 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04E44C1FA77D1C00A70C60 /* AccountService.swift */; };
+		5C04E4501FA788D200A70C60 /* AccountActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04E44F1FA788D200A70C60 /* AccountActions.swift */; };
+		5C04E4511FA788D200A70C60 /* AccountActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04E44F1FA788D200A70C60 /* AccountActions.swift */; };
 		5C20A0F61FA1FAED00B443C9 /* TelepathActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */; };
 		5C20A0F81FA1FBDD00B443C9 /* TelepathReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */; };
 		5C20A0F91FA1FC5300B443C9 /* TelepathReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */; };
@@ -237,6 +242,9 @@
 		522B6D6F55AAD6AA150A5F61 /* Pods-Cogito.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito/Pods-Cogito.debug.xcconfig"; sourceTree = "<group>"; };
 		53940EFC96526AFDFA7CD5FC /* Pods_Cogito_CogitoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito_CogitoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C04E4461FA77C0C00A70C60 /* StoreSpy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreSpy.swift; sourceTree = "<group>"; };
+		5C04E4491FA77CA400A70C60 /* AccountServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountServiceSpec.swift; sourceTree = "<group>"; };
+		5C04E44C1FA77D1C00A70C60 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
+		5C04E44F1FA788D200A70C60 /* AccountActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActions.swift; sourceTree = "<group>"; };
 		5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducer.swift; sourceTree = "<group>"; };
 		5C20A0FA1FA1FC6500B443C9 /* TelepathState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathState.swift; sourceTree = "<group>"; };
 		5C20A1021FA224C000B443C9 /* TelepathChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathChannel.swift; sourceTree = "<group>"; };
@@ -343,6 +351,7 @@
 		027603ED1F6ACD1600788B0A /* Cogito */ = {
 			isa = PBXGroup;
 			children = (
+				5C04E44B1FA77D0400A70C60 /* Accounts */,
 				028F4EF21F7CE37E0015C4AF /* Global state */,
 				028F4EF01F7CE22D0015C4AF /* Geth state */,
 				0298D4331F7A45040070998D /* Geth */,
@@ -368,6 +377,7 @@
 		027604021F6ACD1600788B0A /* CogitoTests */ = {
 			isa = PBXGroup;
 			children = (
+				5C04E4481FA77CA400A70C60 /* Accounts */,
 				028F4EF31F7CE3A10015C4AF /* Global */,
 				028F4EF11F7CE25F0015C4AF /* Geth state */,
 				0298D4321F7A44EF0070998D /* Geth */,
@@ -564,6 +574,23 @@
 				027603F01F6ACD1600788B0A /* DebugViewController.swift */,
 			);
 			path = "Debug view";
+			sourceTree = "<group>";
+		};
+		5C04E4481FA77CA400A70C60 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				5C04E4491FA77CA400A70C60 /* AccountServiceSpec.swift */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		5C04E44B1FA77D0400A70C60 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				5C04E44C1FA77D1C00A70C60 /* AccountService.swift */,
+				5C04E44F1FA788D200A70C60 /* AccountActions.swift */,
+			);
+			path = Accounts;
 			sourceTree = "<group>";
 		};
 		5C48E23B1FA1D06900B8BF6E /* Telepath */ = {
@@ -912,6 +939,7 @@
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
 				02021D191F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
+				5C04E4501FA788D200A70C60 /* AccountActions.swift in Sources */,
 				02A15B011F8672C000A94163 /* DiamondReducer.swift in Sources */,
 				0270D71A1F9F58CA00CC9038 /* AttestationActions.swift in Sources */,
 				028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
@@ -945,6 +973,7 @@
 				5C7C23911FA3502C009E9CE7 /* TelepathReceiver.swift in Sources */,
 				028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */,
+				5C04E44D1FA77D1C00A70C60 /* AccountService.swift in Sources */,
 				02A15AFE1F8671D200A94163 /* Identity.swift in Sources */,
 				C00B5D39FC0D970348A5E0C6 /* DiamondActions.swift in Sources */,
 			);
@@ -963,6 +992,7 @@
 				0292451B1F7AA17300F2C0C1 /* GethState.swift in Sources */,
 				028F4F061F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift in Sources */,
 				02BE32D11F7A6DD0006C7287 /* SyncProgressReporter.swift in Sources */,
+				5C04E4511FA788D200A70C60 /* AccountActions.swift in Sources */,
 				028F4EEC1F7AA64D0015C4AF /* GethReducerSpec.swift in Sources */,
 				02A15B061F86733000A94163 /* DiamondReducerSpec.swift in Sources */,
 				5C20A1061FA224E000B443C9 /* TelepathChannelSpec.swift in Sources */,
@@ -1004,6 +1034,7 @@
 				0298D42E1F7A43C90070998D /* StorePersister.swift in Sources */,
 				0292451D1F7AA3B100F2C0C1 /* AppStateHelper.swift in Sources */,
 				02A15AF71F864F8700A94163 /* HomeViewControllerSpec.swift in Sources */,
+				5C04E44A1FA77CA400A70C60 /* AccountServiceSpec.swift in Sources */,
 				5C04E4471FA77C0D00A70C60 /* StoreSpy.swift in Sources */,
 				0270D71D1F9F5A5F00CC9038 /* AttestationActionsSpec.swift in Sources */,
 				028F4EFE1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
@@ -1026,6 +1057,7 @@
 				C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */,
 				C00B57208B78184BB19798CD /* AppPassword.swift in Sources */,
 				5C7C23951FA35093009E9CE7 /* TelepathDefaults.swift in Sources */,
+				5C04E44E1FA77D1F00A70C60 /* AccountService.swift in Sources */,
 				02A15B021F8672C000A94163 /* DiamondReducer.swift in Sources */,
 				5C7C23981FA37CF9009E9CE7 /* ExampleError.swift in Sources */,
 				5C9331981FA324460056869F /* TelepathChannelExample.swift in Sources */,
