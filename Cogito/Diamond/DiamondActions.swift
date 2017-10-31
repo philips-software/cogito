@@ -8,4 +8,9 @@ struct DiamondActions {
         let description: String
         let account: GethAccount
     }
+
+    struct AddJWTAttestation: Action {
+        let identity: Identity
+        let idToken: String
+    }
 }

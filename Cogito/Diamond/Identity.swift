@@ -8,11 +8,13 @@ struct Identity: Codable {
     let description: String
     let address: Address
     var gethAddress: GethAddress { return address.toGethAddress() }
+    var idTokens: [String]
 
     init(description: String, address: Address) {
         self.identifier = UUID()
         self.description = description
         self.address = address
+        self.idTokens = []
     }
 }
 
@@ -20,6 +22,9 @@ extension Identity: Equatable {
     static func == (lhs: Identity, rhs: Identity) -> Bool {
         let leftHex = lhs.gethAddress.getHex()!
         let rightHex = rhs.gethAddress.getHex()!
-        return lhs.identifier == rhs.identifier && lhs.description == rhs.description && leftHex == rightHex
+        return lhs.identifier == rhs.identifier &&
+               lhs.description == rhs.description &&
+               leftHex == rightHex &&
+               lhs.idTokens == rhs.idTokens
     }
 }
