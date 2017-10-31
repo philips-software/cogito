@@ -46,7 +46,7 @@ class DiamondStateSpec: QuickSpec {
             expect(encoded) == "{\"selectedFacet\":\"\(identity0.identifier)\"," +
                                "\"facets\":[\"\(identity0.identifier)\",{" +
                                "\"description\":\"first identity\"," +
-                               "\"address\":{\"value\":\"\(address)\"}," +
+                               "\"address\":\"\(address)\"," +
                                "\"identifier\":\"\(identity0.identifier)\"}" +
                                "]}"
 
