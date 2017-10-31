@@ -12,7 +12,9 @@ target 'Cogito' do
   pod 'QRCodeReader.swift', '~> 8.0'
   pod 'Telepath', :git => 'https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git'
   pod 'Branch', :inhibit_warnings => true
-  pod 'JWTDecode'
+  pod 'JWTDecode', '~> 2.1'
+  pod 'FontAwesome.swift', '~> 1.3'
+  pod 'RichString', '~> 2.0'
 
   pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0'
   pod 'RxCocoa', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0'

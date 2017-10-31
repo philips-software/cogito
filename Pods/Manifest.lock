@@ -2,6 +2,7 @@ PODS:
   - Branch (0.19.5):
     - Branch/Core (= 0.19.5)
   - Branch/Core (0.19.5)
+  - FontAwesome.swift (1.3.1)
   - Geth (1.7.1)
   - JWTDecode (2.1.1)
   - KeychainAccess (3.1.0)
@@ -22,6 +23,7 @@ PODS:
   - ReSwift (4.0.0)
   - ReSwiftThunk (0.1.1):
     - ReSwift (~> 4.0)
+  - RichString (2.0.0)
   - RxCocoa (4.0.0-beta.1):
     - RxSwift (~> 4.0.0-beta.1)
   - RxSwift (4.0.0-beta.1)
@@ -33,8 +35,9 @@ PODS:
 
 DEPENDENCIES:
   - Branch
+  - FontAwesome.swift (~> 1.3)
   - Geth (~> 1.7.1)
-  - JWTDecode
+  - JWTDecode (~> 2.1)
   - KeychainAccess (~> 3.1)
   - Mockingjay (from `https://github.com/metaltoad/Mockingjay.git`, branch `mt-swift4`)
   - Nimble (from `https://github.com/Quick/Nimble`)
@@ -43,6 +46,7 @@ DEPENDENCIES:
   - ReRxSwift (from `https://github.com/svdo/ReRxSwift`, branch `master`)
   - ReSwift (from `https://github.com/ReSwift/ReSwift`, branch `master`)
   - ReSwiftThunk (from `https://github.com/mikecole20/ReSwiftThunk.git`, branch `swift4.0`)
+  - RichString (~> 2.0)
   - RxCocoa (from `https://github.com/ReactiveX/RxSwift`, branch `rxswift4.0-swift4.0`)
   - RxSwift (from `https://github.com/ReactiveX/RxSwift`, branch `rxswift4.0-swift4.0`)
   - SwiftLint (= 0.21.0)
@@ -106,6 +110,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Branch: 25312ed2f58a569df58e6560238433c2a9d58e99
+  FontAwesome.swift: 050a75c6b94db0b082f39bde5b111c5c64d62a83
   Geth: 5d7ab4565680bc976b81cf8cdab653067807ed01
   JWTDecode: 83e8b381aafe27158d9f692cbdca2b12d61d460c
   KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
@@ -116,6 +121,7 @@ SPEC CHECKSUMS:
   ReRxSwift: 43e87ce023d32c9de72c03dd9b5381b49933e48a
   ReSwift: 85cb57267026cf4df4f6b05306bfce8ef74842c0
   ReSwiftThunk: 9b2ed720b51deabb4d49e7b6e76a618d1e4eb6f6
+  RichString: 0e87341212a3737686db46b3270c56a219babf0f
   RxCocoa: 009b86b0b158d4a7e4a5fc29bbdc0688c44fa3bb
   RxSwift: 9488787dfac649ffc1c4fddf3a3b4d6823d0b392
   Sodium: a3a17f2ba2dc1b83547e13db0075e7c5d426fc55
@@ -123,6 +129,6 @@ SPEC CHECKSUMS:
   Telepath: 14b8a4ad40df8c1f25ddc49ae7e1db3f1c427b7e
   URITemplate: d822aaa2f8ec9dcffffd13baa58bf9ee007e96cb
 
-PODFILE CHECKSUM: df0df8b2390cab8d1401807cbead5323f1fbc43f
+PODFILE CHECKSUM: 62815f139fc47a6f9228812130d05d4d732fb86f
 
 COCOAPODS: 1.3.1
