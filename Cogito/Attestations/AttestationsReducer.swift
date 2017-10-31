@@ -16,6 +16,11 @@ func attestationsReducer(action: Action, state: AttestationsState?) -> Attestati
     case let action as AttestationActions.StartRejected:
         state.open[action.nonce]?.status = .startRejected
         state.open[action.nonce]?.error = action.error
+    case let action as AttestationActions.FinishRejected:
+        if let nonce = action.nonce {
+            state.open[nonce]?.status = .finishRejected
+            state.open[nonce]?.error = action.error
+        }
     default:
         break
     }

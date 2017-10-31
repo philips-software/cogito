@@ -24,6 +24,7 @@ struct AttestationInProgress: Codable {
         case pending
         case started
         case startRejected
+        case finishRejected
     }
 }
 

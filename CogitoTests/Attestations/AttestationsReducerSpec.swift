@@ -48,5 +48,17 @@ class AttestationsReducerSpec: QuickSpec {
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.startRejected
             expect(nextState.open["nonce1"]!.error) == "some error"
         }
+
+        it("handles finish rejected") {
+            let initialState = AttestationsState(open: ["nonce1": AttestationInProgress(nonce: "nonce1",
+                                                                                        subject: "subject1",
+                                                                                        identity: identity1,
+                                                                                        status: .started,
+                                                                                        error: nil)])
+            let action = AttestationActions.FinishRejected(nonce: "nonce1", error: "some error")
+            let nextState = attestationsReducer(action: action, state: initialState)
+            expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.finishRejected
+            expect(nextState.open["nonce1"]!.error) == "some error"
+        }
     }
 }
