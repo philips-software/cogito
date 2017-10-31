@@ -5,6 +5,8 @@ import ReSwift
 import ReRxSwift
 import RxSwift
 import Geth
+import RichString
+import FontAwesome_swift
 
 class SelectedFacetViewController: UIViewController, Connectable {
 
@@ -25,7 +27,19 @@ class SelectedFacetViewController: UIViewController, Connectable {
         connection.bind(\Props.selectedFacet, to: headerButton.rx.isUserInteractionEnabled) {
             $0 == nil
         }
-        connection.bind(\Props.selectedFacet, to: facetLabel.rx.text) { $0?.description ?? "" }
+        connection.bind(\Props.selectedFacet, to: facetLabel.rx.attributedText) {
+            let size = self.facetLabel.font.pointSize
+            let font = self.facetLabel.font!
+            let text = ($0?.description ?? "")
+            let hasAttestations = (self.props.selectedFacet?.idTokens.count ?? 0) > 0
+            let description = text.font(font)
+            if hasAttestations {
+                let icon = String.fontAwesomeIcon(name: .sunO).font(Font.fontAwesome(ofSize: size/2))
+                return description + "  ".font(font) + icon
+            } else {
+                return description
+            }
+        }
     }
 
     func configureUI() {
