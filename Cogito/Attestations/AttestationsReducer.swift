@@ -10,7 +10,8 @@ func attestationsReducer(action: Action, state: AttestationsState?) -> Attestati
                                                          subject: action.subject,
                                                          identity: action.identity,
                                                          status: .pending,
-                                                         error: nil)
+                                                         error: nil,
+                                                         idToken: nil)
     case let action as AttestationActions.Started:
         state.open[action.nonce]?.status = .started
     case let action as AttestationActions.StartRejected:
@@ -21,6 +22,9 @@ func attestationsReducer(action: Action, state: AttestationsState?) -> Attestati
             state.open[nonce]?.status = .finishRejected
             state.open[nonce]?.error = action.error
         }
+    case let action as AttestationActions.Fulfilled:
+        state.open[action.nonce]?.status = .fulfilled
+        state.open[action.nonce]?.idToken = action.idToken
     default:
         break
     }

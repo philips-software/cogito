@@ -37,7 +37,8 @@ class AttestationActionsSpec: QuickSpec {
                                                                  subject: "incorrect subject",
                                                                  identity: identity,
                                                                  status: .started,
-                                                                 error: "the error message")])
+                                                                 error: "the error message",
+                                                                 idToken: nil)])
                     )
                 })
                 expect(dispatchRecorder.count) == 1
@@ -53,7 +54,8 @@ class AttestationActionsSpec: QuickSpec {
                                                                  subject: validSubject,
                                                                  identity: identity,
                                                                  status: .started,
-                                                                 error: "the error message")])
+                                                                 error: "the error message",
+                                                                 idToken: nil)])
                     )
                 })
                 expect(dispatchRecorder.count) == 1

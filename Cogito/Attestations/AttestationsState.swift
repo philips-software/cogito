@@ -19,12 +19,14 @@ struct AttestationInProgress: Codable {
     let identity: Identity
     var status: Status
     var error: String?
+    var idToken: String?
 
     enum Status: String, Codable {
         case pending
         case started
         case startRejected
         case finishRejected
+        case fulfilled
     }
 }
 
