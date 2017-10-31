@@ -33,7 +33,7 @@ class AttestationActionsSpec: QuickSpec {
                 let dispatchRecorder = DispatchRecorder<AttestationActions.FinishRejected>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
-                        pending: [validNonce: PendingAttestation(nonce: validNonce,
+                        open: [validNonce: AttestationInProgress(nonce: validNonce,
                                                                  subject: "incorrect subject",
                                                                  identity: identity,
                                                                  status: .started)])
@@ -48,7 +48,7 @@ class AttestationActionsSpec: QuickSpec {
                 let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
-                        pending: [validNonce: PendingAttestation(nonce: validNonce,
+                        open: [validNonce: AttestationInProgress(nonce: validNonce,
                                                                  subject: validSubject,
                                                                  identity: identity,
                                                                  status: .started)])

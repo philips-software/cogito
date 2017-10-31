@@ -79,7 +79,7 @@ class StorePersisterSpec: QuickSpec {
                         "receivedMessages": []
                     },
                     "attestations": {
-                        "pending": {}
+                        "open": {}
                     },
                 }
                 """

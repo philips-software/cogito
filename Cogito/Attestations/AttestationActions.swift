@@ -29,7 +29,7 @@ struct AttestationActions {
                     if let nonce = jwt.claim(name: "nonce").string,
                         let state = getState(),
                         let subject = jwt.subject,
-                        let pendingAttestation = state.attestations.pending[nonce],
+                        let pendingAttestation = state.attestations.open[nonce],
                         pendingAttestation.subject == subject {
                         dispatch(Fulfilled(idToken: idToken))
                     } else {
