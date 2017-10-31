@@ -28,22 +28,28 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             it("dispatches FinishRejected when subject is incorrect") {
+                let identity = Identity(description: "test identity", address: Address.testAddress1)
                 let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
                 let dispatchRecorder = DispatchRecorder<AttestationActions.FinishRejected>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
-                        pending: [validNonce: "incorrect subject"])
+                        pending: [validNonce: PendingAttestation(nonce: validNonce,
+                                                                 subject: "incorrect subject",
+                                                                 identity: identity)])
                     )
                 })
                 expect(dispatchRecorder.count) == 1
             }
 
             it("dispatches FinishRejected when token has correct nonce") {
+                let identity = Identity(description: "test identity", address: Address.testAddress1)
                 let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
                 let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
-                        pending: [validNonce: validSubject])
+                        pending: [validNonce: PendingAttestation(nonce: validNonce,
+                                                                 subject: validSubject,
+                                                                 identity: identity)])
                     )
                 })
                 expect(dispatchRecorder.count) == 1

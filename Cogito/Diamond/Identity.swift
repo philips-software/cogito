@@ -6,33 +6,13 @@ import Geth
 struct Identity: Codable {
     let identifier: UUID
     let description: String
-    let gethAddress: GethAddress
+    let address: Address
+    var gethAddress: GethAddress { return address.toGethAddress() }
 
-    init(description: String, gethAddress: GethAddress) {
+    init(description: String, address: Address) {
         self.identifier = UUID()
         self.description = description
-        self.gethAddress = gethAddress
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.identifier = try container.decode(UUID.self, forKey: .identifier)
-        self.description = try container.decode(String.self, forKey: .description)
-        let hexAddress = try container.decode(String.self, forKey: .gethAddress)
-        self.gethAddress = GethAddress(fromHex: hexAddress)
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(identifier, forKey: .identifier)
-        try container.encode(description, forKey: .description)
-        try container.encode(gethAddress.getHex()!, forKey: .gethAddress)
-    }
-
-    enum CodingKeys: String, CodingKey {
-        case identifier
-        case description
-        case gethAddress
+        self.address = address
     }
 }
 

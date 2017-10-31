@@ -2,7 +2,6 @@
 
 import Quick
 import Nimble
-import Geth
 
 class AppReducerSpec: QuickSpec {
     override func spec() {
@@ -11,7 +10,7 @@ class AppReducerSpec: QuickSpec {
                 keyStore: KeyStoreState(keyStore: KeyStore(name: "test", scryptN: 0, scryptP: 0)),
                 geth: GethState(peersCount: 1, syncProgress: nil),
                 createIdentity: CreateIdentityState(description: "test", pending: true, newAccount: nil, error: "test"),
-                diamond: DiamondState(facets: [Identity(description: "test", gethAddress: GethAddress())]),
+                diamond: DiamondState(facets: [Identity(description: "test", address: Address.testAddress1)]),
                 telepath: TelepathState(channel: TelepathChannel.example, connectionError: nil)
             )
             let action = ResetAppState()
