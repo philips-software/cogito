@@ -31,6 +31,8 @@ struct AttestationActions {
                         let subject = jwt.subject,
                         let pendingAttestation = state.attestations.open[nonce],
                         pendingAttestation.subject == subject {
+                        dispatch(DiamondActions.AddJWTAttestation(identity: pendingAttestation.identity,
+                                                                  idToken: idToken))
                         dispatch(Fulfilled(nonce: nonce, idToken: idToken))
                     } else if let nonce = jwt.claim(name: "nonce").string {
                         dispatch(FinishRejected(nonce: nonce, error: "unexpected nonce or subject"))
