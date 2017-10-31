@@ -4,16 +4,16 @@ typealias Nonce = String
 typealias Subject = String
 
 struct AttestationsState: Codable {
-    var pending: [Nonce:PendingAttestation]
+    var open: [Nonce: AttestationInProgress]
 }
 
 extension AttestationsState: Equatable {
     static func == (lhs: AttestationsState, rhs: AttestationsState) -> Bool {
-        return lhs.pending == rhs.pending
+        return lhs.open == rhs.open
     }
 }
 
-struct PendingAttestation: Codable {
+struct AttestationInProgress: Codable {
     let nonce: Nonce
     let subject: Subject
     let identity: Identity
@@ -25,8 +25,8 @@ struct PendingAttestation: Codable {
     }
 }
 
-extension PendingAttestation: Equatable {
-    static func == (lhs: PendingAttestation, rhs: PendingAttestation) -> Bool {
+extension AttestationInProgress: Equatable {
+    static func == (lhs: AttestationInProgress, rhs: AttestationInProgress) -> Bool {
         return lhs.nonce == rhs.nonce &&
                lhs.subject == rhs.subject &&
                lhs.identity == rhs.identity &&
@@ -34,4 +34,4 @@ extension PendingAttestation: Equatable {
     }
 }
 
-let initialAttestationsState = AttestationsState(pending: [:])
+let initialAttestationsState = AttestationsState(open: [:])

@@ -6,12 +6,12 @@ func attestationsReducer(action: Action, state: AttestationsState?) -> Attestati
     var state = state ?? initialAttestationsState
     switch action {
     case let action as AttestationActions.Pending:
-        state.pending[action.nonce] = PendingAttestation(nonce: action.nonce,
+        state.open[action.nonce] = AttestationInProgress(nonce: action.nonce,
                                                          subject: action.subject,
                                                          identity: action.identity,
                                                          status: .pending)
     case let action as AttestationActions.Started:
-        state.pending[action.nonce]?.status = .started
+        state.open[action.nonce]?.status = .started
     default:
         break
     }

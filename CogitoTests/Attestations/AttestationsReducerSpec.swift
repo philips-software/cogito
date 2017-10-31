@@ -9,7 +9,7 @@ class AttestationsReducerSpec: QuickSpec {
         let identity2 = Identity(description: "identity2", address: Address.testAddress1)
 
         it("handles pending") {
-            let initialState = AttestationsState(pending: ["nonce1": PendingAttestation(nonce: "nonce1",
+            let initialState = AttestationsState(open: ["nonce1": AttestationInProgress(nonce: "nonce1",
                                                                                         subject: "subject1",
                                                                                         identity: identity1,
                                                                                         status: .started)])
@@ -17,22 +17,22 @@ class AttestationsReducerSpec: QuickSpec {
                                                     nonce: "nonce2",
                                                     subject: "subject2")
             let nextState = attestationsReducer(action: action, state: initialState)
-            expect(nextState.pending) == [
-                "nonce1": PendingAttestation(
+            expect(nextState.open) == [
+                "nonce1": AttestationInProgress(
                     nonce: "nonce1", subject: "subject1", identity: identity1, status: .started),
-                "nonce2": PendingAttestation(
+                "nonce2": AttestationInProgress(
                     nonce: "nonce2", subject: "subject2", identity: identity2, status: .pending)
             ]
         }
 
         it("handles started") {
-            let initialState = AttestationsState(pending: ["nonce1": PendingAttestation(nonce: "nonce1",
+            let initialState = AttestationsState(open: ["nonce1": AttestationInProgress(nonce: "nonce1",
                                                                                         subject: "subject1",
                                                                                         identity: identity1,
                                                                                         status: .pending)])
             let action = AttestationActions.Started(nonce: "nonce1")
             let nextState = attestationsReducer(action: action, state: initialState)
-            expect(nextState.pending["nonce1"]!.status) == PendingAttestation.Status.started
+            expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.started
         }
     }
 }
