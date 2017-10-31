@@ -32,14 +32,16 @@ struct AttestationActions {
                         let pendingAttestation = state.attestations.open[nonce],
                         pendingAttestation.subject == subject {
                         dispatch(Fulfilled(idToken: idToken))
+                    } else if let nonce = jwt.claim(name: "nonce").string {
+                        dispatch(FinishRejected(nonce: nonce, error: "unexpected nonce or subject"))
                     } else {
-                        dispatch(FinishRejected(error: "unexpected nonce or subject"))
+                        dispatch(FinishRejected(nonce: nil, error: "nonce is missing"))
                     }
                 } catch let e {
-                    dispatch(FinishRejected(error: e.localizedDescription))
+                    dispatch(FinishRejected(nonce: nil, error: e.localizedDescription))
                 }
             } else {
-                dispatch(FinishRejected(error: "id token missing"))
+                dispatch(FinishRejected(nonce: nil, error: "id token missing"))
             }
         })
     }
@@ -64,6 +66,7 @@ struct AttestationActions {
     }
 
     struct FinishRejected: Action {
+        let nonce: String?
         let error: String
     }
 }
