@@ -13,7 +13,7 @@ struct AttestationActions {
         return ThunkAction(action: { dispatch, _ in
             let handler = OpenIDAttestationStarter(
                 oidcRealmUrl: oidcRealmUrl,
-                onSuccess: { dispatch(Started()) },
+                onSuccess: { nonce in dispatch(Started(nonce: nonce)) },
                 onError: { error in dispatch(StartRejected(error: error)) })
             dispatch(Pending(identity: identity, nonce: handler.nonce, subject: subject))
             handler.run()
@@ -50,7 +50,9 @@ struct AttestationActions {
         let subject: String
     }
 
-    struct Started: Action {}
+    struct Started: Action {
+        let nonce: String
+    }
 
     struct StartRejected: Action {
         let error: String
