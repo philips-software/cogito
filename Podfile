@@ -13,10 +13,10 @@ target 'Cogito' do
   pod 'Telepath', :git => 'https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git'
   pod 'Branch', :inhibit_warnings => true
   pod 'JWTDecode', '~> 2.1'
-  pod 'FontAwesome.swift', '~> 1.3'
-  pod 'RichString', '~> 2.0'
+  pod 'FontAwesome.swift', '~> 1.3', :inhibit_warnings => true
+  pod 'RichString', '~> 2.0', :inhibit_warnings => true
 
-  pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0'
+  pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0', :inhibit_warnings => true
   pod 'RxCocoa', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0'
 
   target 'CogitoTests' do
