@@ -5,7 +5,7 @@ import ReSwift
 import ReSwiftThunk
 
 struct TelepathActions {
-    // swiftlint:disable identifier_name
+    // swiftlint:disable:next identifier_name
     static func Connect(url: URL) -> ThunkAction<AppState> {
         return ThunkAction { dispatch, _ in
             do {
@@ -25,7 +25,7 @@ struct TelepathActions {
         let error: Error
     }
 
-    // swiftlint:disable identifier_name
+    // swiftlint:disable:next identifier_name
     static func Receive() -> ThunkAction<AppState> {
         return ThunkAction { dispatch, getState in
             getState()?.telepath.channel?.receive { message, error in
@@ -46,6 +46,7 @@ struct TelepathActions {
         let error: Error
     }
 
+    // swiftlint:disable:next identifier_name
     static func Send(message: String) -> ThunkAction<AppState> {
         return ThunkAction { dispatch, getState in
             dispatch(SendPending(message: message))
