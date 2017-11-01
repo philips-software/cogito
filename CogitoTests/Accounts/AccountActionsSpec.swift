@@ -2,6 +2,7 @@
 
 import Quick
 import Nimble
+import ReSwiftThunk
 
 class AccountActionsSpec: QuickSpec {
     override func spec() {
@@ -15,10 +16,12 @@ class AccountActionsSpec: QuickSpec {
             }
 
             it("sends out its Ethereum address via Telepath") {
-                let recorder = DispatchRecorder<TelepathActions.Send>()
+                let thunkRecorder = DispatchRecorder<ThunkAction<AppState>>()
+                let sendRecorder = DispatchRecorder<TelepathActions.SendPending>()
                 let action = AccountActions.GetAccounts()
-                action.action(recorder.dispatch, { return state })
-                let send = recorder.actions.last
+                action.action(thunkRecorder.dispatch, { return state })
+                thunkRecorder.actions[0].action(sendRecorder.dispatch, { return state })
+                let send = sendRecorder.actions.last
                 expect(send?.message) == "{\"result\":[\"\(address)\"]}"
             }
         }
@@ -31,10 +34,12 @@ class AccountActionsSpec: QuickSpec {
             }
 
             it("returns an empty list") {
-                let recorder = DispatchRecorder<TelepathActions.Send>()
+                let thunkRecorder = DispatchRecorder<ThunkAction<AppState>>()
+                let sendRecorder = DispatchRecorder<TelepathActions.SendPending>()
                 let action = AccountActions.GetAccounts()
-                action.action(recorder.dispatch, { return state })
-                let send = recorder.actions.last
+                action.action(thunkRecorder.dispatch, { return state })
+                thunkRecorder.actions[0].action(sendRecorder.dispatch, { return state })
+                let send = sendRecorder.actions.last
                 expect(send?.message) == "{\"result\":[]}"
             }
         }

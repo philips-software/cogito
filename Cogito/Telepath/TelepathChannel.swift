@@ -27,7 +27,11 @@ class TelepathChannel: TelepathChannelType, Codable {
     }
 
     func receive(completion: @escaping (String?, Error?) -> Void) {
-        self.channel?.receive(completion: completion)
+        self.channel.receive(completion: completion)
+    }
+
+    func send(message: String, completion: @escaping (Error?) -> Void) {
+        self.channel.send(message: message, completion: completion)
     }
 
     enum CodingKeys: String, CodingKey {

@@ -30,9 +30,9 @@ struct TelepathActions {
         return ThunkAction { dispatch, getState in
             getState()?.telepath.channel?.receive { message, error in
                 if let error = error {
-                    dispatch(TelepathActions.ReceiveRejected(error: error))
+                    dispatch(ReceiveRejected(error: error))
                 } else if let message = message {
-                    dispatch(TelepathActions.ReceiveFulfilled(message: message))
+                    dispatch(ReceiveFulfilled(message: message))
                 }
             }
         }
@@ -46,7 +46,27 @@ struct TelepathActions {
         let error: Error
     }
 
-    struct Send: Action {
+    static func Send(message: String) -> ThunkAction<AppState> {
+        return ThunkAction { dispatch, getState in
+            dispatch(SendPending(message: message))
+            getState()?.telepath.channel?.send(message: message) { error in
+                if let error = error {
+                    dispatch(SendRejected(error: error))
+                } else {
+                    dispatch(SendFulfilled())
+                }
+            }
+        }
+    }
+
+    struct SendPending: Action {
         let message: String
+    }
+
+    struct SendFulfilled: Action {
+    }
+
+    struct SendRejected: Action {
+        let error: Error
     }
 }

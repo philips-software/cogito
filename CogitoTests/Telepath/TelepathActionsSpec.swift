@@ -25,7 +25,7 @@ class TelepathActionsSpec: QuickSpec {
             }
         }
 
-        describe("receiving") {
+        describe("sending and receiving") {
             var state: AppState!
             var channel: TelepathChannelSpy!
 
@@ -52,6 +52,36 @@ class TelepathActionsSpec: QuickSpec {
                 channel.receiveError = error
 
                 let action = TelepathActions.Receive()
+                action.action(recorder.dispatch, { return state })
+
+                expect(recorder.actions.last?.error as? ExampleError)
+                    .toEventually(equal(error))
+            }
+
+            it("sends messages") {
+                let message = "a message"
+
+                let action = TelepathActions.Send(message: message)
+                action.action({ _ in }, { return state })
+
+                expect(channel.sentMessage) == message
+            }
+
+            it("reports sending success") {
+                let recorder = DispatchRecorder<TelepathActions.SendFulfilled>()
+
+                let action = TelepathActions.Send(message: "")
+                action.action(recorder.dispatch, { return state })
+
+                expect(recorder.count).toEventually(equal(1))
+            }
+
+            it("reports errors while sending") {
+                let recorder = DispatchRecorder<TelepathActions.SendRejected>()
+                let error = ExampleError(message: "an error")
+                channel.sendError = error
+
+                let action = TelepathActions.Send(message: "")
                 action.action(recorder.dispatch, { return state })
 
                 expect(recorder.actions.last?.error as? ExampleError)
