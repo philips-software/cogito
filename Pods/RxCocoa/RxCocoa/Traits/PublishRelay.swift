@@ -6,15 +6,13 @@
 //  Copyright © 2017 Krunoslav Zaher. All rights reserved.
 //
 
-import Dispatch
 #if !RX_NO_MODULE
     import RxSwift
 #endif
 
 /// PublishRelay is a wrapper for `PublishSubject`.
 ///
-/// Unlike `PublishSubject` it can't terminate with error.
-/// it will complete it's observable sequence (`asObservable`).
+/// Unlike `PublishSubject` it can't terminate with error or completed.
 public final class PublishRelay<Element>: ObservableType {
     public typealias E = Element
 

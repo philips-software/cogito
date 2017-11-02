@@ -2,6 +2,7 @@ PODS:
   - Branch (0.19.5):
     - Branch/Core (= 0.19.5)
   - Branch/Core (0.19.5)
+  - Differentiator (3.0.1)
   - FontAwesome.swift (1.3.1)
   - Geth (1.7.1)
   - JWTDecode (2.1.1)
@@ -24,9 +25,13 @@ PODS:
   - ReSwiftThunk (0.1.1):
     - ReSwift (~> 4.0)
   - RichString (2.0.0)
-  - RxCocoa (4.0.0-beta.1):
-    - RxSwift (~> 4.0.0-beta.1)
-  - RxSwift (4.0.0-beta.1)
+  - RxCocoa (4.0.0):
+    - RxSwift (~> 4.0)
+  - RxDataSources (3.0.1):
+    - Differentiator (~> 3.0)
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+  - RxSwift (4.0.0)
   - Sodium (0.5)
   - SwiftLint (0.21.0)
   - Telepath (0.1.0):
@@ -47,8 +52,9 @@ DEPENDENCIES:
   - ReSwift (from `https://github.com/ReSwift/ReSwift`, branch `master`)
   - ReSwiftThunk (from `https://github.com/mikecole20/ReSwiftThunk.git`, branch `swift4.0`)
   - RichString (~> 2.0)
-  - RxCocoa (from `https://github.com/ReactiveX/RxSwift`, branch `rxswift4.0-swift4.0`)
-  - RxSwift (from `https://github.com/ReactiveX/RxSwift`, branch `rxswift4.0-swift4.0`)
+  - RxCocoa (~> 4.0)
+  - RxDataSources (~> 3.0)
+  - RxSwift (~> 4.0)
   - SwiftLint (= 0.21.0)
   - Telepath (from `https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git`)
   - URITemplate
@@ -70,12 +76,6 @@ EXTERNAL SOURCES:
   ReSwiftThunk:
     :branch: swift4.0
     :git: https://github.com/mikecole20/ReSwiftThunk.git
-  RxCocoa:
-    :branch: rxswift4.0-swift4.0
-    :git: https://github.com/ReactiveX/RxSwift
-  RxSwift:
-    :branch: rxswift4.0-swift4.0
-    :git: https://github.com/ReactiveX/RxSwift
   Telepath:
     :git: https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git
 
@@ -98,18 +98,13 @@ CHECKOUT OPTIONS:
   ReSwiftThunk:
     :commit: 2871ea34c919bbdaa236c870ce7e16242f16ffb0
     :git: https://github.com/mikecole20/ReSwiftThunk.git
-  RxCocoa:
-    :commit: aacfcc894bd3bc3ea1b03d483720973ea0e02905
-    :git: https://github.com/ReactiveX/RxSwift
-  RxSwift:
-    :commit: aacfcc894bd3bc3ea1b03d483720973ea0e02905
-    :git: https://github.com/ReactiveX/RxSwift
   Telepath:
     :commit: 00a3ae50018077da13d66342e3fb129571e70a84
     :git: https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git
 
 SPEC CHECKSUMS:
   Branch: 25312ed2f58a569df58e6560238433c2a9d58e99
+  Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
   FontAwesome.swift: 050a75c6b94db0b082f39bde5b111c5c64d62a83
   Geth: 5d7ab4565680bc976b81cf8cdab653067807ed01
   JWTDecode: 83e8b381aafe27158d9f692cbdca2b12d61d460c
@@ -122,13 +117,14 @@ SPEC CHECKSUMS:
   ReSwift: 85cb57267026cf4df4f6b05306bfce8ef74842c0
   ReSwiftThunk: 9b2ed720b51deabb4d49e7b6e76a618d1e4eb6f6
   RichString: 0e87341212a3737686db46b3270c56a219babf0f
-  RxCocoa: 009b86b0b158d4a7e4a5fc29bbdc0688c44fa3bb
-  RxSwift: 9488787dfac649ffc1c4fddf3a3b4d6823d0b392
+  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
+  RxDataSources: 098b7e62b6316313b14d6bf594e3f4f4f62a238a
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   Sodium: a3a17f2ba2dc1b83547e13db0075e7c5d426fc55
   SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
   Telepath: 14b8a4ad40df8c1f25ddc49ae7e1db3f1c427b7e
   URITemplate: d822aaa2f8ec9dcffffd13baa58bf9ee007e96cb
 
-PODFILE CHECKSUM: cb99989d0f190840fdb3c66244d0b9fdf47e181f
+PODFILE CHECKSUM: 1a61e7ed4d0ce5d8123e5098dd32aa22ee43bed1
 
 COCOAPODS: 1.3.1

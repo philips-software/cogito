@@ -1,6 +1,9 @@
 //  Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
 
 class IdentityManagerViewController: UITableViewController {
 
@@ -8,4 +11,9 @@ class IdentityManagerViewController: UITableViewController {
         dismiss(animated: true)
     }
 
+}
+
+extension IdentityManagerViewController {
+    private struct FacetGroup {
+    }
 }

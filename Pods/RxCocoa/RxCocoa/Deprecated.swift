@@ -10,6 +10,8 @@
     import RxSwift
 #endif
 
+import Dispatch
+
 extension ObservableType {
 
     /**
@@ -262,6 +264,8 @@ extension Variable {
     }
 }
 
+#if !os(Linux)
+
 extension DelegateProxy {
     @available(*, unavailable, renamed: "assignedProxy(for:)")
     public static func assignedProxyFor(_ object: ParentObject) -> Delegate? {
@@ -273,6 +277,8 @@ extension DelegateProxy {
         fatalError()
     }
 }
+
+#endif
 
 /**
 Observer that enforces interface binding rules:
@@ -339,3 +345,159 @@ public final class UIBindingObserver<UIElementType, Value> : ObserverType where 
         }
     }
 #endif
+
+#if os(iOS) || os(tvOS)
+extension Reactive where Base: UIImageView {
+
+    /// Bindable sink for `image` property.
+    /// - parameter transitionType: Optional transition type while setting the image (kCATransitionFade, kCATransitionMoveIn, ...)
+    @available(*, deprecated, renamed: "image")
+    public func image(transitionType: String? = nil) -> Binder<UIImage?> {
+        return Binder(base) { imageView, image in
+            if let transitionType = transitionType {
+                if image != nil {
+                    let transition = CATransition()
+                    transition.duration = 0.25
+                    transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                    transition.type = transitionType
+                    imageView.layer.add(transition, forKey: kCATransition)
+                }
+            }
+            else {
+                imageView.layer.removeAllAnimations()
+            }
+            imageView.image = image
+        }
+    }
+}
+#endif
+
+#if os(macOS)
+
+    extension Reactive where Base: NSImageView {
+
+        /// Bindable sink for `image` property.
+        ///
+        /// - parameter transitionType: Optional transition type while setting the image (kCATransitionFade, kCATransitionMoveIn, ...)
+        @available(*, deprecated, renamed: "image")
+        public func image(transitionType: String? = nil) -> Binder<NSImage?> {
+            return Binder(self.base) { control, value in
+                if let transitionType = transitionType {
+                    if value != nil {
+                        let transition = CATransition()
+                        transition.duration = 0.25
+                        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                        transition.type = transitionType
+                        control.layer?.add(transition, forKey: kCATransition)
+                    }
+                }
+                else {
+                    control.layer?.removeAllAnimations()
+                }
+                control.image = value
+            }
+        }
+    }
+#endif
+
+#if !RX_NO_MODULE
+    import RxSwift
+#endif
+
+extension Variable {
+    /// Converts `Variable` to `Driver` trait.
+    ///
+    /// - returns: Driving observable sequence.
+    public func asDriver() -> Driver<E> {
+        let source = self.asObservable()
+            .observeOn(DriverSharingStrategy.scheduler)
+        return Driver(source)
+    }
+}
+
+
+private let errorMessage = "`drive*` family of methods can be only called from `MainThread`.\n" +
+"This is required to ensure that the last replayed `Driver` element is delivered on `MainThread`.\n"
+
+extension SharedSequenceConvertibleType where SharingStrategy == DriverSharingStrategy {
+    /**
+     Creates new subscription and sends elements to variable.
+     This method can be only called from `MainThread`.
+
+     - parameter variable: Target variable for sequence elements.
+     - returns: Disposable object that can be used to unsubscribe the observer from the variable.
+     */
+    public func drive(_ variable: Variable<E>) -> Disposable {
+        MainScheduler.ensureExecutingOnScheduler(errorMessage: errorMessage)
+        return drive(onNext: { e in
+            variable.value = e
+        })
+    }
+
+    /**
+     Creates new subscription and sends elements to variable.
+     This method can be only called from `MainThread`.
+
+     - parameter variable: Target variable for sequence elements.
+     - returns: Disposable object that can be used to unsubscribe the observer from the variable.
+     */
+    public func drive(_ variable: Variable<E?>) -> Disposable {
+        MainScheduler.ensureExecutingOnScheduler(errorMessage: errorMessage)
+        return drive(onNext: { e in
+            variable.value = e
+        })
+    }
+}
+
+extension ObservableConvertibleType {
+    /**
+     Converts anything convertible to `Observable` to `SharedSequence` unit.
+
+     - parameter onErrorJustReturn: Element to return in case of error and after that complete the sequence.
+     - returns: Driving observable sequence.
+     */
+    @available(*, deprecated, message: "Please use conversion methods to some SharedSequence specialization.")
+    public func asSharedSequence<S>(sharingStrategy: S.Type = S.self, onErrorJustReturn: E) -> SharedSequence<S, E> {
+        let source = self
+            .asObservable()
+            .observeOn(S.scheduler)
+            .catchErrorJustReturn(onErrorJustReturn)
+        return SharedSequence(source)
+    }
+
+    /**
+     Converts anything convertible to `Observable` to `SharedSequence` unit.
+
+     - parameter onErrorDriveWith: SharedSequence that provides elements of the sequence in case of error.
+     - returns: Driving observable sequence.
+     */
+    @available(*, deprecated, message: "Please use conversion methods to some SharedSequence specialization.")
+    public func asSharedSequence<S>(sharingStrategy: S.Type = S.self, onErrorDriveWith: SharedSequence<S, E>) -> SharedSequence<S, E> {
+        let source = self
+            .asObservable()
+            .observeOn(S.scheduler)
+            .catchError { _ in
+                onErrorDriveWith.asObservable()
+        }
+        return SharedSequence(source)
+    }
+
+    /**
+     Converts anything convertible to `Observable` to `SharedSequence` unit.
+
+     - parameter onErrorRecover: Calculates driver that continues to drive the sequence in case of error.
+     - returns: Driving observable sequence.
+     */
+    @available(*, deprecated, message: "Please use conversion methods to some SharedSequence specialization.")
+    public func asSharedSequence<S>(sharingStrategy: S.Type = S.self, onErrorRecover: @escaping (_ error: Swift.Error) -> SharedSequence<S, E>) -> SharedSequence<S, E> {
+        let source = self
+            .asObservable()
+            .observeOn(S.scheduler)
+            .catchError { error in
+                onErrorRecover(error).asObservable()
+        }
+        return SharedSequence(source)
+    }
+}
+
+
