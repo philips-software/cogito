@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oxI-YO-us9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oxI-YO-us9">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -153,9 +152,13 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="abcfjk" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcs-gR-jth">
                                 <rect key="frame" x="0.0" y="47" width="288" height="38"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" name="SnellRoundhand" family="Snell Roundhand" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="y6m-9l-HtE" appends="YES" id="SR9-1T-CLp"/>
+                                </connections>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -168,6 +171,9 @@
                             <constraint firstItem="b5r-3P-nfz" firstAttribute="centerX" secondItem="Qgj-aA-LR8" secondAttribute="centerX" id="esf-k0-OKR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VqY-Nu-4ni"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="y6m-9l-HtE" appends="YES" id="I7n-rS-F63"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="facetLabel" destination="vcs-gR-jth" id="gJD-5I-s8F"/>
@@ -175,8 +181,21 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yx2-9b-gRV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="y6m-9l-HtE">
+                    <connections>
+                        <segue destination="4lb-K9-L3x" kind="presentation" id="TUx-vM-jQD"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="140.625" y="125"/>
+        </scene>
+        <!--IdentityManager-->
+        <scene sceneID="wuC-s5-adP">
+            <objects>
+                <viewControllerPlaceholder storyboardName="IdentityManager" id="4lb-K9-L3x" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VMj-Dg-tIm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="797" y="125"/>
         </scene>
     </scenes>
     <resources>
