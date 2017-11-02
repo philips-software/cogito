@@ -17,6 +17,14 @@
 		0212E0351F9E397C00EEDE34 /* SignTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */; };
 		0212E0361F9E397C00EEDE34 /* SignTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */; };
 		022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */; };
+		022621291FAB1E1300692126 /* IdentityManager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 022621281FAB1E1300692126 /* IdentityManager.storyboard */; };
+		0226212B1FAB1E6800692126 /* IdentityManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226212A1FAB1E6800692126 /* IdentityManagerViewController.swift */; };
+		0226212C1FAB1E6800692126 /* IdentityManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226212A1FAB1E6800692126 /* IdentityManagerViewController.swift */; };
+		0226212E1FAB1EC200692126 /* IdentityManagerViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226212D1FAB1EC200692126 /* IdentityManagerViewControllerSpec.swift */; };
+		022621301FAB1FF100692126 /* FacetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226212F1FAB1FF100692126 /* FacetTableViewCell.swift */; };
+		022621311FAB1FF100692126 /* FacetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226212F1FAB1FF100692126 /* FacetTableViewCell.swift */; };
+		022621331FAB202400692126 /* FacetDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022621321FAB202400692126 /* FacetDetailsTableViewCell.swift */; };
+		022621341FAB202400692126 /* FacetDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022621321FAB202400692126 /* FacetDetailsTableViewCell.swift */; };
 		0230F9471FA1E5F3006A36FC /* LaunchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F9461FA1E5F3006A36FC /* LaunchActions.swift */; };
 		0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */; };
 		0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
@@ -179,6 +187,11 @@
 		0212E0301F99FFD300EEDE34 /* Cogito.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cogito.entitlements; sourceTree = "<group>"; };
 		0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignTransaction.storyboard; sourceTree = "<group>"; };
 		022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityActionsSpec.swift; sourceTree = "<group>"; };
+		022621281FAB1E1300692126 /* IdentityManager.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IdentityManager.storyboard; sourceTree = "<group>"; };
+		0226212A1FAB1E6800692126 /* IdentityManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityManagerViewController.swift; sourceTree = "<group>"; };
+		0226212D1FAB1EC200692126 /* IdentityManagerViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityManagerViewControllerSpec.swift; sourceTree = "<group>"; };
+		0226212F1FAB1FF100692126 /* FacetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetTableViewCell.swift; sourceTree = "<group>"; };
+		022621321FAB202400692126 /* FacetDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		0230F9461FA1E5F3006A36FC /* LaunchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchActions.swift; sourceTree = "<group>"; };
 		0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchActionsSpec.swift; sourceTree = "<group>"; };
 		0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
@@ -317,6 +330,25 @@
 			path = "Sign transaction";
 			sourceTree = "<group>";
 		};
+		022621261FAB1CE700692126 /* Identity manager */ = {
+			isa = PBXGroup;
+			children = (
+				0226212A1FAB1E6800692126 /* IdentityManagerViewController.swift */,
+				022621281FAB1E1300692126 /* IdentityManager.storyboard */,
+				0226212F1FAB1FF100692126 /* FacetTableViewCell.swift */,
+				022621321FAB202400692126 /* FacetDetailsTableViewCell.swift */,
+			);
+			path = "Identity manager";
+			sourceTree = "<group>";
+		};
+		022621271FAB1D0600692126 /* Identity manager */ = {
+			isa = PBXGroup;
+			children = (
+				0226212D1FAB1EC200692126 /* IdentityManagerViewControllerSpec.swift */,
+			);
+			path = "Identity manager";
+			sourceTree = "<group>";
+		};
 		0270D7171F9F445F00CC9038 /* Attestations */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,6 +407,7 @@
 				0212E0321F9E392500EEDE34 /* Sign transaction */,
 				0270D7171F9F445F00CC9038 /* Attestations */,
 				5C48E23E1FA1F8A900B8BF6E /* Telepath */,
+				022621261FAB1CE700692126 /* Identity manager */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
 				0230F9461FA1E5F3006A36FC /* LaunchActions.swift */,
 				027603F51F6ACD1600788B0A /* Assets.xcassets */,
@@ -400,6 +433,7 @@
 				0212E0331F9E393A00EEDE34 /* Sign transaction */,
 				0270D7181F9F446C00CC9038 /* Attestations */,
 				5C48E23B1FA1D06900B8BF6E /* Telepath */,
+				022621271FAB1D0600692126 /* Identity manager */,
 				0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
 				5C014F511FAA07FF00F95071 /* RecordingStore.swift */,
@@ -754,6 +788,7 @@
 				027603F61F6ACD1600788B0A /* Assets.xcassets in Resources */,
 				027603F41F6ACD1600788B0A /* Debug.storyboard in Resources */,
 				0212E0351F9E397C00EEDE34 /* SignTransaction.storyboard in Resources */,
+				022621291FAB1E1300692126 /* IdentityManager.storyboard in Resources */,
 				02A15AF41F864F4B00A94163 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -959,7 +994,10 @@
 				5C20A0FB1FA1FC6500B443C9 /* TelepathState.swift in Sources */,
 				02A15AFB1F86719400A94163 /* DiamondState.swift in Sources */,
 				0298D43A1F7A46A30070998D /* Node.swift in Sources */,
+				022621331FAB202400692126 /* FacetDetailsTableViewCell.swift in Sources */,
 				028F4F001F7D3B640015C4AF /* CreateIdentityState.swift in Sources */,
+				022621301FAB1FF100692126 /* FacetTableViewCell.swift in Sources */,
+				0226212B1FAB1E6800692126 /* IdentityManagerViewController.swift in Sources */,
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
 				02021D191F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
@@ -1038,12 +1076,15 @@
 				02D0C0E11F8B73B20001223E /* SelectedFacetViewControllerSpec.swift in Sources */,
 				5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */,
 				029CDFFE1FA22E1200281369 /* AttestationsReducer.swift in Sources */,
+				0226212C1FAB1E6800692126 /* IdentityManagerViewController.swift in Sources */,
 				02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */,
 				0298D42C1F7A43C90070998D /* AppState.swift in Sources */,
 				02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */,
 				0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */,
+				022621311FAB1FF100692126 /* FacetTableViewCell.swift in Sources */,
 				02021D1A1F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				5C20A0F61FA1FAED00B443C9 /* TelepathActions.swift in Sources */,
+				022621341FAB202400692126 /* FacetDetailsTableViewCell.swift in Sources */,
 				02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */,
 				0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */,
 				5C20A1041FA224D700B443C9 /* TelepathChannel.swift in Sources */,
@@ -1092,6 +1133,7 @@
 				C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */,
 				C00B5F4394A34E4348285CB9 /* DiamondActions.swift in Sources */,
 				C00B5E26A7AC55AC03FD717B /* DispatchRecorder.swift in Sources */,
+				0226212E1FAB1EC200692126 /* IdentityManagerViewControllerSpec.swift in Sources */,
 				C00B52429CD6E478242F31F6 /* LaunchActions.swift in Sources */,
 				C00B505E972138AEEFC08864 /* AttestationsReducerSpec.swift in Sources */,
 				C00B51B16777B9F0F6E84B07 /* Address.swift in Sources */,
