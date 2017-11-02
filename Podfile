@@ -16,8 +16,9 @@ target 'Cogito' do
   pod 'FontAwesome.swift', '~> 1.3', :inhibit_warnings => true
   pod 'RichString', '~> 2.0', :inhibit_warnings => true
 
-  pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0', :inhibit_warnings => true
-  pod 'RxCocoa', :git => 'https://github.com/ReactiveX/RxSwift', :branch => 'rxswift4.0-swift4.0'
+  pod 'RxSwift', '~> 4.0'
+  pod 'RxCocoa', '~> 4.0'
+  pod 'RxDataSources', '~> 3.0'
 
   target 'CogitoTests' do
     pod 'Quick', :git => 'https://github.com/Quick/Quick'
