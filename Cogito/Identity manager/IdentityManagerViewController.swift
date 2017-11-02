@@ -3,7 +3,7 @@
 import UIKit
 
 class IdentityManagerViewController: UITableViewController {
-    
+
     @IBAction func done(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }

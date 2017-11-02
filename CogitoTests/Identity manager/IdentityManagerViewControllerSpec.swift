@@ -5,6 +5,6 @@ import Nimble
 
 class IdentityManagerViewControllerSpec: QuickSpec {
     override func spec() {
-        
+
     }
 }

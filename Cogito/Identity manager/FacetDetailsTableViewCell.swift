@@ -3,5 +3,5 @@
 import UIKit
 
 class FacetDetailsTableViewCell: UITableViewCell {
-    
+
 }
