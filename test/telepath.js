@@ -3,7 +3,7 @@ const chai = require('chai')
 const expect = chai.expect
 const td = require('testdouble')
 const base64url = require('base64url')
-const crypto = td.replace('../lib/crypto')
+const { random, keySize } = td.replace('../lib/crypto')
 const Telepath = require('../lib/telepath')
 
 describe('Telepath', function () {
@@ -28,8 +28,8 @@ describe('Telepath', function () {
 
     beforeEach(async function () {
       const idSize = 18
-      td.when(crypto.random(idSize)).thenReturn(randomId)
-      td.when(crypto.random(crypto.keySize)).thenReturn(randomKey)
+      td.when(random(idSize)).thenResolve(randomId)
+      td.when(random(await keySize())).thenResolve(randomKey)
       channel = await telepath.createChannel()
     })
 

@@ -9,15 +9,16 @@ const SecureChannel = require('../lib/secure-channel')
 
 describe('Secure Channel', function () {
   const channelId = 'channel_id'
-  const key = random(keySize)
   const blueQueue = `${channelId}.blue`
   const redQueue = `${channelId}.red`
   const message = 'a message'
 
   let channel
   let queuing
+  let key
 
-  beforeEach(function () {
+  beforeEach(async function () {
+    key = await random(await keySize())
     queuing = td.object()
     channel = new SecureChannel({ queuing, id: channelId, key })
     channel.poller.interval = 0
@@ -29,17 +30,17 @@ describe('Secure Channel', function () {
   })
 
   context('when sending a message', function () {
-    beforeEach(function () {
-      channel.send(message)
+    beforeEach(async function () {
+      await channel.send(message)
     })
 
-    it('encrypts the message', function () {
+    it('encrypts the message', async function () {
       const captor = td.matchers.captor()
       td.verify(queuing.send(anything(), captor.capture()))
       const nonceAndCypherText = captor.value
-      const nonce = nonceAndCypherText.slice(0, nonceSize)
-      const cypherText = nonceAndCypherText.slice(nonceSize)
-      expect(decrypt(cypherText, nonce, key, 'text')).to.equal(message)
+      const nonce = nonceAndCypherText.slice(0, await nonceSize())
+      const cypherText = nonceAndCypherText.slice(await nonceSize())
+      expect(await decrypt(cypherText, nonce, key, 'text')).to.equal(message)
     })
 
     it('uses the red queue', function () {
@@ -52,19 +53,19 @@ describe('Secure Channel', function () {
       td.when(queuing.receive(blueQueue)).thenResolve(...messages)
     }
 
-    function enc (message) {
-      const nonce = Buffer.from(random(nonceSize))
-      const cypherText = Buffer.from(encrypt(Buffer.from(message), nonce, key))
+    async function enc (message) {
+      const nonce = Buffer.from(await random(await nonceSize()))
+      const cypherText = Buffer.from(await encrypt(Buffer.from(message), nonce, key))
       return Buffer.concat([nonce, cypherText])
     }
 
     it('decrypts the message', async function () {
-      whenReceiving(enc(message))
+      whenReceiving(await enc(message))
       expect(await channel.receive()).to.equal(message)
     })
 
     it('waits for a message to become available', async function () {
-      whenReceiving(null, null, enc(message))
+      whenReceiving(null, null, await enc(message))
       expect(await channel.receive()).to.equal(message)
     })
   })
@@ -87,7 +88,7 @@ describe('Secure Channel', function () {
   })
 
   it('receives null when no message is waiting', async function () {
-    td.when(queuing.receiv(blueQueue)).thenResolve(null)
+    td.when(queuing.receive(blueQueue)).thenResolve(null)
     await expect(channel.receive()).to.eventually.be.null()
   })
 
