@@ -1,3 +1,3 @@
-const CogitoProvider = require('lib/provider')
+const CogitoProvider = require('./lib/provider')
 
 module.exports = CogitoProvider
