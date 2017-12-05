@@ -58,13 +58,16 @@ describe('provider', function () {
   })
 
   describe('signed transactions', function () {
-    const transaction = { from: '0x1234567890123456789012345678901234567890', gasPrice: '0x123' }
+    const transaction = {
+      from: '0x1234567890123456789012345678901234567890',
+      gasPrice: '0x123'
+    }
 
     context('when cogito provides signatures', function () {
       const signed = '0xSignedTransaction'
 
       beforeEach(function () {
-        const request = JSON.stringify({ method: 'sign', params: [ transaction ] })
+        const request = JSON.stringify({ method: 'sign', params: [transaction] })
         const response = JSON.stringify({ result: signed })
         td.when(telepathChannel.send(request)).thenDo(function () {
           td.when(telepathChannel.receive(), { times: 1 }).thenResolve(response)
@@ -75,7 +78,7 @@ describe('provider', function () {
         const hash = '0xTransactionHash'
 
         beforeEach(function () {
-          const sendRaw = { method: 'eth_sendRawTransaction', params: [ signed ] }
+          const sendRaw = { method: 'eth_sendRawTransaction', params: [signed] }
           td.when(originalProvider.send(contains(sendRaw), anything()))
             .thenDo(function (request, callback) {
               const response = { jsonrpc: '2.0', result: hash, id: request.id }
