@@ -4,10 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:cogito.app.link</string>
-		<string>applinks:cogito-alternate.app.link</string>
-		<string>webcredentials:cogito.app.link</string>
-		<string>webcredentials:cogito-alternate.app.link</string>
+		<string>applinks:cogito.mobi</string>
 	</array>
 </dict>
 </plist>
