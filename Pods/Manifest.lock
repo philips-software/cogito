@@ -1,7 +1,4 @@
 PODS:
-  - Branch (0.19.5):
-    - Branch/Core (= 0.19.5)
-  - Branch/Core (0.19.5)
   - Differentiator (3.0.1)
   - FontAwesome.swift (1.3.1)
   - Geth (1.7.1)
@@ -39,7 +36,6 @@ PODS:
   - URITemplate (2.0.2)
 
 DEPENDENCIES:
-  - Branch
   - FontAwesome.swift (~> 1.3)
   - Geth (~> 1.7.1)
   - JWTDecode (~> 2.1)
@@ -103,7 +99,6 @@ CHECKOUT OPTIONS:
     :git: https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git
 
 SPEC CHECKSUMS:
-  Branch: 25312ed2f58a569df58e6560238433c2a9d58e99
   Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
   FontAwesome.swift: 050a75c6b94db0b082f39bde5b111c5c64d62a83
   Geth: 5d7ab4565680bc976b81cf8cdab653067807ed01
@@ -125,6 +120,6 @@ SPEC CHECKSUMS:
   Telepath: 14b8a4ad40df8c1f25ddc49ae7e1db3f1c427b7e
   URITemplate: d822aaa2f8ec9dcffffd13baa58bf9ee007e96cb
 
-PODFILE CHECKSUM: 1a61e7ed4d0ce5d8123e5098dd32aa22ee43bed1
+PODFILE CHECKSUM: 88bf50e528746ccd2427859c171d41de8db3ef32
 
 COCOAPODS: 1.3.1
