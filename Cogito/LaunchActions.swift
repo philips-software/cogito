@@ -3,17 +3,8 @@
 import ReSwift
 
 struct LaunchActions {
-    static func create(forBranchParams params: [String: AnyObject]) -> Action? {
-        if let referringLink = params["~referring_link"] as? String,
-            let url = URL(string: referringLink) {
-            return create(forLink: url)
-        }
-
-        return nil
-    }
-
     enum AppLinkType: String {
-        case openIdConnectRedirect = "bHwkY7KrvH"
+        case openIdConnectRedirect = "openid-callback"
     }
 
     static func create(forLink link: URL) -> Action? {

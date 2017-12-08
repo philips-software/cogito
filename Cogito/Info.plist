@@ -17,14 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>cogito</string>
-			</array>
-		</dict>
-	</array>
+	<array/>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -59,12 +52,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>branch_key</key>
-	<dict>
-		<key>live</key>
-		<string>key_live_jhwQf1ZVdYQ08CiTi4N5qaalwueFOvJF</string>
-		<key>test</key>
-		<string>key_test_oiwPn81Tp4U90taThWYz3ppkEBnuGyLK</string>
-	</dict>
 </dict>
 </plist>

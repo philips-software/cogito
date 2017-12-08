@@ -20,12 +20,9 @@ class LaunchActionsSpec: QuickSpec {
         }
 
         it("dispatches AttestationActions action") {
-            let linkString = "https://cogito.app.link/bHwkY7KrvH#id_token=whatever&not-before-policy=0"
-            let params: [String:AnyObject] = [
-                "~referring_link": linkString as NSString
-            ]
+            let linkString = "https://cogito.mobi/applinks/openid-callback#id_token=whatever&not-before-policy=0"
             // swiftlint:disable:next force_cast
-            let startAction = LaunchActions.create(forBranchParams: params)! as! ThunkAction<AppState>
+            let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! ThunkAction<AppState>
             let dispatchRecorder = DispatchRecorder<AttestationActions.FinishRejected>()
             startAction.action(dispatchRecorder.dispatch, { return nil })
             expect(dispatchRecorder.count) == 1

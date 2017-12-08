@@ -37,8 +37,9 @@ class OpenIDAttestationHandlerSpec: QuickSpec {
             expect(components.path) == "/realms/master/protocol/openid-connect/auth"
             expect(components.queryItems).to(contain(URLQueryItem(name: "response_type", value: "id_token")))
             expect(components.queryItems).to(contain(URLQueryItem(name: "client_id", value: "cogito")))
-            expect(components.queryItems).to(contain(URLQueryItem(name: "redirect_uri",
-                                                                  value: "https://cogito.app.link/bHwkY7KrvH")))
+            expect(components.queryItems).to(contain(URLQueryItem(
+                name: "redirect_uri",
+                value: "https://cogito.mobi/applinks/openid-callback")))
             expect(components.queryItems).to(contain(URLQueryItem(name: "scope", value: "openid")))
             expect(components.query).to(contain("nonce="))
         }
