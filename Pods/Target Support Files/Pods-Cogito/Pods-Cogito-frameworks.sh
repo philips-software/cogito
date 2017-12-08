@@ -102,7 +102,6 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Branch/Branch.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FontAwesome.swift/FontAwesome_swift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JWTDecode/JWTDecode.framework"
@@ -119,7 +118,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Telepath/Telepath.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Branch/Branch.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/FontAwesome.swift/FontAwesome_swift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JWTDecode/JWTDecode.framework"
