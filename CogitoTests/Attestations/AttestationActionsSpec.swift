@@ -102,4 +102,4 @@ private let validToken = "eyJhbGciOiJSUzI1NiIsInR5c" +
                          "fzinyXc1wC-rGNb5rtbHbC1qx8Se4-gp-G0EDTa3iChS7m_ZDdXjMmnp22poRv1M8W3Ft" +
                          "rnfAnMyyDxr8AZwTefCQN9-3ge3hmBS7nBjlrrYkmwSTpAlJGHOg"
 private let validNonce = "a0eb291b8bb601ef08e45f1fcec35b7b32acb79e552f66664c4a2533330eee71"
-private let validSubject = "d0ef5107-0f25-4995-8201-619b5accf92d"
+private let validSubject = "93ab1275-f7e2-4af6-8aa9-4cc34b7be307"
