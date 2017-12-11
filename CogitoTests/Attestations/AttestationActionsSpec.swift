@@ -61,6 +61,28 @@ class AttestationActionsSpec: QuickSpec {
                 expect(dispatchRecorder.count) == 1
             }
 
+            it("dispatches Fulfilled also when subject is missing for easy demoing") {
+                // This should normally not be possible in production, but we want to demo
+                // a use case without actually requiring the web app to also authenticate with
+                // the OpenID Connect server; hence the web app doesn't know what subject to
+                // provide.
+                // todo: remove this capability
+                let identity = Identity(description: "test identity", address: Address.testAddress1)
+                let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
+                let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
+                finishAction.action(dispatchRecorder.dispatch, {
+                    return appState(attestations: AttestationsState(
+                        open: [validNonce: AttestationInProgress(nonce: validNonce,
+                                                                 subject: nil,
+                                                                 identity: identity,
+                                                                 status: .started,
+                                                                 error: nil,
+                                                                 idToken: nil)])
+                    )
+                })
+                expect(dispatchRecorder.count) == 1
+            }
+
             it("also dispatches DiamondActions.AddAttestation") {
                 let identity = Identity(description: "test identity", address: Address.testAddress1)
                 let finishAction = AttestationActions.Finish(params: ["id_token": validToken])

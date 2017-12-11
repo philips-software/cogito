@@ -67,9 +67,11 @@ class DebugViewController: UIViewController, Connectable {
             print("invalid OpenID Connect URL")
             return
         }
-        guard let subject = oidcSubjectField.text else {
-            print("invalid OpenID Connect subject")
-            return
+        let subject: Subject?
+        if let t = oidcSubjectField.text, !t.isEmpty {
+            subject = t
+        } else {
+            subject = nil
         }
         guard let identity = props.selectedIdentity else {
             print("no identity was selected")
@@ -86,7 +88,7 @@ class DebugViewController: UIViewController, Connectable {
     struct Actions {
         let resetCreateIdentity: () -> Void
         let resetAppState: () -> Void
-        let startOpenIdConnectAttestation: (Identity, URL, String) -> Void
+        let startOpenIdConnectAttestation: (Identity, URL, String?) -> Void
     }
 }
 

@@ -9,7 +9,7 @@ import JWTDecode
 struct AttestationActions {
     static func StartAttestation(for identity: Identity,
                                  oidcRealmUrl: URL,
-                                 subject: String) -> ThunkAction<AppState> {
+                                 subject: String?) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, _ in
             let handler = OpenIDAttestationStarter(
                 oidcRealmUrl: oidcRealmUrl,
@@ -28,9 +28,8 @@ struct AttestationActions {
                     let jwt = try JWTDecode.decode(jwt: idToken)
                     if let nonce = jwt.claim(name: "nonce").string,
                         let state = getState(),
-                        let subject = jwt.subject,
                         let pendingAttestation = state.attestations.open[nonce],
-                        pendingAttestation.subject == subject {
+                        (pendingAttestation.subject == nil || pendingAttestation.subject! == jwt.subject) {
                         dispatch(DiamondActions.AddJWTAttestation(identity: pendingAttestation.identity,
                                                                   idToken: idToken))
                         dispatch(Fulfilled(nonce: nonce, idToken: idToken))
@@ -51,7 +50,7 @@ struct AttestationActions {
     struct Pending: Action {
         let identity: Identity
         let nonce: String
-        let subject: String
+        let subject: String?
     }
 
     struct Started: Action {
