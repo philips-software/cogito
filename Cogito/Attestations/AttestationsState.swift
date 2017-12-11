@@ -15,7 +15,7 @@ extension AttestationsState: Equatable {
 
 struct AttestationInProgress: Codable {
     let nonce: Nonce
-    let subject: Subject
+    let subject: Subject?
     let identity: Identity
     var status: Status
     var error: String?
