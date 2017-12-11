@@ -23,4 +23,25 @@ cd telepath-queuing-service
 yarn start
 ```
 
+### Cloud deployment
+
+Example deployment with Docker to Amazon Web Services. Adapt parameters to match your environment.
+
+    docker-machine create \
+        --driver amazonec2 \
+        --amazonec2-open-port 3000 \
+        --amazonec2-region eu-central-1 \
+        --amazonec2-instance-type t2.medium \
+        --amazonec2-zone "a" \
+        --amazonec2-ssh-keypath ~/.ssh/aws/charterhouse \
+        telepath-queuing-service
+        
+    eval $(docker-machine env telepath-queuing-service)
+    
+    docker build -t charterhouse/telepath-queuing-service
+    
+    docker run \
+        -p 3000:3000 \
+        -d charterhouse/telepath-queuing-service
+
 [1]: https://gitlab.ta.philips.com/blockchain-lab/telepath
