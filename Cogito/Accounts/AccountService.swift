@@ -23,6 +23,7 @@ class AccountService: StoreSubscriber {
 
     func newState(state incomingMessages: [String]) {
         if incomingMessages.first?.isAccountRequest == true {
+            store.dispatch(TelepathActions.ReceivedMessageHandled())
             store.dispatch(AccountActions.GetAccounts())
         }
     }

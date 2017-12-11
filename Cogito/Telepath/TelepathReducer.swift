@@ -13,6 +13,8 @@ func telepathReducer(_ action: Action, _ state: TelepathState?) -> TelepathState
         nextState.receivedMessages.append(received.message)
     case let receiveFailure as TelepathActions.ReceiveRejected:
         nextState.receiveError = receiveFailure.error.localizedDescription
+    case is TelepathActions.ReceivedMessageHandled:
+        nextState.receivedMessages.remove(at: 0)
     default:
         break
     }
