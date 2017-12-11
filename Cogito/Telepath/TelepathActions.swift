@@ -46,6 +46,8 @@ struct TelepathActions {
         let error: Error
     }
 
+    struct ReceivedMessageHandled: Action {}
+
     // swiftlint:disable:next identifier_name
     static func Send(message: String) -> ThunkAction<AppState> {
         return ThunkAction { dispatch, getState in

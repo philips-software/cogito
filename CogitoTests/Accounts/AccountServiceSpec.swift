@@ -48,8 +48,17 @@ class AccountServiceSpec: QuickSpec {
                 }
             }
 
+            func itHandlesTheMessage() {
+                it("handles the message") {
+                    expect(store.actions).to(containElementSatisfying({
+                        $0 is TelepathActions.ReceivedMessageHandled
+                    }))
+                }
+            }
+
             context("when an account requests comes in") {
                 whenReceiving(messages: [accountRequest])
+                itHandlesTheMessage()
                 itDispatchesGetAccounts()
             }
 

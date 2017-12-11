@@ -33,5 +33,12 @@ class TelepathReducerSpec: QuickSpec {
             let nextState = telepathReducer(action, nil)
             expect(nextState.receiveError) == error.localizedDescription
         }
+
+        it("removes handled messages from state") {
+            let state = TelepathState(receivedMessages: ["a message"])
+            let action = TelepathActions.ReceivedMessageHandled()
+            let nextState = telepathReducer(action, state)
+            expect(nextState.receivedMessages) == []
+        }
     }
 }
