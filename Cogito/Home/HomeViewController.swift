@@ -6,6 +6,8 @@ import QRCodeReader
 import RxCocoa
 import ReSwift
 import ReRxSwift
+import FontAwesome_swift
+import RichString
 
 class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, Connectable {
     let connection = Connection(store: appStore,
@@ -30,9 +32,16 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         let readerVC = QRCodeReaderViewController(builder: builder)
         addChildViewController(readerVC)
         previewContainer.insertSubview(readerVC.view, at: 0)
-        readerVC.view.frame = CGRect(x: 0, y: 0,
-                                     width: previewContainer.frame.size.width,
-                                     height: previewContainer.frame.size.height)
+        let frame = CGRect(x: 0, y: 0,
+                           width: previewContainer.frame.size.width,
+                           height: previewContainer.frame.size.height)
+        readerVC.view.frame = frame
+        let cameraIconLabel = UILabel(frame: frame)
+        cameraIconLabel.textAlignment = .center
+        let icon = String.fontAwesomeIcon(name: .videoCamera).font(Font.fontAwesome(ofSize: frame.size.width/2))
+        cameraIconLabel.attributedText = icon
+        cameraIconLabel.textColor = .white
+        readerVC.view.insertSubview(cameraIconLabel, at: 0)
         return readerVC
     }()
 
