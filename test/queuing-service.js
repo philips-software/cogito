@@ -30,8 +30,9 @@ describe('Queuing Service', function () {
   })
 
   it('can receive a message', async function () {
-    nock(`${baseUrl}`).get(`/${queueId}`).reply(200, message)
-    await expect(queuing.receive(queueId)).to.eventually.equal(message)
+    nock(`${baseUrl}`).get(`/${queueId}`).reply(200, Buffer.from(message))
+    await expect(queuing.receive(queueId))
+      .to.eventually.eql(Buffer.from(message))
   })
 
   it('returns null when queue is empty', async function () {
