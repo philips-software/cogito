@@ -38,7 +38,7 @@ Example deployment with Docker to Amazon Web Services. Adapt parameters to match
         
     eval $(docker-machine env telepath-queuing-service)
     
-    docker build -t charterhouse/telepath-queuing-service
+    docker build -t charterhouse/telepath-queuing-service .
     
     docker run \
         -p 3000:3000 \
