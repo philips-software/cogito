@@ -2,6 +2,7 @@
 
 import Foundation
 import Geth
+import JWTDecode
 
 struct Identity: Codable {
     let identifier: UUID
@@ -16,6 +17,15 @@ struct Identity: Codable {
         self.address = address
         self.idTokens = []
     }
+
+    func findToken(claim: String, value: String) -> String? {
+        if let index = self.idTokens.index(where: { $0.has(claim: claim, value: value) }) {
+            return self.idTokens[index]
+        } else {
+            return nil
+        }
+    }
+
 }
 
 extension Identity: Equatable {
@@ -26,5 +36,16 @@ extension Identity: Equatable {
                lhs.description == rhs.description &&
                leftHex == rightHex &&
                lhs.idTokens == rhs.idTokens
+    }
+}
+
+private extension String {
+    func has(claim: String, value: String) -> Bool {
+        do {
+            let jwt = try JWTDecode.decode(jwt: self)
+            return jwt.claim(name: claim).string == value
+        } catch {
+            return false
+        }
     }
 }
