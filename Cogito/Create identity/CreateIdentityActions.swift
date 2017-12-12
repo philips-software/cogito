@@ -29,8 +29,6 @@ struct CreateIdentityActions {
                     dispatch(Rejected(message: error ?? "failed to create account"))
                     return
                 }
-                let address = account.getAddress().getHex()!
-                print("[debug] account created: \(address)")
                 dispatch(DiamondActions.CreateFacet(description: state.createIdentity.description,
                                                     account: account))
                 dispatch(Fulfilled(account: account))
