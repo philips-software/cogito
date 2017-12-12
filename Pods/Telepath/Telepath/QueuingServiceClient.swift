@@ -9,10 +9,11 @@ public struct QueuingServiceClient: QueuingService {
     }
 
     public func send(queueId: QueueID, message: Data, completion: @escaping (Error?) -> Void) {
+        let encodedMessage = message.base64urlEncodedString().data(using: .utf8)
         let queueUrl = url.appendingPathComponent(queueId)
         var request = URLRequest(url: queueUrl)
         request.httpMethod = "POST"
-        let task = URLSession.shared.uploadTask(with: request, from: message) { _, response, error in
+        let task = URLSession.shared.uploadTask(with: request, from: encodedMessage) { _, response, error in
             completion(self.checkValidity(response: response, error: error))
         }
         task.resume()
@@ -23,8 +24,10 @@ public struct QueuingServiceClient: QueuingService {
         let task = URLSession.shared.dataTask(with: queueUrl) { data, response, error in
             if let failure = self.checkValidity(response: response, error: error) {
                 completion(nil, failure)
+            } else if let message = self.extractMessage(responseData: data) {
+                completion(message, nil)
             } else {
-                completion(data, nil)
+                completion(nil, Failure.invalidResponse)
             }
         }
         task.resume()
@@ -41,6 +44,17 @@ public struct QueuingServiceClient: QueuingService {
             return Failure.httpError(statusCode: response.statusCode)
         }
         return nil
+    }
+
+    private func extractMessage(responseData: Data?) -> Data? {
+        guard
+            let data = responseData,
+            let base64 = String(data: data, encoding: .utf8),
+            let message = Data(base64urlEncoded: base64)
+        else {
+            return nil
+        }
+        return message
     }
 
     public enum Failure: Error {
