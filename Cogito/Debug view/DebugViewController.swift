@@ -96,9 +96,7 @@ private func mapStateToProps(state: AppState) -> DebugViewController.Props {
     return DebugViewController.Props(
         peerCount: state.geth.peersCount,
         syncProgress: state.geth.syncProgress,
-        selectedIdentity: state.diamond.selectedFacet != nil
-            ? state.diamond.facets[state.diamond.selectedFacet!]
-            : nil
+        selectedIdentity: state.diamond.selectedFacet()
     )
 }
 
