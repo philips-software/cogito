@@ -13,8 +13,8 @@ func diamondReducer(action: Action, state: DiamondState?) -> DiamondState {
                                 address: Address(from: gethAddress))
         newFacets[identity.identifier] = identity
         state.facets = newFacets
-        if state.selectedFacet == nil {
-            state.selectedFacet = identity.identifier
+        if state.selectedFacetId == nil {
+            state.selectedFacetId = identity.identifier
         }
     case let action as DiamondActions.AddJWTAttestation:
         state.facets[action.identity.identifier]?.idTokens.append(action.idToken)

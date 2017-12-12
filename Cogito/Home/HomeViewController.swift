@@ -137,14 +137,8 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 }
 
 private func mapStateToProps(state: AppState) -> HomeViewController.Props {
-    let selectedFacet: Identity?
-    if let selectedIdentifier = state.diamond.selectedFacet {
-        selectedFacet = state.diamond.facets[selectedIdentifier]
-    } else {
-        selectedFacet = nil
-    }
     return HomeViewController.Props(
-        selectedFacet: selectedFacet
+        selectedFacet: state.diamond.selectedFacet()
     )
 }
 

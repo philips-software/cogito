@@ -38,16 +38,16 @@ class DiamondReducerSpec: QuickSpec {
             let firstFacet = newState.facets.values.first!
             expect(firstFacet.description) == "my id"
             expect(firstFacet.gethAddress.getHex()!) == account0.getAddress()!.getHex()!
-            expect(newState.selectedFacet) == firstFacet.identifier
+            expect(newState.selectedFacetId) == firstFacet.identifier
         }
 
         it("doesn't change selectedFacet when one was already selected") {
             var state = DiamondState(facets: [])
             let someIdentifier = UUID()
-            state.selectedFacet = someIdentifier
+            state.selectedFacetId = someIdentifier
             let action = DiamondActions.CreateFacet(description: "my id", account: account0)
             let newState = diamondReducer(action: action, state: state)
-            expect(newState.selectedFacet) == someIdentifier
+            expect(newState.selectedFacetId) == someIdentifier
         }
 
         it("handles AddJWTAttestation") {

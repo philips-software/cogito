@@ -135,14 +135,8 @@ class SelectedFacetViewController: UIViewController, Connectable {
 }
 
 private func mapStateToProps(state: AppState) -> SelectedFacetViewController.Props {
-    let selectedFacet: Identity?
-    if let selectedIdentifier = state.diamond.selectedFacet {
-        selectedFacet = state.diamond.facets[selectedIdentifier]
-    } else {
-        selectedFacet = nil
-    }
     return SelectedFacetViewController.Props(
-        selectedFacet: selectedFacet,
+        selectedFacet: state.diamond.selectedFacet(),
         createdNewAccount: state.createIdentity.newAccount,
         facets: state.diamond.facets
     )

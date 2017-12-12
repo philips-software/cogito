@@ -8,9 +8,8 @@ struct AccountActions {
         return ThunkAction(action: { dispatch, getState in
             var accounts: [Address] = []
             if let diamond = getState()?.diamond,
-               let selectedFacet = diamond.selectedFacet,
-               let address = diamond.facets[selectedFacet]?.address {
-                   accounts.append(address)
+               let selectedFacet = diamond.selectedFacet() {
+                   accounts.append(selectedFacet.address)
             }
             let message = AccountsResult(result: accounts).json
             dispatch(TelepathActions.Send(message: message))
