@@ -10,18 +10,18 @@ struct AttestationActions {
     static func StartAttestation(for identity: Identity,
                                  oidcRealmUrl: URL,
                                  subject: String?) -> ThunkAction<AppState> {
-        return ThunkAction(action: { dispatch, _ in
+        return ThunkAction { dispatch, _ in
             let handler = OpenIDAttestationStarter(
                 oidcRealmUrl: oidcRealmUrl,
                 onSuccess: { nonce in dispatch(Started(nonce: nonce)) },
                 onError: { nonce, error in dispatch(StartRejected(nonce: nonce, error: error)) })
             dispatch(Pending(identity: identity, nonce: handler.nonce, subject: subject))
             handler.run()
-        })
+        }
     }
 
     static func Finish(params: [String:String]) -> ThunkAction<AppState> {
-        return ThunkAction(action: { dispatch, getState in
+        return ThunkAction { dispatch, getState in
             guard let idToken = params["id_token"] else {
                 dispatch(FinishRejected(nonce: nil, error: "id token missing"))
                 return
@@ -45,7 +45,7 @@ struct AttestationActions {
             } catch let e {
                 dispatch(FinishRejected(nonce: nil, error: e.localizedDescription))
             }
-        })
+        }
     }
 
     struct Pending: Action {
