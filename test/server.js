@@ -14,23 +14,21 @@ describe('Server', function () {
   it('receives messages that have been sent', async function () {
     const message = 'a message'
     await request(server).post(`/${queueId}`).send(message)
-    await request(server).get(`/${queueId}`)
-      .expect(200)
-      .expect(Buffer.from(message))
+    await request(server).get(`/${queueId}`).expect(200).expect(message)
   })
 
   it('delivers messages in fifo order', async function () {
     await request(server).post(`/${queueId}`).send('message 1')
     await request(server).post(`/${queueId}`).send('message 2')
-    await request(server).get(`/${queueId}`).expect(Buffer.from('message 1'))
-    await request(server).get(`/${queueId}`).expect(Buffer.from('message 2'))
+    await request(server).get(`/${queueId}`).expect('message 1')
+    await request(server).get(`/${queueId}`).expect('message 2')
   })
 
   it('delivers messages to the correct queue', async function () {
     await request(server).post(`/queueA`).send('messageA')
     await request(server).post(`/queueB`).send('messageB')
-    await request(server).get(`/queueB`).expect(Buffer.from('messageB'))
-    await request(server).get(`/queueA`).expect(Buffer.from('messageA'))
+    await request(server).get(`/queueB`).expect('messageB')
+    await request(server).get(`/queueA`).expect('messageA')
   })
 
   it('returns status code 204 when queue is empty', async function () {
