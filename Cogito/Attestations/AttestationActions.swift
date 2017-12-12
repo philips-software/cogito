@@ -22,27 +22,28 @@ struct AttestationActions {
 
     static func Finish(params: [String:String]) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, getState in
-            if let idToken = params["id_token"] {
-                do {
-                    // todo this JWTDecode library does not check the JWT signature!
-                    let jwt = try JWTDecode.decode(jwt: idToken)
-                    if let nonce = jwt.claim(name: "nonce").string,
-                        let state = getState(),
-                        let pendingAttestation = state.attestations.open[nonce],
-                        (pendingAttestation.subject == nil || pendingAttestation.subject! == jwt.subject) {
-                        dispatch(DiamondActions.AddJWTAttestation(identity: pendingAttestation.identity,
-                                                                  idToken: idToken))
-                        dispatch(Fulfilled(nonce: nonce, idToken: idToken))
-                    } else if let nonce = jwt.claim(name: "nonce").string {
-                        dispatch(FinishRejected(nonce: nonce, error: "unexpected nonce or subject"))
-                    } else {
-                        dispatch(FinishRejected(nonce: nil, error: "nonce is missing"))
-                    }
-                } catch let e {
-                    dispatch(FinishRejected(nonce: nil, error: e.localizedDescription))
-                }
-            } else {
+            guard let idToken = params["id_token"] else {
                 dispatch(FinishRejected(nonce: nil, error: "id token missing"))
+                return
+            }
+            do {
+                // todo this JWTDecode library does not check the JWT signature!
+                let jwt = try JWTDecode.decode(jwt: idToken)
+                guard let nonce = jwt.claim(name: "nonce").string else {
+                    dispatch(FinishRejected(nonce: nil, error: "nonce is missing"))
+                    return
+                }
+                guard let state = getState(),
+                      let pendingAttestation = state.attestations.open[nonce],
+                      (pendingAttestation.subject == nil || pendingAttestation.subject! == jwt.subject) else {
+                    dispatch(FinishRejected(nonce: nonce, error: "unexpected nonce or subject"))
+                    return
+                }
+                dispatch(DiamondActions.AddJWTAttestation(identity: pendingAttestation.identity,
+                                                          idToken: idToken))
+                dispatch(Fulfilled(nonce: nonce, idToken: idToken))
+            } catch let e {
+                dispatch(FinishRejected(nonce: nil, error: e.localizedDescription))
             }
         })
     }
