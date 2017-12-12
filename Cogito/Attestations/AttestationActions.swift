@@ -71,4 +71,9 @@ struct AttestationActions {
         let nonce: String?
         let error: String
     }
+
+    static func GetAttestations(oidcRealmUrl: URL) -> ThunkAction<AppState> {
+        return ThunkAction(action: { _, _ in
+        })
+    }
 }
