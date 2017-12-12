@@ -72,8 +72,24 @@ struct AttestationActions {
         let error: String
     }
 
-    static func GetAttestations(oidcRealmUrl: URL) -> ThunkAction<AppState> {
-        return ThunkAction(action: { _, _ in
+    static func GetAttestations(oidcRealmUrl: String) -> ThunkAction<AppState> {
+        return ThunkAction(action: { dispatch, getState in
+            if let facet = getState()?.diamond.selectedFacet(),
+               let token = facet.findToken(claim: "iss", value: oidcRealmUrl) {
+                let message = AttestationsResult(idToken: token).json
+                dispatch(TelepathActions.Send(message: message))
+            }
         })
+    }
+}
+
+private struct AttestationsResult: Codable {
+    let idToken: String
+}
+
+private extension Encodable {
+    var json: String {
+        let data = try? JSONEncoder().encode(self)
+        return String(data: data!, encoding: .utf8)!
     }
 }

@@ -24,10 +24,9 @@ class AttestationService: StoreSubscriber {
     func newState(state incomingMessages: [String]) {
         if let message = incomingMessages.first,
            let request = try? JSONDecoder().decode(JSONRequest.self, from: message),
-           request.method == "attestations",
-           let url = URL(string: request.realmUrl) {
+           request.method == "attestations" {
             store.dispatch(TelepathActions.ReceivedMessageHandled())
-            store.dispatch(AttestationActions.GetAttestations(oidcRealmUrl: url))
+            store.dispatch(AttestationActions.GetAttestations(oidcRealmUrl: request.realmUrl))
         }
     }
 }

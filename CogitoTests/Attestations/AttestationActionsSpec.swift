@@ -102,6 +102,71 @@ class AttestationActionsSpec: QuickSpec {
                 expect(dispatchRecorder.actions.first!.idToken) == validToken
             }
         }
+
+        describe("getting attestations") {
+            var store: RecordingStore!
+
+            beforeEach {
+                store = RecordingStore()
+            }
+
+            context("when requested attestation is present") {
+                context("when this Telepath channel has been given the attestation before") {
+                    it("only dispatches Telepath send message") {
+                        let idToken = validToken
+                        let action = AttestationActions.GetAttestations(oidcRealmUrl: validIssuer)
+                        var identity = Identity(description: "test", address: Address.testAddress)
+                        identity.idTokens = [idToken]
+                        store.state = appState(diamond: DiamondState(facets: [identity]))
+                        store.dispatch(action)
+                        let sendPending = store.actions.last as? TelepathActions.SendPending
+                        expect(sendPending?.message) == "{\"idToken\":\"\(idToken)\"}"
+                    }
+                }
+
+                context("when this Telepath channel has not been given the attestation yet") {
+                    it("asks the user to confirm that the attestation may be sent") {
+
+                    }
+
+                    context("when user confirms") {
+                        it("sends Telepath message containing token") {
+
+                        }
+                    }
+
+                    context("when user rejects") {
+                        it("sends Telepath message containing 'rejected'") {
+
+                        }
+                    }
+                }
+            }
+
+            context("when requested attestation is not present") {
+                it("asks the user to confirm starting attestation flow") {
+
+                }
+
+                context("when user confirms") {
+                    it("starts attestation flow") {
+
+                    }
+                }
+
+                context("when user rejects") {
+                    it("sends Telepath message containing 'rejected'") {
+
+                    }
+                }
+
+                context("when the attestation becomes available") {
+                    it("dispatches Telepath send message") {
+
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -125,3 +190,4 @@ private let validToken = "eyJhbGciOiJSUzI1NiIsInR5c" +
                          "rnfAnMyyDxr8AZwTefCQN9-3ge3hmBS7nBjlrrYkmwSTpAlJGHOg"
 private let validNonce = "a0eb291b8bb601ef08e45f1fcec35b7b32acb79e552f66664c4a2533330eee71"
 private let validSubject = "93ab1275-f7e2-4af6-8aa9-4cc34b7be307"
+private let validIssuer = "http://ec2-35-158-20-161.eu-central-1.compute.amazonaws.com:8080/auth/realms/master"
