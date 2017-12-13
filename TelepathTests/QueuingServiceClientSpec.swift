@@ -72,6 +72,17 @@ class QueuingServiceClientSpec: QuickSpec {
             }
         }
 
+        it("returns nil when there is no message waiting") {
+            waitUntil { done in
+                self.stub(http(.get, uri: "\(baseUrl)/\(queueId)"), http(204))
+                queuing.receive(queueId: queueId) { receivedMessage, error in
+                    expect(error).to(beNil())
+                    expect(receivedMessage).to(beNil())
+                    done()
+                }
+            }
+        }
+
         describe("receive errors") {
             func expectErrorWhileReceiving(done: @escaping () -> Void) {
                 queuing.receive(queueId: queueId) { _, error in

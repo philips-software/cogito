@@ -22,12 +22,8 @@ public struct QueuingServiceClient: QueuingService {
     public func receive(queueId: QueueID, completion: @escaping (Data?, Error?) -> Void) {
         let queueUrl = url.appendingPathComponent(queueId)
         let task = URLSession.shared.dataTask(with: queueUrl) { data, response, error in
-            if let failure = self.checkValidity(response: response, error: error) {
-                completion(nil, failure)
-            } else {
-                let (message, error) = self.extractMessage(responseData: data)
-                completion(message, error)
-            }
+            let (message, error) = self.extractMessage(response: response, data: data, error: error)
+            completion(message, error)
         }
         task.resume()
     }
@@ -45,15 +41,21 @@ public struct QueuingServiceClient: QueuingService {
         return nil
     }
 
-    private func extractMessage(responseData: Data?) -> (Data?, Error?) {
-        guard
-            let data = responseData,
+    private func extractMessage(response: URLResponse?, data: Data?, error: Error?) -> (Data?, Error?) {
+        if let error = checkValidity(response: response, error: error) {
+            return (nil, error)
+        }
+        if (response as? HTTPURLResponse)?.statusCode == 204 {
+            return (nil, nil)
+        }
+        if
+            let data = data,
             let base64 = String(data: data, encoding: .utf8),
             let message = Data(base64urlEncoded: base64)
-        else {
-            return (nil, Failure.invalidResponse)
+        {
+            return (message, nil)
         }
-        return (message, nil)
+        return (nil, Failure.invalidResponse)
     }
 
     public enum Failure: Error {
