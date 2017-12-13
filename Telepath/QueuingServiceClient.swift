@@ -24,10 +24,9 @@ public struct QueuingServiceClient: QueuingService {
         let task = URLSession.shared.dataTask(with: queueUrl) { data, response, error in
             if let failure = self.checkValidity(response: response, error: error) {
                 completion(nil, failure)
-            } else if let message = self.extractMessage(responseData: data) {
-                completion(message, nil)
             } else {
-                completion(nil, Failure.invalidResponse)
+                let (message, error) = self.extractMessage(responseData: data)
+                completion(message, error)
             }
         }
         task.resume()
@@ -46,15 +45,15 @@ public struct QueuingServiceClient: QueuingService {
         return nil
     }
 
-    private func extractMessage(responseData: Data?) -> Data? {
+    private func extractMessage(responseData: Data?) -> (Data?, Error?) {
         guard
             let data = responseData,
             let base64 = String(data: data, encoding: .utf8),
             let message = Data(base64urlEncoded: base64)
         else {
-            return nil
+            return (nil, Failure.invalidResponse)
         }
-        return message
+        return (message, nil)
     }
 
     public enum Failure: Error {
