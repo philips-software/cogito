@@ -1,6 +1,6 @@
 {
   "name": "ReRxSwift",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "summary": "RxSwift bindings for ReSwift",
   "description": "ReRxSwift: RxSwift bindings for ReSwift. Heavily inspired by\nreact-redux, this allows you to 'connect' your controllers and specify\nprops and actions that your controller depends on. The real state\nand actions are thus decoupled from the controller implementations.",
   "homepage": "https://github.com/svdo/ReRxSwift",
@@ -16,7 +16,7 @@
   },
   "source": {
     "git": "https://github.com/svdo/ReRxSwift.git",
-    "tag": "0.1.0"
+    "tag": "1.1.0"
   },
   "source_files": "ReRxSwift/*.swift",
   "requires_arc": true,
@@ -25,10 +25,10 @@
       "~> 4.0"
     ],
     "RxSwift": [
-      "~> 4.0.0-alpha.1"
+      "~> 4.0"
     ],
     "RxCocoa": [
-      "~> 4.0.0-alpha.1"
+      "~> 4.0"
     ]
   }
 }

@@ -7,7 +7,7 @@ target 'Cogito' do
   pod 'ReSwiftThunk', :git => 'https://github.com/mikecole20/ReSwiftThunk.git', :branch => 'swift4.0'
   pod 'Geth', '~> 1.7.1'
   pod 'SwiftLint', '0.21.0'
-  pod 'ReRxSwift', :git => 'https://github.com/svdo/ReRxSwift', :branch => 'master'
+  pod 'ReRxSwift', '~> 1.1'
   pod 'KeychainAccess', '~> 3.1'
   pod 'QRCodeReader.swift', '~> 8.0'
   pod 'Telepath', :git => 'https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git'
