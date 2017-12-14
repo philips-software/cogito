@@ -74,17 +74,3 @@ private func mapStateToProps(state: AppState) -> DialogPresenter.Props {
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> DialogPresenter.Actions {
     return DialogPresenter.Actions()
 }
-
-struct RequestedAlert {
-    let title: String
-    let message: String
-    let actions: [UIAlertAction]
-}
-
-extension RequestedAlert: Equatable {
-    static func == (lhs: RequestedAlert, rhs: RequestedAlert) -> Bool {
-        return lhs.title == rhs.title &&
-               lhs.message == rhs.message &&
-               lhs.actions.count == rhs.actions.count
-    }
-}
