@@ -28,7 +28,7 @@ class DialogPresenterSpec: QuickSpec {
 
         it("can present an alert") {
             viewController.alertWindow.rootViewController = ViewControllerPartialMock()
-            let actions = [UIAlertAction(title: "test", style: .default)]
+            let actions = [AlertAction(title: "test", style: .default)]
             viewController.props = DialogPresenter.Props(requestedAlerts: [
                 RequestedAlert(title: "test title",
                                message: "test message",
@@ -40,11 +40,23 @@ class DialogPresenterSpec: QuickSpec {
             // swiftlint:disable:next force_cast
             let alert = window.rootViewController!.presentedViewController as! UIAlertController
             expect(alert).toNot(beNil())
-            expect(alert.actions) == actions
+            expect(alert.actions.count) == actions.count
+            expect(alert.actions.first?.title) == actions.first?.title
+            expect(alert.actions.first?.style) == actions.first?.style
+        }
+
+        it("triggers action when alert action handler is called") {
+            let alertAction = AlertAction(title: "test", style: .default)
+            var actionTriggered = false
+            viewController.actions = DialogPresenter.Actions(didDismissAlert: {
+                actionTriggered = true
+            })
+            viewController.handleAlertAction(action:alertAction)
+            expect(actionTriggered).to(beTrue())
         }
 
         it("maps state to props") {
-            let actions = [UIAlertAction(title: "test", style: .default)]
+            let actions = [AlertAction(title: "test", style: .default)]
             let requestedAlert = RequestedAlert(title: "test title",
                                                 message: "test message",
                                                 actions: actions)
@@ -52,6 +64,13 @@ class DialogPresenterSpec: QuickSpec {
             let state = appState(dialogPresenter: dialogState)
             viewController.connection.newState(state: state)
             expect(viewController.props.requestedAlerts) == [requestedAlert]
+        }
+
+        it("maps dispatch to actions") {
+            let storeSpy = StoreSpy()
+            viewController.connection.store = storeSpy
+            viewController.actions.didDismissAlert()
+            expect(storeSpy.actions.last is DialogPresenterActions.DidDismissAlert).to(beTrue())
         }
     }
 }

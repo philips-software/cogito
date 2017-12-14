@@ -51,11 +51,20 @@ class DialogPresenter: UIViewController, Connectable {
                                       message: requestedAlert.message,
                                       preferredStyle: .alert)
         for action in requestedAlert.actions {
-            alert.addAction(action)
+            alert.addAction(UIAlertAction(
+                title: action.title,
+                style: action.style) { _ in
+                self.handleAlertAction(action: action)
+            })
         }
 
         self.alertWindow.makeKeyAndVisible()
         self.alertWindow.rootViewController?.present(alert, animated: true)
+    }
+
+    func handleAlertAction(action: AlertAction) {
+        action.handler?(action)
+        self.actions.didDismissAlert()
     }
 
     let connection = Connection(store: appStore,
@@ -66,6 +75,7 @@ class DialogPresenter: UIViewController, Connectable {
         let requestedAlerts: [RequestedAlert]
     }
     struct Actions {
+        let didDismissAlert: () -> Void
     }
 }
 
@@ -74,5 +84,7 @@ private func mapStateToProps(state: AppState) -> DialogPresenter.Props {
 }
 
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> DialogPresenter.Actions {
-    return DialogPresenter.Actions()
+    return DialogPresenter.Actions(
+        didDismissAlert: { dispatch(DialogPresenterActions.DidDismissAlert()) }
+    )
 }
