@@ -25,23 +25,13 @@ yarn start
 
 ### Cloud deployment
 
-Example deployment with Docker to Amazon Web Services. Adapt parameters to match your environment.
+A [Terraform][2] script to deploy to Amazon Web Services is included. Adapt the
+script to match your own Amazon environment, domain name and ssl certificate. 
+Deploy to Amazon by issuing the following commands:
 
-    docker-machine create \
-        --driver amazonec2 \
-        --amazonec2-open-port 3000 \
-        --amazonec2-region eu-central-1 \
-        --amazonec2-instance-type t2.medium \
-        --amazonec2-zone "a" \
-        --amazonec2-ssh-keypath ~/.ssh/aws/charterhouse \
-        telepath-queuing-service
-        
-    eval $(docker-machine env telepath-queuing-service)
-    
-    docker build -t charterhouse/telepath-queuing-service .
-    
-    docker run \
-        -p 3000:3000 \
-        -d charterhouse/telepath-queuing-service
+    terraform init
+    terraform plan
+    terraform apply
 
 [1]: https://gitlab.ta.philips.com/blockchain-lab/telepath
+[2]: https://terraform.io
