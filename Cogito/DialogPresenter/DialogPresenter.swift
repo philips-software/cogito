@@ -47,7 +47,9 @@ class DialogPresenter: UIViewController, Connectable {
     }
 
     func presentAlert(requestedAlert: RequestedAlert) {
-        let alert = UIAlertController(title: requestedAlert.title, message: requestedAlert.message, preferredStyle: .alert)
+        let alert = UIAlertController(title: requestedAlert.title,
+                                      message: requestedAlert.message,
+                                      preferredStyle: .alert)
         for action in requestedAlert.actions {
             alert.addAction(action)
         }
@@ -68,7 +70,7 @@ class DialogPresenter: UIViewController, Connectable {
 }
 
 private func mapStateToProps(state: AppState) -> DialogPresenter.Props {
-    return DialogPresenter.Props(requestedAlerts: [])
+    return DialogPresenter.Props(requestedAlerts: state.dialogPresenter.requestedAlerts)
 }
 
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> DialogPresenter.Actions {

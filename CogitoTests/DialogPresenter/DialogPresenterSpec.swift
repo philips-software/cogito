@@ -42,6 +42,17 @@ class DialogPresenterSpec: QuickSpec {
             expect(alert).toNot(beNil())
             expect(alert.actions) == actions
         }
+
+        it("maps state to props") {
+            let actions = [UIAlertAction(title: "test", style: .default)]
+            let requestedAlert = RequestedAlert(title: "test title",
+                                                message: "test message",
+                                                actions: actions)
+            let dialogState = DialogPresenterState(requestedAlerts: [requestedAlert])
+            let state = appState(dialogPresenter: dialogState)
+            viewController.connection.newState(state: state)
+            expect(viewController.props.requestedAlerts) == [requestedAlert]
+        }
     }
 }
 
