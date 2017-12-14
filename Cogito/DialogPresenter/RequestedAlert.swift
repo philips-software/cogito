@@ -6,7 +6,7 @@ import UIKit
 struct RequestedAlert {
     let title: String
     let message: String
-    let actions: [UIAlertAction]
+    let actions: [AlertAction]
 }
 
 extension RequestedAlert: Equatable {
@@ -14,5 +14,23 @@ extension RequestedAlert: Equatable {
         return lhs.title == rhs.title &&
                lhs.message == rhs.message &&
                lhs.actions.count == rhs.actions.count
+    }
+}
+
+struct AlertAction {
+    let title: String
+    let style: UIAlertActionStyle
+    let handler: ((AlertAction) -> Void)?
+
+    init(title: String, style: UIAlertActionStyle, handler: ((AlertAction) -> Void)? = nil) {
+        self.title = title
+        self.style = style
+        self.handler = handler
+    }
+}
+
+extension AlertAction: Equatable {
+    static func == (lhs: AlertAction, rhs: AlertAction) -> Bool {
+        return lhs.title == rhs.title && lhs.style == rhs.style
     }
 }
