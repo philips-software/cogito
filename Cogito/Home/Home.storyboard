@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oxI-YO-us9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Kas-l3-cFb">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,6 +20,35 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Dialog Presenter-->
+        <scene sceneID="1p2-yV-cVE">
+            <objects>
+                <viewController id="Kas-l3-cFb" customClass="DialogPresenter" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VsT-M2-Ruz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mVc-He-Yyx">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <connections>
+                                    <segue destination="oxI-YO-us9" kind="embed" id="FFM-4j-k5B"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mVc-He-Yyx" firstAttribute="bottom" secondItem="2Yy-Xi-zS8" secondAttribute="bottom" id="Bi9-gg-6cE"/>
+                            <constraint firstItem="mVc-He-Yyx" firstAttribute="leading" secondItem="2Yy-Xi-zS8" secondAttribute="leading" id="Mpp-gb-ylJ"/>
+                            <constraint firstItem="mVc-He-Yyx" firstAttribute="top" secondItem="VsT-M2-Ruz" secondAttribute="top" id="Z1Z-3r-yp7"/>
+                            <constraint firstItem="mVc-He-Yyx" firstAttribute="trailing" secondItem="2Yy-Xi-zS8" secondAttribute="trailing" id="rrn-mj-mTM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2Yy-Xi-zS8"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vcP-cm-oDb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1413.75" y="125.70422535211267"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="ryG-zE-RLB">
             <objects>
