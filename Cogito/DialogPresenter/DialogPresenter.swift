@@ -32,7 +32,7 @@ class DialogPresenter: UIViewController, Connectable {
         super.viewDidLoad()
         connection.subscribe(\Props.requestedAlerts) { requestedAlerts in
             guard requestedAlerts.count > 0 else { return }
-            self.presentAlert(alert: requestedAlerts[0])
+            self.presentAlert(requestedAlert: requestedAlerts[0])
         }
     }
 
@@ -46,10 +46,11 @@ class DialogPresenter: UIViewController, Connectable {
         connection.disconnect()
     }
 
-    func presentAlert(alert: RequestedAlert) {
-        let alert = UIAlertController(title: "test", message: "test", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "action1", style: .cancel) { _ in self.alertWindow.isHidden = true })
-        alert.addAction(UIAlertAction(title: "action2", style: .default) { _ in self.alertWindow.isHidden = true })
+    func presentAlert(requestedAlert: RequestedAlert) {
+        let alert = UIAlertController(title: requestedAlert.title, message: requestedAlert.message, preferredStyle: .alert)
+        for action in requestedAlert.actions {
+            alert.addAction(action)
+        }
 
         self.alertWindow.makeKeyAndVisible()
         self.alertWindow.rootViewController?.present(alert, animated: true)

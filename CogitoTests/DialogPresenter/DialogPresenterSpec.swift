@@ -27,18 +27,25 @@ class DialogPresenterSpec: QuickSpec {
         }
 
         it("can present an alert") {
+            viewController.alertWindow.rootViewController = ViewControllerPartialMock()
+            let actions = [UIAlertAction(title: "test", style: .default)]
             viewController.props = DialogPresenter.Props(requestedAlerts: [
                 RequestedAlert(title: "test title",
                                message: "test message",
-                               actions: [])
+                               actions: actions)
             ])
-            expect(viewController.alertWindow.isHidden).to(beFalse())
-            expect(viewController.alertWindow.isKeyWindow).to(beTrue())
+            let window: WindowType = viewController.alertWindow
+            expect(window.isHidden).to(beFalse())
+            expect(window.isKeyWindow).to(beTrue())
+            // swiftlint:disable:next force_cast
+            let alert = window.rootViewController!.presentedViewController as! UIAlertController
+            expect(alert).toNot(beNil())
+            expect(alert.actions) == actions
         }
     }
 }
 
-class WindowSpy: WindowType {
+private class WindowSpy: WindowType {
     var rootViewController: UIViewController?
     var isHidden: Bool = false
     var isKeyWindow: Bool = false
@@ -47,5 +54,17 @@ class WindowSpy: WindowType {
     func makeKeyAndVisible() {
         isHidden = false
         isKeyWindow = true
+    }
+}
+
+private class ViewControllerPartialMock: UIViewController {
+    var viewControllerToPresent: UIViewController?
+
+    override var presentedViewController: UIViewController? {
+        return viewControllerToPresent
+    }
+
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+        self.viewControllerToPresent = viewControllerToPresent
     }
 }
