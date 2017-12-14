@@ -126,6 +126,8 @@
 		02E90F4E1FDEC1D7008D81F9 /* AttestationServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90F4D1FDEC1D7008D81F9 /* AttestationServiceSpec.swift */; };
 		02E90F4F1FDEC585008D81F9 /* AttestationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90F4B1FDEC1C4008D81F9 /* AttestationService.swift */; };
 		02E90F521FE03348008D81F9 /* DialogPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90F511FE03348008D81F9 /* DialogPresenter.swift */; };
+		02E90F531FE2753F008D81F9 /* DialogPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90F511FE03348008D81F9 /* DialogPresenter.swift */; };
+		02E90F561FE2755B008D81F9 /* DialogPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90F551FE2755B008D81F9 /* DialogPresenterSpec.swift */; };
 		02F0CA091F875515000C428F /* DebugGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F0CA081F875515000C428F /* DebugGestureHandler.swift */; };
 		5C014F521FAA07FF00F95071 /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C014F511FAA07FF00F95071 /* RecordingStore.swift */; };
 		5C04E4471FA77C0D00A70C60 /* StoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04E4461FA77C0C00A70C60 /* StoreSpy.swift */; };
@@ -264,6 +266,7 @@
 		02E90F4B1FDEC1C4008D81F9 /* AttestationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationService.swift; sourceTree = "<group>"; };
 		02E90F4D1FDEC1D7008D81F9 /* AttestationServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationServiceSpec.swift; sourceTree = "<group>"; };
 		02E90F511FE03348008D81F9 /* DialogPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogPresenter.swift; sourceTree = "<group>"; };
+		02E90F551FE2755B008D81F9 /* DialogPresenterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogPresenterSpec.swift; sourceTree = "<group>"; };
 		02F0CA081F875515000C428F /* DebugGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugGestureHandler.swift; sourceTree = "<group>"; };
 		2DA9DD4F7CAA535BF4E32B61 /* Pods-Cogito-CogitoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito-CogitoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito-CogitoTests/Pods-Cogito-CogitoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4E01CAF19EC1DDC9775320D9 /* Pods-Cogito.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito/Pods-Cogito.release.xcconfig"; sourceTree = "<group>"; };
@@ -447,6 +450,7 @@
 				0270D7181F9F446C00CC9038 /* Attestations */,
 				5C48E23B1FA1D06900B8BF6E /* Telepath */,
 				022621271FAB1D0600692126 /* Identity manager */,
+				02E90F541FE27547008D81F9 /* DialogPresenter */,
 				0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
 				5C014F511FAA07FF00F95071 /* RecordingStore.swift */,
@@ -632,6 +636,14 @@
 			isa = PBXGroup;
 			children = (
 				02E90F511FE03348008D81F9 /* DialogPresenter.swift */,
+			);
+			path = DialogPresenter;
+			sourceTree = "<group>";
+		};
+		02E90F541FE27547008D81F9 /* DialogPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				02E90F551FE2755B008D81F9 /* DialogPresenterSpec.swift */,
 			);
 			path = DialogPresenter;
 			sourceTree = "<group>";
@@ -1131,6 +1143,7 @@
 				02C7420B1F8F5B6E007AE227 /* CameraButton.swift in Sources */,
 				02E90F4F1FDEC585008D81F9 /* AttestationService.swift in Sources */,
 				0298D42E1F7A43C90070998D /* StorePersister.swift in Sources */,
+				02E90F531FE2753F008D81F9 /* DialogPresenter.swift in Sources */,
 				0292451D1F7AA3B100F2C0C1 /* AppStateHelper.swift in Sources */,
 				02A15AF71F864F8700A94163 /* HomeViewControllerSpec.swift in Sources */,
 				5C04E44A1FA77CA400A70C60 /* AccountServiceSpec.swift in Sources */,
@@ -1154,6 +1167,7 @@
 				02A15AFF1F8671D200A94163 /* Identity.swift in Sources */,
 				C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */,
 				C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */,
+				02E90F561FE2755B008D81F9 /* DialogPresenterSpec.swift in Sources */,
 				C00B57208B78184BB19798CD /* AppPassword.swift in Sources */,
 				5C7C23951FA35093009E9CE7 /* TelepathDefaults.swift in Sources */,
 				5C04E44E1FA77D1F00A70C60 /* AccountService.swift in Sources */,
