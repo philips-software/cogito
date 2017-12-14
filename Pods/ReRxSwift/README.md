@@ -2,8 +2,24 @@
 ![Swift Version 4](https://img.shields.io/badge/Swift-v4-yellow.svg)
 [![Build Status](https://travis-ci.org/svdo/ReRxSwift.svg?branch=master)](https://travis-ci.org/svdo/ReRxSwift)
 [![API Documentation](https://svdo.github.io/ReRxSwift/badge.svg)](https://svdo.github.io/ReRxSwift)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![CocoaPods Version Badge](https://img.shields.io/cocoapods/v/ReRxSwift.svg)](https://cocoapods.org/pods/ReRxSwift)
+![Supported Platforms Badge](https://img.shields.io/cocoapods/p/ReRxSwift.svg)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/svdo/ReRxSwift/blob/master/LICENSE)
 
 *[RxSwift][1] bindings for [ReSwift][2]*
+
+## Table of Contents
+
+* [Introduction](#introduction)
+* [Installation](#installation)
+* [Usage](#usage)
+* [API](#api)
+  - [Connectable](#connectable)
+  - [Connection](#connection)
+- [Example App](#example-app)
+- [FAQ](#faq)
+
 
 ## Introduction
 
@@ -28,7 +44,8 @@ and they change data by invoking callbacks defined by `actions` (instead
 of directly dispatching ReSwift actions). This has some nice advantages:
 
 - Better separation of concerns. It is easier to understand what your
-  view controller does and what data it uses.
+  view controller does and what data it uses. In other words, it
+  facilitates local reasoning.
 - Unit-testing. Because of the separation of concerns, you can easily
   unit-test your view controllers, all the way up to the Interface
   Builder connections.
@@ -40,6 +57,21 @@ of directly dispatching ReSwift actions). This has some nice advantages:
   application's business logic, you can implement your presentation
   layer in such a way that it is very simple to replace the dummies
   with real state and actions.
+
+
+## Installation
+
+The easiest way to use this library is through [Cocoapods][15] or [Carthage][16]. For CocoaPods, add this to your `Podfile`:
+
+```ruby
+pod 'ReRxSwift', '~> 1.0'
+```
+
+For Carthage, add this to your `Cartfile`:
+
+```
+github "svdo/ReRxSwift" ~> 1.0
+```
 
 ## Usage
 
@@ -129,17 +161,6 @@ controller `MyViewController`, you use the following steps.
 This is pretty much the [`SimpleTextFieldViewController`][10] inside the sample
 app. That view controller comes with complete unit tests:
 [`SimpleTextFieldViewControllerSpec`][11].
-
-## Note: Swift 4
-
-This project depends on Swift 4, because it uses [key paths][7] in its
-API. I am currently using Xcode 9.0 beta 6 and the Swift compiler that
-comes with it. Some earlier Xcode 9.0 betas fail at compiling this
-project!
-
-As soon as Xcode 9 and Swift 4 are released, and RxSwift and ReSwift
-have migrated to Swift 4, I will formally release this framework through
-CocoaPods et al.
 
 
 ## API
@@ -243,6 +264,7 @@ The folder [`Example`][13] contains the following examples:
 
 - **SimpleTextField**: Most basic use case of ReRxSwift, containing a text field that has its value bound, and an action.
 - **SteppingUp**: Use case with multiple bound values and actions, also showing how to transform values when binding them.
+- **TableAndCollection**: Shows how to use ReRxSwift in combination with RxSwift, RxCocoa and RxDataSources to have very simple table/collection views that automatically animate their updates.
 
 
 ## FAQ
@@ -270,7 +292,7 @@ the third parameter to `bind(_:to:mapping:)` to cast the `props` element to
 the expected type. See [`SteppingUpViewController.swift`][12] for examples.
 
 ### I double-checked everything and I still get errors!
-Please open a [new issue][8] on GitHub, as you may have run into a bug.
+Please open a [new issue][8] on GitHub, as you may have run into a bug. (But please make sure everything inside your `Props` type is `Equatable`!)
 
 
 [1]: https://github.com/ReactiveX/RxSwift
@@ -287,3 +309,5 @@ Please open a [new issue][8] on GitHub, as you may have run into a bug.
 [12]: https://github.com/svdo/ReRxSwift/blob/master/Example/SteppingUp/SteppingUpViewController.swift
 [13]: https://github.com/svdo/ReRxSwift/tree/master/Example
 [14]: https://svdo.github.io/ReRxSwift
+[15]: http://cocoapods.org
+[16]: https://github.com/Carthage/Carthage
