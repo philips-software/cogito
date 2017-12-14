@@ -158,9 +158,11 @@
 		5C93319A1FA325C30056869F /* TelepathActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9331991FA325C30056869F /* TelepathActionsSpec.swift */; };
 		C00B505E972138AEEFC08864 /* AttestationsReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */; };
 		C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */; };
+		C00B5164F17E8581AB40BA9E /* RequestedAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5BCC0EDADAE701077CA0 /* RequestedAlert.swift */; };
 		C00B51B16777B9F0F6E84B07 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B542BA533252756727EF5 /* Address.swift */; };
 		C00B51F86FA2BE636728F0F9 /* AddressSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B54DD2E80DB0874E74DDD /* AddressSpec.swift */; };
 		C00B52429CD6E478242F31F6 /* LaunchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F9461FA1E5F3006A36FC /* LaunchActions.swift */; };
+		C00B524676276F6E1FDAAE98 /* RequestedAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5BCC0EDADAE701077CA0 /* RequestedAlert.swift */; };
 		C00B5559989C9FF92C6C70FA /* IdenittySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5807D4B578AAA0D57B47 /* IdenittySpec.swift */; };
 		C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */; };
 		C00B57208B78184BB19798CD /* AppPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B57766800CB3EFBE971EC /* AppPassword.swift */; };
@@ -301,6 +303,7 @@
 		C00B54DD2E80DB0874E74DDD /* AddressSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressSpec.swift; sourceTree = "<group>"; };
 		C00B57766800CB3EFBE971EC /* AppPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPassword.swift; sourceTree = "<group>"; };
 		C00B5807D4B578AAA0D57B47 /* IdenittySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdenittySpec.swift; sourceTree = "<group>"; };
+		C00B5BCC0EDADAE701077CA0 /* RequestedAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestedAlert.swift; sourceTree = "<group>"; };
 		C00B5F53B99BC5464AF8BE3E /* DiamondActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiamondActions.swift; sourceTree = "<group>"; };
 		C00B5F8B50D233D21FB7153C /* KeyStoreSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreSpec.swift; sourceTree = "<group>"; };
 		C00B5FFF481EB4982C21280E /* DispatchRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchRecorder.swift; sourceTree = "<group>"; };
@@ -636,6 +639,7 @@
 			isa = PBXGroup;
 			children = (
 				02E90F511FE03348008D81F9 /* DialogPresenter.swift */,
+				C00B5BCC0EDADAE701077CA0 /* RequestedAlert.swift */,
 			);
 			path = DialogPresenter;
 			sourceTree = "<group>";
@@ -1080,6 +1084,7 @@
 				02A15AFE1F8671D200A94163 /* Identity.swift in Sources */,
 				C00B5D39FC0D970348A5E0C6 /* DiamondActions.swift in Sources */,
 				C00B5AF3F2ECB1BD9415E765 /* Address.swift in Sources */,
+				C00B5164F17E8581AB40BA9E /* RequestedAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1184,6 +1189,7 @@
 				C00B51B16777B9F0F6E84B07 /* Address.swift in Sources */,
 				C00B51F86FA2BE636728F0F9 /* AddressSpec.swift in Sources */,
 				C00B5559989C9FF92C6C70FA /* IdenittySpec.swift in Sources */,
+				C00B524676276F6E1FDAAE98 /* RequestedAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
