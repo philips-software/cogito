@@ -9,6 +9,7 @@ struct AppState: StateType, Codable {
     let diamond: DiamondState
     let telepath: TelepathState
     let attestations: AttestationsState
+    let dialogPresenter: DialogPresenterState
 }
 
 extension AppState: Equatable {
@@ -28,5 +29,6 @@ let initialAppState = AppState(
     createIdentity: initialCreateIdentityState,
     diamond: initialDiamondState,
     telepath: initialTelepathState,
-    attestations: initialAttestationsState
+    attestations: initialAttestationsState,
+    dialogPresenter: initialDialogPresenterState
 )
