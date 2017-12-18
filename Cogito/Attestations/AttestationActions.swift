@@ -75,12 +75,34 @@ struct AttestationActions {
 
     static func GetAttestations(oidcRealmUrl: String) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, getState in
-            if let facet = getState()?.diamond.selectedFacet(),
+            if let state = getState(),
+               let facet = state.diamond.selectedFacet(),
                let token = facet.findToken(claim: "iss", value: oidcRealmUrl) {
-                let message = AttestationsResult(idToken: token).json
-                dispatch(TelepathActions.Send(message: message))
+                if alreadyProvided(idToken: token, state: state) {
+                    let message = AttestationsResult(idToken: token).json
+                    dispatch(TelepathActions.Send(message: message))
+                } else {
+                    let alert = RequestedAlert(title: "Request for access",
+                                               message: "Application <?> wants to access your credentials " +
+                                                        "from \(oidcRealmUrl)",
+                                               actions: [
+                                                   AlertAction(title: "Deny", style: .cancel) { _ in
+                                                   },
+                                                   AlertAction(title: "Approve", style: .default) { _ in
+                                                   }
+                                               ])
+                    dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
+                }
             }
         })
+    }
+
+    private static func alreadyProvided(idToken: String, state: AppState) -> Bool {
+        guard let channelId = state.telepath.channel?.id,
+              let providedTokens = state.attestations.providedAttestations[channelId] else {
+            return false
+        }
+        return providedTokens.contains { $0 == idToken }
     }
 }
 
