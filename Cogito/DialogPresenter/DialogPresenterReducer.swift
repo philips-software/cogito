@@ -6,7 +6,7 @@ func dialogPresenterReducer(action: Action,
     switch action {
         case _ as DialogPresenterActions.DidDismissAlert:
             var newState = state
-            newState.requestedAlerts.remove(at: 0)
+            newState.requestedAlerts.removeFirst()
             return newState
         case let action as DialogPresenterActions.RequestAlert:
             var newState = state
