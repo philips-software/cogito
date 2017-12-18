@@ -115,9 +115,10 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             context("when requested attestation is present") {
+                let idToken = validToken
+
                 context("when this Telepath channel has been given the attestation before") {
                     it("only dispatches Telepath send message") {
-                        let idToken = validToken
                         let action = AttestationActions.GetAttestations(oidcRealmUrl: validIssuer)
                         let channel = TelepathChannelSpy()
                         var identity = Identity(description: "test", address: Address.testAddress)
@@ -137,26 +138,52 @@ class AttestationActionsSpec: QuickSpec {
                 }
 
                 context("when this Telepath channel has not been given the attestation yet") {
-                    it("asks the user to confirm that the attestation may be sent") {
-                        let idToken = validToken
-                        let action = AttestationActions.GetAttestations(oidcRealmUrl: validIssuer)
+                    beforeEach {
                         var identity = Identity(description: "test", address: Address.testAddress)
                         identity.idTokens = [idToken]
                         store.state = appState(diamond: DiamondState(facets: [identity]))
+                        let action = AttestationActions.GetAttestations(oidcRealmUrl: validIssuer)
                         store.dispatch(action)
+                    }
+
+                    it("asks the user to confirm that the attestation may be sent") {
                         let alertRequested = store.actions.contains { $0 is DialogPresenterActions.RequestAlert }
                         expect(alertRequested).to(beTrue())
                     }
 
                     context("when user confirms") {
                         it("sends Telepath message containing token") {
-
+                            guard let action = store.actions.filter({
+                                $0 is DialogPresenterActions.RequestAlert
+                            }).first,
+                                  let requestAlertAction = action as? DialogPresenterActions.RequestAlert,
+                                  let approveAction = requestAlertAction.requestedAlert.actions.filter({
+                                      $0.style == .default
+                                  }).first else {
+                                fail("unexpected state")
+                                return
+                            }
+                            approveAction.handler!(approveAction)
+                            let sendPending = store.actions.last as? TelepathActions.SendPending
+                            expect(sendPending?.message) == "{\"idToken\":\"\(idToken)\"}"
                         }
                     }
 
                     context("when user rejects") {
-                        it("sends Telepath message containing 'rejected'") {
-
+                        it("sends Telepath message containing error") {
+                            guard let action = store.actions.filter({
+                                $0 is DialogPresenterActions.RequestAlert
+                            }).first,
+                                  let requestAlertAction = action as? DialogPresenterActions.RequestAlert,
+                                  let cancelAction = requestAlertAction.requestedAlert.actions.filter({
+                                      $0.style == .cancel
+                                  }).first else {
+                                fail("unexpected state")
+                                return
+                            }
+                            cancelAction.handler!(cancelAction)
+                            let sendPending = store.actions.last as? TelepathActions.SendPending
+                            expect(sendPending?.message) == "{\"error\":\"user denied access\"}"
                         }
                     }
                 }
