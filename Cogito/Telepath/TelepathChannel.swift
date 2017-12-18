@@ -34,6 +34,8 @@ class TelepathChannel: TelepathChannelType, Codable {
         self.channel.send(message: message, completion: completion)
     }
 
+    var id: ChannelID { return channel.id } // swiftlint:disable:this identifier_name
+
     enum CodingKeys: String, CodingKey {
         case connectUrl
     }
