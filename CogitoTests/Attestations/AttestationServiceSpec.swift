@@ -58,7 +58,7 @@ class AttestationServiceSpec: QuickSpec {
                 }
             }
 
-            context("when an attestations requests comes in") {
+            context("when an attestations request comes in") {
                 whenReceiving(messages: [attestationsRequest])
                 itHandlesTheMessage()
                 itDispatchesGetAttestations()
