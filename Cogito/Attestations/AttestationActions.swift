@@ -75,22 +75,22 @@ struct AttestationActions {
 
     static func GetAttestations(oidcRealmUrl: String) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, getState in
+            let sendError = { (error: String) in
+                let msg = AttestationsResult(error: error).json
+                dispatch(TelepathActions.Send(message: msg))
+            }
+            guard let realmUrl = URL(string: oidcRealmUrl) else {
+                sendError("invalid realm URL")
+                return
+            }
             guard let state = getState(),
                   let facet = state.diamond.selectedFacet() else {
                 // todo send not configured properly
                 return
             }
-            guard let realmUrl = URL(string: oidcRealmUrl) else {
-                // todo send invalid url
-                return
-            }
 
             let sendIdToken = { (idToken: String) in
                 let msg = AttestationsResult(idToken: idToken).json
-                dispatch(TelepathActions.Send(message: msg))
-            }
-            let sendError = { (error: String) in
-                let msg = AttestationsResult(error: error).json
                 dispatch(TelepathActions.Send(message: msg))
             }
             let showRequestAccessDialog = { (idToken: String) in
