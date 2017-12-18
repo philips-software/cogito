@@ -119,18 +119,33 @@ class AttestationActionsSpec: QuickSpec {
                     it("only dispatches Telepath send message") {
                         let idToken = validToken
                         let action = AttestationActions.GetAttestations(oidcRealmUrl: validIssuer)
+                        let channel = TelepathChannelSpy()
                         var identity = Identity(description: "test", address: Address.testAddress)
                         identity.idTokens = [idToken]
-                        store.state = appState(diamond: DiamondState(facets: [identity]))
+                        store.state = appState(
+                            diamond: DiamondState(facets: [identity]),
+                            telepath: TelepathState(channel: channel, connectionError: nil,
+                                                    receivedMessages: [], receiveError: nil),
+                            attestations: AttestationsState(open: [:], providedAttestations: [
+                                channel.id: [idToken]
+                            ])
+                        )
                         store.dispatch(action)
-                        let sendPending = store.actions.last as? TelepathActions.SendPending
+                        let sendPending = store.actions[store.actions.count-2] as? TelepathActions.SendPending
                         expect(sendPending?.message) == "{\"idToken\":\"\(idToken)\"}"
                     }
                 }
 
                 context("when this Telepath channel has not been given the attestation yet") {
                     it("asks the user to confirm that the attestation may be sent") {
-
+                        let idToken = validToken
+                        let action = AttestationActions.GetAttestations(oidcRealmUrl: validIssuer)
+                        var identity = Identity(description: "test", address: Address.testAddress)
+                        identity.idTokens = [idToken]
+                        store.state = appState(diamond: DiamondState(facets: [identity]))
+                        store.dispatch(action)
+                        let alertRequested = store.actions.contains { $0 is DialogPresenterActions.RequestAlert }
+                        expect(alertRequested).to(beTrue())
                     }
 
                     context("when user confirms") {
