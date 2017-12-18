@@ -161,6 +161,10 @@
 		5CC4D2CC1FE7F731002F2450 /* TransactionSigningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2CA1FE7F724002F2450 /* TransactionSigningService.swift */; };
 		5CC4D2CE1FE801DE002F2450 /* TransactionSigningActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2CD1FE801DE002F2450 /* TransactionSigningActions.swift */; };
 		5CC4D2CF1FE801E5002F2450 /* TransactionSigningActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2CD1FE801DE002F2450 /* TransactionSigningActions.swift */; };
+		5CC4D2D11FE80E8E002F2450 /* TelepathService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2D01FE80E8E002F2450 /* TelepathService.swift */; };
+		5CC4D2D21FE80E8E002F2450 /* TelepathService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2D01FE80E8E002F2450 /* TelepathService.swift */; };
+		5CC4D2D41FE81815002F2450 /* JSONDecodeFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */; };
+		5CC4D2D51FE81815002F2450 /* JSONDecodeFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */; };
 		C00B50288844174B2DCC9AD6 /* DialogPresenterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B58EF23AD635EAE304108 /* DialogPresenterActions.swift */; };
 		C00B505E972138AEEFC08864 /* AttestationsReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */; };
 		C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */; };
@@ -308,6 +312,8 @@
 		5CC4D2C81FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningServiceSpec.swift; sourceTree = "<group>"; };
 		5CC4D2CA1FE7F724002F2450 /* TransactionSigningService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningService.swift; sourceTree = "<group>"; };
 		5CC4D2CD1FE801DE002F2450 /* TransactionSigningActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningActions.swift; sourceTree = "<group>"; };
+		5CC4D2D01FE80E8E002F2450 /* TelepathService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathService.swift; sourceTree = "<group>"; };
+		5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodeFromString.swift; sourceTree = "<group>"; };
 		8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51C652F88A1C505BE309FCA /* Pods-Cogito-CogitoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito-CogitoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito-CogitoTests/Pods-Cogito-CogitoTests.release.xcconfig"; sourceTree = "<group>"; };
 		C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreStateSpec.swift; sourceTree = "<group>"; };
@@ -728,6 +734,8 @@
 				5C20A0FA1FA1FC6500B443C9 /* TelepathState.swift */,
 				5C20A1021FA224C000B443C9 /* TelepathChannel.swift */,
 				5C7C23931FA35093009E9CE7 /* TelepathDefaults.swift */,
+				5CC4D2D01FE80E8E002F2450 /* TelepathService.swift */,
+				5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -1063,6 +1071,7 @@
 				0298D4371F7A45680070998D /* Geth.swift in Sources */,
 				5C20A0FB1FA1FC6500B443C9 /* TelepathState.swift in Sources */,
 				02A15AFB1F86719400A94163 /* DiamondState.swift in Sources */,
+				5CC4D2D41FE81815002F2450 /* JSONDecodeFromString.swift in Sources */,
 				0298D43A1F7A46A30070998D /* Node.swift in Sources */,
 				5CC4D2CB1FE7F724002F2450 /* TransactionSigningService.swift in Sources */,
 				022621331FAB202400692126 /* FacetDetailsTableViewCell.swift in Sources */,
@@ -1105,6 +1114,7 @@
 				5C7C23941FA35093009E9CE7 /* TelepathDefaults.swift in Sources */,
 				028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
 				5C20A1031FA224C000B443C9 /* TelepathChannel.swift in Sources */,
+				5CC4D2D11FE80E8E002F2450 /* TelepathService.swift in Sources */,
 				5C7C23911FA3502C009E9CE7 /* TelepathReceiver.swift in Sources */,
 				028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
 				C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */,
@@ -1155,6 +1165,7 @@
 				5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */,
 				029CDFFE1FA22E1200281369 /* AttestationsReducer.swift in Sources */,
 				0226212C1FAB1E6800692126 /* IdentityManagerViewController.swift in Sources */,
+				5CC4D2D51FE81815002F2450 /* JSONDecodeFromString.swift in Sources */,
 				02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */,
 				0298D42C1F7A43C90070998D /* AppState.swift in Sources */,
 				02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */,
@@ -1223,6 +1234,7 @@
 				C00B51B16777B9F0F6E84B07 /* Address.swift in Sources */,
 				C00B51F86FA2BE636728F0F9 /* AddressSpec.swift in Sources */,
 				C00B5559989C9FF92C6C70FA /* IdenittySpec.swift in Sources */,
+				5CC4D2D21FE80E8E002F2450 /* TelepathService.swift in Sources */,
 				C00B565D47B7F81FE21339CF /* DialogPresenterState.swift in Sources */,
 				C00B524676276F6E1FDAAE98 /* RequestedAlert.swift in Sources */,
 				C00B52E1B28440BB32322784 /* DialogPresenterReducer.swift in Sources */,

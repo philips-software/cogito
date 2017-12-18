@@ -2,30 +2,14 @@
 
 import ReSwift
 
-class AttestationService: StoreSubscriber {
-    let store: Store<AppState>
+class AttestationService: TelepathService {
 
     init(store: Store<AppState>) {
-        self.store = store
+        super.init(store: store, method: "attestations")
     }
 
-    func start() {
-        store.subscribe(self) { subscription in
-            subscription.select { state in
-                state.telepath.receivedMessages
-            }
-        }
-    }
-
-    func stop() {
-        store.unsubscribe(self)
-    }
-
-    func newState(state incomingMessages: [String]) {
-        if let message = incomingMessages.first,
-           let request = try? JSONDecoder().decode(JSONRequest.self, from: message),
-           request.method == "attestations" {
-            store.dispatch(TelepathActions.ReceivedMessageHandled())
+    override func onMessage(_ message: String) {
+        if let request = try? JSONDecoder().decode(JSONRequest.self, from: message) {
             store.dispatch(AttestationActions.GetAttestations(oidcRealmUrl: request.realmUrl))
         }
     }
@@ -34,11 +18,4 @@ class AttestationService: StoreSubscriber {
 private struct JSONRequest: Codable {
     let method: String
     let realmUrl: String
-}
-
-private extension JSONDecoder {
-    func decode<T>(_ type: T.Type, from string: String) throws -> T where T: Decodable {
-        let data = string.data(using: .utf8)!
-        return try decode(type, from: data)
-    }
 }
