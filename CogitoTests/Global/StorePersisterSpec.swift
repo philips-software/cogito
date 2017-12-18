@@ -79,7 +79,8 @@ class StorePersisterSpec: QuickSpec {
                         "receivedMessages": []
                     },
                     "attestations": {
-                        "open": {}
+                        "open": {},
+                        "providedAttestations": {}
                     },
                     "dialogPresenter": {}
                 }

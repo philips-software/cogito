@@ -14,7 +14,8 @@ class AttestationsReducerSpec: QuickSpec {
                                                                                         identity: identity1,
                                                                                         status: .started,
                                                                                         error: nil,
-                                                                                        idToken: nil)])
+                                                                                        idToken: nil)],
+                                                 providedAttestations: [:])
             let action = AttestationActions.Pending(identity: identity2,
                                                     nonce: "nonce2",
                                                     subject: "subject2")
@@ -35,7 +36,8 @@ class AttestationsReducerSpec: QuickSpec {
                                                                                         identity: identity1,
                                                                                         status: .pending,
                                                                                         error: nil,
-                                                                                        idToken: nil)])
+                                                                                        idToken: nil)],
+                                                 providedAttestations: [:])
             let action = AttestationActions.Started(nonce: "nonce1")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.started
@@ -47,7 +49,8 @@ class AttestationsReducerSpec: QuickSpec {
                                                                                         identity: identity1,
                                                                                         status: .pending,
                                                                                         error: nil,
-                                                                                        idToken: nil)])
+                                                                                        idToken: nil)],
+                                                 providedAttestations: [:])
             let action = AttestationActions.StartRejected(nonce: "nonce1", error: "some error")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.startRejected
@@ -60,7 +63,8 @@ class AttestationsReducerSpec: QuickSpec {
                                                                                         identity: identity1,
                                                                                         status: .started,
                                                                                         error: nil,
-                                                                                        idToken: nil)])
+                                                                                        idToken: nil)],
+                                                 providedAttestations: [:])
             let action = AttestationActions.FinishRejected(nonce: "nonce1", error: "some error")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.finishRejected
@@ -73,7 +77,8 @@ class AttestationsReducerSpec: QuickSpec {
                                                                                         identity: identity1,
                                                                                         status: .started,
                                                                                         error: nil,
-                                                                                        idToken: nil)])
+                                                                                        idToken: nil)],
+                                                 providedAttestations: [:])
             let action = AttestationActions.Fulfilled(nonce: "nonce1", idToken: "some token")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.fulfilled
