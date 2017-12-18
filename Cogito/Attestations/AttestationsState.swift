@@ -1,10 +1,13 @@
 //  Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
 
+import Telepath
+
 typealias Nonce = String
 typealias Subject = String
 
 struct AttestationsState: Codable {
     var open: [Nonce: AttestationInProgress]
+    var providedAttestations: [ChannelID: [String]]
 }
 
 extension AttestationsState: Equatable {
@@ -39,4 +42,4 @@ extension AttestationInProgress: Equatable {
     }
 }
 
-let initialAttestationsState = AttestationsState(open: [:])
+let initialAttestationsState = AttestationsState(open: [:], providedAttestations: [:])

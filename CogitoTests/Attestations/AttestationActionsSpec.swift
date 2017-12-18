@@ -38,7 +38,8 @@ class AttestationActionsSpec: QuickSpec {
                                                                  identity: identity,
                                                                  status: .started,
                                                                  error: "the error message",
-                                                                 idToken: nil)])
+                                                                 idToken: nil)],
+                        providedAttestations: [:])
                     )
                 })
                 expect(dispatchRecorder.count) == 1
@@ -55,7 +56,8 @@ class AttestationActionsSpec: QuickSpec {
                                                                  identity: identity,
                                                                  status: .started,
                                                                  error: nil,
-                                                                 idToken: nil)])
+                                                                 idToken: nil)],
+                        providedAttestations: [:])
                     )
                 })
                 expect(dispatchRecorder.count) == 1
@@ -77,7 +79,8 @@ class AttestationActionsSpec: QuickSpec {
                                                                  identity: identity,
                                                                  status: .started,
                                                                  error: nil,
-                                                                 idToken: nil)])
+                                                                 idToken: nil)],
+                        providedAttestations: [:])
                     )
                 })
                 expect(dispatchRecorder.count) == 1
@@ -94,7 +97,8 @@ class AttestationActionsSpec: QuickSpec {
                                                                  identity: identity,
                                                                  status: .started,
                                                                  error: nil,
-                                                                 idToken: nil)])
+                                                                 idToken: nil)],
+                        providedAttestations: [:])
                     )
                 })
                 expect(dispatchRecorder.count) == 1
