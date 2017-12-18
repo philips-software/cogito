@@ -1,11 +1,15 @@
 //Copyright © 2017 Philips. All rights reserved.
 
+import Foundation
+
 public struct QueuingServiceClient: QueuingService {
 
     let url: URL
+    let callbackQueue: DispatchQueue
 
-    public init(url: URL) {
+    public init(url: URL, callbackQueue: DispatchQueue = DispatchQueue.main) {
         self.url = url
+        self.callbackQueue = callbackQueue
     }
 
     public func send(queueId: QueueID, message: Data, completion: @escaping (Error?) -> Void) {
@@ -14,7 +18,9 @@ public struct QueuingServiceClient: QueuingService {
         var request = URLRequest(url: queueUrl)
         request.httpMethod = "POST"
         let task = URLSession.shared.uploadTask(with: request, from: encodedMessage) { _, response, error in
-            completion(self.checkValidity(response: response, error: error))
+            self.callbackQueue.async {
+                completion(self.checkValidity(response: response, error: error))
+            }
         }
         task.resume()
     }
@@ -23,7 +29,9 @@ public struct QueuingServiceClient: QueuingService {
         let queueUrl = url.appendingPathComponent(queueId)
         let task = URLSession.shared.dataTask(with: queueUrl) { data, response, error in
             let (message, error) = self.extractMessage(response: response, data: data, error: error)
-            completion(message, error)
+            self.callbackQueue.async {
+                completion(message, error)
+            }
         }
         task.resume()
     }

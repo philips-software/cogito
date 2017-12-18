@@ -35,6 +35,16 @@ class QueuingServiceClientSpec: QuickSpec {
             }
         }
 
+        it("calls back on the main thread after sending") {
+            self.stub(http(.post, uri: "\(baseUrl)/\(queueId)"), http(200))
+            waitUntil { done in
+                queuing.send(queueId: queueId, message: message) { _ in
+                    expect(Thread.isMainThread).to(beTrue())
+                    done()
+                }
+            }
+        }
+
         describe("send errors") {
             it("returns error when connection fails") {
                 let someError = NSError(domain: "", code: 0, userInfo: nil)
@@ -78,6 +88,16 @@ class QueuingServiceClientSpec: QuickSpec {
                 queuing.receive(queueId: queueId) { receivedMessage, error in
                     expect(error).to(beNil())
                     expect(receivedMessage).to(beNil())
+                    done()
+                }
+            }
+        }
+
+        it("calls back on the main thread after receiving") {
+            self.stub(http(.get, uri: "\(baseUrl)/\(queueId)"), http(204))
+            waitUntil { done in
+                queuing.receive(queueId: queueId) { _, _ in
+                    expect(Thread.isMainThread).to(beTrue())
                     done()
                 }
             }
