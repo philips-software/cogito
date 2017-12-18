@@ -18,4 +18,5 @@ specific facet of your diamond to the world, not all of you.
 
 Open Issues
 -----------
-The library used for handling the JWTs from the OpenID Connect provider does not check the JWT signature.
+* The library used for handling the JWTs from the OpenID Connect provider does not check the JWT signature.
+* Instead of passing a realm URL for OpenID Connect attestations, webfinger should be used.
