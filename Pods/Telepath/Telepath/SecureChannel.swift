@@ -3,9 +3,9 @@
 import Sodium
 
 public struct SecureChannel {
+    public let id: ChannelID
     let queuing: QueuingService
     let key: ChannelKey
-    let id: ChannelID
     let receivingQueue: QueueID
     let sendingQueue: QueueID
 

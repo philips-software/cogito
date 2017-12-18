@@ -89,7 +89,7 @@ CHECKOUT OPTIONS:
     :commit: 2871ea34c919bbdaa236c870ce7e16242f16ffb0
     :git: https://github.com/mikecole20/ReSwiftThunk.git
   Telepath:
-    :commit: c9ab3b875190b2d90e945d0a44dc94fb9340ade4
+    :commit: 36dcf1feec482c2b3bb399f1d11adf3fcda00169
     :git: https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git
 
 SPEC CHECKSUMS:
