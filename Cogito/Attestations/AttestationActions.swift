@@ -75,23 +75,37 @@ struct AttestationActions {
 
     static func GetAttestations(oidcRealmUrl: String) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, getState in
+            let sendIdToken = { (idToken: String) in
+                let msg = AttestationsResult(idToken: idToken).json
+                dispatch(TelepathActions.Send(message: msg))
+            }
+            let sendError = { (error: String) in
+                let msg = AttestationsResult(error: error).json
+                dispatch(TelepathActions.Send(message: msg))
+            }
+            let showRequestAccessDialog = { (idToken: String) in
+                let alert = RequestedAlert(title: "Request for access",
+                                           message: "Application <?> wants to access your credentials " +
+                                                    // todo:    ^^^^^  insert application name
+                                                    "from \(oidcRealmUrl)",
+                                           actions: [
+                                               AlertAction(title: "Deny", style: .cancel) { _ in
+                                                   sendError("user denied access")
+                                               },
+                                               AlertAction(title: "Approve", style: .default) { _ in
+                                                   sendIdToken(idToken)
+                                               }
+                                           ])
+                dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
+            }
+
             if let state = getState(),
                let facet = state.diamond.selectedFacet(),
-               let token = facet.findToken(claim: "iss", value: oidcRealmUrl) {
-                if alreadyProvided(idToken: token, state: state) {
-                    let message = AttestationsResult(idToken: token).json
-                    dispatch(TelepathActions.Send(message: message))
+               let idToken = facet.findToken(claim: "iss", value: oidcRealmUrl) {
+                if alreadyProvided(idToken: idToken, state: state) {
+                    sendIdToken(idToken)
                 } else {
-                    let alert = RequestedAlert(title: "Request for access",
-                                               message: "Application <?> wants to access your credentials " +
-                                                        "from \(oidcRealmUrl)",
-                                               actions: [
-                                                   AlertAction(title: "Deny", style: .cancel) { _ in
-                                                   },
-                                                   AlertAction(title: "Approve", style: .default) { _ in
-                                                   }
-                                               ])
-                    dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
+                    showRequestAccessDialog(idToken)
                 }
             }
         })
@@ -107,7 +121,13 @@ struct AttestationActions {
 }
 
 private struct AttestationsResult: Codable {
-    let idToken: String
+    let idToken: String?
+    let error: String?
+
+    init(idToken: String? = nil, error: String? = nil) {
+        self.idToken = idToken
+        self.error = error
+    }
 }
 
 private extension Encodable {
