@@ -147,8 +147,9 @@ class AttestationActionsSpec: QuickSpec {
                     }
 
                     it("asks the user to confirm that the attestation may be sent") {
-                        let alertRequested = store.actions.contains { $0 is DialogPresenterActions.RequestAlert }
-                        expect(alertRequested).to(beTrue())
+                        let alert = store.actions.filter({ $0 is DialogPresenterActions.RequestAlert }).first!
+                            as! DialogPresenterActions.RequestAlert // swiftlint:disable:this force_cast
+                        expect(alert.requestedAlert.title) == "Request for access"
                     }
 
                     context("when user confirms") {
@@ -190,19 +191,37 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             context("when requested attestation is not present") {
-                it("asks the user to confirm starting attestation flow") {
+                beforeEach {
+                    let identity = Identity(description: "test", address: Address.testAddress)
+                    store.state = appState(diamond: DiamondState(facets: [identity]))
+                    let action = AttestationActions.GetAttestations(oidcRealmUrl: validIssuer)
+                    store.dispatch(action)
+                }
 
+                it("asks the user to confirm starting attestation flow") {
+                    let alert = store.actions.filter({ $0 is DialogPresenterActions.RequestAlert }).first!
+                        as! DialogPresenterActions.RequestAlert // swiftlint:disable:this force_cast
+                    expect(alert.requestedAlert.title) == "Login required"
                 }
 
                 context("when user confirms") {
                     it("starts attestation flow") {
-
+                        let alert = store.actions.filter({ $0 is DialogPresenterActions.RequestAlert }).first!
+                        as! DialogPresenterActions.RequestAlert // swiftlint:disable:this force_cast
+                        let loginAction = alert.requestedAlert.actions.filter({ $0.style == .default }).first!
+                        loginAction.handler!(loginAction)
+                        expect(store.actions.contains { $0 is AttestationActions.Pending }).to(beTrue())
                     }
                 }
 
                 context("when user rejects") {
                     it("sends Telepath message containing 'rejected'") {
-
+                        let alert = store.actions.filter({ $0 is DialogPresenterActions.RequestAlert }).first!
+                        as! DialogPresenterActions.RequestAlert // swiftlint:disable:this force_cast
+                        let cancelAction = alert.requestedAlert.actions.filter({ $0.style == .cancel }).first!
+                        cancelAction.handler!(cancelAction)
+                        let sendPending = store.actions.last as? TelepathActions.SendPending
+                        expect(sendPending?.message) == "{\"error\":\"user cancelled login\"}"
                     }
                 }
 
@@ -211,6 +230,16 @@ class AttestationActionsSpec: QuickSpec {
 
                     }
                 }
+            }
+
+            context("when there is no identity yet") {
+                it("sends 'improperly configured' or something") {
+
+                }
+            }
+
+            it("sends error when realm URL is invalid") {
+
             }
         }
     }

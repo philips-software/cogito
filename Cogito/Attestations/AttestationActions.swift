@@ -75,6 +75,16 @@ struct AttestationActions {
 
     static func GetAttestations(oidcRealmUrl: String) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, getState in
+            guard let state = getState(),
+                  let facet = state.diamond.selectedFacet() else {
+                // todo send not configured properly
+                return
+            }
+            guard let realmUrl = URL(string: oidcRealmUrl) else {
+                // todo send invalid url
+                return
+            }
+
             let sendIdToken = { (idToken: String) in
                 let msg = AttestationsResult(idToken: idToken).json
                 dispatch(TelepathActions.Send(message: msg))
@@ -98,15 +108,34 @@ struct AttestationActions {
                                            ])
                 dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
             }
+            let startAttestation = {
+                dispatch(AttestationActions.StartAttestation(for: facet, oidcRealmUrl: realmUrl, subject: nil))
+            }
+            let showLoginRequiredDialog = {
+                let alert = RequestedAlert(title: "Login required",
+                                           message: "Application <?> requires you to login to " +
+                                                    // todo:    ^^^^^  insert application name
+                                                    "\(oidcRealmUrl)",
+                                                    // ^^^^^^^^^^^^ todo: use webfinger
+                                           actions: [
+                                               AlertAction(title: "Cancel", style: .cancel) { _ in
+                                                   sendError("user cancelled login")
+                                               },
+                                               AlertAction(title: "Login", style: .default) { _ in
+                                                   startAttestation()
+                                               }
+                                           ])
+                dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
+            }
 
-            if let state = getState(),
-               let facet = state.diamond.selectedFacet(),
-               let idToken = facet.findToken(claim: "iss", value: oidcRealmUrl) {
+            if let idToken = facet.findToken(claim: "iss", value: oidcRealmUrl) {
                 if alreadyProvided(idToken: idToken, state: state) {
                     sendIdToken(idToken)
                 } else {
                     showRequestAccessDialog(idToken)
                 }
+            } else {
+                showLoginRequiredDialog()
             }
         })
     }
