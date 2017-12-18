@@ -239,7 +239,10 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             it("sends error when realm URL is invalid") {
-
+                let action = AttestationActions.GetAttestations(oidcRealmUrl: "invalid url")
+                store.dispatch(action)
+                let sendPending = store.actions.last as? TelepathActions.SendPending
+                expect(sendPending?.message) == "{\"error\":\"invalid realm URL\"}"
             }
         }
     }
