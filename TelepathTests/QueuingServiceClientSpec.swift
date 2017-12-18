@@ -23,11 +23,11 @@ class QueuingServiceClientSpec: QuickSpec {
         }
 
         it("can send a message") {
+            self.stub(http(.post, uri: "\(baseUrl)/\(queueId)")) { request in
+                expect(Data(reading: request.httpBodyStream!)) == encodedMessage
+                return http(200)(request)
+            }
             waitUntil { done in
-                self.stub(http(.post, uri: "\(baseUrl)/\(queueId)")) { request in
-                    expect(Data(reading: request.httpBodyStream!)) == encodedMessage
-                    return http(200)(request)
-                }
                 queuing.send(queueId: queueId, message: message) { error in
                     expect(error).to(beNil())
                     done()
@@ -38,8 +38,8 @@ class QueuingServiceClientSpec: QuickSpec {
         describe("send errors") {
             it("returns error when connection fails") {
                 let someError = NSError(domain: "", code: 0, userInfo: nil)
+                self.stub(http(.post, uri: "\(baseUrl)/\(queueId)"), failure(someError))
                 waitUntil { done in
-                    self.stub(http(.post, uri: "\(baseUrl)/\(queueId)"), failure(someError))
                     queuing.send(queueId: queueId, message: message) { error in
                         expect(error).toNot(beNil())
                         done()
@@ -48,8 +48,8 @@ class QueuingServiceClientSpec: QuickSpec {
             }
 
             it("returns error when http post was unsuccessfull") {
+                self.stub(http(.post, uri: "\(baseUrl)/\(queueId)"), http(500))
                 waitUntil { done in
-                    self.stub(http(.post, uri: "\(baseUrl)/\(queueId)"), http(500))
                     queuing.send(queueId: queueId, message: message) { error in
                         expect(error).toNot(beNil())
                         done()
@@ -59,11 +59,11 @@ class QueuingServiceClientSpec: QuickSpec {
         }
 
         it("can receive a message") {
+            self.stub(
+                http(.get, uri: "\(baseUrl)/\(queueId)"),
+                http(200, headers: nil, download: .content(encodedMessage))
+            )
             waitUntil { done in
-                self.stub(
-                    http(.get, uri: "\(baseUrl)/\(queueId)"),
-                    http(200, headers: nil, download: .content(encodedMessage))
-                )
                 queuing.receive(queueId: queueId) { receivedMessage, error in
                     expect(error).to(beNil())
                     expect(receivedMessage) == message
@@ -73,8 +73,8 @@ class QueuingServiceClientSpec: QuickSpec {
         }
 
         it("returns nil when there is no message waiting") {
+            self.stub(http(.get, uri: "\(baseUrl)/\(queueId)"), http(204))
             waitUntil { done in
-                self.stub(http(.get, uri: "\(baseUrl)/\(queueId)"), http(204))
                 queuing.receive(queueId: queueId) { receivedMessage, error in
                     expect(error).to(beNil())
                     expect(receivedMessage).to(beNil())
@@ -93,37 +93,37 @@ class QueuingServiceClientSpec: QuickSpec {
 
             it("returns error when connection fails") {
                 let someError = NSError(domain: "", code: 0, userInfo: nil)
+                self.stub(http(.get, uri: "\(baseUrl)/\(queueId)"), failure(someError))
                 waitUntil { done in
-                    self.stub(http(.get, uri: "\(baseUrl)/\(queueId)"), failure(someError))
                     expectErrorWhileReceiving(done: done)
                 }
             }
 
             it("returns error when http get was unsuccessfull") {
+                self.stub(http(.get, uri: "\(baseUrl)/\(queueId)"), http(500))
                 waitUntil { done in
-                    self.stub(http(.get, uri: "\(baseUrl)/\(queueId)"), http(500))
                     expectErrorWhileReceiving(done: done)
                 }
             }
 
             it("returns error when message is not in base64url format") {
                 let invalidData = "not base64!".data(using: .utf8)!
+                self.stub(
+                    http(.get, uri: "\(baseUrl)/\(queueId)"),
+                    http(200, headers: nil, download: .content(invalidData))
+                )
                 waitUntil { done in
-                    self.stub(
-                        http(.get, uri: "\(baseUrl)/\(queueId)"),
-                        http(200, headers: nil, download: .content(invalidData))
-                    )
                     expectErrorWhileReceiving(done: done)
                 }
             }
 
             it("returns error when message is not a string in utf8 format") {
                 let invalidData = "not utf8 😅!".data(using: .utf16)!
+                self.stub(
+                    http(.get, uri: "\(baseUrl)/\(queueId)"),
+                    http(200, headers: nil, download: .content(invalidData))
+                )
                 waitUntil { done in
-                    self.stub(
-                        http(.get, uri: "\(baseUrl)/\(queueId)"),
-                        http(200, headers: nil, download: .content(invalidData))
-                    )
                     expectErrorWhileReceiving(done: done)
                 }
             }
