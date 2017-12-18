@@ -3,7 +3,7 @@
 import ReSwift
 
 struct DialogPresenterState: Codable {
-    let requestedAlerts: [RequestedAlert]
+    var requestedAlerts: [RequestedAlert]
 
     init(requestedAlerts: [RequestedAlert]) {
         self.requestedAlerts = requestedAlerts
