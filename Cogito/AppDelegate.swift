@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storePersister: StorePersister?
     var telepathReceiver: TelepathReceiver?
     var accountService: AccountService?
+    var attestationService: AttestationService?
     var geth: Geth?
     var syncProgressReporter: SyncProgressReporter!
     var peerReporter: PeerReporter!
@@ -27,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         telepathReceiver = TelepathReceiver(store: appStore)
         accountService = AccountService(store: appStore)
+        attestationService = AttestationService(store: appStore)
 
         if appStore.state.keyStore.keyStore == nil {
             appStore.dispatch(KeyStoreActions.Create())
@@ -43,12 +45,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         telepathReceiver?.stop()
         storePersister?.stop()
         accountService?.stop()
+        attestationService?.stop()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         storePersister?.start()
         telepathReceiver?.start()
         accountService?.start()
+        attestationService?.start()
     }
 
     func startGeth() {
