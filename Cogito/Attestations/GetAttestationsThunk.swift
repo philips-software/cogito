@@ -4,11 +4,13 @@ import ReSwift
 
 struct GetAttestationsThunk {
     let oidcRealmUrl: URL
+    let subject: String?
     let dispatch: DispatchFunction
     let state: AppState
     let facet: Identity
 
     init?(oidcRealmUrl: String,
+          subject: String? = nil,
           dispatch: @escaping DispatchFunction,
           getState: @escaping () -> AppState?) {
         guard let url = URL(string: oidcRealmUrl) else {
@@ -21,6 +23,7 @@ struct GetAttestationsThunk {
             return nil
         }
         self.oidcRealmUrl = url
+        self.subject = subject
         self.dispatch = dispatch
         self.state = state
         self.facet = facet
@@ -68,7 +71,7 @@ struct GetAttestationsThunk {
         self.dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
     }
 
-    func showLoginRequiredDialog(subject: String? = nil) {
+    func showLoginRequiredDialog() {
         let alert = RequestedAlert(title: "Login required",
                                    message: "Application <?> requires you to login to " +
                                             // todo:    ^^^^^  insert application name
@@ -79,16 +82,16 @@ struct GetAttestationsThunk {
                                            self.send(error: "user cancelled login")
                                        },
                                        AlertAction(title: "Login", style: .default) { _ in
-                                           self.startAttestation(subject: subject)
+                                           self.startAttestation()
                                        }
                                    ])
         self.dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
     }
 
-    func startAttestation(subject: String? = nil) {
+    func startAttestation() {
         self.dispatch(AttestationActions.StartAttestation(for: self.facet,
                                                           oidcRealmUrl: self.oidcRealmUrl,
-                                                          subject: subject))
+                                                          subject: self.subject))
     }
 
     private static func alreadyProvided(idToken: String, state: AppState) -> Bool {
