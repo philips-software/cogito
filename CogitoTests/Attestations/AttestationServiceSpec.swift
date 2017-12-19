@@ -6,6 +6,10 @@ import ReSwiftThunk
 
 class AttestationServiceSpec: QuickSpec {
     override func spec() {
+        let realmUrl = "https://iam-blockchain-dev.cogito.mobi/auth/realms/master"
+        let attestationsRequest =
+            "{\"method\":\"attestations\",\"realmUrl\":\"\(realmUrl)\"}"
+
         var service: AttestationService!
         var store: StoreSpy!
 
@@ -14,69 +18,13 @@ class AttestationServiceSpec: QuickSpec {
             service = AttestationService(store: store)
         }
 
-        it("subscribes to incoming Telepath messages") {
-            service.start()
-            expect(store.latestSubscriber) === service
-        }
-
-        it("unsubscribes") {
-            service.stop()
-            expect(store.latestUnsubscriber) === service
-        }
-
-        describe("incoming messages") {
-            let realmUrl = "https://iam-blockchain-dev.cogito.mobi/auth/realms/master"
-            let attestationsRequest = "{\"method\":\"attestations\"," +
-                                      "\"realmUrl\":\"\(realmUrl)\"}"
-            let otherRequest = "{\"method\":\"other\"}"
-
-            func whenReceiving(messages: [String]) {
-                beforeEach {
-                    service.newState(state: messages)
-                }
+        describe("when an attestations request comes in") {
+            beforeEach {
+                service.newState(state: [attestationsRequest])
             }
 
-            func itDispatchesGetAttestations() {
-                it("dispatches the GetAttestations action") {
-                    expect(store.actions.last as? ThunkAction<AppState>)
-                        .toNot(beNil())
-                }
-            }
-
-            func itDoesNotDispatchGetAttestations() {
-                it("does not dispatch the GetAttestations action") {
-                    expect(store.actions.last as? ThunkAction<AppState>)
-                        .to(beNil())
-                }
-            }
-
-            func itHandlesTheMessage() {
-                it("handles the message") {
-                    expect(store.actions).to(containElementSatisfying({
-                        $0 is TelepathActions.ReceivedMessageHandled
-                    }))
-                }
-            }
-
-            context("when an attestations request comes in") {
-                whenReceiving(messages: [attestationsRequest])
-                itHandlesTheMessage()
-                itDispatchesGetAttestations()
-            }
-
-            context("when a different request comes in") {
-                whenReceiving(messages: [otherRequest])
-                itDoesNotDispatchGetAttestations()
-            }
-
-            context("when the list of messages is empty") {
-                whenReceiving(messages: [])
-                itDoesNotDispatchGetAttestations()
-            }
-
-            context("when the attestations request is not the oldest message") {
-                whenReceiving(messages: [otherRequest, attestationsRequest])
-                itDoesNotDispatchGetAttestations()
+            it("dispatches the GetAttestations action") {
+                expect(store.actions.last as? ThunkAction<AppState>).toNot(beNil())
             }
         }
     }

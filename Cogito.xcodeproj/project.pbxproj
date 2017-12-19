@@ -165,6 +165,7 @@
 		5CC4D2D21FE80E8E002F2450 /* TelepathService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2D01FE80E8E002F2450 /* TelepathService.swift */; };
 		5CC4D2D41FE81815002F2450 /* JSONDecodeFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */; };
 		5CC4D2D51FE81815002F2450 /* JSONDecodeFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */; };
+		5CC4D2D71FE90248002F2450 /* TelepathServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2D61FE90248002F2450 /* TelepathServiceSpec.swift */; };
 		C00B50288844174B2DCC9AD6 /* DialogPresenterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B58EF23AD635EAE304108 /* DialogPresenterActions.swift */; };
 		C00B505E972138AEEFC08864 /* AttestationsReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */; };
 		C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */; };
@@ -316,6 +317,7 @@
 		5CC4D2CD1FE801DE002F2450 /* TransactionSigningActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningActions.swift; sourceTree = "<group>"; };
 		5CC4D2D01FE80E8E002F2450 /* TelepathService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathService.swift; sourceTree = "<group>"; };
 		5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodeFromString.swift; sourceTree = "<group>"; };
+		5CC4D2D61FE90248002F2450 /* TelepathServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathServiceSpec.swift; sourceTree = "<group>"; };
 		8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51C652F88A1C505BE309FCA /* Pods-Cogito-CogitoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito-CogitoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito-CogitoTests/Pods-Cogito-CogitoTests.release.xcconfig"; sourceTree = "<group>"; };
 		C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreStateSpec.swift; sourceTree = "<group>"; };
@@ -725,6 +727,7 @@
 				5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */,
 				5C20A1051FA224E000B443C9 /* TelepathChannelSpec.swift */,
 				5C04E4541FA8D61700A70C60 /* TelepathChannelSpy.swift */,
+				5CC4D2D61FE90248002F2450 /* TelepathServiceSpec.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -1185,6 +1188,7 @@
 				0298D42D1F7A43C90070998D /* AppReducer.swift in Sources */,
 				022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */,
 				0298D4271F7A43C90070998D /* KeyStore.swift in Sources */,
+				5CC4D2D71FE90248002F2450 /* TelepathServiceSpec.swift in Sources */,
 				02021D401F8C1C770092DD89 /* AppReducerSpec.swift in Sources */,
 				02BE32CC1F7A511D006C7287 /* PeerReporter.swift in Sources */,
 				0298D4381F7A456A0070998D /* Geth.swift in Sources */,
