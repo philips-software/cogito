@@ -75,8 +75,11 @@ struct AttestationActions {
 
     static func GetAttestations(oidcRealmUrl: String) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, getState in
-            let t = GetAttestationsThunk(oidcRealmUrl: oidcRealmUrl, dispatch: dispatch, getState: getState)
-            t.execute()
+            if let t = GetAttestationsThunk(oidcRealmUrl: oidcRealmUrl,
+                                            dispatch: dispatch,
+                                            getState: getState) {
+                t.execute()
+            }
         })
     }
 }

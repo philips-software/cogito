@@ -3,13 +3,36 @@
 import ReSwift
 
 struct GetAttestationsThunk {
-    let oidcRealmUrl: String
+    let oidcRealmUrl: URL
     let dispatch: DispatchFunction
-    let getState: () -> AppState?
+    let state: AppState
+    let facet: Identity
+
+    init?(oidcRealmUrl: String,
+          dispatch: @escaping DispatchFunction,
+          getState: @escaping () -> AppState?) {
+        guard let url = URL(string: oidcRealmUrl) else {
+            GetAttestationsThunk.send(error: "invalid realm URL", dispatch: dispatch)
+            return nil
+        }
+        guard let state = getState(),
+              let facet = state.diamond.selectedFacet() else {
+            // todo send not configured properly
+            return nil
+        }
+        self.oidcRealmUrl = url
+        self.dispatch = dispatch
+        self.state = state
+        self.facet = facet
+    }
+
+    static func send(error: String, dispatch: DispatchFunction) {
+        let msg = AttestationsResult(error: error).json
+        dispatch(TelepathActions.Send(message: msg))
+    }
 
     func send(error: String) {
-        let msg = AttestationsResult(error: error).json
-        self.dispatch(TelepathActions.Send(message: msg))
+        GetAttestationsThunk.send(error: error, dispatch: self.dispatch)
     }
 
     func send(idToken: String) {
@@ -21,7 +44,7 @@ struct GetAttestationsThunk {
         let alert = RequestedAlert(title: "Request for access",
                                    message: "Application <?> wants to access your credentials " +
                                             // todo:    ^^^^^  insert application name
-                                            "from \(self.oidcRealmUrl)",
+                                            "from \(self.oidcRealmUrl.absoluteString)",
                                    actions: [
                                        AlertAction(title: "Deny", style: .cancel) { _ in
                                            self.send(error: "user denied access")
@@ -33,50 +56,38 @@ struct GetAttestationsThunk {
         self.dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
     }
 
-    func showLoginRequiredDialog(for identity: Identity, realmUrl: URL, subject: String? = nil) {
+    func showLoginRequiredDialog(subject: String? = nil) {
         let alert = RequestedAlert(title: "Login required",
                                    message: "Application <?> requires you to login to " +
                                             // todo:    ^^^^^  insert application name
-                                            "\(self.oidcRealmUrl)",
+                                            "\(self.oidcRealmUrl.absoluteString)",
                                             // ^^^^^^^^^^^^ todo: use webfinger
                                    actions: [
                                        AlertAction(title: "Cancel", style: .cancel) { _ in
                                            self.send(error: "user cancelled login")
                                        },
                                        AlertAction(title: "Login", style: .default) { _ in
-                                           self.startAttestation(for: identity,
-                                                                 realmUrl: realmUrl,
-                                                                 subject: subject)
+                                           self.startAttestation(subject: subject)
                                        }
                                    ])
         self.dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
     }
 
-    func startAttestation(for identity: Identity, realmUrl: URL, subject: String? = nil) {
-        self.dispatch(AttestationActions.StartAttestation(for: identity,
-                                                          oidcRealmUrl: realmUrl,
+    func startAttestation(subject: String? = nil) {
+        self.dispatch(AttestationActions.StartAttestation(for: self.facet,
+                                                          oidcRealmUrl: self.oidcRealmUrl,
                                                           subject: subject))
     }
 
     func execute() {
-        guard let realmUrl = URL(string: oidcRealmUrl) else {
-            send(error: "invalid realm URL")
-            return
-        }
-        guard let state = getState(),
-              let facet = state.diamond.selectedFacet() else {
-            // todo send not configured properly
-            return
-        }
-
-        if let idToken = facet.findToken(claim: "iss", value: oidcRealmUrl) {
+        if let idToken = facet.findToken(claim: "iss", value: oidcRealmUrl.absoluteString) {
             if GetAttestationsThunk.alreadyProvided(idToken: idToken, state: state) {
                 send(idToken: idToken)
             } else {
                 showRequestAccessDialog(idToken: idToken)
             }
         } else {
-            showLoginRequiredDialog(for: facet, realmUrl: realmUrl)
+            showLoginRequiredDialog()
         }
     }
 
