@@ -26,6 +26,18 @@ struct GetAttestationsThunk {
         self.facet = facet
     }
 
+    func execute() {
+        if let idToken = facet.findToken(claim: "iss", value: oidcRealmUrl.absoluteString) {
+            if GetAttestationsThunk.alreadyProvided(idToken: idToken, state: state) {
+                send(idToken: idToken)
+            } else {
+                showRequestAccessDialog(idToken: idToken)
+            }
+        } else {
+            showLoginRequiredDialog()
+        }
+    }
+
     static func send(error: String, dispatch: DispatchFunction) {
         let msg = AttestationsResult(error: error).json
         dispatch(TelepathActions.Send(message: msg))
@@ -77,18 +89,6 @@ struct GetAttestationsThunk {
         self.dispatch(AttestationActions.StartAttestation(for: self.facet,
                                                           oidcRealmUrl: self.oidcRealmUrl,
                                                           subject: subject))
-    }
-
-    func execute() {
-        if let idToken = facet.findToken(claim: "iss", value: oidcRealmUrl.absoluteString) {
-            if GetAttestationsThunk.alreadyProvided(idToken: idToken, state: state) {
-                send(idToken: idToken)
-            } else {
-                showRequestAccessDialog(idToken: idToken)
-            }
-        } else {
-            showLoginRequiredDialog()
-        }
     }
 
     private static func alreadyProvided(idToken: String, state: AppState) -> Bool {
