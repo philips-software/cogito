@@ -3,36 +3,46 @@
 import ReSwift
 
 struct GetAttestationsThunk {
-    let oidcRealmUrl: URL
+    let oidcRealmUrlString: String
+    var oidcRealmUrl: URL!
     let subject: String?
     let dispatch: DispatchFunction
-    let state: AppState
-    let facet: Identity
+    let getState: () -> AppState?
+    var state: AppState!
+    var facet: Identity!
     let appName: String
 
-    init?(applicationName: String,
-          oidcRealmUrl: String,
-          subject: String?,
-          dispatch: @escaping DispatchFunction,
-          getState: @escaping () -> AppState?) {
-        guard let url = URL(string: oidcRealmUrl) else {
-            GetAttestationsThunk.send(error: "invalid realm URL", dispatch: dispatch)
-            return nil
+    init(applicationName: String,
+         oidcRealmUrl: String,
+         subject: String?,
+         dispatch: @escaping DispatchFunction,
+         getState: @escaping () -> AppState?) {
+        self.appName = applicationName
+        self.oidcRealmUrlString = oidcRealmUrl
+        self.subject = subject
+        self.dispatch = dispatch
+        self.getState = getState
+    }
+
+    mutating func finishInit() -> Bool {
+        guard let url = URL(string: oidcRealmUrlString) else {
+            send(error: "invalid realm URL")
+            return false
         }
         guard let state = getState(),
               let facet = state.diamond.selectedFacet() else {
             // todo send not configured properly
-            return nil
+            return false
         }
-        self.appName = applicationName
         self.oidcRealmUrl = url
-        self.subject = subject
-        self.dispatch = dispatch
         self.state = state
         self.facet = facet
+        return true
     }
 
-    func execute() {
+    mutating func execute() {
+        guard finishInit() else { return }
+
         if let idToken = facet.findToken(claim: "iss", value: oidcRealmUrl.absoluteString) {
             if GetAttestationsThunk.alreadyProvided(idToken: idToken, state: state) {
                 send(idToken: idToken)
@@ -44,13 +54,9 @@ struct GetAttestationsThunk {
         }
     }
 
-    static func send(error: String, dispatch: DispatchFunction) {
+    func send(error: String) {
         let msg = AttestationsResult(error: error).json
         dispatch(TelepathActions.Send(message: msg))
-    }
-
-    func send(error: String) {
-        GetAttestationsThunk.send(error: error, dispatch: self.dispatch)
     }
 
     func send(idToken: String) {
