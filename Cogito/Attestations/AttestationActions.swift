@@ -77,13 +77,12 @@ struct AttestationActions {
                                 oidcRealmUrl: String,
                                 subject: String?) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, getState in
-            let builder = GetAttestationsThunkBuilder(oidcRealmUrlString: oidcRealmUrl,
-                                                      applicationName: applicationName,
-                                                      subject: subject,
-                                                      dispatch: dispatch,
-                                                      getState: getState)
-            let thunk = builder.build()
-            thunk.execute()
+            let builder = GetAttestationsBuilder(oidcRealmUrlString: oidcRealmUrl,
+                                                 applicationName: applicationName,
+                                                 subject: subject,
+                                                 dispatch: dispatch,
+                                                 getState: getState)
+            builder.build().execute()
         })
     }
 }

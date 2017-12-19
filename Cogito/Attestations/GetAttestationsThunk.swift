@@ -2,23 +2,23 @@
 
 import ReSwift
 
-struct GetAttestationsThunkBuilder {
+struct GetAttestationsBuilder {
     let oidcRealmUrlString: String
     let applicationName: String
     let subject: String?
     let dispatch: DispatchFunction
     let getState: () -> AppState?
 
-    func build() -> GetAttestationsThunkT {
+    func build() -> GetAttestations {
         guard let url = URL(string: oidcRealmUrlString) else {
-            return GetAttestationsThunkError(error: "invalid realm URL", dispatch: dispatch)
+            return GetAttestationsInvalid(error: "invalid realm URL", dispatch: dispatch)
         }
         guard let state = getState(),
               let facet = state.diamond.selectedFacet() else {
             // todo send not configured properly
-            return GetAttestationsThunkError(error: "todo", dispatch: dispatch)
+            return GetAttestationsInvalid(error: "todo", dispatch: dispatch)
         }
-        return GetAttestationsThunk(applicationName: applicationName,
+        return GetAttestationsValid(applicationName: applicationName,
                                     oidcRealmUrl: url,
                                     subject: subject,
                                     dispatch: dispatch,
@@ -27,19 +27,19 @@ struct GetAttestationsThunkBuilder {
     }
 }
 
-protocol GetAttestationsThunkT {
+protocol GetAttestations {
     var dispatch: DispatchFunction { get }
     func execute()
 }
 
-extension GetAttestationsThunkT {
+extension GetAttestations {
     func send(error: String) {
         let msg = AttestationsResult(error: error).json
         dispatch(TelepathActions.Send(message: msg))
     }
 }
 
-struct GetAttestationsThunkError: GetAttestationsThunkT {
+struct GetAttestationsInvalid: GetAttestations {
     let error: String
     let dispatch: DispatchFunction
 
@@ -48,7 +48,7 @@ struct GetAttestationsThunkError: GetAttestationsThunkT {
     }
 }
 
-struct GetAttestationsThunk: GetAttestationsThunkT {
+struct GetAttestationsValid: GetAttestations {
     let applicationName: String
     let oidcRealmUrl: URL
     let subject: String?
@@ -72,7 +72,7 @@ struct GetAttestationsThunk: GetAttestationsThunkT {
 
     func execute() {
         if let idToken = facet.findToken(claim: "iss", value: oidcRealmUrl.absoluteString) {
-            if GetAttestationsThunk.alreadyProvided(idToken: idToken, state: state) {
+            if GetAttestationsValid.alreadyProvided(idToken: idToken, state: state) {
                 send(idToken: idToken)
             } else {
                 showRequestAccessDialog(idToken: idToken)
