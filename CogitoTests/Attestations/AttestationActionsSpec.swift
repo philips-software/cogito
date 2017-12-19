@@ -119,7 +119,9 @@ class AttestationActionsSpec: QuickSpec {
 
                 context("when this Telepath channel has been given the attestation before") {
                     it("only dispatches Telepath send message") {
-                        let action = AttestationActions.GetAttestations(oidcRealmUrl: validIssuer)
+                        let action = AttestationActions.GetAttestations(applicationName: "test",
+                                                                        oidcRealmUrl: validIssuer,
+                                                                        subject: nil)
                         let channel = TelepathChannelSpy()
                         var identity = Identity(description: "test", address: Address.testAddress)
                         identity.idTokens = [idToken]
@@ -142,7 +144,9 @@ class AttestationActionsSpec: QuickSpec {
                         var identity = Identity(description: "test", address: Address.testAddress)
                         identity.idTokens = [idToken]
                         store.state = appState(diamond: DiamondState(facets: [identity]))
-                        let action = AttestationActions.GetAttestations(oidcRealmUrl: validIssuer)
+                        let action = AttestationActions.GetAttestations(applicationName: "test",
+                                                                        oidcRealmUrl: validIssuer,
+                                                                        subject: nil)
                         store.dispatch(action)
                     }
 
@@ -194,7 +198,9 @@ class AttestationActionsSpec: QuickSpec {
                 beforeEach {
                     let identity = Identity(description: "test", address: Address.testAddress)
                     store.state = appState(diamond: DiamondState(facets: [identity]))
-                    let action = AttestationActions.GetAttestations(oidcRealmUrl: validIssuer)
+                    let action = AttestationActions.GetAttestations(applicationName: "test",
+                                                                    oidcRealmUrl: validIssuer,
+                                                                    subject: nil)
                     store.dispatch(action)
                 }
 
@@ -239,7 +245,9 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             it("sends error when realm URL is invalid") {
-                let action = AttestationActions.GetAttestations(oidcRealmUrl: "invalid url")
+                let action = AttestationActions.GetAttestations(applicationName: "test",
+                                                                oidcRealmUrl: "invalid url",
+                                                                subject: nil)
                 store.dispatch(action)
                 let sendPending = store.actions.last as? TelepathActions.SendPending
                 expect(sendPending?.message) == "{\"error\":\"invalid realm URL\"}"

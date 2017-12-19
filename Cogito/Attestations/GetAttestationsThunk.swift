@@ -8,9 +8,11 @@ struct GetAttestationsThunk {
     let dispatch: DispatchFunction
     let state: AppState
     let facet: Identity
+    let appName: String
 
-    init?(oidcRealmUrl: String,
-          subject: String? = nil,
+    init?(applicationName: String,
+          oidcRealmUrl: String,
+          subject: String?,
           dispatch: @escaping DispatchFunction,
           getState: @escaping () -> AppState?) {
         guard let url = URL(string: oidcRealmUrl) else {
@@ -22,6 +24,7 @@ struct GetAttestationsThunk {
             // todo send not configured properly
             return nil
         }
+        self.appName = applicationName
         self.oidcRealmUrl = url
         self.subject = subject
         self.dispatch = dispatch
@@ -57,8 +60,7 @@ struct GetAttestationsThunk {
 
     func showRequestAccessDialog(idToken: String) {
         let alert = RequestedAlert(title: "Request for access",
-                                   message: "Application <?> wants to access your credentials " +
-                                            // todo:    ^^^^^  insert application name
+                                   message: "Application \(appName) wants to access your credentials " +
                                             "from \(self.oidcRealmUrl.absoluteString)",
                                    actions: [
                                        AlertAction(title: "Deny", style: .cancel) { _ in
@@ -73,8 +75,7 @@ struct GetAttestationsThunk {
 
     func showLoginRequiredDialog() {
         let alert = RequestedAlert(title: "Login required",
-                                   message: "Application <?> requires you to login to " +
-                                            // todo:    ^^^^^  insert application name
+                                   message: "Application \(appName) requires you to login to " +
                                             "\(self.oidcRealmUrl.absoluteString)",
                                             // ^^^^^^^^^^^^ todo: use webfinger
                                    actions: [
