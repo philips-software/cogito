@@ -2,47 +2,75 @@
 
 import ReSwift
 
-struct GetAttestationsThunk {
+struct GetAttestationsThunkBuilder {
     let oidcRealmUrlString: String
-    var oidcRealmUrl: URL!
+    let applicationName: String
     let subject: String?
     let dispatch: DispatchFunction
     let getState: () -> AppState?
-    var state: AppState!
-    var facet: Identity!
-    let appName: String
 
-    init(applicationName: String,
-         oidcRealmUrl: String,
-         subject: String?,
-         dispatch: @escaping DispatchFunction,
-         getState: @escaping () -> AppState?) {
-        self.appName = applicationName
-        self.oidcRealmUrlString = oidcRealmUrl
-        self.subject = subject
-        self.dispatch = dispatch
-        self.getState = getState
-    }
-
-    mutating func finishInit() -> Bool {
+    func build() -> GetAttestationsThunkT {
         guard let url = URL(string: oidcRealmUrlString) else {
-            send(error: "invalid realm URL")
-            return false
+            return GetAttestationsThunkError(error: "invalid realm URL", dispatch: dispatch)
         }
         guard let state = getState(),
               let facet = state.diamond.selectedFacet() else {
             // todo send not configured properly
-            return false
+            return GetAttestationsThunkError(error: "todo", dispatch: dispatch)
         }
-        self.oidcRealmUrl = url
+        return GetAttestationsThunk(applicationName: applicationName,
+                                    oidcRealmUrl: url,
+                                    subject: subject,
+                                    dispatch: dispatch,
+                                    state: state,
+                                    facet: facet)
+    }
+}
+
+protocol GetAttestationsThunkT {
+    var dispatch: DispatchFunction { get }
+    func execute()
+}
+
+extension GetAttestationsThunkT {
+    func send(error: String) {
+        let msg = AttestationsResult(error: error).json
+        dispatch(TelepathActions.Send(message: msg))
+    }
+}
+
+struct GetAttestationsThunkError: GetAttestationsThunkT {
+    let error: String
+    let dispatch: DispatchFunction
+
+    func execute() {
+        send(error: error)
+    }
+}
+
+struct GetAttestationsThunk: GetAttestationsThunkT {
+    let applicationName: String
+    let oidcRealmUrl: URL
+    let subject: String?
+    let dispatch: DispatchFunction
+    let state: AppState
+    let facet: Identity
+
+    init(applicationName: String,
+         oidcRealmUrl: URL,
+         subject: String?,
+         dispatch: @escaping DispatchFunction,
+         state: AppState,
+         facet: Identity) {
+        self.applicationName = applicationName
+        self.oidcRealmUrl = oidcRealmUrl
+        self.subject = subject
+        self.dispatch = dispatch
         self.state = state
         self.facet = facet
-        return true
     }
 
-    mutating func execute() {
-        guard finishInit() else { return }
-
+    func execute() {
         if let idToken = facet.findToken(claim: "iss", value: oidcRealmUrl.absoluteString) {
             if GetAttestationsThunk.alreadyProvided(idToken: idToken, state: state) {
                 send(idToken: idToken)
@@ -54,11 +82,6 @@ struct GetAttestationsThunk {
         }
     }
 
-    func send(error: String) {
-        let msg = AttestationsResult(error: error).json
-        dispatch(TelepathActions.Send(message: msg))
-    }
-
     func send(idToken: String) {
         let msg = AttestationsResult(idToken: idToken).json
         self.dispatch(TelepathActions.Send(message: msg))
@@ -66,7 +89,7 @@ struct GetAttestationsThunk {
 
     func showRequestAccessDialog(idToken: String) {
         let alert = RequestedAlert(title: "Request for access",
-                                   message: "Application \(appName) wants to access your credentials " +
+                                   message: "Application \(applicationName) wants to access your credentials " +
                                             "from \(self.oidcRealmUrl.absoluteString)",
                                    actions: [
                                        AlertAction(title: "Deny", style: .cancel) { _ in
@@ -81,7 +104,7 @@ struct GetAttestationsThunk {
 
     func showLoginRequiredDialog() {
         let alert = RequestedAlert(title: "Login required",
-                                   message: "Application \(appName) requires you to login to " +
+                                   message: "Application \(applicationName) requires you to login to " +
                                             "\(self.oidcRealmUrl.absoluteString)",
                                             // ^^^^^^^^^^^^ todo: use webfinger
                                    actions: [
