@@ -10,7 +10,12 @@ class AttestationService: TelepathService {
 
     override func onMessage(_ message: String) {
         if let request = try? JSONDecoder().decode(JSONRequest.self, from: message) {
-            store.dispatch(AttestationActions.GetAttestations(oidcRealmUrl: request.realmUrl))
+            let appName = "<?>" // todo take from request
+            let subject: String? = nil // todo take from request (if present)
+            let realmUrl = request.realmUrl
+            store.dispatch(AttestationActions.GetAttestations(applicationName: appName,
+                                                              oidcRealmUrl: realmUrl,
+                                                              subject: subject))
         }
     }
 }
