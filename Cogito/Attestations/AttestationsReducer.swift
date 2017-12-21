@@ -11,7 +11,8 @@ func attestationsReducer(action: Action, state: AttestationsState?) -> Attestati
                                                          identity: action.identity,
                                                          status: .pending,
                                                          error: nil,
-                                                         idToken: nil)
+                                                         idToken: nil,
+                                                         requestedOnChannel: action.requestedOnChannel)
     case let action as AttestationActions.Started:
         state.open[action.nonce]?.status = .started
     case let action as AttestationActions.StartRejected:

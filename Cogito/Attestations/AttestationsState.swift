@@ -23,6 +23,7 @@ struct AttestationInProgress: Codable {
     var status: Status
     var error: String?
     var idToken: String?
+    let requestedOnChannel: ChannelID?
 
     enum Status: String, Codable {
         case pending
@@ -38,7 +39,8 @@ extension AttestationInProgress: Equatable {
         return lhs.nonce == rhs.nonce &&
                lhs.subject == rhs.subject &&
                lhs.identity == rhs.identity &&
-               lhs.status == rhs.status
+               lhs.status == rhs.status &&
+               lhs.requestedOnChannel == rhs.requestedOnChannel
     }
 }
 

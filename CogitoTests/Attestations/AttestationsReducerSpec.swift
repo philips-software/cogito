@@ -14,19 +14,21 @@ class AttestationsReducerSpec: QuickSpec {
                                                                                         identity: identity1,
                                                                                         status: .started,
                                                                                         error: nil,
-                                                                                        idToken: nil)],
+                                                                                        idToken: nil,
+                                                                                        requestedOnChannel: nil)],
                                                  providedAttestations: [:])
             let action = AttestationActions.Pending(identity: identity2,
                                                     nonce: "nonce2",
-                                                    subject: "subject2")
+                                                    subject: "subject2",
+                                                    requestedOnChannel: "channelId")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open) == [
                 "nonce1": AttestationInProgress(
                     nonce: "nonce1", subject: "subject1", identity: identity1, status: .started,
-                    error: nil, idToken: nil),
+                    error: nil, idToken: nil, requestedOnChannel: nil),
                 "nonce2": AttestationInProgress(
                     nonce: "nonce2", subject: "subject2", identity: identity2, status: .pending,
-                    error: nil, idToken: nil)
+                    error: nil, idToken: nil, requestedOnChannel: "channelId")
             ]
         }
 
@@ -36,7 +38,8 @@ class AttestationsReducerSpec: QuickSpec {
                                                                                         identity: identity1,
                                                                                         status: .pending,
                                                                                         error: nil,
-                                                                                        idToken: nil)],
+                                                                                        idToken: nil,
+                                                                                        requestedOnChannel: nil)],
                                                  providedAttestations: [:])
             let action = AttestationActions.Started(nonce: "nonce1")
             let nextState = attestationsReducer(action: action, state: initialState)
@@ -49,7 +52,8 @@ class AttestationsReducerSpec: QuickSpec {
                                                                                         identity: identity1,
                                                                                         status: .pending,
                                                                                         error: nil,
-                                                                                        idToken: nil)],
+                                                                                        idToken: nil,
+                                                                                        requestedOnChannel: nil)],
                                                  providedAttestations: [:])
             let action = AttestationActions.StartRejected(nonce: "nonce1", error: "some error")
             let nextState = attestationsReducer(action: action, state: initialState)
@@ -63,7 +67,8 @@ class AttestationsReducerSpec: QuickSpec {
                                                                                         identity: identity1,
                                                                                         status: .started,
                                                                                         error: nil,
-                                                                                        idToken: nil)],
+                                                                                        idToken: nil,
+                                                                                        requestedOnChannel: nil)],
                                                  providedAttestations: [:])
             let action = AttestationActions.FinishRejected(nonce: "nonce1", error: "some error")
             let nextState = attestationsReducer(action: action, state: initialState)
@@ -77,7 +82,8 @@ class AttestationsReducerSpec: QuickSpec {
                                                                                         identity: identity1,
                                                                                         status: .started,
                                                                                         error: nil,
-                                                                                        idToken: nil)],
+                                                                                        idToken: nil,
+                                                                                        requestedOnChannel: nil)],
                                                  providedAttestations: [:])
             let action = AttestationActions.Fulfilled(nonce: "nonce1", idToken: "some token")
             let nextState = attestationsReducer(action: action, state: initialState)
