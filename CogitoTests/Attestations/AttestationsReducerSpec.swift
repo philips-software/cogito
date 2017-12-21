@@ -85,5 +85,26 @@ class AttestationsReducerSpec: QuickSpec {
             expect(nextState.open["nonce1"]!.error).to(beNil())
             expect(nextState.open["nonce1"]!.idToken) == "some token"
          }
+
+        it("handles Provided for new channel id") {
+            let initialState = AttestationsState(open: [:], providedAttestations: [:])
+            let action = AttestationActions.Provided(idToken: "idToken", channel: "channelId")
+            let nextState = attestationsReducer(action: action, state: initialState)
+            expect(nextState.providedAttestations["channelId"]) == ["idToken"]
+        }
+
+        it("handles Provided for existing channel id") {
+            let initialState = AttestationsState(open: [:], providedAttestations: ["channelId": ["foo"]])
+            let action = AttestationActions.Provided(idToken: "idToken", channel: "channelId")
+            let nextState = attestationsReducer(action: action, state: initialState)
+            expect(nextState.providedAttestations["channelId"]) == ["foo", "idToken"]
+        }
+
+        it("handles Provided for existing channel id: no duplicates") {
+            let initialState = AttestationsState(open: [:], providedAttestations: ["channelId": ["idToken"]])
+            let action = AttestationActions.Provided(idToken: "idToken", channel: "channelId")
+            let nextState = attestationsReducer(action: action, state: initialState)
+            expect(nextState.providedAttestations["channelId"]) == ["idToken"]
+        }
     }
 }

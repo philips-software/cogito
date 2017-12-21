@@ -73,6 +73,11 @@ struct AttestationActions {
         let error: String
     }
 
+    struct Provided: Action {
+        let idToken: String
+        let channel: ChannelID
+    }
+
     static func GetAttestations(applicationName: String,
                                 oidcRealmUrl: String,
                                 subject: String?) -> ThunkAction<AppState> {
