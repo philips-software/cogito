@@ -172,7 +172,7 @@
 		C00B5164F17E8581AB40BA9E /* RequestedAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5BCC0EDADAE701077CA0 /* RequestedAlert.swift */; };
 		C00B51B16777B9F0F6E84B07 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B542BA533252756727EF5 /* Address.swift */; };
 		C00B51F86FA2BE636728F0F9 /* AddressSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B54DD2E80DB0874E74DDD /* AddressSpec.swift */; };
-		C00B521DE886A27DE2569C8B /* GetAttestationsThunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B581D01FD60AA97FEEFBC /* GetAttestationsThunk.swift */; };
+		C00B521DE886A27DE2569C8B /* GetAttestations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B581D01FD60AA97FEEFBC /* GetAttestations.swift */; };
 		C00B52429CD6E478242F31F6 /* LaunchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F9461FA1E5F3006A36FC /* LaunchActions.swift */; };
 		C00B524676276F6E1FDAAE98 /* RequestedAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5BCC0EDADAE701077CA0 /* RequestedAlert.swift */; };
 		C00B52E1B28440BB32322784 /* DialogPresenterReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B579EEF4EDAFB75E6221C /* DialogPresenterReducer.swift */; };
@@ -184,7 +184,7 @@
 		C00B57208B78184BB19798CD /* AppPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B57766800CB3EFBE971EC /* AppPassword.swift */; };
 		C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5412CBC3B026E362474C /* CreateIdentityStateSpec.swift */; };
 		C00B588AFDC9DD01CBAE511B /* DialogPresenterReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B579EEF4EDAFB75E6221C /* DialogPresenterReducer.swift */; };
-		C00B58FCADEA882A76465278 /* GetAttestationsThunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B581D01FD60AA97FEEFBC /* GetAttestationsThunk.swift */; };
+		C00B58FCADEA882A76465278 /* GetAttestations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B581D01FD60AA97FEEFBC /* GetAttestations.swift */; };
 		C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5F8B50D233D21FB7153C /* KeyStoreSpec.swift */; };
 		C00B5ACC20A8568692E88D7A /* DialogPresenterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B56F8009E903C75F86606 /* DialogPresenterState.swift */; };
 		C00B5AF3F2ECB1BD9415E765 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B542BA533252756727EF5 /* Address.swift */; };
@@ -331,7 +331,7 @@
 		C00B57766800CB3EFBE971EC /* AppPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPassword.swift; sourceTree = "<group>"; };
 		C00B579EEF4EDAFB75E6221C /* DialogPresenterReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterReducer.swift; sourceTree = "<group>"; };
 		C00B5807D4B578AAA0D57B47 /* IdenittySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdenittySpec.swift; sourceTree = "<group>"; };
-		C00B581D01FD60AA97FEEFBC /* GetAttestationsThunk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAttestationsThunk.swift; sourceTree = "<group>"; };
+		C00B581D01FD60AA97FEEFBC /* GetAttestations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAttestations.swift; sourceTree = "<group>"; };
 		C00B58EF23AD635EAE304108 /* DialogPresenterActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterActions.swift; sourceTree = "<group>"; };
 		C00B5BCC0EDADAE701077CA0 /* RequestedAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestedAlert.swift; sourceTree = "<group>"; };
 		C00B5F53B99BC5464AF8BE3E /* DiamondActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiamondActions.swift; sourceTree = "<group>"; };
@@ -406,7 +406,7 @@
 				029CDFFA1FA22DEB00281369 /* AttestationsState.swift */,
 				0270D7201F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift */,
 				02E90F4B1FDEC1C4008D81F9 /* AttestationService.swift */,
-				C00B581D01FD60AA97FEEFBC /* GetAttestationsThunk.swift */,
+				C00B581D01FD60AA97FEEFBC /* GetAttestations.swift */,
 			);
 			path = Attestations;
 			sourceTree = "<group>";
@@ -1133,7 +1133,7 @@
 				C00B5164F17E8581AB40BA9E /* RequestedAlert.swift in Sources */,
 				C00B588AFDC9DD01CBAE511B /* DialogPresenterReducer.swift in Sources */,
 				C00B53178861BC297D2B8513 /* DialogPresenterActions.swift in Sources */,
-				C00B58FCADEA882A76465278 /* GetAttestationsThunk.swift in Sources */,
+				C00B58FCADEA882A76465278 /* GetAttestations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1249,7 +1249,7 @@
 				C00B52E1B28440BB32322784 /* DialogPresenterReducer.swift in Sources */,
 				C00B50288844174B2DCC9AD6 /* DialogPresenterActions.swift in Sources */,
 				C00B5370FDA0454E818FE2EB /* DialogPresenterReducerSpec.swift in Sources */,
-				C00B521DE886A27DE2569C8B /* GetAttestationsThunk.swift in Sources */,
+				C00B521DE886A27DE2569C8B /* GetAttestations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
