@@ -20,10 +20,3 @@ struct AccountActions {
 private struct AccountsResult: Codable {
     let result: [Address]
 }
-
-private extension Encodable {
-    var json: String {
-        let data = try? JSONEncoder().encode(self)
-        return String(data: data!, encoding: .utf8)!
-    }
-}
