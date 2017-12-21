@@ -25,6 +25,12 @@ func attestationsReducer(action: Action, state: AttestationsState?) -> Attestati
     case let action as AttestationActions.Fulfilled:
         state.open[action.nonce]?.status = .fulfilled
         state.open[action.nonce]?.idToken = action.idToken
+    case let action as AttestationActions.Provided:
+        var tokens = state.providedAttestations[action.channel] ?? [action.idToken]
+        if tokens.index(of: action.idToken) == nil {
+            tokens.append(action.idToken)
+        }
+        state.providedAttestations[action.channel] = tokens
     default:
         break
     }
