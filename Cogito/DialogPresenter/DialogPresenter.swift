@@ -63,6 +63,7 @@ class DialogPresenter: UIViewController, Connectable {
     }
 
     func handleAlertAction(action: AlertAction) {
+        self.alertWindow.isHidden = true
         action.handler?(action)
         self.actions.didDismissAlert()
     }

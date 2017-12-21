@@ -45,16 +45,27 @@ class DialogPresenterSpec: QuickSpec {
             expect(alert.actions.first?.style) == actions.first?.style
         }
 
-        it("triggers action when alert action handler is called") {
-            let alertAction = AlertAction(title: "test", style: .default)
+        context("when an alert action handler is called") {
             var actionTriggered = false
-            viewController.actions = DialogPresenter.Actions(didDismissAlert: {
-                actionTriggered = true
-            })
-            viewController.handleAlertAction(action:alertAction)
-            expect(actionTriggered).to(beTrue())
-        }
 
+            beforeEach {
+                windowSpy.isHidden = false
+                let alertAction = AlertAction(title: "test", style: .default)
+                viewController.actions = DialogPresenter.Actions(didDismissAlert: {
+                    actionTriggered = true
+                })
+                actionTriggered = false
+                viewController.handleAlertAction(action:alertAction)
+            }
+
+            it("triggers action when alert action handler is called") {
+                expect(actionTriggered).to(beTrue())
+            }
+
+            it("hides the window when an alert action handler is called") {
+                expect(windowSpy.isHidden).to(beTrue())
+            }
+        }
         it("maps state to props") {
             let actions = [AlertAction(title: "test", style: .default)]
             let requestedAlert = RequestedAlert(title: "test title",
