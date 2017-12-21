@@ -22,5 +22,5 @@ class StoreSpy: Store<AppState> {
 
     override func dispatch(_ action: Action) {
         actions.append(action)
-        }
+    }
 }
