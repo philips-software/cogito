@@ -38,7 +38,8 @@ class AttestationActionsSpec: QuickSpec {
                                                                  identity: identity,
                                                                  status: .started,
                                                                  error: "the error message",
-                                                                 idToken: nil)],
+                                                                 idToken: nil,
+                                                                 requestedOnChannel: nil)],
                         providedAttestations: [:])
                     )
                 })
@@ -56,7 +57,8 @@ class AttestationActionsSpec: QuickSpec {
                                                                  identity: identity,
                                                                  status: .started,
                                                                  error: nil,
-                                                                 idToken: nil)],
+                                                                 idToken: nil,
+                                                                 requestedOnChannel: nil)],
                         providedAttestations: [:])
                     )
                 })
@@ -79,7 +81,8 @@ class AttestationActionsSpec: QuickSpec {
                                                                  identity: identity,
                                                                  status: .started,
                                                                  error: nil,
-                                                                 idToken: nil)],
+                                                                 idToken: nil,
+                                                                 requestedOnChannel: nil)],
                         providedAttestations: [:])
                     )
                 })
@@ -97,7 +100,8 @@ class AttestationActionsSpec: QuickSpec {
                                                                  identity: identity,
                                                                  status: .started,
                                                                  error: nil,
-                                                                 idToken: nil)],
+                                                                 idToken: nil,
+                                                                 requestedOnChannel: nil)],
                         providedAttestations: [:])
                     )
                 })
@@ -109,14 +113,13 @@ class AttestationActionsSpec: QuickSpec {
 
         describe("getting attestations") {
             var store: RecordingStore!
+            let idToken = validToken
 
             beforeEach {
                 store = RecordingStore()
             }
 
             context("when requested attestation is present") {
-                let idToken = validToken
-
                 context("when this Telepath channel has been given the attestation before") {
                     it("only dispatches Telepath send message") {
                         let action = AttestationActions.GetAttestations(applicationName: "test",
@@ -134,7 +137,8 @@ class AttestationActionsSpec: QuickSpec {
                             ])
                         )
                         store.dispatch(action)
-                        let sendPending = store.actions[store.actions.count-2] as? TelepathActions.SendPending
+                        let sendPending = store.actions.filter { $0 is TelepathActions.SendPending }.first
+                            as? TelepathActions.SendPending
                         expect(sendPending?.message) == "{\"idToken\":\"\(idToken)\"}"
                     }
                 }
@@ -143,7 +147,12 @@ class AttestationActionsSpec: QuickSpec {
                     beforeEach {
                         var identity = Identity(description: "test", address: Address.testAddress)
                         identity.idTokens = [idToken]
-                        store.state = appState(diamond: DiamondState(facets: [identity]))
+                        let channel = TelepathChannelSpy()
+                        store.state = appState(
+                            diamond: DiamondState(facets: [identity]),
+                            telepath: TelepathState(channel: channel, connectionError: nil,
+                                                    receivedMessages: [], receiveError: nil)
+                        )
                         let action = AttestationActions.GetAttestations(applicationName: "test",
                                                                         oidcRealmUrl: validIssuer,
                                                                         subject: nil)
@@ -169,8 +178,11 @@ class AttestationActionsSpec: QuickSpec {
                                 return
                             }
                             approveAction.handler!(approveAction)
-                            let sendPending = store.actions.last as? TelepathActions.SendPending
+                            let sendPending = store.actions.filter { $0 is TelepathActions.SendPending }.first!
+                                as? TelepathActions.SendPending
                             expect(sendPending?.message) == "{\"idToken\":\"\(idToken)\"}"
+                            let attestationProvided = store.actions.contains { $0 is AttestationActions.Provided }
+                            expect(attestationProvided).to(beTrue())
                         }
                     }
 
@@ -187,7 +199,8 @@ class AttestationActionsSpec: QuickSpec {
                                 return
                             }
                             cancelAction.handler!(cancelAction)
-                            let sendPending = store.actions.last as? TelepathActions.SendPending
+                            let sendPending = store.actions.filter { $0 is TelepathActions.SendPending }.first
+                                as? TelepathActions.SendPending
                             expect(sendPending?.message) == "{\"error\":\"user denied access\"}"
                         }
                     }
@@ -195,9 +208,15 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             context("when requested attestation is not present") {
+                let channel = TelepathChannelSpy()
+                let identity = Identity(description: "test", address: Address.testAddress)
+
                 beforeEach {
-                    let identity = Identity(description: "test", address: Address.testAddress)
-                    store.state = appState(diamond: DiamondState(facets: [identity]))
+                    store.state = appState(
+                        diamond: DiamondState(facets: [identity]),
+                        telepath: TelepathState(channel: channel, connectionError: nil,
+                                                receivedMessages: [], receiveError: nil)
+                    )
                     let action = AttestationActions.GetAttestations(applicationName: "test",
                                                                     oidcRealmUrl: validIssuer,
                                                                     subject: nil)
@@ -213,34 +232,95 @@ class AttestationActionsSpec: QuickSpec {
                 context("when user confirms") {
                     it("starts attestation flow") {
                         let alert = store.actions.filter({ $0 is DialogPresenterActions.RequestAlert }).first!
-                        as! DialogPresenterActions.RequestAlert // swiftlint:disable:this force_cast
+                            as! DialogPresenterActions.RequestAlert // swiftlint:disable:this force_cast
                         let loginAction = alert.requestedAlert.actions.filter({ $0.style == .default }).first!
                         loginAction.handler!(loginAction)
-                        expect(store.actions.contains { $0 is AttestationActions.Pending }).to(beTrue())
+                        let pending = store.actions.filter { $0 is AttestationActions.Pending }.first!
+                            as! AttestationActions.Pending // swiftlint:disable:this force_cast
+                        expect(pending.requestedOnChannel) == channel.id
                     }
                 }
 
                 context("when user rejects") {
                     it("sends Telepath message containing 'rejected'") {
                         let alert = store.actions.filter({ $0 is DialogPresenterActions.RequestAlert }).first!
-                        as! DialogPresenterActions.RequestAlert // swiftlint:disable:this force_cast
+                            as! DialogPresenterActions.RequestAlert // swiftlint:disable:this force_cast
                         let cancelAction = alert.requestedAlert.actions.filter({ $0.style == .cancel }).first!
                         cancelAction.handler!(cancelAction)
-                        let sendPending = store.actions.last as? TelepathActions.SendPending
+                        let sendPending = store.actions[store.actions.count-2] as? TelepathActions.SendPending
                         expect(sendPending?.message) == "{\"error\":\"user cancelled login\"}"
                     }
                 }
 
                 context("when the attestation becomes available") {
-                    it("dispatches Telepath send message") {
+                    context("when channel has not changed") {
+                        it("dispatches Telepath send message") {
+                            let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
+                            store.state = appState(
+                                diamond: DiamondState(facets: [identity]),
+                                telepath: TelepathState(channel: channel, connectionError: nil,
+                                                        receivedMessages: [], receiveError: nil),
+                                attestations: AttestationsState(
+                                    open: [validNonce: AttestationInProgress(nonce: validNonce,
+                                                                             subject: validSubject,
+                                                                             identity: identity,
+                                                                             status: .started,
+                                                                             error: nil,
+                                                                             idToken: nil,
+                                                                             requestedOnChannel: channel.id)],
+                                    providedAttestations: [:])
+                            )
+                            store.dispatch(finishAction)
+                            let pending = store.actions.filter { $0 is TelepathActions.SendPending }.first
+                                as? TelepathActions.SendPending
+                            expect(pending?.message) == "{\"idToken\":\"\(idToken)\"}"
+                            let attestationProvided = store.actions.contains { $0 is AttestationActions.Provided }
+                            expect(attestationProvided).to(beTrue())
+                        }
+                    }
 
+                    context("when channel has changed") {
+                        it("does not dispatch Telepath send message") {
+                            let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
+                            store.state = appState(
+                                diamond: DiamondState(facets: [identity]),
+                                telepath: TelepathState(channel: channel, connectionError: nil,
+                                                        receivedMessages: [], receiveError: nil),
+                                attestations: AttestationsState(
+                                    open: [validNonce: AttestationInProgress(nonce: validNonce,
+                                                                             subject: validSubject,
+                                                                             identity: identity,
+                                                                             status: .started,
+                                                                             error: nil,
+                                                                             idToken: nil,
+                                                                             requestedOnChannel: "other")],
+                                    providedAttestations: [:])
+                            )
+                            store.dispatch(finishAction)
+                            let pending = store.actions.contains { $0 is TelepathActions.SendPending }
+                            expect(pending).to(beFalse())
+                        }
                     }
                 }
             }
 
             context("when there is no identity yet") {
-                it("sends 'improperly configured' or something") {
-
+                it("sends 'invalid configuration'") {
+                    let action = AttestationActions.GetAttestations(applicationName: "test",
+                                                                    oidcRealmUrl: validIssuer,
+                                                                    subject: nil)
+                    let channel = TelepathChannelSpy()
+                    store.state = appState(
+                        diamond: DiamondState(facets: []),
+                        telepath: TelepathState(channel: channel, connectionError: nil,
+                                                receivedMessages: [], receiveError: nil),
+                        attestations: AttestationsState(open: [:], providedAttestations: [
+                            channel.id: [idToken]
+                        ])
+                    )
+                    store.dispatch(action)
+                    let sendPending = store.actions[store.actions.count-2] as? TelepathActions.SendPending
+                    expect(sendPending?.message) == "{\"error\":\"invalid configuration\"}"
                 }
             }
 

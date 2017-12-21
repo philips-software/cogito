@@ -6,16 +6,21 @@ import JWTDecode
 
 // swiftlint:disable identifier_name
 
+import Telepath
+
 struct AttestationActions {
-    static func StartAttestation(for identity: Identity,
-                                 oidcRealmUrl: URL,
-                                 subject: String?) -> ThunkAction<AppState> {
+    static func StartAttestation(
+        for identity: Identity,
+        oidcRealmUrl: URL,
+        subject: String?,
+        requestedOnChannel channelId: ChannelID? = nil) -> ThunkAction<AppState> {
         return ThunkAction { dispatch, _ in
             let handler = OpenIDAttestationStarter(
                 oidcRealmUrl: oidcRealmUrl,
                 onSuccess: { nonce in dispatch(Started(nonce: nonce)) },
                 onError: { nonce, error in dispatch(StartRejected(nonce: nonce, error: error)) })
-            dispatch(Pending(identity: identity, nonce: handler.nonce, subject: subject))
+            dispatch(Pending(identity: identity, nonce: handler.nonce,
+                             subject: subject, requestedOnChannel: channelId))
             handler.run()
         }
     }
@@ -42,6 +47,10 @@ struct AttestationActions {
                 dispatch(DiamondActions.AddJWTAttestation(identity: pendingAttestation.identity,
                                                           idToken: idToken))
                 dispatch(Fulfilled(nonce: nonce, idToken: idToken))
+                if let currentChannel = state.telepath.channel,
+                   currentChannel.id == pendingAttestation.requestedOnChannel {
+                    GetAttestationsValid.send(idToken: idToken, dispatch: dispatch, state: state)
+                }
             } catch let e {
                 dispatch(FinishRejected(nonce: nil, error: e.localizedDescription))
             }
@@ -52,6 +61,7 @@ struct AttestationActions {
         let identity: Identity
         let nonce: String
         let subject: String?
+        let requestedOnChannel: ChannelID?
     }
 
     struct Started: Action {

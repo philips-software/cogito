@@ -15,8 +15,7 @@ struct GetAttestationsBuilder {
         }
         guard let state = getState(),
               let facet = state.diamond.selectedFacet() else {
-            // todo send not configured properly
-            return GetAttestationsInvalid(error: "todo", dispatch: dispatch)
+            return GetAttestationsInvalid(error: "invalid configuration", dispatch: dispatch)
         }
         return GetAttestationsValid(applicationName: applicationName,
                                     oidcRealmUrl: url,
@@ -82,9 +81,16 @@ struct GetAttestationsValid: GetAttestations {
         }
     }
 
-    func send(idToken: String) {
+    static func send(idToken: String, dispatch: DispatchFunction, state: AppState) {
+        precondition(state.telepath.channel != nil)
         let msg = AttestationsResult(idToken: idToken).json
-        self.dispatch(TelepathActions.Send(message: msg))
+        dispatch(TelepathActions.Send(message: msg))
+        let channelId = state.telepath.channel!.id
+        dispatch(AttestationActions.Provided(idToken: idToken, channel: channelId))
+    }
+
+    func send(idToken: String) {
+        GetAttestationsValid.send(idToken: idToken, dispatch: dispatch, state: state)
     }
 
     func showRequestAccessDialog(idToken: String) {
@@ -119,9 +125,12 @@ struct GetAttestationsValid: GetAttestations {
     }
 
     func startAttestation() {
+        precondition(state.telepath.channel != nil)
+        let channelId = state.telepath.channel!.id
         self.dispatch(AttestationActions.StartAttestation(for: self.facet,
                                                           oidcRealmUrl: self.oidcRealmUrl,
-                                                          subject: self.subject))
+                                                          subject: self.subject,
+                                                          requestedOnChannel: channelId))
     }
 
     private static func alreadyProvided(idToken: String, state: AppState) -> Bool {
@@ -133,7 +142,7 @@ struct GetAttestationsValid: GetAttestations {
     }
 }
 
-private struct AttestationsResult: Codable {
+struct AttestationsResult: Codable {
     let idToken: String?
     let error: String?
 
