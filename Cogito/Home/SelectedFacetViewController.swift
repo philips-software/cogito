@@ -34,7 +34,9 @@ class SelectedFacetViewController: UIViewController, Connectable {
             let hasAttestations = (self.props.selectedFacet?.idTokens.count ?? 0) > 0
             let description = text.font(font)
             if hasAttestations {
-                let icon = String.fontAwesomeIcon(name: .sunO).font(Font.fontAwesome(ofSize: size/2))
+                let icon = String.fontAwesomeIcon(name: .sunO)
+                    .font(Font.fontAwesome(ofSize: size/2))
+                    .color(UIColor(red: 0.1, green: 0.8, blue: 0.1, alpha: 1))
                 return description + "  ".font(font) + icon
             } else {
                 return description
