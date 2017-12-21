@@ -17,7 +17,7 @@ class CreateIdentityReducerSpec: QuickSpec {
                                             pending: true,
                                             newAccount: GethAccount(),
                                             error: "some error")
-            let action = CreateIdentityActions.Reset()
+            let action = CreateIdentityActions.ResetForm()
             let nextState = createIdentityReducer(action: action, state: state)
             expect(nextState.description) == ""
             expect(nextState.pending).to(beFalse())

@@ -102,7 +102,7 @@ private func mapStateToProps(state: AppState) -> DebugViewController.Props {
 
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> DebugViewController.Actions {
     return DebugViewController.Actions(
-        resetCreateIdentity: { dispatch(CreateIdentityActions.Reset()) },
+        resetCreateIdentity: { dispatch(CreateIdentityActions.ResetForm()) },
         resetAppState: { dispatch(ResetApp()) },
         startOpenIdConnectAttestation: { identity, url, subject in
             dispatch(AttestationActions.StartAttestation(for: identity, oidcRealmUrl: url, subject:subject))
