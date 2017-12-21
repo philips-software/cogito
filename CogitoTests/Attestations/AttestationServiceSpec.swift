@@ -8,7 +8,7 @@ class AttestationServiceSpec: QuickSpec {
     override func spec() {
         let realmUrl = "https://iam-blockchain-dev.cogito.mobi/auth/realms/master"
         let attestationsRequest =
-            "{\"method\":\"attestations\",\"realmUrl\":\"\(realmUrl)\"}"
+            "{\"method\":\"attestations\",\"app\":\"test\",\"realmUrl\":\"\(realmUrl)\"}"
 
         var service: AttestationService!
         var store: StoreSpy!
