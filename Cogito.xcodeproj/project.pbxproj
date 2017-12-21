@@ -118,6 +118,7 @@
 		02D0C0DB1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */; };
 		02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */; };
 		02D0C0E11F8B73B20001223E /* SelectedFacetViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0E01F8B73B20001223E /* SelectedFacetViewControllerSpec.swift */; };
+		02E678E21FEC056D00C634E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027603F51F6ACD1600788B0A /* Assets.xcassets */; };
 		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
 		02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792321F6FFBF700DC5973 /* AppReducer.swift */; };
 		02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792341F6FFBFF00DC5973 /* AppStore.swift */; };
@@ -884,6 +885,7 @@
 				028F4EF61F7CF8330015C4AF /* Debug.storyboard in Resources */,
 				022621351FAB2B2500692126 /* IdentityManager.storyboard in Resources */,
 				02A15AF51F864F4B00A94163 /* Home.storyboard in Resources */,
+				02E678E21FEC056D00C634E2 /* Assets.xcassets in Resources */,
 				02D0C0D91F8B59E80001223E /* InitialSetup.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
