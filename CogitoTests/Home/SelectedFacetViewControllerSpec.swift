@@ -70,7 +70,7 @@ class SelectedFacetViewControllerSpec: QuickSpec {
             }
 
             it("maps resetCreateIdentity") {
-                let dispatchRecorder = DispatchRecorder<CreateIdentityActions.Reset>()
+                let dispatchRecorder = DispatchRecorder<CreateIdentityActions.ResetForm>()
                 testStore.dispatchFunction = dispatchRecorder.dispatch
                 viewController.actions.resetCreateIdentity()
                 expect(dispatchRecorder.count) == 1

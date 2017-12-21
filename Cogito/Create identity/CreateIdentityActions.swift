@@ -10,7 +10,7 @@ import Geth
 // swiftlint:disable identifier_name
 
 struct CreateIdentityActions {
-    struct Reset: Action {}
+    struct ResetForm: Action {}
 
     struct SetDescription: Action {
         let description: String

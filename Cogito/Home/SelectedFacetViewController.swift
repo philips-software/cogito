@@ -145,6 +145,6 @@ private func mapStateToProps(state: AppState) -> SelectedFacetViewController.Pro
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction)
     -> SelectedFacetViewController.Actions {
     return SelectedFacetViewController.Actions(
-        resetCreateIdentity: { dispatch(CreateIdentityActions.Reset()) }
+        resetCreateIdentity: { dispatch(CreateIdentityActions.ResetForm()) }
     )
 }

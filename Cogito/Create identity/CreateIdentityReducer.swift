@@ -7,7 +7,7 @@ func createIdentityReducer(action: Action, state: CreateIdentityState?) -> Creat
     switch action {
     case let action as CreateIdentityActions.SetDescription:
         state.description = action.description
-    case _ as CreateIdentityActions.Reset:
+    case _ as CreateIdentityActions.ResetForm:
         state.description = ""
         state.pending = false
         state.newAccount = nil
