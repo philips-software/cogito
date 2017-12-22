@@ -4,7 +4,7 @@ import ReSwift
 
 class TransactionSigningService: TelepathService {
     init(store: Store<AppState>) {
-        super.init(store: store, method: "signTransaction")
+        super.init(store: store, method: "sign")
     }
 
     override func onMessage(_ message: String) {
