@@ -6,7 +6,7 @@ import ReSwiftThunk
 
 class TransactionSigningServiceSpec: QuickSpec {
     override func spec() {
-        let signRequest = "{\"method\":\"signTransaction\",\"params\":{}}"
+        let signRequest = "{\"method\":\"sign\",\"params\":{}}"
 
         var service: TransactionSigningService!
         var store: StoreSpy!
