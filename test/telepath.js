@@ -3,6 +3,7 @@ const chai = require('chai')
 const expect = chai.expect
 const td = require('testdouble')
 const base64url = require('base64url')
+const JsonRpcChannel = require('../lib/json-rpc-channel')
 const { random, keySize } = td.replace('../lib/crypto')
 const Telepath = require('../lib/telepath')
 
@@ -33,16 +34,20 @@ describe('Telepath', function () {
       channel = await telepath.createChannel()
     })
 
+    it('returns a JSON-RPC channel', function () {
+      expect(channel).to.be.an.instanceOf(JsonRpcChannel)
+    })
+
     it('uses the queuing service', function () {
-      expect(channel.queuing).to.equal(queuing)
+      expect(channel.channel.queuing).to.equal(queuing)
     })
 
     it('has a random id', function () {
-      expect(channel.id).to.equal(base64url.encode(randomId))
+      expect(channel.channel.id).to.equal(base64url.encode(randomId))
     })
 
     it('has a random key', function () {
-      expect(channel.key).to.equal(randomKey)
+      expect(channel.channel.key).to.equal(randomKey)
     })
   })
 })

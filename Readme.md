@@ -40,19 +40,17 @@ functionality for displaying QR codes, you can use a QR code component such as
 const connectUrl = channel.createConnectUrl(appBaseUrl)
 ```
 
-Sending messages:
+Messages are exchanged using [JSON-RPC][3]:
 
 ```javascript
-await channel.send('a message')
+const request = { jsonrpc: '2.0', method:'test', id: 1 }
+const response = await channel.send(request)
 ```
 
-Receiving messages. The `receive` method returns a promise. The queuing service
-will be polled for at least 10 minutes. If no message is available after this
-time it will return `null`.
-
-```javascript
-const receivedMessage = await channel.receive()
-```
+The `send` method returns a promise. The queuing service will be polled for a
+response for at least 10 minutes. If no response is available after this time it
+will return `null`.
 
 [1]: https://gitlab.ta.philips.com/blockchain-lab/telepath
 [2]: https://www.npmjs.com/package/qrcode.react
+[3]: http://www.jsonrpc.org/specification
