@@ -62,4 +62,11 @@ describe('JSON RPC Channel', function () {
     td.when(channel.receive()).thenResolve(null) // timeout
     await expect(jsonrpc.send(request)).to.be.rejected()
   })
+
+  it('can create a connect url', function () {
+    const baseUrl = 'https://example.com'
+    const url = 'https://example.com#connect'
+    td.when(channel.createConnectUrl(baseUrl)).thenReturn(url)
+    expect(jsonrpc.createConnectUrl(baseUrl)).to.equal(url)
+  })
 })
