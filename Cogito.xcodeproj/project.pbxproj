@@ -28,6 +28,9 @@
 		022621351FAB2B2500692126 /* IdentityManager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 022621281FAB1E1300692126 /* IdentityManager.storyboard */; };
 		0230F9471FA1E5F3006A36FC /* LaunchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F9461FA1E5F3006A36FC /* LaunchActions.swift */; };
 		0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */; };
+		026779AD2007B47E00C2D45C /* TransactionSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AC2007B47E00C2D45C /* TransactionSigner.swift */; };
+		026779AE2007B47E00C2D45C /* TransactionSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AC2007B47E00C2D45C /* TransactionSigner.swift */; };
+		026779B02007B49A00C2D45C /* TransactionSignerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */; };
 		0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
 		0270D7141F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
 		0270D7161F9F146A00CC9038 /* ExplanationViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */; };
@@ -231,6 +234,8 @@
 		022621321FAB202400692126 /* FacetDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		0230F9461FA1E5F3006A36FC /* LaunchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchActions.swift; sourceTree = "<group>"; };
 		0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchActionsSpec.swift; sourceTree = "<group>"; };
+		026779AC2007B47E00C2D45C /* TransactionSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigner.swift; sourceTree = "<group>"; };
+		026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSignerSpec.swift; sourceTree = "<group>"; };
 		0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
 		0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewControllerSpec.swift; sourceTree = "<group>"; };
 		0270D7191F9F58CA00CC9038 /* AttestationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActions.swift; sourceTree = "<group>"; };
@@ -378,6 +383,7 @@
 				0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */,
 				5CC4D2CA1FE7F724002F2450 /* TransactionSigningService.swift */,
 				5CC4D2CD1FE801DE002F2450 /* TransactionSigningActions.swift */,
+				026779AC2007B47E00C2D45C /* TransactionSigner.swift */,
 			);
 			path = "Sign transaction";
 			sourceTree = "<group>";
@@ -387,6 +393,7 @@
 			children = (
 				0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */,
 				5CC4D2C81FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift */,
+				026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */,
 			);
 			path = "Sign transaction";
 			sourceTree = "<group>";
@@ -1099,6 +1106,7 @@
 				0298D43A1F7A46A30070998D /* Node.swift in Sources */,
 				5CC4D2CB1FE7F724002F2450 /* TransactionSigningService.swift in Sources */,
 				5C8CFD3B200798DD00D383C0 /* JsonRpcService.swift in Sources */,
+				026779AD2007B47E00C2D45C /* TransactionSigner.swift in Sources */,
 				022621331FAB202400692126 /* FacetDetailsTableViewCell.swift in Sources */,
 				028F4F001F7D3B640015C4AF /* CreateIdentityState.swift in Sources */,
 				022621301FAB1FF100692126 /* FacetTableViewCell.swift in Sources */,
@@ -1163,6 +1171,7 @@
 			files = (
 				02BE32CE1F7A5C55006C7287 /* SyncProgressReporterSpec.swift in Sources */,
 				028F4EF51F7CF7EB0015C4AF /* DebugViewControllerSpec.swift in Sources */,
+				026779B02007B49A00C2D45C /* TransactionSignerSpec.swift in Sources */,
 				0270D7221F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift in Sources */,
 				02C305471F87596200351B4A /* DebugViewController.swift in Sources */,
 				029245151F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
@@ -1197,6 +1206,7 @@
 				5C8CFD39200791B100D383C0 /* JsonRpcServiceSpec.swift in Sources */,
 				5CC4D2D51FE81815002F2450 /* JSONDecodeFromString.swift in Sources */,
 				02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */,
+				026779AE2007B47E00C2D45C /* TransactionSigner.swift in Sources */,
 				0298D42C1F7A43C90070998D /* AppState.swift in Sources */,
 				02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */,
 				0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */,
