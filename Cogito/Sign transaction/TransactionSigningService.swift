@@ -8,6 +8,6 @@ class TransactionSigningService: TelepathService {
     }
 
     override func onMessage(_ message: String) {
-        store.dispatch(TransactionSigningActions.Sign())
+        store.dispatch(TransactionSigningActions.Sign(tx: [:])) // todo: take from message
     }
 }
