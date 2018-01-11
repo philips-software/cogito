@@ -35,14 +35,7 @@ class TelepathService: StoreSubscriber {
 
 private extension String {
     func isRequest(method: String) -> Bool {
-        let request = try? JSONDecoder().decode(JSONRequest.self, from: self)
+        let request = try? JSONDecoder().decode(JsonRpcRequest.self, from: self)
         return request?.method == method
-    }
-}
-
-private struct JSONRequest: Codable {
-    let method: String
-    enum CodingKeys: String, CodingKey {
-        case method
     }
 }
