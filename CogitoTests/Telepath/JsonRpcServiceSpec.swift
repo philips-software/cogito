@@ -22,6 +22,21 @@ class JsonRpcServiceSpec: QuickSpec {
                 service.onMessage(message)
                 expect(service.latestRequest?.method) == "test"
             }
+
+            it("parses a numeric id") {
+                service.onMessage(message)
+                expect(service.latestRequest?.id?.number) == 42
+            }
+
+            it("parses a string id") {
+                let message = "{" +
+                    "\"jsonrpc\":\"2.0\"," +
+                    "\"id\":\"test id\"," +
+                    "\"method\":\"test\"" +
+                "}"
+                service.onMessage(message)
+                expect(service.latestRequest?.id?.string) == "test id"
+            }
         }
     }
 }
