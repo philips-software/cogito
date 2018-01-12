@@ -20,3 +20,9 @@ extension JsonRpcRequest {
         self.init(id: id, method: method)
     }
 }
+
+extension JsonRpcRequest: Equatable {
+    static func == (lhs: JsonRpcRequest, rhs: JsonRpcRequest) -> Bool {
+        return lhs.id == rhs.id && lhs.method == rhs.method
+    }
+}
