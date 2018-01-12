@@ -2,10 +2,13 @@
 
 import SwiftyJSON
 
+typealias JsonRpcId = JSON
+typealias JsonRpcParams = JSON
+
 struct JsonRpcRequest {
-    let id: JSON
+    let id: JsonRpcId
     let method: String
-    let params: JSON
+    let params: JsonRpcParams
 }
 
 extension JsonRpcRequest {

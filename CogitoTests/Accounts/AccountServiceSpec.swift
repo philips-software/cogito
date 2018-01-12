@@ -3,14 +3,13 @@
 import Quick
 import Nimble
 import ReSwiftThunk
-import SwiftyJSON
 
 class AccountServiceSpec: QuickSpec {
     override func spec() {
         let accountRequest = JsonRpcRequest(
-            id: JSON(),
+            id: JsonRpcId(1),
             method: "accounts",
-            params: JSON()
+            params: JsonRpcParams()
         )
 
         var service: AccountService!

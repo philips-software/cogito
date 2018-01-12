@@ -3,15 +3,14 @@
 import Quick
 import Nimble
 import ReSwiftThunk
-import SwiftyJSON
 
 class AttestationServiceSpec: QuickSpec {
     override func spec() {
         let realmUrl = "https://iam-blockchain-dev.cogito.mobi/auth/realms/master"
         let attestationsRequest = JsonRpcRequest(
-            id: JSON(),
+            id: JsonRpcId(1),
             method: "attestations",
-            params: JSON([
+            params: JsonRpcParams([
                 "app": "test",
                 "realmUrl": realmUrl
             ])
