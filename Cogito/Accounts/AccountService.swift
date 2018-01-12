@@ -2,12 +2,12 @@
 
 import ReSwift
 
-class AccountService: TelepathService {
+class AccountService: JsonRpcService {
     init(store: Store<AppState>) {
         super.init(store: store, method: "accounts")
     }
 
-    override func onMessage(_ message: String) {
+    override func onRequest(_ request: JsonRpcRequest) {
         store.dispatch(AccountActions.GetAccounts())
     }
 }
