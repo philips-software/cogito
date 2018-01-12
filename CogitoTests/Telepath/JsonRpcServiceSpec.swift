@@ -11,32 +11,14 @@ class JsonRpcServiceSpec: QuickSpec {
             service = TestableJsonRpcService(store: StoreSpy(), method: "test")
         }
 
-        describe("parsing of incoming JSON RPC requests") {
+        it("parses an incoming JSON RPC request") {
             let message = "{" +
                 "\"jsonrpc\":\"2.0\"," +
                 "\"id\":42," +
                 "\"method\":\"test\"" +
             "}"
-
-            it("parses the method") {
-                service.onMessage(message)
-                expect(service.latestRequest?.method) == "test"
-            }
-
-            it("parses a numeric id") {
-                service.onMessage(message)
-                expect(service.latestRequest?.id.number) == 42
-            }
-
-            it("parses a string id") {
-                let message = "{" +
-                    "\"jsonrpc\":\"2.0\"," +
-                    "\"id\":\"test id\"," +
-                    "\"method\":\"test\"" +
-                "}"
-                service.onMessage(message)
-                expect(service.latestRequest?.id.string) == "test id"
-            }
+            service.onMessage(message)
+            expect(service.latestRequest) == JsonRpcRequest(parse: message)
         }
     }
 }
