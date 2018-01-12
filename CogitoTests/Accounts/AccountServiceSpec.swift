@@ -3,10 +3,15 @@
 import Quick
 import Nimble
 import ReSwiftThunk
+import SwiftyJSON
 
 class AccountServiceSpec: QuickSpec {
     override func spec() {
-        let accountRequest = "{\"method\":\"accounts\"}"
+        let accountRequest = JsonRpcRequest(
+            id: JSON(),
+            method: "accounts",
+            params: JSON()
+        )
 
         var service: AccountService!
         var store: StoreSpy!
@@ -18,7 +23,7 @@ class AccountServiceSpec: QuickSpec {
 
         describe("when an account request comes in") {
             beforeEach {
-                service.newState(state: [accountRequest])
+                service.onRequest(accountRequest)
             }
 
             it("dispatches the GetAccounts action") {
