@@ -31,6 +31,7 @@ PODS:
   - RxSwift (4.0.0)
   - Sodium (0.6)
   - SwiftLint (0.21.0)
+  - SwiftyJSON (4.0.0)
   - Telepath (0.1.0):
     - Sodium (~> 0.5)
   - URITemplate (2.0.2)
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - RxDataSources (~> 3.0)
   - RxSwift (~> 4.0)
   - SwiftLint (= 0.21.0)
+  - SwiftyJSON (~> 4.0)
   - Telepath (from `https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git`)
   - URITemplate
 
@@ -111,9 +113,10 @@ SPEC CHECKSUMS:
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   Sodium: bf524b0a3d5ad6870dcf343205cca7e659c15ad5
   SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   Telepath: 14b8a4ad40df8c1f25ddc49ae7e1db3f1c427b7e
   URITemplate: d822aaa2f8ec9dcffffd13baa58bf9ee007e96cb
 
-PODFILE CHECKSUM: 7fdf87dd0d8fe6755da330256ad789cc3270fceb
+PODFILE CHECKSUM: 796fd3344144e928cee7ac04bb86e62e2cd5d770
 
 COCOAPODS: 1.3.1

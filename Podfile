@@ -11,6 +11,7 @@ target 'Cogito' do
   pod 'KeychainAccess', '~> 3.1'
   pod 'QRCodeReader.swift', '~> 8.0'
   pod 'Telepath', :git => 'https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git'
+  pod 'SwiftyJSON', '~> 4.0'
   pod 'JWTDecode', '~> 2.1'
   pod 'FontAwesome.swift', '~> 1.3', :inhibit_warnings => true
   pod 'RichString', '~> 2.0', :inhibit_warnings => true
