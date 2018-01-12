@@ -35,7 +35,7 @@ class TelepathService: StoreSubscriber {
 
 private extension String {
     func isRequest(method: String) -> Bool {
-        let request = try? JSONDecoder().decode(JsonRpcRequest.self, from: self)
+        let request = JsonRpcRequest(parse: self)
         return request?.method == method
     }
 }
