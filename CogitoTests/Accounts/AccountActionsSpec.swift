@@ -2,6 +2,7 @@
 
 import Quick
 import Nimble
+import SwiftyJSON
 
 class AccountActionsSpec: QuickSpec {
     override func spec() {
@@ -20,9 +21,10 @@ class AccountActionsSpec: QuickSpec {
             }
 
             it("sends out its Ethereum address via Telepath") {
-                store.dispatch(AccountActions.GetAccounts())
+                store.dispatch(AccountActions.GetAccounts(requestId: JsonRpcId(1)))
                 let send = store.actions.last as? TelepathActions.SendPending
-                expect(send?.message) == "{\"result\":[\"\(address)\"]}"
+                let response = JSON(parseJSON: send!.message)
+                expect(response["result"]) == JSON(["\(address)"])
             }
         }
 
@@ -32,9 +34,10 @@ class AccountActionsSpec: QuickSpec {
             }
 
             it("returns an empty list") {
-                store.dispatch(AccountActions.GetAccounts())
+                store.dispatch(AccountActions.GetAccounts(requestId: JsonRpcId(1)))
                 let send = store.actions.last as? TelepathActions.SendPending
-                expect(send?.message) == "{\"result\":[]}"
+                let response = JSON(parseJSON: send!.message)
+                expect(response["result"]) == JSON([])
             }
         }
     }
