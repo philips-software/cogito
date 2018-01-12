@@ -2,12 +2,12 @@
 
 import ReSwift
 
-class TransactionSigningService: TelepathService {
+class TransactionSigningService: JsonRpcService {
     init(store: Store<AppState>) {
         super.init(store: store, method: "sign")
     }
 
-    override func onMessage(_ message: String) {
-        store.dispatch(TransactionSigningActions.Sign(tx: [:])) // todo: take from message
+    override func onRequest(_ request: JsonRpcRequest) {
+        store.dispatch(TransactionSigningActions.Sign(tx: [:])) // todo: take from request
     }
 }

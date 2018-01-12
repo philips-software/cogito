@@ -3,10 +3,15 @@
 import Quick
 import Nimble
 import ReSwiftThunk
+import SwiftyJSON
 
 class TransactionSigningServiceSpec: QuickSpec {
     override func spec() {
-        let signRequest = "{\"method\":\"sign\",\"params\":{}}"
+        let signRequest = JsonRpcRequest(
+            id: JSON(),
+            method: "sign",
+            params: JSON()
+        )
 
         var service: TransactionSigningService!
         var store: StoreSpy!
@@ -18,7 +23,7 @@ class TransactionSigningServiceSpec: QuickSpec {
 
         context("when a sign requests comes in") {
             beforeEach {
-                service.newState(state: [signRequest])
+                service.onRequest(signRequest)
             }
 
             it("dispatches the SignTransaction action") {
