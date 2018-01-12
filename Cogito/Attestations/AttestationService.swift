@@ -2,26 +2,24 @@
 
 import ReSwift
 
-class AttestationService: TelepathService {
+class AttestationService: JsonRpcService {
 
     init(store: Store<AppState>) {
         super.init(store: store, method: "attestations")
     }
 
-    override func onMessage(_ message: String) {
-        if let request = try? JSONDecoder().decode(JSONRequest.self, from: message) {
-            let appName = request.app
-            let subject: String? = nil // todo take from request (if present)
-            let realmUrl = request.realmUrl
-            store.dispatch(AttestationActions.GetAttestations(applicationName: appName,
-                                                              oidcRealmUrl: realmUrl,
-                                                              subject: subject))
+    override func onRequest(_ request: JsonRpcRequest) {
+        if
+            let appName = request.params["app"].string,
+            let realmUrl = request.params["realmUrl"].string
+        {
+            let subject = request.params["subject"].string
+            let action = AttestationActions.GetAttestations(
+                applicationName: appName,
+                oidcRealmUrl: realmUrl,
+                subject: subject
+            )
+            store.dispatch(action)
         }
     }
-}
-
-private struct JSONRequest: Codable {
-    let method: String
-    let app: String
-    let realmUrl: String
 }

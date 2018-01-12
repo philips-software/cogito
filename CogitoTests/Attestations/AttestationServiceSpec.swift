@@ -3,12 +3,19 @@
 import Quick
 import Nimble
 import ReSwiftThunk
+import SwiftyJSON
 
 class AttestationServiceSpec: QuickSpec {
     override func spec() {
         let realmUrl = "https://iam-blockchain-dev.cogito.mobi/auth/realms/master"
-        let attestationsRequest =
-            "{\"method\":\"attestations\",\"app\":\"test\",\"realmUrl\":\"\(realmUrl)\"}"
+        let attestationsRequest = JsonRpcRequest(
+            id: JSON(),
+            method: "attestations",
+            params: JSON([
+                "app": "test",
+                "realmUrl": realmUrl
+            ])
+        )
 
         var service: AttestationService!
         var store: StoreSpy!
@@ -20,7 +27,7 @@ class AttestationServiceSpec: QuickSpec {
 
         describe("when an attestations request comes in") {
             beforeEach {
-                service.newState(state: [attestationsRequest])
+                service.onRequest(attestationsRequest)
             }
 
             it("dispatches the GetAttestations action") {
