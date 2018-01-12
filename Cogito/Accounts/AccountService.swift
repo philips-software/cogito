@@ -8,6 +8,6 @@ class AccountService: JsonRpcService {
     }
 
     override func onRequest(_ request: JsonRpcRequest) {
-        store.dispatch(AccountActions.GetAccounts())
+        store.dispatch(AccountActions.GetAccounts(requestId: request.id))
     }
 }
