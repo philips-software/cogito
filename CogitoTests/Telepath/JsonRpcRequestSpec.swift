@@ -8,7 +8,11 @@ class JsonRpcRequestSpec: QuickSpec {
         let json = "{" +
             "\"jsonrpc\":\"2.0\"," +
             "\"id\":42," +
-            "\"method\":\"test\"" +
+            "\"method\":\"test\"," +
+            "\"params\":{" +
+                "\"a\": 1," +
+                "\"b\": 2" +
+            "}" +
         "}"
 
         it("parses the method") {
@@ -16,19 +20,15 @@ class JsonRpcRequestSpec: QuickSpec {
             expect(request?.method) == "test"
         }
 
-        it("parses a numeric id") {
+        it("parses an id") {
             let request = JsonRpcRequest(parse: json)
             expect(request?.id.number) == 42
         }
 
-        it("parses a string id") {
-            let json = "{" +
-                "\"jsonrpc\":\"2.0\"," +
-                "\"id\":\"test id\"," +
-                "\"method\":\"test\"" +
-            "}"
+        it("parses parameters") {
             let request = JsonRpcRequest(parse: json)
-            expect(request?.id.string) == "test id"
+            expect(request?.params["a"].number) == 1
+            expect(request?.params["b"].number) == 2
         }
     }
 }

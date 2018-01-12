@@ -5,6 +5,7 @@ import SwiftyJSON
 struct JsonRpcRequest {
     let id: JSON
     let method: String
+    let params: JSON
 }
 
 extension JsonRpcRequest {
@@ -16,13 +17,17 @@ extension JsonRpcRequest {
         }
 
         let id = json["id"]
+        let params = json["params"]
 
-        self.init(id: id, method: method)
+        self.init(id: id, method: method, params: params)
     }
 }
 
 extension JsonRpcRequest: Equatable {
     static func == (lhs: JsonRpcRequest, rhs: JsonRpcRequest) -> Bool {
-        return lhs.id == rhs.id && lhs.method == rhs.method
+        return
+            lhs.id == rhs.id &&
+            lhs.method == rhs.method &&
+            lhs.params == rhs.params
     }
 }
