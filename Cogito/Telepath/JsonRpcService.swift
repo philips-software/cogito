@@ -4,7 +4,7 @@ import Foundation
 
 class JsonRpcService: TelepathService {
     override func onMessage(_ message: String) {
-        if let request = try? JSONDecoder().decode(JsonRpcRequest.self, from: message) {
+        if let request = JsonRpcRequest(parse: message) {
             onRequest(request)
         }
     }
