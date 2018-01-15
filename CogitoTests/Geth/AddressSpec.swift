@@ -13,6 +13,17 @@ class AddressSpec: QuickSpec {
             expect(address.description) == hex
         }
 
+        it("can be created from a hex string") {
+            let hex = "0x1111111111111111111111111111111111111111"
+            let address = Address(fromHex: hex)
+            expect(address?.description) == hex
+        }
+
+        it("cannot be created from an invalid hax string") {
+            let invalidHex = "0x1"
+            expect(Address(fromHex: invalidHex)).to(beNil())
+        }
+
         it("can return equivalent GethAddress") {
             let address = Address.testAddress1
             let gethAddress = address.toGethAddress()
@@ -23,19 +34,14 @@ class AddressSpec: QuickSpec {
 
 extension Address {
     static var testAddress: Address {
-        return testAddress(hex: "0x0000000000000000000000000000000000000000")
+        return Address(fromHex: "0x0000000000000000000000000000000000000000")!
     }
 
     static var testAddress1: Address {
-        return testAddress(hex: "0x1111111111111111111111111111111111111111")
+        return Address(fromHex: "0x1111111111111111111111111111111111111111")!
     }
 
     static var testAddress2: Address {
-        return testAddress(hex: "0x2222222222222222222222222222222222222222")
-    }
-
-    static func testAddress(hex: String) -> Address {
-        let gethAddress = GethAddress(fromHex: hex)!
-        return Address(from: gethAddress)
+        return Address(fromHex: "0x2222222222222222222222222222222222222222")!
     }
 }
