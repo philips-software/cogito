@@ -11,11 +11,11 @@ struct GetAttestationsBuilder {
 
     func build() -> GetAttestations {
         guard let url = URL(string: oidcRealmUrlString) else {
-            return GetAttestationsInvalid(error: "invalid realm URL", dispatch: dispatch)
+            return GetAttestationsInvalid(error: .invalidRealmUrl, dispatch: dispatch)
         }
         guard let state = getState(),
               let facet = state.diamond.selectedFacet() else {
-            return GetAttestationsInvalid(error: "invalid configuration", dispatch: dispatch)
+            return GetAttestationsInvalid(error: .invalidConfiguration, dispatch: dispatch)
         }
         return GetAttestationsValid(applicationName: applicationName,
                                     oidcRealmUrl: url,
@@ -32,18 +32,41 @@ protocol GetAttestations {
 }
 
 extension GetAttestations {
-    func send(error: String) {
-        let msg = AttestationsResult(error: error).json
-        dispatch(TelepathActions.Send(message: msg))
+    func send(id: JsonRpcId = JsonRpcId()/*TODO*/, error: AttestationError) {
+        dispatch(TelepathActions.Send(
+            id: id,
+            errorCode: error.code,
+            errorMessage: error.message
+        ))
     }
 }
 
 struct GetAttestationsInvalid: GetAttestations {
-    let error: String
+    let error: AttestationError
     let dispatch: DispatchFunction
 
     func execute() {
         send(error: error)
+    }
+}
+
+enum AttestationError: Int, Error {
+    case invalidRealmUrl = 33297600
+    case invalidConfiguration
+    case userDeniedAccess
+    case userCancelledLogin
+
+    var code: Int {
+        return self.rawValue
+    }
+
+    var message: String {
+        switch self {
+        case .invalidRealmUrl: return "invalid realm URL"
+        case .invalidConfiguration: return "invalid configuration"
+        case .userDeniedAccess: return "user denied access"
+        case .userCancelledLogin: return "user cancelled login"
+        }
     }
 }
 
@@ -99,7 +122,7 @@ struct GetAttestationsValid: GetAttestations {
                                             "from \(self.oidcRealmUrl.absoluteString)",
                                    actions: [
                                        AlertAction(title: "Deny", style: .cancel) { _ in
-                                           self.send(error: "user denied access")
+                                           self.send(error: .userDeniedAccess)
                                        },
                                        AlertAction(title: "Approve", style: .default) { _ in
                                            self.send(idToken: idToken)
@@ -115,7 +138,7 @@ struct GetAttestationsValid: GetAttestations {
                                             // ^^^^^^^^^^^^ todo: use webfinger
                                    actions: [
                                        AlertAction(title: "Cancel", style: .cancel) { _ in
-                                           self.send(error: "user cancelled login")
+                                           self.send(error: .userCancelledLogin)
                                        },
                                        AlertAction(title: "Login", style: .default) { _ in
                                            self.startAttestation()
@@ -144,10 +167,12 @@ struct GetAttestationsValid: GetAttestations {
 
 struct AttestationsResult: Codable {
     let idToken: String?
-    let error: String?
+    let errorCode: Int?
+    let errorMessage: String?
 
-    init(idToken: String? = nil, error: String? = nil) {
+    init(idToken: String? = nil, errorCode: Int? = nil, errorMessage: String? = nil) {
         self.idToken = idToken
-        self.error = error
+        self.errorCode = errorCode
+        self.errorMessage = errorMessage
     }
 }
