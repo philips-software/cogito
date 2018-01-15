@@ -117,6 +117,7 @@ class AttestationActionsSpec: QuickSpec {
         }
 
         describe("getting attestations") {
+            let requestId = JsonRpcId("a request id")
             let idToken = validToken
             var store: RecordingStore!
             var identityWithAttestation: Identity!
@@ -143,9 +144,12 @@ class AttestationActionsSpec: QuickSpec {
                 identityWithoutAttestation = Identity(description: "test", address: Address.testAddress)
                 identityWithAttestation = Identity(description: "test", address: Address.testAddress)
                 identityWithAttestation.idTokens = [idToken]
-                getAttestationsAction = AttestationActions.GetAttestations(applicationName: "test",
-                                                                               oidcRealmUrl: validIssuer,
-                                                                               subject: nil)
+                getAttestationsAction = AttestationActions.GetAttestations(
+                    requestId: requestId,
+                    applicationName: "test",
+                    oidcRealmUrl: validIssuer,
+                    subject: nil
+                )
             }
 
             context("when requested attestation is present") {
@@ -309,16 +313,21 @@ class AttestationActionsSpec: QuickSpec {
                     store.dispatch(action)
                     let response = JSON(parseJSON: sendPendingAction()!.message)
                     expect(response["error"]["code"].int) == AttestationError.invalidConfiguration.code
+                    expect(response["id"]) == requestId
                 }
             }
 
             it("sends error when realm URL is invalid") {
-                let action = AttestationActions.GetAttestations(applicationName: "test",
-                                                                oidcRealmUrl: "invalid url",
-                                                                subject: nil)
+                let action = AttestationActions.GetAttestations(
+                    requestId: requestId,
+                    applicationName: "test",
+                    oidcRealmUrl: "invalid url",
+                    subject: nil
+                )
                 store.dispatch(action)
                 let response = JSON(parseJSON: sendPendingAction()!.message)
                 expect(response["error"]["code"].int) == AttestationError.invalidRealmUrl.code
+                expect(response["id"]) == requestId
             }
         }
     }

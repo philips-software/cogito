@@ -15,6 +15,7 @@ class AttestationService: JsonRpcService {
         {
             let subject = request.params["subject"].string
             let action = AttestationActions.GetAttestations(
+                requestId: request.id,
                 applicationName: appName,
                 oidcRealmUrl: realmUrl,
                 subject: subject
