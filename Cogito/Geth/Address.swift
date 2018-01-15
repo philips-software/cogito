@@ -10,6 +10,13 @@ struct Address: Codable {
         value = gethAddress.getHex()
     }
 
+    init?(fromHex hex: String) {
+        guard GethAddress(fromHex: hex) != nil else {
+            return nil
+        }
+        value = hex
+    }
+
     func toGethAddress() -> GethAddress {
         return GethAddress(fromHex: value)
     }
