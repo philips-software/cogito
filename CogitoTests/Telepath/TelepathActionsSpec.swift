@@ -80,6 +80,19 @@ class TelepathActionsSpec: QuickSpec {
             let errorCode = 123
             let errorMessage = "an error message"
 
+            it("encodes string responses") {
+                let result = "foo"
+
+                store.dispatch(TelepathActions.Send(id: id, result: result))
+
+                let pending = store.firstAction(ofType: TelepathActions.SendPending.self)!
+                expect(JSON(parseJSON: pending.message)) == JSON([
+                    "jsonrpc": "2.0",
+                    "id": id.object,
+                    "result": result
+                ])
+            }
+
             it("encodes dictionary responses") {
                 let result = [ "foo": 1 ]
 
