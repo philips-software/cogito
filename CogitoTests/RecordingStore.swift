@@ -18,3 +18,9 @@ class RecordingStore: Store<AppState> {
         super.dispatch(action)
     }
 }
+
+extension RecordingStore {
+    func firstAction <T> (ofType: T.Type) -> T? {
+        return actions.flatMap { $0 as? T }.first
+    }
+}

@@ -2,6 +2,7 @@
 
 import Quick
 import Nimble
+import SwiftyJSON
 
 class TelepathActionsSpec: QuickSpec {
     override func spec() {
@@ -71,6 +72,22 @@ class TelepathActionsSpec: QuickSpec {
                 store.dispatch(TelepathActions.Send(message: ""))
                 let rejected = store.actions.last as? TelepathActions.SendRejected
                 expect(rejected?.error as? ExampleError) == error
+            }
+        }
+
+        describe("sending JSON") {
+            let id = JsonRpcId(42)
+            let result = [ "foo": 1 ]
+
+            it("encodes response as JSON-RPC") {
+                store.dispatch(TelepathActions.Send(id: id, result: result))
+
+                let pending = store.firstAction(ofType: TelepathActions.SendPending.self)!
+                expect(JSON(parseJSON: pending.message)) == JSON([
+                    "jsonrpc": "2.0",
+                    "id": id.object,
+                    "result": result
+                ])
             }
         }
     }
