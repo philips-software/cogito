@@ -88,15 +88,19 @@ struct AttestationActions {
         let channel: ChannelID
     }
 
-    static func GetAttestations(applicationName: String,
+    static func GetAttestations(requestId: JsonRpcId,
+                                applicationName: String,
                                 oidcRealmUrl: String,
                                 subject: String?) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, getState in
-            let builder = GetAttestationsBuilder(oidcRealmUrlString: oidcRealmUrl,
-                                                 applicationName: applicationName,
-                                                 subject: subject,
-                                                 dispatch: dispatch,
-                                                 getState: getState)
+            let builder = GetAttestationsBuilder(
+                requestId: requestId,
+                oidcRealmUrlString: oidcRealmUrl,
+                applicationName: applicationName,
+                subject: subject,
+                dispatch: dispatch,
+                getState: getState
+            )
             builder.build().execute()
         })
     }

@@ -3,6 +3,7 @@
 import ReSwift
 
 struct GetAttestationsBuilder {
+    let requestId: JsonRpcId
     let oidcRealmUrlString: String
     let applicationName: String
     let subject: String?
@@ -11,18 +12,27 @@ struct GetAttestationsBuilder {
 
     func build() -> GetAttestations {
         guard let url = URL(string: oidcRealmUrlString) else {
-            return GetAttestationsInvalid(error: .invalidRealmUrl, dispatch: dispatch)
+            return GetAttestationsInvalid(requestId: requestId, error: .invalidRealmUrl, dispatch: dispatch)
         }
-        guard let state = getState(),
-              let facet = state.diamond.selectedFacet() else {
-            return GetAttestationsInvalid(error: .invalidConfiguration, dispatch: dispatch)
+        guard
+            let state = getState(),
+            let facet = state.diamond.selectedFacet()
+        else {
+            return GetAttestationsInvalid(
+                requestId: requestId,
+                error: .invalidConfiguration,
+                dispatch: dispatch
+            )
         }
-        return GetAttestationsValid(applicationName: applicationName,
-                                    oidcRealmUrl: url,
-                                    subject: subject,
-                                    dispatch: dispatch,
-                                    state: state,
-                                    facet: facet)
+        return GetAttestationsValid(
+            requestId: requestId,
+            applicationName: applicationName,
+            oidcRealmUrl: url,
+            subject: subject,
+            dispatch: dispatch,
+            state: state,
+            facet: facet
+        )
     }
 }
 
@@ -32,7 +42,7 @@ protocol GetAttestations {
 }
 
 extension GetAttestations {
-    func send(id: JsonRpcId = JsonRpcId()/*TODO*/, error: AttestationError) {
+    func send(id: JsonRpcId, error: AttestationError) {
         dispatch(TelepathActions.Send(
             id: id,
             errorCode: error.code,
@@ -42,11 +52,12 @@ extension GetAttestations {
 }
 
 struct GetAttestationsInvalid: GetAttestations {
+    let requestId: JsonRpcId
     let error: AttestationError
     let dispatch: DispatchFunction
 
     func execute() {
-        send(error: error)
+        send(id: requestId, error: error)
     }
 }
 
@@ -71,6 +82,7 @@ enum AttestationError: Int, Error {
 }
 
 struct GetAttestationsValid: GetAttestations {
+    let requestId: JsonRpcId
     let applicationName: String
     let oidcRealmUrl: URL
     let subject: String?
@@ -78,12 +90,14 @@ struct GetAttestationsValid: GetAttestations {
     let state: AppState
     let facet: Identity
 
-    init(applicationName: String,
+    init(requestId: JsonRpcId,
+         applicationName: String,
          oidcRealmUrl: URL,
          subject: String?,
          dispatch: @escaping DispatchFunction,
          state: AppState,
          facet: Identity) {
+        self.requestId = requestId
         self.applicationName = applicationName
         self.oidcRealmUrl = oidcRealmUrl
         self.subject = subject
@@ -117,12 +131,13 @@ struct GetAttestationsValid: GetAttestations {
     }
 
     func showRequestAccessDialog(idToken: String) {
+        let requestId = self.requestId
         let alert = RequestedAlert(title: "Request for access",
                                    message: "Application \(applicationName) wants to access your credentials " +
                                             "from \(self.oidcRealmUrl.absoluteString)",
                                    actions: [
                                        AlertAction(title: "Deny", style: .cancel) { _ in
-                                           self.send(error: .userDeniedAccess)
+                                        self.send(id: requestId, error: .userDeniedAccess)
                                        },
                                        AlertAction(title: "Approve", style: .default) { _ in
                                            self.send(idToken: idToken)
@@ -132,13 +147,14 @@ struct GetAttestationsValid: GetAttestations {
     }
 
     func showLoginRequiredDialog() {
+        let requestId = self.requestId
         let alert = RequestedAlert(title: "Login required",
                                    message: "Application \(applicationName) requires you to login to " +
                                             "\(self.oidcRealmUrl.absoluteString)",
                                             // ^^^^^^^^^^^^ todo: use webfinger
                                    actions: [
                                        AlertAction(title: "Cancel", style: .cancel) { _ in
-                                           self.send(error: .userCancelledLogin)
+                                        self.send(id: requestId, error: .userCancelledLogin)
                                        },
                                        AlertAction(title: "Login", style: .default) { _ in
                                            self.startAttestation()
