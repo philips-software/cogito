@@ -76,6 +76,18 @@ struct TelepathActions {
     }
 
     // swiftlint:disable:next identifier_name
+    static func Send(id: JsonRpcId, result: [Any]) -> ThunkAction<AppState> {
+        return ThunkAction { dispatch, _ in
+            let response = JSON([
+                "jsonrpc": "2.0",
+                "id": id,
+                "result": JSON(result).object
+            ])
+            dispatch(Send(message: response.rawString()!))
+        }
+    }
+
+    // swiftlint:disable:next identifier_name
     static func Send(id: JsonRpcId, errorCode: Int, errorMessage: String) -> ThunkAction<AppState> {
         return ThunkAction { dispatch, _ in
             let response = JSON([
