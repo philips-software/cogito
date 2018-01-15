@@ -75,11 +75,13 @@ class TelepathActionsSpec: QuickSpec {
             }
         }
 
-        describe("sending JSON") {
+        describe("sending JSON-RPC") {
             let id = JsonRpcId(42)
             let result = [ "foo": 1 ]
+            let errorCode = 123
+            let errorMessage = "an error message"
 
-            it("encodes response as JSON-RPC") {
+            it("encodes responses") {
                 store.dispatch(TelepathActions.Send(id: id, result: result))
 
                 let pending = store.firstAction(ofType: TelepathActions.SendPending.self)!
@@ -87,6 +89,27 @@ class TelepathActionsSpec: QuickSpec {
                     "jsonrpc": "2.0",
                     "id": id.object,
                     "result": result
+                ])
+            }
+
+            it("encodes errors") {
+                let action = TelepathActions.Send(
+                    id: id,
+                    errorCode: errorCode,
+                    errorMessage: errorMessage
+                )
+
+                store.dispatch(action)
+
+                let pending = store.firstAction(ofType: TelepathActions.SendPending.self)!
+
+                expect(JSON(parseJSON: pending.message)) == JSON([
+                    "jsonrpc": "2.0",
+                    "id": id.object,
+                    "error": [
+                        "code": errorCode,
+                        "message": errorMessage
+                    ]
                 ])
             }
         }
