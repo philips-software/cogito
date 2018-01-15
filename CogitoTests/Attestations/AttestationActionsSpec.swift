@@ -4,6 +4,7 @@ import Quick
 import Nimble
 import ReSwiftThunk
 import Telepath
+import SwiftyJSON
 
 // swiftlint:disable:next type_body_length
 class AttestationActionsSpec: QuickSpec {
@@ -207,7 +208,8 @@ class AttestationActionsSpec: QuickSpec {
                                 return
                             }
                             cancelAction.handler!(cancelAction)
-                            expect(sendPendingAction()?.message) == "{\"error\":\"user denied access\"}"
+                            let response = JSON(parseJSON: sendPendingAction()!.message)
+                            expect(response["error"]["code"].int) == AttestationError.userDeniedAccess.code
                         }
                     }
                 }
@@ -244,7 +246,8 @@ class AttestationActionsSpec: QuickSpec {
                         let alert = requestAlertAction()!
                         let cancelAction = alert.requestedAlert.actions.filter({ $0.style == .cancel }).first!
                         cancelAction.handler!(cancelAction)
-                        expect(sendPendingAction()?.message) == "{\"error\":\"user cancelled login\"}"
+                        let response = JSON(parseJSON: sendPendingAction()!.message)
+                        expect(response["error"]["code"].int) == AttestationError.userCancelledLogin.code
                     }
                 }
 
@@ -304,7 +307,8 @@ class AttestationActionsSpec: QuickSpec {
                         ])
                     )
                     store.dispatch(action)
-                    expect(sendPendingAction()?.message) == "{\"error\":\"invalid configuration\"}"
+                    let response = JSON(parseJSON: sendPendingAction()!.message)
+                    expect(response["error"]["code"].int) == AttestationError.invalidConfiguration.code
                 }
             }
 
@@ -313,7 +317,8 @@ class AttestationActionsSpec: QuickSpec {
                                                                 oidcRealmUrl: "invalid url",
                                                                 subject: nil)
                 store.dispatch(action)
-                expect(sendPendingAction()?.message) == "{\"error\":\"invalid realm URL\"}"
+                let response = JSON(parseJSON: sendPendingAction()!.message)
+                expect(response["error"]["code"].int) == AttestationError.invalidRealmUrl.code
             }
         }
     }
