@@ -3,6 +3,7 @@
 import Foundation
 import ReSwift
 import ReSwiftThunk
+import SwiftyJSON
 
 struct TelepathActions {
     // swiftlint:disable:next identifier_name
@@ -59,6 +60,18 @@ struct TelepathActions {
                     dispatch(SendFulfilled())
                 }
             }
+        }
+    }
+
+    // swiftlint:disable:next identifier_name
+    static func Send(id: JsonRpcId, result: [String:Any]) -> ThunkAction<AppState> {
+        return ThunkAction { dispatch, _ in
+            let response = JSON([
+                "jsonrpc": "2.0",
+                "id": id,
+                "result": JSON(result).object
+            ])
+            dispatch(Send(message: response.rawString()!))
         }
     }
 
