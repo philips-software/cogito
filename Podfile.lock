@@ -1,4 +1,6 @@
 PODS:
+  - BigInt (3.0.1):
+    - SipHash (~> 1.2)
   - Differentiator (3.0.1)
   - FontAwesome.swift (1.3.1)
   - Geth (1.7.3)
@@ -29,6 +31,7 @@ PODS:
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - RxSwift (4.0.0)
+  - SipHash (1.2.0)
   - Sodium (0.6)
   - SwiftLint (0.21.0)
   - SwiftyJSON (4.0.0)
@@ -37,6 +40,7 @@ PODS:
   - URITemplate (2.0.2)
 
 DEPENDENCIES:
+  - BigInt (~> 3.0)
   - FontAwesome.swift (~> 1.3)
   - Geth (~> 1.7.1)
   - JWTDecode (~> 2.1)
@@ -95,6 +99,7 @@ CHECKOUT OPTIONS:
     :git: https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git
 
 SPEC CHECKSUMS:
+  BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
   Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
   FontAwesome.swift: 050a75c6b94db0b082f39bde5b111c5c64d62a83
   Geth: 45a08eeef7a20e58dfc09a455563ffe210941a96
@@ -111,12 +116,13 @@ SPEC CHECKSUMS:
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxDataSources: 098b7e62b6316313b14d6bf594e3f4f4f62a238a
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
+  SipHash: c6e9e43e9c531b5bc6602545130c26194a6d31ce
   Sodium: bf524b0a3d5ad6870dcf343205cca7e659c15ad5
   SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   Telepath: 14b8a4ad40df8c1f25ddc49ae7e1db3f1c427b7e
   URITemplate: d822aaa2f8ec9dcffffd13baa58bf9ee007e96cb
 
-PODFILE CHECKSUM: 796fd3344144e928cee7ac04bb86e62e2cd5d770
+PODFILE CHECKSUM: 251530eb654af79c8692f0e795669b52610b00e2
 
 COCOAPODS: 1.3.1
