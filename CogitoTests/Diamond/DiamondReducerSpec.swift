@@ -37,7 +37,7 @@ class DiamondReducerSpec: QuickSpec {
             expect(newState.facets.count) == 1
             let firstFacet = newState.facets.values.first!
             expect(firstFacet.description) == "my id"
-            expect(firstFacet.gethAddress.getHex()!) == account0.getAddress()!.getHex()!
+            expect(firstFacet.address) == Address(from: account0.getAddress()!)
             expect(newState.selectedFacetId) == firstFacet.identifier
         }
 
