@@ -1488,13 +1488,13 @@ FOUNDATION_EXPORT GethBoundContract* GethDeployContract(GethTransactOpts* opts, 
  * FoundationBootnodes returns the enode URLs of the P2P bootstrap nodes operated
 by the foundation running the V5 discovery protocol.
  */
-FOUNDATION_EXPORT GethEnodes* GethFoundationBootnodes();
+FOUNDATION_EXPORT GethEnodes* GethFoundationBootnodes(void);
 
 /**
  * MainnetGenesis returns the JSON spec to use for the main Ethereum network. It
 is actually empty since that defaults to the hard coded binary genesis block.
  */
-FOUNDATION_EXPORT NSString* GethMainnetGenesis();
+FOUNDATION_EXPORT NSString* GethMainnetGenesis(void);
 
 /**
  * NewAddressFromBytes converts a slice of bytes to a hash value.
@@ -1514,7 +1514,7 @@ FOUNDATION_EXPORT GethAddresses* GethNewAddresses(long size);
 /**
  * NewAddressesEmpty creates an empty slice of Addresses values.
  */
-FOUNDATION_EXPORT GethAddresses* GethNewAddressesEmpty();
+FOUNDATION_EXPORT GethAddresses* GethNewAddressesEmpty(void);
 
 /**
  * NewBigInt allocates and returns a new BigInt set to x.
@@ -1534,19 +1534,19 @@ FOUNDATION_EXPORT GethBlock* GethNewBlockFromRLP(NSData* data, NSError** error);
 /**
  * NewCallMsg creates an empty contract call parameter list.
  */
-FOUNDATION_EXPORT GethCallMsg* GethNewCallMsg();
+FOUNDATION_EXPORT GethCallMsg* GethNewCallMsg(void);
 
 /**
  * NewCallOpts creates a new option set for contract calls.
  */
-FOUNDATION_EXPORT GethCallOpts* GethNewCallOpts();
+FOUNDATION_EXPORT GethCallOpts* GethNewCallOpts(void);
 
 /**
  * NewContext returns a non-nil, empty Context. It is never canceled, has no
 values, and has no deadline. It is typically used by the main function,
 initialization, and tests, and as the top-level Context for incoming requests.
  */
-FOUNDATION_EXPORT GethContext* GethNewContext();
+FOUNDATION_EXPORT GethContext* GethNewContext(void);
 
 /**
  * NewEnode parses a node designator.
@@ -1583,7 +1583,7 @@ FOUNDATION_EXPORT GethEnodes* GethNewEnodes(long size);
 /**
  * NewEnodesEmpty creates an empty slice of Enode values.
  */
-FOUNDATION_EXPORT GethEnodes* GethNewEnodesEmpty();
+FOUNDATION_EXPORT GethEnodes* GethNewEnodesEmpty(void);
 
 /**
  * NewEthereumClient connects a client to the given URL.
@@ -1593,7 +1593,7 @@ FOUNDATION_EXPORT GethEthereumClient* GethNewEthereumClient(NSString* rawurl, NS
 /**
  * NewFilterQuery creates an empty filter query for contact log filtering.
  */
-FOUNDATION_EXPORT GethFilterQuery* GethNewFilterQuery();
+FOUNDATION_EXPORT GethFilterQuery* GethNewFilterQuery(void);
 
 /**
  * NewHashFromBytes converts a slice of bytes to a hash value.
@@ -1613,7 +1613,7 @@ FOUNDATION_EXPORT GethHashes* GethNewHashes(long size);
 /**
  * NewHashesEmpty creates an empty slice of Hashes values.
  */
-FOUNDATION_EXPORT GethHashes* GethNewHashesEmpty();
+FOUNDATION_EXPORT GethHashes* GethNewHashesEmpty(void);
 
 /**
  * NewHeaderFromJSON parses a header from an JSON data dump.
@@ -1629,7 +1629,7 @@ FOUNDATION_EXPORT GethHeader* GethNewHeaderFromRLP(NSData* data, NSError** error
  * NewInterface creates a new empty interface that can be used to pass around
 generic types.
  */
-FOUNDATION_EXPORT GethInterface* GethNewInterface();
+FOUNDATION_EXPORT GethInterface* GethNewInterface(void);
 
 /**
  * NewInterfaces creates a slice of uninitialized interfaces.
@@ -1649,7 +1649,7 @@ FOUNDATION_EXPORT GethNode* GethNewNode(NSString* datadir, GethNodeConfig* confi
 /**
  * NewNodeConfig creates a new node option set, initialized to the default values.
  */
-FOUNDATION_EXPORT GethNodeConfig* GethNewNodeConfig();
+FOUNDATION_EXPORT GethNodeConfig* GethNewNodeConfig(void);
 
 /**
  * NewReceiptFromJSON parses a transaction receipt from an JSON data dump.
@@ -1669,7 +1669,7 @@ FOUNDATION_EXPORT GethTopics* GethNewTopics(long size);
 /**
  * NewTopicsEmpty creates an empty slice of Topics values.
  */
-FOUNDATION_EXPORT GethTopics* GethNewTopicsEmpty();
+FOUNDATION_EXPORT GethTopics* GethNewTopicsEmpty(void);
 
 /**
  * NewTransaction creates a new transaction with the given properties.
@@ -1689,7 +1689,7 @@ FOUNDATION_EXPORT GethTransaction* GethNewTransactionFromRLP(NSData* data, NSErr
 /**
  * RinkebyGenesis returns the JSON spec to use for the Rinkeby test network
  */
-FOUNDATION_EXPORT NSString* GethRinkebyGenesis();
+FOUNDATION_EXPORT NSString* GethRinkebyGenesis(void);
 
 /**
  * SetVerbosity sets the global verbosity level (between 0 and 6 - see logger/verbosity.go).
@@ -1699,7 +1699,7 @@ FOUNDATION_EXPORT void GethSetVerbosity(long level);
 /**
  * TestnetGenesis returns the JSON spec to use for the Ethereum test network.
  */
-FOUNDATION_EXPORT NSString* GethTestnetGenesis();
+FOUNDATION_EXPORT NSString* GethTestnetGenesis(void);
 
 @class GethFilterLogsHandler;
 
