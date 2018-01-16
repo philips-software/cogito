@@ -68,7 +68,7 @@ struct TelepathActions {
         return ThunkAction { dispatch, _ in
             let response = JSON([
                 "jsonrpc": "2.0",
-                "id": id,
+                "id": id.object,
                 "result": JSON(result).object
                 ])
             dispatch(Send(message: response.rawString()!))
@@ -80,7 +80,7 @@ struct TelepathActions {
         return ThunkAction { dispatch, _ in
             let response = JSON([
                 "jsonrpc": "2.0",
-                "id": id,
+                "id": id.object,
                 "result": JSON(result).object
             ])
             dispatch(Send(message: response.rawString()!))
@@ -92,7 +92,7 @@ struct TelepathActions {
         return ThunkAction { dispatch, _ in
             let response = JSON([
                 "jsonrpc": "2.0",
-                "id": id,
+                "id": id.object,
                 "result": JSON(result).object
             ])
             dispatch(Send(message: response.rawString()!))

@@ -2,7 +2,6 @@
 
 import SwiftyJSON
 
-typealias JsonRpcId = JSON
 typealias JsonRpcParams = JSON
 
 struct JsonRpcRequest {
@@ -19,7 +18,7 @@ extension JsonRpcRequest {
             return nil
         }
 
-        let id = json["id"]
+        let id = JsonRpcId(json["id"])
         let params = json["params"]
 
         self.init(id: id, method: method, params: params)
