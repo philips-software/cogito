@@ -35,3 +35,9 @@ extension Address: CustomStringConvertible {
         return value
     }
 }
+
+extension Address: Equatable {
+    static func == (lhs: Address, rhs: Address) -> Bool {
+        return lhs.value == rhs.value
+    }
+}

@@ -43,6 +43,9 @@ class TransactionSpec: QuickSpec {
         it("can initialize with valid data") {
             let tx = Transaction(from: validTransaction)
             expect(tx).toNot(beNil())
+            expect(tx?.from) == Address.testAddress1
+            expect(tx?.to) == Address.testAddress2
+            expect(tx?.data) == Data(fromHex: "0xabcdef")
         }
     }
 }
