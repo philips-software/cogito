@@ -189,10 +189,13 @@
 		C00B52E1B28440BB32322784 /* DialogPresenterReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B579EEF4EDAFB75E6221C /* DialogPresenterReducer.swift */; };
 		C00B53178861BC297D2B8513 /* DialogPresenterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B58EF23AD635EAE304108 /* DialogPresenterActions.swift */; };
 		C00B5370FDA0454E818FE2EB /* DialogPresenterReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5417AE458FB345850039 /* DialogPresenterReducerSpec.swift */; };
+		C00B54321DC6AA59BE55E8C1 /* TransactionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B56B7E4CA3836960336DF /* TransactionSpec.swift */; };
 		C00B54913224B9C03F32E185 /* Encodable+json.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5B1891702007BD67637B /* Encodable+json.swift */; };
+		C00B552C389894477CA10423 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B535ED8937C7ED5FC8495 /* Transaction.swift */; };
 		C00B5559989C9FF92C6C70FA /* IdenittySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5807D4B578AAA0D57B47 /* IdenittySpec.swift */; };
 		C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */; };
 		C00B565D47B7F81FE21339CF /* DialogPresenterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B56F8009E903C75F86606 /* DialogPresenterState.swift */; };
+		C00B568FFA6C3F707DEE730C /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B535ED8937C7ED5FC8495 /* Transaction.swift */; };
 		C00B57208B78184BB19798CD /* AppPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B57766800CB3EFBE971EC /* AppPassword.swift */; };
 		C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5412CBC3B026E362474C /* CreateIdentityStateSpec.swift */; };
 		C00B57F400C10AB0C6F066D8 /* Data+hexSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B564B1F469FEE90CE761B /* Data+hexSpec.swift */; };
@@ -344,12 +347,14 @@
 		C00B5147CAE92346F14EF19F /* Data+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+hex.swift"; sourceTree = "<group>"; };
 		C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreStateSpec.swift; sourceTree = "<group>"; };
 		C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttestationsReducerSpec.swift; sourceTree = "<group>"; };
+		C00B535ED8937C7ED5FC8495 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPasswordSpec.swift; sourceTree = "<group>"; };
 		C00B5412CBC3B026E362474C /* CreateIdentityStateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateIdentityStateSpec.swift; sourceTree = "<group>"; };
 		C00B5417AE458FB345850039 /* DialogPresenterReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterReducerSpec.swift; sourceTree = "<group>"; };
 		C00B542BA533252756727EF5 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		C00B54DD2E80DB0874E74DDD /* AddressSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressSpec.swift; sourceTree = "<group>"; };
 		C00B564B1F469FEE90CE761B /* Data+hexSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+hexSpec.swift"; sourceTree = "<group>"; };
+		C00B56B7E4CA3836960336DF /* TransactionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionSpec.swift; sourceTree = "<group>"; };
 		C00B56F8009E903C75F86606 /* DialogPresenterState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterState.swift; sourceTree = "<group>"; };
 		C00B57766800CB3EFBE971EC /* AppPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPassword.swift; sourceTree = "<group>"; };
 		C00B579EEF4EDAFB75E6221C /* DialogPresenterReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterReducer.swift; sourceTree = "<group>"; };
@@ -598,6 +603,7 @@
 				02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */,
 				02BE32CD1F7A5C55006C7287 /* SyncProgressReporterSpec.swift */,
 				C00B54DD2E80DB0874E74DDD /* AddressSpec.swift */,
+				C00B56B7E4CA3836960336DF /* TransactionSpec.swift */,
 			);
 			path = Geth;
 			sourceTree = "<group>";
@@ -612,6 +618,7 @@
 				028F4EED1F7CE12A0015C4AF /* SyncProgress.swift */,
 				02BE32CF1F7A6D92006C7287 /* SyncProgressReporter.swift */,
 				C00B542BA533252756727EF5 /* Address.swift */,
+				C00B535ED8937C7ED5FC8495 /* Transaction.swift */,
 			);
 			path = Geth;
 			sourceTree = "<group>";
@@ -1193,6 +1200,7 @@
 				C00B58FCADEA882A76465278 /* GetAttestations.swift in Sources */,
 				C00B54913224B9C03F32E185 /* Encodable+json.swift in Sources */,
 				C00B5B06165F3D5132AB7064 /* Data+hex.swift in Sources */,
+				C00B552C389894477CA10423 /* Transaction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1318,6 +1326,8 @@
 				C00B5181AA0834F5A6F122DF /* Encodable+json.swift in Sources */,
 				C00B5F2F98B19D0B3884414E /* Data+hex.swift in Sources */,
 				C00B57F400C10AB0C6F066D8 /* Data+hexSpec.swift in Sources */,
+				C00B568FFA6C3F707DEE730C /* Transaction.swift in Sources */,
+				C00B54321DC6AA59BE55E8C1 /* TransactionSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
