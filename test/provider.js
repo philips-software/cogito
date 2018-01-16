@@ -33,11 +33,9 @@ describe('provider', function () {
 
     context('when cogito provides accounts', function () {
       beforeEach(function () {
-        const request = JSON.stringify({ method: 'accounts' })
-        const response = JSON.stringify({ result: accounts })
-        td.when(telepathChannel.send(request)).thenDo(function () {
-          td.when(telepathChannel.receive(), { times: 1 }).thenResolve(response)
-        })
+        const request = { method: 'accounts' }
+        const response = { result: accounts }
+        td.when(telepathChannel.send(contains(request))).thenResolve(response)
       })
 
       it('returns the cogito accounts', function (done) {
@@ -67,11 +65,9 @@ describe('provider', function () {
       const signed = '0xSignedTransaction'
 
       beforeEach(function () {
-        const request = JSON.stringify({ method: 'sign', params: [transaction] })
-        const response = JSON.stringify({ result: signed })
-        td.when(telepathChannel.send(request)).thenDo(function () {
-          td.when(telepathChannel.receive(), { times: 1 }).thenResolve(response)
-        })
+        const request = { method: 'sign', params: [transaction] }
+        const response = { result: signed }
+        td.when(telepathChannel.send(contains(request))).thenResolve(response)
       })
 
       context('when using original provider for raw transactions', function () {
