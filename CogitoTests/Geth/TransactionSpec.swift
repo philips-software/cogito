@@ -2,6 +2,7 @@
 
 import Quick
 import Nimble
+import Geth
 
 class TransactionSpec: QuickSpec {
     override func spec() {
@@ -9,7 +10,7 @@ class TransactionSpec: QuickSpec {
                                 "to": Address.testAddress2.description,
                                 "data": "0xabcdef",
                                 "gasPrice": "0x1", "gasLimit": "0x2",
-                                "nonce": "0x3", "value": "0x4"]
+                                "nonce": "0x30", "value": "0x4"]
 
         describe("missing fields") {
             func itCannotInitializeWhenMissing(field: String) {
@@ -37,7 +38,7 @@ class TransactionSpec: QuickSpec {
             it("dispatches invalid when from is invalid") { itCannotInitializeWhen(field: "from", is: "0x1") }
             it("dispatches invalid when to is invalid") { itCannotInitializeWhen(field: "to", is: "0x2") }
             it("dispatches invalid when data is invalid") { itCannotInitializeWhen(field: "data", is: "0x3") }
-//            it("dispatches invalid when nonce is invalid") { itDispatchesInvalidWhen(field: "nonce", is: "0x") }
+            it("dispatches invalid when nonce is invalid") { itCannotInitializeWhen(field: "nonce", is: "0x") }
         }
 
         it("can initialize with valid data") {
@@ -46,6 +47,10 @@ class TransactionSpec: QuickSpec {
             expect(tx?.from) == Address.testAddress1
             expect(tx?.to) == Address.testAddress2
             expect(tx?.data) == Data(fromHex: "0xabcdef")
+            expect(tx?.nonce.description) == "48"
+            expect(tx?.gasPrice.description) == "1"
+            expect(tx?.gasLimit.description) == "2"
+            expect(tx?.value.description) == "4"
         }
     }
 }
