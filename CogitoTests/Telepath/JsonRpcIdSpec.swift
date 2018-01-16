@@ -58,5 +58,23 @@ class JsonRpcIdSpec: QuickSpec {
             let json = try! encoder.encode([JsonRpcId()])
             expect(try! JSON(data: json)) == JSON([nil])
         }
+
+        it("is decodable as an integer") {
+            let encoded = try! JSONEncoder().encode([JsonRpcId(42)])
+            let decoded = try! JSONDecoder().decode([JsonRpcId].self, from: encoded)
+            expect(decoded) == [JsonRpcId(42)]
+        }
+
+        it("is decodable as a string") {
+            let encoded = try! JSONEncoder().encode([JsonRpcId("a string")])
+            let decoded = try! JSONDecoder().decode([JsonRpcId].self, from: encoded)
+            expect(decoded) == [JsonRpcId("a string")]
+        }
+
+        it("is decodable as a null value") {
+            let encoded = try! JSONEncoder().encode([JsonRpcId()])
+            let decoded = try! JSONDecoder().decode([JsonRpcId].self, from: encoded)
+            expect(decoded) == [JsonRpcId()]
+        }
     }
 }

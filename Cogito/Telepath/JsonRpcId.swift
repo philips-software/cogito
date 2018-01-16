@@ -40,7 +40,18 @@ extension JsonRpcId: Equatable {
     }
 }
 
-extension JsonRpcId: Encodable {
+extension JsonRpcId: Codable {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let integer = try? container.decode(Int.self) {
+            self.init(integer)
+        } else if let string = try? container.decode(String.self) {
+            self.init(string)
+        } else {
+            self.init()
+        }
+    }
+
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         if let integer = self.int {
