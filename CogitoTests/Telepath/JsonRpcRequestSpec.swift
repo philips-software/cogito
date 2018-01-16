@@ -22,7 +22,7 @@ class JsonRpcRequestSpec: QuickSpec {
 
         it("parses an id") {
             let request = JsonRpcRequest(parse: json)
-            expect(request?.id.number) == 42
+            expect(request?.id.int) == 42
         }
 
         it("parses parameters") {

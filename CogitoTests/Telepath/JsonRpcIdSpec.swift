@@ -26,9 +26,9 @@ class JsonRpcIdSpec: QuickSpec {
             expect(JsonRpcId(42)) == JsonRpcId(42)
         }
 
-        it("can be converted to a number") {
-            expect(JsonRpcId(42).number) == 42
-            expect(JsonRpcId("not a number").number).to(beNil())
+        it("can be converted to an integer") {
+            expect(JsonRpcId(42).int) == 42
+            expect(JsonRpcId("not a number").int).to(beNil())
         }
 
         it("can be converted to a string") {
