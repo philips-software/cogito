@@ -17,8 +17,8 @@ struct JsonRpcId {
         json = JSON(value)
     }
 
-    init(_ value: JSON) {
-        json = value
+    init(json: JSON) {
+        self.json = json
     }
 
     var int: Int? {

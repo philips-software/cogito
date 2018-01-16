@@ -19,7 +19,7 @@ class JsonRpcIdSpec: QuickSpec {
         }
 
         it("can be instantiated with a JSON value") {
-            expect(JsonRpcId(JSON("a json id")).json) == JSON("a json id")
+            expect(JsonRpcId(json: JSON("a json id")).json) == JSON("a json id")
         }
 
         it("can be compared with another JSON RCP id") {
