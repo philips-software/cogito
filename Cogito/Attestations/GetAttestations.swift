@@ -109,7 +109,7 @@ struct GetAttestationsValid: GetAttestations {
     func execute() {
         if let idToken = facet.findToken(claim: "iss", value: oidcRealmUrl.absoluteString) {
             if GetAttestationsValid.alreadyProvided(idToken: idToken, state: state) {
-                send(idToken: idToken)
+                send(requestId: requestId, idToken: idToken)
             } else {
                 showRequestAccessDialog(idToken: idToken)
             }
@@ -118,16 +118,20 @@ struct GetAttestationsValid: GetAttestations {
         }
     }
 
-    static func send(idToken: String, dispatch: DispatchFunction, state: AppState) {
+    static func send(requestId: JsonRpcId, idToken: String, dispatch: DispatchFunction, state: AppState) {
         precondition(state.telepath.channel != nil)
-        let msg = AttestationsResult(idToken: idToken).json
-        dispatch(TelepathActions.Send(message: msg))
+        dispatch(TelepathActions.Send(id: requestId, result: idToken))
         let channelId = state.telepath.channel!.id
         dispatch(AttestationActions.Provided(idToken: idToken, channel: channelId))
     }
 
-    func send(idToken: String) {
-        GetAttestationsValid.send(idToken: idToken, dispatch: dispatch, state: state)
+    func send(requestId: JsonRpcId, idToken: String) {
+        GetAttestationsValid.send(
+            requestId: requestId,
+            idToken: idToken,
+            dispatch: dispatch,
+            state: state
+        )
     }
 
     func showRequestAccessDialog(idToken: String) {
@@ -140,7 +144,7 @@ struct GetAttestationsValid: GetAttestations {
                                         self.send(id: requestId, error: .userDeniedAccess)
                                        },
                                        AlertAction(title: "Approve", style: .default) { _ in
-                                           self.send(idToken: idToken)
+                                        self.send(requestId: requestId, idToken: idToken)
                                        }
                                    ])
         self.dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
@@ -166,10 +170,13 @@ struct GetAttestationsValid: GetAttestations {
     func startAttestation() {
         precondition(state.telepath.channel != nil)
         let channelId = state.telepath.channel!.id
-        self.dispatch(AttestationActions.StartAttestation(for: self.facet,
-                                                          oidcRealmUrl: self.oidcRealmUrl,
-                                                          subject: self.subject,
-                                                          requestedOnChannel: channelId))
+        self.dispatch(AttestationActions.StartAttestation(
+            for: self.facet,
+            requestId: requestId,
+            oidcRealmUrl: self.oidcRealmUrl,
+            subject: self.subject,
+            requestedOnChannel: channelId
+        ))
     }
 
     private static func alreadyProvided(idToken: String, state: AppState) -> Bool {

@@ -77,7 +77,7 @@ class DebugViewController: UIViewController, Connectable {
             print("no identity was selected")
             return
         }
-        actions.startOpenIdConnectAttestation(identity, url, subject)
+        actions.startOpenIdConnectAttestation(identity, JsonRpcId(), url, subject)
     }
 
     struct Props {
@@ -88,7 +88,7 @@ class DebugViewController: UIViewController, Connectable {
     struct Actions {
         let resetCreateIdentity: () -> Void
         let resetAppState: () -> Void
-        let startOpenIdConnectAttestation: (Identity, URL, String?) -> Void
+        let startOpenIdConnectAttestation: (Identity, JsonRpcId, URL, String?) -> Void
     }
 }
 
@@ -104,8 +104,13 @@ private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> Debug
     return DebugViewController.Actions(
         resetCreateIdentity: { dispatch(CreateIdentityActions.ResetForm()) },
         resetAppState: { dispatch(ResetApp()) },
-        startOpenIdConnectAttestation: { identity, url, subject in
-            dispatch(AttestationActions.StartAttestation(for: identity, oidcRealmUrl: url, subject:subject))
+        startOpenIdConnectAttestation: { identity, requestId, url, subject in
+            dispatch(AttestationActions.StartAttestation(
+                for: identity,
+                requestId: requestId,
+                oidcRealmUrl: url,
+                subject:subject
+            ))
         }
     )
 }

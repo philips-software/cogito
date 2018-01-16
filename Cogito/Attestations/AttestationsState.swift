@@ -17,6 +17,7 @@ extension AttestationsState: Equatable {
 }
 
 struct AttestationInProgress: Codable {
+    let requestId: JsonRpcId
     let nonce: Nonce
     let subject: Subject?
     let identity: Identity

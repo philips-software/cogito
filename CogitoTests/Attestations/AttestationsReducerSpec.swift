@@ -9,52 +9,90 @@ class AttestationsReducerSpec: QuickSpec {
         let identity2 = Identity(description: "identity2", address: Address.testAddress1)
 
         it("handles pending") {
-            let initialState = AttestationsState(open: ["nonce1": AttestationInProgress(nonce: "nonce1",
-                                                                                        subject: "subject1",
-                                                                                        identity: identity1,
-                                                                                        status: .started,
-                                                                                        error: nil,
-                                                                                        idToken: nil,
-                                                                                        requestedOnChannel: nil)],
-                                                 providedAttestations: [:])
-            let action = AttestationActions.Pending(identity: identity2,
-                                                    nonce: "nonce2",
-                                                    subject: "subject2",
-                                                    requestedOnChannel: "channelId")
+            let initialState = AttestationsState(
+                open: [
+                    "nonce1": AttestationInProgress(
+                        requestId: JsonRpcId(),
+                        nonce: "nonce1",
+                        subject: "subject1",
+                        identity: identity1,
+                        status: .started,
+                        error: nil,
+                        idToken: nil,
+                        requestedOnChannel: nil
+                    )
+                ],
+                providedAttestations: [:]
+            )
+            let action = AttestationActions.Pending(
+                requestId: JsonRpcId(),
+                identity: identity2,
+                nonce: "nonce2",
+                subject: "subject2",
+                requestedOnChannel: "channelId"
+            )
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open) == [
                 "nonce1": AttestationInProgress(
-                    nonce: "nonce1", subject: "subject1", identity: identity1, status: .started,
-                    error: nil, idToken: nil, requestedOnChannel: nil),
+                    requestId: JsonRpcId(),
+                    nonce: "nonce1",
+                    subject: "subject1",
+                    identity: identity1,
+                    status: .started,
+                    error: nil,
+                    idToken: nil,
+                    requestedOnChannel: nil
+                ),
                 "nonce2": AttestationInProgress(
-                    nonce: "nonce2", subject: "subject2", identity: identity2, status: .pending,
-                    error: nil, idToken: nil, requestedOnChannel: "channelId")
+                    requestId: JsonRpcId(),
+                    nonce: "nonce2",
+                    subject: "subject2",
+                    identity: identity2,
+                    status: .pending,
+                    error: nil,
+                    idToken: nil,
+                    requestedOnChannel: "channelId"
+                )
             ]
         }
 
         it("handles started") {
-            let initialState = AttestationsState(open: ["nonce1": AttestationInProgress(nonce: "nonce1",
-                                                                                        subject: "subject1",
-                                                                                        identity: identity1,
-                                                                                        status: .pending,
-                                                                                        error: nil,
-                                                                                        idToken: nil,
-                                                                                        requestedOnChannel: nil)],
-                                                 providedAttestations: [:])
+            let initialState = AttestationsState(
+                open: [
+                    "nonce1": AttestationInProgress(
+                        requestId: JsonRpcId(),
+                        nonce: "nonce1",
+                        subject: "subject1",
+                        identity: identity1,
+                        status: .pending,
+                        error: nil,
+                        idToken: nil,
+                        requestedOnChannel: nil
+                    )
+                ],
+                providedAttestations: [:]
+            )
             let action = AttestationActions.Started(nonce: "nonce1")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.started
         }
 
         it("handles start rejected") {
-            let initialState = AttestationsState(open: ["nonce1": AttestationInProgress(nonce: "nonce1",
-                                                                                        subject: "subject1",
-                                                                                        identity: identity1,
-                                                                                        status: .pending,
-                                                                                        error: nil,
-                                                                                        idToken: nil,
-                                                                                        requestedOnChannel: nil)],
-                                                 providedAttestations: [:])
+            let initialState = AttestationsState(
+                open: [
+                    "nonce1": AttestationInProgress(
+                        requestId: JsonRpcId(),
+                        nonce: "nonce1",
+                        subject: "subject1",
+                        identity: identity1,
+                        status: .pending,
+                        error: nil,
+                        idToken: nil,
+                        requestedOnChannel: nil
+                    )
+                ],
+                providedAttestations: [:]
+            )
             let action = AttestationActions.StartRejected(nonce: "nonce1", error: "some error")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.startRejected
@@ -62,14 +100,21 @@ class AttestationsReducerSpec: QuickSpec {
         }
 
         it("handles finish rejected") {
-            let initialState = AttestationsState(open: ["nonce1": AttestationInProgress(nonce: "nonce1",
-                                                                                        subject: "subject1",
-                                                                                        identity: identity1,
-                                                                                        status: .started,
-                                                                                        error: nil,
-                                                                                        idToken: nil,
-                                                                                        requestedOnChannel: nil)],
-                                                 providedAttestations: [:])
+            let initialState = AttestationsState(
+                open: [
+                    "nonce1": AttestationInProgress(
+                        requestId: JsonRpcId(),
+                        nonce: "nonce1",
+                        subject: "subject1",
+                        identity: identity1,
+                        status: .started,
+                        error: nil,
+                        idToken: nil,
+                        requestedOnChannel: nil
+                    )
+                ],
+                providedAttestations: [:]
+            )
             let action = AttestationActions.FinishRejected(nonce: "nonce1", error: "some error")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.finishRejected
@@ -77,14 +122,21 @@ class AttestationsReducerSpec: QuickSpec {
         }
 
         it("handles fulfilled") {
-            let initialState = AttestationsState(open: ["nonce1": AttestationInProgress(nonce: "nonce1",
-                                                                                        subject: "subject1",
-                                                                                        identity: identity1,
-                                                                                        status: .started,
-                                                                                        error: nil,
-                                                                                        idToken: nil,
-                                                                                        requestedOnChannel: nil)],
-                                                 providedAttestations: [:])
+            let initialState = AttestationsState(
+                open: [
+                    "nonce1": AttestationInProgress(
+                        requestId: JsonRpcId(),
+                        nonce: "nonce1",
+                        subject: "subject1",
+                        identity: identity1,
+                        status: .started,
+                        error: nil,
+                        idToken: nil,
+                        requestedOnChannel: nil
+                    )
+                ],
+                providedAttestations: [:]
+            )
             let action = AttestationActions.Fulfilled(nonce: "nonce1", idToken: "some token")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.fulfilled
