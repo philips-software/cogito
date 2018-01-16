@@ -2,6 +2,7 @@
 
 import Quick
 import Nimble
+import Geth
 
 class KeyStoreSpec: QuickSpec {
     override func spec() {
@@ -33,6 +34,52 @@ class KeyStoreSpec: QuickSpec {
             expect(FileManager.default.fileExists(atPath: keyStore.storeUrl.path)).to(beTrue())
             expect { try keyStore.reset() }.toNot(throwError())
             expect(FileManager.default.fileExists(atPath: keyStore.storeUrl.path)).to(beFalse())
+        }
+
+        context("given an initialized key store") {
+            var keyStore: KeyStore!
+            var keychainMock: KeychainMock!
+            var appPassword: AppPassword!
+
+            beforeEach {
+                keychainMock = KeychainMock()
+                appPassword = AppPassword(keychain: keychainMock)
+                keyStore = KeyStore(name: "testStore.keyStore",
+                                    scryptN: GethLightScryptN,
+                                    scryptP: GethLightScryptP)
+                keyStore.appPassword = appPassword
+                expect {
+                    try FileManager.default.createDirectory(at: keyStore.storeUrl,
+                                                            withIntermediateDirectories: false,
+                                                            attributes: [:])
+                }.toNot(throwError())
+            }
+
+            afterEach {
+                try? keyStore.reset()
+            }
+
+            context("given an account") {
+                var createdAccount: GethAccount!
+
+                beforeEach {
+                    waitUntil { done in
+                        keyStore.newAccount { account, error in
+                            expect(error).to(beNil())
+                            expect(account).toNot(beNil())
+                            createdAccount = account
+                            done()
+                        }
+                    }
+                }
+
+                it("finds the account matching an identity") {
+                    let identity = Identity(description: "test",
+                                            address: Address(from: createdAccount.getAddress()!))
+                    let foundAccount = keyStore.findAccount(identity: identity)!
+                    expect(foundAccount.getAddress().getHex()) == createdAccount.getAddress().getHex()
+                }
+            }
         }
     }
 }
