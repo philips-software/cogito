@@ -1,7 +1,7 @@
 PODS:
   - Differentiator (3.0.1)
   - FontAwesome.swift (1.3.1)
-  - Geth (1.7.1)
+  - Geth (1.7.3)
   - JWTDecode (2.1.1)
   - KeychainAccess (3.1.0)
   - Mockingjay (2.0.2):
@@ -97,7 +97,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
   FontAwesome.swift: 050a75c6b94db0b082f39bde5b111c5c64d62a83
-  Geth: 5d7ab4565680bc976b81cf8cdab653067807ed01
+  Geth: 45a08eeef7a20e58dfc09a455563ffe210941a96
   JWTDecode: 83e8b381aafe27158d9f692cbdca2b12d61d460c
   KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
   Mockingjay: e44b65b6b4b919ad228929db83cb6b1d69fff623
