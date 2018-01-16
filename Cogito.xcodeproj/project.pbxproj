@@ -195,14 +195,17 @@
 		C00B565D47B7F81FE21339CF /* DialogPresenterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B56F8009E903C75F86606 /* DialogPresenterState.swift */; };
 		C00B57208B78184BB19798CD /* AppPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B57766800CB3EFBE971EC /* AppPassword.swift */; };
 		C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5412CBC3B026E362474C /* CreateIdentityStateSpec.swift */; };
+		C00B57F400C10AB0C6F066D8 /* Data+hexSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B564B1F469FEE90CE761B /* Data+hexSpec.swift */; };
 		C00B588AFDC9DD01CBAE511B /* DialogPresenterReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B579EEF4EDAFB75E6221C /* DialogPresenterReducer.swift */; };
 		C00B58FCADEA882A76465278 /* GetAttestations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B581D01FD60AA97FEEFBC /* GetAttestations.swift */; };
 		C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5F8B50D233D21FB7153C /* KeyStoreSpec.swift */; };
 		C00B5ACC20A8568692E88D7A /* DialogPresenterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B56F8009E903C75F86606 /* DialogPresenterState.swift */; };
 		C00B5AF3F2ECB1BD9415E765 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B542BA533252756727EF5 /* Address.swift */; };
+		C00B5B06165F3D5132AB7064 /* Data+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5147CAE92346F14EF19F /* Data+hex.swift */; };
 		C00B5D39FC0D970348A5E0C6 /* DiamondActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5F53B99BC5464AF8BE3E /* DiamondActions.swift */; };
 		C00B5E26A7AC55AC03FD717B /* DispatchRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5FFF481EB4982C21280E /* DispatchRecorder.swift */; };
 		C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B57766800CB3EFBE971EC /* AppPassword.swift */; };
+		C00B5F2F98B19D0B3884414E /* Data+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5147CAE92346F14EF19F /* Data+hex.swift */; };
 		C00B5F4394A34E4348285CB9 /* DiamondActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5F53B99BC5464AF8BE3E /* DiamondActions.swift */; };
 		C5BA5E19747B73A161EF0D57 /* Pods_Cogito.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */; };
 		D0885FE16CB0CF89FA9AE774 /* Pods_Cogito_CogitoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53940EFC96526AFDFA7CD5FC /* Pods_Cogito_CogitoTests.framework */; };
@@ -338,6 +341,7 @@
 		5CC4D2D61FE90248002F2450 /* TelepathServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathServiceSpec.swift; sourceTree = "<group>"; };
 		8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51C652F88A1C505BE309FCA /* Pods-Cogito-CogitoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito-CogitoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito-CogitoTests/Pods-Cogito-CogitoTests.release.xcconfig"; sourceTree = "<group>"; };
+		C00B5147CAE92346F14EF19F /* Data+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+hex.swift"; sourceTree = "<group>"; };
 		C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreStateSpec.swift; sourceTree = "<group>"; };
 		C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttestationsReducerSpec.swift; sourceTree = "<group>"; };
 		C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPasswordSpec.swift; sourceTree = "<group>"; };
@@ -345,6 +349,7 @@
 		C00B5417AE458FB345850039 /* DialogPresenterReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterReducerSpec.swift; sourceTree = "<group>"; };
 		C00B542BA533252756727EF5 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		C00B54DD2E80DB0874E74DDD /* AddressSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressSpec.swift; sourceTree = "<group>"; };
+		C00B564B1F469FEE90CE761B /* Data+hexSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+hexSpec.swift"; sourceTree = "<group>"; };
 		C00B56F8009E903C75F86606 /* DialogPresenterState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterState.swift; sourceTree = "<group>"; };
 		C00B57766800CB3EFBE971EC /* AppPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPassword.swift; sourceTree = "<group>"; };
 		C00B579EEF4EDAFB75E6221C /* DialogPresenterReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterReducer.swift; sourceTree = "<group>"; };
@@ -489,6 +494,7 @@
 				027603FA1F6ACD1600788B0A /* Info.plist */,
 				0212E0301F99FFD300EEDE34 /* Cogito.entitlements */,
 				C00B5B1891702007BD67637B /* Encodable+json.swift */,
+				C00B5B3C1E5A12284EE52C34 /* Foundation extensions */,
 			);
 			path = Cogito;
 			sourceTree = "<group>";
@@ -517,6 +523,7 @@
 				5C04E4461FA77C0C00A70C60 /* StoreSpy.swift */,
 				5C7C23971FA37CF9009E9CE7 /* ExampleError.swift */,
 				027604051F6ACD1600788B0A /* Info.plist */,
+				C00B5C92B3ECC155E7CB58ED /* Foundation extensions */,
 			);
 			path = CogitoTests;
 			sourceTree = "<group>";
@@ -791,6 +798,22 @@
 				53940EFC96526AFDFA7CD5FC /* Pods_Cogito_CogitoTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C00B5B3C1E5A12284EE52C34 /* Foundation extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C00B5147CAE92346F14EF19F /* Data+hex.swift */,
+			);
+			path = "Foundation extensions";
+			sourceTree = "<group>";
+		};
+		C00B5C92B3ECC155E7CB58ED /* Foundation extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C00B564B1F469FEE90CE761B /* Data+hexSpec.swift */,
+			);
+			path = "Foundation extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1169,6 +1192,7 @@
 				C00B53178861BC297D2B8513 /* DialogPresenterActions.swift in Sources */,
 				C00B58FCADEA882A76465278 /* GetAttestations.swift in Sources */,
 				C00B54913224B9C03F32E185 /* Encodable+json.swift in Sources */,
+				C00B5B06165F3D5132AB7064 /* Data+hex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1292,6 +1316,8 @@
 				C00B5370FDA0454E818FE2EB /* DialogPresenterReducerSpec.swift in Sources */,
 				C00B521DE886A27DE2569C8B /* GetAttestations.swift in Sources */,
 				C00B5181AA0834F5A6F122DF /* Encodable+json.swift in Sources */,
+				C00B5F2F98B19D0B3884414E /* Data+hex.swift in Sources */,
+				C00B57F400C10AB0C6F066D8 /* Data+hexSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
