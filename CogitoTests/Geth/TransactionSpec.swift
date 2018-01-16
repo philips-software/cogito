@@ -6,11 +6,11 @@ import Geth
 
 class TransactionSpec: QuickSpec {
     override func spec() {
-        let validTransaction = ["from": Address.testAddress1.description,
-                                "to": Address.testAddress2.description,
-                                "data": "0xabcdef",
-                                "gasPrice": "0x1", "gasLimit": "0x2",
-                                "nonce": "0x30", "value": "0x4"]
+        let validTransaction: [String: Any] = ["from": Address.testAddress1.description,
+                                               "to": Address.testAddress2.description,
+                                               "data": "0xabcdef",
+                                               "gasPrice": "0x1", "gasLimit": "0x2",
+                                               "nonce": "0x30", "value": "0x4"]
 
         describe("missing fields") {
             func itCannotInitializeWhenMissing(field: String) {
@@ -51,6 +51,13 @@ class TransactionSpec: QuickSpec {
             expect(tx?.gasPrice.description) == "1"
             expect(tx?.gasLimit.description) == "2"
             expect(tx?.value.description) == "4"
+        }
+
+        it("accepts plain number for gasPrice") {
+            var transaction = validTransaction
+            transaction["gasPrice"] = 42
+            let tx = Transaction(from: transaction)
+            expect(tx?.gasPrice.description) == "42"
         }
     }
 }
