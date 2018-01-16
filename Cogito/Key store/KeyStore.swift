@@ -1,6 +1,7 @@
 //  Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
 
 import Geth
+import BigInt
 
 class KeyStore: Codable {
     let name: String
@@ -11,7 +12,7 @@ class KeyStore: Codable {
         let base = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return base.appendingPathComponent(name)
     }
-    let appPassword = AppPassword()
+    var appPassword = AppPassword()
 
     required init(name: String, scryptN: Int, scryptP: Int) {
         self.name = name
@@ -52,6 +53,21 @@ class KeyStore: Codable {
                 onComplete(nil, error)
             }
         }
+    }
+
+    func findAccount(identity: Identity) -> GethAccount? {
+        guard let gethKeyStore = wrapped else { return nil }
+
+        let accounts = gethKeyStore.getAccounts()!
+        for i in 0..<accounts.size() {
+            do {
+                let account = try accounts.get(i)
+                if account.getAddress().getHex() == identity.address.value {
+                    return account
+                }
+            } catch {}
+        }
+        return nil
     }
 
     func encode(to encoder: Encoder) throws {

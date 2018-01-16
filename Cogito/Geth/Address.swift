@@ -4,7 +4,7 @@ import Foundation
 import Geth
 
 struct Address: Codable {
-    private let value: String
+    let value: String
 
     init(from gethAddress: GethAddress) {
         value = gethAddress.getHex()
