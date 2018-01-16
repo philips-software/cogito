@@ -5,41 +5,51 @@ import Nimble
 
 class TransactionSignerSpec: QuickSpec {
     override func spec() {
-        describe("missing fields") {
-            let validTransaction = ["from": "0x123", "to": "0x456", "data": "0xabcdef",
-                                    "gasPrice": "0x1", "gasLimit": "0x2",
-                                    "nonce": "0x3", "value": "0x4"]
+        let validTransaction = ["from": Address.testAddress1.description,
+                                "to": Address.testAddress2.description,
+                                "data": "0xabcdef",
+                                "gasPrice": "0x1", "gasLimit": "0x2",
+                                "nonce": "0x3", "value": "0x4"]
+        var store: RecordingStore!
 
-            func itDispatchesInvalidWhenMissing(field: String) {
-                var transaction = validTransaction
-                transaction.removeValue(forKey: field)
+        beforeEach {
+            store = RecordingStore()
+        }
 
-                let store = RecordingStore()
-                let builder = TransactionSignerBuilder(transaction: transaction,
-                                                       dispatch: store.dispatch,
-                                                       getState: { return nil })
-                let signer = builder.build()
-                expect(signer).to(beAKindOf(TransactionSignerInvalid.self))
-                signer.execute()
-                let lastAction = store.actions.last as? TelepathActions.SendPending
-                expect(lastAction?.message).to(contain("missing or invalid field(s) in transaction data"))
-            }
+        it("dispatches invalid when transaction data is incomplete") {
+            var transaction = validTransaction
+            transaction.removeValue(forKey: "from")
 
-            it("dispatches invalid when from is missing") { itDispatchesInvalidWhenMissing(field: "from") }
-            it("dispatches invalid when to is missing") { itDispatchesInvalidWhenMissing(field: "to") }
-            it("dispatches invalid when data is missing") { itDispatchesInvalidWhenMissing(field: "data") }
-            it("dispatches invalid when nonce is missing") { itDispatchesInvalidWhenMissing(field: "nonce") }
-            it("dispatches invalid when gasLimit is missing") { itDispatchesInvalidWhenMissing(field: "gasLimit") }
-            it("dispatches invalid when gasPrice is missing") { itDispatchesInvalidWhenMissing(field: "gasPrice") }
-            it("dispatches invalid when value is missing") { itDispatchesInvalidWhenMissing(field: "value") }
-            it("dispatches valid otherwise") {
-                let store = RecordingStore()
-                let builder = TransactionSignerBuilder(transaction: validTransaction,
-                                                       dispatch: store.dispatch,
-                                                       getState: { return nil })
-                let signer = builder.build()
-                expect(signer).to(beAKindOf(TransactionSignerValid.self))
-            }
+            let builder = TransactionSignerBuilder(transaction: transaction,
+                                                   dispatch: store.dispatch,
+                                                   getState: { return nil })
+            let signer = builder.build()
+            expect(signer).to(beAKindOf(TransactionSignerInvalid.self))
+            signer.execute()
+            let lastAction = store.actions.last as? TelepathActions.SendPending
+            expect(lastAction?.message).to(contain("missing or invalid field(s) in transaction data"))
+        }
+
+        it("dispatches valid when transaction data is valid") {
+            let builder = TransactionSignerBuilder(transaction: validTransaction,
+                                                   dispatch: store.dispatch,
+                                                   getState: { return nil })
+            let signer = builder.build()
+            expect(signer).to(beAKindOf(TransactionSignerValid.self))
+        }
+
+        it("dispatches invalid when transaction data is invalid") {
+            var transaction = validTransaction
+            transaction["from"] = "foo"
+
+            let builder = TransactionSignerBuilder(transaction: transaction,
+                                                   dispatch: store.dispatch,
+                                                   getState: { return nil })
+            let signer = builder.build()
+            expect(signer).to(beAKindOf(TransactionSignerInvalid.self))
+            signer.execute()
+            let lastAction = store.actions.last as? TelepathActions.SendPending
+            expect(lastAction?.message).to(contain("missing or invalid field(s) in transaction data"))
         }
     }
 }
