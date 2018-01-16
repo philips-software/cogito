@@ -1,14 +1,12 @@
 //  Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
 
 import Foundation
-import Geth
 import JWTDecode
 
 struct Identity: Codable {
     let identifier: UUID
     let description: String
     let address: Address
-    var gethAddress: GethAddress { return address.toGethAddress() }
     var idTokens: [String]
 
     init(description: String, address: Address) {
@@ -30,11 +28,9 @@ struct Identity: Codable {
 
 extension Identity: Equatable {
     static func == (lhs: Identity, rhs: Identity) -> Bool {
-        let leftHex = lhs.gethAddress.getHex()!
-        let rightHex = rhs.gethAddress.getHex()!
         return lhs.identifier == rhs.identifier &&
                lhs.description == rhs.description &&
-               leftHex == rightHex &&
+               lhs.address == rhs.address &&
                lhs.idTokens == rhs.idTokens
     }
 }
