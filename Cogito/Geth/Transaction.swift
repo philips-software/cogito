@@ -42,11 +42,13 @@ private func takeAddress(from txDict: [String: Any], key: String) -> Address? {
 }
 
 private func takeNumber(from txDict: [String: Any], key: String) -> BigInt? {
-    guard let numberString = txDict[key] as? String,
-          let number = BigInt(fromHex: numberString) else {
-        return nil
+    if let numberString = txDict[key] as? String,
+       let number = BigInt(fromHex: numberString) {
+        return number
+    } else if let number = txDict[key] as? Int {
+        return BigInt(exactly: number)
     }
-    return number
+    return nil
 }
 
 private func takeData(from txDict: [String: Any], key: String) -> Data? {
