@@ -39,3 +39,16 @@ extension JsonRpcId: Equatable {
         return lhs.json == rhs.json
     }
 }
+
+extension JsonRpcId: Encodable {
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        if let integer = self.int {
+            try container.encode(integer)
+        } else if let string = self.string {
+            try container.encode(string)
+        } else {
+            try container.encodeNil()
+        }
+    }
+}

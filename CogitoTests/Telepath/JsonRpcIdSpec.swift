@@ -40,5 +40,23 @@ class JsonRpcIdSpec: QuickSpec {
             expect(JsonRpcId(42).object as? Int) == 42
             expect(JsonRpcId("a string").object as? String) == "a string"
         }
+
+        it("is encodable as an integer") {
+            let encoder = JSONEncoder()
+            let json = try! encoder.encode([JsonRpcId(42)])
+            expect(try! JSON(data: json)) == JSON([42])
+        }
+
+        it("is encodable as a string") {
+            let encoder = JSONEncoder()
+            let json = try! encoder.encode([JsonRpcId("a string")])
+            expect(try! JSON(data: json)) == JSON(["a string"])
+        }
+
+        it("is encodable as a null value") {
+            let encoder = JSONEncoder()
+            let json = try! encoder.encode([JsonRpcId()])
+            expect(try! JSON(data: json)) == JSON([nil])
+        }
     }
 }
