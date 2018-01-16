@@ -142,6 +142,9 @@
 		5C04E4511FA788D200A70C60 /* AccountActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04E44F1FA788D200A70C60 /* AccountActions.swift */; };
 		5C04E4531FA87D5200A70C60 /* AccountActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04E4521FA87D5200A70C60 /* AccountActionsSpec.swift */; };
 		5C04E4551FA8D61700A70C60 /* TelepathChannelSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04E4541FA8D61700A70C60 /* TelepathChannelSpy.swift */; };
+		5C0C74F6200DF705009463F9 /* JsonRpcId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0C74F5200DF705009463F9 /* JsonRpcId.swift */; };
+		5C0C74F7200DF705009463F9 /* JsonRpcId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0C74F5200DF705009463F9 /* JsonRpcId.swift */; };
+		5C0C74FA200DF71D009463F9 /* JsonRpcIdSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0C74F8200DF71D009463F9 /* JsonRpcIdSpec.swift */; };
 		5C20A0F61FA1FAED00B443C9 /* TelepathActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */; };
 		5C20A0F81FA1FBDD00B443C9 /* TelepathReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */; };
 		5C20A0F91FA1FC5300B443C9 /* TelepathReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */; };
@@ -320,6 +323,8 @@
 		5C04E44F1FA788D200A70C60 /* AccountActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActions.swift; sourceTree = "<group>"; };
 		5C04E4521FA87D5200A70C60 /* AccountActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountActionsSpec.swift; sourceTree = "<group>"; };
 		5C04E4541FA8D61700A70C60 /* TelepathChannelSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathChannelSpy.swift; sourceTree = "<group>"; };
+		5C0C74F5200DF705009463F9 /* JsonRpcId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcId.swift; sourceTree = "<group>"; };
+		5C0C74F8200DF71D009463F9 /* JsonRpcIdSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcIdSpec.swift; sourceTree = "<group>"; };
 		5C20A0F71FA1FBDD00B443C9 /* TelepathReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducer.swift; sourceTree = "<group>"; };
 		5C20A0FA1FA1FC6500B443C9 /* TelepathState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathState.swift; sourceTree = "<group>"; };
 		5C20A1021FA224C000B443C9 /* TelepathChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathChannel.swift; sourceTree = "<group>"; };
@@ -766,6 +771,7 @@
 				5CC4D2D61FE90248002F2450 /* TelepathServiceSpec.swift */,
 				5C8CFD38200791B100D383C0 /* JsonRpcServiceSpec.swift */,
 				5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */,
+				5C0C74F8200DF71D009463F9 /* JsonRpcIdSpec.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -783,6 +789,7 @@
 				5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */,
 				5C8CFD3A200798DD00D383C0 /* JsonRpcService.swift */,
 				5C8CFD3D2007993500D383C0 /* JsonRpcRequest.swift */,
+				5C0C74F5200DF705009463F9 /* JsonRpcId.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -1147,6 +1154,7 @@
 				0298D4371F7A45680070998D /* Geth.swift in Sources */,
 				5C20A0FB1FA1FC6500B443C9 /* TelepathState.swift in Sources */,
 				02A15AFB1F86719400A94163 /* DiamondState.swift in Sources */,
+				5C0C74F6200DF705009463F9 /* JsonRpcId.swift in Sources */,
 				5CC4D2D41FE81815002F2450 /* JSONDecodeFromString.swift in Sources */,
 				0298D43A1F7A46A30070998D /* Node.swift in Sources */,
 				5CC4D2CB1FE7F724002F2450 /* TransactionSigningService.swift in Sources */,
@@ -1294,7 +1302,9 @@
 				02A15B041F86732500A94163 /* DiamondStateSpec.swift in Sources */,
 				02021D3E1F8C16370092DD89 /* AppActionsSpec.swift in Sources */,
 				5C20A0FC1FA1FC7C00B443C9 /* TelepathState.swift in Sources */,
+				5C0C74FA200DF71D009463F9 /* JsonRpcIdSpec.swift in Sources */,
 				5C20A0F91FA1FC5300B443C9 /* TelepathReducer.swift in Sources */,
+				5C0C74F7200DF705009463F9 /* JsonRpcId.swift in Sources */,
 				029245181F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
 				5CC4D2CC1FE7F731002F2450 /* TransactionSigningService.swift in Sources */,
 				0270D7161F9F146A00CC9038 /* ExplanationViewControllerSpec.swift in Sources */,

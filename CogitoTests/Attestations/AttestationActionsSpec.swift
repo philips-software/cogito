@@ -313,7 +313,7 @@ class AttestationActionsSpec: QuickSpec {
                     store.dispatch(action)
                     let response = JSON(parseJSON: sendPendingAction()!.message)
                     expect(response["error"]["code"].int) == AttestationError.invalidConfiguration.code
-                    expect(response["id"]) == requestId
+                    expect(response["id"]) == requestId.json
                 }
             }
 
@@ -327,7 +327,7 @@ class AttestationActionsSpec: QuickSpec {
                 store.dispatch(action)
                 let response = JSON(parseJSON: sendPendingAction()!.message)
                 expect(response["error"]["code"].int) == AttestationError.invalidRealmUrl.code
-                expect(response["id"]) == requestId
+                expect(response["id"]) == requestId.json
             }
         }
     }
