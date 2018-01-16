@@ -30,14 +30,6 @@ class TransactionSignerSpec: QuickSpec {
             expect(lastAction?.message).to(contain("missing or invalid field(s) in transaction data"))
         }
 
-        it("dispatches valid when transaction data is valid") {
-            let builder = TransactionSignerBuilder(transaction: validTransaction,
-                                                   dispatch: store.dispatch,
-                                                   getState: { return nil })
-            let signer = builder.build()
-            expect(signer).to(beAKindOf(TransactionSignerValid.self))
-        }
-
         it("dispatches invalid when transaction data is invalid") {
             var transaction = validTransaction
             transaction["from"] = "foo"
@@ -50,6 +42,14 @@ class TransactionSignerSpec: QuickSpec {
             signer.execute()
             let lastAction = store.actions.last as? TelepathActions.SendPending
             expect(lastAction?.message).to(contain("missing or invalid field(s) in transaction data"))
+        }
+
+        it("builds valid signer when transaction data is valid") {
+            let builder = TransactionSignerBuilder(transaction: validTransaction,
+                                                   dispatch: store.dispatch,
+                                                   getState: { return nil })
+            let signer = builder.build()
+            expect(signer).to(beAKindOf(TransactionSignerValid.self))
         }
     }
 }
