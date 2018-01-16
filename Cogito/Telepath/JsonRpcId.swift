@@ -21,8 +21,8 @@ struct JsonRpcId {
         json = value
     }
 
-    var number: NSNumber? {
-        return json.number
+    var int: Int? {
+        return json.int
     }
 
     var string: String? {
