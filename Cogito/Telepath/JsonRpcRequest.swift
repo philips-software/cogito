@@ -18,7 +18,7 @@ extension JsonRpcRequest {
             return nil
         }
 
-        let id = JsonRpcId(json["id"])
+        let id = JsonRpcId(json: json["id"])
         let params = json["params"]
 
         self.init(id: id, method: method, params: params)
