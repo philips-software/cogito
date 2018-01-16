@@ -11,6 +11,7 @@ import Telepath
 struct AttestationActions {
     static func StartAttestation(
         for identity: Identity,
+        requestId: JsonRpcId,
         oidcRealmUrl: URL,
         subject: String?,
         requestedOnChannel channelId: ChannelID? = nil) -> ThunkAction<AppState> {
@@ -19,8 +20,13 @@ struct AttestationActions {
                 oidcRealmUrl: oidcRealmUrl,
                 onSuccess: { nonce in dispatch(Started(nonce: nonce)) },
                 onError: { nonce, error in dispatch(StartRejected(nonce: nonce, error: error)) })
-            dispatch(Pending(identity: identity, nonce: handler.nonce,
-                             subject: subject, requestedOnChannel: channelId))
+            dispatch(Pending(
+                requestId: requestId,
+                identity: identity,
+                nonce: handler.nonce,
+                subject: subject,
+                requestedOnChannel: channelId
+            ))
             handler.run()
         }
     }
@@ -49,7 +55,12 @@ struct AttestationActions {
                 dispatch(Fulfilled(nonce: nonce, idToken: idToken))
                 if let currentChannel = state.telepath.channel,
                    currentChannel.id == pendingAttestation.requestedOnChannel {
-                    GetAttestationsValid.send(idToken: idToken, dispatch: dispatch, state: state)
+                    GetAttestationsValid.send(
+                        requestId: pendingAttestation.requestId,
+                        idToken: idToken,
+                        dispatch: dispatch,
+                        state: state
+                    )
                 }
             } catch let e {
                 dispatch(FinishRejected(nonce: nil, error: e.localizedDescription))
@@ -58,6 +69,7 @@ struct AttestationActions {
     }
 
     struct Pending: Action {
+        let requestId: JsonRpcId
         let identity: Identity
         let nonce: String
         let subject: String?

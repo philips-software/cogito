@@ -38,13 +38,18 @@ class AttestationActionsSpec: QuickSpec {
                 let dispatchRecorder = DispatchRecorder<AttestationActions.FinishRejected>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
-                        open: [validNonce: AttestationInProgress(nonce: validNonce,
-                                                                 subject: "incorrect subject",
-                                                                 identity: identity,
-                                                                 status: .started,
-                                                                 error: "the error message",
-                                                                 idToken: nil,
-                                                                 requestedOnChannel: nil)],
+                        open: [
+                            validNonce: AttestationInProgress(
+                                requestId: JsonRpcId(),
+                                nonce: validNonce,
+                                subject: "incorrect subject",
+                                identity: identity,
+                                status: .started,
+                                error: "the error message",
+                                idToken: nil,
+                                requestedOnChannel: nil
+                            )
+                        ],
                         providedAttestations: [:])
                     )
                 })
@@ -57,13 +62,18 @@ class AttestationActionsSpec: QuickSpec {
                 let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
-                        open: [validNonce: AttestationInProgress(nonce: validNonce,
-                                                                 subject: validSubject,
-                                                                 identity: identity,
-                                                                 status: .started,
-                                                                 error: nil,
-                                                                 idToken: nil,
-                                                                 requestedOnChannel: nil)],
+                        open: [
+                            validNonce: AttestationInProgress(
+                                requestId: JsonRpcId(),
+                                nonce: validNonce,
+                                subject: validSubject,
+                                identity: identity,
+                                status: .started,
+                                error: nil,
+                                idToken: nil,
+                                requestedOnChannel: nil
+                            )
+                        ],
                         providedAttestations: [:])
                     )
                 })
@@ -81,15 +91,20 @@ class AttestationActionsSpec: QuickSpec {
                 let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
-                        open: [validNonce: AttestationInProgress(nonce: validNonce,
-                                                                 subject: nil,
-                                                                 identity: identity,
-                                                                 status: .started,
-                                                                 error: nil,
-                                                                 idToken: nil,
-                                                                 requestedOnChannel: nil)],
-                        providedAttestations: [:])
-                    )
+                        open: [
+                            validNonce: AttestationInProgress(
+                                requestId: JsonRpcId(),
+                                nonce: validNonce,
+                                subject: nil,
+                                identity: identity,
+                                status: .started,
+                                error: nil,
+                                idToken: nil,
+                                requestedOnChannel: nil
+                            )
+                        ],
+                        providedAttestations: [:]
+                    ))
                 })
                 expect(dispatchRecorder.count) == 1
             }
@@ -100,13 +115,18 @@ class AttestationActionsSpec: QuickSpec {
                 let dispatchRecorder = DispatchRecorder<DiamondActions.AddJWTAttestation>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
-                        open: [validNonce: AttestationInProgress(nonce: validNonce,
-                                                                 subject: validSubject,
-                                                                 identity: identity,
-                                                                 status: .started,
-                                                                 error: nil,
-                                                                 idToken: nil,
-                                                                 requestedOnChannel: nil)],
+                        open: [
+                            validNonce: AttestationInProgress(
+                                requestId: JsonRpcId(),
+                                nonce: validNonce,
+                                subject: validSubject,
+                                identity: identity,
+                                status: .started,
+                                error: nil,
+                                idToken: nil,
+                                requestedOnChannel: nil
+                            )
+                        ],
                         providedAttestations: [:])
                     )
                 })
@@ -167,7 +187,9 @@ class AttestationActionsSpec: QuickSpec {
                     it("only dispatches Telepath send message") {
                         let action = getAttestationsAction!
                         store.dispatch(action)
-                        expect(sendPendingAction()?.message) == "{\"idToken\":\"\(idToken)\"}"
+                        let response = JSON(parseJSON: sendPendingAction()!.message)
+                        expect(response["id"]) == requestId.json
+                        expect(response["result"].string) == idToken
                     }
                 }
 
@@ -196,7 +218,9 @@ class AttestationActionsSpec: QuickSpec {
                                 return
                             }
                             approveAction.handler!(approveAction)
-                            expect(sendPendingAction()?.message) == "{\"idToken\":\"\(idToken)\"}"
+                            let response = JSON(parseJSON: sendPendingAction()!.message)
+                            expect(response["id"]) == requestId.json
+                            expect(response["result"].string) == idToken
                             let attestationProvided = store.actions.contains { $0 is AttestationActions.Provided }
                             expect(attestationProvided).to(beTrue())
                         }
@@ -257,13 +281,16 @@ class AttestationActionsSpec: QuickSpec {
 
                 context("when the attestation becomes available") {
                     func attestationInProgress(channelId: ChannelID) -> AttestationInProgress {
-                        return AttestationInProgress(nonce: validNonce,
-                                                     subject: validSubject,
-                                                     identity: identityWithoutAttestation,
-                                                     status: .started,
-                                                     error: nil,
-                                                     idToken: nil,
-                                                     requestedOnChannel: channelId)
+                        return AttestationInProgress(
+                            requestId: requestId,
+                            nonce: validNonce,
+                            subject: validSubject,
+                            identity: identityWithoutAttestation,
+                            status: .started,
+                            error: nil,
+                            idToken: nil,
+                            requestedOnChannel: channelId
+                        )
                     }
 
                     context("when channel has not changed") {
@@ -277,7 +304,9 @@ class AttestationActionsSpec: QuickSpec {
                                     providedAttestations: [:])
                             )
                             store.dispatch(finishAction)
-                            expect(sendPendingAction()?.message) == "{\"idToken\":\"\(idToken)\"}"
+                            let response = JSON(parseJSON: sendPendingAction()!.message)
+                            expect(response["id"]) == requestId.json
+                            expect(response["result"].string) == idToken
                             let attestationProvided = store.actions.contains { $0 is AttestationActions.Provided }
                             expect(attestationProvided).to(beTrue())
                         }

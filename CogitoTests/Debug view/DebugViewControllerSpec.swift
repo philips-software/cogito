@@ -48,7 +48,7 @@ class DebugViewControllerSpec: QuickSpec {
             viewController.connection.actions = DebugViewController.Actions(
                 resetCreateIdentity: { resetCalled = true },
                 resetAppState: {},
-                startOpenIdConnectAttestation: { _, _, _ in }
+                startOpenIdConnectAttestation: { _, _, _, _ in }
             )
             let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: type(of: self)))
             let createIdentityViewController = storyboard.instantiateViewController(withIdentifier: "CreateIdentity")
