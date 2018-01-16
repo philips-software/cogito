@@ -6,7 +6,7 @@ target 'Cogito' do
   pod 'ReSwift', :git => 'https://github.com/ReSwift/ReSwift', :branch => 'master'
   pod 'ReSwiftThunk', :git => 'https://github.com/mikecole20/ReSwiftThunk.git', :branch => 'swift4.0'
   pod 'Geth', '~> 1.7.1'
-  pod 'BigInt', '~> 3.0'
+  pod 'BigInt', '~> 3.0', :inhibit_warnings => true
   pod 'SwiftLint', '0.21.0'
   pod 'ReRxSwift', '~> 1.1'
   pod 'KeychainAccess', '~> 3.1'
