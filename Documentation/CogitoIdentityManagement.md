@@ -24,7 +24,7 @@ For a more details about zk-SNARKS we recommend [Introduction to zk-SNARKs with 
 
 We describe the application of zk-SANRKs to verifiable claims using a running example where a student of a university can receive a discount when buying goods in a store that honors students of that university with this privilege.
 
-Bob is a student of University of Twente (`ut`). Bob visits the university and requests a credential proving that he is a student of that university. After showing his id document, university issues the following credential to Bob:
+Bob is a student of a university (`ut`). Bob visits the university and requests a credential proving that he is a student of that university. After showing his id document, university issues the following credential to Bob:
 
 ```
 ut.student <- bob
@@ -73,7 +73,7 @@ The disadvantage of this solution would be that the verification function become
 
 Bob will store `zk(c)`. When Bob wants to prove to the store that he is a student of the university he provides the zero-knowledge credential to the store. In order to verify that Bob is indeed a student of the university, the store performs the following steps:
 
-1. Verify the signature on the `zk(c)` using the public key of University of Twente.
+1. Verify the signature on the `zk(c)` using the public key of the university.
 2. Check that the role (`student` in our case) specified in `zk(c)` matches the required discount role.
 3. Assert that `V(vk, H(c), prf) === true`.
 
@@ -91,7 +91,7 @@ For this reason we need to consider the benefits of being compliant with DIDs an
 
 Please join the discussion on how to integrate DIDs with Cogito by adding content and comments in [DIDs for Cogito self-sovereign identity solution](https://confluence.atlas.philips.com/display/BLA/DIDs+for+Cogito+self-sovereign+identity+solution) document.
 
-Cogito for OpenID providers
+## Cogito for OpenID providers
 
 TBD...
 
