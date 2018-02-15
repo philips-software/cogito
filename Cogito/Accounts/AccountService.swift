@@ -2,7 +2,7 @@
 
 import ReSwift
 
-struct AccountService: NewTelepathService {
+struct AccountService: TelepathService {
     let store: Store<AppState>
 
     func onRequest(_ request: JsonRpcRequest) {

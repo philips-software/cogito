@@ -4,13 +4,13 @@ import ReSwift
 
 class TelepathSubscriber: StoreSubscriber {
     let store: Store<AppState>
-    var services: [NewTelepathService] = []
+    var services: [TelepathService] = []
 
     init(store: Store<AppState>) {
         self.store = store
     }
 
-    func addService(_ service: NewTelepathService) {
+    func addService(_ service: TelepathService) {
         services.append(service)
     }
 
@@ -36,6 +36,6 @@ class TelepathSubscriber: StoreSubscriber {
     }
 }
 
-protocol NewTelepathService {
+protocol TelepathService {
     func onRequest(_ request: JsonRpcRequest)
 }
