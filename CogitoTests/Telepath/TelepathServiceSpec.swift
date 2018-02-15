@@ -70,7 +70,7 @@ class TelepathServiceSpec: QuickSpec {
                 itDoesNotCallOnMessage()
             }
 
-            context("when the account request is not the oldest message") {
+            context("when the expected request is not the oldest message") {
                 whenReceiving(messages: [otherRequest, testRequest])
                 itDoesNotCallOnMessage()
             }
