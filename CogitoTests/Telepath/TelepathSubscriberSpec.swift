@@ -65,6 +65,18 @@ class TelepathSubscriberSpec: QuickSpec {
                 }))
             }
         }
+
+        context("when there are no messages waiting") {
+            beforeEach {
+                subscriber.newState(state: [])
+            }
+
+            it("does nothing") {
+                expect(store.actions).toNot(containElementSatisfying({
+                    $0 is TelepathActions.ReceivedMessageHandled
+                }))
+            }
+        }
     }
 }
 
