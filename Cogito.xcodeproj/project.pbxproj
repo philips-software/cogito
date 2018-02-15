@@ -179,6 +179,9 @@
 		5CC4D2D41FE81815002F2450 /* JSONDecodeFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */; };
 		5CC4D2D51FE81815002F2450 /* JSONDecodeFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */; };
 		5CC4D2D71FE90248002F2450 /* TelepathServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2D61FE90248002F2450 /* TelepathServiceSpec.swift */; };
+		5CDB58DC203589CC00A28D60 /* TelepathSubscriberSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB58DB203589CC00A28D60 /* TelepathSubscriberSpec.swift */; };
+		5CDB58DE20358B4100A28D60 /* TelepathSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB58DD20358B4100A28D60 /* TelepathSubscriber.swift */; };
+		5CDB58DF20358B7700A28D60 /* TelepathSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB58DD20358B4100A28D60 /* TelepathSubscriber.swift */; };
 		C00B50288844174B2DCC9AD6 /* DialogPresenterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B58EF23AD635EAE304108 /* DialogPresenterActions.swift */; };
 		C00B505E972138AEEFC08864 /* AttestationsReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */; };
 		C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */; };
@@ -347,6 +350,8 @@
 		5CC4D2D01FE80E8E002F2450 /* TelepathService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathService.swift; sourceTree = "<group>"; };
 		5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodeFromString.swift; sourceTree = "<group>"; };
 		5CC4D2D61FE90248002F2450 /* TelepathServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathServiceSpec.swift; sourceTree = "<group>"; };
+		5CDB58DB203589CC00A28D60 /* TelepathSubscriberSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathSubscriberSpec.swift; sourceTree = "<group>"; };
+		5CDB58DD20358B4100A28D60 /* TelepathSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathSubscriber.swift; sourceTree = "<group>"; };
 		8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51C652F88A1C505BE309FCA /* Pods-Cogito-CogitoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito-CogitoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito-CogitoTests/Pods-Cogito-CogitoTests.release.xcconfig"; sourceTree = "<group>"; };
 		C00B5147CAE92346F14EF19F /* Data+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+hex.swift"; sourceTree = "<group>"; };
@@ -772,6 +777,7 @@
 				5C8CFD38200791B100D383C0 /* JsonRpcServiceSpec.swift */,
 				5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */,
 				5C0C74F8200DF71D009463F9 /* JsonRpcIdSpec.swift */,
+				5CDB58DB203589CC00A28D60 /* TelepathSubscriberSpec.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -790,6 +796,7 @@
 				5C8CFD3A200798DD00D383C0 /* JsonRpcService.swift */,
 				5C8CFD3D2007993500D383C0 /* JsonRpcRequest.swift */,
 				5C0C74F5200DF705009463F9 /* JsonRpcId.swift */,
+				5CDB58DD20358B4100A28D60 /* TelepathSubscriber.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -1192,6 +1199,7 @@
 				02D0C0D41F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
 				02CD80581F7E30D100AA5C3A /* ActionLogger.swift in Sources */,
 				5C20A0F81FA1FBDD00B443C9 /* TelepathReducer.swift in Sources */,
+				5CDB58DE20358B4100A28D60 /* TelepathSubscriber.swift in Sources */,
 				029691551F7166EE00654BD0 /* KeyStoreState.swift in Sources */,
 				02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */,
 				02C7420A1F8F5B6E007AE227 /* CameraButton.swift in Sources */,
@@ -1225,10 +1233,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				02BE32CE1F7A5C55006C7287 /* SyncProgressReporterSpec.swift in Sources */,
+				5CDB58DC203589CC00A28D60 /* TelepathSubscriberSpec.swift in Sources */,
 				028F4EF51F7CF7EB0015C4AF /* DebugViewControllerSpec.swift in Sources */,
 				026779B02007B49A00C2D45C /* TransactionSignerSpec.swift in Sources */,
 				0270D7221F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift in Sources */,
 				02C305471F87596200351B4A /* DebugViewController.swift in Sources */,
+				5CDB58DF20358B7700A28D60 /* TelepathSubscriber.swift in Sources */,
 				029245151F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
 				0270D7141F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */,
 				5CC4D2C91FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift in Sources */,
