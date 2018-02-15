@@ -30,12 +30,12 @@ class TelepathSubscriber: StoreSubscriber {
         guard let message = incomingMessages.first else {
             return
         }
+        store.dispatch(TelepathActions.ReceivedMessageHandled())
         if let request = JsonRpcRequest(parse: message) {
             for service in services {
                 service.onRequest(request)
             }
         }
-        store.dispatch(TelepathActions.ReceivedMessageHandled())
     }
 }
 
