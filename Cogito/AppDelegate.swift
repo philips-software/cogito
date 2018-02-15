@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
+        telepathSubscriber?.stop()
         telepathReceiver?.stop()
         storePersister?.stop()
     }
@@ -50,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         storePersister?.start()
         telepathReceiver?.start()
+        telepathSubscriber?.start()
     }
 
     func startGeth() {
