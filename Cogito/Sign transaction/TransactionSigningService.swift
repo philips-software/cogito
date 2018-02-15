@@ -2,7 +2,7 @@
 
 import ReSwift
 
-struct TransactionSigningService: NewTelepathService {
+struct TransactionSigningService: TelepathService {
     let store: Store<AppState>
 
     func onRequest(_ request: JsonRpcRequest) {

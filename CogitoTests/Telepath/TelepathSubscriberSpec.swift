@@ -68,7 +68,7 @@ class TelepathSubscriberSpec: QuickSpec {
     }
 }
 
-class ServiceSpy: NewTelepathService {
+class ServiceSpy: TelepathService {
     var latestRequest: JsonRpcRequest?
 
     func onRequest(_ request: JsonRpcRequest) {

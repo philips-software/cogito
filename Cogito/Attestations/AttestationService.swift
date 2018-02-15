@@ -2,7 +2,7 @@
 
 import ReSwift
 
-struct AttestationService: NewTelepathService {
+struct AttestationService: TelepathService {
 
     let store: Store<AppState>
 
