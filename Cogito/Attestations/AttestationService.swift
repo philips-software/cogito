@@ -2,14 +2,13 @@
 
 import ReSwift
 
-class AttestationService: JsonRpcService {
+struct AttestationService: NewTelepathService {
 
-    init(store: Store<AppState>) {
-        super.init(store: store, method: "attestations")
-    }
+    let store: Store<AppState>
 
-    override func onRequest(_ request: JsonRpcRequest) {
+    func onRequest(_ request: JsonRpcRequest) {
         if
+            request.method == "attestations",
             let appName = request.params["app"].string,
             let realmUrl = request.params["realmUrl"].string
         {
