@@ -33,5 +33,24 @@ class AttestationServiceSpec: QuickSpec {
                 expect(store.actions.last as? ThunkAction<AppState>).toNot(beNil())
             }
         }
+
+        describe("when a different request comes in") {
+            beforeEach {
+                let request = JsonRpcRequest(
+                    id: JsonRpcId(),
+                    method: "other",
+                    params: JsonRpcParams([
+                        "app": "test",
+                        "realmUrl": realmUrl
+                    ])
+                )
+                service.onRequest(request)
+            }
+
+            it("is ignored") {
+                expect(store.actions.last as? ThunkAction<AppState>).to(beNil())
+            }
+
+        }
     }
 }
