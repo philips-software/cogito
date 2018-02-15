@@ -27,7 +27,10 @@ class TelepathSubscriber: StoreSubscriber {
     }
 
     func newState(state incomingMessages: [String]) {
-        if let message = incomingMessages.first, let request = JsonRpcRequest(parse: message) {
+        guard let message = incomingMessages.first else {
+            return
+        }
+        if let request = JsonRpcRequest(parse: message) {
             for service in services {
                 service.onRequest(request)
             }
