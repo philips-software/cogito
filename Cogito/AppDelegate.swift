@@ -12,6 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var storePersister: StorePersister?
     var telepathReceiver: TelepathReceiver?
+    var telepathSubscriber: TelepathSubscriber?
     var accountService: AccountService?
     var attestationService: AttestationService?
     var transactionSigningService: TransactionSigningService?
@@ -28,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         telepathReceiver = TelepathReceiver(store: appStore)
-        accountService = AccountService(store: appStore)
+        telepathSubscriber = TelepathSubscriber(store: appStore)
+        telepathSubscriber?.addService(AccountService(store: appStore))
         attestationService = AttestationService(store: appStore)
         transactionSigningService = TransactionSigningService(store: appStore)
 
@@ -46,7 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         telepathReceiver?.stop()
         storePersister?.stop()
-        accountService?.stop()
         attestationService?.stop()
         transactionSigningService?.stop()
     }
@@ -54,7 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         storePersister?.start()
         telepathReceiver?.start()
-        accountService?.start()
         attestationService?.start()
         transactionSigningService?.start()
     }
