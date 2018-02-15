@@ -2,12 +2,13 @@
 
 import ReSwift
 
-class TransactionSigningService: JsonRpcService {
-    init(store: Store<AppState>) {
-        super.init(store: store, method: "sign")
-    }
+struct TransactionSigningService: NewTelepathService {
+    let store: Store<AppState>
 
-    override func onRequest(_ request: JsonRpcRequest) {
+    func onRequest(_ request: JsonRpcRequest) {
+        guard request.method == "sign" else {
+            return
+        }
         store.dispatch(TransactionSigningActions.Sign(tx: [:])) // todo: take from request
     }
 }
