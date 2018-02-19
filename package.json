@@ -24,5 +24,10 @@
   },
   "peerDependencies": {
     "web3": "^1.0.0-beta.26"
+  },
+  "standard": {
+    "envs": [
+      "mocha"
+    ]
   }
 }
