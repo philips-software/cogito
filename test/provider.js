@@ -1,15 +1,9 @@
-const chai = require('chai')
-const expect = chai.expect
-const chaiAsPromised = require('chai-as-promised')
-const dirtyChai = require('dirty-chai')
+const expect = require('chai').expect
 const td = require('testdouble')
 const anything = td.matchers.anything
 const contains = td.matchers.contains
 const Web3 = require('web3')
 const CogitoProvider = require('../lib/provider')
-
-chai.use(chaiAsPromised)
-chai.use(dirtyChai)
 
 describe('provider', function () {
   let cogitoProvider
