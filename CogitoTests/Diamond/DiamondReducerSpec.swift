@@ -58,5 +58,22 @@ class DiamondReducerSpec: QuickSpec {
             let nextState = diamondReducer(action: action, state: initialState)
             expect(nextState.facets[identity.identifier]!.idTokens).to(contain(idToken))
         }
+
+        it("handles DeleteFacet") {
+            let identity = Identity(description: "test identity", address: Address.testAddress1)
+            let initialState = DiamondState(facets: [identity])
+            let action = DiamondActions.DeleteFacet(uuid: identity.identifier)
+            let nextState = diamondReducer(action: action, state: initialState)
+            expect(nextState.facets.count) == 0
+        }
+
+        it("changes selectedFacet if DeleteFacet deletes the selected one") {
+            let identity = Identity(description: "test identity", address: Address.testAddress1)
+            var initialState = DiamondState(facets: [identity])
+            initialState.selectedFacetId = identity.identifier
+            let action = DiamondActions.DeleteFacet(uuid: identity.identifier)
+            let nextState = diamondReducer(action: action, state: initialState)
+            expect(nextState.selectedFacetId).to(beNil())
+        }
     }
 }
