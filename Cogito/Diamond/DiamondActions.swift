@@ -9,6 +9,10 @@ struct DiamondActions {
         let account: GethAccount
     }
 
+    struct DeleteFacet: Action {
+        let uuid: UUID
+    }
+
     struct AddJWTAttestation: Action {
         let identity: Identity
         let idToken: String

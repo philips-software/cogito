@@ -10,23 +10,31 @@ import ReRxSwift
 class IdentityManagerViewController: UITableViewController, Connectable {
 
     var dataSource: RxTableViewSectionedAnimatedDataSource<ViewModel.FacetGroup>!
+    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tableView.dataSource = nil
-        dataSource = RxTableViewSectionedAnimatedDataSource(configureCell: { _, tableView, indexPath, item in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Facet", for: indexPath)
-            if let facetCell = cell as? FacetTableVieCell {
-                // space compensates for slanted font, gets clipped otherwise
-                facetCell.textLabel?.text = " " + item.facet.description
-                let addr = item.facet.address.description
-                let range = addr.startIndex ..< addr.index(addr.startIndex, offsetBy: 10)
-                facetCell.detailTextLabel?.text = addr[range] + "..."
-            }
-            return cell
-        })
+        dataSource = RxTableViewSectionedAnimatedDataSource(
+            configureCell: { _, tableView, indexPath, item in
+                let cell = tableView.dequeueReusableCell(withIdentifier: "Facet", for: indexPath)
+                if let facetCell = cell as? FacetTableVieCell {
+                    // space compensates for slanted font, gets clipped otherwise
+                    facetCell.textLabel?.text = " " + item.facet.description
+                    let addr = item.facet.address.description
+                    let range = addr.startIndex ..< addr.index(addr.startIndex, offsetBy: 10)
+                    facetCell.detailTextLabel?.text = addr[range] + "..."
+                }
+                return cell
+            },
+            canEditRowAtIndexPath: { _, _ in return true }
+        )
         connection.bind(\Props.facetGroups, to: tableView.rx.items(dataSource: dataSource))
+        tableView.rx.itemDeleted.subscribe(onNext: { [unowned self] (indexPath: IndexPath) in
+            let uuid = self.props.facetGroups[indexPath.section].items[indexPath.row].identity
+            self.actions.deleteIdentity(uuid)
+        }).disposed(by: disposeBag)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +67,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     }
     struct Actions {
         let resetCreateIdentity: () -> Void
+        let deleteIdentity: (UUID) -> Void
     }
 
     let connection = Connection(store: appStore,
@@ -74,7 +83,8 @@ private func mapStateToProps(state: AppState) -> IdentityManagerViewController.P
 
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> IdentityManagerViewController.Actions {
     return IdentityManagerViewController.Actions(
-        resetCreateIdentity: { dispatch(CreateIdentityActions.ResetForm()) }
+        resetCreateIdentity: { dispatch(CreateIdentityActions.ResetForm()) },
+        deleteIdentity: { uuid in dispatch(DiamondActions.DeleteFacet(uuid: uuid)) }
     )
 }
 
