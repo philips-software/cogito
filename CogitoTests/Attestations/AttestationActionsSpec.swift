@@ -147,13 +147,11 @@ class AttestationActionsSpec: QuickSpec {
             var getAttestationsAction: ThunkAction<AppState>!
 
             func sendPendingAction() -> TelepathActions.SendPending? {
-                return store.actions.filter { $0 is TelepathActions.SendPending }.first
-                    as? TelepathActions.SendPending
+                return store.firstAction(ofType: TelepathActions.SendPending.self)
             }
 
             func requestAlertAction() -> DialogPresenterActions.RequestAlert? {
-                return store.actions.filter({ $0 is DialogPresenterActions.RequestAlert }).first!
-                    as? DialogPresenterActions.RequestAlert
+                return store.firstAction(ofType: DialogPresenterActions.RequestAlert.self)
             }
 
             beforeEach {
@@ -263,9 +261,8 @@ class AttestationActionsSpec: QuickSpec {
                         let alert = requestAlertAction()!
                         let loginAction = alert.requestedAlert.actions.filter({ $0.style == .default }).first!
                         loginAction.handler!(loginAction)
-                        let pending = store.actions.filter { $0 is AttestationActions.Pending }.first!
-                            as! AttestationActions.Pending // swiftlint:disable:this force_cast
-                        expect(pending.requestedOnChannel) == channel.id
+                        let pending = store.firstAction(ofType: AttestationActions.Pending.self)
+                        expect(pending?.requestedOnChannel) == channel.id
                     }
                 }
 
