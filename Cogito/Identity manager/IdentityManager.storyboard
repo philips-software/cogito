@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bHl-rf-6fF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bHl-rf-6fF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -61,6 +62,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Me, Myself and I" id="ck6-H8-qtF">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="Gm6-Gd-4va">
+                            <connections>
+                                <segue destination="aui-nC-Exo" kind="show" identifier="CreateIdentity" id="wkF-Rx-o7A"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="H5h-Wd-Itf">
                             <connections>
                                 <action selector="done:" destination="1Zv-v9-37E" id="NMM-vf-y73"/>
@@ -89,6 +95,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I3h-df-7FC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1540" y="63"/>
+        </scene>
+        <!--Create Identity View Controller-->
+        <scene sceneID="p2o-SG-Psn">
+            <objects>
+                <viewController storyboardIdentifier="CreateIdentity" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aui-nC-Exo" customClass="CreateIdentityViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NOX-NN-kCf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am also:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeB-9W-OFi">
+                                <rect key="frame" x="151" y="134" width="73" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. your name or &quot;work&quot;" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qvy-nl-rbr">
+                                <rect key="frame" x="16" y="208" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES" textContentType="nickname"/>
+                                <connections>
+                                    <action selector="editingChanged" destination="aui-nC-Exo" eventType="editingChanged" id="P1e-cT-jMl"/>
+                                    <action selector="editingDidEnd" destination="aui-nC-Exo" eventType="editingDidEnd" id="Ldh-O6-qQV"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VW-9w-gSg">
+                                <rect key="frame" x="158.5" y="313.5" width="58" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="createTapped" destination="aui-nC-Exo" eventType="touchUpInside" id="o8N-Xs-26a"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(this will be private, only you will see this)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMn-Ao-KRC">
+                                <rect key="frame" x="69.5" y="246" width="236" height="15"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Qvy-nl-rbr" firstAttribute="leading" secondItem="N15-uF-45j" secondAttribute="leading" constant="16" id="0iK-lt-bf4"/>
+                            <constraint firstItem="0VW-9w-gSg" firstAttribute="top" secondItem="YMn-Ao-KRC" secondAttribute="bottom" constant="53" id="4Xg-El-OaH"/>
+                            <constraint firstItem="0VW-9w-gSg" firstAttribute="centerX" secondItem="NOX-NN-kCf" secondAttribute="centerX" id="EST-PN-Nkk"/>
+                            <constraint firstItem="YMn-Ao-KRC" firstAttribute="centerX" secondItem="NOX-NN-kCf" secondAttribute="centerX" id="RQs-rf-KNg"/>
+                            <constraint firstItem="CeB-9W-OFi" firstAttribute="top" secondItem="N15-uF-45j" secondAttribute="top" constant="70" id="SMY-5q-Hku"/>
+                            <constraint firstItem="YMn-Ao-KRC" firstAttribute="top" secondItem="Qvy-nl-rbr" secondAttribute="bottom" constant="8" id="exE-2X-z2x"/>
+                            <constraint firstItem="Qvy-nl-rbr" firstAttribute="top" secondItem="CeB-9W-OFi" secondAttribute="bottom" constant="53" id="fag-jr-ziu"/>
+                            <constraint firstItem="N15-uF-45j" firstAttribute="trailing" secondItem="Qvy-nl-rbr" secondAttribute="trailing" constant="16" id="ffG-TQ-ky4"/>
+                            <constraint firstItem="CeB-9W-OFi" firstAttribute="centerX" secondItem="NOX-NN-kCf" secondAttribute="centerX" id="nWR-BM-d6R"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="N15-uF-45j"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="showCloseButton" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outlet property="createButton" destination="0VW-9w-gSg" id="N5x-Fn-dTj"/>
+                        <outlet property="descriptionField" destination="Qvy-nl-rbr" id="pXk-rg-Y6R"/>
+                    </connections>
+                </viewController>
+                <barButtonItem systemItem="cancel" id="cCk-tu-fdh"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5CD-ZM-nuN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="121" y="63"/>
         </scene>
     </scenes>
 </document>

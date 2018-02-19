@@ -7,7 +7,7 @@ import RxDataSources
 import ReSwift
 import ReRxSwift
 
-class IdentityManagerViewController: UITableViewController {
+class IdentityManagerViewController: UITableViewController, Connectable {
 
     var dataSource: RxTableViewSectionedAnimatedDataSource<ViewModel.FacetGroup>!
 
@@ -43,10 +43,23 @@ class IdentityManagerViewController: UITableViewController {
         dismiss(animated: true)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? CreateIdentityViewController {
+            destination.onDone = { [weak self] in
+                destination.navigationController?.popViewController(animated: true)
+                DispatchQueue.main.async {
+                    self?.actions.resetCreateIdentity()
+                }
+            }
+        }
+    }
+
     struct Props {
         let facetGroups: [ViewModel.FacetGroup]
     }
-    struct Actions {}
+    struct Actions {
+        let resetCreateIdentity: () -> Void
+    }
 
     let connection = Connection(store: appStore,
                                 mapStateToProps: mapStateToProps,
@@ -60,7 +73,9 @@ private func mapStateToProps(state: AppState) -> IdentityManagerViewController.P
 }
 
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> IdentityManagerViewController.Actions {
-    return IdentityManagerViewController.Actions()
+    return IdentityManagerViewController.Actions(
+        resetCreateIdentity: { dispatch(CreateIdentityActions.ResetForm()) }
+    )
 }
 
 typealias CogitoIdentity = Identity
