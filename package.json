@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "description": "Secure communication channel between mobile app and web app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/telepath-js",
-  "private": "true",
+  "private": true,
   "license": "UNLICENSED",
   "main": "index.js",
   "scripts": {
-    "test": "yarn run standard && yarn run nyc mocha 'test/**/*.js'"
+    "test": "yarn standard && yarn nyc mocha 'test/**/*.js'"
   },
   "engines": {
     "node": ">=7.6.0"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -20,7 +23,8 @@
     "nock": "^9.0.22",
     "nyc": "^11.2.1",
     "standard": "^10.0.3",
-    "testdouble": "^3.2.6"
+    "testdouble": "^3.2.6",
+    "babel-eslint": "8.0.2"
   },
   "dependencies": {
     "base64url": "^2.0.0",
