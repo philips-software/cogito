@@ -2,6 +2,7 @@ const expect = require('chai').expect
 const td = require('testdouble')
 const anything = td.matchers.anything
 const contains = td.matchers.contains
+const { stubResponse } = require('./provider-stubbing')
 const Web3 = require('web3')
 const CogitoProvider = require('../lib/provider')
 
@@ -68,11 +69,7 @@ describe('provider', function () {
 
         beforeEach(function () {
           const sendRaw = { method: 'eth_sendRawTransaction', params: [signed] }
-          td.when(originalProvider.send(contains(sendRaw), anything()))
-            .thenDo(function (request, callback) {
-              const response = { jsonrpc: '2.0', result: hash, id: request.id }
-              callback(null, response)
-            })
+          stubResponse(originalProvider, contains(sendRaw), hash)
         })
 
         it('sends a cogito signed transaction', function (done) {
@@ -94,11 +91,7 @@ describe('provider', function () {
   })
 
   it('passes requests to the original provider', function (done) {
-    td.when(originalProvider.send(anything(), anything()))
-      .thenDo(function (request, callback) {
-        const response = { jsonrpc: '2.0', result: 42, id: request.id }
-        callback(null, response)
-      })
+    stubResponse(originalProvider, anything(), 42)
     web3.eth.getBlockNumber(function (_, result) {
       expect(result).to.equal(42)
       done()

@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 const td = require('testdouble')
 const contains = td.matchers.contains
-const anything = td.matchers.anything
+const { stubResponse, stubResponseError } = require('./provider-stubbing')
 const TransactionDefaults = require('../lib/transaction-defaults')
 
 describe('transaction defaults', function () {
@@ -109,19 +109,3 @@ describe('transaction defaults', function () {
     })
   })
 })
-
-function stubResponse (provider, request, result) {
-  td
-    .when(provider.send(request, anything()))
-    .thenDo(function (request, callback) {
-      callback(null, { jsonrpc: 2.0, id: request.id, result })
-    })
-}
-
-function stubResponseError (provider, request) {
-  td
-    .when(provider.send(request, anything()))
-    .thenDo(function (request, callback) {
-      callback(new Error('an error'), null)
-    })
-}
