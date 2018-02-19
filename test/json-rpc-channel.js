@@ -69,4 +69,20 @@ describe('JSON RPC Channel', function () {
     td.when(channel.createConnectUrl(baseUrl)).thenReturn(url)
     expect(jsonrpc.createConnectUrl(baseUrl)).to.equal(url)
   })
+
+  it('exposes id of the underlying secure channel', () => {
+    const id = 'channel id'
+    channel.id = id
+
+    jsonrpc = new JsonRpcChannel({ channel: channel })
+    expect(jsonrpc.id).to.equal(id)
+  })
+
+  it('exposes the key of the underlying secure channel', () => {
+    const key = 'channel key'
+    channel.key = key
+
+    jsonrpc = new JsonRpcChannel({ channel: channel })
+    expect(jsonrpc.key).to.equal(key)
+  })
 })
