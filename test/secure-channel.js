@@ -94,8 +94,8 @@ describe('Secure Channel', function () {
 
   it('has sensible polling parameters', function () {
     const channel = new SecureChannel({})
-    expect(channel.poller.interval).to.equal(100) // 100 ms
-    expect(channel.poller.retries).to.equal(6000) // at least 10 minutes
+    expect(channel.poller.interval).to.equal(1000) // 1000 ms
+    expect(channel.poller.retries).to.equal(600) // at least 10 minutes
   })
 
   it('encodes the channel id and key in a URL', function () {
