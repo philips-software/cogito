@@ -31,7 +31,7 @@ class CreateIdentityViewController: UIViewController, Connectable {
             if let e = error {
                 print("[error] createIdentity error: \(e)")
                 let alert = UIAlertController(
-                    title: "Failed to create account",
+                    title: "Failed to create identity",
                     message: "Not sure why this happened. The only options I can give" +
                              " are to retry or contact the developer, I'm afraid.",
                     preferredStyle: .alert)
