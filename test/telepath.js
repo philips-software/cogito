@@ -49,5 +49,14 @@ describe('Telepath', function () {
     it('has a random key', function () {
       expect(channel.channel.key).to.equal(randomKey)
     })
+
+    it('can create a channel with given id and key params', async () => {
+      const id = base64url.encode([11, 12, 13])
+      const key = [14, 15, 16]
+      channel = await telepath.createChannel({ id, key })
+
+      expect(channel.channel.id).to.equal(id)
+      expect(channel.channel.key).to.equal(key)
+    })
   })
 })
