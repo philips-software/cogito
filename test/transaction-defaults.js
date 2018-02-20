@@ -7,10 +7,10 @@ const TransactionDefaults = require('../lib/transaction-defaults')
 describe('transaction defaults', function () {
   const transaction = {
     from: '0x1234567890123456789012345678901234567890',
-    value: 10,
-    gasPrice: 20,
-    nonce: 30,
-    gas: 40
+    value: '0x10',
+    gasPrice: '0x20',
+    nonce: '0x30',
+    gas: '0x40'
   }
 
   let transactionDefaults
@@ -27,7 +27,7 @@ describe('transaction defaults', function () {
 
     it('is 0 when not defined', async function () {
       const defaults = await transactionDefaults.apply(noValue)
-      expect(defaults.value).to.equal(0)
+      expect(defaults.value).to.equal('0x0')
     })
 
     it('is unchanged when defined', async function () {
@@ -41,9 +41,9 @@ describe('transaction defaults', function () {
     delete noGasPrice.gasPrice
 
     it('is retrieved when not specified', async function () {
-      stubResponse(provider, contains({ method: 'eth_gasPrice' }), 42)
+      stubResponse(provider, contains({ method: 'eth_gasPrice' }), '0x42')
       const defaults = await transactionDefaults.apply(noGasPrice)
-      expect(defaults.gasPrice).to.equal(42)
+      expect(defaults.gasPrice).to.equal('0x42')
     })
 
     it('is unchanged when defined', async function () {
@@ -67,9 +67,9 @@ describe('transaction defaults', function () {
     }
 
     it('is equal to transaction count when not specified', async function () {
-      stubResponse(provider, contains(expectedRequest), 42)
+      stubResponse(provider, contains(expectedRequest), '0x42')
       const defaults = await transactionDefaults.apply(noNonce)
-      expect(defaults.nonce).to.equal(42)
+      expect(defaults.nonce).to.equal('0x42')
     })
 
     it('is unchanged when defined', async function () {
@@ -93,9 +93,9 @@ describe('transaction defaults', function () {
     }
 
     it('estimates the gas limit when not specified', async function () {
-      stubResponse(provider, contains(expectedRequest), 42)
+      stubResponse(provider, contains(expectedRequest), '0x42')
       const defaults = await transactionDefaults.apply(noGas)
-      expect(defaults.gas).to.equal(42)
+      expect(defaults.gas).to.equal('0x42')
     })
 
     it('is unchanged when defined', async function () {
