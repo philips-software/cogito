@@ -8,11 +8,12 @@ struct TransactionSignerBuilder {
     let getState: () -> AppState?
 
     func build() -> TransactionSigner {
-        guard let tx = Transaction(from: transaction) else {
+        guard let tx = UnsignedTransaction(from: transaction) else {
             return TransactionSignerInvalid(error: "missing or invalid field(s) in transaction data",
                                             dispatch: dispatch)
         }
-        return TransactionSignerValid(transaction: tx, dispatch: dispatch)
+        return TransactionSignerValid(transaction: tx,
+                                      dispatch: dispatch, getState: getState)
     }
 }
 

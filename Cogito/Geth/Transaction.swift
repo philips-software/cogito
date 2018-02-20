@@ -3,7 +3,17 @@
 import Foundation
 import BigInt
 
-struct Transaction {
+protocol Transaction {
+    var from: Address { get }
+    var to: Address { get } // swiftlint:disable:this identifier_name
+    var data: Data { get }
+    var nonce: BigInt { get }
+    var gasPrice: BigInt { get }
+    var gasLimit: BigInt { get }
+    var value: BigInt { get }
+}
+
+struct UnsignedTransaction: Transaction {
     let from: Address
     let to: Address // swiftlint:disable:this identifier_name
     let data: Data
@@ -22,7 +32,13 @@ struct Transaction {
               let data = takeData(from: txDict, key: "data") else {
             return nil
         }
+        self.init(from: from, to: to, data: data, nonce: nonce,
+                  gasPrice: gasPrice, gasLimit: gasLimit, value: value)
+    }
 
+    // swiftlint:disable:next identifier_name
+    init(from: Address, to: Address, data: Data, nonce: BigInt,
+         gasPrice: BigInt, gasLimit: BigInt, value: BigInt) {
         self.from = from
         self.to = to
         self.data = data
@@ -30,6 +46,53 @@ struct Transaction {
         self.gasPrice = gasPrice
         self.gasLimit = gasLimit
         self.value = value
+    }
+}
+
+struct SignedTransaction: Transaction {
+    let from: Address
+    let to: Address // swiftlint:disable:this identifier_name
+    let data: Data
+    let nonce: BigInt
+    let gasPrice: BigInt
+    let gasLimit: BigInt
+    let value: BigInt
+    let signingV: BigInt
+    let signingR: String
+    let signingS: String
+
+    init?(from txDict: [String: Any]) {
+        guard let from = takeAddress(from: txDict, key: "from"),
+              let to = takeAddress(from: txDict, key: "to"),
+              let gasPrice = takeNumber(from: txDict, key: "gasPrice"),
+              let gasLimit = takeNumber(from: txDict, key: "gasLimit"),
+              let value = takeNumber(from: txDict, key: "value"),
+              let nonce = takeNumber(from: txDict, key: "nonce"),
+              let data = takeData(from: txDict, key: "data"),
+              let signingV = takeNumber(from: txDict, key: "v"),
+              let signingR = txDict["r"] as? String,
+              let signingS = txDict["s"] as? String else {
+            return nil
+        }
+        self.init(from: from, to: to, data: data, nonce: nonce,
+                  gasPrice: gasPrice, gasLimit: gasLimit, value: value,
+                  signingV: signingV, signingR: signingR, signingS: signingS)
+    }
+
+    // swiftlint:disable:next identifier_name
+    init(from: Address, to: Address, data: Data, nonce: BigInt,
+         gasPrice: BigInt, gasLimit: BigInt, value: BigInt,
+         signingV: BigInt, signingR: String, signingS: String) {
+        self.from = from
+        self.to = to
+        self.data = data
+        self.nonce = nonce
+        self.gasPrice = gasPrice
+        self.gasLimit = gasLimit
+        self.value = value
+        self.signingV = signingV
+        self.signingR = signingR
+        self.signingS = signingS
     }
 }
 
