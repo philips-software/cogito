@@ -22,7 +22,7 @@ describe('transaction defaults', function () {
   })
 
   describe('value', function () {
-    const noValue = { ...transaction }
+    const noValue = Object.assign({}, transaction)
     delete noValue.value
 
     it('is 0 when not defined', async function () {
@@ -37,7 +37,7 @@ describe('transaction defaults', function () {
   })
 
   describe('gas price', function () {
-    const noGasPrice = { ...transaction }
+    const noGasPrice = Object.assign({}, transaction)
     delete noGasPrice.gasPrice
 
     it('is retrieved when not specified', async function () {
@@ -58,7 +58,7 @@ describe('transaction defaults', function () {
   })
 
   describe('nonce', function () {
-    const noNonce = { ...transaction }
+    const noNonce = Object.assign({}, transaction)
     delete noNonce.nonce
 
     const expectedRequest = {
@@ -84,7 +84,7 @@ describe('transaction defaults', function () {
   })
 
   describe('gas limit', function () {
-    const noGas = { ...transaction }
+    const noGas = Object.assign({}, transaction)
     delete noGas.gas
 
     const expectedRequest = {

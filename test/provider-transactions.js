@@ -61,7 +61,7 @@ describe('sending transactions', function () {
   })
 
   it('sets transaction defaults', function (done) {
-    const transactionWithDefaults = { value: 0, ...transaction }
+    const transactionWithDefaults = Object.assign({ value: 0 }, transaction)
     const expectedRequest = { method: 'sign', params: [transactionWithDefaults] }
     web3.eth.sendTransaction(transaction, function () {
       td.verify(telepathChannel.send(contains(expectedRequest)))
