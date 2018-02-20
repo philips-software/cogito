@@ -6,13 +6,7 @@ import ReSwift
 
 class ExplanationViewController: UIViewController, Connectable {
 
-    static let signColor = UIColor(red: 0.816, green: 0.259, blue: 0.196, alpha: 1)
-    static let rejectColor = UIColor(red: 0.111, green: 0.749, blue: 0.247, alpha: 1)
-    static let signDisabledColor = UIColor.lightGray
-    static let rejectDisabledColor = UIColor.gray
-
     @IBOutlet weak var explanationLabel: UILabel!
-    @IBOutlet weak var startAttestationButton: UIButton!
     @IBOutlet weak var signButton: UIButton!
     @IBOutlet weak var rejectButton: UIButton!
 
@@ -20,30 +14,11 @@ class ExplanationViewController: UIViewController, Connectable {
         super.viewDidLoad()
         connection.subscribe(\Props.appName) { _ in self.configureExplanation() }
         connection.subscribe(\Props.actionDescription) { _ in  self.configureExplanation() }
-        connection.subscribe(\Props.hasValidAttestation) { _ in self.configureButtons() }
     }
 
     func configureExplanation() {
-        var text = "\(props.appName) requires your signature to \(props.actionDescription)."
-        if let org = props.organization {
-            text += "\n\nIn addition, \(props.appName) requires proof that you have an account"
-            text += " with \(org)."
-        }
+        let text = "\(props.appName) requests your signature to \(props.actionDescription)."
         explanationLabel.text = text
-    }
-
-    func configureButtons() {
-        let canSign = props.hasValidAttestation ?? true
-        if canSign {
-            signButton.backgroundColor = ExplanationViewController.signColor
-            rejectButton.backgroundColor = ExplanationViewController.rejectColor
-        } else {
-            signButton.backgroundColor = ExplanationViewController.signDisabledColor
-            rejectButton.backgroundColor = ExplanationViewController.rejectDisabledColor
-        }
-        signButton.isEnabled = canSign
-        rejectButton.isEnabled = canSign
-        startAttestationButton.isHidden = canSign
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -60,10 +35,6 @@ class ExplanationViewController: UIViewController, Connectable {
         dismiss(animated: true, completion: {})
     }
 
-    @IBAction func startAttestation() {
-        actions.startAttestation()
-    }
-
     @IBAction func sign() {
         actions.sign()
     }
@@ -75,14 +46,11 @@ class ExplanationViewController: UIViewController, Connectable {
     struct Props {
         let appName: String
         let actionDescription: String
-        let organization: String?
-        let hasValidAttestation: Bool?
     }
 
     struct Actions {
         let sign: () -> Void
         let reject: () -> Void
-        let startAttestation: () -> Void
     }
 
     let connection = Connection(store: appStore,
@@ -93,16 +61,13 @@ class ExplanationViewController: UIViewController, Connectable {
 private func mapStateToProps(state: AppState) -> ExplanationViewController.Props {
     return ExplanationViewController.Props(
         appName: "Sample App",
-        actionDescription: "perform some sample action",
-        organization: "Sample Organization",
-        hasValidAttestation: false
+        actionDescription: "perform some sample action"
     )
 }
 
 private func mapDispatchToActions(dispatch: DispatchFunction) -> ExplanationViewController.Actions {
     return ExplanationViewController.Actions(
         sign: { print("not implemented yet") },
-        reject: { print("not implemented yet") },
-        startAttestation: { print("not implemented yet") }
+        reject: { print("not implemented yet") }
     )
 }
