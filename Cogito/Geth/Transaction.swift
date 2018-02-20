@@ -2,6 +2,7 @@
 
 import Foundation
 import BigInt
+import SwiftyJSON
 
 protocol Transaction {
     var from: Address { get }
@@ -79,6 +80,23 @@ struct SignedTransaction: Transaction {
                   signingV: signingV, signingR: signingR, signingS: signingS)
     }
 
+    init?(from transaction: Transaction, params: String) {
+        guard let paramsData = params.data(using: .utf8) else {
+            return nil
+        }
+        guard let json = try? JSON(data: paramsData),
+              let txDict: [String:Any] = json.dictionaryObject,
+              let signingV = takeNumber(from: txDict, key: "v"),
+              let signingR = txDict["r"] as? String,
+              let signingS = txDict["s"] as? String else {
+            return nil
+        }
+        self.init(from: transaction.from, to: transaction.to, data: transaction.data,
+                  nonce: transaction.nonce, gasPrice: transaction.gasPrice,
+                  gasLimit: transaction.gasLimit, value: transaction.value,
+                  signingV: signingV, signingR: signingR, signingS: signingS)
+    }
+
     // swiftlint:disable:next identifier_name
     init(from: Address, to: Address, data: Data, nonce: BigInt,
          gasPrice: BigInt, gasLimit: BigInt, value: BigInt,
@@ -115,7 +133,7 @@ private func takeNumber(from txDict: [String: Any], key: String) -> BigInt? {
 }
 
 private func takeData(from txDict: [String: Any], key: String) -> Data? {
-    guard let dataString = txDict["data"] as? String,
+    guard let dataString = txDict[key] as? String,
           let data = Data(fromHex: dataString) else {
         return nil
     }
