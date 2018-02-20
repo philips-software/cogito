@@ -4,7 +4,7 @@ import Quick
 import Nimble
 import Geth
 
-class TransactionSpec: QuickSpec {
+class UnsignedTransactionSpec: QuickSpec {
     override func spec() {
         let validTransaction: [String: Any] = ["from": Address.testAddress1.description,
                                                "to": Address.testAddress2.description,
@@ -16,7 +16,7 @@ class TransactionSpec: QuickSpec {
             func itCannotInitializeWhenMissing(field: String) {
                 var transaction = validTransaction
                 transaction.removeValue(forKey: field)
-                expect(Transaction(from: transaction)).to(beNil())
+                expect(UnsignedTransaction(from: transaction)).to(beNil())
             }
 
             it("cannot initialize when from is missing") { itCannotInitializeWhenMissing(field: "from") }
@@ -32,7 +32,7 @@ class TransactionSpec: QuickSpec {
             func itCannotInitializeWhen(field: String, is value: String) {
                 var transaction = validTransaction
                 transaction[field] = value
-                expect(Transaction(from: transaction)).to(beNil())
+                expect(UnsignedTransaction(from: transaction)).to(beNil())
             }
 
             it("dispatches invalid when from is invalid") { itCannotInitializeWhen(field: "from", is: "0x1") }
@@ -42,7 +42,7 @@ class TransactionSpec: QuickSpec {
         }
 
         it("can initialize with valid data") {
-            let tx = Transaction(from: validTransaction)
+            let tx = UnsignedTransaction(from: validTransaction)
             expect(tx).toNot(beNil())
             expect(tx?.from) == Address.testAddress1
             expect(tx?.to) == Address.testAddress2
@@ -56,7 +56,7 @@ class TransactionSpec: QuickSpec {
         it("accepts plain number for gasPrice") {
             var transaction = validTransaction
             transaction["gasPrice"] = 42
-            let tx = Transaction(from: transaction)
+            let tx = UnsignedTransaction(from: transaction)
             expect(tx?.gasPrice.description) == "42"
         }
     }
