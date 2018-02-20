@@ -43,9 +43,12 @@ class SignedTransactionSpec: QuickSpec {
             it("dispatches invalid when to is invalid") { itCannotInitializeWhen(field: "to", is: "0x2") }
             it("dispatches invalid when data is invalid") { itCannotInitializeWhen(field: "data", is: "0x3") }
             it("dispatches invalid when nonce is invalid") { itCannotInitializeWhen(field: "nonce", is: "0x") }
-            it("dispatches invalid when gasLimit is invalid") { itCannotInitializeWhen(field: "gasLimit", is: "not a number") }
-            it("dispatches invalid when gasPrice is invalid") { itCannotInitializeWhen(field: "gasPrice", is: "not a number") }
-            it("dispatches invalid when value is invalid") { itCannotInitializeWhen(field: "value", is: "not a number") }
+            it("dispatches invalid when gasLimit is invalid") { itCannotInitializeWhen(field: "gasLimit",
+                                                                                       is: "not a number") }
+            it("dispatches invalid when gasPrice is invalid") { itCannotInitializeWhen(field: "gasPrice",
+                                                                                       is: "not a number") }
+            it("dispatches invalid when value is invalid") { itCannotInitializeWhen(field: "value",
+                                                                                    is: "not a number") }
             it("dispatches invalid when v is invalid") { itCannotInitializeWhen(field: "v", is: "not a number") }
             it("dispatches invalid when r is invalid") { itCannotInitializeWhen(field: "r", is: 42) }
             it("dispatches invalid when s is invalid") { itCannotInitializeWhen(field: "s", is: 42) }
