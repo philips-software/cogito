@@ -80,6 +80,21 @@ struct SignedTransaction: Transaction {
                   signingV: signingV, signingR: signingR, signingS: signingS)
     }
 
+    func asDictionary() -> [String:String] {
+        return [
+            "from": from.description,
+            "to": to.description,
+            "data": "0x" + data.hexEncodedString(),
+            "nonce": "0x" + String(nonce, radix: 16),
+            "gasPrice": "0x" + String(gasPrice, radix: 16),
+            "gasLimit": "0x" + String(gasLimit, radix: 16),
+            "value": "0x" + String(value, radix: 16),
+            "v": "0x" + String(signingV, radix: 16),
+            "r": signingR,
+            "s": signingS
+        ]
+    }
+
     init?(from transaction: Transaction, params: String) {
         guard let paramsData = params.data(using: .utf8) else {
             return nil
