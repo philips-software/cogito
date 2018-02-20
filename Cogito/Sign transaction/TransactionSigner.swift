@@ -26,30 +26,13 @@ protocol TransactionSigner {
     func execute()
 }
 
-extension TransactionSigner {
-    func send(error: String) {
-        let msg = TransactionSignerResult(error: error).json
-        dispatch(TelepathActions.Send(message: msg))
-    }
-}
-
-struct TransactionSignerResult: Codable {
-    let serializedRawTransaction: String?
-    let error: String?
-
-    init(serializedRawTransaction: String? = nil, error: String? = nil) {
-        self.serializedRawTransaction = serializedRawTransaction
-        self.error = error
-    }
-}
-
 struct TransactionSignerInvalid: TransactionSigner {
     let error: String
     let dispatch: DispatchFunction
     let responseId: JsonRpcId
 
     func execute() {
-        send(error: error)
+        dispatch(TelepathActions.Send(id: responseId, errorCode: -1/*todo*/, errorMessage: error))
     }
 }
 
