@@ -1,34 +1,26 @@
 //  Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
 
 import UIKit
-import ReRxSwift
-import ReSwift
 
-class ExplanationViewController: UIViewController, Connectable {
+class ExplanationViewController: UIViewController {
 
     @IBOutlet weak var explanationLabel: UILabel!
     @IBOutlet weak var signButton: UIButton!
     @IBOutlet weak var rejectButton: UIButton!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        connection.subscribe(\Props.appName) { _ in self.configureExplanation() }
-        connection.subscribe(\Props.actionDescription) { _ in  self.configureExplanation() }
+    var appName: String = ""
+    var actionDescription: String = ""
+    var onSign: () -> Void = {}
+    var onReject: () -> Void = {}
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        configureExplanation()
     }
 
     func configureExplanation() {
-        let text = "\(props.appName) requests your signature to \(props.actionDescription)."
+        let text = "\(appName) requests your signature to \(actionDescription)."
         explanationLabel.text = text
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        connection.connect()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        connection.disconnect()
     }
 
     @IBAction func cancel(_ sender: Any) {
@@ -36,38 +28,10 @@ class ExplanationViewController: UIViewController, Connectable {
     }
 
     @IBAction func sign() {
-        actions.sign()
+        onSign()
     }
 
     @IBAction func reject() {
-        actions.reject()
+        onReject()
     }
-
-    struct Props {
-        let appName: String
-        let actionDescription: String
-    }
-
-    struct Actions {
-        let sign: () -> Void
-        let reject: () -> Void
-    }
-
-    let connection = Connection(store: appStore,
-                                mapStateToProps: mapStateToProps,
-                                mapDispatchToActions: mapDispatchToActions)
-}
-
-private func mapStateToProps(state: AppState) -> ExplanationViewController.Props {
-    return ExplanationViewController.Props(
-        appName: "Sample App",
-        actionDescription: "perform some sample action"
-    )
-}
-
-private func mapDispatchToActions(dispatch: DispatchFunction) -> ExplanationViewController.Actions {
-    return ExplanationViewController.Actions(
-        sign: { print("not implemented yet") },
-        reject: { print("not implemented yet") }
-    )
 }
