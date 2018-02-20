@@ -6,7 +6,7 @@ import Geth
 
 class SignedTransactionSpec: QuickSpec {
     override func spec() {
-        let validTransaction: [String: Any] = ["from": Address.testAddress1.description,
+        let validTransaction: [String: String] = ["from": Address.testAddress1.description,
                                                "to": Address.testAddress2.description,
                                                "data": "0xabcdef",
                                                "gasPrice": "0x1", "gasLimit": "0x2",
@@ -33,7 +33,7 @@ class SignedTransactionSpec: QuickSpec {
         }
 
         describe("invalid fields") {
-            func itCannotInitializeWhen(field: String, is value: Any) {
+            func itCannotInitializeWhen(field: String, is value: String) {
                 var transaction = validTransaction
                 transaction[field] = value
                 expect(SignedTransaction(from: transaction)).to(beNil())
@@ -50,8 +50,6 @@ class SignedTransactionSpec: QuickSpec {
             it("dispatches invalid when value is invalid") { itCannotInitializeWhen(field: "value",
                                                                                     is: "not a number") }
             it("dispatches invalid when v is invalid") { itCannotInitializeWhen(field: "v", is: "not a number") }
-            it("dispatches invalid when r is invalid") { itCannotInitializeWhen(field: "r", is: 42) }
-            it("dispatches invalid when s is invalid") { itCannotInitializeWhen(field: "s", is: 42) }
         }
 
         it("can initialize with valid data") {
@@ -70,10 +68,16 @@ class SignedTransactionSpec: QuickSpec {
         }
 
         it("accepts plain number for gasPrice") {
-            var transaction = validTransaction
+            var transaction: [String: Any] = validTransaction
             transaction["gasPrice"] = 42
             let tx = SignedTransaction(from: transaction)
             expect(tx?.gasPrice.description) == "42"
+        }
+
+        it("can create dictionary representation") {
+            let tx = SignedTransaction(from: validTransaction)!
+            let txDict = tx.asDictionary()
+            expect(txDict) == validTransaction
         }
     }
 }
