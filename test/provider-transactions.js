@@ -9,7 +9,9 @@ const CogitoProvider = require('../lib/provider')
 describe('sending transactions', function () {
   const transaction = {
     from: '0x1234567890123456789012345678901234567890',
-    gasPrice: '0x123'
+    gasPrice: 20,
+    nonce: 30,
+    gas: 40
   }
 
   let cogitoProvider
@@ -54,6 +56,15 @@ describe('sending transactions', function () {
     td.when(telepathChannel.send(anything())).thenReject(new Error('an error'))
     web3.eth.sendTransaction(transaction, function (error, _) {
       expect(error).to.not.be.null()
+      done()
+    })
+  })
+
+  it('sets transaction defaults', function (done) {
+    const transactionWithDefaults = { value: 0, ...transaction }
+    const expectedRequest = { method: 'sign', params: [transactionWithDefaults] }
+    web3.eth.sendTransaction(transaction, function () {
+      td.verify(telepathChannel.send(contains(expectedRequest)))
       done()
     })
   })
