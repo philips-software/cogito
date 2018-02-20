@@ -1,4 +1,4 @@
-image: 'node:7.6.0'
+image: 'digilabs/node-ci:7.6.0'
 
 stages:
   - test
