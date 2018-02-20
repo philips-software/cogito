@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Z3A-AE-fsA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Z3A-AE-fsA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,7 +25,7 @@
             </objects>
             <point key="canvasLocation" x="-364" y="107"/>
         </scene>
-        <!--Signature required-->
+        <!--Signature requested-->
         <scene sceneID="lGC-2f-ySM">
             <objects>
                 <viewController storyboardIdentifier="Explanation" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zYe-bO-UOX" customClass="ExplanationViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
@@ -39,14 +39,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0HZ-lZ-qO4">
-                                <rect key="frame" x="127.5" y="159.5" width="119" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Login with &lt;&gt;"/>
-                                <connections>
-                                    <action selector="startAttestation" destination="zYe-bO-UOX" eventType="touchUpInside" id="UhP-mT-0cO"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cc9-Cr-5du">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
@@ -79,8 +71,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="d6B-Fa-2XX" firstAttribute="trailing" secondItem="cc9-Cr-5du" secondAttribute="trailing" id="0XX-n0-2NW"/>
-                            <constraint firstItem="0HZ-lZ-qO4" firstAttribute="centerX" secondItem="Ndi-vO-tCJ" secondAttribute="centerX" id="7wz-6O-2kB"/>
-                            <constraint firstItem="0HZ-lZ-qO4" firstAttribute="top" secondItem="LqP-Yj-8jZ" secondAttribute="bottom" constant="25" id="8RT-uN-Neh"/>
                             <constraint firstItem="cc9-Cr-5du" firstAttribute="leading" secondItem="d6B-Fa-2XX" secondAttribute="leading" id="JWy-om-x3o"/>
                             <constraint firstItem="d6B-Fa-2XX" firstAttribute="trailing" secondItem="LqP-Yj-8jZ" secondAttribute="trailing" constant="16" id="L5j-HH-yGD"/>
                             <constraint firstItem="LqP-Yj-8jZ" firstAttribute="leading" secondItem="d6B-Fa-2XX" secondAttribute="leading" constant="16" id="WhB-FW-Vnq"/>
@@ -89,7 +79,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="d6B-Fa-2XX"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Signature required" id="4QQ-ag-00q">
+                    <navigationItem key="navigationItem" title="Signature requested" id="4QQ-ag-00q">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="wvr-PY-rxO">
                             <connections>
                                 <action selector="cancel:" destination="zYe-bO-UOX" id="995-Qc-S5u"/>
@@ -100,7 +90,6 @@
                         <outlet property="explanationLabel" destination="LqP-Yj-8jZ" id="N8e-oM-uka"/>
                         <outlet property="rejectButton" destination="6RG-5o-HXO" id="uJP-qj-imU"/>
                         <outlet property="signButton" destination="Grw-XV-eLZ" id="opq-0T-qMs"/>
-                        <outlet property="startAttestationButton" destination="0HZ-lZ-qO4" id="uVl-pj-OEJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ve7-sD-1Xd" userLabel="First Responder" sceneMemberID="firstResponder"/>
