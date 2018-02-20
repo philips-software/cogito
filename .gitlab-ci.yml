@@ -12,7 +12,3 @@ test:
     - yarn test
   tags:
     - docker
-
-cache:
-  paths:
-    - node_modules/
