@@ -192,7 +192,7 @@
 		C00B54321DC6AA59BE55E8C1 /* TransactionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B56B7E4CA3836960336DF /* TransactionSpec.swift */; };
 		C00B54913224B9C03F32E185 /* Encodable+json.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5B1891702007BD67637B /* Encodable+json.swift */; };
 		C00B552C389894477CA10423 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B535ED8937C7ED5FC8495 /* Transaction.swift */; };
-		C00B5559989C9FF92C6C70FA /* IdenittySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5807D4B578AAA0D57B47 /* IdenittySpec.swift */; };
+		C00B5559989C9FF92C6C70FA /* IdentitySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5807D4B578AAA0D57B47 /* IdentitySpec.swift */; };
 		C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */; };
 		C00B565D47B7F81FE21339CF /* DialogPresenterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B56F8009E903C75F86606 /* DialogPresenterState.swift */; };
 		C00B568FFA6C3F707DEE730C /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B535ED8937C7ED5FC8495 /* Transaction.swift */; };
@@ -358,7 +358,7 @@
 		C00B56F8009E903C75F86606 /* DialogPresenterState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterState.swift; sourceTree = "<group>"; };
 		C00B57766800CB3EFBE971EC /* AppPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPassword.swift; sourceTree = "<group>"; };
 		C00B579EEF4EDAFB75E6221C /* DialogPresenterReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterReducer.swift; sourceTree = "<group>"; };
-		C00B5807D4B578AAA0D57B47 /* IdenittySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdenittySpec.swift; sourceTree = "<group>"; };
+		C00B5807D4B578AAA0D57B47 /* IdentitySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentitySpec.swift; sourceTree = "<group>"; };
 		C00B581D01FD60AA97FEEFBC /* GetAttestations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAttestations.swift; sourceTree = "<group>"; };
 		C00B58EF23AD635EAE304108 /* DialogPresenterActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterActions.swift; sourceTree = "<group>"; };
 		C00B5B1891702007BD67637B /* Encodable+json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+json.swift"; sourceTree = "<group>"; };
@@ -659,7 +659,7 @@
 			children = (
 				02A15B031F86732500A94163 /* DiamondStateSpec.swift */,
 				02A15B051F86733000A94163 /* DiamondReducerSpec.swift */,
-				C00B5807D4B578AAA0D57B47 /* IdenittySpec.swift */,
+				C00B5807D4B578AAA0D57B47 /* IdentitySpec.swift */,
 			);
 			path = Diamond;
 			sourceTree = "<group>";
@@ -1324,7 +1324,7 @@
 				C00B51B16777B9F0F6E84B07 /* Address.swift in Sources */,
 				C00B51F86FA2BE636728F0F9 /* AddressSpec.swift in Sources */,
 				5C59C9C52008B01D00186D29 /* JsonRpcRequestSpec.swift in Sources */,
-				C00B5559989C9FF92C6C70FA /* IdenittySpec.swift in Sources */,
+				C00B5559989C9FF92C6C70FA /* IdentitySpec.swift in Sources */,
 				C00B565D47B7F81FE21339CF /* DialogPresenterState.swift in Sources */,
 				C00B524676276F6E1FDAAE98 /* RequestedAlert.swift in Sources */,
 				C00B52E1B28440BB32322784 /* DialogPresenterReducer.swift in Sources */,
