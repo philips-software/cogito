@@ -27,7 +27,7 @@ struct UnsignedTransaction: Transaction {
         guard let from = takeAddress(from: txDict, key: "from"),
               let to = takeAddress(from: txDict, key: "to"),
               let gasPrice = takeNumber(from: txDict, key: "gasPrice"),
-              let gasLimit = takeNumber(from: txDict, key: "gasLimit"),
+              let gasLimit = takeNumber(from: txDict, key: "gasLimit") ?? takeNumber(from: txDict, key: "gas"),
               let value = takeNumber(from: txDict, key: "value"),
               let nonce = takeNumber(from: txDict, key: "nonce"),
               let data = takeData(from: txDict, key: "data") else {
@@ -66,7 +66,7 @@ struct SignedTransaction: Transaction {
         guard let from = takeAddress(from: txDict, key: "from"),
               let to = takeAddress(from: txDict, key: "to"),
               let gasPrice = takeNumber(from: txDict, key: "gasPrice"),
-              let gasLimit = takeNumber(from: txDict, key: "gasLimit"),
+              let gasLimit = takeNumber(from: txDict, key: "gasLimit") ?? takeNumber(from: txDict, key: "gas"),
               let value = takeNumber(from: txDict, key: "value"),
               let nonce = takeNumber(from: txDict, key: "nonce"),
               let data = takeData(from: txDict, key: "data"),
