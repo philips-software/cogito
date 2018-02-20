@@ -10,7 +10,8 @@ describe('transaction defaults', function () {
     value: '0x10',
     gasPrice: '0x20',
     nonce: '0x30',
-    gas: '0x40'
+    gas: '0x40',
+    chainId: 50
   }
 
   let transactionDefaults
@@ -106,6 +107,29 @@ describe('transaction defaults', function () {
     it('throws when gas limit cannot be estimated', async function () {
       stubResponseError(provider, contains(expectedRequest))
       await expect(transactionDefaults.apply(noGas)).to.be.rejected()
+    })
+  })
+
+  describe('chain id', function () {
+    const noChainId = Object.assign({}, transaction)
+    delete noChainId.chainId
+
+    const expectedRequest = { method: 'net_version' }
+
+    it('is retrieved when not specified', async function () {
+      stubResponse(provider, contains(expectedRequest), '42')
+      const defaults = await transactionDefaults.apply(noChainId)
+      expect(defaults.chainId).to.equal(42)
+    })
+
+    it('is unchanged when defined', async function () {
+      const defaults = await transactionDefaults.apply(transaction)
+      expect(defaults.chainId).to.equal(transaction.chainId)
+    })
+
+    it('throws when chain id could not be retrieved', async function () {
+      stubResponseError(provider, contains(expectedRequest))
+      await expect(transactionDefaults.apply(noChainId)).to.be.rejected()
     })
   })
 })

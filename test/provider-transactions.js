@@ -11,7 +11,8 @@ describe('sending transactions', function () {
     from: '0x1234567890123456789012345678901234567890',
     gasPrice: '0x20',
     nonce: '0x30',
-    gas: '0x40'
+    gas: '0x40',
+    chainId: 50
   }
 
   let cogitoProvider
