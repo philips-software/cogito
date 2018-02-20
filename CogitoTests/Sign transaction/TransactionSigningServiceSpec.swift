@@ -9,7 +9,7 @@ class TransactionSigningServiceSpec: QuickSpec {
         let signRequest = JsonRpcRequest(
             id: JsonRpcId(1),
             method: "sign",
-            params: JsonRpcParams()
+            params: JsonRpcParams(parseJSON: "[{}]")
         )
 
         var service: TransactionSigningService!
