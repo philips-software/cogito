@@ -13,7 +13,8 @@ struct TransactionSignerBuilder {
                                             dispatch: dispatch)
         }
         return TransactionSignerValid(transaction: tx,
-                                      dispatch: dispatch, getState: getState)
+                                      dispatch: dispatch,
+                                      getState: getState)
     }
 }
 
@@ -51,6 +52,7 @@ struct TransactionSignerInvalid: TransactionSigner {
 struct TransactionSignerValid: TransactionSigner {
     let transaction: Transaction
     let dispatch: DispatchFunction
+    let getState: () -> AppState?
 
     func execute() {
     }
