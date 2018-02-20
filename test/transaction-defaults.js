@@ -73,6 +73,13 @@ describe('transaction defaults', function () {
       expect(defaults.nonce).to.equal('0x42')
     })
 
+    it('increments for pending transactions', async function () {
+      stubResponse(provider, contains(expectedRequest), '0x42')
+      await transactionDefaults.apply(noNonce)
+      const defaults = await transactionDefaults.apply(noNonce)
+      expect(defaults.nonce).to.equal('0x43')
+    })
+
     it('is unchanged when defined', async function () {
       const defaults = await transactionDefaults.apply(transaction)
       expect(defaults.nonce).to.equal(transaction.nonce)
