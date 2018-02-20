@@ -69,7 +69,7 @@ struct TelepathActions {
             let response = JSON([
                 "jsonrpc": "2.0",
                 "id": id.object,
-                "result": JSON(result).object
+                "result": result
                 ])
             dispatch(Send(message: response.rawString()!))
         }
