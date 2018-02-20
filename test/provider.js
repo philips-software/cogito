@@ -19,36 +19,6 @@ describe('provider', function () {
     web3 = new Web3(cogitoProvider)
   })
 
-  describe('accounts', function () {
-    const accounts = [
-      '0x1234567890123456789012345678901234567890',
-      '0x0123456789012345678901234567890123456789'
-    ]
-
-    context('when cogito provides accounts', function () {
-      beforeEach(function () {
-        const request = { method: 'accounts' }
-        const response = { result: accounts }
-        td.when(telepathChannel.send(contains(request))).thenResolve(response)
-      })
-
-      it('returns the cogito accounts', function (done) {
-        web3.eth.getAccounts(function (_, result) {
-          expect(result).to.eql(accounts)
-          done()
-        })
-      })
-    })
-
-    it('throws when requesting accounts via telepath fails', function (done) {
-      td.when(telepathChannel.send(anything())).thenReject(new Error('an error'))
-      web3.eth.getAccounts(function (error, _) {
-        expect(error).to.not.be.null()
-        done()
-      })
-    })
-  })
-
   describe('signed transactions', function () {
     const transaction = {
       from: '0x1234567890123456789012345678901234567890',
