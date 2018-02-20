@@ -22,7 +22,8 @@ class TransactionSignerSpec: QuickSpec {
 
             let builder = TransactionSignerBuilder(transaction: transaction,
                                                    dispatch: store.dispatch,
-                                                   getState: { return nil })
+                                                   getState: { return nil },
+                                                   responseId: JsonRpcId(0))
             let signer = builder.build()
             expect(signer).to(beAKindOf(TransactionSignerInvalid.self))
             signer.execute()
@@ -36,7 +37,8 @@ class TransactionSignerSpec: QuickSpec {
 
             let builder = TransactionSignerBuilder(transaction: transaction,
                                                    dispatch: store.dispatch,
-                                                   getState: { return nil })
+                                                   getState: { return nil },
+                                                   responseId: JsonRpcId(0))
             let signer = builder.build()
             expect(signer).to(beAKindOf(TransactionSignerInvalid.self))
             signer.execute()
@@ -47,7 +49,8 @@ class TransactionSignerSpec: QuickSpec {
         it("builds valid signer when transaction data is valid") {
             let builder = TransactionSignerBuilder(transaction: validTransaction,
                                                    dispatch: store.dispatch,
-                                                   getState: { return nil })
+                                                   getState: { return nil },
+                                                   responseId: JsonRpcId(0))
             let signer = builder.build()
             expect(signer).to(beAKindOf(TransactionSignerValid.self))
         }

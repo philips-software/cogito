@@ -6,15 +6,18 @@ struct TransactionSignerBuilder {
     let transaction: [String:Any]
     let dispatch: DispatchFunction
     let getState: () -> AppState?
+    let responseId: JsonRpcId
 
     func build() -> TransactionSigner {
         guard let tx = UnsignedTransaction(from: transaction) else {
             return TransactionSignerInvalid(error: "missing or invalid field(s) in transaction data",
-                                            dispatch: dispatch)
+                                            dispatch: dispatch,
+                                            responseId: responseId)
         }
         return TransactionSignerValid(transaction: tx,
                                       dispatch: dispatch,
-                                      getState: getState)
+                                      getState: getState,
+                                      responseId: responseId)
     }
 }
 
@@ -43,6 +46,7 @@ struct TransactionSignerResult: Codable {
 struct TransactionSignerInvalid: TransactionSigner {
     let error: String
     let dispatch: DispatchFunction
+    let responseId: JsonRpcId
 
     func execute() {
         send(error: error)
@@ -53,6 +57,7 @@ struct TransactionSignerValid: TransactionSigner {
     let transaction: Transaction
     let dispatch: DispatchFunction
     let getState: () -> AppState?
+    let responseId: JsonRpcId
 
     func execute() {
     }

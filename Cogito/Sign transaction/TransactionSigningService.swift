@@ -9,6 +9,7 @@ struct TransactionSigningService: TelepathService {
         guard request.method == "sign" else {
             return
         }
-        store.dispatch(TransactionSigningActions.Sign(tx: [:])) // todo: take from request
+        store.dispatch(TransactionSigningActions.Sign(tx: [:],
+                                                      responseId: request.id)) // todo: take from request
     }
 }
