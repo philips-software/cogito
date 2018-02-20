@@ -33,7 +33,6 @@
 		026779B02007B49A00C2D45C /* TransactionSignerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */; };
 		0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
 		0270D7141F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
-		0270D7161F9F146A00CC9038 /* ExplanationViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */; };
 		0270D71A1F9F58CA00CC9038 /* AttestationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7191F9F58CA00CC9038 /* AttestationActions.swift */; };
 		0270D71B1F9F58CA00CC9038 /* AttestationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7191F9F58CA00CC9038 /* AttestationActions.swift */; };
 		0270D71D1F9F5A5F00CC9038 /* AttestationActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D71C1F9F5A5F00CC9038 /* AttestationActionsSpec.swift */; };
@@ -98,6 +97,8 @@
 		02A15B021F8672C000A94163 /* DiamondReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15B001F8672C000A94163 /* DiamondReducer.swift */; };
 		02A15B041F86732500A94163 /* DiamondStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15B031F86732500A94163 /* DiamondStateSpec.swift */; };
 		02A15B061F86733000A94163 /* DiamondReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15B051F86733000A94163 /* DiamondReducerSpec.swift */; };
+		02B9A683203C762100ADB44F /* UIWindow+CurrentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9A682203C762100ADB44F /* UIWindow+CurrentViewController.swift */; };
+		02B9A684203C7B9200ADB44F /* UIWindow+CurrentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9A682203C762100ADB44F /* UIWindow+CurrentViewController.swift */; };
 		02BE32C91F7A4DF9006C7287 /* PeerReporterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */; };
 		02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CA1F7A511A006C7287 /* PeerReporter.swift */; };
 		02BE32CC1F7A511D006C7287 /* PeerReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CA1F7A511A006C7287 /* PeerReporter.swift */; };
@@ -245,7 +246,6 @@
 		026779AC2007B47E00C2D45C /* TransactionSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigner.swift; sourceTree = "<group>"; };
 		026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSignerSpec.swift; sourceTree = "<group>"; };
 		0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
-		0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewControllerSpec.swift; sourceTree = "<group>"; };
 		0270D7191F9F58CA00CC9038 /* AttestationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActions.swift; sourceTree = "<group>"; };
 		0270D71C1F9F5A5F00CC9038 /* AttestationActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActionsSpec.swift; sourceTree = "<group>"; };
 		0270D71E1F9F6C6D00CC9038 /* OpenIDAttestationStarterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenIDAttestationStarterSpec.swift; sourceTree = "<group>"; };
@@ -287,6 +287,7 @@
 		02A15B001F8672C000A94163 /* DiamondReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondReducer.swift; sourceTree = "<group>"; };
 		02A15B031F86732500A94163 /* DiamondStateSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondStateSpec.swift; sourceTree = "<group>"; };
 		02A15B051F86733000A94163 /* DiamondReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondReducerSpec.swift; sourceTree = "<group>"; };
+		02B9A682203C762100ADB44F /* UIWindow+CurrentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+CurrentViewController.swift"; sourceTree = "<group>"; };
 		02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerReporterSpec.swift; sourceTree = "<group>"; };
 		02BE32CA1F7A511A006C7287 /* PeerReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerReporter.swift; sourceTree = "<group>"; };
 		02BE32CD1F7A5C55006C7287 /* SyncProgressReporterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProgressReporterSpec.swift; sourceTree = "<group>"; };
@@ -405,7 +406,6 @@
 		0212E0331F9E393A00EEDE34 /* Sign transaction */ = {
 			isa = PBXGroup;
 			children = (
-				0270D7151F9F146A00CC9038 /* ExplanationViewControllerSpec.swift */,
 				5CC4D2C81FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift */,
 				026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */,
 			);
@@ -502,6 +502,7 @@
 				0212E0301F99FFD300EEDE34 /* Cogito.entitlements */,
 				C00B5B1891702007BD67637B /* Encodable+json.swift */,
 				C00B5B3C1E5A12284EE52C34 /* Foundation extensions */,
+				02B9A681203C75FB00ADB44F /* UIKit reference */,
 			);
 			path = Cogito;
 			sourceTree = "<group>";
@@ -665,6 +666,14 @@
 				C00B5807D4B578AAA0D57B47 /* IdentitySpec.swift */,
 			);
 			path = Diamond;
+			sourceTree = "<group>";
+		};
+		02B9A681203C75FB00ADB44F /* UIKit reference */ = {
+			isa = PBXGroup;
+			children = (
+				02B9A682203C762100ADB44F /* UIWindow+CurrentViewController.swift */,
+			);
+			path = "UIKit reference";
 			sourceTree = "<group>";
 		};
 		02C305461F87592800351B4A /* Debug view */ = {
@@ -1184,6 +1193,7 @@
 				0230F9471FA1E5F3006A36FC /* LaunchActions.swift in Sources */,
 				0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */,
 				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
+				02B9A683203C762100ADB44F /* UIWindow+CurrentViewController.swift in Sources */,
 				02D0C0D41F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
 				02CD80581F7E30D100AA5C3A /* ActionLogger.swift in Sources */,
 				5C20A0F81FA1FBDD00B443C9 /* TelepathReducer.swift in Sources */,
@@ -1256,6 +1266,7 @@
 				0226212C1FAB1E6800692126 /* IdentityManagerViewController.swift in Sources */,
 				5CC4D2D51FE81815002F2450 /* JSONDecodeFromString.swift in Sources */,
 				02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */,
+				02B9A684203C7B9200ADB44F /* UIWindow+CurrentViewController.swift in Sources */,
 				026779AE2007B47E00C2D45C /* TransactionSigner.swift in Sources */,
 				0298D42C1F7A43C90070998D /* AppState.swift in Sources */,
 				02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */,
@@ -1301,7 +1312,6 @@
 				5C0C74F7200DF705009463F9 /* JsonRpcId.swift in Sources */,
 				029245181F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
 				5CC4D2CC1FE7F731002F2450 /* TransactionSigningService.swift in Sources */,
-				0270D7161F9F146A00CC9038 /* ExplanationViewControllerSpec.swift in Sources */,
 				028F4F041F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
 				0270D71B1F9F58CA00CC9038 /* AttestationActions.swift in Sources */,
 				028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
