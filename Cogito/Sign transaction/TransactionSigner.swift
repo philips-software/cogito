@@ -73,8 +73,7 @@ struct TransactionSignerValid: TransactionSigner {
                     signingDone()
                     return
                 }
-                let txDict = signedTx.asDictionary()
-                self.dispatch(TelepathActions.Send(id: self.responseId, result: txDict))
+                self.dispatch(TelepathActions.Send(id: self.responseId, result: signedTx))
                 signingDone()
             }
         }

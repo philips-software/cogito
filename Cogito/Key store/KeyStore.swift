@@ -83,7 +83,7 @@ class KeyStore: Codable {
     }
 
     func sign(transaction: Transaction, chainId: BigInt, identity: Identity,
-              onComplete: @escaping (_ transaction: SignedTransaction?, _ error: String?) -> Void) {
+              onComplete: @escaping (_ transaction: Data?, _ error: String?) -> Void) {
         guard let gethKeyStore = wrapped else {
             onComplete(nil, "failed to open key store")
             return
@@ -128,8 +128,8 @@ class KeyStore: Codable {
                                                                  passphrase: password,
                                                                  tx: gethTx,
                                                                  chainID: gethChainId)
-                let signedTransaction = SignedTransaction(from: transaction, params: try signedTx.encodeJSON())
-                onComplete(signedTransaction, nil)
+                let signedTxRLP = try signedTx.encodeRLP()
+                onComplete(signedTxRLP, nil)
             } catch let e {
                 print("[error] failed to sign transaction: \(e)")
                 onComplete(nil, "failed to sign transaction")
