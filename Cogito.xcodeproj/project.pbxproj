@@ -208,7 +208,6 @@
 		C00B5B06165F3D5132AB7064 /* Data+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5147CAE92346F14EF19F /* Data+hex.swift */; };
 		C00B5D39FC0D970348A5E0C6 /* DiamondActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5F53B99BC5464AF8BE3E /* DiamondActions.swift */; };
 		C00B5E26A7AC55AC03FD717B /* DispatchRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5FFF481EB4982C21280E /* DispatchRecorder.swift */; };
-		C00B5E724C851E930F029FD4 /* SignedTransactionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B510CB0BBF854A3161890 /* SignedTransactionSpec.swift */; };
 		C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B57766800CB3EFBE971EC /* AppPassword.swift */; };
 		C00B5F2F98B19D0B3884414E /* Data+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5147CAE92346F14EF19F /* Data+hex.swift */; };
 		C00B5F4394A34E4348285CB9 /* DiamondActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5F53B99BC5464AF8BE3E /* DiamondActions.swift */; };
@@ -346,7 +345,6 @@
 		5CDB58DD20358B4100A28D60 /* TelepathSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathSubscriber.swift; sourceTree = "<group>"; };
 		8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51C652F88A1C505BE309FCA /* Pods-Cogito-CogitoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito-CogitoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito-CogitoTests/Pods-Cogito-CogitoTests.release.xcconfig"; sourceTree = "<group>"; };
-		C00B510CB0BBF854A3161890 /* SignedTransactionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignedTransactionSpec.swift; sourceTree = "<group>"; };
 		C00B5147CAE92346F14EF19F /* Data+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+hex.swift"; sourceTree = "<group>"; };
 		C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreStateSpec.swift; sourceTree = "<group>"; };
 		C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttestationsReducerSpec.swift; sourceTree = "<group>"; };
@@ -607,7 +605,6 @@
 				02BE32CD1F7A5C55006C7287 /* SyncProgressReporterSpec.swift */,
 				C00B54DD2E80DB0874E74DDD /* AddressSpec.swift */,
 				C00B56B7E4CA3836960336DF /* UnsignedTransactionSpec.swift */,
-				C00B510CB0BBF854A3161890 /* SignedTransactionSpec.swift */,
 			);
 			path = Geth;
 			sourceTree = "<group>";
@@ -1349,7 +1346,6 @@
 				C00B57F400C10AB0C6F066D8 /* Data+hexSpec.swift in Sources */,
 				C00B568FFA6C3F707DEE730C /* Transaction.swift in Sources */,
 				C00B54321DC6AA59BE55E8C1 /* UnsignedTransactionSpec.swift in Sources */,
-				C00B5E724C851E930F029FD4 /* SignedTransactionSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
