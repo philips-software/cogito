@@ -63,9 +63,10 @@ struct TransactionSignerValid: TransactionSigner {
             let state = self.getState()!
             let keyStore = state.keyStore.keyStore!
             let identity = state.diamond.selectedFacet()!
-            keyStore.sign(transaction: self.transaction,
-                          chainId: BigInt(5), /* todo hard-coded */
-            identity: identity) { (signedTransaction, error) in
+            keyStore.sign(
+                transaction: self.transaction,
+                identity: identity
+            ) { (signedTransaction, error) in
                 guard let signedTx = signedTransaction else {
                     self.dispatch(TelepathActions.Send(id: self.responseId,
                                                        errorCode: -2/*todo*/,

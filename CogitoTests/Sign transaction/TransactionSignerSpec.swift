@@ -5,11 +5,17 @@ import Nimble
 
 class TransactionSignerSpec: QuickSpec {
     override func spec() {
-        let validTransaction = ["from": Address.testAddress1.description,
-                                "to": Address.testAddress2.description,
-                                "data": "0xabcdef",
-                                "gasPrice": "0x1", "gasLimit": "0x2",
-                                "nonce": "0x3", "value": "0x4"]
+        let validTransaction: [String: Any] = [
+            "from": Address.testAddress1.description,
+            "to": Address.testAddress2.description,
+            "data": "0xabcdef",
+            "gasPrice": "0x1",
+            "gasLimit": "0x2",
+             "nonce": "0x3",
+             "value": "0x4",
+             "chainId": 55
+        ]
+
         var store: RecordingStore!
 
         beforeEach {

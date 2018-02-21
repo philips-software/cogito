@@ -6,11 +6,16 @@ import Geth
 
 class UnsignedTransactionSpec: QuickSpec {
     override func spec() {
-        let validTransaction: [String: Any] = ["from": Address.testAddress1.description,
-                                               "to": Address.testAddress2.description,
-                                               "data": "0xabcdef",
-                                               "gasPrice": "0x1", "gasLimit": "0x2",
-                                               "nonce": "0x30", "value": "0x4"]
+        let validTransaction: [String: Any] = [
+            "from": Address.testAddress1.description,
+            "to": Address.testAddress2.description,
+            "data": "0xabcdef",
+            "gasPrice": "0x1",
+            "gasLimit": "0x2",
+            "nonce": "0x30",
+            "value": "0x4",
+            "chainId": 55
+        ]
 
         describe("missing fields") {
             func itCannotInitializeWhenMissing(field: String) {
@@ -19,13 +24,30 @@ class UnsignedTransactionSpec: QuickSpec {
                 expect(UnsignedTransaction(from: transaction)).to(beNil())
             }
 
-            it("cannot initialize when from is missing") { itCannotInitializeWhenMissing(field: "from") }
-            it("cannot initialize when to is missing") { itCannotInitializeWhenMissing(field: "to") }
-            it("cannot initialize when data is missing") { itCannotInitializeWhenMissing(field: "data") }
-            it("cannot initialize when nonce is missing") { itCannotInitializeWhenMissing(field: "nonce") }
-            it("cannot initialize when gasLimit is missing") { itCannotInitializeWhenMissing(field: "gasLimit") }
-            it("cannot initialize when gasPrice is missing") { itCannotInitializeWhenMissing(field: "gasPrice") }
-            it("cannot initialize when value is missing") { itCannotInitializeWhenMissing(field: "value") }
+            it("cannot initialize when from is missing") {
+                itCannotInitializeWhenMissing(field: "from")
+            }
+            it("cannot initialize when to is missing") {
+                itCannotInitializeWhenMissing(field: "to")
+            }
+            it("cannot initialize when data is missing") {
+                itCannotInitializeWhenMissing(field: "data")
+            }
+            it("cannot initialize when nonce is missing") {
+                itCannotInitializeWhenMissing(field: "nonce")
+            }
+            it("cannot initialize when gasLimit is missing") {
+                itCannotInitializeWhenMissing(field: "gasLimit")
+            }
+            it("cannot initialize when gasPrice is missing") {
+                itCannotInitializeWhenMissing(field: "gasPrice")
+            }
+            it("cannot initialize when value is missing") {
+                itCannotInitializeWhenMissing(field: "value")
+            }
+            it("cannot initialize when chain id is missing") {
+                itCannotInitializeWhenMissing(field: "chainId")
+            }
         }
 
         describe("invalid fields") {

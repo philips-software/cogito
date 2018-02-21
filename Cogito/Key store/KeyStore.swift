@@ -82,8 +82,11 @@ class KeyStore: Codable {
         return nil
     }
 
-    func sign(transaction: UnsignedTransaction, chainId: BigInt, identity: Identity,
-              onComplete: @escaping (_ transaction: Data?, _ error: String?) -> Void) {
+    func sign(
+        transaction: UnsignedTransaction,
+        identity: Identity,
+        onComplete: @escaping (_ transaction: Data?, _ error: String?) -> Void
+    ) {
         guard let gethKeyStore = wrapped else {
             onComplete(nil, "failed to open key store")
             return
@@ -107,8 +110,8 @@ class KeyStore: Codable {
         assert(gasPrice.string() == transaction.gasPrice.description, "gasPrice")
 
         let gethChainId = GethBigInt(0)!
-        gethChainId.setString(chainId.description, base: 10)
-        assert(gethChainId.string() == chainId.description, "chainId")
+        gethChainId.setString(transaction.chainId.description, base: 10)
+        assert(gethChainId.string() == transaction.chainId.description, "chainId")
 
         let gethTx = GethTransaction(Int64(transaction.nonce),
                                      to: transaction.to.toGethAddress(),
