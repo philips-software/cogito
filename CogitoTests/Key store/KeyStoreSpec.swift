@@ -90,13 +90,22 @@ class KeyStoreSpec: QuickSpec {
                     let gasPrice = BigInt(2)
                     let gasLimit = BigInt(3)
                     let value = BigInt(4)
-                    let transaction = UnsignedTransaction(from: from, to: to, data: data, nonce: nonce,
-                                                          gasPrice: gasPrice, gasLimit: gasLimit, value: value)
                     let chainId = BigInt(42)
+                    let transaction = UnsignedTransaction(
+                        from: from,
+                        to: to,
+                        data: data,
+                        nonce: nonce,
+                        gasPrice: gasPrice,
+                        gasLimit: gasLimit,
+                        value: value,
+                        chainId: chainId
+                    )
                     waitUntil { done in
-                        keyStore.sign(transaction: transaction,
-                                                   chainId: chainId,
-                                                   identity: identity) { signed, error in
+                        keyStore.sign(
+                            transaction: transaction,
+                            identity: identity
+                        ) { signed, error in
                             expect(error).to(beNil())
                             expect(signed).toNot(beNil())
                             done()

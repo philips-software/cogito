@@ -12,24 +12,43 @@ struct UnsignedTransaction {
     let gasPrice: BigInt
     let gasLimit: BigInt
     let value: BigInt
+    let chainId: BigInt
 
     init?(from txDict: [String: Any]) {
-        guard let from = takeAddress(from: txDict, key: "from"),
-              let to = takeAddress(from: txDict, key: "to"),
-              let gasPrice = takeNumber(from: txDict, key: "gasPrice"),
-              let gasLimit = takeNumber(from: txDict, key: "gasLimit") ?? takeNumber(from: txDict, key: "gas"),
-              let value = takeNumber(from: txDict, key: "value"),
-              let nonce = takeNumber(from: txDict, key: "nonce"),
-              let data = takeData(from: txDict, key: "data") else {
+        guard
+            let from = takeAddress(from: txDict, key: "from"),
+            let to = takeAddress(from: txDict, key: "to"),
+            let gasPrice = takeNumber(from: txDict, key: "gasPrice"),
+            let gasLimit = takeNumber(from: txDict, key: "gasLimit") ?? takeNumber(from: txDict, key: "gas"),
+            let value = takeNumber(from: txDict, key: "value"),
+            let nonce = takeNumber(from: txDict, key: "nonce"),
+            let data = takeData(from: txDict, key: "data"),
+            let chainId = takeNumber(from: txDict, key: "chainId")
+        else {
             return nil
         }
-        self.init(from: from, to: to, data: data, nonce: nonce,
-                  gasPrice: gasPrice, gasLimit: gasLimit, value: value)
+        self.init(
+            from: from,
+            to: to,
+            data: data,
+            nonce: nonce,
+            gasPrice: gasPrice,
+            gasLimit: gasLimit,
+            value: value,
+            chainId: chainId
+        )
     }
 
-    // swiftlint:disable:next identifier_name
-    init(from: Address, to: Address, data: Data, nonce: BigInt,
-         gasPrice: BigInt, gasLimit: BigInt, value: BigInt) {
+    init(
+        from: Address,
+        to: Address,
+        data: Data,
+        nonce: BigInt,
+        gasPrice: BigInt,
+        gasLimit: BigInt,
+        value: BigInt,
+        chainId: BigInt
+    ) {
         self.from = from
         self.to = to
         self.data = data
@@ -37,6 +56,7 @@ struct UnsignedTransaction {
         self.gasPrice = gasPrice
         self.gasLimit = gasLimit
         self.value = value
+        self.chainId = chainId
     }
 }
 
