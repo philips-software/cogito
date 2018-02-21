@@ -82,7 +82,7 @@ class KeyStore: Codable {
         return nil
     }
 
-    func sign(transaction: Transaction, chainId: BigInt, identity: Identity,
+    func sign(transaction: UnsignedTransaction, chainId: BigInt, identity: Identity,
               onComplete: @escaping (_ transaction: Data?, _ error: String?) -> Void) {
         guard let gethKeyStore = wrapped else {
             onComplete(nil, "failed to open key store")

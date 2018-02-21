@@ -4,17 +4,7 @@ import Foundation
 import BigInt
 import SwiftyJSON
 
-protocol Transaction {
-    var from: Address { get }
-    var to: Address { get } // swiftlint:disable:this identifier_name
-    var data: Data { get }
-    var nonce: BigInt { get }
-    var gasPrice: BigInt { get }
-    var gasLimit: BigInt { get }
-    var value: BigInt { get }
-}
-
-struct UnsignedTransaction: Transaction {
+struct UnsignedTransaction {
     let from: Address
     let to: Address // swiftlint:disable:this identifier_name
     let data: Data
