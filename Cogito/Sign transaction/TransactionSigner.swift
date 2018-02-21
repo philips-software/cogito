@@ -38,7 +38,7 @@ struct TransactionSignerInvalid: TransactionSigner {
 }
 
 struct TransactionSignerValid: TransactionSigner {
-    let transaction: Transaction
+    let transaction: UnsignedTransaction
     let dispatch: DispatchFunction
     let getState: () -> AppState?
     let responseId: JsonRpcId
