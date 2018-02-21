@@ -4,7 +4,7 @@ const anything = td.matchers.anything
 const contains = td.matchers.contains
 const { stubResponse } = require('./provider-stubbing')
 const Web3 = require('web3')
-const CogitoProvider = require('../lib/provider')
+const CogitoProvider = require('../lib/cogito-provider')
 
 describe('sending transactions', function () {
   const transaction = {
