@@ -119,6 +119,20 @@ class TelepathActionsSpec: QuickSpec {
                 ])
             }
 
+            it ("encodes data responses") {
+                let result = "some data".data(using: .utf8)!
+
+                store.dispatch(TelepathActions.Send(id: id, result: result))
+
+                let pending = store.firstAction(ofType: TelepathActions.SendPending.self)!
+
+                expect(JSON(parseJSON: pending.message)) == JSON([
+                    "jsonrpc": "2.0",
+                    "id": id.object,
+                    "result": "0x" + result.hexEncodedString()
+                ])
+            }
+
             it("encodes errors") {
                 let action = TelepathActions.Send(
                     id: id,
