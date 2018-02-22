@@ -79,13 +79,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="d6B-Fa-2XX"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Signature requested" id="4QQ-ag-00q">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="wvr-PY-rxO">
-                            <connections>
-                                <action selector="cancel:" destination="zYe-bO-UOX" id="995-Qc-S5u"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Signature requested" id="4QQ-ag-00q"/>
                     <connections>
                         <outlet property="explanationLabel" destination="LqP-Yj-8jZ" id="N8e-oM-uka"/>
                         <outlet property="rejectButton" destination="6RG-5o-HXO" id="uJP-qj-imU"/>
