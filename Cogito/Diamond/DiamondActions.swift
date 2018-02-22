@@ -13,6 +13,10 @@ struct DiamondActions {
         let uuid: UUID
     }
 
+    struct SelectFacet: Action {
+        let uuid: UUID
+    }
+
     struct AddJWTAttestation: Action {
         let identity: Identity
         let idToken: String

@@ -32,14 +32,39 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         )
         connection.bind(\Props.facetGroups, to: tableView.rx.items(dataSource: dataSource))
         tableView.rx.itemDeleted.subscribe(onNext: { [unowned self] (indexPath: IndexPath) in
-            let uuid = self.props.facetGroups[indexPath.section].items[indexPath.row].identity
-            self.actions.deleteIdentity(uuid)
+            self.itemDeleted(at: indexPath)
         }).disposed(by: disposeBag)
+        tableView.rx.itemSelected.subscribe(onNext: { [unowned self] (indexPath: IndexPath) in
+            self.itemSelected(at: indexPath)
+        }).disposed(by: disposeBag)
+        connection.subscribe(\Props.selectedFacetIndex) { [unowned self] newIndex in
+            self.updateSelectedRow(facetIndex: newIndex)
+        }
+    }
+
+    func itemDeleted(at indexPath: IndexPath) {
+        let uuid = self.props.facetGroups[indexPath.section].items[indexPath.row].identity
+        self.actions.deleteIdentity(uuid)
+    }
+
+    func itemSelected(at indexPath: IndexPath) {
+        let uuid = self.props.facetGroups[indexPath.section].items[indexPath.row].identity
+        self.actions.selectIdentity(uuid)
+    }
+
+    func updateSelectedRow(facetIndex: Int) {
+        guard facetIndex < self.tableView.numberOfRows(inSection: 0) else {
+            return
+        }
+        self.tableView.selectRow(at: IndexPath(row: facetIndex, section: 0),
+                                 animated: true,
+                                 scrollPosition: .middle)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         connection.connect()
+        updateSelectedRow(facetIndex: self.props.selectedFacetIndex)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -64,10 +89,12 @@ class IdentityManagerViewController: UITableViewController, Connectable {
 
     struct Props {
         let facetGroups: [ViewModel.FacetGroup]
+        let selectedFacetIndex: Int
     }
     struct Actions {
         let resetCreateIdentity: () -> Void
         let deleteIdentity: (UUID) -> Void
+        let selectIdentity: (UUID) -> Void
     }
 
     let connection = Connection(store: appStore,
@@ -77,14 +104,27 @@ class IdentityManagerViewController: UITableViewController, Connectable {
 
 private func mapStateToProps(state: AppState) -> IdentityManagerViewController.Props {
     let facets = state.diamond.facets.values.map { IdentityManagerViewController.ViewModel.Facet(facet: $0) }
-    let groups = [IdentityManagerViewController.ViewModel.FacetGroup(items: facets).sorted()]
-    return IdentityManagerViewController.Props(facetGroups: groups)
+    let group = IdentityManagerViewController.ViewModel.FacetGroup(items: facets).sorted()
+
+    let selectedIndex: Int
+    if let selectedFacet = state.diamond.selectedFacetId {
+        selectedIndex = group.items.map { $0.identity }.index(of: selectedFacet) ?? 0
+    } else {
+        selectedIndex = 0
+    }
+
+    let groups = [group]
+    return IdentityManagerViewController.Props(
+        facetGroups: groups,
+        selectedFacetIndex: selectedIndex
+    )
 }
 
 private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> IdentityManagerViewController.Actions {
     return IdentityManagerViewController.Actions(
         resetCreateIdentity: { dispatch(CreateIdentityActions.ResetForm()) },
-        deleteIdentity: { uuid in dispatch(DiamondActions.DeleteFacet(uuid: uuid)) }
+        deleteIdentity: { uuid in dispatch(DiamondActions.DeleteFacet(uuid: uuid)) },
+        selectIdentity: { uuid in dispatch(DiamondActions.SelectFacet(uuid: uuid)) }
     )
 }
 

@@ -18,7 +18,8 @@ class IdentityManagerViewControllerSpec: QuickSpec {
             var reset = false
             identityManagerController.actions = IdentityManagerViewController.Actions(
                 resetCreateIdentity: { reset = true },
-                deleteIdentity: { _ in }
+                deleteIdentity: { _ in },
+                selectIdentity: { _ in }
             )
             let createIdentityController = CreateIdentityViewController()
             let segue = UIStoryboardSegue(identifier: "CreateIdentity",
@@ -36,16 +37,57 @@ class IdentityManagerViewControllerSpec: QuickSpec {
             let model = [IdentityManagerViewController.ViewModel.FacetGroup(items: [
                 IdentityManagerViewController.ViewModel.Facet(facet: testIdentity)
             ])]
-            identityManagerController.props = IdentityManagerViewController.Props(facetGroups: model)
+            identityManagerController.props = IdentityManagerViewController.Props(
+                facetGroups: model,
+                selectedFacetIndex: 0
+            )
             var deletedUuid: UUID? = nil
             identityManagerController.actions = IdentityManagerViewController.Actions(
                 resetCreateIdentity: {},
-                deleteIdentity: { uuid in deletedUuid = uuid }
+                deleteIdentity: { uuid in deletedUuid = uuid },
+                selectIdentity: { _ in }
             )
             identityManagerController.tableView.dataSource?.tableView?(identityManagerController.tableView,
                                                            commit: .delete,
                                                            forRowAt: IndexPath(row: 0, section: 0))
             expect(deletedUuid) == testIdentity.identifier
+        }
+
+        it("triggers select identity action") {
+            let testAddress = Address.testAddress
+            let testAddress1 = Address.testAddress1
+            let testIdentity = Identity(description: "testdesc",
+                                        address: testAddress)
+            let testIdentity1 = Identity(description: "testdesc1",
+                                         address: testAddress1)
+            let model = [IdentityManagerViewController.ViewModel.FacetGroup(items: [
+                IdentityManagerViewController.ViewModel.Facet(facet: testIdentity),
+                IdentityManagerViewController.ViewModel.Facet(facet: testIdentity1)
+            ])]
+            identityManagerController.props = IdentityManagerViewController.Props(
+                facetGroups: model,
+                selectedFacetIndex: 0
+            )
+            var selectedUuid: UUID? = nil
+            identityManagerController.actions = IdentityManagerViewController.Actions(
+                resetCreateIdentity: {},
+                deleteIdentity: { _ in },
+                selectIdentity: { uuid in selectedUuid = uuid })
+            let indexPath = IndexPath(row: 1, section: 0)
+            identityManagerController.itemSelected(at: indexPath)
+            expect(selectedUuid) == testIdentity1.identifier
+        }
+
+        describe("Map state to props") {
+            it("maps selectedFacetIndex") {
+                let identity0 = Identity(description: "id0", address: Address.testAddress)
+                let identity1 = Identity(description: "id1", address: Address.testAddress1)
+                var diamond = DiamondState(facets: [identity0, identity1])
+                diamond.selectedFacetId = identity1.identifier
+                let state = appState(diamond: diamond)
+                identityManagerController.connection.newState(state: state)
+                expect(identityManagerController.props.selectedFacetIndex) == 1
+            }
         }
 
         describe("Map dispatch to actions") {
@@ -65,6 +107,12 @@ class IdentityManagerViewControllerSpec: QuickSpec {
                 let uuid = UUID()
                 identityManagerController.actions.deleteIdentity(uuid)
                 expect(store.firstAction(ofType: DiamondActions.DeleteFacet.self)?.uuid) == uuid
+            }
+
+            it("maps selectIdentity") {
+                let uuid = UUID()
+                identityManagerController.actions.selectIdentity(uuid)
+                expect(store.firstAction(ofType: DiamondActions.SelectFacet.self)?.uuid) == uuid
             }
         }
     }
