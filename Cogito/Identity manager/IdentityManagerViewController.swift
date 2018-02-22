@@ -77,7 +77,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
 
 private func mapStateToProps(state: AppState) -> IdentityManagerViewController.Props {
     let facets = state.diamond.facets.values.map { IdentityManagerViewController.ViewModel.Facet(facet: $0) }
-    let groups = [IdentityManagerViewController.ViewModel.FacetGroup(items: facets)]
+    let groups = [IdentityManagerViewController.ViewModel.FacetGroup(items: facets).sorted()]
     return IdentityManagerViewController.Props(facetGroups: groups)
 }
 
@@ -108,6 +108,12 @@ extension IdentityManagerViewController {
             init(original: FacetGroup, items: [Facet]) {
                 self = original
                 self.items = items
+            }
+
+            func sorted() -> FacetGroup {
+                return FacetGroup(items: items.sorted(by: { (lhs, rhs) -> Bool in
+                    return lhs.facet.created < rhs.facet.created
+                }))
             }
 
             static func == (lhs: FacetGroup, rhs: FacetGroup) -> Bool {
