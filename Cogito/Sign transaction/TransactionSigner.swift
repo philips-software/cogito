@@ -44,12 +44,22 @@ struct TransactionSignerValid: TransactionSigner {
     let responseId: JsonRpcId
 
     func execute() {
-        let onReject = { (_:Any) in
+        let storyBoard = UIStoryboard(name: "SignTransaction", bundle: nil)
+        // swiftlint:disable force_cast
+        let viewController = storyBoard.instantiateInitialViewController() as! UINavigationController
+        let explanationViewController = viewController.topViewController! as! ExplanationViewController
+        // swiftlint:enable force_cast
+        explanationViewController.appName = "DSP Marketplace" // todo hard-coded
+        explanationViewController.actionDescription = "make a blockchain transaction" // todo hard-coded
+        let signingDone = { viewController.dismiss(animated: true) }
+
+        explanationViewController.onReject = {
             self.dispatch(TelepathActions.Send(id: self.responseId,
                                                errorCode: -3/*todo*/,
                                                errorMessage: "user rejected"))
+            signingDone()
         }
-        let onSign = { (_:Any) in
+        explanationViewController.onSign = {
             let state = self.getState()!
             let keyStore = state.keyStore.keyStore!
             let identity = state.diamond.selectedFacet()!
@@ -61,19 +71,13 @@ struct TransactionSignerValid: TransactionSigner {
                     self.dispatch(TelepathActions.Send(id: self.responseId,
                                                        errorCode: -2/*todo*/,
                         errorMessage: error ?? "unknown error"))
+                    signingDone()
                     return
                 }
                 self.dispatch(TelepathActions.Send(id: self.responseId, result: signedTx))
+                signingDone()
             }
         }
-
-        let alert = UIAlertController(title: "Signature requested",
-                                      message: "DSP Marktetplace requests your signature for a blockchain transaction.",
-                                      preferredStyle: .actionSheet)
-        let rejectAction = UIAlertAction(title: "Reject", style: .cancel, handler: onReject)
-        let signAction = UIAlertAction(title: "Sign", style: .default, handler: onSign)
-        alert.addAction(rejectAction)
-        alert.addAction(signAction)
-        UIApplication.shared.keyWindow?.currentViewController?.present(alert, animated: true)
+        UIApplication.shared.keyWindow?.currentViewController?.present(viewController, animated: true)
     }
 }
