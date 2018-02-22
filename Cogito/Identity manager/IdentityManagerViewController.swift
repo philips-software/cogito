@@ -21,7 +21,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Facet", for: indexPath)
                 if let facetCell = cell as? FacetTableVieCell {
                     // space compensates for slanted font, gets clipped otherwise
-                    facetCell.textLabel?.text = " " + item.facet.description
+                    facetCell.textLabel?.text = " " + item.facet.description + " "
                     let addr = item.facet.address.description
                     let range = addr.startIndex ..< addr.index(addr.startIndex, offsetBy: 10)
                     facetCell.detailTextLabel?.text = addr[range] + "..."
