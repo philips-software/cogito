@@ -41,19 +41,9 @@ class DiamondStateSpec: QuickSpec {
             expect {
                 encodedData = try encoder.encode(state)
             }.toNot(throwError())
-            let encoded = String(data: encodedData, encoding: .utf8)
-            let address = account0.getAddress()!.getHex()!
-            expect(encoded) == "{\"selectedFacetId\":\"\(identity0.identifier)\"," +
-                               "\"facets\":[\"\(identity0.identifier)\",{" +
-                               "\"idTokens\":[]," +
-                               "\"description\":\"first identity\"," +
-                               "\"identifier\":\"\(identity0.identifier)\"," +
-                               "\"address\":\"\(address)\"" +
-                               "}" +
-                               "]}"
 
             let decoder = JSONDecoder()
-            var decodedState: DiamondState!
+            var decodedState: DiamondState?
             expect {
                 decodedState = try decoder.decode(DiamondState.self, from: encodedData)
             }.toNot(throwError())
