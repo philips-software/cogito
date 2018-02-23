@@ -49,7 +49,7 @@ struct TransactionSignerValid: TransactionSigner {
         let viewController = storyBoard.instantiateInitialViewController() as! UINavigationController
         let explanationViewController = viewController.topViewController! as! ExplanationViewController
         // swiftlint:enable force_cast
-        explanationViewController.appName = "DSP Marketplace" // todo hard-coded
+        explanationViewController.appName = "HealthSuite Insights Marketplace" // todo hard-coded
         explanationViewController.actionDescription = "make a blockchain transaction" // todo hard-coded
         let signingDone = { viewController.dismiss(animated: true) }
 
