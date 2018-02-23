@@ -1,9 +1,7 @@
 {
   "presets": [
-    [ "env", {
-      "modules": false
-      }
-    ]
-  ],
-  "plugins": ["transform-async-to-generator"]
+    "env",
+    "stage-0",
+    "react"
+  ]
 }
