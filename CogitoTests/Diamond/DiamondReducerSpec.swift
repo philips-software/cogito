@@ -75,5 +75,22 @@ class DiamondReducerSpec: QuickSpec {
             let nextState = diamondReducer(action: action, state: initialState)
             expect(nextState.selectedFacetId).to(beNil())
         }
+
+        it("handles SelectFacet") {
+            let identity = Identity(description: "test identity", address: Address.testAddress1)
+            var initialState = DiamondState(facets: [identity])
+            initialState.selectedFacetId = nil
+            let action = DiamondActions.SelectFacet(uuid: identity.identifier)
+            let nextState = diamondReducer(action: action, state: initialState)
+            expect(nextState.selectedFacetId) == identity.identifier
+        }
+
+        it("doesn't allow selecting non-existing identity") {
+            var initialState = DiamondState(facets: [])
+            initialState.selectedFacetId = nil
+            let action = DiamondActions.SelectFacet(uuid: UUID())
+            let nextState = diamondReducer(action: action, state: initialState)
+            expect(nextState.selectedFacetId).to(beNil())
+        }
     }
 }
