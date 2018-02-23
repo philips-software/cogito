@@ -5,17 +5,22 @@
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/telepath-js",
   "private": true,
   "license": "UNLICENSED",
-  "main": "index.js",
+  "main": "./distribution/index.js",
   "scripts": {
-    "test": "yarn standard && yarn nyc mocha 'test/**/*.js'"
+    "test": "yarn standard && yarn nyc mocha 'source/test/**/*.js'",
+    "build": "babel source --presets babel-preset-env --out-dir distribution",
+    "prepublish": "yarn build"
   },
   "engines": {
-    "node": ">=7.6.0"
+    "node": ">=9.0.0"
   },
   "standard": {
     "parser": "babel-eslint"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "8.0.2",
+    "babel-preset-env": "^1.6.1",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "dirty-chai": "^2.0.1",
@@ -23,8 +28,7 @@
     "nock": "^9.0.22",
     "nyc": "^11.2.1",
     "standard": "^10.0.3",
-    "testdouble": "^3.2.6",
-    "babel-eslint": "8.0.2"
+    "testdouble": "^3.2.6"
   },
   "dependencies": {
     "base64url": "^2.0.0",
