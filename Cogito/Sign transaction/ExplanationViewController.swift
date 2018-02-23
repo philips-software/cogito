@@ -4,23 +4,29 @@ import UIKit
 
 class ExplanationViewController: UIViewController {
 
-    @IBOutlet weak var explanationLabel: UILabel!
+    @IBOutlet weak var applicationLabel: UILabel!
+    @IBOutlet weak var actionLabel: UILabel!
+    @IBOutlet weak var identityLabel: UILabel!
     @IBOutlet weak var signButton: UIButton!
     @IBOutlet weak var rejectButton: UIButton!
 
     var appName: String = ""
     var actionDescription: String = ""
+    var identity: Identity?
     var onSign: () -> Void = {}
     var onReject: () -> Void = {}
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        configureExplanation()
+        configureUI()
     }
 
-    func configureExplanation() {
-        let text = "\(appName) requests your signature to \(actionDescription)."
-        explanationLabel.text = text
+    func configureUI() {
+        applicationLabel.text = appName
+        actionLabel.text = actionDescription
+        if let identityDescription = identity?.description {
+            identityLabel.text = identityDescription
+        }
     }
 
     @IBAction func cancel(_ sender: Any) {

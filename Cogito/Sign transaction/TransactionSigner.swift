@@ -49,8 +49,11 @@ struct TransactionSignerValid: TransactionSigner {
         let viewController = storyBoard.instantiateInitialViewController() as! UINavigationController
         let explanationViewController = viewController.topViewController! as! ExplanationViewController
         // swiftlint:enable force_cast
+        let state = self.getState()!
         explanationViewController.appName = "HealthSuite Insights Marketplace" // todo hard-coded
-        explanationViewController.actionDescription = "make a blockchain transaction" // todo hard-coded
+        explanationViewController.actionDescription = "sign a blockchain transaction" // todo hard-coded
+        explanationViewController.identity = state.diamond.findIdentity(address: transaction.from)
+
         let signingDone = { viewController.dismiss(animated: true) }
 
         explanationViewController.onReject = {
@@ -60,7 +63,6 @@ struct TransactionSignerValid: TransactionSigner {
             signingDone()
         }
         explanationViewController.onSign = {
-            let state = self.getState()!
             let keyStore = state.keyStore.keyStore!
             let identity = state.diamond.selectedFacet()!
             keyStore.sign(
