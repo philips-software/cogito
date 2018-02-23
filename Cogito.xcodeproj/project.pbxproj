@@ -190,6 +190,7 @@
 		C00B52E1B28440BB32322784 /* DialogPresenterReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B579EEF4EDAFB75E6221C /* DialogPresenterReducer.swift */; };
 		C00B53178861BC297D2B8513 /* DialogPresenterActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B58EF23AD635EAE304108 /* DialogPresenterActions.swift */; };
 		C00B5370FDA0454E818FE2EB /* DialogPresenterReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5417AE458FB345850039 /* DialogPresenterReducerSpec.swift */; };
+		C00B538DC686778CC24DBA02 /* TelepathError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5357D2CD9D8091E64E4A /* TelepathError.swift */; };
 		C00B54321DC6AA59BE55E8C1 /* UnsignedTransactionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B56B7E4CA3836960336DF /* UnsignedTransactionSpec.swift */; };
 		C00B54913224B9C03F32E185 /* Encodable+json.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5B1891702007BD67637B /* Encodable+json.swift */; };
 		C00B552C389894477CA10423 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B535ED8937C7ED5FC8495 /* Transaction.swift */; };
@@ -207,6 +208,7 @@
 		C00B5AF3F2ECB1BD9415E765 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B542BA533252756727EF5 /* Address.swift */; };
 		C00B5B06165F3D5132AB7064 /* Data+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5147CAE92346F14EF19F /* Data+hex.swift */; };
 		C00B5D39FC0D970348A5E0C6 /* DiamondActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5F53B99BC5464AF8BE3E /* DiamondActions.swift */; };
+		C00B5DFD7BD878D070179544 /* TelepathError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5357D2CD9D8091E64E4A /* TelepathError.swift */; };
 		C00B5E26A7AC55AC03FD717B /* DispatchRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5FFF481EB4982C21280E /* DispatchRecorder.swift */; };
 		C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B57766800CB3EFBE971EC /* AppPassword.swift */; };
 		C00B5F2F98B19D0B3884414E /* Data+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5147CAE92346F14EF19F /* Data+hex.swift */; };
@@ -348,6 +350,7 @@
 		C00B5147CAE92346F14EF19F /* Data+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+hex.swift"; sourceTree = "<group>"; };
 		C00B51FAEC4359E68AB1FA33 /* KeyStoreStateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreStateSpec.swift; sourceTree = "<group>"; };
 		C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttestationsReducerSpec.swift; sourceTree = "<group>"; };
+		C00B5357D2CD9D8091E64E4A /* TelepathError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelepathError.swift; sourceTree = "<group>"; };
 		C00B535ED8937C7ED5FC8495 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPasswordSpec.swift; sourceTree = "<group>"; };
 		C00B5412CBC3B026E362474C /* CreateIdentityStateSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateIdentityStateSpec.swift; sourceTree = "<group>"; };
@@ -792,6 +795,7 @@
 				5C8CFD3D2007993500D383C0 /* JsonRpcRequest.swift */,
 				5C0C74F5200DF705009463F9 /* JsonRpcId.swift */,
 				5CDB58DD20358B4100A28D60 /* TelepathSubscriber.swift */,
+				C00B5357D2CD9D8091E64E4A /* TelepathError.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -1219,6 +1223,7 @@
 				C00B54913224B9C03F32E185 /* Encodable+json.swift in Sources */,
 				C00B5B06165F3D5132AB7064 /* Data+hex.swift in Sources */,
 				C00B552C389894477CA10423 /* Transaction.swift in Sources */,
+				C00B5DFD7BD878D070179544 /* TelepathError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1346,6 +1351,7 @@
 				C00B57F400C10AB0C6F066D8 /* Data+hexSpec.swift in Sources */,
 				C00B568FFA6C3F707DEE730C /* Transaction.swift in Sources */,
 				C00B54321DC6AA59BE55E8C1 /* UnsignedTransactionSpec.swift in Sources */,
+				C00B538DC686778CC24DBA02 /* TelepathError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
