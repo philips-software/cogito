@@ -1,3 +1,5 @@
+'use strict';
+
 var waitUntilReady = function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
     return regeneratorRuntime.wrap(function _callee$(_context) {
