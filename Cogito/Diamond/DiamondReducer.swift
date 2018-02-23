@@ -25,6 +25,10 @@ func diamondReducer(action: Action, state: DiamondState?) -> DiamondState {
         }
     case let action as DiamondActions.AddJWTAttestation:
         state.facets[action.identity.identifier]?.idTokens.append(action.idToken)
+    case let action as DiamondActions.SelectFacet:
+        if state.facets[action.uuid] != nil {
+            state.selectedFacetId = action.uuid
+        }
     default:
         break
     }
