@@ -155,7 +155,6 @@ struct GetAttestationsValid: GetAttestations {
         let alert = RequestedAlert(title: "Login required",
                                    message: "Application \(applicationName) requires you to login to " +
                                             "\(self.oidcRealmUrl.absoluteString)",
-                                            // ^^^^^^^^^^^^ todo: use webfinger
                                    actions: [
                                        AlertAction(title: "Cancel", style: .cancel) { _ in
                                         self.send(id: requestId, error: .userCancelledLogin)

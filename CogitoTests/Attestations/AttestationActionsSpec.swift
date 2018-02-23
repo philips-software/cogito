@@ -85,7 +85,7 @@ class AttestationActionsSpec: QuickSpec {
                 // a use case without actually requiring the web app to also authenticate with
                 // the OpenID Connect server; hence the web app doesn't know what subject to
                 // provide.
-                // todo: remove this capability
+                // https://gitlab.ta.philips.com/blockchain-lab/Cogito/issues/11
                 let identity = Identity(description: "test identity", address: Address.testAddress1)
                 let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
                 let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()

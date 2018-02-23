@@ -38,7 +38,8 @@ struct AttestationActions {
                 return
             }
             do {
-                // todo this JWTDecode library does not check the JWT signature!
+                // This JWTDecode library does not check the JWT signature;
+                // https://gitlab.ta.philips.com/blockchain-lab/Cogito/issues/8
                 let jwt = try JWTDecode.decode(jwt: idToken)
                 guard let nonce = jwt.claim(name: "nonce").string else {
                     dispatch(FinishRejected(nonce: nil, error: "nonce is missing"))
@@ -46,6 +47,7 @@ struct AttestationActions {
                 }
                 guard let state = getState(),
                       let pendingAttestation = state.attestations.open[nonce],
+                      // https://gitlab.ta.philips.com/blockchain-lab/Cogito/issues/11
                       (pendingAttestation.subject == nil || pendingAttestation.subject! == jwt.subject) else {
                     dispatch(FinishRejected(nonce: nonce, error: "unexpected nonce or subject"))
                     return
