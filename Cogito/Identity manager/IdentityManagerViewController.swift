@@ -50,6 +50,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     func itemSelected(at indexPath: IndexPath) {
         let uuid = self.props.facetGroups[indexPath.section].items[indexPath.row].identity
         self.actions.selectIdentity(uuid)
+        self.dismiss(animated: true)
     }
 
     func updateSelectedRow(facetIndex: Int) {
