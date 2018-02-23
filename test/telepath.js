@@ -3,9 +3,9 @@ const chai = require('chai')
 const expect = chai.expect
 const td = require('testdouble')
 const base64url = require('base64url')
-const JsonRpcChannel = require('../lib/json-rpc-channel')
-const { random, keySize } = td.replace('../lib/crypto')
-const Telepath = require('../lib/telepath')
+const JsonRpcChannel = require('../source/lib/json-rpc-channel')
+const { random, keySize } = td.replace('../source/lib/crypto')
+const Telepath = require('../source/lib/telepath')
 
 describe('Telepath', function () {
   let telepath

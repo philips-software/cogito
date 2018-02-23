@@ -1,8 +1,8 @@
 /* eslint-env mocha */
 const expect = require('chai').expect
 const td = require('testdouble')
-const delay = require('../lib/delay')
-const Poller = require('../lib/poller')
+const delay = require('../source/lib/delay')
+const Poller = require('../source/lib/poller')
 
 describe('Poller', function () {
   const retries = 5

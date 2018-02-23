@@ -3,9 +3,9 @@ const chai = require('chai')
 const expect = chai.expect
 const td = require('testdouble')
 const anything = td.matchers.anything
-const { random, encrypt, decrypt, keySize, nonceSize } = require('../lib/crypto')
+const { random, encrypt, decrypt, keySize, nonceSize } = require('../source/lib/crypto')
 const base64url = require('base64url')
-const SecureChannel = require('../lib/secure-channel')
+const SecureChannel = require('../source/lib/secure-channel')
 
 describe('Secure Channel', function () {
   const channelId = 'channel_id'
