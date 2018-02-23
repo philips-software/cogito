@@ -55,13 +55,14 @@ struct AttestationActions {
                 dispatch(DiamondActions.AddJWTAttestation(identity: pendingAttestation.identity,
                                                           idToken: idToken))
                 dispatch(Fulfilled(nonce: nonce, idToken: idToken))
-                if let currentChannel = state.telepath.channel,
-                   currentChannel.id == pendingAttestation.requestedOnChannel {
+                if let channelId = pendingAttestation.requestedOnChannel,
+                   let channel = state.telepath.findChannel(id: channelId) {
                     GetAttestationsValid.send(
                         requestId: pendingAttestation.requestId,
                         idToken: idToken,
                         dispatch: dispatch,
-                        state: state
+                        state: state,
+                        on: channel
                     )
                 }
             } catch let e {
@@ -114,7 +115,8 @@ struct AttestationActions {
                 applicationName: applicationName,
                 subject: subject,
                 dispatch: dispatch,
-                getState: getState
+                getState: getState,
+                channel: channel
             )
             builder.build().execute()
         })

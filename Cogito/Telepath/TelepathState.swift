@@ -1,27 +1,32 @@
 //Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
 
 import Foundation
+import Telepath
 
 struct TelepathState: Equatable, Codable {
-    var channel: TelepathChannel?
+    var channels: [TelepathChannel:Identity]
     var connectionError: String?
     var receivedMessages: [TelepathMessage] = []
     var receiveError: String?
 
     init(
-        channel: TelepathChannel? = nil,
+        channels: [TelepathChannel:Identity] = [:],
         connectionError: String? = nil,
         receivedMessages: [TelepathMessage] = [],
         receiveError: String? = nil
     ) {
-        self.channel = channel
+        self.channels = channels
         self.connectionError = connectionError
         self.receivedMessages = receivedMessages
         self.receiveError = receiveError
     }
 
+    func findChannel(id: ChannelID) -> TelepathChannel? {
+        return channels.keys.first { $0.id == id }
+    }
+
     static func == (lhs: TelepathState, rhs: TelepathState) -> Bool {
-        return lhs.channel == rhs.channel
+        return lhs.channels == rhs.channels
     }
 
 }

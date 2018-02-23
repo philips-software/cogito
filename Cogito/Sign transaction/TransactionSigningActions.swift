@@ -11,7 +11,8 @@ struct TransactionSigningActions {
             let builder = TransactionSignerBuilder(transaction: tx,
                                                    dispatch: dispatch,
                                                    getState: getState,
-                                                   responseId: responseId)
+                                                   responseId: responseId,
+                                                   channel: channel)
             builder.build().execute()
         })
     }

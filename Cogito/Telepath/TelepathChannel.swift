@@ -46,3 +46,9 @@ extension TelepathChannel: Equatable {
         return lhs.connectUrl == rhs.connectUrl
     }
 }
+
+extension TelepathChannel: Hashable {
+    var hashValue: Int {
+        return self.channel.id.hashValue
+    }
+}

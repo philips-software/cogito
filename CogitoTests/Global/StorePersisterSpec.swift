@@ -76,7 +76,8 @@ class StorePersisterSpec: QuickSpec {
                         "selectedFacet": null
                     },
                     "telepath": {
-                        "receivedMessages": []
+                        "receivedMessages": [],
+                        "channels": []
                     },
                     "attestations": {
                         "open": {},
