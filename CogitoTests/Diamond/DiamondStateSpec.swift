@@ -49,5 +49,15 @@ class DiamondStateSpec: QuickSpec {
             }.toNot(throwError())
             expect(decodedState) == state
         }
+
+        it("can find an identity by address") {
+            let state = DiamondState(facets: [identity0])
+            expect(state.findIdentity(address: identity0.address)) == identity0
+        }
+
+        it("cannot find a non-existing identity") {
+            let state = DiamondState(facets: [])
+            expect(state.findIdentity(address: identity0.address)).to(beNil())
+        }
     }
 }
