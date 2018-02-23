@@ -1,5 +1,3 @@
-"use strict";
-
 var delay = function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(milliseconds) {
     return regeneratorRuntime.wrap(function _callee$(_context) {

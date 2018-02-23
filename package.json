@@ -8,7 +8,7 @@
   "main": "./distribution/index.js",
   "scripts": {
     "test": "yarn standard && yarn nyc mocha 'source/test/**/*.js'",
-    "build": "babel source --presets babel-preset-env --out-dir distribution",
+    "build": "babel source --out-dir distribution",
     "prepublish": "yarn build"
   },
   "engines": {
