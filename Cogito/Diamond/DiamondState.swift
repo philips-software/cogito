@@ -20,6 +20,10 @@ struct DiamondState: Codable {
         guard let facetId = selectedFacetId else { return nil }
         return facets[facetId]
     }
+
+    func findIdentity(address: Address) -> Identity? {
+        return facets.values.first { $0.address == address }
+    }
 }
 
 extension DiamondState: Equatable {
