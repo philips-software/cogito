@@ -13,7 +13,9 @@ struct AccountActions {
                let selectedFacet = diamond.selectedFacet() {
                    accounts.append("\(selectedFacet.address)")
             }
-            dispatch(TelepathActions.Send(id: requestId, result: accounts))
+            dispatch(TelepathActions.Send(id: requestId,
+                                          result: accounts,
+                                          on: channel))
         })
     }
 }

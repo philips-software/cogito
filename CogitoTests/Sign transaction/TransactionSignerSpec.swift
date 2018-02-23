@@ -29,11 +29,12 @@ class TransactionSignerSpec: QuickSpec {
             let builder = TransactionSignerBuilder(transaction: transaction,
                                                    dispatch: store.dispatch,
                                                    getState: { return nil },
-                                                   responseId: JsonRpcId(0))
+                                                   responseId: JsonRpcId(0),
+                                                   channel: TelepathChannelSpy())
             let signer = builder.build()
             expect(signer).to(beAKindOf(TransactionSignerInvalid.self))
             signer.execute()
-            let lastAction = store.actions.last as? TelepathActions.SendPending
+            let lastAction = store.firstAction(ofType: TelepathActions.SendPending.self)
             expect(lastAction?.message).to(contain("missing or invalid field(s) in transaction data"))
         }
 
@@ -44,11 +45,12 @@ class TransactionSignerSpec: QuickSpec {
             let builder = TransactionSignerBuilder(transaction: transaction,
                                                    dispatch: store.dispatch,
                                                    getState: { return nil },
-                                                   responseId: JsonRpcId(0))
+                                                   responseId: JsonRpcId(0),
+                                                   channel: TelepathChannelSpy())
             let signer = builder.build()
             expect(signer).to(beAKindOf(TransactionSignerInvalid.self))
             signer.execute()
-            let lastAction = store.actions.last as? TelepathActions.SendPending
+            let lastAction = store.firstAction(ofType: TelepathActions.SendPending.self)
             expect(lastAction?.message).to(contain("missing or invalid field(s) in transaction data"))
         }
 
@@ -56,7 +58,8 @@ class TransactionSignerSpec: QuickSpec {
             let builder = TransactionSignerBuilder(transaction: validTransaction,
                                                    dispatch: store.dispatch,
                                                    getState: { return nil },
-                                                   responseId: JsonRpcId(0))
+                                                   responseId: JsonRpcId(0),
+                                                   channel: TelepathChannelSpy())
             let signer = builder.build()
             expect(signer).to(beAKindOf(TransactionSignerValid.self))
         }

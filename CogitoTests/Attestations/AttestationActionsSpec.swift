@@ -155,13 +155,13 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             beforeEach {
-                channel = TelepathChannelSpy()
-                telepathState = TelepathState(channel: channel, connectionError: nil,
-                                              receivedMessages: [], receiveError: nil)
-                store = RecordingStore()
                 identityWithoutAttestation = Identity(description: "test", address: Address.testAddress)
                 identityWithAttestation = Identity(description: "test", address: Address.testAddress)
                 identityWithAttestation.idTokens = [idToken]
+                channel = TelepathChannelSpy()
+                telepathState = TelepathState(channels: [channel: identityWithoutAttestation], connectionError: nil,
+                                              receivedMessages: [], receiveError: nil)
+                store = RecordingStore()
                 getAttestationsAction = AttestationActions.GetAttestations(
                     requestId: requestId,
                     applicationName: "test",

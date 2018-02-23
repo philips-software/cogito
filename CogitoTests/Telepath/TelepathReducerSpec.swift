@@ -6,17 +6,18 @@ import Nimble
 class TelepathReducerSpec: QuickSpec {
     override func spec() {
         let channel = TelepathChannel.example
+        let identity = Identity(description: "test", address: Address.testAddress)
         let message = TelepathMessage(message: "a message", channel: channel)
 
         it("stores the channel in the state") {
-            let action = TelepathActions.ConnectFulfilled(channel: channel)
+            let action = TelepathActions.ConnectFulfilled(channel: channel, identity: identity)
             let nextState = telepathReducer(action, nil)
-            expect(nextState.channel) == channel
+            expect(nextState.channels[channel]) == identity
         }
 
         it("stores connection errors in the state") {
             let error = ExampleError(message: "an error")
-            let action = TelepathActions.ConnectRejected(error: error)
+            let action = TelepathActions.ConnectRejected(error: error, identity: identity)
             let nextState = telepathReducer(action, nil)
             expect(nextState.connectionError) == error.localizedDescription
         }

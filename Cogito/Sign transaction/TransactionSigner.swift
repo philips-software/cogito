@@ -8,16 +8,19 @@ struct TransactionSignerBuilder {
     let dispatch: DispatchFunction
     let getState: () -> AppState?
     let responseId: JsonRpcId
+    let channel: TelepathChannel
 
     func build() -> TransactionSigner {
         guard let tx = UnsignedTransaction(from: transaction) else {
             return TransactionSignerInvalid(dispatch: dispatch,
-                                            responseId: responseId)
+                                            responseId: responseId,
+                                            channel: channel)
         }
         return TransactionSignerValid(transaction: tx,
                                       dispatch: dispatch,
                                       getState: getState,
-                                      responseId: responseId)
+                                      responseId: responseId,
+                                      channel: channel)
     }
 }
 
@@ -29,9 +32,12 @@ protocol TransactionSigner {
 struct TransactionSignerInvalid: TransactionSigner {
     let dispatch: DispatchFunction
     let responseId: JsonRpcId
+    let channel: TelepathChannel
 
     func execute() {
-        dispatch(TelepathActions.Send(id: responseId, error: SignTransactionError.invalidTransaction))
+        dispatch(TelepathActions.Send(id: responseId,
+                                      error: SignTransactionError.invalidTransaction,
+                                      on: channel))
     }
 }
 
@@ -40,6 +46,7 @@ struct TransactionSignerValid: TransactionSigner {
     let dispatch: DispatchFunction
     let getState: () -> AppState?
     let responseId: JsonRpcId
+    let channel: TelepathChannel
 
     func execute() {
         let storyBoard = UIStoryboard(name: "SignTransaction", bundle: nil)
@@ -57,7 +64,8 @@ struct TransactionSignerValid: TransactionSigner {
 
         explanationViewController.onReject = {
             self.dispatch(TelepathActions.Send(id: self.responseId,
-                                               error: SignTransactionError.userRejected))
+                                               error: SignTransactionError.userRejected,
+                                               on: self.channel))
             signingDone()
         }
         explanationViewController.onSign = {
@@ -70,11 +78,14 @@ struct TransactionSignerValid: TransactionSigner {
                 guard let signedTx = signedTransaction else {
                     print("[error] sign transaction failed: \(error ?? "unknown error")")
                     self.dispatch(TelepathActions.Send(id: self.responseId,
-                                                       error: SignTransactionError.signingFailed))
+                                                       error: SignTransactionError.signingFailed,
+                                                       on: self.channel))
                     signingDone()
                     return
                 }
-                self.dispatch(TelepathActions.Send(id: self.responseId, result: signedTx))
+                self.dispatch(TelepathActions.Send(id: self.responseId,
+                                                   result: signedTx,
+                                                   on: self.channel))
                 signingDone()
             }
         }
