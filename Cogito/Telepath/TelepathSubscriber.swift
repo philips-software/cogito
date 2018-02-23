@@ -26,19 +26,19 @@ class TelepathSubscriber: StoreSubscriber {
         store.unsubscribe(self)
     }
 
-    func newState(state incomingMessages: [String]) {
+    func newState(state incomingMessages: [TelepathMessage]) {
         guard let message = incomingMessages.first else {
             return
         }
         store.dispatch(TelepathActions.ReceivedMessageHandled())
-        if let request = JsonRpcRequest(parse: message) {
+        if let request = JsonRpcRequest(parse: message.message) {
             for service in services {
-                service.onRequest(request)
+                service.onRequest(request, on: message.channel)
             }
         }
     }
 }
 
 protocol TelepathService {
-    func onRequest(_ request: JsonRpcRequest)
+    func onRequest(_ request: JsonRpcRequest, on channel: TelepathChannel)
 }

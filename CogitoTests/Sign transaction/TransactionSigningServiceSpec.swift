@@ -22,7 +22,7 @@ class TransactionSigningServiceSpec: QuickSpec {
 
         context("when a sign requests comes in") {
             beforeEach {
-                service.onRequest(signRequest)
+                service.onRequest(signRequest, on: TelepathChannel.example)
             }
 
             it("dispatches the SignTransaction action") {
@@ -37,7 +37,7 @@ class TransactionSigningServiceSpec: QuickSpec {
                     method: "other",
                     params: JsonRpcParams()
                 )
-                service.onRequest(request)
+                service.onRequest(request, on: TelepathChannel.example)
             }
 
             it("is ignored") {

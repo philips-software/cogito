@@ -22,7 +22,7 @@ class AccountServiceSpec: QuickSpec {
 
         describe("when an account request comes in") {
             beforeEach {
-                service.onRequest(accountRequest)
+                service.onRequest(accountRequest, on: TelepathChannel.example)
             }
 
             it("dispatches the GetAccounts action") {
@@ -37,7 +37,7 @@ class AccountServiceSpec: QuickSpec {
                     method: "other",
                     params: JsonRpcParams()
                 )
-                service.onRequest(request)
+                service.onRequest(request, on: TelepathChannel.example)
             }
 
             it("is ignored") {

@@ -6,20 +6,19 @@ struct AttestationService: TelepathService {
 
     let store: Store<AppState>
 
-    func onRequest(_ request: JsonRpcRequest) {
-        if
-            request.method == "attestations",
-            let appName = request.params["app"].string,
-            let realmUrl = request.params["realmUrl"].string
-        {
-            let subject = request.params["subject"].string
-            let action = AttestationActions.GetAttestations(
-                requestId: request.id,
-                applicationName: appName,
-                oidcRealmUrl: realmUrl,
-                subject: subject
-            )
-            store.dispatch(action)
-        }
+    func onRequest(_ request: JsonRpcRequest, on channel: TelepathChannel) {
+        guard request.method == "attestations",
+              let appName = request.params["app"].string,
+              let realmUrl = request.params["realmUrl"].string else { return }
+
+        let subject = request.params["subject"].string
+        let action = AttestationActions.GetAttestations(
+            requestId: request.id,
+            applicationName: appName,
+            oidcRealmUrl: realmUrl,
+            subject: subject,
+            channel: channel
+        )
+        store.dispatch(action)
     }
 }

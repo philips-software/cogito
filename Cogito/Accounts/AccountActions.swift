@@ -5,7 +5,8 @@ import SwiftyJSON
 
 struct AccountActions {
     // swiftlint:disable identifier_name
-    static func GetAccounts(requestId: JsonRpcId) -> ThunkAction<AppState> {
+    static func GetAccounts(requestId: JsonRpcId,
+                            channel: TelepathChannel) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, getState in
             var accounts: [String] = []
             if let diamond = getState()?.diamond,
