@@ -2,7 +2,7 @@ const expect = require('chai').expect
 const td = require('testdouble')
 const contains = td.matchers.contains
 const { stubResponse, stubResponseError } = require('./provider-stubbing')
-const TransactionDefaults = require('../lib/transaction-defaults')
+const TransactionDefaults = require('../source/lib/transaction-defaults')
 
 describe('transaction defaults', function () {
   const transaction = {
