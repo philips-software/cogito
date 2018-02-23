@@ -51,11 +51,15 @@ class DialogPresenter: UIViewController, Connectable {
                                       message: requestedAlert.message,
                                       preferredStyle: .alert)
         for action in requestedAlert.actions {
-            alert.addAction(UIAlertAction(
+            let alertAction = UIAlertAction(
                 title: action.title,
                 style: action.style) { _ in
                 self.handleAlertAction(action: action)
-            })
+            }
+            alert.addAction(alertAction)
+            if action.style == .default {
+                alert.preferredAction = alertAction
+            }
         }
 
         self.alertWindow.makeKeyAndVisible()
