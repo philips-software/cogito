@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "main": "./distribution/index.js",
   "scripts": {
-    "test": "yarn standard && yarn nyc mocha 'source/test/**/*.js'",
+    "test": "yarn standard && yarn nyc mocha 'test/**/*.js'",
     "build": "babel source --out-dir distribution",
     "prepublish": "yarn build"
   },
@@ -15,14 +15,16 @@
     "node": ">=9.0.0"
   },
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "ignore": [      
+      "node_modules/**",
+      "distribution/**"
+    ]
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "8.0.2",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-env": "^1.6.1",    
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "dirty-chai": "^2.0.1",

@@ -2,7 +2,7 @@
 const expect = require('chai').expect
 const nock = require('nock')
 const base64url = require('base64url')
-const QueuingService = require('../lib/queuing-service')
+const QueuingService = require('../source/lib/queuing-service')
 
 describe('Queuing Service', function () {
   const baseUrl = 'https://queuing.example.com'

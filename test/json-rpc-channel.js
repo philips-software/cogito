@@ -1,5 +1,5 @@
 /* eslint-env mocha */
-const JsonRpcChannel = require('../lib/json-rpc-channel')
+const JsonRpcChannel = require('../source/lib/json-rpc-channel')
 const expect = require('chai').expect
 const td = require('testdouble')
 
