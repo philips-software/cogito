@@ -77,8 +77,12 @@ class TelepathActionsSpec: QuickSpec {
 
         describe("sending JSON-RPC") {
             let id = JsonRpcId(42)
-            let errorCode = 123
-            let errorMessage = "an error message"
+
+            enum TestError: Int, TelepathError {
+                case someError = 123
+                var code: Int { return self.rawValue }
+                var message: String { return "an error message" }
+            }
 
             it("encodes string responses") {
                 let result = "foo"
@@ -136,8 +140,7 @@ class TelepathActionsSpec: QuickSpec {
             it("encodes errors") {
                 let action = TelepathActions.Send(
                     id: id,
-                    errorCode: errorCode,
-                    errorMessage: errorMessage
+                    error: TestError.someError
                 )
 
                 store.dispatch(action)
@@ -148,8 +151,8 @@ class TelepathActionsSpec: QuickSpec {
                     "jsonrpc": "2.0",
                     "id": id.object,
                     "error": [
-                        "code": errorCode,
-                        "message": errorMessage
+                        "code": TestError.someError.code,
+                        "message": TestError.someError.message
                     ]
                 ])
             }

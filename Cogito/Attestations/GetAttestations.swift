@@ -42,11 +42,10 @@ protocol GetAttestations {
 }
 
 extension GetAttestations {
-    func send(id: JsonRpcId, error: AttestationError) {
+    func send(id: JsonRpcId, error: TelepathError) {
         dispatch(TelepathActions.Send(
             id: id,
-            errorCode: error.code,
-            errorMessage: error.message
+            error: error
         ))
     }
 }
@@ -58,26 +57,6 @@ struct GetAttestationsInvalid: GetAttestations {
 
     func execute() {
         send(id: requestId, error: error)
-    }
-}
-
-enum AttestationError: Int, Error {
-    case invalidRealmUrl = 33297600
-    case invalidConfiguration
-    case userDeniedAccess
-    case userCancelledLogin
-
-    var code: Int {
-        return self.rawValue
-    }
-
-    var message: String {
-        switch self {
-        case .invalidRealmUrl: return "invalid realm URL"
-        case .invalidConfiguration: return "invalid configuration"
-        case .userDeniedAccess: return "user denied access"
-        case .userCancelledLogin: return "user cancelled login"
-        }
     }
 }
 
@@ -136,33 +115,35 @@ struct GetAttestationsValid: GetAttestations {
 
     func showRequestAccessDialog(idToken: String) {
         let requestId = self.requestId
-        let alert = RequestedAlert(title: "Request for access",
-                                   message: "Application \(applicationName) wants to access your credentials " +
-                                            "from \(self.oidcRealmUrl.absoluteString)",
-                                   actions: [
-                                       AlertAction(title: "Deny", style: .cancel) { _ in
-                                        self.send(id: requestId, error: .userDeniedAccess)
-                                       },
-                                       AlertAction(title: "Approve", style: .default) { _ in
-                                        self.send(requestId: requestId, idToken: idToken)
-                                       }
-                                   ])
+        let alert = RequestedAlert(
+            title: "Request for access",
+            message: "Application \(applicationName) wants to access your credentials " +
+                     "from \(self.oidcRealmUrl.absoluteString)",
+            actions: [
+                AlertAction(title: "Deny", style: .cancel) { _ in
+                    self.send(id: requestId, error: AttestationError.userDeniedAccess)
+                },
+                AlertAction(title: "Approve", style: .default) { _ in
+                    self.send(requestId: requestId, idToken: idToken)
+                }
+            ])
         self.dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
     }
 
     func showLoginRequiredDialog() {
         let requestId = self.requestId
-        let alert = RequestedAlert(title: "Login required",
-                                   message: "Application \(applicationName) requires you to login to " +
-                                            "\(self.oidcRealmUrl.absoluteString)",
-                                   actions: [
-                                       AlertAction(title: "Cancel", style: .cancel) { _ in
-                                        self.send(id: requestId, error: .userCancelledLogin)
-                                       },
-                                       AlertAction(title: "Login", style: .default) { _ in
-                                           self.startAttestation()
-                                       }
-                                   ])
+        let alert = RequestedAlert(
+            title: "Login required",
+            message: "Application \(applicationName) requires you to login to " +
+                     "\(self.oidcRealmUrl.absoluteString)",
+            actions: [
+                AlertAction(title: "Cancel", style: .cancel) { _ in
+                    self.send(id: requestId, error: AttestationError.userCancelledLogin)
+                },
+                AlertAction(title: "Login", style: .default) { _ in
+                    self.startAttestation()
+                }
+            ])
         self.dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
     }
 
