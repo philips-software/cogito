@@ -30,52 +30,45 @@ class IdentityManagerViewControllerSpec: QuickSpec {
             expect(reset).toEventually(beTrue())
         }
 
-        it("triggers delete identity action") {
-            let testAddress = Address.testAddress
-            let testIdentity = Identity(description: "testdesc",
-                                        address: testAddress)
-            let model = [IdentityManagerViewController.ViewModel.FacetGroup(items: [
-                IdentityManagerViewController.ViewModel.Facet(facet: testIdentity)
-            ])]
-            identityManagerController.props = IdentityManagerViewController.Props(
-                facetGroups: model,
-                selectedFacetIndex: 0
-            )
-            var deletedUuid: UUID? = nil
-            identityManagerController.actions = IdentityManagerViewController.Actions(
-                resetCreateIdentity: {},
-                deleteIdentity: { uuid in deletedUuid = uuid },
-                selectIdentity: { _ in }
-            )
-            identityManagerController.tableView.dataSource?.tableView?(identityManagerController.tableView,
-                                                           commit: .delete,
-                                                           forRowAt: IndexPath(row: 0, section: 0))
-            expect(deletedUuid) == testIdentity.identifier
-        }
-
-        it("triggers select identity action") {
+        context("given some identities") {
             let testAddress = Address.testAddress
             let testAddress1 = Address.testAddress1
-            let testIdentity = Identity(description: "testdesc",
-                                        address: testAddress)
-            let testIdentity1 = Identity(description: "testdesc1",
-                                         address: testAddress1)
-            let model = [IdentityManagerViewController.ViewModel.FacetGroup(items: [
-                IdentityManagerViewController.ViewModel.Facet(facet: testIdentity),
-                IdentityManagerViewController.ViewModel.Facet(facet: testIdentity1)
-            ])]
-            identityManagerController.props = IdentityManagerViewController.Props(
-                facetGroups: model,
-                selectedFacetIndex: 0
-            )
-            var selectedUuid: UUID? = nil
-            identityManagerController.actions = IdentityManagerViewController.Actions(
-                resetCreateIdentity: {},
-                deleteIdentity: { _ in },
-                selectIdentity: { uuid in selectedUuid = uuid })
-            let indexPath = IndexPath(row: 1, section: 0)
-            identityManagerController.itemSelected(at: indexPath)
-            expect(selectedUuid) == testIdentity1.identifier
+            let testIdentity = Identity(description: "testdesc", address: testAddress)
+            let testIdentity1 = Identity(description: "testdesc1", address: testAddress1)
+            var model: [IdentityManagerViewController.ViewModel.FacetGroup]!
+
+            beforeEach {
+                model = [IdentityManagerViewController.ViewModel.FacetGroup(items: [
+                    IdentityManagerViewController.ViewModel.Facet(facet: testIdentity),
+                    IdentityManagerViewController.ViewModel.Facet(facet: testIdentity1)
+                ])]
+                identityManagerController.props = IdentityManagerViewController.Props(
+                    facetGroups: model,
+                    selectedFacetIndex: 0
+                )
+            }
+
+            it("triggers delete identity action") {
+                var deletedUuid: UUID? = nil
+                identityManagerController.actions = IdentityManagerViewController.Actions(
+                    resetCreateIdentity: {},
+                    deleteIdentity: { uuid in deletedUuid = uuid },
+                    selectIdentity: { _ in }
+                )
+                identityManagerController.itemDeleted(at: IndexPath(row: 0, section: 0))
+                expect(deletedUuid) == testIdentity.identifier
+            }
+
+            it("triggers select identity action") {
+                var selectedUuid: UUID? = nil
+                identityManagerController.actions = IdentityManagerViewController.Actions(
+                    resetCreateIdentity: {},
+                    deleteIdentity: { _ in },
+                    selectIdentity: { uuid in selectedUuid = uuid })
+                let indexPath = IndexPath(row: 1, section: 0)
+                identityManagerController.itemSelected(at: indexPath)
+                expect(selectedUuid) == testIdentity1.identifier
+            }
         }
 
         describe("Map state to props") {
