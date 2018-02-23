@@ -26,7 +26,7 @@ class AttestationServiceSpec: QuickSpec {
 
         describe("when an attestations request comes in") {
             beforeEach {
-                service.onRequest(attestationsRequest)
+                service.onRequest(attestationsRequest, on: TelepathChannel.example)
             }
 
             it("dispatches the GetAttestations action") {
@@ -44,7 +44,7 @@ class AttestationServiceSpec: QuickSpec {
                         "realmUrl": realmUrl
                     ])
                 )
-                service.onRequest(request)
+                service.onRequest(request, on: TelepathChannel.example)
             }
 
             it("is ignored") {

@@ -29,11 +29,12 @@ struct TelepathActions {
     // swiftlint:disable:next identifier_name
     static func Receive() -> ThunkAction<AppState> {
         return ThunkAction { dispatch, getState in
-            getState()?.telepath.channel?.receive { message, error in
+            guard let channel = getState()?.telepath.channel else { return }
+            channel.receive { message, error in
                 if let error = error {
-                    dispatch(ReceiveRejected(error: error))
+                    dispatch(ReceiveRejected(error: error, channel: channel))
                 } else if let message = message {
-                    dispatch(ReceiveFulfilled(message: message))
+                    dispatch(ReceiveFulfilled(message: message, channel: channel))
                 }
             }
         }
@@ -41,10 +42,12 @@ struct TelepathActions {
 
     struct ReceiveFulfilled: Action {
         let message: String
+        let channel: TelepathChannel
     }
 
     struct ReceiveRejected: Action {
         let error: Error
+        let channel: TelepathChannel
     }
 
     struct ReceivedMessageHandled: Action {}

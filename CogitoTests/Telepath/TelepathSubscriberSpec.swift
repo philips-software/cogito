@@ -7,6 +7,7 @@ class TelepathSubscriberSpec: QuickSpec {
     override func spec() {
         var subscriber: TelepathSubscriber!
         var store: StoreSpy!
+        let exampleChannel = TelepathChannel.example
 
         beforeEach {
             store = StoreSpy()
@@ -38,7 +39,8 @@ class TelepathSubscriberSpec: QuickSpec {
                 service2 = ServiceSpy()
                 subscriber.addService(service1)
                 subscriber.addService(service2)
-                subscriber.newState(state: [message])
+                let telepathMessage = TelepathMessage(message: message, channel: exampleChannel)
+                subscriber.newState(state: [telepathMessage])
             }
 
             it("notifies subscribed services") {
@@ -56,7 +58,9 @@ class TelepathSubscriberSpec: QuickSpec {
 
         context("when an invalid JSON RPC request is received") {
             beforeEach {
-                subscriber.newState(state: ["invalid request"])
+                subscriber.newState(state: [
+                    TelepathMessage(message: "invalid request", channel: exampleChannel)
+                ])
             }
 
             it("ignores the message and signals that it has been handled") {
@@ -82,8 +86,10 @@ class TelepathSubscriberSpec: QuickSpec {
 
 class ServiceSpy: TelepathService {
     var latestRequest: JsonRpcRequest?
+    var latestChannel: TelepathChannel?
 
-    func onRequest(_ request: JsonRpcRequest) {
+    func onRequest(_ request: JsonRpcRequest, on channel: TelepathChannel) {
         latestRequest = request
+        latestChannel = channel
     }
 }

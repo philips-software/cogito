@@ -166,7 +166,8 @@ class AttestationActionsSpec: QuickSpec {
                     requestId: requestId,
                     applicationName: "test",
                     oidcRealmUrl: validIssuer,
-                    subject: nil
+                    subject: nil,
+                    channel: channel
                 )
             }
 
@@ -348,7 +349,8 @@ class AttestationActionsSpec: QuickSpec {
                     requestId: requestId,
                     applicationName: "test",
                     oidcRealmUrl: "invalid url",
-                    subject: nil
+                    subject: nil,
+                    channel: channel
                 )
                 store.dispatch(action)
                 let response = JSON(parseJSON: sendPendingAction()!.message)

@@ -21,7 +21,8 @@ class AccountActionsSpec: QuickSpec {
             }
 
             it("sends out its Ethereum address via Telepath") {
-                store.dispatch(AccountActions.GetAccounts(requestId: JsonRpcId(1)))
+                store.dispatch(AccountActions.GetAccounts(requestId: JsonRpcId(1),
+                                                          channel: TelepathChannel.example))
                 let send = store.actions.last as? TelepathActions.SendPending
                 let response = JSON(parseJSON: send!.message)
                 expect(response["result"]) == JSON(["\(address)"])
@@ -34,7 +35,8 @@ class AccountActionsSpec: QuickSpec {
             }
 
             it("returns an empty list") {
-                store.dispatch(AccountActions.GetAccounts(requestId: JsonRpcId(1)))
+                store.dispatch(AccountActions.GetAccounts(requestId: JsonRpcId(1),
+                                                          channel: TelepathChannel.example))
                 let send = store.actions.last as? TelepathActions.SendPending
                 let response = JSON(parseJSON: send!.message)
                 expect(response["result"]) == JSON([])

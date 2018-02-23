@@ -6,6 +6,7 @@ import Nimble
 class TelepathReducerSpec: QuickSpec {
     override func spec() {
         let channel = TelepathChannel.example
+        let message = TelepathMessage(message: "a message", channel: channel)
 
         it("stores the channel in the state") {
             let action = TelepathActions.ConnectFulfilled(channel: channel)
@@ -21,21 +22,20 @@ class TelepathReducerSpec: QuickSpec {
         }
 
         it("stores received messages in the state") {
-            let message = "a message"
-            let action = TelepathActions.ReceiveFulfilled(message: message)
+            let action = TelepathActions.ReceiveFulfilled(message: message.message, channel: channel)
             let nextState = telepathReducer(action, nil)
             expect(nextState.receivedMessages) == [message]
         }
 
         it("stores error while receiving in state") {
             let error = ExampleError(message: "an error")
-            let action = TelepathActions.ReceiveRejected(error: error)
+            let action = TelepathActions.ReceiveRejected(error: error, channel: channel)
             let nextState = telepathReducer(action, nil)
             expect(nextState.receiveError) == error.localizedDescription
         }
 
         it("removes handled messages from state") {
-            let state = TelepathState(receivedMessages: ["a message"])
+            let state = TelepathState(receivedMessages: [message])
             let action = TelepathActions.ReceivedMessageHandled()
             let nextState = telepathReducer(action, state)
             expect(nextState.receivedMessages) == []

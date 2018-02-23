@@ -105,7 +105,8 @@ struct AttestationActions {
     static func GetAttestations(requestId: JsonRpcId,
                                 applicationName: String,
                                 oidcRealmUrl: String,
-                                subject: String?) -> ThunkAction<AppState> {
+                                subject: String?,
+                                channel: TelepathChannel) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, getState in
             let builder = GetAttestationsBuilder(
                 requestId: requestId,

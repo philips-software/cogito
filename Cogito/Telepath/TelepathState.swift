@@ -5,13 +5,13 @@ import Foundation
 struct TelepathState: Equatable, Codable {
     var channel: TelepathChannel?
     var connectionError: String?
-    var receivedMessages: [String] = []
+    var receivedMessages: [TelepathMessage] = []
     var receiveError: String?
 
     init(
         channel: TelepathChannel? = nil,
         connectionError: String? = nil,
-        receivedMessages: [String] = [],
+        receivedMessages: [TelepathMessage] = [],
         receiveError: String? = nil
     ) {
         self.channel = channel
@@ -22,6 +22,19 @@ struct TelepathState: Equatable, Codable {
 
     static func == (lhs: TelepathState, rhs: TelepathState) -> Bool {
         return lhs.channel == rhs.channel
+    }
+
+}
+
+struct TelepathMessage: Codable {
+    let message: String
+    let channel: TelepathChannel
+}
+
+extension TelepathMessage: Equatable {
+    static func == (lhs: TelepathMessage, rhs: TelepathMessage) -> Bool {
+        return lhs.message == rhs.message &&
+               lhs.channel == rhs.channel
     }
 }
 
