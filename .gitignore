@@ -1,5 +1,4 @@
 node_modules
-distribution
 .nyc_output
 .idea/workspace.xml
 .DS_Store
