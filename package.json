@@ -16,15 +16,16 @@
   },
   "standard": {
     "parser": "babel-eslint",
-    "ignore": [      
+    "ignore": [
       "node_modules/**",
       "distribution/**"
     ]
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
+    "@babel/cli": "^7.0.0-beta.40",
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
     "babel-eslint": "8.0.2",
-    "babel-preset-env": "^1.6.1",    
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "dirty-chai": "^2.0.1",
