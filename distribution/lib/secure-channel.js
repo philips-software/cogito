@@ -1,10 +1,16 @@
-'use strict';
+"use strict";
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+require("core-js/modules/es6.promise");
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+require("regenerator-runtime/runtime");
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } } function _next(value) { step("next", value); } function _throw(err) { step("throw", err); } _next(); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var base64url = require('base64url');
 
@@ -16,7 +22,9 @@ var _require = require('./crypto'),
 
 var Poller = require('./poller');
 
-var SecureChannel = function () {
+var SecureChannel =
+/*#__PURE__*/
+function () {
   function SecureChannel(_ref) {
     var queuing = _ref.queuing,
         id = _ref.id,
@@ -29,7 +37,7 @@ var SecureChannel = function () {
     this.key = key;
     this.poller = new Poller({
       pollFunction: function pollFunction() {
-        return queuing.receive(id + '.blue');
+        return queuing.receive("".concat(id, ".blue"));
       },
       interval: 1000,
       retries: 600
@@ -37,15 +45,17 @@ var SecureChannel = function () {
   }
 
   _createClass(SecureChannel, [{
-    key: 'send',
+    key: "send",
     value: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(message) {
+      var _send = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(message) {
         var queueId, nonce, cypherText, nonceAndCypherText;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                queueId = this.id + '.red';
+                queueId = "".concat(this.id, ".red");
                 _context.t0 = Buffer;
                 _context.t1 = random;
                 _context.next = 5;
@@ -71,23 +81,23 @@ var SecureChannel = function () {
                 return this.queuing.send(queueId, nonceAndCypherText);
 
               case 18:
-              case 'end':
+              case "end":
                 return _context.stop();
             }
           }
         }, _callee, this);
       }));
 
-      function send(_x) {
-        return _ref2.apply(this, arguments);
-      }
-
-      return send;
+      return function send(_x) {
+        return _send.apply(this, arguments);
+      };
     }()
   }, {
-    key: 'receive',
+    key: "receive",
     value: function () {
-      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var _receive = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2() {
         var nonceAndCypherText, nonce, cypherText;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -104,7 +114,7 @@ var SecureChannel = function () {
                   break;
                 }
 
-                return _context2.abrupt('return', null);
+                return _context2.abrupt("return", null);
 
               case 5:
                 _context2.t0 = nonceAndCypherText;
@@ -121,27 +131,25 @@ var SecureChannel = function () {
               case 13:
                 _context2.t3 = _context2.sent;
                 cypherText = _context2.t2.slice.call(_context2.t2, _context2.t3);
-                return _context2.abrupt('return', decrypt(cypherText, nonce, this.key, 'text'));
+                return _context2.abrupt("return", decrypt(cypherText, nonce, this.key, 'text'));
 
               case 16:
-              case 'end':
+              case "end":
                 return _context2.stop();
             }
           }
         }, _callee2, this);
       }));
 
-      function receive() {
-        return _ref3.apply(this, arguments);
-      }
-
-      return receive;
+      return function receive() {
+        return _receive.apply(this, arguments);
+      };
     }()
   }, {
-    key: 'createConnectUrl',
+    key: "createConnectUrl",
     value: function createConnectUrl(baseUrl) {
       var encodedKey = base64url.encode(this.key);
-      return baseUrl + '/telepath/connect#I=' + this.id + '&E=' + encodedKey;
+      return "".concat(baseUrl, "/telepath/connect#I=").concat(this.id, "&E=").concat(encodedKey);
     }
   }]);
 

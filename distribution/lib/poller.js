@@ -1,20 +1,28 @@
-'use strict';
+"use strict";
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+require("core-js/modules/es6.promise");
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+require("regenerator-runtime/runtime");
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } } function _next(value) { step("next", value); } function _throw(err) { step("throw", err); } _next(); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 var delay = require('./delay');
 
-var Poller = function () {
+var Poller =
+/*#__PURE__*/
+function () {
   function Poller(_ref) {
     var pollFunction = _ref.pollFunction,
         _ref$retries = _ref.retries,
-        retries = _ref$retries === undefined ? 10 : _ref$retries,
+        retries = _ref$retries === void 0 ? 10 : _ref$retries,
         _ref$interval = _ref.interval,
-        interval = _ref$interval === undefined ? 100 : _ref$interval;
+        interval = _ref$interval === void 0 ? 100 : _ref$interval;
 
     _classCallCheck(this, Poller);
 
@@ -26,9 +34,11 @@ var Poller = function () {
   }
 
   _createClass(Poller, [{
-    key: 'poll',
+    key: "poll",
     value: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      var _poll = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee() {
         var _this = this;
 
         var alreadyPolling, expiry, promise;
@@ -39,32 +49,37 @@ var Poller = function () {
                 alreadyPolling = this.waiting.length > 0;
                 expiry = this.currentAttempt + this.retries;
                 promise = new Promise(function (resolve, reject) {
-                  _this.waiting.push({ resolve: resolve, reject: reject, expiry: expiry });
+                  _this.waiting.push({
+                    resolve: resolve,
+                    reject: reject,
+                    expiry: expiry
+                  });
                 });
 
                 if (!alreadyPolling) {
                   this.attempt();
                 }
-                return _context.abrupt('return', promise);
+
+                return _context.abrupt("return", promise);
 
               case 5:
-              case 'end':
+              case "end":
                 return _context.stop();
             }
           }
         }, _callee, this);
       }));
 
-      function poll() {
-        return _ref2.apply(this, arguments);
-      }
-
-      return poll;
+      return function poll() {
+        return _poll.apply(this, arguments);
+      };
     }()
   }, {
-    key: 'attempt',
+    key: "attempt",
     value: function () {
-      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var _attempt = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2() {
         var result;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
@@ -79,50 +94,46 @@ var Poller = function () {
                   break;
                 }
 
-                return _context2.abrupt('return');
+                return _context2.abrupt("return");
 
               case 3:
-                result = void 0;
-                _context2.prev = 4;
-
+                _context2.prev = 3;
                 this.currentAttempt += 1;
-                _context2.next = 8;
+                _context2.next = 7;
                 return this.pollFunction();
 
-              case 8:
+              case 7:
                 result = _context2.sent;
-                _context2.next = 14;
+                _context2.next = 13;
                 break;
 
-              case 11:
-                _context2.prev = 11;
-                _context2.t0 = _context2['catch'](4);
-
+              case 10:
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](3);
                 this.waiting.shift().reject(_context2.t0);
 
-              case 14:
+              case 13:
                 if (result) {
                   this.waiting.shift().resolve(result);
                 }
-                _context2.next = 17;
+
+                _context2.next = 16;
                 return delay(this.interval);
 
-              case 17:
-                return _context2.abrupt('return', this.attempt());
+              case 16:
+                return _context2.abrupt("return", this.attempt());
 
-              case 18:
-              case 'end':
+              case 17:
+              case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[4, 11]]);
+        }, _callee2, this, [[3, 10]]);
       }));
 
-      function attempt() {
-        return _ref3.apply(this, arguments);
-      }
-
-      return attempt;
+      return function attempt() {
+        return _attempt.apply(this, arguments);
+      };
     }()
   }]);
 
