@@ -1,28 +1,45 @@
-'use strict';
+"use strict";
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+require("core-js/modules/es6.promise");
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+require("core-js/modules/es6.object.assign");
+
+require("regenerator-runtime/runtime");
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } } function _next(value) { step("next", value); } function _throw(err) { step("throw", err); } _next(); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 var JsonRpcClient = require('./json-rpc-client');
+
 var TransactionNonces = require('./transaction-nonces');
 
-var TransactionDefaults = function () {
+var TransactionDefaults =
+/*#__PURE__*/
+function () {
   function TransactionDefaults(_ref) {
     var provider = _ref.provider;
 
     _classCallCheck(this, TransactionDefaults);
 
-    this.client = new JsonRpcClient({ provider: provider });
-    this.nonces = new TransactionNonces({ provider: provider });
+    this.client = new JsonRpcClient({
+      provider: provider
+    });
+    this.nonces = new TransactionNonces({
+      provider: provider
+    });
   }
 
   _createClass(TransactionDefaults, [{
-    key: 'apply',
+    key: "apply",
     value: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(transaction) {
+      var _apply = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(transaction) {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -98,56 +115,58 @@ var TransactionDefaults = function () {
                   gas: _context.t9,
                   chainId: _context.t11
                 };
-                return _context.abrupt('return', _context.t0.assign.call(_context.t0, _context.t1, _context.t2, _context.t12));
+                return _context.abrupt("return", _context.t0.assign.call(_context.t0, _context.t1, _context.t2, _context.t12));
 
               case 30:
-              case 'end':
+              case "end":
                 return _context.stop();
             }
           }
         }, _callee, this);
       }));
 
-      function apply(_x) {
-        return _ref2.apply(this, arguments);
-      }
-
-      return apply;
+      return function apply(_x) {
+        return _apply.apply(this, arguments);
+      };
     }()
   }, {
-    key: 'getGasPrice',
+    key: "getGasPrice",
     value: function () {
-      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      var _getGasPrice = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2() {
         var request;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                request = { method: 'eth_gasPrice' };
+                request = {
+                  method: 'eth_gasPrice'
+                };
                 _context2.next = 3;
                 return this.client.send(request);
 
               case 3:
-                return _context2.abrupt('return', _context2.sent.result);
+                return _context2.abrupt("return", _context2.sent.result);
 
               case 4:
-              case 'end':
+              case "end":
                 return _context2.stop();
             }
           }
         }, _callee2, this);
       }));
 
-      function getGasPrice() {
-        return _ref3.apply(this, arguments);
-      }
-
-      return getGasPrice;
+      return function getGasPrice() {
+        return _getGasPrice.apply(this, arguments);
+      };
     }()
   }, {
-    key: 'estimateGas',
+    key: "estimateGas",
     value: function () {
-      var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(transaction) {
+      var _estimateGas = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(transaction) {
         var request;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
@@ -161,53 +180,53 @@ var TransactionDefaults = function () {
                 return this.client.send(request);
 
               case 3:
-                return _context3.abrupt('return', _context3.sent.result);
+                return _context3.abrupt("return", _context3.sent.result);
 
               case 4:
-              case 'end':
+              case "end":
                 return _context3.stop();
             }
           }
         }, _callee3, this);
       }));
 
-      function estimateGas(_x2) {
-        return _ref4.apply(this, arguments);
-      }
-
-      return estimateGas;
+      return function estimateGas(_x2) {
+        return _estimateGas.apply(this, arguments);
+      };
     }()
   }, {
-    key: 'getChainId',
+    key: "getChainId",
     value: function () {
-      var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+      var _getChainId = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4() {
         var request;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                request = { method: 'net_version' };
+                request = {
+                  method: 'net_version'
+                };
                 _context4.t0 = parseInt;
                 _context4.next = 4;
                 return this.client.send(request);
 
               case 4:
                 _context4.t1 = _context4.sent.result;
-                return _context4.abrupt('return', (0, _context4.t0)(_context4.t1));
+                return _context4.abrupt("return", (0, _context4.t0)(_context4.t1));
 
               case 6:
-              case 'end':
+              case "end":
                 return _context4.stop();
             }
           }
         }, _callee4, this);
       }));
 
-      function getChainId() {
-        return _ref5.apply(this, arguments);
-      }
-
-      return getChainId;
+      return function getChainId() {
+        return _getChainId.apply(this, arguments);
+      };
     }()
   }]);
 
