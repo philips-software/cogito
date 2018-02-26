@@ -1,15 +1,20 @@
 const Defaults = require('./transaction-defaults')
+const TransactionNonces = require('./transaction-nonces')
 
 class TransactionsProvider {
   constructor ({ originalProvider, telepathChannel }) {
     this.provider = originalProvider
     this.channel = telepathChannel
     this.defaults = new Defaults({ provider: originalProvider })
+    this.nonces = new TransactionNonces({ provider: originalProvider })
   }
 
   async send (payload, callback) {
     try {
+      const nonces = this.nonces
       const transaction = await this.extractTransaction(payload)
+      const nonce = transaction.nonce || await nonces.getNonce(transaction)
+      transaction.nonce = nonce
       const signedTransaction = await this.sign(transaction, payload.id)
       const sendRequest = {
         jsonrpc: '2.0',
@@ -17,7 +22,12 @@ class TransactionsProvider {
         method: 'eth_sendRawTransaction',
         params: [ signedTransaction ]
       }
-      this.provider.send(sendRequest, callback)
+      this.provider.send(sendRequest, function (error, result) {
+        if (!error) {
+          nonces.commitNonce(transaction)
+        }
+        callback(error, result)
+      })
     } catch (error) {
       callback(error, null)
     }
