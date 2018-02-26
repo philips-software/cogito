@@ -74,7 +74,8 @@ final public class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
   private weak var reader: QRCodeReader?
 
   public func setupComponents(showCancelButton: Bool, showSwitchCameraButton: Bool, showTorchButton: Bool, showOverlayView: Bool, reader: QRCodeReader?) {
-    self.reader = reader
+    self.reader               = reader
+    reader?.lifeCycleDelegate = self
 
     addComponents()
 
@@ -115,7 +116,7 @@ final public class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
   public override func layoutSubviews() {
     super.layoutSubviews()
 
-    reader?.previewLayer.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+    reader?.previewLayer.frame = bounds
   }
 
   // MARK: - Scan Result Indication
@@ -146,11 +147,13 @@ final public class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
 
   @objc func orientationDidChange() {
     setNeedsDisplay()
+
     overlayView?.setNeedsDisplay()
 
     if let connection = reader?.previewLayer.connection, connection.isVideoOrientationSupported {
+      let application                    = UIApplication.shared
       let orientation                    = UIDevice.current.orientation
-      let supportedInterfaceOrientations = UIApplication.shared.supportedInterfaceOrientations(for: nil)
+      let supportedInterfaceOrientations = application.supportedInterfaceOrientations(for: application.keyWindow)
 
       connection.videoOrientation = QRCodeReader.videoOrientation(deviceOrientation: orientation, withSupportedOrientations: supportedInterfaceOrientations, fallbackOrientation: connection.videoOrientation)
     }
@@ -180,9 +183,18 @@ final public class QRCodeReaderView: UIView, QRCodeReaderDisplayable {
     }
 
     if let reader = reader {
+      print("reader", reader.previewLayer)
       cameraView.layer.insertSublayer(reader.previewLayer, at: 0)
       
       orientationDidChange()
     }
   }
+}
+
+extension QRCodeReaderView: QRCodeReaderLifeCycleDelegate {
+  func readerDidStartScanning() {
+    orientationDidChange()
+  }
+
+  func readerDidStopScanning() {}
 }

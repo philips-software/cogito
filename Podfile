@@ -3,7 +3,7 @@ platform :ios, '11.0'
 target 'Cogito' do
   use_frameworks!
 
-  pod 'ReSwift', :git => 'https://github.com/ReSwift/ReSwift', :branch => 'master'
+  pod 'ReSwift', '~> 4.0'
   pod 'ReSwiftThunk', :git => 'https://github.com/mikecole20/ReSwiftThunk.git', :branch => 'swift4.0'
   pod 'Geth', '~> 1.7.1'
   pod 'BigInt', '~> 3.0', :inhibit_warnings => true
@@ -22,9 +22,9 @@ target 'Cogito' do
   pod 'RxDataSources', '~> 3.0'
 
   target 'CogitoTests' do
-    pod 'Quick', :git => 'https://github.com/Quick/Quick'
-    pod 'Nimble', :git => 'https://github.com/Quick/Nimble'
-    pod 'Mockingjay', git: 'https://github.com/metaltoad/Mockingjay.git', branch: 'mt-swift4'
+    pod 'Quick', '~> 1.2'
+    pod 'Nimble', '~> 7.0'
+    pod 'Mockingjay', '~> 2.0'
     pod 'URITemplate', :inhibit_warnings => true
   end
 

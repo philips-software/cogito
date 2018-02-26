@@ -1,43 +1,43 @@
 PODS:
   - BigInt (3.0.1):
     - SipHash (~> 1.2)
-  - Differentiator (3.0.1)
-  - FontAwesome.swift (1.3.1)
+  - Differentiator (3.0.2)
+  - FontAwesome.swift (1.3.2)
   - Geth (1.7.3)
   - JWTDecode (2.1.1)
   - KeychainAccess (3.1.0)
-  - Mockingjay (2.0.2):
-    - Mockingjay/Core (= 2.0.2)
-    - Mockingjay/XCTest (= 2.0.2)
-  - Mockingjay/Core (2.0.2):
-    - URITemplate (~> 2.0.2)
-  - Mockingjay/XCTest (2.0.2):
+  - Mockingjay (2.0.1):
+    - Mockingjay/Core (= 2.0.1)
+    - Mockingjay/XCTest (= 2.0.1)
+  - Mockingjay/Core (2.0.1):
+    - URITemplate (~> 2.0)
+  - Mockingjay/XCTest (2.0.1):
     - Mockingjay/Core
-  - Nimble (7.0.2)
-  - QRCodeReader.swift (8.0.2)
+  - Nimble (7.0.3)
+  - QRCodeReader.swift (8.1.1)
   - Quick (1.2.0)
-  - ReRxSwift (1.1.0):
+  - ReRxSwift (1.2.0):
     - ReSwift (~> 4.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - ReSwift (4.0.0)
+  - ReSwift (4.0.1)
   - ReSwiftThunk (0.1.1):
     - ReSwift (~> 4.0)
-  - RichString (2.0.0)
-  - RxCocoa (4.0.0):
+  - RichString (2.1.0)
+  - RxCocoa (4.1.2):
     - RxSwift (~> 4.0)
-  - RxDataSources (3.0.1):
+  - RxDataSources (3.0.2):
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxSwift (4.0.0)
+  - RxSwift (4.1.2)
   - SipHash (1.2.0)
   - Sodium (0.6)
   - SwiftLint (0.21.0)
   - SwiftyJSON (4.0.0)
   - Telepath (0.1.0):
     - Sodium (~> 0.5)
-  - URITemplate (2.0.2)
+  - URITemplate (2.0.3)
 
 DEPENDENCIES:
   - BigInt (~> 3.0)
@@ -45,12 +45,12 @@ DEPENDENCIES:
   - Geth (~> 1.7.1)
   - JWTDecode (~> 2.1)
   - KeychainAccess (~> 3.1)
-  - Mockingjay (from `https://github.com/metaltoad/Mockingjay.git`, branch `mt-swift4`)
-  - Nimble (from `https://github.com/Quick/Nimble`)
+  - Mockingjay (~> 2.0)
+  - Nimble (~> 7.0)
   - QRCodeReader.swift (~> 8.0)
-  - Quick (from `https://github.com/Quick/Quick`)
+  - Quick (~> 1.2)
   - ReRxSwift (~> 1.1)
-  - ReSwift (from `https://github.com/ReSwift/ReSwift`, branch `master`)
+  - ReSwift (~> 4.0)
   - ReSwiftThunk (from `https://github.com/mikecole20/ReSwiftThunk.git`, branch `swift4.0`)
   - RichString (~> 2.0)
   - RxCocoa (~> 4.0)
@@ -62,16 +62,6 @@ DEPENDENCIES:
   - URITemplate
 
 EXTERNAL SOURCES:
-  Mockingjay:
-    :branch: mt-swift4
-    :git: https://github.com/metaltoad/Mockingjay.git
-  Nimble:
-    :git: https://github.com/Quick/Nimble
-  Quick:
-    :git: https://github.com/Quick/Quick
-  ReSwift:
-    :branch: master
-    :git: https://github.com/ReSwift/ReSwift
   ReSwiftThunk:
     :branch: swift4.0
     :git: https://github.com/mikecole20/ReSwiftThunk.git
@@ -79,18 +69,6 @@ EXTERNAL SOURCES:
     :git: https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git
 
 CHECKOUT OPTIONS:
-  Mockingjay:
-    :commit: 121eb0ccb0ce282c23926ac78f2759a970e05588
-    :git: https://github.com/metaltoad/Mockingjay.git
-  Nimble:
-    :commit: 38c9ab0846a3fbec308eb2aa9ef68b10a7434eb4
-    :git: https://github.com/Quick/Nimble
-  Quick:
-    :commit: 0ff81f2c665b4381f526bd656f8708dd52a9ea2f
-    :git: https://github.com/Quick/Quick
-  ReSwift:
-    :commit: 7fc23863f00efac4a2bdbac8904d5beac4d98229
-    :git: https://github.com/ReSwift/ReSwift
   ReSwiftThunk:
     :commit: 2871ea34c919bbdaa236c870ce7e16242f16ffb0
     :git: https://github.com/mikecole20/ReSwiftThunk.git
@@ -100,29 +78,29 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
-  Differentiator: ffe513ce1ea4e7198b89fac94d6e281c673055a9
-  FontAwesome.swift: 050a75c6b94db0b082f39bde5b111c5c64d62a83
+  Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
+  FontAwesome.swift: b4e4c8ccbbecb12f9b592bc533ff237af3706667
   Geth: 45a08eeef7a20e58dfc09a455563ffe210941a96
   JWTDecode: 83e8b381aafe27158d9f692cbdca2b12d61d460c
   KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
-  Mockingjay: e44b65b6b4b919ad228929db83cb6b1d69fff623
-  Nimble: 5c3b8c4b0229d95c2c7b0005e2edf244937dbb04
-  QRCodeReader.swift: 823f2e02867df25e7ae32034a16ea60e6bb218e4
-  Quick: 65081c7ab6eb85f9b65dbecbaf88793ce9ce47bc
-  ReRxSwift: 61ffc64fe65b9ec2cc5cf3c064099e8bbd7ba520
-  ReSwift: 85cb57267026cf4df4f6b05306bfce8ef74842c0
+  Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
+  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
+  QRCodeReader.swift: b164a681887de276d405ff02bce854d82cd6360b
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  ReRxSwift: 1b01a673f5b9f88a4043588b15f1b2a924122430
+  ReSwift: f4012c613e13da7398827fe5aebdb938eaed40a3
   ReSwiftThunk: 9b2ed720b51deabb4d49e7b6e76a618d1e4eb6f6
-  RichString: 0e87341212a3737686db46b3270c56a219babf0f
-  RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
-  RxDataSources: 098b7e62b6316313b14d6bf594e3f4f4f62a238a
-  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
+  RichString: 10acd3e3bfd248c3e6f5ec84ef6d6ad125ab4ab2
+  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
+  RxSwift: e49536837d9901277638493ea537394d4b55f570
   SipHash: c6e9e43e9c531b5bc6602545130c26194a6d31ce
   Sodium: bf524b0a3d5ad6870dcf343205cca7e659c15ad5
   SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   Telepath: 14b8a4ad40df8c1f25ddc49ae7e1db3f1c427b7e
-  URITemplate: d822aaa2f8ec9dcffffd13baa58bf9ee007e96cb
+  URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: ddf1ffe53d2ec6c1aebe72a4a5e217d7efe28180
+PODFILE CHECKSUM: 1e8bb253980c0b363ff9e2aed5c80ad6c857490c
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0
