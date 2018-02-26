@@ -172,6 +172,11 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             context("when requested attestation is present") {
+                beforeEach {
+                    telepathState = TelepathState(channels: [channel: identityWithAttestation], connectionError: nil,
+                                                  receivedMessages: [], receiveError: nil)
+                }
+
                 context("when this Telepath channel has been given the attestation before") {
                     beforeEach {
                         store.state = appState(
@@ -327,23 +332,6 @@ class AttestationActionsSpec: QuickSpec {
                 }
             }
 
-            context("when there is no identity yet") {
-                it("sends 'invalid configuration'") {
-                    let action = getAttestationsAction!
-                    store.state = appState(
-                        diamond: DiamondState(facets: []),
-                        telepath: telepathState,
-                        attestations: AttestationsState(open: [:], providedAttestations: [
-                            channel.id: [idToken]
-                        ])
-                    )
-                    store.dispatch(action)
-                    let response = JSON(parseJSON: sendPendingAction()!.message)
-                    expect(response["error"]["code"].int) == AttestationError.invalidConfiguration.code
-                    expect(response["id"]) == requestId.json
-                }
-            }
-
             it("sends error when realm URL is invalid") {
                 let action = AttestationActions.GetAttestations(
                     requestId: requestId,
@@ -356,6 +344,26 @@ class AttestationActionsSpec: QuickSpec {
                 let response = JSON(parseJSON: sendPendingAction()!.message)
                 expect(response["error"]["code"].int) == AttestationError.invalidRealmUrl.code
                 expect(response["id"]) == requestId.json
+            }
+        }
+
+        describe("multiple identities") {
+            it("uses the identity associated with the telepath channel") {
+                let identity1 = Identity(description: "test identity 1", address: Address.testAddress1)
+                let identity2 = Identity(description: "test identity 2", address: Address.testAddress2)
+                var diamondState = DiamondState(facets: [identity1, identity2])
+                diamondState.selectedFacetId = identity1.identifier
+                let channel = TelepathChannelSpy()
+                let state = appState(
+                    diamond: diamondState,
+                    telepath: TelepathState(
+                        channels: [channel: identity2], connectionError: nil, receivedMessages: [], receiveError: nil))
+                let builder = GetAttestationsBuilder(
+                    requestId: JsonRpcId(1), oidcRealmUrlString: "https://test.realm", applicationName: "app",
+                    subject: "sub", dispatch: { _ in }, getState: { return state }, channel: channel
+                )
+                let attestationsGetter = builder.build() as? GetAttestationsValid
+                expect(attestationsGetter?.facet) == identity2
             }
         }
     }
