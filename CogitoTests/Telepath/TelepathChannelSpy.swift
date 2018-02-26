@@ -8,8 +8,8 @@ class TelepathChannelSpy: TelepathChannel {
     var sentMessage: String?
     var sendError: Error?
 
-    convenience init() {
-        let url = URL(string: "http://example.com/telepath/connect#I=1234&E=abcd")!
+    convenience init(id: String = "1234") {
+        let url = URL(string: "http://example.com/telepath/connect#I=\(id)&E=abcd")!
         try! self.init(connectUrl: url)
     }
 
