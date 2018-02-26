@@ -35,13 +35,9 @@
     "mocha": "^4.0.1",
     "nyc": "^11.2.1",
     "standard": "^10.0.3",
-    "testdouble": "^3.2.6",
-    "web3": "^1.0.0-beta.26"
+    "testdouble": "^3.2.6"
   },
   "peerDependencies": {
     "web3": "^1.0.0-beta.26"
-  },
-  "dependencies": {    
-    "regenerator-runtime": "^0.11.1"
   }
 }
