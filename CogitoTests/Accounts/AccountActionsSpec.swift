@@ -14,15 +14,21 @@ class AccountActionsSpec: QuickSpec {
 
         context("given that a facet was selected") {
             let address = Address.testAddress
+            var channel: TelepathChannel!
 
             beforeEach {
+                channel = TelepathChannelSpy()
                 let identity = Identity(description: "me", address: address)
-                store.state = appState(diamond: DiamondState(facets: [identity]))
+                store.state = appState(
+                    diamond: DiamondState(facets: [identity]),
+                    telepath: TelepathState(channels: [channel: identity],
+                                            connectionError: nil, receivedMessages: [], receiveError: nil)
+                )
             }
 
             it("sends out its Ethereum address via Telepath") {
                 store.dispatch(AccountActions.GetAccounts(requestId: JsonRpcId(1),
-                                                          channel: TelepathChannelSpy()))
+                                                          channel: channel))
                 let send = store.firstAction(ofType: TelepathActions.SendPending.self)
                 let response = JSON(parseJSON: send!.message)
                 expect(response["result"]) == JSON(["\(address)"])
@@ -30,16 +36,52 @@ class AccountActionsSpec: QuickSpec {
         }
 
         context("when no facet was selected") {
+            let address = Address.testAddress
+            var channel: TelepathChannel!
+
             beforeEach {
-                store.state = appState(diamond: DiamondState(facets: []))
+                channel = TelepathChannelSpy()
+                let identity = Identity(description: "me", address: address)
+                store.state = appState(
+                    diamond: DiamondState(facets: []),
+                    telepath: TelepathState(channels: [channel: identity],
+                                            connectionError: nil, receivedMessages: [], receiveError: nil)
+                )
             }
 
-            it("returns an empty list") {
+            it("still returns the account matching the channel") {
                 store.dispatch(AccountActions.GetAccounts(requestId: JsonRpcId(1),
-                                                          channel: TelepathChannelSpy()))
+                                                          channel: channel))
                 let send = store.firstAction(ofType: TelepathActions.SendPending.self)
                 let response = JSON(parseJSON: send!.message)
-                expect(response["result"]) == JSON([])
+                expect(response["result"]) == JSON(["\(address)"])
+            }
+        }
+
+        context("given multiple accounts") {
+            let address1 = Address.testAddress1
+            let address2 = Address.testAddress2
+            var channel1: TelepathChannel!
+            var channel2: TelepathChannel!
+
+            beforeEach {
+                let identity1 = Identity(description: "1", address: address1)
+                let identity2 = Identity(description: "2", address: address2)
+                channel1 = TelepathChannelSpy(id: "1")
+                channel2 = TelepathChannelSpy(id: "2")
+                store.state = appState(
+                    diamond: DiamondState(facets: [identity1, identity2]),
+                    telepath: TelepathState(channels: [channel1: identity1, channel2: identity2],
+                                            connectionError: nil, receivedMessages: [], receiveError: nil)
+                )
+            }
+
+            it("returns the account matching the Telepath channel") {
+                store.dispatch(AccountActions.GetAccounts(requestId: JsonRpcId(1),
+                                                          channel: channel2))
+                let send = store.firstAction(ofType: TelepathActions.SendPending.self)
+                let response = JSON(parseJSON: send!.message)
+                expect(response["result"]) == JSON(["\(address2)"])
             }
         }
     }

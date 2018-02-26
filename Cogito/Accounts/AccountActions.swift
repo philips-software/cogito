@@ -9,9 +9,9 @@ struct AccountActions {
                             channel: TelepathChannel) -> ThunkAction<AppState> {
         return ThunkAction(action: { dispatch, getState in
             var accounts: [String] = []
-            if let diamond = getState()?.diamond,
-               let selectedFacet = diamond.selectedFacet() {
-                   accounts.append("\(selectedFacet.address)")
+            if let telepath = getState()?.telepath,
+               let identity = telepath.channels[channel] {
+                   accounts.append("\(identity.address)")
             }
             dispatch(TelepathActions.Send(id: requestId,
                                           result: accounts,

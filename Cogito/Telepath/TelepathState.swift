@@ -28,7 +28,6 @@ struct TelepathState: Equatable, Codable {
     static func == (lhs: TelepathState, rhs: TelepathState) -> Bool {
         return lhs.channels == rhs.channels
     }
-
 }
 
 struct TelepathMessage: Codable {
