@@ -58,39 +58,6 @@ describe('transaction defaults', function () {
     })
   })
 
-  describe('nonce', function () {
-    const noNonce = Object.assign({}, transaction)
-    delete noNonce.nonce
-
-    const expectedRequest = {
-      method: 'eth_getTransactionCount',
-      params: [ transaction.from, 'pending' ]
-    }
-
-    it('is equal to transaction count when not specified', async function () {
-      stubResponse(provider, contains(expectedRequest), '0x42')
-      const defaults = await transactionDefaults.apply(noNonce)
-      expect(defaults.nonce).to.equal('0x42')
-    })
-
-    it('increments for pending transactions', async function () {
-      stubResponse(provider, contains(expectedRequest), '0x42')
-      await transactionDefaults.apply(noNonce)
-      const defaults = await transactionDefaults.apply(noNonce)
-      expect(defaults.nonce).to.equal('0x43')
-    })
-
-    it('is unchanged when defined', async function () {
-      const defaults = await transactionDefaults.apply(transaction)
-      expect(defaults.nonce).to.equal(transaction.nonce)
-    })
-
-    it('throws when transaction count cannot be determined', async function () {
-      stubResponseError(provider, contains(expectedRequest))
-      await expect(transactionDefaults.apply(noNonce)).to.be.rejected()
-    })
-  })
-
   describe('gas limit', function () {
     const noGas = Object.assign({}, transaction)
     delete noGas.gas

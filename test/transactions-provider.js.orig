@@ -36,6 +36,7 @@ describe('sending transactions', function () {
       td.when(telepathChannel.send(contains(request))).thenResolve(response)
     })
 
+<<<<<<< ours
     context('when using original provider for raw transactions', function () {
       const hash = '0xTransactionHash'
 
@@ -46,14 +47,22 @@ describe('sending transactions', function () {
 
       it('sends a cogito signed transaction', function (done) {
         web3.eth.sendTransaction(transaction, function (_, result) {
-          try {
-            expect(result).to.equal(hash)
-            done()
-          } catch (assertionFailure) {
-            done(assertionFailure)
-          }
+          expect(result).to.equal(hash)
+          done()
         })
       })
+=======
+  it('sends a cogito signed transaction', function (done) {
+    whenCogitoProvidesSignature()
+    whenOriginalProviderSendsRawTransaction()
+    web3.eth.sendTransaction(transaction, function (_, result) {
+      try {
+        expect(result).to.equal(hash)
+        done()
+      } catch (assertionFailure) {
+        done(assertionFailure)
+      }
+>>>>>>> theirs
     })
   })
 
