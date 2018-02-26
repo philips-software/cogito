@@ -20,7 +20,7 @@ struct GetAttestationsBuilder {
         }
         guard
             let state = getState(),
-            let facet = state.diamond.selectedFacet()
+            let facet = state.telepath.channels[channel]
         else {
             return GetAttestationsInvalid(
                 requestId: requestId,
