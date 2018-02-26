@@ -39,9 +39,7 @@
     "web3": "^1.0.0-beta.26"
   },
   "peerDependencies": {
-    "web3": "^1.0.0-beta.26"
-  },
-  "dependencies": {
+    "web3": "^1.0.0-beta.26",
     "regenerator-runtime": "^0.11.1"
   }
 }
