@@ -113,12 +113,31 @@ describe('sending transactions', function () {
       })
     })
 
-    it('increments for pending transactions', function (done) {
-      stubResponse(originalProvider, contains(transactionCountRequest), '0x42')
-      web3.eth.sendTransaction(withoutNonce, function () {})
-      const expectedRequest = { method: 'sign', params: [{ nonce: '0x43' }] }
+    it('increments for successful transactions', function (done) {
+      stubResponse(originalProvider, contains(transactionCountRequest), '0x0')
+      whenCogitoProvidesSignature()
+      whenOriginalProviderSendsRawTransaction()
+      web3.eth.sendTransaction(transaction, function () {})
       web3.eth.sendTransaction(withoutNonce, function () {
         try {
+          const expectedRequest = { method: 'sign', params: [{ nonce: '0x31' }] }
+          td.verify(telepathChannel.send(contains(expectedRequest)))
+          done()
+        } catch (assertionFailure) {
+          done(assertionFailure)
+        }
+      })
+    })
+
+    it('does not increment for transactions that fail', function (done) {
+      stubResponse(originalProvider, contains(transactionCountRequest), '0x0')
+      whenCogitoProvidesSignature()
+      const sendRaw = { method: 'eth_sendRawTransaction', params: [signed] }
+      stubResponseError(originalProvider, contains(sendRaw))
+      web3.eth.sendTransaction(transaction, function () {})
+      web3.eth.sendTransaction(withoutNonce, function () {
+        try {
+          const expectedRequest = { method: 'sign', params: [{ nonce: '0x0' }] }
           td.verify(telepathChannel.send(contains(expectedRequest)))
           done()
         } catch (assertionFailure) {

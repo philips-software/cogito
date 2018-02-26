@@ -1,17 +1,14 @@
 const JsonRpcClient = require('./json-rpc-client')
-const TransactionNonces = require('./transaction-nonces')
 
 class TransactionDefaults {
   constructor ({ provider }) {
     this.client = new JsonRpcClient({ provider })
-    this.nonces = new TransactionNonces({ provider })
   }
 
   async apply (transaction) {
     return Object.assign({}, transaction, {
       value: transaction.value || '0x0',
       gasPrice: transaction.gasPrice || await this.getGasPrice(),
-      nonce: transaction.nonce || await this.nonces.getNonce(transaction),
       gas: transaction.gas || await this.estimateGas(transaction),
       chainId: transaction.chainId || await this.getChainId()
     })

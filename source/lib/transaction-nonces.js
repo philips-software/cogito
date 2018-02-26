@@ -19,7 +19,6 @@ class TransactionNonces {
     const remoteNonce = await this.getRemoteNonce(transaction)
     const localNonce = this.getLocalNonce(transaction)
     const nonce = Math.max(remoteNonce, localNonce)
-    this.setLocalNonce(transaction, nonce + 1)
     return `0x${nonce.toString(16)}`
   }
 
@@ -34,8 +33,12 @@ class TransactionNonces {
 
   getLocalNonce (transaction) {
     const nonce = this.nonces[transaction.from] || 0
-    this.nonces[transaction.from] = nonce + 1
     return nonce
+  }
+
+  commitNonce (transaction) {
+    const nonce = parseInt(transaction.nonce.substr(2), 16)
+    this.setLocalNonce(transaction, nonce + 1)
   }
 
   setLocalNonce (transaction, nonce) {
