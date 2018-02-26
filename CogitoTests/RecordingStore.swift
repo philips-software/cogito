@@ -24,3 +24,5 @@ extension RecordingStore {
         return actions.flatMap { $0 as? T }.first
     }
 }
+
+struct TracerAction: Action {}

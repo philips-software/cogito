@@ -6,22 +6,35 @@ import Nimble
 class TelepathSubscriberSpec: QuickSpec {
     override func spec() {
         var subscriber: TelepathSubscriber!
-        var store: StoreSpy!
+        var store: RecordingStore!
         let exampleChannel = TelepathChannel.example
 
         beforeEach {
-            store = StoreSpy()
+            store = RecordingStore()
             subscriber = TelepathSubscriber(store: store)
         }
 
-        it("subscribes to incoming Telepath messages") {
-            subscriber.start()
-            expect(store.latestSubscriber) === subscriber
-        }
+        describe("subscribe/unsubscribe") {
+            var newStateReceived = false
 
-        it("unsubscribes") {
-            subscriber.stop()
-            expect(store.latestUnsubscriber) === subscriber
+            beforeEach {
+                newStateReceived = false
+                subscriber.onNewState = { _ in return { _ in
+                    newStateReceived = true
+                }}
+            }
+
+            it("subscribes to changes to the telepath channel") {
+                subscriber.start()
+                store.dispatch(TracerAction())
+                expect(newStateReceived).to(beTrue())
+            }
+
+            it("unsubscribes") {
+                subscriber.stop()
+                store.dispatch(TracerAction())
+                expect(newStateReceived).to(beFalse())
+            }
         }
 
         describe("incoming JSON RPC requests") {
