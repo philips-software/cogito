@@ -14,6 +14,8 @@ describe('sending transactions', function () {
     gas: '0x40',
     chainId: 50
   }
+  const signed = '0xSignedTransaction'
+  const hash = '0xTransactionHash'
 
   let cogitoProvider
   let originalProvider
@@ -27,33 +29,27 @@ describe('sending transactions', function () {
     web3 = new Web3(cogitoProvider)
   })
 
-  context('when cogito provides signatures', function () {
-    const signed = '0xSignedTransaction'
+  function whenCogitoProvidesSignature () {
+    const request = { method: 'sign', params: [transaction] }
+    const response = { result: signed }
+    td.when(telepathChannel.send(contains(request))).thenResolve(response)
+  }
 
-    beforeEach(function () {
-      const request = { method: 'sign', params: [transaction] }
-      const response = { result: signed }
-      td.when(telepathChannel.send(contains(request))).thenResolve(response)
-    })
+  function whenOriginalProviderSendsRawTransaction () {
+    const sendRaw = { method: 'eth_sendRawTransaction', params: [signed] }
+    stubResponse(originalProvider, contains(sendRaw), hash)
+  }
 
-    context('when using original provider for raw transactions', function () {
-      const hash = '0xTransactionHash'
-
-      beforeEach(function () {
-        const sendRaw = { method: 'eth_sendRawTransaction', params: [signed] }
-        stubResponse(originalProvider, contains(sendRaw), hash)
-      })
-
-      it('sends a cogito signed transaction', function (done) {
-        web3.eth.sendTransaction(transaction, function (_, result) {
-          try {
-            expect(result).to.equal(hash)
-            done()
-          } catch (assertionFailure) {
-            done(assertionFailure)
-          }
-        })
-      })
+  it('sends a cogito signed transaction', function (done) {
+    whenCogitoProvidesSignature()
+    whenOriginalProviderSendsRawTransaction()
+    web3.eth.sendTransaction(transaction, function (_, result) {
+      try {
+        expect(result).to.equal(hash)
+        done()
+      } catch (assertionFailure) {
+        done(assertionFailure)
+      }
     })
   })
 
