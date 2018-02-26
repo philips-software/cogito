@@ -50,6 +50,9 @@ class DialogPresenter: UIViewController, Connectable {
         let alert = UIAlertController(title: requestedAlert.title,
                                       message: requestedAlert.message,
                                       preferredStyle: .alert)
+        if let textFieldConfigurator = requestedAlert.textFieldConfigurator {
+            alert.addTextField(configurationHandler: textFieldConfigurator)
+        }
         for action in requestedAlert.actions {
             let alertAction = UIAlertAction(
                 title: action.title,

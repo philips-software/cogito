@@ -131,8 +131,8 @@ struct GetAttestationsValid: GetAttestations {
         let requestId = self.requestId
         let alert = RequestedAlert(
             title: "Request for access",
-            message: "Application \(applicationName) wants to access your credentials " +
-                     "from \(self.oidcRealmUrl.absoluteString)",
+            message: "Application \(applicationName) wants to access the credentials " +
+                     "from \(self.oidcRealmUrl.absoluteString) for your identity:",
             actions: [
                 AlertAction(title: "Deny", style: .cancel) { _ in
                     self.send(id: requestId,
@@ -142,7 +142,8 @@ struct GetAttestationsValid: GetAttestations {
                 AlertAction(title: "Approve", style: .default) { _ in
                     self.send(requestId: requestId, idToken: idToken, on: self.channel)
                 }
-            ])
+            ],
+            textFieldConfigurator: textFieldConfigurator(facet: facet))
         self.dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
     }
 
@@ -151,7 +152,7 @@ struct GetAttestationsValid: GetAttestations {
         let alert = RequestedAlert(
             title: "Login required",
             message: "Application \(applicationName) requires you to login to " +
-                     "\(self.oidcRealmUrl.absoluteString)",
+                     "\(self.oidcRealmUrl.absoluteString) using your identity:",
             actions: [
                 AlertAction(title: "Cancel", style: .cancel) { _ in
                     self.send(id: requestId,
@@ -161,8 +162,18 @@ struct GetAttestationsValid: GetAttestations {
                 AlertAction(title: "Login", style: .default) { _ in
                     self.startAttestation()
                 }
-            ])
+            ],
+            textFieldConfigurator: textFieldConfigurator(facet: facet))
         self.dispatch(DialogPresenterActions.RequestAlert(requestedAlert: alert))
+    }
+
+    func textFieldConfigurator(facet: Identity) -> ((UITextField) -> Void) {
+        return { (textField: UITextField) in
+            textField.isUserInteractionEnabled = false
+            textField.font = UIFont(name: "Snell Roundhand", size: 30)
+            textField.text = facet.description
+            textField.textAlignment = .center
+        }
     }
 
     func startAttestation() {

@@ -7,6 +7,15 @@ struct RequestedAlert {
     let title: String
     let message: String
     let actions: [AlertAction]
+    let textFieldConfigurator: ((UITextField) -> Void)?
+
+    init(title: String, message: String, actions: [AlertAction],
+         textFieldConfigurator: ((UITextField) -> Void)? = nil) {
+        self.title = title
+        self.message = message
+        self.actions = actions
+        self.textFieldConfigurator = textFieldConfigurator
+    }
 }
 
 extension RequestedAlert: Equatable {
