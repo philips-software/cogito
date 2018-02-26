@@ -5,6 +5,7 @@ import ReSwift
 class TelepathSubscriber: StoreSubscriber {
     let store: Store<AppState>
     var services: [TelepathService] = []
+    var onNewState = dispatchIncomingMessages
 
     init(store: Store<AppState>) {
         self.store = store
@@ -27,6 +28,10 @@ class TelepathSubscriber: StoreSubscriber {
     }
 
     func newState(state incomingMessages: [TelepathMessage]) {
+        onNewState(self)(incomingMessages)
+    }
+
+    func dispatchIncomingMessages(_ incomingMessages: [TelepathMessage]) {
         guard let message = incomingMessages.first else {
             return
         }

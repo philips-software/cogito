@@ -8,21 +8,34 @@ import Telepath
 class TelepathReceiverSpec: QuickSpec {
     override func spec() {
         var receiver: TelepathReceiver!
-        var store: StoreSpy!
+        var store: RecordingStore!
 
         beforeEach {
-            store = StoreSpy()
+            store = RecordingStore()
             receiver = TelepathReceiver(store: store, pollInterval: 0)
         }
 
-        it("subscribes to changes to the telepath channel") {
-            receiver.start()
-            expect(store.latestSubscriber) === receiver
-        }
+        describe("subscribe/unsubscribe") {
+            var newStateReceived = false
 
-        it("unsubscribes") {
-            receiver.stop()
-            expect(store.latestUnsubscriber) === receiver
+            beforeEach {
+                newStateReceived = false
+                receiver.onNewState = { _ in return { _ in
+                    newStateReceived = true
+                }}
+            }
+
+            it("subscribes to changes to the telepath channel") {
+                receiver.start()
+                store.dispatch(TracerAction())
+                expect(newStateReceived).to(beTrue())
+            }
+
+            it("unsubscribes") {
+                receiver.stop()
+                store.dispatch(TracerAction())
+                expect(newStateReceived).to(beFalse())
+            }
         }
 
         it("continuously polls for new messages") {

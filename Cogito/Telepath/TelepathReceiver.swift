@@ -6,6 +6,7 @@ class TelepathReceiver: StoreSubscriber {
     let store: Store<AppState>
     let pollInterval: TimeInterval
     var timers: [TelepathChannel:Timer] = [:]
+    var onNewState = recreatePollingTimers
 
     init(store: Store<AppState>, pollInterval: TimeInterval = 0.5) {
         self.store = store
@@ -31,6 +32,10 @@ class TelepathReceiver: StoreSubscriber {
     }
 
     func newState(state channels: [TelepathChannel:Identity]?) {
+        self.onNewState(self)(channels)
+    }
+
+    func recreatePollingTimers(channels: [TelepathChannel:Identity]?) {
         for timer in timers.values {
             timer.invalidate()
         }
