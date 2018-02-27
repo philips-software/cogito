@@ -9,6 +9,7 @@ const CogitoProvider = require('../source/lib/cogito-provider')
 describe('sending transactions', function () {
   const transaction = {
     from: '0x1234567890123456789012345678901234567890',
+    value: '0x10',
     gasPrice: '0x20',
     nonce: '0x30',
     gas: '0x40',
@@ -84,15 +85,20 @@ describe('sending transactions', function () {
     await expect(sendTransaction(transaction)).to.be.rejectedWith(/cogito error/)
   })
 
-  it('sets transaction defaults', async function () {
-    whenCogitoProvidesSignatures()
-    whenProviderSendsRawTransaction()
+  context('when a value is not provided', async function () {
+    const withoutValue = Object.assign({}, transaction)
+    delete withoutValue.value
 
-    await sendTransaction(transaction)
+    it('sets transaction defaults', async function () {
+      whenCogitoProvidesSignatures()
+      whenProviderSendsRawTransaction()
 
-    const expectedTransaction = { ...transaction, value: '0x0' }
-    const expectedRequest = { method: 'sign', params: [expectedTransaction] }
-    td.verify(telepathChannel.send(contains(expectedRequest)))
+      await sendTransaction(withoutValue)
+
+      const expectedTransaction = { ...transaction, value: '0x0' }
+      const expectedRequest = { method: 'sign', params: [expectedTransaction] }
+      td.verify(telepathChannel.send(contains(expectedRequest)))
+    })
   })
 
   it('transaction nonce is unchanged when provided', async function () {
