@@ -69,13 +69,18 @@ describe('sending transactions', function () {
 
   it('throws when signing via telepath fails', async function () {
     td.when(telepathChannel.send(anything())).thenReject(new Error('an error'))
-    await expect(sendTransaction(transaction)).to.be.rejected()
+    await expect(sendTransaction(transaction)).to.be.rejectedWith(/an error/)
+  })
+
+  it('throws when telepath times out', async function () {
+    td.when(telepathChannel.send(anything())).thenResolve(null)
+    await expect(sendTransaction(transaction)).to.be.rejectedWith(/timeout/)
   })
 
   it('throws when cogito returns an error', async function () {
     const response = { error: { message: 'some error', code: -42 } }
     td.when(telepathChannel.send(anything())).thenResolve(response)
-    await expect(sendTransaction(transaction)).to.be.rejected()
+    await expect(sendTransaction(transaction)).to.be.rejectedWith(/some error/)
   })
 
   it('sets transaction defaults', async function () {

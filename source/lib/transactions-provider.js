@@ -46,6 +46,9 @@ class TransactionsProvider {
       params: [ transaction ]
     }
     const response = await this.channel.send(signRequest)
+    if (!response) {
+      throw new Error('timeout while waiting for signature')
+    }
     if (response.error) {
       throw new Error(response.error.message)
     }
