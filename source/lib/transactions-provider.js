@@ -11,31 +11,34 @@ class TransactionsProvider {
 
   async send (payload, callback) {
     try {
-      const nonces = this.nonces
-      const transaction = await this.extractTransaction(payload)
-      const nonce = transaction.nonce || await nonces.getNonce(transaction)
-      transaction.nonce = nonce
-      const signedTransaction = await this.sign(transaction, payload.id)
-      const sendRequest = {
-        jsonrpc: '2.0',
-        id: payload.id,
-        method: 'eth_sendRawTransaction',
-        params: [ signedTransaction ]
-      }
-      this.provider.send(sendRequest, function (error, result) {
-        if (!error) {
-          nonces.commitNonce(transaction)
-        }
-        callback(error, result)
-      })
+      callback(null, await this.sendWithDefaults(payload))
     } catch (error) {
       callback(error, null)
     }
   }
 
-  async extractTransaction (payload) {
-    const transaction = payload.params[0]
+  async sendWithDefaults (payload) {
+    let transaction = payload.params[0]
+    transaction = await this.setDefaults(transaction)
+    transaction = await this.setNonce(transaction)
+    const result = this.sendTransaction(transaction, payload.id)
+    this.nonces.commitNonce(transaction)
+    return result
+  }
+
+  async setDefaults (transaction) {
     return this.defaults.apply(transaction)
+  }
+
+  async setNonce (transaction) {
+    return Object.assign({}, transaction, {
+      nonce: transaction.nonce || await this.nonces.getNonce(transaction)
+    })
+  }
+
+  async sendTransaction (transaction, requestId) {
+    const signedTransaction = await this.sign(transaction, requestId)
+    return this.sendRaw(signedTransaction, requestId)
   }
 
   async sign (transaction, requestId) {
@@ -53,6 +56,25 @@ class TransactionsProvider {
       throw new Error(response.error.message)
     }
     return response.result
+  }
+
+  async sendRaw (signedTransaction, requestId) {
+    const provider = this.provider
+    const request = {
+      jsonrpc: '2.0',
+      id: requestId,
+      method: 'eth_sendRawTransaction',
+      params: [ signedTransaction ]
+    }
+    return new Promise(function (resolve, reject) {
+      provider.send(request, function (error, result) {
+        if (error) {
+          reject(error)
+        } else {
+          resolve(result)
+        }
+      })
+    })
   }
 }
 
