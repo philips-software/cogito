@@ -25,16 +25,18 @@ class IdentityManagerViewController: UITableViewController, Connectable {
                     let addr = item.facet.address.description
                     let range = addr.startIndex ..< addr.index(addr.startIndex, offsetBy: 10)
                     facetCell.detailTextLabel?.text = addr[range] + "..."
+                    facetCell.accessoryType = .detailDisclosureButton
+                    facetCell.facet = item.facet
                 }
                 return cell
             },
             canEditRowAtIndexPath: { _, _ in return true }
         )
         connection.bind(\Props.facetGroups, to: tableView.rx.items(dataSource: dataSource))
-        tableView.rx.itemDeleted.subscribe(onNext: { [unowned self] (indexPath: IndexPath) in
+        tableView.rx.itemDeleted.subscribe(onNext: { [unowned self] indexPath in
             self.itemDeleted(at: indexPath)
         }).disposed(by: disposeBag)
-        tableView.rx.itemSelected.subscribe(onNext: { [unowned self] (indexPath: IndexPath) in
+        tableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
             self.itemSelected(at: indexPath)
         }).disposed(by: disposeBag)
         connection.subscribe(\Props.selectedFacetIndex) { [unowned self] newIndex in
@@ -43,12 +45,12 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     }
 
     func itemDeleted(at indexPath: IndexPath) {
-        let uuid = self.props.facetGroups[indexPath.section].items[indexPath.row].identity
+        let uuid = self.props.facetGroups[indexPath.section].items[indexPath.row].facet.identifier
         self.actions.deleteIdentity(uuid)
     }
 
     func itemSelected(at indexPath: IndexPath) {
-        let uuid = self.props.facetGroups[indexPath.section].items[indexPath.row].identity
+        let uuid = self.props.facetGroups[indexPath.section].items[indexPath.row].facet.identifier
         self.actions.selectIdentity(uuid)
         self.dismiss(animated: true)
     }
@@ -60,6 +62,11 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         self.tableView.selectRow(at: IndexPath(row: facetIndex, section: 0),
                                  animated: true,
                                  scrollPosition: .middle)
+    }
+
+    func showIdentityDetails(for indexPath: IndexPath) {
+        let identity = self.props.facetGroups[indexPath.section].items[indexPath.row].facet
+        performSegue(withIdentifier: "ShowIdentityDetails", sender: identity)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -85,6 +92,10 @@ class IdentityManagerViewController: UITableViewController, Connectable {
                     self?.actions.resetCreateIdentity()
                 }
             }
+        } else if let destination = segue.destination as? FacetDetailsViewController,
+                  let cell = sender as? FacetTableViewCell,
+                  let facet = cell.facet {
+            destination.facet = facet
         }
     }
 
@@ -109,7 +120,7 @@ private func mapStateToProps(state: AppState) -> IdentityManagerViewController.P
 
     let selectedIndex: Int
     if let selectedFacet = state.diamond.selectedFacetId {
-        selectedIndex = group.items.map { $0.identity }.index(of: selectedFacet) ?? 0
+        selectedIndex = group.items.map { $0.facet.identifier }.index(of: selectedFacet) ?? 0
     } else {
         selectedIndex = 0
     }
@@ -163,8 +174,8 @@ extension IdentityManagerViewController {
         }
 
         struct Facet: IdentifiableType, Equatable {
-            typealias Identity = UUID
-            var identity: UUID { return facet.identifier }
+            typealias Identity = String
+            var identity: String { return facet.identifier.uuidString }
             var facet: CogitoIdentity
 
             static func == (lhs: Facet, rhs: Facet) -> Bool {

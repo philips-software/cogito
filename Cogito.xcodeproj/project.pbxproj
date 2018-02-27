@@ -23,8 +23,6 @@
 		0226212E1FAB1EC200692126 /* IdentityManagerViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226212D1FAB1EC200692126 /* IdentityManagerViewControllerSpec.swift */; };
 		022621301FAB1FF100692126 /* FacetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226212F1FAB1FF100692126 /* FacetTableViewCell.swift */; };
 		022621311FAB1FF100692126 /* FacetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0226212F1FAB1FF100692126 /* FacetTableViewCell.swift */; };
-		022621331FAB202400692126 /* FacetDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022621321FAB202400692126 /* FacetDetailsTableViewCell.swift */; };
-		022621341FAB202400692126 /* FacetDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022621321FAB202400692126 /* FacetDetailsTableViewCell.swift */; };
 		022621351FAB2B2500692126 /* IdentityManager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 022621281FAB1E1300692126 /* IdentityManager.storyboard */; };
 		0230F9471FA1E5F3006A36FC /* LaunchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F9461FA1E5F3006A36FC /* LaunchActions.swift */; };
 		0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */; };
@@ -124,6 +122,8 @@
 		02D0C0E11F8B73B20001223E /* SelectedFacetViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0E01F8B73B20001223E /* SelectedFacetViewControllerSpec.swift */; };
 		02DB90E420453E3A00C4817C /* Identity+Formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB90E320453E3A00C4817C /* Identity+Formatted.swift */; };
 		02DB90E520454B8B00C4817C /* Identity+Formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB90E320453E3A00C4817C /* Identity+Formatted.swift */; };
+		02DB90E72045546C00C4817C /* FacetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB90E62045546C00C4817C /* FacetDetailsViewController.swift */; };
+		02DB90E82045546C00C4817C /* FacetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB90E62045546C00C4817C /* FacetDetailsViewController.swift */; };
 		02E678E21FEC056D00C634E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027603F51F6ACD1600788B0A /* Assets.xcassets */; };
 		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
 		02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792321F6FFBF700DC5973 /* AppReducer.swift */; };
@@ -243,7 +243,6 @@
 		0226212A1FAB1E6800692126 /* IdentityManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityManagerViewController.swift; sourceTree = "<group>"; };
 		0226212D1FAB1EC200692126 /* IdentityManagerViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityManagerViewControllerSpec.swift; sourceTree = "<group>"; };
 		0226212F1FAB1FF100692126 /* FacetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetTableViewCell.swift; sourceTree = "<group>"; };
-		022621321FAB202400692126 /* FacetDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		0230F9461FA1E5F3006A36FC /* LaunchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchActions.swift; sourceTree = "<group>"; };
 		0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchActionsSpec.swift; sourceTree = "<group>"; };
 		026779AC2007B47E00C2D45C /* TransactionSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigner.swift; sourceTree = "<group>"; };
@@ -306,6 +305,7 @@
 		02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialExplanationViewController.swift; sourceTree = "<group>"; };
 		02D0C0E01F8B73B20001223E /* SelectedFacetViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFacetViewControllerSpec.swift; sourceTree = "<group>"; };
 		02DB90E320453E3A00C4817C /* Identity+Formatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Identity+Formatted.swift"; sourceTree = "<group>"; };
+		02DB90E62045546C00C4817C /* FacetDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetDetailsViewController.swift; sourceTree = "<group>"; };
 		02E792301F6FFBAD00DC5973 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		02E792321F6FFBF700DC5973 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		02E792341F6FFBFF00DC5973 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -422,7 +422,7 @@
 				0226212A1FAB1E6800692126 /* IdentityManagerViewController.swift */,
 				022621281FAB1E1300692126 /* IdentityManager.storyboard */,
 				0226212F1FAB1FF100692126 /* FacetTableViewCell.swift */,
-				022621321FAB202400692126 /* FacetDetailsTableViewCell.swift */,
+				02DB90E62045546C00C4817C /* FacetDetailsViewController.swift */,
 			);
 			path = "Identity manager";
 			sourceTree = "<group>";
@@ -1169,7 +1169,6 @@
 				0298D43A1F7A46A30070998D /* Node.swift in Sources */,
 				5CC4D2CB1FE7F724002F2450 /* TransactionSigningService.swift in Sources */,
 				026779AD2007B47E00C2D45C /* TransactionSigner.swift in Sources */,
-				022621331FAB202400692126 /* FacetDetailsTableViewCell.swift in Sources */,
 				028F4F001F7D3B640015C4AF /* CreateIdentityState.swift in Sources */,
 				022621301FAB1FF100692126 /* FacetTableViewCell.swift in Sources */,
 				0226212B1FAB1E6800692126 /* IdentityManagerViewController.swift in Sources */,
@@ -1178,6 +1177,7 @@
 				029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
 				5C04E4501FA788D200A70C60 /* AccountActions.swift in Sources */,
 				02A15B011F8672C000A94163 /* DiamondReducer.swift in Sources */,
+				02DB90E72045546C00C4817C /* FacetDetailsViewController.swift in Sources */,
 				0270D71A1F9F58CA00CC9038 /* AttestationActions.swift in Sources */,
 				028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
@@ -1281,7 +1281,6 @@
 				022621311FAB1FF100692126 /* FacetTableViewCell.swift in Sources */,
 				02021D1A1F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				5C20A0F61FA1FAED00B443C9 /* TelepathActions.swift in Sources */,
-				022621341FAB202400692126 /* FacetDetailsTableViewCell.swift in Sources */,
 				02DB90E520454B8B00C4817C /* Identity+Formatted.swift in Sources */,
 				5C8CFD3F2007993500D383C0 /* JsonRpcRequest.swift in Sources */,
 				02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */,
@@ -1326,6 +1325,7 @@
 				02A15AF01F864F0900A94163 /* HomeViewController.swift in Sources */,
 				02D0C0D51F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
 				02A15AFF1F8671D200A94163 /* Identity.swift in Sources */,
+				02DB90E82045546C00C4817C /* FacetDetailsViewController.swift in Sources */,
 				C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */,
 				C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */,
 				02E90F561FE2755B008D81F9 /* DialogPresenterSpec.swift in Sources */,
