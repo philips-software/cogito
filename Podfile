@@ -16,6 +16,7 @@ target 'Cogito' do
   pod 'JWTDecode', '~> 2.1'
   pod 'FontAwesome.swift', '~> 1.3', :inhibit_warnings => true
   pod 'RichString', '~> 2.0', :inhibit_warnings => true
+  pod 'Toast-Swift', '~> 3.0'
 
   pod 'RxSwift', '~> 4.0'
   pod 'RxCocoa', '~> 4.0'
