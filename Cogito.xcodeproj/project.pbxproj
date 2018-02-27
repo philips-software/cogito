@@ -123,6 +123,7 @@
 		02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */; };
 		02D0C0E11F8B73B20001223E /* SelectedFacetViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0E01F8B73B20001223E /* SelectedFacetViewControllerSpec.swift */; };
 		02DB90E420453E3A00C4817C /* Identity+Formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB90E320453E3A00C4817C /* Identity+Formatted.swift */; };
+		02DB90E520454B8B00C4817C /* Identity+Formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB90E320453E3A00C4817C /* Identity+Formatted.swift */; };
 		02E678E21FEC056D00C634E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027603F51F6ACD1600788B0A /* Assets.xcassets */; };
 		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
 		02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792321F6FFBF700DC5973 /* AppReducer.swift */; };
@@ -1281,6 +1282,7 @@
 				02021D1A1F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				5C20A0F61FA1FAED00B443C9 /* TelepathActions.swift in Sources */,
 				022621341FAB202400692126 /* FacetDetailsTableViewCell.swift in Sources */,
+				02DB90E520454B8B00C4817C /* Identity+Formatted.swift in Sources */,
 				5C8CFD3F2007993500D383C0 /* JsonRpcRequest.swift in Sources */,
 				02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */,
 				0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */,

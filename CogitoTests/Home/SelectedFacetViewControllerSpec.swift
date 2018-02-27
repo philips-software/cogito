@@ -91,7 +91,7 @@ class SelectedFacetViewControllerSpec: QuickSpec {
             }
 
             it("has empty facet label and facet label is hidden") {
-                expect(viewController.facetLabel.text) == ""
+                expect(viewController.facetLabel.attributedText).to(beNil())
                 expect(viewController.facetLabel.isHidden).to(beTrue())
             }
         }

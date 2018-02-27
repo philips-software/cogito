@@ -9,9 +9,11 @@ private let formattedIdentityFont = UIFont(name: "Snell Roundhand", size: format
                                     ?? UIFont.italicSystemFont(ofSize: formattedIdentityFontSize)
 
 extension Identity {
-    func formatted() -> NSAttributedString {
-        let text = self.description
+    func formatted(addSpacePadding: Int = 0) -> NSAttributedString {
         let hasAttestations = self.idTokens.count > 0
+        let spacePadding = [Int](0..<addSpacePadding).map { _ in " " }.joined()
+        var text = spacePadding + self.description
+        if !hasAttestations { text += spacePadding }
         let description = text.font(formattedIdentityFont)
         if hasAttestations {
             let icon = String.fontAwesomeIcon(name: .sunO)

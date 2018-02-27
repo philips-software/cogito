@@ -24,8 +24,8 @@ class ExplanationViewController: UIViewController {
     func configureUI() {
         applicationLabel.text = appName
         actionLabel.text = actionDescription
-        if let identityDescription = identity?.description {
-            identityLabel.text = identityDescription
+        if let identityDescription = identity?.formatted() {
+            identityLabel.attributedText = identityDescription
         }
     }
 
