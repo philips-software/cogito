@@ -8,8 +8,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var JsonRpcClient = require('./json-rpc-client');
 
-var TransactionNonces = require('./transaction-nonces');
-
 var TransactionDefaults =
 /*#__PURE__*/
 function () {
@@ -19,9 +17,6 @@ function () {
     _classCallCheck(this, TransactionDefaults);
 
     this.client = new JsonRpcClient({
-      provider: provider
-    });
-    this.nonces = new TransactionNonces({
       provider: provider
     });
   }
@@ -55,7 +50,7 @@ function () {
 
               case 9:
                 _context.t5 = _context.t4;
-                _context.t6 = transaction.nonce;
+                _context.t6 = transaction.gas;
 
                 if (_context.t6) {
                   _context.next = 15;
@@ -63,14 +58,14 @@ function () {
                 }
 
                 _context.next = 14;
-                return this.nonces.getNonce(transaction);
+                return this.estimateGas(transaction);
 
               case 14:
                 _context.t6 = _context.sent;
 
               case 15:
                 _context.t7 = _context.t6;
-                _context.t8 = transaction.gas;
+                _context.t8 = transaction.chainId;
 
                 if (_context.t8) {
                   _context.next = 21;
@@ -78,38 +73,22 @@ function () {
                 }
 
                 _context.next = 20;
-                return this.estimateGas(transaction);
+                return this.getChainId();
 
               case 20:
                 _context.t8 = _context.sent;
 
               case 21:
                 _context.t9 = _context.t8;
-                _context.t10 = transaction.chainId;
-
-                if (_context.t10) {
-                  _context.next = 27;
-                  break;
-                }
-
-                _context.next = 26;
-                return this.getChainId();
-
-              case 26:
-                _context.t10 = _context.sent;
-
-              case 27:
-                _context.t11 = _context.t10;
-                _context.t12 = {
+                _context.t10 = {
                   value: _context.t3,
                   gasPrice: _context.t5,
-                  nonce: _context.t7,
-                  gas: _context.t9,
-                  chainId: _context.t11
+                  gas: _context.t7,
+                  chainId: _context.t9
                 };
-                return _context.abrupt("return", _context.t0.assign.call(_context.t0, _context.t1, _context.t2, _context.t12));
+                return _context.abrupt("return", _context.t0.assign.call(_context.t0, _context.t1, _context.t2, _context.t10));
 
-              case 30:
+              case 24:
               case "end":
                 return _context.stop();
             }
