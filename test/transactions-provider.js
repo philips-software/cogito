@@ -85,9 +85,14 @@ describe('sending transactions', function () {
     await expect(sendTransaction(transaction)).to.be.rejectedWith(/cogito error/)
   })
 
-  context('when a value is not provided', async function () {
+  context('when a transaction property is not provided', async function () {
     const withoutValue = Object.assign({}, transaction)
     delete withoutValue.value
+
+    function verifyValue (value) {
+      const expectedRequest = { method: 'sign', params: [{ value }] }
+      td.verify(telepathChannel.send(contains(expectedRequest)))
+    }
 
     it('sets transaction defaults', async function () {
       whenCogitoProvidesSignatures()
@@ -95,9 +100,7 @@ describe('sending transactions', function () {
 
       await sendTransaction(withoutValue)
 
-      const expectedTransaction = { ...transaction, value: '0x0' }
-      const expectedRequest = { method: 'sign', params: [expectedTransaction] }
-      td.verify(telepathChannel.send(contains(expectedRequest)))
+      verifyValue('0x0')
     })
   })
 
