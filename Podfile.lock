@@ -37,6 +37,7 @@ PODS:
   - SwiftyJSON (4.0.0)
   - Telepath (0.1.0):
     - Sodium (~> 0.5)
+  - Toast-Swift (3.0.1)
   - URITemplate (2.0.3)
 
 DEPENDENCIES:
@@ -59,6 +60,7 @@ DEPENDENCIES:
   - SwiftLint (= 0.21.0)
   - SwiftyJSON (~> 4.0)
   - Telepath (from `https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git`)
+  - Toast-Swift (~> 3.0)
   - URITemplate
 
 EXTERNAL SOURCES:
@@ -99,8 +101,9 @@ SPEC CHECKSUMS:
   SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   Telepath: 14b8a4ad40df8c1f25ddc49ae7e1db3f1c427b7e
+  Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
   URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: 1e8bb253980c0b363ff9e2aed5c80ad6c857490c
+PODFILE CHECKSUM: c2fa3bd6bec142fe10541b5ab20de2ff22c84964
 
 COCOAPODS: 1.4.0
