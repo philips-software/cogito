@@ -122,6 +122,7 @@
 		02D0C0DB1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */; };
 		02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */; };
 		02D0C0E11F8B73B20001223E /* SelectedFacetViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0E01F8B73B20001223E /* SelectedFacetViewControllerSpec.swift */; };
+		02DB90E420453E3A00C4817C /* Identity+Formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB90E320453E3A00C4817C /* Identity+Formatted.swift */; };
 		02E678E21FEC056D00C634E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027603F51F6ACD1600788B0A /* Assets.xcassets */; };
 		02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792301F6FFBAD00DC5973 /* AppState.swift */; };
 		02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E792321F6FFBF700DC5973 /* AppReducer.swift */; };
@@ -303,6 +304,7 @@
 		02D0C0D71F8B59E80001223E /* InitialSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialSetup.storyboard; sourceTree = "<group>"; };
 		02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialExplanationViewController.swift; sourceTree = "<group>"; };
 		02D0C0E01F8B73B20001223E /* SelectedFacetViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFacetViewControllerSpec.swift; sourceTree = "<group>"; };
+		02DB90E320453E3A00C4817C /* Identity+Formatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Identity+Formatted.swift"; sourceTree = "<group>"; };
 		02E792301F6FFBAD00DC5973 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		02E792321F6FFBF700DC5973 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		02E792341F6FFBFF00DC5973 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -654,6 +656,7 @@
 				02A15AFD1F8671D200A94163 /* Identity.swift */,
 				02A15B001F8672C000A94163 /* DiamondReducer.swift */,
 				C00B5F53B99BC5464AF8BE3E /* DiamondActions.swift */,
+				02DB90E320453E3A00C4817C /* Identity+Formatted.swift */,
 			);
 			path = Diamond;
 			sourceTree = "<group>";
@@ -1197,6 +1200,7 @@
 				02B9A683203C762100ADB44F /* UIWindow+CurrentViewController.swift in Sources */,
 				02D0C0D41F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
 				02CD80581F7E30D100AA5C3A /* ActionLogger.swift in Sources */,
+				02DB90E420453E3A00C4817C /* Identity+Formatted.swift in Sources */,
 				5C20A0F81FA1FBDD00B443C9 /* TelepathReducer.swift in Sources */,
 				5CDB58DE20358B4100A28D60 /* TelepathSubscriber.swift in Sources */,
 				029691551F7166EE00654BD0 /* KeyStoreState.swift in Sources */,
