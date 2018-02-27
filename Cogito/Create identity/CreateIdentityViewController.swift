@@ -32,8 +32,7 @@ class CreateIdentityViewController: UIViewController, Connectable {
                 print("[error] createIdentity error: \(e)")
                 let alert = UIAlertController(
                     title: "Failed to create identity",
-                    message: "Not sure why this happened. The only options I can give" +
-                             " are to retry or contact the developer, I'm afraid.",
+                    message: "Please make sure you have a passcode set on your device, and retry.",
                     preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
                 self.present(alert, animated: true)
