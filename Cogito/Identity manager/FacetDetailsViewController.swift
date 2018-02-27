@@ -5,6 +5,8 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import JWTDecode
+import Toast_Swift
+import MobileCoreServices
 
 class FacetDetailsViewController: UITableViewController {
     var facet: Identity? {
@@ -77,7 +79,7 @@ class FacetDetailsViewController: UITableViewController {
                     let cell = table.dequeueReusableCell(withIdentifier: "Normal", for: indexPath)
                     cell.textLabel?.text = title
                     cell.detailTextLabel?.text = detail
-                    cell.selectionStyle = .none
+                    cell.selectionStyle = title == "Address:" ? .default : .none
                     return cell
                 }
             },
@@ -86,6 +88,13 @@ class FacetDetailsViewController: UITableViewController {
                 return section.title
             }
         )
+        tableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
+            self.tableView.deselectRow(at: indexPath, animated: true)
+            guard let text = self.facet?.address.description else { return }
+            let pasteBoard = UIPasteboard.general
+            pasteBoard.setValue(text, forPasteboardType: kUTTypeUTF8PlainText as String)
+            self.view.makeToast("Copied!", duration: 1, position: .center)
+        }).disposed(by: disposeBag)
 
         Observable.just(sections)
             .bind(to: tableView.rx.items(dataSource: dataSource))
