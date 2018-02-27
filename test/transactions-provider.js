@@ -93,7 +93,6 @@ describe('sending transactions', function () {
   })
 
   describe('transaction nonces', function () {
-    const nonce = transaction.nonce
     const withoutNonce = Object.assign({}, transaction)
     delete withoutNonce.nonce
 
@@ -103,11 +102,11 @@ describe('sending transactions', function () {
     }
 
     it('is equal to transaction count when not specified', async function () {
-      stubResponse(originalProvider, contains(transactionCountRequest), nonce)
-      whenCogitoProvidesSignature()
+      stubResponse(originalProvider, contains(transactionCountRequest), '0x42')
+      whenCogitoProvidesSignatureFor({ ...transaction, nonce: '0x42' })
       whenOriginalProviderSendsRawTransaction()
       await sendTransaction(withoutNonce)
-      const expectedRequest = { method: 'sign', params: [transaction] }
+      const expectedRequest = { method: 'sign', params: [{ nonce: '0x42' }] }
       td.verify(telepathChannel.send(contains(expectedRequest)))
     })
 
@@ -136,8 +135,8 @@ describe('sending transactions', function () {
     it('is unchanged when defined', async function () {
       whenCogitoProvidesSignature()
       whenOriginalProviderSendsRawTransaction()
-      const expectedRequest = { method: 'sign', params: [transaction] }
       await sendTransaction(transaction)
+      const expectedRequest = { method: 'sign', params: [transaction] }
       td.verify(telepathChannel.send(contains(expectedRequest)))
     })
 
