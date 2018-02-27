@@ -36,17 +36,17 @@ function () {
       var _getNonce = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(transaction) {
-        var remoteNonce, localNonce, nonce;
+        var localNonce, remoteNonce, nonce;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                localNonce = this.getLocalNonce(transaction);
+                _context.next = 3;
                 return this.getRemoteNonce(transaction);
 
-              case 2:
+              case 3:
                 remoteNonce = _context.sent;
-                localNonce = this.getLocalNonce(transaction);
                 nonce = Math.max(remoteNonce, localNonce);
                 return _context.abrupt("return", "0x".concat(nonce.toString(16)));
 
@@ -62,6 +62,18 @@ function () {
         return _getNonce.apply(this, arguments);
       };
     }()
+  }, {
+    key: "commitNonce",
+    value: function commitNonce(transaction) {
+      var nonce = parseInt(transaction.nonce.substr(2), 16);
+      this.nonces[transaction.from] = nonce + 1;
+    }
+  }, {
+    key: "getLocalNonce",
+    value: function getLocalNonce(transaction) {
+      var nonce = this.nonces[transaction.from] || 0;
+      return nonce;
+    }
   }, {
     key: "getRemoteNonce",
     value: function () {
@@ -96,24 +108,6 @@ function () {
         return _getRemoteNonce.apply(this, arguments);
       };
     }()
-  }, {
-    key: "getLocalNonce",
-    value: function getLocalNonce(transaction) {
-      var nonce = this.nonces[transaction.from] || 0;
-      return nonce;
-    } // TODO: refactor
-
-  }, {
-    key: "commitNonce",
-    value: function commitNonce(transaction) {
-      var nonce = parseInt(transaction.nonce.substr(2), 16);
-      this.setLocalNonce(transaction, nonce + 1);
-    }
-  }, {
-    key: "setLocalNonce",
-    value: function setLocalNonce(transaction, nonce) {
-      this.nonces[transaction.from] = nonce;
-    }
   }]);
 
   return TransactionNonces;
