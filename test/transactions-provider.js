@@ -86,75 +86,82 @@ describe('sending transactions', function () {
   it('sets transaction defaults', async function () {
     whenCogitoProvidesSignatures()
     whenOriginalProviderSendsRawTransaction()
+
     await sendTransaction(transaction)
+
     const expectedTransaction = { ...transaction, value: '0x0' }
     const expectedRequest = { method: 'sign', params: [expectedTransaction] }
     td.verify(telepathChannel.send(contains(expectedRequest)))
   })
 
-  describe('transaction nonces', function () {
-    it('is unchanged when provided', async function () {
+  it('transaction nonce is unchanged when provided', async function () {
+    whenCogitoProvidesSignatures()
+    whenOriginalProviderSendsRawTransaction()
+
+    await sendTransaction(transaction)
+
+    const expectedRequest = { method: 'sign', params: [transaction] }
+    td.verify(telepathChannel.send(contains(expectedRequest)))
+  })
+
+  context('when transaction nonce is is not provided', function () {
+    const withoutNonce = Object.assign({}, transaction)
+    delete withoutNonce.nonce
+
+    const transactionCountRequest = {
+      method: 'eth_getTransactionCount',
+      params: [ transaction.from, 'pending' ]
+    }
+
+    function whenOriginalProviderReturnsTransactionCount (count) {
+      stubResponse(originalProvider, contains(transactionCountRequest), count)
+    }
+
+    function whenOriginalProviderThrowsWhenRequestingTransactionCount () {
+      stubResponseError(originalProvider, contains(transactionCountRequest))
+    }
+
+    it('is set to transaction count when not specified', async function () {
+      whenOriginalProviderReturnsTransactionCount('0x42')
       whenCogitoProvidesSignatures()
       whenOriginalProviderSendsRawTransaction()
-      await sendTransaction(transaction)
-      const expectedRequest = { method: 'sign', params: [transaction] }
+
+      await sendTransaction(withoutNonce)
+
+      const expectedTransaction = { ...transaction, nonce: '0x42' }
+      const expectedRequest = { method: 'sign', params: [expectedTransaction] }
       td.verify(telepathChannel.send(contains(expectedRequest)))
     })
 
-    context('when it is not provided', function () {
-      const withoutNonce = Object.assign({}, transaction)
-      delete withoutNonce.nonce
+    it('increments for successful transactions', async function () {
+      whenOriginalProviderReturnsTransactionCount('0x42')
+      whenCogitoProvidesSignatures()
+      whenOriginalProviderSendsRawTransaction()
 
-      const transactionCountRequest = {
-        method: 'eth_getTransactionCount',
-        params: [ transaction.from, 'pending' ]
-      }
+      await sendTransaction(withoutNonce)
+      await sendTransaction(withoutNonce)
 
-      context('when transaction count is available', function () {
-        const transactionCount = '0x42'
+      const expectedRequest = { method: 'sign', params: [{ nonce: '0x43' }] }
+      td.verify(telepathChannel.send(contains(expectedRequest)))
+    })
 
-        beforeEach(function () {
-          stubResponse(
-            originalProvider,
-            contains(transactionCountRequest),
-            transactionCount
-          )
-        })
+    it('does not increment for transactions that fail', async function () {
+      whenOriginalProviderReturnsTransactionCount('0x42')
+      whenCogitoProvidesSignatures()
+      whenOriginalProviderThrowsWhileSendingRawTransaction()
 
-        it('is equal to transaction count when not specified', async function () {
-          whenCogitoProvidesSignatures()
-          whenOriginalProviderSendsRawTransaction()
-          await sendTransaction(withoutNonce)
-          const expectedTransaction = { ...transaction, nonce: transactionCount }
-          const expectedRequest = { method: 'sign', params: [expectedTransaction] }
-          td.verify(telepathChannel.send(contains(expectedRequest)))
-        })
+      try { await sendTransaction(withoutNonce) } catch (_) {}
+      try { await sendTransaction(withoutNonce) } catch (_) {}
 
-        it('increments for successful transactions', async function () {
-          whenCogitoProvidesSignatures()
-          whenOriginalProviderSendsRawTransaction()
-          await sendTransaction(withoutNonce)
-          await sendTransaction(withoutNonce)
-          const expectedRequest = { method: 'sign', params: [{ nonce: '0x43' }] }
-          td.verify(telepathChannel.send(contains(expectedRequest)))
-        })
+      const expectedRequest = { method: 'sign', params: [{ nonce: '0x42' }] }
+      td.verify(telepathChannel.send(contains(expectedRequest)), { times: 2 })
+    })
 
-        it('does not increment for transactions that fail', async function () {
-          whenCogitoProvidesSignatures()
-          whenOriginalProviderThrowsWhileSendingRawTransaction()
-          try { await sendTransaction(withoutNonce) } catch (_) {}
-          try { await sendTransaction(withoutNonce) } catch (_) {}
-          const expectedRequest = { method: 'sign', params: [{ nonce: '0x42' }] }
-          td.verify(telepathChannel.send(contains(expectedRequest)), { times: 2 })
-        })
-      })
-
-      it('throws when transaction count cannot be determined', async function () {
-        stubResponseError(originalProvider, contains(transactionCountRequest))
-        whenCogitoProvidesSignatures()
-        whenOriginalProviderSendsRawTransaction()
-        await expect(sendTransaction(withoutNonce)).to.be.rejected()
-      })
+    it('throws when transaction count cannot be determined', async function () {
+      whenOriginalProviderThrowsWhenRequestingTransactionCount()
+      whenCogitoProvidesSignatures()
+      whenOriginalProviderSendsRawTransaction()
+      await expect(sendTransaction(withoutNonce)).to.be.rejected()
     })
   })
 })
