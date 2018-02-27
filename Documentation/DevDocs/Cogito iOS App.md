@@ -1,6 +1,6 @@
 # Cogito iOS App
 
-The architecture of the Cogito iOS App follows the [FLux](http://facebook.github.io/flux/) architecture (althought in a simpler way). It is a combination [ReSwift](https://github.com/ReSwift/ReSwift) and (RxSwift)[https://github.com/ReactiveX/RxSwift], using [ReRxSwift](https://github.com/svdo/ReRxSwift) to make the combination easier to use.
+The architecture of the Cogito iOS App follows the [FLux](http://facebook.github.io/flux/) architecture (although in a simpler way). It is a combination [ReSwift](https://github.com/ReSwift/ReSwift) and [RxSwift](https://github.com/ReactiveX/RxSwift), using [ReRxSwift](https://github.com/svdo/ReRxSwift) to make the combination easier to use.
 
 ## Key Management
 
