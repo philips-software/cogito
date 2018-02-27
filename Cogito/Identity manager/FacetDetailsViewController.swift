@@ -10,7 +10,7 @@ class FacetDetailsViewController: UITableViewController {
     var facet: Identity? {
         didSet {
             self.title = facet?.description
-            createViewModel()
+            updateViewModel()
         }
     }
 
