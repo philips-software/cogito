@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Facet" textLabel="RQQ-IT-hDk" detailTextLabel="Yhx-DY-MDv" style="IBUITableViewCellStyleValue1" id="veq-fd-q3x" customClass="FacetTableVieCell" customModule="Cogito" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Facet" textLabel="RQQ-IT-hDk" detailTextLabel="Yhx-DY-MDv" style="IBUITableViewCellStyleValue1" id="veq-fd-q3x" customClass="FacetTableViewCell" customModule="Cogito" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="veq-fd-q3x" id="dgx-hb-DwM">

@@ -6,6 +6,7 @@ import RxCocoa
 import RxDataSources
 import ReSwift
 import ReRxSwift
+import RichString
 
 class IdentityManagerViewController: UITableViewController, Connectable {
 
@@ -19,9 +20,8 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         dataSource = RxTableViewSectionedAnimatedDataSource(
             configureCell: { _, tableView, indexPath, item in
                 let cell = tableView.dequeueReusableCell(withIdentifier: "Facet", for: indexPath)
-                if let facetCell = cell as? FacetTableVieCell {
-                    // space compensates for slanted font, gets clipped otherwise
-                    facetCell.textLabel?.text = " " + item.facet.description + " "
+                if let facetCell = cell as? FacetTableViewCell {
+                    facetCell.textLabel?.attributedText = item.facet.formatted(addSpacePadding: 3)
                     let addr = item.facet.address.description
                     let range = addr.startIndex ..< addr.index(addr.startIndex, offsetBy: 10)
                     facetCell.detailTextLabel?.text = addr[range] + "..."

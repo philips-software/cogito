@@ -2,6 +2,6 @@
 
 import UIKit
 
-class FacetTableVieCell: UITableViewCell {
+class FacetTableViewCell: UITableViewCell {
 
 }
