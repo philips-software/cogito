@@ -30,6 +30,10 @@ describe('sending transactions', function () {
   })
 
   function whenCogitoProvidesSignature () {
+    whenCogitoProvidesSignatureFor(transaction)
+  }
+
+  function whenCogitoProvidesSignatureFor (transaction) {
     const request = { method: 'sign', params: [transaction] }
     const response = { result: signed }
     td.when(telepathChannel.send(contains(request))).thenResolve(response)
@@ -40,58 +44,51 @@ describe('sending transactions', function () {
     stubResponse(originalProvider, contains(sendRaw), hash)
   }
 
-  it('sends a cogito signed transaction', function (done) {
+  function whenOriginalProviderThrowsWhileSendingRawTransaction () {
+    const sendRaw = { method: 'eth_sendRawTransaction', params: [signed] }
+    stubResponseError(originalProvider, contains(sendRaw))
+  }
+
+  async function sendTransaction (transaction) {
+    return new Promise(function (resolve, reject) {
+      web3.eth.sendTransaction(transaction, function (error, result) {
+        if (error) {
+          reject(error)
+        } else {
+          resolve(result)
+        }
+      })
+    })
+  }
+
+  it('sends a cogito signed transaction', async function () {
     whenCogitoProvidesSignature()
     whenOriginalProviderSendsRawTransaction()
-    web3.eth.sendTransaction(transaction, function (_, result) {
-      try {
-        expect(result).to.equal(hash)
-        done()
-      } catch (assertionFailure) {
-        done(assertionFailure)
-      }
-    })
+    expect(await sendTransaction(transaction)).to.equal(hash)
   })
 
-  it('throws when signing via telepath fails', function (done) {
+  it('throws when signing via telepath fails', async function () {
     td.when(telepathChannel.send(anything())).thenReject(new Error('an error'))
-    web3.eth.sendTransaction(transaction, function (error, _) {
-      try {
-        expect(error).to.not.be.null()
-        done()
-      } catch (assertionFailure) {
-        done(assertionFailure)
-      }
-    })
+    await expect(sendTransaction(transaction)).to.be.rejected()
   })
 
-  it('throws when cogito returns an error', function (done) {
+  it('throws when cogito returns an error', async function () {
     const response = { error: { message: 'some error', code: -42 } }
     td.when(telepathChannel.send(anything())).thenResolve(response)
-    web3.eth.sendTransaction(transaction, function (error, _) {
-      try {
-        expect(error).to.not.be.null()
-        done()
-      } catch (assertionFailure) {
-        done(assertionFailure)
-      }
-    })
+    await expect(sendTransaction(transaction)).to.be.rejected()
   })
 
-  it('sets transaction defaults', function (done) {
+  it('sets transaction defaults', async function () {
+    whenCogitoProvidesSignature()
+    whenOriginalProviderSendsRawTransaction()
+    await sendTransaction(transaction)
     const transactionWithDefaults = Object.assign({ value: '0x0' }, transaction)
     const expectedRequest = { method: 'sign', params: [transactionWithDefaults] }
-    web3.eth.sendTransaction(transaction, function () {
-      try {
-        td.verify(telepathChannel.send(contains(expectedRequest)))
-        done()
-      } catch (assertionFailure) {
-        done(assertionFailure)
-      }
-    })
+    td.verify(telepathChannel.send(contains(expectedRequest)))
   })
 
   describe('transaction nonces', function () {
+    const nonce = transaction.nonce
     const withoutNonce = Object.assign({}, transaction)
     delete withoutNonce.nonce
 
@@ -100,74 +97,50 @@ describe('sending transactions', function () {
       params: [ transaction.from, 'pending' ]
     }
 
-    it('is equal to transaction count when not specified', function (done) {
-      stubResponse(originalProvider, contains(transactionCountRequest), '0x42')
-      const expectedRequest = { method: 'sign', params: [{ nonce: '0x42' }] }
-      web3.eth.sendTransaction(withoutNonce, function () {
-        try {
-          td.verify(telepathChannel.send(contains(expectedRequest)))
-          done()
-        } catch (assertionFailure) {
-          done(assertionFailure)
-        }
-      })
-    })
-
-    it('increments for successful transactions', function (done) {
-      stubResponse(originalProvider, contains(transactionCountRequest), '0x0')
+    it('is equal to transaction count when not specified', async function () {
+      stubResponse(originalProvider, contains(transactionCountRequest), nonce)
       whenCogitoProvidesSignature()
       whenOriginalProviderSendsRawTransaction()
-      web3.eth.sendTransaction(transaction, function () {})
-      web3.eth.sendTransaction(withoutNonce, function () {
-        try {
-          const expectedRequest = { method: 'sign', params: [{ nonce: '0x31' }] }
-          td.verify(telepathChannel.send(contains(expectedRequest)))
-          done()
-        } catch (assertionFailure) {
-          done(assertionFailure)
-        }
-      })
-    })
-
-    it('does not increment for transactions that fail', function (done) {
-      stubResponse(originalProvider, contains(transactionCountRequest), '0x0')
-      whenCogitoProvidesSignature()
-      const sendRaw = { method: 'eth_sendRawTransaction', params: [signed] }
-      stubResponseError(originalProvider, contains(sendRaw))
-      web3.eth.sendTransaction(transaction, function () {})
-      web3.eth.sendTransaction(withoutNonce, function () {
-        try {
-          const expectedRequest = { method: 'sign', params: [{ nonce: '0x0' }] }
-          td.verify(telepathChannel.send(contains(expectedRequest)))
-          done()
-        } catch (assertionFailure) {
-          done(assertionFailure)
-        }
-      })
-    })
-
-    it('is unchanged when defined', function (done) {
+      await sendTransaction(withoutNonce)
       const expectedRequest = { method: 'sign', params: [transaction] }
-      web3.eth.sendTransaction(transaction, function () {
-        try {
-          td.verify(telepathChannel.send(contains(expectedRequest)))
-          done()
-        } catch (assertionFailure) {
-          done(assertionFailure)
-        }
-      })
+      td.verify(telepathChannel.send(contains(expectedRequest)))
     })
 
-    it('throws when transaction count cannot be determined', function (done) {
+    it('increments for successful transactions', async function () {
+      stubResponse(originalProvider, contains(transactionCountRequest), '0x42')
+      whenCogitoProvidesSignatureFor({ ...transaction, nonce: '0x42' })
+      whenCogitoProvidesSignatureFor({ ...transaction, nonce: '0x43' })
+      whenOriginalProviderSendsRawTransaction()
+      await sendTransaction(withoutNonce)
+      await sendTransaction(withoutNonce)
+      const expectedRequest = { method: 'sign', params: [{ nonce: '0x43' }] }
+      td.verify(telepathChannel.send(contains(expectedRequest)))
+    })
+
+    it('does not increment for transactions that fail', async function () {
+      stubResponse(originalProvider, contains(transactionCountRequest), '0x42')
+      whenCogitoProvidesSignatureFor({ ...transaction, nonce: '0x42' })
+      whenCogitoProvidesSignatureFor({ ...transaction, nonce: '0x43' })
+      whenOriginalProviderThrowsWhileSendingRawTransaction()
+      try { await sendTransaction(withoutNonce) } catch (_) {}
+      try { await sendTransaction(withoutNonce) } catch (_) {}
+      const expectedRequest = { method: 'sign', params: [{ nonce: '0x42' }] }
+      td.verify(telepathChannel.send(contains(expectedRequest)), { times: 2 })
+    })
+
+    it('is unchanged when defined', async function () {
+      whenCogitoProvidesSignature()
+      whenOriginalProviderSendsRawTransaction()
+      const expectedRequest = { method: 'sign', params: [transaction] }
+      await sendTransaction(transaction)
+      td.verify(telepathChannel.send(contains(expectedRequest)))
+    })
+
+    it('throws when transaction count cannot be determined', async function () {
       stubResponseError(originalProvider, contains(transactionCountRequest))
-      web3.eth.sendTransaction(withoutNonce, function (error) {
-        try {
-          expect(error).to.exist()
-          done()
-        } catch (assertionFailure) {
-          done(assertionFailure)
-        }
-      })
+      whenCogitoProvidesSignature()
+      whenOriginalProviderSendsRawTransaction()
+      await expect(sendTransaction(withoutNonce)).to.be.rejected()
     })
   })
 })
