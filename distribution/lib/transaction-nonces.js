@@ -48,10 +48,9 @@ function () {
                 remoteNonce = _context.sent;
                 localNonce = this.getLocalNonce(transaction);
                 nonce = Math.max(remoteNonce, localNonce);
-                this.setLocalNonce(transaction, nonce + 1);
                 return _context.abrupt("return", "0x".concat(nonce.toString(16)));
 
-              case 7:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -101,8 +100,14 @@ function () {
     key: "getLocalNonce",
     value: function getLocalNonce(transaction) {
       var nonce = this.nonces[transaction.from] || 0;
-      this.nonces[transaction.from] = nonce + 1;
       return nonce;
+    } // TODO: refactor
+
+  }, {
+    key: "commitNonce",
+    value: function commitNonce(transaction) {
+      var nonce = parseInt(transaction.nonce.substr(2), 16);
+      this.setLocalNonce(transaction, nonce + 1);
     }
   }, {
     key: "setLocalNonce",

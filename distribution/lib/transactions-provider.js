@@ -8,6 +8,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var Defaults = require('./transaction-defaults');
 
+var TransactionNonces = require('./transaction-nonces');
+
 var TransactionsProvider =
 /*#__PURE__*/
 function () {
@@ -22,7 +24,11 @@ function () {
     this.defaults = new Defaults({
       provider: originalProvider
     });
-  }
+    this.nonces = new TransactionNonces({
+      provider: originalProvider
+    });
+  } // TODO: refactor
+
 
   _createClass(TransactionsProvider, [{
     key: "send",
@@ -30,21 +36,38 @@ function () {
       var _send = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(payload, callback) {
-        var transaction, signedTransaction, sendRequest;
+        var nonces, transaction, nonce, signedTransaction, sendRequest;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
+                nonces = this.nonces;
+                _context.next = 4;
                 return this.extractTransaction(payload);
 
-              case 3:
+              case 4:
                 transaction = _context.sent;
-                _context.next = 6;
+                _context.t0 = transaction.nonce;
+
+                if (_context.t0) {
+                  _context.next = 10;
+                  break;
+                }
+
+                _context.next = 9;
+                return nonces.getNonce(transaction);
+
+              case 9:
+                _context.t0 = _context.sent;
+
+              case 10:
+                nonce = _context.t0;
+                transaction.nonce = nonce;
+                _context.next = 14;
                 return this.sign(transaction, payload.id);
 
-              case 6:
+              case 14:
                 signedTransaction = _context.sent;
                 sendRequest = {
                   jsonrpc: '2.0',
@@ -52,21 +75,27 @@ function () {
                   method: 'eth_sendRawTransaction',
                   params: [signedTransaction]
                 };
-                this.provider.send(sendRequest, callback);
-                _context.next = 14;
+                this.provider.send(sendRequest, function (error, result) {
+                  if (!error) {
+                    nonces.commitNonce(transaction);
+                  }
+
+                  callback(error, result);
+                });
+                _context.next = 22;
                 break;
 
-              case 11:
-                _context.prev = 11;
-                _context.t0 = _context["catch"](0);
-                callback(_context.t0, null);
+              case 19:
+                _context.prev = 19;
+                _context.t1 = _context["catch"](0);
+                callback(_context.t1, null);
 
-              case 14:
+              case 22:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[0, 11]]);
+        }, _callee, this, [[0, 19]]);
       }));
 
       return function send(_x, _x2) {
