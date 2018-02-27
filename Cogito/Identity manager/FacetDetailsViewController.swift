@@ -17,6 +17,11 @@ class FacetDetailsViewController: UITableViewController {
     var sections: [ViewModel.SectionModel] = []
     let disposeBag = DisposeBag()
 
+    func updateViewModel() {
+        createViewModel()
+        bindToViewModel()
+    }
+
     func createViewModel() {
         guard let facet = self.facet else {
             sections = []
@@ -31,30 +36,38 @@ class FacetDetailsViewController: UITableViewController {
                                  detail: facet.address.description)
             ])
         ]
+
         for token in facet.idTokens {
             if let jwt = try? JWTDecode.decode(jwt: token) {
-                var items = [ViewModel.SectionItem]()
-                if let issuer = jwt.issuer {
-                    items.append(.facetDetailItem(title: "Issuer:", detail: issuer))
-                }
-                if let subject = jwt.subject {
-                    items.append(.facetDetailItem(title: "Subject:", detail: subject))
-                }
-                if let expiresAt = jwt.expiresAt {
-                    items.append(.facetDetailItem(
-                        title: "Expires at:",
-                        detail: expiresAt.description(with: Locale.autoupdatingCurrent)))
-                }
-                if let audience = jwt.audience {
-                    items.append(.facetDetailItem(title: "Audience:",
-                                                  detail: audience.joined(separator: ", ")))
-                }
+                let items = createItems(for: jwt)
                 if items.count > 0 {
                     sections.append(.attestationsSection(title: "OpenID Attestation", items: items))
                 }
             }
         }
+    }
 
+    func createItems(for jwt: JWT) -> [ViewModel.SectionItem] {
+        var items = [ViewModel.SectionItem]()
+        if let issuer = jwt.issuer {
+            items.append(.facetDetailItem(title: "Issuer:", detail: issuer))
+        }
+        if let subject = jwt.subject {
+            items.append(.facetDetailItem(title: "Subject:", detail: subject))
+        }
+        if let expiresAt = jwt.expiresAt {
+            items.append(.facetDetailItem(
+                title: "Expires at:",
+                detail: expiresAt.description(with: Locale.autoupdatingCurrent)))
+        }
+        if let audience = jwt.audience {
+            items.append(.facetDetailItem(title: "Audience:",
+                                          detail: audience.joined(separator: ", ")))
+        }
+        return items
+    }
+
+    func bindToViewModel() {
         self.tableView.dataSource = nil
 
         let dataSource = RxTableViewSectionedReloadDataSource<ViewModel.SectionModel>(
