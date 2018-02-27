@@ -4,6 +4,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import JWTDecode
 
 class FacetDetailsViewController: UITableViewController {
     var facet: Identity? {
@@ -30,6 +31,29 @@ class FacetDetailsViewController: UITableViewController {
                                  detail: facet.address.description)
             ])
         ]
+        for token in facet.idTokens {
+            if let jwt = try? JWTDecode.decode(jwt: token) {
+                var items = [ViewModel.SectionItem]()
+                if let issuer = jwt.issuer {
+                    items.append(.facetDetailItem(title: "Issuer:", detail: issuer))
+                }
+                if let subject = jwt.subject {
+                    items.append(.facetDetailItem(title: "Subject:", detail: subject))
+                }
+                if let expiresAt = jwt.expiresAt {
+                    items.append(.facetDetailItem(
+                        title: "Expires at:",
+                        detail: expiresAt.description(with: Locale.autoupdatingCurrent)))
+                }
+                if let audience = jwt.audience {
+                    items.append(.facetDetailItem(title: "Audience:",
+                                                  detail: audience.joined(separator: ", ")))
+                }
+                if items.count > 0 {
+                    sections.append(.attestationsSection(title: "OpenID Attestation", items: items))
+                }
+            }
+        }
 
         self.tableView.dataSource = nil
 
@@ -40,6 +64,7 @@ class FacetDetailsViewController: UITableViewController {
                     let cell = table.dequeueReusableCell(withIdentifier: "Normal", for: indexPath)
                     cell.textLabel?.text = title
                     cell.detailTextLabel?.text = detail
+                    cell.selectionStyle = .none
                     return cell
                 }
             },
@@ -61,7 +86,7 @@ extension FacetDetailsViewController {
 
         enum SectionModel {
             case facetDetailsSection(title: String, items: [SectionItem])
-            case attributionsSection(title: String, items: [SectionItem])
+            case attestationsSection(title: String, items: [SectionItem])
         }
 
         enum SectionItem {
@@ -76,7 +101,7 @@ extension FacetDetailsViewController.ViewModel.SectionModel: SectionModelType {
     var title: String {
         switch self {
         case .facetDetailsSection(title: let title, items: _): return title
-        case .attributionsSection(title: let title, items: _): return title
+        case .attestationsSection(title: let title, items: _): return title
         }
     }
 
@@ -84,7 +109,7 @@ extension FacetDetailsViewController.ViewModel.SectionModel: SectionModelType {
         switch self {
         case .facetDetailsSection(title: _, items: let items):
             return items.map { $0 }
-        case .attributionsSection(title: _, items: let items):
+        case .attestationsSection(title: _, items: let items):
             return items.map { $0 }
         }
     }
@@ -94,8 +119,8 @@ extension FacetDetailsViewController.ViewModel.SectionModel: SectionModelType {
         switch original {
         case let .facetDetailsSection(title: title, items: _):
             self = .facetDetailsSection(title: title, items: items)
-        case let .attributionsSection(title: title, items: _):
-            self = .attributionsSection(title: title, items: items)
+        case let .attestationsSection(title: title, items: _):
+            self = .attestationsSection(title: title, items: items)
         }
     }
 }
