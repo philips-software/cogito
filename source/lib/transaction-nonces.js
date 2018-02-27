@@ -16,10 +16,20 @@ class TransactionNonces {
   }
 
   async getNonce (transaction) {
-    const remoteNonce = await this.getRemoteNonce(transaction)
     const localNonce = this.getLocalNonce(transaction)
+    const remoteNonce = await this.getRemoteNonce(transaction)
     const nonce = Math.max(remoteNonce, localNonce)
     return `0x${nonce.toString(16)}`
+  }
+
+  commitNonce (transaction) {
+    const nonce = parseInt(transaction.nonce.substr(2), 16)
+    this.nonces[transaction.from] = nonce + 1
+  }
+
+  getLocalNonce (transaction) {
+    const nonce = this.nonces[transaction.from] || 0
+    return nonce
   }
 
   async getRemoteNonce (transaction) {
@@ -29,20 +39,6 @@ class TransactionNonces {
     }
     const nonceHex = (await this.client.send(request)).result
     return parseInt(nonceHex.substr(2), 16)
-  }
-
-  getLocalNonce (transaction) {
-    const nonce = this.nonces[transaction.from] || 0
-    return nonce
-  }
-
-  commitNonce (transaction) {
-    const nonce = parseInt(transaction.nonce.substr(2), 16)
-    this.setLocalNonce(transaction, nonce + 1)
-  }
-
-  setLocalNonce (transaction, nonce) {
-    this.nonces[transaction.from] = nonce
   }
 }
 
