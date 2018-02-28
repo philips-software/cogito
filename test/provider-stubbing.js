@@ -9,7 +9,7 @@ function stubResponse (provider, request, result) {
     })
 }
 
-function stubResponseError (provider, request) {
+function stubResponseReject (provider, request) {
   td
     .when(provider.send(request, anything()))
     .thenDo(function (request, callback) {
@@ -17,7 +17,16 @@ function stubResponseError (provider, request) {
     })
 }
 
+function stubResponseError (provider, request, error) {
+  td
+    .when(provider.send(request, anything()))
+    .thenDo(function (request, callback) {
+      callback(null, { jsonrpc: '2.0', id: request.id, error })
+    })
+}
+
 module.exports = {
   stubResponse,
+  stubResponseReject,
   stubResponseError
 }

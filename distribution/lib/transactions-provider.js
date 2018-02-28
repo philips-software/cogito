@@ -89,11 +89,19 @@ function () {
 
               case 6:
                 transaction = _context2.sent;
-                result = this.sendTransaction(transaction, payload.id);
-                this.nonces.commitNonce(transaction);
+                _context2.next = 9;
+                return this.sendTransaction(transaction, payload.id);
+
+              case 9:
+                result = _context2.sent;
+
+                if (!result.error) {
+                  this.nonces.commitNonce(transaction);
+                }
+
                 return _context2.abrupt("return", result);
 
-              case 10:
+              case 12:
               case "end":
                 return _context2.stop();
             }

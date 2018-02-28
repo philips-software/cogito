@@ -21,8 +21,10 @@ class TransactionsProvider {
     let transaction = payload.params[0]
     transaction = await this.setDefaults(transaction)
     transaction = await this.setNonce(transaction)
-    const result = this.sendTransaction(transaction, payload.id)
-    this.nonces.commitNonce(transaction)
+    const result = await this.sendTransaction(transaction, payload.id)
+    if (!result.error) {
+      this.nonces.commitNonce(transaction)
+    }
     return result
   }
 
