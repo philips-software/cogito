@@ -70,7 +70,7 @@ struct TransactionSignerValid: TransactionSigner {
         }
         explanationViewController.onSign = {
             let keyStore = state.keyStore.keyStore!
-            let identity = state.diamond.selectedFacet()!
+            let identity = explanationViewController.identity!
             keyStore.sign(
                 transaction: self.transaction,
                 identity: identity
