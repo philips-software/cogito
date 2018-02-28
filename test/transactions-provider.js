@@ -2,7 +2,7 @@ const expect = require('chai').expect
 const td = require('testdouble')
 const anything = td.matchers.anything
 const contains = td.matchers.contains
-const { stubResponse, stubResponseError } = require('./provider-stubbing')
+const { stubResponse, stubResponseReject, stubResponseError } = require('./provider-stubbing')
 const Web3 = require('web3')
 const CogitoProvider = require('../source/lib/cogito-provider')
 
@@ -42,13 +42,19 @@ describe('sending transactions', function () {
   }
 
   function whenProviderSendsRawTransaction () {
-    const sendRaw = { method: 'eth_sendRawTransaction', params: [signed] }
-    stubResponse(originalProvider, contains(sendRaw), hash)
+    const request = { method: 'eth_sendRawTransaction', params: [signed] }
+    stubResponse(originalProvider, contains(request), hash)
   }
 
-  function whenOriginalProviderThrowsWhileSendingRawTransaction () {
-    const sendRaw = { method: 'eth_sendRawTransaction', params: [signed] }
-    stubResponseError(originalProvider, contains(sendRaw))
+  function whenProviderThrowsWhileSendingRawTransaction () {
+    const request = { method: 'eth_sendRawTransaction', params: [signed] }
+    stubResponseReject(originalProvider, contains(request))
+  }
+
+  function whenProviderReturnsErrorWhileSendingRawTransaction () {
+    const request = { method: 'eth_sendRawTransaction', params: [signed] }
+    const error = { code: -42, message: 'an error' }
+    stubResponseError(originalProvider, contains(request), error)
   }
 
   async function sendTransaction (transaction) {
@@ -128,12 +134,12 @@ describe('sending transactions', function () {
     }
 
     function whenProviderThrowsWhenRequestingTransactionCount () {
-      stubResponseError(originalProvider, contains(transactionCountRequest))
+      stubResponseReject(originalProvider, contains(transactionCountRequest))
     }
 
-    function verifyNonce (nonce) {
+    function verifyNonce (nonce, options = {}) {
       const expectedRequest = { method: 'sign', params: [{ nonce }] }
-      td.verify(telepathChannel.send(contains(expectedRequest)))
+      td.verify(telepathChannel.send(contains(expectedRequest)), options)
     }
 
     it('is set to transaction count when not specified', async function () {
@@ -157,15 +163,26 @@ describe('sending transactions', function () {
       verifyNonce('0x43')
     })
 
-    it('does not increment for transactions that fail', async function () {
+    it('does not increment for transactions that throw', async function () {
       whenProviderReturnsTransactionCount('0x42')
       whenCogitoProvidesSignatures()
-      whenOriginalProviderThrowsWhileSendingRawTransaction()
+      whenProviderThrowsWhileSendingRawTransaction()
 
       try { await sendTransaction(withoutNonce) } catch (_) {}
       try { await sendTransaction(withoutNonce) } catch (_) {}
 
-      verifyNonce('0x42')
+      verifyNonce('0x42', { times: 2 })
+    })
+
+    it('does not increment for transactions that err', async function () {
+      whenProviderReturnsTransactionCount('0x42')
+      whenCogitoProvidesSignatures()
+      whenProviderReturnsErrorWhileSendingRawTransaction()
+
+      try { await sendTransaction(withoutNonce) } catch (_) {}
+      try { await sendTransaction(withoutNonce) } catch (_) {}
+
+      verifyNonce('0x42', { times: 2 })
     })
 
     it('throws when transaction count cannot be determined', async function () {

@@ -1,7 +1,7 @@
 const expect = require('chai').expect
 const td = require('testdouble')
 const contains = td.matchers.contains
-const { stubResponse, stubResponseError } = require('./provider-stubbing')
+const { stubResponse, stubResponseReject } = require('./provider-stubbing')
 const TransactionDefaults = require('../source/lib/transaction-defaults')
 
 describe('transaction defaults', function () {
@@ -53,7 +53,7 @@ describe('transaction defaults', function () {
     })
 
     it('throws when gas price cannot be determined', async function () {
-      stubResponseError(provider, contains({ method: 'eth_gasPrice' }))
+      stubResponseReject(provider, contains({ method: 'eth_gasPrice' }))
       await expect(transactionDefaults.apply(noGasPrice)).to.be.rejected()
     })
   })
@@ -79,7 +79,7 @@ describe('transaction defaults', function () {
     })
 
     it('throws when gas limit cannot be estimated', async function () {
-      stubResponseError(provider, contains(expectedRequest))
+      stubResponseReject(provider, contains(expectedRequest))
       await expect(transactionDefaults.apply(noGas)).to.be.rejected()
     })
   })
@@ -102,7 +102,7 @@ describe('transaction defaults', function () {
     })
 
     it('throws when chain id could not be retrieved', async function () {
-      stubResponseError(provider, contains(expectedRequest))
+      stubResponseReject(provider, contains(expectedRequest))
       await expect(transactionDefaults.apply(noChainId)).to.be.rejected()
     })
   })
