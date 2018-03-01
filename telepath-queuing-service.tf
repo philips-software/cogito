@@ -28,7 +28,7 @@ resource "aws_s3_bucket" "telepath-source" {
 resource "aws_s3_bucket_object" "source" {
     bucket = "${aws_s3_bucket.telepath-source.id}"
     key = "telepath-queuing-service.zip"
-    source = "${path.module}/build/telepath-queuing-service.zip"
+    source = "${path.module}/.terraform-build/telepath-queuing-service.zip"
 }
 
 resource "aws_elastic_beanstalk_application" "telepath-queuing-service" {
