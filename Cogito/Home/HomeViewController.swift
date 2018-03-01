@@ -19,6 +19,14 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     @IBOutlet weak var rightShutter: UIView!
     @IBOutlet weak var selectedFacetView: UIView!
     var embeddedSelectedFacetController: SelectedFacetViewController!
+    lazy var bleepPlayer: AVAudioPlayer? = {
+        guard let url = Bundle.main.url(forResource: "198414__divinux__infobleep", withExtension: "wav") else {
+            return nil
+        }
+        let player = try? AVAudioPlayer(contentsOf: url)
+        player?.prepareToPlay()
+        return player
+    }()
 
     lazy var readerVC: QRCodeReaderViewController = {
         let builder = QRCodeReaderViewControllerBuilder {
@@ -114,6 +122,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
         guard let identity = self.props.selectedFacet else { return }
+        bleepPlayer?.play()
         actions.connectToTelepathChannel(result.value, identity)
         stopScanning()
     }
