@@ -120,6 +120,7 @@
 		02D0C0DB1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */; };
 		02D0C0DC1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */; };
 		02D0C0E11F8B73B20001223E /* SelectedFacetViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0E01F8B73B20001223E /* SelectedFacetViewControllerSpec.swift */; };
+		02D4F345204835DA00196820 /* 198414__divinux__infobleep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 02D4F344204835DA00196820 /* 198414__divinux__infobleep.wav */; };
 		02DB90E420453E3A00C4817C /* Identity+Formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB90E320453E3A00C4817C /* Identity+Formatted.swift */; };
 		02DB90E520454B8B00C4817C /* Identity+Formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB90E320453E3A00C4817C /* Identity+Formatted.swift */; };
 		02DB90E72045546C00C4817C /* FacetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB90E62045546C00C4817C /* FacetDetailsViewController.swift */; };
@@ -304,6 +305,7 @@
 		02D0C0D71F8B59E80001223E /* InitialSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialSetup.storyboard; sourceTree = "<group>"; };
 		02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialExplanationViewController.swift; sourceTree = "<group>"; };
 		02D0C0E01F8B73B20001223E /* SelectedFacetViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFacetViewControllerSpec.swift; sourceTree = "<group>"; };
+		02D4F344204835DA00196820 /* 198414__divinux__infobleep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 198414__divinux__infobleep.wav; sourceTree = "<group>"; };
 		02DB90E320453E3A00C4817C /* Identity+Formatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Identity+Formatted.swift"; sourceTree = "<group>"; };
 		02DB90E62045546C00C4817C /* FacetDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetDetailsViewController.swift; sourceTree = "<group>"; };
 		02E792301F6FFBAD00DC5973 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 				027603FA1F6ACD1600788B0A /* Info.plist */,
 				0212E0301F99FFD300EEDE34 /* Cogito.entitlements */,
 				C00B5B1891702007BD67637B /* Encodable+json.swift */,
+				02D4F344204835DA00196820 /* 198414__divinux__infobleep.wav */,
 				C00B5B3C1E5A12284EE52C34 /* Foundation extensions */,
 				02B9A681203C75FB00ADB44F /* UIKit reference */,
 			);
@@ -939,6 +942,7 @@
 				02D0C0D81F8B59E80001223E /* InitialSetup.storyboard in Resources */,
 				027603F61F6ACD1600788B0A /* Assets.xcassets in Resources */,
 				027603F41F6ACD1600788B0A /* Debug.storyboard in Resources */,
+				02D4F345204835DA00196820 /* 198414__divinux__infobleep.wav in Resources */,
 				0212E0351F9E397C00EEDE34 /* SignTransaction.storyboard in Resources */,
 				022621291FAB1E1300692126 /* IdentityManager.storyboard in Resources */,
 				02A15AF41F864F4B00A94163 /* Home.storyboard in Resources */,
