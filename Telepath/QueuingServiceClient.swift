@@ -17,7 +17,8 @@ public struct QueuingServiceClient: QueuingService {
         let queueUrl = url.appendingPathComponent(queueId)
         var request = URLRequest(url: queueUrl)
         request.httpMethod = "POST"
-        let task = URLSession.shared.uploadTask(with: request, from: encodedMessage) { _, response, error in
+        let task = URLSession(configuration: .ephemeral)
+                             .uploadTask(with: request, from: encodedMessage) { _, response, error in
             self.callbackQueue.async {
                 completion(self.checkValidity(response: response, error: error))
             }
@@ -27,7 +28,8 @@ public struct QueuingServiceClient: QueuingService {
 
     public func receive(queueId: QueueID, completion: @escaping (Data?, Error?) -> Void) {
         let queueUrl = url.appendingPathComponent(queueId)
-        let task = URLSession.shared.dataTask(with: queueUrl) { data, response, error in
+        let task = URLSession(configuration: .ephemeral)
+                             .dataTask(with: queueUrl) { data, response, error in
             let (message, error) = self.extractMessage(response: response, data: data, error: error)
             self.callbackQueue.async {
                 completion(message, error)
