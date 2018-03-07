@@ -1,0 +1,14 @@
+image: 'digilabs/node-ci:7.6.0'
+
+stages:
+  - test
+
+before_script:
+  - yarn install
+
+test:
+  stage: test
+  script:
+    - yarn test
+  tags:
+    - docker
