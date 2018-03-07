@@ -1,0 +1,43 @@
+{
+  "name": "telepath-js",
+  "version": "0.1.0",
+  "description": "Secure communication channel between mobile app and web app",
+  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/telepath-js",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "./distribution/index.js",
+  "scripts": {
+    "test": "yarn standard && yarn nyc mocha 'test/**/*.js'",
+    "build": "babel source --out-dir distribution",
+    "prepublish": "yarn build"
+  },
+  "engines": {
+    "node": ">=9.0.0"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "node_modules/**",
+      "distribution/**"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.40",
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "babel-eslint": "8.0.2",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "dirty-chai": "^2.0.1",
+    "mocha": "^3.5.3",
+    "nock": "^9.0.22",
+    "nyc": "^11.2.1",
+    "standard": "^10.0.3",
+    "testdouble": "^3.2.6"
+  },
+  "dependencies": {
+    "base64url": "^2.0.0",
+    "cross-fetch": "^1.1.1",
+    "libsodium-wrappers": "^0.7.2"
+  }
+}
