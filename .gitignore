@@ -1,0 +1,15 @@
+# js
+node_modules
+.nyc_output
+.idea/workspace.xml
+yarn-error.log
+.DS_Store
+
+# terraform
+.terraform
+.terraform-build
+
+# ios
+xcuserdata
+.idea/workspace.xml
+.idea/dictionaries/*
