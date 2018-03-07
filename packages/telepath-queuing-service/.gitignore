@@ -1,0 +1,5 @@
+node_modules
+.nyc_output
+.terraform
+.terraform-build
+.idea/workspace.xml
