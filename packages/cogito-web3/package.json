@@ -1,0 +1,44 @@
+{
+  "name": "cogito-web3",
+  "version": "0.1.0",
+  "description": "An Ethereum web3 provider that signs transactions with the Cogito app",
+  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito-web3",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "./distribution/index.js",
+  "scripts": {
+    "test": "yarn standard && nyc mocha test/**/*.js",
+    "build": "babel source --out-dir distribution",
+    "prepublish": "yarn build"
+  },
+  "engines": {
+    "node": ">=9.0.0"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "node_modules/**",
+      "distribution/**"
+    ],
+    "envs": [
+      "mocha"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.40",
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "babel-eslint": "8.0.2",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "dirty-chai": "^2.0.1",
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1",
+    "standard": "^10.0.3",
+    "testdouble": "^3.2.6",
+    "web3": "^1.0.0-beta.29"
+  },
+  "peerDependencies": {
+    "web3": "^1.0.0-beta.29"
+  }
+}
