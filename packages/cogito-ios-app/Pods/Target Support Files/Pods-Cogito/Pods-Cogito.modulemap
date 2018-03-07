@@ -1,0 +1,6 @@
+framework module Pods_Cogito {
+  umbrella header "Pods-Cogito-umbrella.h"
+
+  export *
+  module * { export * }
+}

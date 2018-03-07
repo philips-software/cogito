@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="CogitoTests" type="OCUnitRunConfiguration" factoryName="XCTest/Kiwi" singleton="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Cogito" TARGET_NAME="CogitoTests" CONFIG_NAME="Debug" SCHEME_NAME="CogitoTests" TEST_MODE="SUITE_TEST" XCODE_SKIPPED_TESTS_HASH_CODE="0">
+    <envs />
+    <method />
+  </configuration>
+</component>

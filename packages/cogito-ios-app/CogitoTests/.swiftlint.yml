@@ -1,0 +1,7 @@
+function_body_length: 200
+disabled_rules:
+  - force_try
+identifier_name:
+  excluded:
+    - id
+    - to
