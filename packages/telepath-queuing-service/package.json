@@ -1,0 +1,28 @@
+{
+  "name": "telepath-queuing-service",
+  "version": "0.1.0",
+  "description": "Telepath Queuing Service",
+  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index",
+    "test": "standard && nyc mocha test/**/*.js"
+  },
+  "engines": {
+    "node": ">=7.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1",
+    "standard": "^10.0.3",
+    "supertest": "^3.0.0"
+  },
+  "dependencies": {
+    "async-middleware": "^1.2.1",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2"
+  }
+}
