@@ -1,7 +1,44 @@
 {
 	"private": true,
 	"devDependencies": {
-		"lerna": "^2.9.0"
+		"@babel/core": "^7.0.0-beta.40",
+		"babel-core": "^7.0.0-0",
+		"babel-eslint": "7.0.0",
+		"babel-jest": "^22.4.1",
+		"jest": "^22.4.2",
+		"lerna": "^2.9.0",
+		"regenerator-runtime": "^0.11.1",
+		"standard": "^11.0.0",
+		"web3": "^1.0.0-beta.29"
 	},
-	"workspaces": ["packages/*"]
+	"workspaces": [
+		"packages/*"
+	],
+	"jest": {
+		"testEnvironment": "node",
+		"testRegex": "packages/cogito-web3/test/accounts-provider.js"
+	},
+	"scripts": {
+		"test": "jest",
+		"lint": "yarn standard",
+    "lint-fix": "yarn standard --fix --verbose"
+	},
+	"standard": {
+		"parser": "babel-eslint",
+		"ignore": [
+			"**/node_modules/**",
+			"**/distribution/**"
+		],
+		"envs": [
+			"es6",
+			"browser",
+			"jest"
+		],
+		"globals": [
+			"artifacts",
+			"contract",
+			"assert",
+			"context"
+		]
+	}
 }
