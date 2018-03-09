@@ -1,5 +1,5 @@
-const AccountsProvider = require('./accounts-provider')
-const TransactionsProvider = require('./transactions-provider')
+import { AccountsProvider } from './accounts-provider'
+import { TransactionsProvider } from './transactions-provider'
 
 class CogitoProvider {
   constructor ({ originalProvider, telepathChannel }) {
@@ -21,4 +21,4 @@ class CogitoProvider {
   }
 }
 
-module.exports = CogitoProvider
+export { CogitoProvider }

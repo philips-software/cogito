@@ -80,4 +80,4 @@ class TransactionsProvider {
   }
 }
 
-module.exports = TransactionsProvider
+export { TransactionsProvider }
