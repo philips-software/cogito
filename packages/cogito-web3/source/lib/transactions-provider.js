@@ -1,5 +1,5 @@
-const Defaults = require('./transaction-defaults')
-const TransactionNonces = require('./transaction-nonces')
+import { TransactionDefaults as Defaults } from './transaction-defaults'
+import { TransactionNonces } from './transaction-nonces'
 
 class TransactionsProvider {
   constructor ({ originalProvider, telepathChannel }) {

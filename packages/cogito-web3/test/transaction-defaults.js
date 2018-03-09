@@ -1,10 +1,6 @@
-const expect = require('chai').expect
-const td = require('testdouble')
-const contains = td.matchers.contains
-const { stubResponse, stubResponseReject } = require('./provider-stubbing')
-const TransactionDefaults = require('../source/lib/transaction-defaults')
+import { TransactionDefaults } from '../source/lib/transaction-defaults'
 
-describe('transaction defaults', function () {
+describe('transaction defaults', () => {
   const transaction = {
     from: '0x1234567890123456789012345678901234567890',
     value: '0x10',
@@ -17,49 +13,76 @@ describe('transaction defaults', function () {
   let transactionDefaults
   let provider
 
-  beforeEach(function () {
-    provider = td.object()
+  beforeEach(() => {
+    provider = {
+      result: 0,
+      payload: {},
+      reject: false,
+      expectedResult: function (result) {
+        this.result = result
+        return this
+      },
+      expectedPayload: function (payload) {
+        this.payload = payload
+        return this
+      },
+      setReject: function (reject) {
+        this.reject = reject
+        return this
+      },
+      send: function (payload, callback) {
+        expect(payload).toMatchObject(this.payload)
+        if (this.reject) {
+          callback(new Error('an error'), null)
+        } else {
+          callback(null, { jsonrpc: '2.0', id: payload.id, result: this.result })
+        }
+      }
+    }
     transactionDefaults = new TransactionDefaults({ provider })
   })
 
-  describe('value', function () {
-    const noValue = Object.assign({}, transaction)
+  describe('value', () => {
+    const noValue = { ...transaction }
     delete noValue.value
 
-    it('is 0 when not defined', async function () {
+    it('is 0 when not defined', async () => {
       const defaults = await transactionDefaults.apply(noValue)
-      expect(defaults.value).to.equal('0x0')
+      expect(defaults.value).toBe('0x0')
     })
 
-    it('is unchanged when defined', async function () {
+    it('is unchanged when defined', async () => {
       const defaults = await transactionDefaults.apply(transaction)
-      expect(defaults.value).to.equal(transaction.value)
+      expect(defaults.value).toBe(transaction.value)
     })
   })
 
-  describe('gas price', function () {
-    const noGasPrice = Object.assign({}, transaction)
+  describe('gas price', () => {
+    const noGasPrice = { ...transaction }
     delete noGasPrice.gasPrice
 
-    it('is retrieved when not specified', async function () {
-      stubResponse(provider, contains({ method: 'eth_gasPrice' }), '0x42')
+    it('is retrieved when not specified', async () => {
+      expect.assertions(2)
+      provider.expectedResult('0x42').expectedPayload({ method: 'eth_gasPrice' })
       const defaults = await transactionDefaults.apply(noGasPrice)
-      expect(defaults.gasPrice).to.equal('0x42')
+      expect(defaults.gasPrice).toBe('0x42')
     })
 
-    it('is unchanged when defined', async function () {
+    it('is unchanged when defined', async () => {
+      expect.assertions(1)
       const defaults = await transactionDefaults.apply(transaction)
-      expect(defaults.gasPrice).to.equal(transaction.gasPrice)
+      expect(defaults.gasPrice).toEqual(transaction.gasPrice)
     })
 
-    it('throws when gas price cannot be determined', async function () {
-      stubResponseReject(provider, contains({ method: 'eth_gasPrice' }))
-      await expect(transactionDefaults.apply(noGasPrice)).to.be.rejected()
+    it('throws when gas price cannot be determined', async () => {
+      expect.assertions(2)
+      provider.setReject(true).expectedPayload({ method: 'eth_gasPrice' })
+      await expect(transactionDefaults.apply(noGasPrice)).rejects.toThrow('an error')
     })
   })
 
-  describe('gas limit', function () {
-    const noGas = Object.assign({}, transaction)
+  describe('gas limit', () => {
+    const noGas = { ...transaction }
     delete noGas.gas
 
     const expectedRequest = {
@@ -67,43 +90,49 @@ describe('transaction defaults', function () {
       params: [noGas]
     }
 
-    it('estimates the gas limit when not specified', async function () {
-      stubResponse(provider, contains(expectedRequest), '0x42')
+    it('estimates the gas limit when not specified', async () => {
+      expect.assertions(2)
+      provider.expectedResult('0x42').expectedPayload(expectedRequest)
       const defaults = await transactionDefaults.apply(noGas)
-      expect(defaults.gas).to.equal('0x42')
+      expect(defaults.gas).toBe('0x42')
     })
 
-    it('is unchanged when defined', async function () {
+    it('is unchanged when defined', async () => {
+      expect.assertions(1)
       const defaults = await transactionDefaults.apply(transaction)
-      expect(defaults.gas).to.equal(transaction.gas)
+      expect(defaults.gas).toBe(transaction.gas)
     })
 
-    it('throws when gas limit cannot be estimated', async function () {
-      stubResponseReject(provider, contains(expectedRequest))
-      await expect(transactionDefaults.apply(noGas)).to.be.rejected()
+    it('throws when gas limit cannot be estimated', async () => {
+      expect.assertions(2)
+      provider.setReject(true).expectedPayload(expectedRequest)
+      await expect(transactionDefaults.apply(noGas)).rejects.toThrow('an error')
     })
   })
 
-  describe('chain id', function () {
-    const noChainId = Object.assign({}, transaction)
+  describe('chain id', () => {
+    const noChainId = { ...transaction }
     delete noChainId.chainId
 
     const expectedRequest = { method: 'net_version' }
 
-    it('is retrieved when not specified', async function () {
-      stubResponse(provider, contains(expectedRequest), '42')
+    it('is retrieved when not specified', async () => {
+      expect.assertions(2)
+      provider.expectedResult('42').expectedPayload(expectedRequest)
       const defaults = await transactionDefaults.apply(noChainId)
-      expect(defaults.chainId).to.equal(42)
+      expect(defaults.chainId).toBe(42)
     })
 
-    it('is unchanged when defined', async function () {
+    it('is unchanged when defined', async () => {
+      expect.assertions(1)
       const defaults = await transactionDefaults.apply(transaction)
-      expect(defaults.chainId).to.equal(transaction.chainId)
+      expect(defaults.chainId).toBe(transaction.chainId)
     })
 
-    it('throws when chain id could not be retrieved', async function () {
-      stubResponseReject(provider, contains(expectedRequest))
-      await expect(transactionDefaults.apply(noChainId)).to.be.rejected()
+    it('throws when chain id could not be retrieved', async () => {
+      expect.assertions(2)
+      provider.setReject(true).expectedPayload(expectedRequest)
+      await expect(transactionDefaults.apply(noChainId)).rejects.toThrow('an error')
     })
   })
 })
