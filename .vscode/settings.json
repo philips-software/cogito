@@ -1,0 +1,4 @@
+{
+  "jest.pathToJest": "npm test --",
+  "jest.restartJestOnSnapshotUpdate": true
+}
