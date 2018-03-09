@@ -1,4 +1,4 @@
-const JsonRpcClient = require('./json-rpc-client')
+import { JsonRpcClient } from './json-rpc-client'
 
 // Calculates transaction nonces. The main problem that this code attempts to
 // solve is that the ethereum node does not take pending transactions into
@@ -42,4 +42,4 @@ class TransactionNonces {
   }
 }
 
-module.exports = TransactionNonces
+export { TransactionNonces }

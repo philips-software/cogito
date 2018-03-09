@@ -1,4 +1,4 @@
-const JsonRpcClient = require('./json-rpc-client')
+import { JsonRpcClient } from './json-rpc-client'
 
 class TransactionDefaults {
   constructor ({ provider }) {
@@ -33,4 +33,4 @@ class TransactionDefaults {
   }
 }
 
-module.exports = TransactionDefaults
+export { TransactionDefaults }

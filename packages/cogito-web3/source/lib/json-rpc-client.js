@@ -23,4 +23,4 @@ class JsonRpcClient {
   }
 }
 
-module.exports = JsonRpcClient
+export { JsonRpcClient }
