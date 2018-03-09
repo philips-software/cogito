@@ -16,4 +16,4 @@ class AccountsProvider {
   }
 }
 
-module.exports = AccountsProvider
+export { AccountsProvider }
