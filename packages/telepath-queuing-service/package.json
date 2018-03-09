@@ -16,7 +16,6 @@
   "devDependencies": {
     "mocha": "^4.0.1",
     "nyc": "^11.2.1",
-    "standard": "^10.0.3",
     "supertest": "^3.0.0"
   },
   "dependencies": {
