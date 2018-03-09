@@ -3,7 +3,7 @@
 	"devDependencies": {
 		"@babel/core": "^7.0.0-beta.40",
 		"babel-core": "^7.0.0-0",
-		"babel-eslint": "7.0.0",
+		"babel-eslint": "^8.0.0",
 		"babel-jest": "^22.4.1",
 		"jest": "^22.4.2",
 		"lerna": "^2.9.0",
@@ -16,7 +16,7 @@
 	],
 	"jest": {
 		"testEnvironment": "node",
-		"testRegex": "packages/cogito-web3/test/accounts-provider.js"
+		"testRegex": "packages/cogito-web3/test/(accounts-provider|cogito-provider).js"
 	},
 	"scripts": {
 		"test": "jest",
