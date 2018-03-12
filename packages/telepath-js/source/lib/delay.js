@@ -4,4 +4,4 @@ async function delay (milliseconds) {
   })
 }
 
-module.exports = delay
+export { delay }

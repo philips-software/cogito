@@ -1,4 +1,5 @@
-const sodium = require('libsodium-wrappers')
+import sodium from 'libsodium-wrappers'
+
 let ready = false
 
 async function waitUntilReady () {
@@ -33,4 +34,4 @@ async function nonceSize () {
   return sodium.crypto_secretbox_NONCEBYTES
 }
 
-module.exports = { random, encrypt, decrypt, keySize, nonceSize }
+export { random, encrypt, decrypt, keySize, nonceSize }
