@@ -16,7 +16,7 @@
 	],
 	"jest": {
 		"testEnvironment": "node",
-		"testRegex": "packages/cogito-web3/test/(accounts-provider|cogito-provider|transaction-defaults).js"
+		"testRegex": "packages/cogito-web3/test/(accounts-provider|cogito-provider|transaction-defaults|transactions-provider).js$"
 	},
 	"scripts": {
 		"test": "jest",
