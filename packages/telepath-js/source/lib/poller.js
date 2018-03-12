@@ -1,4 +1,4 @@
-const delay = require('./delay')
+import { delay } from './delay'
 
 class Poller {
   constructor ({ pollFunction, retries = 10, interval = 100 }) {
@@ -43,4 +43,4 @@ class Poller {
   }
 }
 
-module.exports = Poller
+export { Poller }
