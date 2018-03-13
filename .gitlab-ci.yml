@@ -5,7 +5,6 @@ stages:
   - build
 
 before_script:
-  - yarn global add lerna
   - yarn install
 
 test:  
