@@ -1,0 +1,27 @@
+image: node:9.4.0
+
+stages:
+  - test
+  - build
+
+before_script:
+  - yarn global add lerna
+  - yarn install
+
+test:  
+  stage: test
+  script:
+    - yarn test
+  tags:
+    - docker
+
+build:
+  stage: build
+  script:
+    - lerna run --scope cogito-web3 build
+  tags:
+    - docker
+cache:
+  paths:
+    - node_modules/
+    - packages/**/node_modules/
