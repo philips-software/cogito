@@ -1,3 +1,14 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TransactionsProvider = void 0;
+
+var _transactionDefaults = require("./transaction-defaults");
+
+var _transactionNonces = require("./transaction-nonces");
+
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } } function _next(value) { step("next", value); } function _throw(err) { step("throw", err); } _next(); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5,10 +16,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Defaults = require('./transaction-defaults');
-
-var TransactionNonces = require('./transaction-nonces');
 
 var TransactionsProvider =
 /*#__PURE__*/
@@ -21,10 +28,10 @@ function () {
 
     this.provider = originalProvider;
     this.channel = telepathChannel;
-    this.defaults = new Defaults({
+    this.defaults = new _transactionDefaults.TransactionDefaults({
       provider: originalProvider
     });
-    this.nonces = new TransactionNonces({
+    this.nonces = new _transactionNonces.TransactionNonces({
       provider: originalProvider
     });
   }
@@ -147,30 +154,26 @@ function () {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _context4.t0 = Object;
-                _context4.t1 = {};
-                _context4.t2 = transaction;
-                _context4.t3 = transaction.nonce;
+                _context4.t0 = transaction.nonce;
 
-                if (_context4.t3) {
-                  _context4.next = 8;
+                if (_context4.t0) {
+                  _context4.next = 5;
                   break;
                 }
 
-                _context4.next = 7;
+                _context4.next = 4;
                 return this.nonces.getNonce(transaction);
 
+              case 4:
+                _context4.t0 = _context4.sent;
+
+              case 5:
+                _context4.t1 = _context4.t0;
+                return _context4.abrupt("return", { ...transaction,
+                  nonce: _context4.t1
+                });
+
               case 7:
-                _context4.t3 = _context4.sent;
-
-              case 8:
-                _context4.t4 = _context4.t3;
-                _context4.t5 = {
-                  nonce: _context4.t4
-                };
-                return _context4.abrupt("return", _context4.t0.assign.call(_context4.t0, _context4.t1, _context4.t2, _context4.t5));
-
-              case 11:
               case "end":
                 return _context4.stop();
             }
@@ -285,11 +288,7 @@ function () {
                 };
                 return _context7.abrupt("return", new Promise(function (resolve, reject) {
                   provider.send(request, function (error, result) {
-                    if (error) {
-                      reject(error);
-                    } else {
-                      resolve(result);
-                    }
+                    error ? reject(error) : resolve(result);
                   });
                 }));
 
@@ -310,4 +309,4 @@ function () {
   return TransactionsProvider;
 }();
 
-module.exports = TransactionsProvider;
+exports.TransactionsProvider = TransactionsProvider;
