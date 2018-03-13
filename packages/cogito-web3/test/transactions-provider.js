@@ -1,5 +1,6 @@
 import Web3 from 'web3'
 import { CogitoProvider } from '../source/lib/cogito-provider'
+import { isMatch } from 'lodash'
 
 describe('sending transactions', () => {
   const transaction = {
@@ -42,27 +43,10 @@ describe('sending transactions', () => {
         return this
       },
       matchedInputFor: function (payload) {
-        const match = Object.entries(this.payload).find(([key, {request}]) => {
-          if (typeof payload === 'object' && typeof request === 'object') {
-            for (key in request) {
-              if (key in payload) {
-                if (JSON.stringify(payload[key]) !== JSON.stringify(request[key])) {
-                  return false
-                } else continue
-              }
-              return false
-            }
-            return true
-          } else if (payload === request) {
-            return true
-          }
-          return false
+        const match = Object.values(this.payload).find(({request}) => {
+          return isMatch(payload, request)
         })
-        if (match.length === 2) {
-          return match[1].result
-        } else {
-          return this.payload['any']
-        }
+        return match ? match.result : this.payload['any']
       },
       send: function (payload, callback) {
         const result = this.matchedInputFor(payload)
