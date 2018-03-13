@@ -13,3 +13,6 @@ yarn-error.log
 xcuserdata
 .idea/workspace.xml
 .idea/dictionaries/*
+
+# lerna
+lerna-debug.log
