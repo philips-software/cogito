@@ -1,7 +1,7 @@
 import Web3 from 'web3'
 import { CogitoProvider } from '../source/lib/cogito-provider'
 
-describe('accounts', function () {
+describe('accounts', () => {
   const accounts = [
     '0x1234567890123456789012345678901234567890',
     '0x0123456789012345678901234567890123456789'

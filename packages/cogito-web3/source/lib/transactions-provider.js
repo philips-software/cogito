@@ -33,9 +33,10 @@ class TransactionsProvider {
   }
 
   async setNonce (transaction) {
-    return Object.assign({}, transaction, {
+    return {
+      ...transaction,
       nonce: transaction.nonce || await this.nonces.getNonce(transaction)
-    })
+    }
   }
 
   async sendTransaction (transaction, requestId) {
@@ -68,13 +69,9 @@ class TransactionsProvider {
       method: 'eth_sendRawTransaction',
       params: [ signedTransaction ]
     }
-    return new Promise(function (resolve, reject) {
-      provider.send(request, function (error, result) {
-        if (error) {
-          reject(error)
-        } else {
-          resolve(result)
-        }
+    return new Promise((resolve, reject) => {
+      provider.send(request, (error, result) => {
+        error ? reject(error) : resolve(result)
       })
     })
   }

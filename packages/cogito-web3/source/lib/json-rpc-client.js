@@ -7,13 +7,9 @@ class JsonRpcClient {
   async send (request) {
     request = Object.assign({ jsonrpc: '2.0', id: this.nextRequestId() }, request)
     const provider = this.provider
-    return new Promise(function (resolve, reject) {
-      provider.send(request, function (error, result) {
-        if (error) {
-          reject(error)
-        } else {
-          resolve(result)
-        }
+    return new Promise((resolve, reject) => {
+      provider.send(request, (error, result) => {
+        error ? reject(error) : resolve(result)
       })
     })
   }
