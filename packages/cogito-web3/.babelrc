@@ -2,8 +2,17 @@
   "presets": [
     "@babel/preset-env"
   ],
-  "plugins": ["transform-object-rest-spread"],
-  "ignore": [
-    "**/*.test.js"
-  ]
+  "plugins": ["transform-object-rest-spread"],  
+  "env": {
+    "production": {
+      "ignore": [
+        "**/*.test.js"
+      ]
+    },
+    "development": {
+      "ignore": [
+        "**/*.test.js"
+      ]
+    }
+  }
 }
