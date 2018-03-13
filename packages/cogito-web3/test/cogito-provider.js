@@ -24,7 +24,7 @@ describe('provider', () => {
   it('passes requests to the original provider', (done) => {
     const expectedResult = 42
     originalProvider.expectedResult(expectedResult)
-    web3.eth.getBlockNumber(function (_, result) {
+    web3.eth.getBlockNumber((_, result) => {
       expect(result).toEqual(expectedResult)
       done()
     })
