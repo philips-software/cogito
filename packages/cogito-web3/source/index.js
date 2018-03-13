@@ -1,3 +1,1 @@
-const CogitoProvider = require('./lib/cogito-provider')
-
-module.exports = CogitoProvider
+export { CogitoProvider } from './cogito-provider'

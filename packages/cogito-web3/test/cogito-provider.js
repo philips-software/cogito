@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import { CogitoProvider } from '../source/lib/cogito-provider'
+import { CogitoProvider } from '../source/cogito-provider'
 
 describe('provider', () => {
   let cogitoProvider

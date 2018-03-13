@@ -1,4 +1,4 @@
-import { TransactionDefaults } from '../source/lib/transaction-defaults'
+import { TransactionDefaults } from '../source/transaction-defaults'
 
 describe('transaction defaults', () => {
   const transaction = {
