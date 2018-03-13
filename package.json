@@ -20,7 +20,7 @@
 		"testRegex": "packages/cogito-web3/(__tests__/.*|source/.*(test|spec))\\.jsx?$"		
 	},
 	"scripts": {
-		"test": "jest",
+		"test": "jest --verbose",
 		"lint": "yarn standard",
 		"lint-fix": "yarn standard --fix --verbose"
 	},
