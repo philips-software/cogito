@@ -1,3 +1,12 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TransactionNonces = void 0;
+
+var _jsonRpcClient = require("./json-rpc-client");
+
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } } function _next(value) { step("next", value); } function _throw(err) { step("throw", err); } _next(); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -6,7 +15,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var JsonRpcClient = require('./json-rpc-client'); // Calculates transaction nonces. The main problem that this code attempts to
+// Calculates transaction nonces. The main problem that this code attempts to
 // solve is that the ethereum node does not take pending transactions into
 // account when returning the transaction count, leading to duplicated
 // transaction nonces when sending a new transaction while another is pending
@@ -14,8 +23,6 @@ var JsonRpcClient = require('./json-rpc-client'); // Calculates transaction nonc
 // Our solution is to keep a local transaction count, and synchronize that with
 // the node transaction count when appropriate
 // (loosely based on https://github.com/livepeer/go-livepeer/pull/252).
-
-
 var TransactionNonces =
 /*#__PURE__*/
 function () {
@@ -24,7 +31,7 @@ function () {
 
     _classCallCheck(this, TransactionNonces);
 
-    this.client = new JsonRpcClient({
+    this.client = new _jsonRpcClient.JsonRpcClient({
       provider: provider
     });
     this.nonces = {};
@@ -113,4 +120,4 @@ function () {
   return TransactionNonces;
 }();
 
-module.exports = TransactionNonces;
+exports.TransactionNonces = TransactionNonces;

@@ -1,12 +1,19 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CogitoProvider = void 0;
+
+var _accountsProvider = require("./accounts-provider");
+
+var _transactionsProvider = require("./transactions-provider");
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var AccountsProvider = require('./accounts-provider');
-
-var TransactionsProvider = require('./transactions-provider');
 
 var CogitoProvider =
 /*#__PURE__*/
@@ -18,10 +25,10 @@ function () {
     _classCallCheck(this, CogitoProvider);
 
     this.provider = originalProvider;
-    this.accounts = new AccountsProvider({
+    this.accounts = new _accountsProvider.AccountsProvider({
       telepathChannel: telepathChannel
     });
-    this.transactions = new TransactionsProvider({
+    this.transactions = new _transactionsProvider.TransactionsProvider({
       originalProvider: originalProvider,
       telepathChannel: telepathChannel
     });
@@ -43,4 +50,4 @@ function () {
   return CogitoProvider;
 }();
 
-module.exports = CogitoProvider;
+exports.CogitoProvider = CogitoProvider;
