@@ -26,21 +26,15 @@
     "@babel/plugin-external-helpers": "7.0.0-beta.41",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.41",
     "@babel/preset-env": "^7.0.0-beta.41",
-    "chai": "^4.1.2",
-    "chai-as-promised": "^7.1.1",
-    "dirty-chai": "^2.0.1",
     "gzip-size": "^4.1.0",
     "lodash": "^4.17.5",
-    "mocha": "^4.0.1",
-    "nyc": "^11.2.1",
     "pretty-bytes": "^4.0.2",
     "rollup": "^0.56.5",
     "rollup-plugin-babel": "^4.0.0-beta.2",
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-node-resolve": "^3.2.0",
     "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-uglify": "^3.0.0",
-    "testdouble": "^3.2.6"
+    "rollup-plugin-uglify": "^3.0.0"
   },
   "peerDependencies": {
     "web3": "^1.0.0-beta.29"
