@@ -10,14 +10,6 @@ class TransactionsProvider {
   }
 
   async send (payload, callback) {
-    try {
-      callback(null, await this.sendWithDefaults(payload))
-    } catch (error) {
-      callback(error, null)
-    }
-  }
-
-  async sendWithDefaults (payload) {
     let transaction = payload.params[0]
     transaction = await this.setDefaults(transaction)
     transaction = await this.setNonce(transaction)

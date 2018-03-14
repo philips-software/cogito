@@ -4,19 +4,22 @@ import { TransactionsProvider } from './transactions-provider'
 class CogitoProvider {
   constructor ({ originalProvider, telepathChannel }) {
     this.provider = originalProvider
-    this.accounts = new AccountsProvider({ telepathChannel })
-    this.transactions = new TransactionsProvider({
-      originalProvider, telepathChannel
-    })
+    this.handlers = {
+      'eth_accounts': new AccountsProvider({ telepathChannel }),
+      'eth_sendTransaction': new TransactionsProvider({ originalProvider, telepathChannel })
+    }
   }
 
-  send (payload, callback) {
-    if (payload.method === 'eth_accounts') {
-      this.accounts.send(payload, callback)
-    } else if (payload.method === 'eth_sendTransaction') {
-      this.transactions.send(payload, callback)
-    } else {
-      this.provider.send(payload, callback)
+  async send (payload, callback) {
+    const handler = this.handlers[payload.method]
+    try {
+      if (handler) {
+        callback(null, await handler.send(payload))
+      } else {
+        this.provider.send(payload, callback)
+      }
+    } catch (error) {
+      callback(error, null)
     }
   }
 }
