@@ -2,10 +2,10 @@
 	"private": true,
 	"devDependencies": {
 		"@babel/core": "^7.0.0-beta.40",
+		"@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.40",
 		"babel-core": "^7.0.0-0",
 		"babel-eslint": "^8.0.0",
 		"babel-jest": "^22.4.1",
-		"babel-plugin-transform-object-rest-spread": "^6.26.0",
 		"jest": "^22.4.2",
 		"lerna": "^2.9.0",
 		"regenerator-runtime": "^0.11.1",
@@ -17,10 +17,10 @@
 	],
 	"jest": {
 		"testEnvironment": "node",
-		"testRegex": "packages/cogito-web3/(__tests__/.*|source/.*(test|spec))\\.jsx?$"		
+		"testRegex": "packages/cogito-web3/(__tests__/.*|source/.*(test|spec))\\.jsx?$"
 	},
 	"scripts": {
-		"test": "jest --verbose --noStackTrace",
+		"test": "jest --verbose",
 		"lint": "yarn standard",
 		"lint-fix": "yarn standard --fix --verbose"
 	},
