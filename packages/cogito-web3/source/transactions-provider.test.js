@@ -1,5 +1,4 @@
-import Web3 from 'web3'
-import { CogitoProvider } from './cogito-provider'
+import { TransactionsProvider } from './transactions-provider'
 import { isMatch } from 'lodash'
 
 describe('sending transactions', () => {
@@ -14,10 +13,9 @@ describe('sending transactions', () => {
   const signed = '0xSignedTransaction'
   const hash = '0xTransactionHash'
 
-  let cogitoProvider
+  let transactionsProvider
   let originalProvider
   let telepathChannel
-  let web3
 
   beforeEach(() => {
     originalProvider = {
@@ -105,8 +103,7 @@ describe('sending transactions', () => {
         }
       })
     }
-    cogitoProvider = new CogitoProvider({ originalProvider, telepathChannel })
-    web3 = new Web3(cogitoProvider)
+    transactionsProvider = new TransactionsProvider({ originalProvider, telepathChannel })
   })
 
   const whenCogitoProvidesSignatures = () => {
@@ -137,17 +134,13 @@ describe('sending transactions', () => {
   }
 
   const sendTransaction = async (transaction) => {
-    return new Promise((resolve, reject) => {
-      web3.eth.sendTransaction(transaction, (error, result) => {
-        error ? reject(error) : resolve(result)
-      })
-    })
+    return transactionsProvider.send({ method: 'eth_sendTransaction', params: [transaction] })
   }
 
   it('sends a cogito signed transaction', async () => {
     whenCogitoProvidesSignatureFor(transaction)
     whenProviderSendsRawTransaction()
-    expect(await sendTransaction(transaction)).toBe(hash)
+    expect(await sendTransaction(transaction)).toMatchObject({ result: hash })
   })
 
   it('throws when signing via telepath fails', async () => {
