@@ -9,7 +9,7 @@ class TransactionsProvider {
     this.nonces = new TransactionNonces({ provider: originalProvider })
   }
 
-  async send (payload, callback) {
+  async send (payload) {
     let transaction = payload.params[0]
     transaction = await this.setDefaults(transaction)
     transaction = await this.setNonce(transaction)
