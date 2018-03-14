@@ -14,6 +14,12 @@
   "engines": {
     "node": ">=9.0.0"
   },
+  "files": [
+    "lib",
+    "es",
+    "umd",
+    "source"
+  ],
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.41",
     "@babel/core": "7.0.0-beta.41",
