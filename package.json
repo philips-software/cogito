@@ -1,8 +1,8 @@
 {
 	"private": true,
 	"devDependencies": {
-		"@babel/core": "^7.0.0-beta.40",
-		"@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.40",
+		"@babel/core": "^7.0.0-beta.41",
+		"@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.41",
 		"babel-core": "^7.0.0-0",
 		"babel-eslint": "^8.0.0",
 		"babel-jest": "^22.4.1",
