@@ -38,10 +38,11 @@ describe('accounts', () => {
   })
 
   describe('on failure', () => {
-    const error = new Error('an error')
+    const telepathFailure = new Error('an error')
+
     beforeEach(() => {
       telepathChannel = {
-        send: jest.fn().mockReturnValue(Promise.reject(error))
+        send: jest.fn().mockReturnValue(Promise.reject(telepathFailure))
       }
       cogitoProvider = new CogitoProvider({ telepathChannel })
       web3 = new Web3(cogitoProvider)
@@ -49,7 +50,7 @@ describe('accounts', () => {
 
     it('throws when requesting accounts via telepath fails', (done) => {
       web3.eth.getAccounts((error, _) => {
-        expect(error).toEqual(error)
+        expect(error).toEqual(telepathFailure)
         done()
       })
     })
