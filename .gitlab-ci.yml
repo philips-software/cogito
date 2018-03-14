@@ -17,7 +17,7 @@ test:
 build:
   stage: build
   script:
-    - node_modules/.bin/lerna run --scope cogito-web3 build
+    - yarn lerna run --scope cogito-web3 build
   tags:
     - docker
 cache:
