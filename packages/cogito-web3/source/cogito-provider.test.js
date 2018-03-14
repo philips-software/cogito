@@ -1,32 +1,36 @@
-import Web3 from 'web3'
 import { CogitoProvider } from './cogito-provider'
+import { AccountsProvider } from './accounts-provider'
+import { TransactionsProvider } from './transactions-provider'
 
 describe('provider', () => {
-  let cogitoProvider
   let originalProvider
-  let web3
+  let cogitoProvider
 
   beforeEach(() => {
-    originalProvider = {
-      result: 0,
-      expectedResult: function (result) {
-        this.result = result
-      },
-      send: function (payload, callback) {
-        const error = null
-        callback(error, { jsonrpc: '2.0', id: payload.id, result: this.result })
-      }
-    }
+    originalProvider = { send: jest.fn() }
     cogitoProvider = new CogitoProvider({ originalProvider })
-    web3 = new Web3(cogitoProvider)
   })
 
-  it('passes requests to the original provider', (done) => {
-    const expectedResult = 42
-    originalProvider.expectedResult(expectedResult)
-    web3.eth.getBlockNumber((_, result) => {
-      expect(result).toEqual(expectedResult)
-      done()
-    })
+  it('forwards known requests to handlers', () => {
+    const method = 'a_known_request_method'
+    const handler = { send: jest.fn() }
+    cogitoProvider.handlers[method] = handler
+    cogitoProvider.send({ method }, () => {})
+    expect(handler.send).toBeCalled()
+  })
+
+  it('forwards account requests to the accounts provider', () => {
+    const accountHandler = cogitoProvider.handlers['eth_accounts']
+    expect(accountHandler).toBeInstanceOf(AccountsProvider)
+  })
+
+  it('forwards transaction requests to the transaction provider', () => {
+    const transactionsHandler = cogitoProvider.handlers['eth_sendTransaction']
+    expect(transactionsHandler).toBeInstanceOf(TransactionsProvider)
+  })
+
+  it('forwards unknown requests to the original provider', () => {
+    cogitoProvider.send({ method: 'unknown' })
+    expect(originalProvider.send).toBeCalled()
   })
 })
