@@ -1,9 +1,5 @@
-/* eslint-env mocha */
-// const expect = require('chai').expect
-// const td = require('testdouble')
-// const delay = require('../source/lib/delay')
-// const Poller = require('../source/lib/poller')
 import { Poller } from '../source/lib/poller'
+import { delay } from '../source/lib/delay'
 
 describe('Poller', () => {
   const retries = 5
@@ -76,20 +72,21 @@ describe('Poller', () => {
   })
 
   it('does not invoke poll function concurrently', async () => {
-    pollFunction.mockReturnValueOnce(() => {
+    let isRunning = false
 
-    })
+    pollFunction
+      .mockImplementation(async () => {
+        expect(isRunning).toBeFalsy()
+        isRunning = true
+        await delay(1)
+        isRunning = false
+      })
 
-    // td.when(pollFunction()).thenDo(async function slow () {
-    //   expect(slow.isRunning).to.not.be.true()
-    //   slow.isRunning = true
-    //   await delay(1)
-    //   slow.isRunning = false
-    // })
-    // const poll1 = poller.poll()
-    // const poll2 = poller.poll()
-    // await poll1
-    // await poll2
+    const first = poller.poll()
+    const second = poller.poll()
+
+    await first
+    await second
   })
 
   it('has sensible defaults', () => {
