@@ -1,8 +1,8 @@
 Telepath for Javascript
 =======================
 
-[![build status](https://gitlab.ta.philips.com/blockchain-lab/telepath-js/badges/master/build.svg)](https://gitlab.ta.philips.com/blockchain-lab/telepath-js/commits/master)
-[![coverage report](https://gitlab.ta.philips.com/blockchain-lab/telepath-js/badges/master/coverage.svg)](https://gitlab.ta.philips.com/blockchain-lab/telepath-js/commits/master)
+[![build status](https://gitlab.ta.philips.com/blockchain-lab/cogito/badges/master/build.svg)](https://gitlab.ta.philips.com/blockchain-lab/cogito/commits/master)
+[![coverage report](https://gitlab.ta.philips.com/blockchain-lab/cogito/badges/master/coverage.svg)](https://gitlab.ta.philips.com/blockchain-lab/cogito/commits/master)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 Provides a secure channel for communication between a web app running in a browser and an app running on a mobile device.
@@ -19,7 +19,7 @@ Create an instance of the Telepath class, providing the URL of the queuing
 service:
 
 ```javascript
-import Telepath from 'telepath-js'
+import Telepath from '@cogito/telepath-js'
 const telepath = new Telepath('https://queuing.example.com')
 ```
 
@@ -51,6 +51,6 @@ The `send` method returns a promise. The queuing service will be polled for a
 response for at least 10 minutes. If no response is available after this time it
 will return `null`.
 
-[1]: https://gitlab.ta.philips.com/blockchain-lab/telepath
+[1]: https://gitlab.ta.philips.com/blockchain-lab/cogito/packages/telepath-queuing-service
 [2]: https://www.npmjs.com/package/qrcode.react
 [3]: http://www.jsonrpc.org/specification
