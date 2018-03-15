@@ -11,16 +11,22 @@ test:
   stage: test
   script:
     - yarn test
-  tags:
-    - docker
 
-build:
+build cogito-web3:
   stage: build
   script:
-    - yarn lerna run --scope cogito-web3 build
-  tags:
-    - docker
-cache:
-  paths:
-    - node_modules/
-    - packages/cogito-web3/node_modules/
+    - yarn lerna run --scope @cogito/cogito-web3 build
+  cache:
+    paths:
+      - node_modules/
+      - packages/cogito-web3/node_modules/
+
+build telepath-js:
+  stage: build
+  script:
+    - yarn lerna run --scope @cogito/telepath-js build
+  allow_failure: true
+  cache:
+    paths:
+      - node_modules/
+      - packages/telepath-js/node_modules/
