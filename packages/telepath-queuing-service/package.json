@@ -8,7 +8,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./index",
-    "test": "standard && nyc mocha test/**/*.js"
+    "test": "yarn standard && nyc mocha test/**/*.js"
   },
   "engines": {
     "node": ">=7.6.0"
@@ -16,7 +16,8 @@
   "devDependencies": {
     "mocha": "^4.0.1",
     "nyc": "^11.2.1",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+		"standard": "^11.0.0"
   },
   "dependencies": {
     "async-middleware": "^1.2.1",
