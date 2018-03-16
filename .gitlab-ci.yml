@@ -7,9 +7,15 @@ stages:
 before_script:
   - yarn install
 
-test:  
+test cogito-web3:
   stage: test
   script:
+    - yarn test
+
+test telepath-queuing-service:
+  stage: test
+  script:
+    - cd packages/telepath-queuing-service
     - yarn test
 
 build cogito-web3:
