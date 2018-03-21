@@ -5,23 +5,10 @@ Cogito Web3
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 An Ethereum [Web3][1] provider that uses the [Cogito app][2] to manage accounts and
-signing. Requires a [Telepath channel][3] to be set up for communication with the
-Cogito app.
+signing.
 
-Usage
------
-
-```javascript
-const Web3 = require('web3')
-const CogitoProvider = require('@cogito/cogito-web3')
-
-const provider = new CogitoProvider({
-  originalProvider: new Web3.providers.HttpProvider("http://localhost:8545")
-  telepathChannel: /* a previously set up telepath channel */
-})
-const web3 = new Web3(provider)
-```
+[Documentation][3]
 
 [1]: https://github.com/ethereum/web3.js
-[2]: https://gitlab.ta.philips.com/blockchain-lab/Cogito/packages/cogiti-ios-app
-[3]: https://gitlab.ta.philips.com/blockchain-lab/cogito/packages/telepath-queuing-service
+[2]: http://blockchain-lab.gitlab-pages.ta.philips.com/cogito
+[3]: http://blockchain-lab.gitlab-pages.ta.philips.com/cogito#ethereum
