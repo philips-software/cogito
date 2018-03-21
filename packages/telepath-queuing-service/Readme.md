@@ -10,7 +10,7 @@ communicate when they are behind distinct NAT.
 [Documentation][1]
 
 
-[1]: http://blockchain-lab.gitlab-pages.ta.philips.com/cogito#telepath-queuing-service
+[1]: http://blockchain-lab.gitlab-pages.ta.philips.com/telepath
 
 ### Known limitations
 

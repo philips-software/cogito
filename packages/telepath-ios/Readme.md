@@ -8,7 +8,7 @@ browser and an app running on a mobile device.
 
 [Documentation][1]
 
-[1]: http://blockchain-lab.gitlab-pages.ta.philips.com/cogito#telepath-for-ios
+[1]: http://blockchain-lab.gitlab-pages.ta.philips.com/telepath
 
 ### Known Limitations
 
