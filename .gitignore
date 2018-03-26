@@ -3,6 +3,7 @@ node_modules
 .idea/workspace.xml
 yarn-error.log
 .DS_Store
+coverage/
 
 # terraform
 .terraform
