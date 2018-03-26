@@ -21,10 +21,12 @@ test telepath-queuing-service:
 test cogito-ios-app:
   stage: test
   before_script:
-    - echo "ignore global install script.. We don't need yarn for IOS builds"
-  script:
     - cd packages/cogito-ios-app
-    - fastlane tests
+    - bundle install --gemfile=.doesntworkinprojectroot/Gemfile
+  script:
+    - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec fastlane tests
+  after_script:
+    - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec slather coverage
   tags:
     - ppf-cios
 
