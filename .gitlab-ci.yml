@@ -18,6 +18,14 @@ test telepath-queuing-service:
     - cd packages/telepath-queuing-service
     - yarn test
 
+test cogito-ios-app:
+  stage: test
+  script:
+    - cd packages/cogito-ios-app
+    - fastlane tests
+  tags:
+    - ppf-cios
+
 build cogito-web3:
   stage: build
   script:
