@@ -1,5 +1,5 @@
-import { Poller } from '../source/lib/poller'
-import { delay } from '../source/lib/delay'
+import { Poller } from './poller'
+import { delay } from './delay'
 
 describe('Poller', () => {
   const retries = 5
