@@ -18,15 +18,16 @@ test telepath-queuing-service:
     - cd packages/telepath-queuing-service
     - yarn test
 
-# test cogito-ios-app:
-#   stage: test
-#   before_script:
-#     - cd packages/cogito-ios-app
-#     - bundle install --gemfile=.doesntworkinprojectroot/Gemfile
-#   script:
-#     - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec fastlane tests
-#   tags:
-#     - ppf-cios
+test cogito-ios-app:
+  stage: test
+  before_script:
+    - cd packages/cogito-ios-app
+    - bundle install --gemfile=.doesntworkinprojectroot/Gemfile
+  script:
+    - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec fastlane tests
+    - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec slather coverage 
+  tags:
+    - ppf-cios
 
 build cogito-web3:
   stage: build
