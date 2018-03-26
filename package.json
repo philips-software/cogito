@@ -17,7 +17,7 @@
 	],
 	"jest": {
 		"testEnvironment": "node",
-		"testRegex": "packages/cogito-web3/(__tests__/.*|source/.*(test|spec))\\.jsx?$",
+		"testRegex": "packages/(cogito-web3|telepath-js)/.*test\\.js$",
 		"collectCoverage": true,
 		"coverageReporters": [ "text-summary" ]
 	},
