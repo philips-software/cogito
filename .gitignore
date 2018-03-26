@@ -1,5 +1,6 @@
 # js
 node_modules
+.nyc_output
 .idea/workspace.xml
 yarn-error.log
 .DS_Store
