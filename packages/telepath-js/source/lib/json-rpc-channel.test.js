@@ -1,5 +1,4 @@
 const JsonRpcChannel = require('./json-rpc-channel')
-const td = require('testdouble')
 
 describe('JSON RPC Channel', () => {
   const request = { jsonrpc: '2.0', id: 1, method: 'foo' }
@@ -9,14 +8,20 @@ describe('JSON RPC Channel', () => {
   let channel
 
   beforeEach(() => {
-    channel = td.object()
+    channel = {
+      send: jest.fn(),
+      receive: jest.fn(),
+      createConnectUrl: jest.fn()
+    }
     jsonrpc = new JsonRpcChannel({ channel: channel })
   })
 
   describe('when a valid response is available', () => {
     beforeEach(() => {
-      td.when(channel.send(JSON.stringify(request))).thenDo(() => {
-        td.when(channel.receive()).thenResolve(JSON.stringify(response))
+      channel.send.mockImplementation((sentRequest) => {
+        if (sentRequest == JSON.stringify(request)) {
+          channel.receive.mockResolvedValue(JSON.stringify(response))
+        }
       })
     })
 
@@ -41,31 +46,33 @@ describe('JSON RPC Channel', () => {
   })
 
   it('ignores responses that are not json', async () => {
-    td.when(channel.receive()).thenResolve(
-      'invalid json',
-      JSON.stringify(response)
-    )
+    channel.receive
+      .mockResolvedValueOnce('invalid json')
+      .mockResolvedValue(JSON.stringify(response))
     expect(await jsonrpc.send(request)).toEqual(response)
   })
 
   it('ignores responses with the wrong id', async () => {
-    td.when(channel.receive()).thenResolve(
-      JSON.stringify({ jsonrpc: '2.0', id: 0, result: null }),
-      JSON.stringify(response)
-    )
+    channel.receive
+      .mockResolvedValueOnce(JSON.stringify({jsonrpc:'2.0', id:0, result:null}))
+      .mockResolvedValue(JSON.stringify(response))
     expect(await jsonrpc.send(request)).toEqual(response)
   })
 
   it('throws when response times out', async () => {
-    td.when(channel.receive()).thenResolve(null) // timeout
+    channel.receive.mockResolvedValue(null)
     await expect(jsonrpc.send(request)).rejects.toThrow()
   })
 
   it('can create a connect url', () => {
     const baseUrl = 'https://example.com'
     const url = 'https://example.com#connect'
-    td.when(channel.createConnectUrl(baseUrl)).thenReturn(url)
-    expect(jsonrpc.createConnectUrl(baseUrl)).toEqual(url)
+    channel.createConnectUrl.mockReturnValue(url)
+
+    const connectUrl = jsonrpc.createConnectUrl(baseUrl)
+
+    expect(channel.createConnectUrl.mock.calls[0][0]).toEqual(baseUrl)
+    expect(connectUrl).toEqual(url)
   })
 
   it('exposes id of the underlying secure channel', () => {
