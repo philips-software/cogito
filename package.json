@@ -17,7 +17,9 @@
 	],
 	"jest": {
 		"testEnvironment": "node",
-		"testRegex": "packages/cogito-web3/(__tests__/.*|source/.*(test|spec))\\.jsx?$"
+		"testRegex": "packages/cogito-web3/(__tests__/.*|source/.*(test|spec))\\.jsx?$",
+		"collectCoverage": true,
+		"coverageReporters": [ "text-summary" ]
 	},
 	"scripts": {
 		"test": "yarn standard && jest --verbose",
