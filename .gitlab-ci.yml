@@ -24,8 +24,10 @@ test cogito-ios-app:
     - cd packages/cogito-ios-app
     - bundle install --gemfile=.doesntworkinprojectroot/Gemfile
   script:
+    - cd packages/cogito-ios-app
     - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec fastlane tests
   after_script:
+    - cd packages/cogito-ios-app
     - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec slather coverage
   tags:
     - ppf-cios
