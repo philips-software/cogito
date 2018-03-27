@@ -1,5 +1,3 @@
-import td from 'testdouble'
-const anything = td.matchers.anything
 import { random, encrypt, decrypt, keySize, nonceSize } from './crypto'
 import base64url from 'base64url'
 import SecureChannel from './secure-channel'
@@ -16,14 +14,13 @@ describe('Secure Channel', () => {
 
   beforeEach(async () => {
     key = await random(await keySize())
-    queuing = td.object()
+    queuing = {
+      send: jest.fn(),
+      receive: jest.fn()
+    }
     channel = new SecureChannel({ queuing, id: channelId, key })
     channel.poller.interval = 0
     channel.poller.retries = 10
-  })
-
-  afterEach(() => {
-    td.reset()
   })
 
   describe('when sending a message', () => {
@@ -32,24 +29,18 @@ describe('Secure Channel', () => {
     })
 
     it('encrypts the message', async () => {
-      const captor = td.matchers.captor()
-      td.verify(queuing.send(anything(), captor.capture()))
-      const nonceAndCypherText = new Uint8Array(captor.value)
+      const nonceAndCypherText = new Uint8Array(queuing.send.mock.calls[0][1])
       const nonce = nonceAndCypherText.slice(0, await nonceSize())
       const cypherText = nonceAndCypherText.slice(await nonceSize())
       expect(await decrypt(cypherText, nonce, key, 'text')).toEqual(message)
     })
 
     it('uses the red queue', () => {
-      td.verify(queuing.send(redQueue, anything()))
+      expect(queuing.send.mock.calls[0][0]).toEqual(redQueue)
     })
   })
 
   describe('when receiving a message (on the blue queue)', () => {
-    function whenReceiving (...messages) {
-      td.when(queuing.receive(blueQueue)).thenResolve(...messages)
-    }
-
     async function enc (message) {
       const nonce = await random(await nonceSize())
       const plainText = new Uint8Array(Buffer.from(message))
@@ -58,35 +49,38 @@ describe('Secure Channel', () => {
     }
 
     it('decrypts the message', async () => {
-      whenReceiving(await enc(message))
+      queuing.receive.mockResolvedValueOnce(enc(message))
       expect(await channel.receive()).toEqual(message)
     })
 
     it('waits for a message to become available', async () => {
-      whenReceiving(null, null, await enc(message))
+      queuing.receive
+        .mockResolvedValueOnce(null)
+        .mockResolvedValueOnce(null)
+        .mockResolvedValueOnce(enc(message))
       expect(await channel.receive()).toEqual(message)
     })
   })
 
   describe('errors', () => {
     it('throws when there is an error while sending', async () => {
-      td.when(queuing.send(anything(), anything())).thenReject('an error')
+      queuing.send.mockRejectedValue('an error')
       await expect(channel.send('a message')).rejects.toThrow()
     })
 
     it('throws when there is an error while receiving', async () => {
-      td.when(queuing.receive(blueQueue)).thenReject('an error')
+      queuing.receive.mockRejectedValue('an error')
       await expect(channel.receive()).rejects.toThrow()
     })
 
     it('throws when there is an error while decrypting', async () => {
-      td.when(queuing.receive(blueQueue)).thenResolve('invalid data')
+      queuing.receive.mockResolvedValue('invalid data')
       await expect(channel.receive()).rejects.toThrow()
     })
   })
 
   it('receives null when no message is waiting', async () => {
-    td.when(queuing.receive(blueQueue)).thenResolve(null)
+    queuing.receive.mockResolvedValue(null)
     await expect(channel.receive()).resolves.toBeNull()
   })
 
