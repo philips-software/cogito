@@ -1,6 +1,6 @@
-const nock = require('nock')
-const base64url = require('base64url')
-const QueuingService = require('./queuing-service')
+import nock from 'nock'
+import base64url from 'base64url'
+import QueuingService from './queuing-service'
 
 describe('Queuing Service', () => {
   const baseUrl = 'https://queuing.example.com'

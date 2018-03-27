@@ -1,6 +1,5 @@
-const base64url = require('base64url')
-const fetch = require('cross-fetch')
-const { Request } = fetch
+import base64url from 'base64url'
+import fetch, { Request } from 'cross-fetch'
 
 class QueuingService {
   constructor (baseUrl) {
@@ -28,4 +27,4 @@ class QueuingService {
   }
 }
 
-module.exports = QueuingService
+export default QueuingService
