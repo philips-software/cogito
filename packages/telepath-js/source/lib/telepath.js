@@ -1,8 +1,8 @@
-const base64url = require('base64url')
-const { random, keySize } = require('./crypto')
-const SecureChannel = require('./secure-channel')
-const JsonRpcChannel = require('./json-rpc-channel')
-const QueuingService = require('./queuing-service')
+import base64url from 'base64url'
+import { random, keySize } from './crypto'
+import SecureChannel from './secure-channel'
+import JsonRpcChannel from './json-rpc-channel'
+import QueuingService from './queuing-service'
 
 class Telepath {
   constructor (queuingServiceUrl) {
@@ -32,4 +32,4 @@ async function createRandomKey () {
   return random(await keySize())
 }
 
-module.exports = Telepath
+export default Telepath
