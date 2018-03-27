@@ -1,6 +1,6 @@
-const base64url = require('base64url')
-const { random, encrypt, decrypt, nonceSize } = require('./crypto')
-const { Poller } = require('./poller')
+import base64url from 'base64url'
+import { random, encrypt, decrypt, nonceSize } from './crypto'
+import { Poller } from './poller'
 
 class SecureChannel {
   constructor ({ queuing, id, key }) {
@@ -40,4 +40,4 @@ class SecureChannel {
   }
 }
 
-module.exports = SecureChannel
+export default SecureChannel
