@@ -1,6 +1,6 @@
 const base64url = require('base64url')
 const { random, encrypt, decrypt, nonceSize } = require('./crypto')
-const Poller = require('./poller')
+const { Poller } = require('./poller')
 
 class SecureChannel {
   constructor ({ queuing, id, key }) {
@@ -16,17 +16,19 @@ class SecureChannel {
 
   async send (message) {
     const queueId = `${this.id}.red`
-    const nonce = Buffer.from(await random(await nonceSize()))
-    const cypherText = Buffer.from(await encrypt(Buffer.from(message), nonce, this.key))
+    const nonce = await random(await nonceSize())
+    const plainText = new Uint8Array(Buffer.from(message))
+    const cypherText = await encrypt(plainText, nonce, this.key)
     const nonceAndCypherText = Buffer.concat([nonce, cypherText])
     await this.queuing.send(queueId, nonceAndCypherText)
   }
 
   async receive () {
-    const nonceAndCypherText = await this.poller.poll()
-    if (!nonceAndCypherText) {
+    const received = await this.poller.poll()
+    if (!received) {
       return null
     }
+    const nonceAndCypherText = new Uint8Array(received)
     const nonce = nonceAndCypherText.slice(0, await nonceSize())
     const cypherText = nonceAndCypherText.slice(await nonceSize())
     return decrypt(cypherText, nonce, this.key, 'text')
