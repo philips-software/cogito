@@ -7,7 +7,6 @@
   "license": "UNLICENSED",
   "main": "./distribution/index.js",
   "scripts": {
-    "test": "yarn standard && yarn nyc mocha 'test/**/*.js'",
     "build": "babel source --out-dir distribution",
     "prepublish": "yarn build"
   },
