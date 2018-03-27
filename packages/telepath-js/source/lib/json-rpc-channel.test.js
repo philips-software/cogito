@@ -1,4 +1,4 @@
-const JsonRpcChannel = require('./json-rpc-channel')
+import JsonRpcChannel from './json-rpc-channel'
 
 describe('JSON RPC Channel', () => {
   const request = { jsonrpc: '2.0', id: 1, method: 'foo' }

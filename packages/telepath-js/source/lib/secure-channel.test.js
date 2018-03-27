@@ -1,8 +1,8 @@
-const td = require('testdouble')
+import td from 'testdouble'
 const anything = td.matchers.anything
-const { random, encrypt, decrypt, keySize, nonceSize } = require('./crypto')
-const base64url = require('base64url')
-const SecureChannel = require('./secure-channel')
+import { random, encrypt, decrypt, keySize, nonceSize } from './crypto'
+import base64url from 'base64url'
+import SecureChannel from './secure-channel'
 
 describe('Secure Channel', () => {
   const channelId = 'channel_id'
