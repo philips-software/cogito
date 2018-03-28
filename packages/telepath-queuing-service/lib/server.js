@@ -1,7 +1,7 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const wrap = require('async-middleware').wrap
-const cors = require('cors')
+import express from 'express'
+import bodyParser from 'body-parser'
+import { wrap } from 'async-middleware'
+import cors from 'cors'
 
 function createServer () {
   const server = express()
@@ -38,4 +38,4 @@ function createServer () {
   return server
 }
 
-module.exports = createServer
+export default createServer
