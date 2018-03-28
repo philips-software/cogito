@@ -17,12 +17,15 @@
 	],
 	"jest": {
 		"testEnvironment": "node",
-		"testRegex": "packages/(cogito-web3|telepath-js|telepath-queuing-service)/.*test\\.js$",
+		"projects": [
+			"packages/cogito-web3",
+			"packages/telepath-js",
+			"packages/telepath-queuing-service"
+		],
+		"testMatch": [ "**/*.test.js" ],
 		"collectCoverage": true,
 		"collectCoverageFrom": [
-			"packages/cogito-web3/source/**.js",
-			"packages/telepath-js/source/**.js",
-			"packages/telepath-queuing-service/**.js",
+			"source/**.js",
 			"!**/*.test.js",
 			"!**/node_modules/**"
 		],
