@@ -170,6 +170,8 @@
 		5C8CFD3F2007993500D383C0 /* JsonRpcRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8CFD3D2007993500D383C0 /* JsonRpcRequest.swift */; };
 		5C9331981FA324460056869F /* TelepathChannelExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9331961FA324460056869F /* TelepathChannelExample.swift */; };
 		5C93319A1FA325C30056869F /* TelepathActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9331991FA325C30056869F /* TelepathActionsSpec.swift */; };
+		5CAC2D65206BD0CB00F74462 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAC2D64206BD0CB00F74462 /* Configuration.swift */; };
+		5CAC2D66206BD0CB00F74462 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAC2D64206BD0CB00F74462 /* Configuration.swift */; };
 		5CC4D2C91FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2C81FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift */; };
 		5CC4D2CB1FE7F724002F2450 /* TransactionSigningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2CA1FE7F724002F2450 /* TransactionSigningService.swift */; };
 		5CC4D2CC1FE7F731002F2450 /* TransactionSigningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2CA1FE7F724002F2450 /* TransactionSigningService.swift */; };
@@ -344,6 +346,7 @@
 		5C8CFD3D2007993500D383C0 /* JsonRpcRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcRequest.swift; sourceTree = "<group>"; };
 		5C9331961FA324460056869F /* TelepathChannelExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelepathChannelExample.swift; sourceTree = "<group>"; };
 		5C9331991FA325C30056869F /* TelepathActionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelepathActionsSpec.swift; sourceTree = "<group>"; };
+		5CAC2D64206BD0CB00F74462 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		5CC4D2C81FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningServiceSpec.swift; sourceTree = "<group>"; };
 		5CC4D2CA1FE7F724002F2450 /* TransactionSigningService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningService.swift; sourceTree = "<group>"; };
 		5CC4D2CD1FE801DE002F2450 /* TransactionSigningActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningActions.swift; sourceTree = "<group>"; };
@@ -502,6 +505,7 @@
 				02E90F501FE03319008D81F9 /* DialogPresenter */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
 				0230F9461FA1E5F3006A36FC /* LaunchActions.swift */,
+				5CAC2D64206BD0CB00F74462 /* Configuration.swift */,
 				027603F51F6ACD1600788B0A /* Assets.xcassets */,
 				027603F71F6ACD1600788B0A /* LaunchScreen.storyboard */,
 				027603FA1F6ACD1600788B0A /* Info.plist */,
@@ -1184,6 +1188,7 @@
 				02021D191F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
 				5C04E4501FA788D200A70C60 /* AccountActions.swift in Sources */,
+				5CAC2D65206BD0CB00F74462 /* Configuration.swift in Sources */,
 				02A15B011F8672C000A94163 /* DiamondReducer.swift in Sources */,
 				02DB90E72045546C00C4817C /* FacetDetailsViewController.swift in Sources */,
 				0270D71A1F9F58CA00CC9038 /* AttestationActions.swift in Sources */,
@@ -1325,6 +1330,7 @@
 				5C0C74FA200DF71D009463F9 /* JsonRpcIdSpec.swift in Sources */,
 				5C20A0F91FA1FC5300B443C9 /* TelepathReducer.swift in Sources */,
 				5C0C74F7200DF705009463F9 /* JsonRpcId.swift in Sources */,
+				5CAC2D66206BD0CB00F74462 /* Configuration.swift in Sources */,
 				029245181F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
 				5CC4D2CC1FE7F731002F2450 /* TransactionSigningService.swift in Sources */,
 				028F4F041F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
