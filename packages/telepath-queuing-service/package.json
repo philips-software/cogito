@@ -5,10 +5,8 @@
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service",
   "private": true,
   "license": "UNLICENSED",
-  "main": "index.js",
   "scripts": {
-    "start": "node ./index",
-    "test": "yarn standard && nyc mocha test/**/*.js"
+    "start": "node --require '@babel/register' ./index"
   },
   "engines": {
     "node": ">=7.6.0"
@@ -17,6 +15,10 @@
     "supertest": "^3.0.0"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.42",
+    "@babel/register": "^7.0.0-beta.42",
+    "@babel/runtime": "^7.0.0-beta.42",
     "async-middleware": "^1.2.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
