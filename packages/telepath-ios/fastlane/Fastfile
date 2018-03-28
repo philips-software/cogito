@@ -1,0 +1,8 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Execute tests"
+  lane :tests do
+    run_tests(scheme: "TelepathTests")
+  end
+end

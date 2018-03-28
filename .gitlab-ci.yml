@@ -23,6 +23,19 @@ test cogito-ios-app:
   tags:
     - ios
 
+test telepath-ios:
+  stage: test
+  variables:
+    BUNDLE_GEMFILE: .ruby-dependencies/Gemfile
+  before_script:
+    - cd packages/telepath-ios
+    - bundle install
+  script:
+    - bundle exec fastlane tests
+    - bundle exec slather coverage
+  tags:
+    - ios
+
 build cogito-web3:
   stage: build
   script:
