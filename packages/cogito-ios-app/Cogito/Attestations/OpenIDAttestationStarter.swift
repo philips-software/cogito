@@ -65,7 +65,7 @@ struct OpenIDAttestationStarter {
         urlComponents.queryItems = [
             URLQueryItem(name: "response_type", value: "id_token"),
             URLQueryItem(name: "client_id", value: "cogito"),
-            URLQueryItem(name: "redirect_uri", value: "https://cogito.mobi/applinks/openid-callback"),
+            URLQueryItem(name: "redirect_uri", value: Configuration.openIdCallbackUrl),
             URLQueryItem(name: "scope", value: "openid"),
             URLQueryItem(name: "nonce", value: nonce)
         ]
