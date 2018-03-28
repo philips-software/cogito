@@ -21,7 +21,7 @@ test cogito-ios-app:
     - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec fastlane tests
     - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec slather coverage
   tags:
-    - ppf-cios
+    - ios
 
 build cogito-web3:
   stage: build
