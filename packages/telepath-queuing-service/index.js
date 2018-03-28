@@ -1,5 +1,7 @@
-const createServer = require('./lib/server')
+import createServer from './lib/server'
+
 const server = createServer()
+
 server.listen(3000, function () {
   console.log('Telepath Queueing Service running on port 3000')
 })
