@@ -8,7 +8,6 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {
-    "test": "yarn standard && nyc mocha test/**/*.js",
     "build": "node ./tools/build.js"
   },
   "engines": {
