@@ -7,15 +7,9 @@ stages:
 before_script:
   - yarn install
 
-test cogito-web3:
+test javascript:
   stage: test
   script:
-    - yarn test
-
-test telepath-queuing-service:
-  stage: test
-  script:
-    - cd packages/telepath-queuing-service
     - yarn test
 
 test cogito-ios-app:
@@ -25,7 +19,7 @@ test cogito-ios-app:
     - bundle install --gemfile=.doesntworkinprojectroot/Gemfile
   script:
     - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec fastlane tests
-    - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec slather coverage 
+    - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec slather coverage
   tags:
     - ppf-cios
 
