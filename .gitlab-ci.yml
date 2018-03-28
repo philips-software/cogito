@@ -14,12 +14,14 @@ test javascript:
 
 test cogito-ios-app:
   stage: test
+  variables:
+    BUNDLE_GEMFILE: .ruby-dependencies/Gemfile
   before_script:
     - cd packages/cogito-ios-app
-    - bundle install --gemfile=.doesntworkinprojectroot/Gemfile
+    - bundle install
   script:
-    - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec fastlane tests
-    - BUNDLE_GEMFILE=.doesntworkinprojectroot/Gemfile bundle exec slather coverage
+    - bundle exec fastlane tests
+    - bundle exec slather coverage
   tags:
     - ios
 
