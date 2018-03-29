@@ -62,4 +62,4 @@ publish telepath-js:
   stage: publish
   script:
     - echo $ARTIFACTORY_DOTNPMRC_PART >> .npmrc
-    - yarn lerna publish --scope @cogito/telepath-js
+    - yarn lerna publish --scope @cogito/telepath-js --canary
