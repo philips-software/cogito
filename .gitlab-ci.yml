@@ -58,6 +58,12 @@ build telepath-js:
       - node_modules/
       - packages/telepath-js/node_modules/
 
+publish cogito-web3:
+  stage: publish
+  script:
+    - echo $ARTIFACTORY_DOTNPMRC_PART >> .npmrc
+    - yarn lerna publish --scope @cogito/cogito-web3 --canary --yes
+
 publish telepath-js:
   stage: publish
   script:
