@@ -3,6 +3,7 @@ image: node:9.4.0
 stages:
   - test
   - build
+  - publish
 
 before_script:
   - yarn install
@@ -56,3 +57,10 @@ build telepath-js:
     paths:
       - node_modules/
       - packages/telepath-js/node_modules/
+
+publish telepath-js:
+  stage: publish
+  script:
+    - yarn version --new-version $CI_COMMIT_TAG --no-git-tag-version
+    - echo $ARTIFACTORY_DOTNPMRC_PART >> .npmrc
+    - yarn lerna publish --scope @cogito/telepath-js
