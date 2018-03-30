@@ -53,7 +53,6 @@ build telepath-js:
   stage: build
   script:
     - yarn lerna run --scope @cogito/telepath-js build
-  allow_failure: true
   artifacts:
     paths:
       - packages/telepath-js/es/
@@ -64,10 +63,14 @@ publish cogito-web3:
   stage: publish
   script:
     - echo $ARTIFACTORY_DOTNPMRC_PART >> .npmrc
-    - yarn lerna publish --scope @cogito/cogito-web3 --canary --yes
+    - yarn lerna publish --scope @cogito/cogito-web3 --skip-git --npm-tag=$CI_COMMIT_TAG
+  only:
+    - tags
 
 publish telepath-js:
   stage: publish
   script:
     - echo $ARTIFACTORY_DOTNPMRC_PART >> .npmrc
-    - yarn lerna publish --scope @cogito/telepath-js --canary --yes
+    - yarn lerna publish --scope @cogito/telepath-js --skip-git --npm-tag=$CI_COMMIT_TAG
+  only:
+    - tags
