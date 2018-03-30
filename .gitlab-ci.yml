@@ -63,14 +63,15 @@ publish cogito-web3:
   stage: publish
   script:
     - echo $ARTIFACTORY_DOTNPMRC_PART >> .npmrc
-    - yarn lerna publish --scope @cogito/cogito-web3 --skip-git --npm-tag=$CI_COMMIT_TAG --force-publish=*
+    - yarn lerna publish --scope @cogito/cogito-web3 --npm-tag=$CI_COMMIT_TAG
   only:
-    - tags
+    - add-artifactory-ta
 
 publish telepath-js:
   stage: publish
   script:
     - echo $ARTIFACTORY_DOTNPMRC_PART >> .npmrc
-    - yarn lerna publish --scope @cogito/telepath-js --skip-git --npm-tag=$CI_COMMIT_TAG --force-publish=*
+    - yarn lerna publish --scope @cogito/telepath-js --npm-tag=$CI_COMMIT_TAG
+
   only:
-    - tags
+    - add-artifactory-ta
