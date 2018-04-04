@@ -51,7 +51,6 @@ build telepath-js:
   stage: build
   script:
     - yarn lerna run --scope @cogito/telepath-js build
-  allow_failure: true
   cache:
     paths:
       - node_modules/
