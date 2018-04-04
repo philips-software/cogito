@@ -40,13 +40,18 @@ describe('Secure Channel', () => {
     })
   })
 
-  describe('when receiving a message (on the blue queue)', () => {
+  describe('when receiving a message', () => {
     async function enc (message) {
       const nonce = await random(await nonceSize())
       const plainText = new Uint8Array(Buffer.from(message))
       const cypherText = await encrypt(plainText, nonce, key)
       return Buffer.concat([nonce, cypherText])
     }
+
+    it('uses the blue queue', async () => {
+      await channel.receive()
+      expect(queuing.receive.mock.calls[0][0]).toEqual(blueQueue)
+    })
 
     it('decrypts the message', async () => {
       queuing.receive.mockResolvedValueOnce(enc(message))

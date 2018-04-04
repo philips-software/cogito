@@ -19,7 +19,7 @@ describe('JSON RPC Channel', () => {
   describe('when a valid response is available', () => {
     beforeEach(() => {
       channel.send.mockImplementation((sentRequest) => {
-        if (sentRequest == JSON.stringify(request)) {
+        if (sentRequest === JSON.stringify(request)) {
           channel.receive.mockResolvedValue(JSON.stringify(response))
         }
       })
@@ -54,7 +54,7 @@ describe('JSON RPC Channel', () => {
 
   it('ignores responses with the wrong id', async () => {
     channel.receive
-      .mockResolvedValueOnce(JSON.stringify({jsonrpc:'2.0', id:0, result:null}))
+      .mockResolvedValueOnce(JSON.stringify({jsonrpc: '2.0', id: 0, result: null}))
       .mockResolvedValue(JSON.stringify(response))
     expect(await jsonrpc.send(request)).toEqual(response)
   })

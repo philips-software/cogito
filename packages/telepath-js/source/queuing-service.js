@@ -1,5 +1,7 @@
 import base64url from 'base64url'
-import fetch, { Request } from 'cross-fetch'
+import fetch from 'cross-fetch'
+
+const Request = fetch.Request
 
 class QueuingService {
   constructor (baseUrl) {
