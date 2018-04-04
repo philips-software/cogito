@@ -1,1 +1,1 @@
-export { default } from './lib/telepath'
+export { default } from './telepath'

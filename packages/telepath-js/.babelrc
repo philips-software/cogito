@@ -26,10 +26,7 @@
           "modules": false
         }]
       ],
-      "plugins": [
-        "@babel/plugin-proposal-object-rest-spread",
-        "@babel/plugin-external-helpers"
-      ],
+      "plugins": ["@babel/plugin-proposal-object-rest-spread"],
       "ignore": [
         "**/*.test.js"
       ]

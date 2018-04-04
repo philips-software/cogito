@@ -25,7 +25,7 @@ describe('Telepath', () => {
       random.mockImplementation(async (size) => {
         if (size === fakeRandomId.length) {
           return fakeRandomId
-        } else if (size === fakeRandomKey.length ) {
+        } else if (size === fakeRandomKey.length) {
           return fakeRandomKey
         }
       })
