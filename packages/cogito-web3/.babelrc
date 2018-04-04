@@ -6,7 +6,8 @@
       ],
       "plugins": ["@babel/plugin-proposal-object-rest-spread"],
       "ignore": [
-        "**/*.test.js"
+        "**/*.test.js",
+        "**/__mocks__/**"
       ]
     },
     "es": {
@@ -17,7 +18,8 @@
       ],
       "plugins": ["@babel/plugin-proposal-object-rest-spread"],
       "ignore": [
-        "**/*.test.js"
+        "**/*.test.js",
+        "**/__mocks__/**"
       ]
     },
     "umd": {
@@ -26,12 +28,10 @@
           "modules": false
         }]
       ],
-      "plugins": [
-        "@babel/plugin-proposal-object-rest-spread",
-        "@babel/plugin-external-helpers"
-      ],
+      "plugins": ["@babel/plugin-proposal-object-rest-spread"],
       "ignore": [
-        "**/*.test.js"
+        "**/*.test.js",
+        "**/__mocks__/**"
       ]
     },
     "test": {

@@ -6,7 +6,9 @@ import resolve from 'rollup-plugin-node-resolve'
 
 const config = {
   input: 'source/index.js',
-  name: 'cogito-web3',
+  output: {
+    name: 'cogito-web3'
+  },
   external: ['web3'],
   plugins: [
     replace({
