@@ -11,13 +11,13 @@ const exec = (command, extraEnv) =>
 
 console.log('Building CommonJS modules ...')
 
-exec('babel source -d lib', {
+exec('babel source -d lib --delete-dir-on-start', {
   BABEL_ENV: 'commonjs'
 })
 
 console.log('\nBuilding ES modules ...')
 
-exec('babel source -d es', {
+exec('babel source -d es --delete-dir-on-start', {
   BABEL_ENV: 'es'
 })
 
