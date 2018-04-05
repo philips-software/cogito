@@ -2,27 +2,31 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import { wrap } from 'async-middleware'
 import cors from 'cors'
+import Cache from 'lru-cache'
 
 function createServer () {
   const server = express()
-  let state = {}
+  let state = Cache({ maxAge: 10 * 60 * 1000 })
 
   server.use(cors())
   server.use(bodyParser.text({ type: '*/*' }))
 
+  setInterval(() => { state.prune() }, 60 * 1000)
+
   server.post('/:queueId', wrap(async function (request, response) {
     const queueId = request.params.queueId
     const message = request.body
-    if (!state[queueId]) {
-      state[queueId] = []
+    if (!state.has(queueId)) {
+      state.set(queueId, [])
     }
-    state[queueId].push(message)
+    state.get(queueId).push(message)
     response.status(200).end()
   }))
 
   server.get('/:queueId', wrap(async function (request, response) {
     const queueId = request.params.queueId
-    const queue = state[queueId]
+    const queue = state.get(queueId)
+    state.set(queueId, queue) // retain queue in cache
     if (!queue) {
       response.status(204).end()
       return
