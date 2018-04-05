@@ -1,5 +1,8 @@
 import request from 'supertest'
 import createServer from './server'
+import MockDate from 'mockdate'
+
+jest.useFakeTimers()
 
 describe('Server', () => {
   const queueId = 'a_queue_id'
@@ -38,5 +41,44 @@ describe('Server', () => {
 
   it('returns status code 204 when queue is non-existent', async () => {
     await request(server).get('/non-existent').expect(204)
+  })
+
+  describe('time to live', async () => {
+    const startTime = Date.now()
+    const tenMinutes = 10 * 60 * 1000
+
+    beforeEach(() => {
+      MockDate.set(startTime)
+    })
+
+    afterEach(() => {
+      MockDate.reset()
+    })
+
+    const forwardTime = (newTime) => {
+      MockDate.set(new Date(newTime))
+      jest.runOnlyPendingTimers()
+    }
+
+    it('retains queues for 10 minutes', async () => {
+      await request(server).post(`/${queueId}`).send('message')
+      forwardTime(startTime + tenMinutes)
+      await request(server).get(`/${queueId}`).expect(200)
+    })
+
+    it('purges queues after 10 minutes', async () => {
+      await request(server).post(`/${queueId}`).send('message')
+      forwardTime(startTime + tenMinutes + 1)
+      await request(server).get(`/${queueId}`).expect(204)
+    })
+
+    it('retains queues that have been read recently', async () => {
+      await request(server).post(`/${queueId}`).send('message1')
+      await request(server).post(`/${queueId}`).send('message2')
+      forwardTime(startTime + tenMinutes)
+      await request(server).get(`/${queueId}`).expect(200)
+      forwardTime(startTime + tenMinutes + 1)
+      await request(server).get(`/${queueId}`).expect(200)
+    })
   })
 })
