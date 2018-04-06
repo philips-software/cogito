@@ -1,16 +1,16 @@
 {
 	"private": true,
 	"devDependencies": {
-		"@babel/core": "^7.0.0-beta.41",
-		"@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.41",
+		"@babel/core": "^7.0.0-beta.44",
+		"@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
 		"babel-core": "^7.0.0-0",
 		"babel-eslint": "^8.0.0",
-		"babel-jest": "^22.4.1",
-		"jest": "^22.4.2",
-		"lerna": "^2.9.0",
+		"babel-jest": "^22.4.3",
+		"jest": "^22.4.3",
+		"lerna": "^2.9.1",
 		"regenerator-runtime": "^0.11.1",
-		"standard": "^11.0.0",
-		"web3": "^1.0.0-beta.29"
+		"standard": "^11.0.1",
+		"web3": "^1.0.0-beta.33"
 	},
 	"workspaces": [
 		"packages/*"
@@ -22,14 +22,18 @@
 			"packages/telepath-js",
 			"packages/telepath-queuing-service"
 		],
-		"testMatch": [ "**/*.test.js" ],
+		"testMatch": [
+			"**/*.test.js"
+		],
 		"collectCoverage": true,
 		"collectCoverageFrom": [
 			"source/**.js",
 			"!**/*.test.js",
 			"!**/node_modules/**"
 		],
-		"coverageReporters": [ "text-summary" ]
+		"coverageReporters": [
+			"text-summary"
+		]
 	},
 	"scripts": {
 		"test": "yarn standard && jest --verbose",
