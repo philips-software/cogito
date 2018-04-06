@@ -1,7 +1,25 @@
 {
-  "presets": ["@babel/preset-env"],
-  "plugins": [
-    "@babel/plugin-proposal-object-rest-spread",
-    "@babel/plugin-transform-runtime"
-  ]
+  "env": {
+    "development": {
+      "presets": ["@babel/preset-env"],
+      "plugins": [
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-transform-runtime"
+      ]
+    },
+    "test": {
+      "presets": ["@babel/preset-env"],
+      "plugins": [
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-transform-runtime"
+      ]
+    },
+    "production": {
+      "presets": ["@babel/preset-env"],
+      "plugins": [
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-transform-runtime"
+      ]
+    }
+  }
 }
