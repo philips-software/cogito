@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "Secure communication channel between mobile app and web app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/packages/telepath-js",
-  "private": true,
   "license": "UNLICENSED",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -40,5 +39,8 @@
     "base64url": "^2.0.0",
     "cross-fetch": "^1.1.1",
     "libsodium-wrappers": "^0.7.2"
+  },
+  "publishConfig": {
+    "registry": "http://artifactory-ehv.ta.philips.com/artifactory/api/npm/dl-common-publish-npm-local"
   }
 }
