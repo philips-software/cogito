@@ -19,8 +19,15 @@ function createServer () {
     if (!state.has(queueId)) {
       state.set(queueId, [])
     }
-    state.get(queueId).push(message)
-    response.status(200).end()
+    const queue = state.get(queueId)
+    if (queue.length < 3) {
+      queue.push(message)
+      response.status(200).end()
+    } else {
+      response
+        .status(429)
+        .send('Too many requests, maximum queue size reached.')
+    }
   }))
 
   server.get('/:queueId', wrap(async function (request, response) {
