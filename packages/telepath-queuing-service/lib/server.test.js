@@ -43,6 +43,13 @@ describe('Server', () => {
     await request(server).get('/non-existent').expect(204)
   })
 
+  it('allows a maximum of 3 messages in a queue', async () => {
+    await request(server).post(`/${queueId}`).send('message').expect(200)
+    await request(server).post(`/${queueId}`).send('message').expect(200)
+    await request(server).post(`/${queueId}`).send('message').expect(200)
+    await request(server).post(`/${queueId}`).send('message').expect(429)
+  })
+
   describe('time to live', async () => {
     const startTime = Date.now()
     const tenMinutes = 10 * 60 * 1000
