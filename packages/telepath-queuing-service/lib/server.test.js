@@ -50,6 +50,13 @@ describe('Server', () => {
     await request(server).post(`/${queueId}`).send('message').expect(429)
   })
 
+  it('allows a maximum message size of 10000 characters', async () => {
+    const notTooBig = Array(10000 + 1).join('a')
+    const tooBig = notTooBig + 'a'
+    await request(server).post(`/${queueId}`).send(notTooBig).expect(200)
+    await request(server).post(`/${queueId}`).send(tooBig).expect(400)
+  })
+
   describe('time to live', async () => {
     const startTime = Date.now()
     const tenMinutes = 10 * 60 * 1000
