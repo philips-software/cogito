@@ -1,7 +1,5 @@
 Telepath Queuing Service
 ========================
-[![build status](https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service/badges/master/build.svg)](https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service/commits/master)
-[![coverage report](https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service/badges/master/coverage.svg)](https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service/commits/master)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 Simple Queueing Service for use with Telepath. Allows two Telepath clients to
@@ -9,12 +7,4 @@ communicate when they are behind distinct NAT.
 
 [Documentation][1]
 
-
 [1]: http://blockchain-lab.gitlab-pages.ta.philips.com/telepath
-
-### Known limitations
-
-This service currently keeps all messages in memory. It has no limitations on
-the amount of queues or messages that it accepts. It also doesn't clear out
-stale messages. This means that its memory usage will continue to increase until
-it runs out of memory. For now, only use this for testing, not for production.
