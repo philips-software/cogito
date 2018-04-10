@@ -43,15 +43,15 @@ describe('Server', () => {
     await request(server).get('/non-existent').expect(204)
   })
 
-  it('allows a maximum of 3 messages in a queue', async () => {
-    await request(server).post(`/${queueId}`).send('message').expect(200)
-    await request(server).post(`/${queueId}`).send('message').expect(200)
-    await request(server).post(`/${queueId}`).send('message').expect(200)
+  it('allows a maximum of 10 messages in a queue', async () => {
+    for (var i = 0; i < 10; i++) {
+      await request(server).post(`/${queueId}`).send('message').expect(200)
+    }
     await request(server).post(`/${queueId}`).send('message').expect(429)
   })
 
-  it('allows a maximum message size of 10000 characters', async () => {
-    const notTooBig = Array(10000 + 1).join('a')
+  it('allows a maximum message size of 100000 characters', async () => {
+    const notTooBig = Array(100000 + 1).join('a')
     const tooBig = notTooBig + 'a'
     await request(server).post(`/${queueId}`).send(notTooBig).expect(200)
     await request(server).post(`/${queueId}`).send(tooBig).expect(400)

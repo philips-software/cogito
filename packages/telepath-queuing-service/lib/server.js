@@ -16,17 +16,17 @@ function createServer () {
   server.post('/:queueId', wrap(async function (request, response) {
     const queueId = request.params.queueId
     const message = request.body
-    if (message.length > 10000) {
+    if (message.length > 100000) {
       response
         .status(400)
-        .send('Message too large. Only 10000 characters allowed.')
+        .send('Message too large. Only 100000 characters allowed.')
       return
     }
     if (!state.get(queueId)) {
       state.set(queueId, [])
     }
     const queue = state.get(queueId)
-    if (queue.length >= 3) {
+    if (queue.length >= 10) {
       response
         .status(429)
         .send('Too many requests, maximum queue size reached.')
