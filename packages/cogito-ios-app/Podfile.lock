@@ -5,7 +5,7 @@ PODS:
   - FontAwesome.swift (1.3.2)
   - Geth (1.7.3)
   - JWTDecode (2.1.1)
-  - KeychainAccess (3.1.0)
+  - KeychainAccess (3.1.1)
   - Mockingjay (2.0.1):
     - Mockingjay/Core (= 2.0.1)
     - Mockingjay/XCTest (= 2.0.1)
@@ -13,7 +13,7 @@ PODS:
     - URITemplate (~> 2.0)
   - Mockingjay/XCTest (2.0.1):
     - Mockingjay/Core
-  - Nimble (7.0.3)
+  - Nimble (7.1.0)
   - QRCodeReader.swift (8.1.1)
   - Quick (1.2.0)
   - ReRxSwift (1.2.2):
@@ -59,24 +59,46 @@ DEPENDENCIES:
   - RxSwift (~> 4.0)
   - SwiftLint (= 0.21.0)
   - SwiftyJSON (~> 4.0)
-  - Telepath (from `https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git`)
+  - Telepath (from `../telepath-ios`)
   - Toast-Swift (~> 3.0)
   - URITemplate
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - BigInt
+    - Differentiator
+    - FontAwesome.swift
+    - Geth
+    - JWTDecode
+    - KeychainAccess
+    - Mockingjay
+    - Nimble
+    - QRCodeReader.swift
+    - Quick
+    - ReRxSwift
+    - ReSwift
+    - RichString
+    - RxCocoa
+    - RxDataSources
+    - RxSwift
+    - SipHash
+    - Sodium
+    - SwiftLint
+    - SwiftyJSON
+    - Toast-Swift
+    - URITemplate
 
 EXTERNAL SOURCES:
   ReSwiftThunk:
     :branch: swift4.0
     :git: https://github.com/mikecole20/ReSwiftThunk.git
   Telepath:
-    :git: https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git
+    :path: "../telepath-ios"
 
 CHECKOUT OPTIONS:
   ReSwiftThunk:
     :commit: 2871ea34c919bbdaa236c870ce7e16242f16ffb0
     :git: https://github.com/mikecole20/ReSwiftThunk.git
-  Telepath:
-    :commit: 36dcf1feec482c2b3bb399f1d11adf3fcda00169
-    :git: https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git
 
 SPEC CHECKSUMS:
   BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
@@ -84,9 +106,9 @@ SPEC CHECKSUMS:
   FontAwesome.swift: b4e4c8ccbbecb12f9b592bc533ff237af3706667
   Geth: 45a08eeef7a20e58dfc09a455563ffe210941a96
   JWTDecode: 83e8b381aafe27158d9f692cbdca2b12d61d460c
-  KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
+  KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
   Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
-  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
+  Nimble: 9c6651c3021af6de54c3ed90a4a0a87d548f7359
   QRCodeReader.swift: b164a681887de276d405ff02bce854d82cd6360b
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   ReRxSwift: f442fb438094237a2918f9345709a31b2a64a9cd
@@ -100,10 +122,10 @@ SPEC CHECKSUMS:
   Sodium: bf524b0a3d5ad6870dcf343205cca7e659c15ad5
   SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
-  Telepath: 14b8a4ad40df8c1f25ddc49ae7e1db3f1c427b7e
+  Telepath: be22939200889f0acf17dae0b4c3cdcab39d666e
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
   URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: c2fa3bd6bec142fe10541b5ab20de2ff22c84964
+PODFILE CHECKSUM: 0d039f6de67d6168284ed6e361a3f7331d52cacf
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0
