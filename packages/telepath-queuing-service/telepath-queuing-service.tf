@@ -1,6 +1,6 @@
 variable "version" {
   description = "Version number of the Telepath Queuing Service to deploy"
-  default     = "v4"
+  default     = "v5"
 }
 
 provider "aws" {
@@ -51,7 +51,7 @@ resource "aws_elastic_beanstalk_environment" "telepath" {
   name                = "telepath"
   application         = "${aws_elastic_beanstalk_application.telepath-queuing-service.name}"
   version_label       = "${aws_elastic_beanstalk_application_version.telepath-queuing-service.name}"
-  solution_stack_name = "64bit Amazon Linux 2017.09 v4.4.0 running Node.js"
+  solution_stack_name = "64bit Amazon Linux 2017.09 v4.4.4 running Node.js"
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
@@ -86,7 +86,7 @@ resource "aws_elastic_beanstalk_environment" "telepath" {
   setting {
     namespace = "aws:elasticbeanstalk:container:nodejs"
     name      = "NodeVersion"
-    value     = "8.8.1"
+    value     = "8.9.3"
   }
 }
 
