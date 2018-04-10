@@ -1,6 +1,6 @@
 variable "version" {
   description = "Version number of the Telepath Queuing Service to deploy"
-  default     = "v5"
+  default     = "v6"
 }
 
 provider "aws" {
