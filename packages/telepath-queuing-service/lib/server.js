@@ -22,7 +22,7 @@ function createServer () {
         .send('Message too large. Only 10000 characters allowed.')
       return
     }
-    if (!state.has(queueId)) {
+    if (!state.get(queueId)) {
       state.set(queueId, [])
     }
     const queue = state.get(queueId)
