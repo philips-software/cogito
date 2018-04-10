@@ -21,7 +21,7 @@ class RecordingStore: Store<AppState> {
 
 extension RecordingStore {
     func firstAction <T> (ofType: T.Type) -> T? {
-        return actions.compactMap { $0 as? T }.first
+        return actions.flatMap { $0 as? T }.first
     }
 }
 
