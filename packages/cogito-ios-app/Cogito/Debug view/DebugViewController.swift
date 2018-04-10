@@ -16,15 +16,17 @@ class DebugViewController: UIViewController, Connectable {
     override func viewDidLoad() {
         super.viewDidLoad()
         connection.bind(\Props.peerCount, to: peerCountLabel.rx.text) { String($0) }
-        connection.bind(\Props.syncProgress, to: syncProgressLabel.rx.text) { progress in
-            guard let p = progress else { return "idle" }
-            return "- \(p.total - p.current) (\(String(format: "%.2f", 100.0 * p.fractionComplete))%)"
+        connection.bind(\Props.syncProgress, to: syncProgressLabel.rx.text) { (maybe: SyncProgress?) -> String in
+            guard let progress = maybe else { return "idle" }
+            let remaining = progress.total - progress.current
+            let percentage = String(format: "%.2f", 100.0 * progress.fractionComplete)
+            return "- \(remaining) (\(percentage)%)"
         }
         connection.bind(\Props.syncProgress, to: syncProgressBar.rx.isHidden) { $0 == nil }
         connection.bind(\Props.syncProgress, to: syncActivityIndicator.rx.isAnimating) { $0 != nil }
-        connection.bind(\Props.syncProgress, to: syncProgressBar.rx.progress) { progress in
-            guard let p = progress else { return 0 }
-            return p.fractionComplete
+        connection.bind(\Props.syncProgress, to: syncProgressBar.rx.progress) { maybeProgress in
+            guard let progress = maybeProgress else { return 0 }
+            return progress.fractionComplete
         }
     }
 
@@ -68,8 +70,8 @@ class DebugViewController: UIViewController, Connectable {
             return
         }
         let subject: Subject?
-        if let t = oidcSubjectField.text, !t.isEmpty {
-            subject = t
+        if let text = oidcSubjectField.text, !text.isEmpty {
+            subject = text
         } else {
             subject = nil
         }
