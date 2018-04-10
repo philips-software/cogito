@@ -1,3 +1,8 @@
+variable "version" {
+  description = "Version number of the Telepath Queuing Service to deploy"
+  default     = "v2"
+}
+
 provider "aws" {
   version = "~> 1.5"
   region  = "eu-central-1"
@@ -27,7 +32,7 @@ resource "aws_s3_bucket" "telepath-source" {
 
 resource "aws_s3_bucket_object" "source" {
   bucket = "${aws_s3_bucket.telepath-source.id}"
-  key    = "telepath-queuing-service.zip"
+  key    = "telepath-queuing-service-${var.version}.zip"
   source = "${path.module}/.terraform-build/telepath-queuing-service.zip"
 }
 
@@ -36,7 +41,7 @@ resource "aws_elastic_beanstalk_application" "telepath-queuing-service" {
 }
 
 resource "aws_elastic_beanstalk_application_version" "telepath-queuing-service" {
-  name        = "telepath-queuing-service-latest"
+  name        = "telepath-queuing-service-${var.version}"
   application = "${aws_elastic_beanstalk_application.telepath-queuing-service.name}"
   bucket      = "${aws_s3_bucket.telepath-source.id}"
   key         = "${aws_s3_bucket_object.source.key}"
