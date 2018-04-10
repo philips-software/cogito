@@ -23,9 +23,7 @@ const config = {
     babel({
       exclude: 'node_modules/**'
     }),
-    resolve({
-      preferBuiltins: true
-    }),
+    resolve(),
     commonjs({
       include: /node_modules/
     }),
