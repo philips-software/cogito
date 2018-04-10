@@ -21,7 +21,6 @@
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.44",
     "@babel/core": "7.0.0-beta.44",
-    "@babel/plugin-external-helpers": "7.0.0-beta.44",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
     "@babel/preset-env": "^7.0.0-beta.44",
     "gzip-size": "^4.1.0",
