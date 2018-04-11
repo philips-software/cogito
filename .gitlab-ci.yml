@@ -17,7 +17,7 @@ test cogito-ios-app:
   variables:
     BUNDLE_GEMFILE: .ruby-dependencies/Gemfile
   before_script:
-    - cd packages/cogito-ios-app
+    - cd workspaces/cogito-ios-app
     - bundle install
   script:
     - bundle exec fastlane tests
@@ -30,7 +30,7 @@ test telepath-ios:
   variables:
     BUNDLE_GEMFILE: .ruby-dependencies/Gemfile
   before_script:
-    - cd packages/telepath-ios
+    - cd workspaces/telepath-ios
     - bundle install
   script:
     - bundle exec fastlane tests
@@ -45,7 +45,7 @@ build cogito-web3:
   cache:
     paths:
       - node_modules/
-      - packages/cogito-web3/node_modules/
+      - workspaces/cogito-web3/node_modules/
 
 build telepath-js:
   stage: build
@@ -54,4 +54,4 @@ build telepath-js:
   cache:
     paths:
       - node_modules/
-      - packages/telepath-js/node_modules/
+      - workspaces/telepath-js/node_modules/

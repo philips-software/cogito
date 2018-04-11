@@ -13,14 +13,14 @@
 		"web3": "^1.0.0-beta.33"
 	},
 	"workspaces": [
-		"packages/*"
+		"workspaces/*"
 	],
 	"jest": {
 		"testEnvironment": "node",
 		"projects": [
-			"packages/cogito-web3",
-			"packages/telepath-js",
-			"packages/telepath-queuing-service"
+			"workspaces/cogito-web3",
+			"workspaces/telepath-js",
+			"workspaces/telepath-queuing-service"
 		],
 		"testMatch": [
 			"**/*.test.js"
