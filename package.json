@@ -37,7 +37,7 @@
 		]
 	},
 	"scripts": {
-		"test": "yarn standard && jest",
+		"test": "yarn standard && NODE_PATH=./workspaces/demo-app/src jest",
 		"lint": "yarn standard",
 		"lint-fix": "yarn standard --fix --verbose"
 	},
