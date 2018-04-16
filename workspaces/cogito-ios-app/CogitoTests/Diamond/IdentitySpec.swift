@@ -5,15 +5,23 @@ import Nimble
 
 class IdentitySpec: QuickSpec {
     override func spec() {
+        var identity: Identity!
+
+        beforeEach {
+            identity = Identity(description: "test", address: Address.testAddress)
+        }
+
         it("cannot find a token when there are none") {
-            let identity = Identity(description: "test", address: Address.testAddress)
             expect(identity.findToken(claim: "iss", value: "https://something")).to(beNil())
         }
 
         it("can find a token") {
-            var identity = Identity(description: "test", address: Address.testAddress)
             identity.idTokens = [token]
             expect(identity.findToken(claim: "iss", value: issuer)) == token
+        }
+
+        it("has no encryption key pairs initially") {
+            expect(identity.encryptionKeyPairs.count) == 0
         }
     }
 }
