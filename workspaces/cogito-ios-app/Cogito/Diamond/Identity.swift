@@ -9,6 +9,7 @@ struct Identity: Codable {
     let address: Address
     let created: Date
     var idTokens: [String]
+    var encryptionKeyPairs: [Tag]
 
     init(description: String, address: Address) {
         self.identifier = UUID()
@@ -16,6 +17,7 @@ struct Identity: Codable {
         self.address = address
         self.idTokens = []
         self.created = Date()
+        self.encryptionKeyPairs = []
     }
 
     func findToken(claim: String, value: String) -> String? {
@@ -26,6 +28,7 @@ struct Identity: Codable {
         }
     }
 
+    typealias Tag = Data
 }
 
 extension Identity: Equatable {
@@ -34,7 +37,8 @@ extension Identity: Equatable {
                lhs.description == rhs.description &&
                lhs.address == rhs.address &&
                lhs.idTokens == rhs.idTokens &&
-               lhs.created == rhs.created
+               lhs.created == rhs.created &&
+               lhs.encryptionKeyPairs == rhs.encryptionKeyPairs
     }
 }
 
