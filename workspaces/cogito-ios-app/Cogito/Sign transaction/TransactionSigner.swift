@@ -11,12 +11,12 @@ struct TransactionSignerBuilder {
     let channel: TelepathChannel
 
     func build() -> TransactionSigner {
-        guard let tx = UnsignedTransaction(from: transaction) else {
+        guard let transaction = UnsignedTransaction(from: transaction) else {
             return TransactionSignerInvalid(dispatch: dispatch,
                                             responseId: responseId,
                                             channel: channel)
         }
-        return TransactionSignerValid(transaction: tx,
+        return TransactionSignerValid(transaction: transaction,
                                       dispatch: dispatch,
                                       getState: getState,
                                       responseId: responseId,

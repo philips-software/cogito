@@ -64,22 +64,22 @@ class UnsignedTransactionSpec: QuickSpec {
         }
 
         it("can initialize with valid data") {
-            let tx = UnsignedTransaction(from: validTransaction)
-            expect(tx).toNot(beNil())
-            expect(tx?.from) == Address.testAddress1
-            expect(tx?.to) == Address.testAddress2
-            expect(tx?.data) == Data(fromHex: "0xabcdef")
-            expect(tx?.nonce.description) == "48"
-            expect(tx?.gasPrice.description) == "1"
-            expect(tx?.gasLimit.description) == "2"
-            expect(tx?.value.description) == "4"
+            let transaction = UnsignedTransaction(from: validTransaction)
+            expect(transaction).toNot(beNil())
+            expect(transaction?.from) == Address.testAddress1
+            expect(transaction?.to) == Address.testAddress2
+            expect(transaction?.data) == Data(fromHex: "0xabcdef")
+            expect(transaction?.nonce.description) == "48"
+            expect(transaction?.gasPrice.description) == "1"
+            expect(transaction?.gasLimit.description) == "2"
+            expect(transaction?.value.description) == "4"
         }
 
         it("accepts plain number for gasPrice") {
             var transaction = validTransaction
             transaction["gasPrice"] = 42
-            let tx = UnsignedTransaction(from: transaction)
-            expect(tx?.gasPrice.description) == "42"
+            let unsigned = UnsignedTransaction(from: transaction)
+            expect(unsigned?.gasPrice.description) == "42"
         }
     }
 }

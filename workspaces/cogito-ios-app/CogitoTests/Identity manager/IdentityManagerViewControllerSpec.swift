@@ -9,9 +9,9 @@ class IdentityManagerViewControllerSpec: QuickSpec {
 
         beforeEach {
             let storyboard = UIStoryboard(name: "IdentityManager", bundle: Bundle(for: type(of: self)))
-            let vc = storyboard.instantiateViewController(withIdentifier: "IdentityManager")
-            identityManagerController = vc as? IdentityManagerViewController
-            expect(vc.view).toNot(beNil())
+            let viewController = storyboard.instantiateViewController(withIdentifier: "IdentityManager")
+            identityManagerController = viewController as? IdentityManagerViewController
+            expect(viewController.view).toNot(beNil())
         }
 
         it("resets create identity when showing the create identity form") {

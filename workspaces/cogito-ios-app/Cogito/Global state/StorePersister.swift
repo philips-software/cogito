@@ -8,15 +8,15 @@ class StorePersister: StoreSubscriber {
 
     static private var defaultPersister: StorePersister?
     static var `default`: StorePersister? {
-        if let d = defaultPersister {
-            return d
+        if let persister = defaultPersister {
+            return persister
         }
         do {
             let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
             let url = URL(fileURLWithPath: documentsDirectory).appendingPathComponent("state.json")
             defaultPersister = try StorePersister(store: appStore, persistAt: url)
-        } catch let e {
-            print("Failed to create default store persister. Error: \(e)")
+        } catch let error {
+            print("Failed to create default store persister. Error: \(error)")
         }
         return defaultPersister
     }
@@ -44,8 +44,8 @@ class StorePersister: StoreSubscriber {
             let encoder = JSONEncoder()
             let encodedState = try encoder.encode(store.state)
             try encodedState.write(to: stateUrl, options: .atomicWrite)
-        } catch let e {
-            print("Failed to write state to disk: \(e).")
+        } catch let error {
+            print("Failed to write state to disk: \(error).")
         }
     }
 }

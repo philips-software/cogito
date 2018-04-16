@@ -27,9 +27,9 @@ class CreateIdentityViewController: UIViewController, Connectable {
                 self.onDone()
             }
         }
-        connection.subscribe(\Props.error) { [unowned self] error in
-            if let e = error {
-                print("[error] createIdentity error: \(e)")
+        connection.subscribe(\Props.error) { [unowned self] maybeError in
+            if let error = maybeError {
+                print("[error] createIdentity error: \(error)")
                 let alert = UIAlertController(
                     title: "Failed to create identity",
                     message: "Please make sure you have a passcode set on your device, and retry.",

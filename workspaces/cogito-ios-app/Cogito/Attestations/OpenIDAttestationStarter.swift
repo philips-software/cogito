@@ -40,9 +40,9 @@ struct OpenIDAttestationStarter {
     }
 
     func run() {
-        withOpenIdConfiguration { config, error in
-            if let c = config,
-               let url = self.implicitFlowUrl(openIdConfiguration: c),
+        withOpenIdConfiguration { maybeConfig, error in
+            if let config = maybeConfig,
+               let url = self.implicitFlowUrl(openIdConfiguration: config),
                self.urlOpener.canOpenURL(url) {
                 self.urlOpener.open(url, options: [:]) { success in
                     if success {

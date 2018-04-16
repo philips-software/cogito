@@ -29,8 +29,8 @@ class AppPassword {
             if password == nil {
                 do {
                     password = try this.keychain.generatePassword()
-                } catch let e {
-                    callback(nil, e.localizedDescription)
+                } catch let error {
+                    callback(nil, error.localizedDescription)
                     return
                 }
                 if let error = this.store(password: password!) {
@@ -60,8 +60,8 @@ class AppPassword {
                 .withAuthenticationPrompt("Authenticate to securely store account data")
                 .set(password, key: appPasswordKey)
             return nil
-        } catch let e {
-            return e.localizedDescription
+        } catch let error {
+            return error.localizedDescription
         }
     }
 
