@@ -28,8 +28,8 @@ class DiamondStateSpec: QuickSpec {
         afterEach {
             do {
                 try FileManager.default.removeItem(atPath: keyStoreDir)
-            } catch let e {
-                print(e)
+            } catch let error {
+                print(error)
                 abort()
             }
         }

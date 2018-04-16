@@ -71,8 +71,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 appStore.dispatch(SyncProgressUpdated(progress: progress))
             }
             syncProgressReporter.start()
-        } catch let e {
-            print(e)
+        } catch let error {
+            print(error)
             abort()
         }
     }

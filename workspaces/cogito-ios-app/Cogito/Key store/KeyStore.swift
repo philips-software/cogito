@@ -53,13 +53,13 @@ class KeyStore: Codable {
             onComplete(nil, "failed to open key store")
             return
         }
-        appPassword.use { (password, error) in
-            if let p = password {
+        appPassword.use { (maybePassword, error) in
+            if let password = maybePassword {
                 do {
-                    let gethAccount = try gethKeyStore.newAccount(p)
+                    let gethAccount = try gethKeyStore.newAccount(password)
                     onComplete(gethAccount, nil)
-                } catch let e {
-                    onComplete(nil, e.localizedDescription)
+                } catch let error {
+                    onComplete(nil, error.localizedDescription)
                 }
             } else {
                 onComplete(nil, error)
@@ -71,9 +71,9 @@ class KeyStore: Codable {
         guard let gethKeyStore = wrapped else { return nil }
 
         let accounts = gethKeyStore.getAccounts()!
-        for i in 0..<accounts.size() {
+        for index in 0..<accounts.size() {
             do {
-                let account = try accounts.get(i)
+                let account = try accounts.get(index)
                 if account.getAddress().getHex() == identity.address.value {
                     return account
                 }
@@ -133,8 +133,8 @@ class KeyStore: Codable {
                                                                  chainID: gethChainId)
                 let signedTxRLP = try signedTx.encodeRLP()
                 onComplete(signedTxRLP, nil)
-            } catch let e {
-                print("[error] failed to sign transaction: \(e)")
+            } catch let error {
+                print("[error] failed to sign transaction: \(error)")
                 onComplete(nil, "failed to sign transaction")
                 return
             }
