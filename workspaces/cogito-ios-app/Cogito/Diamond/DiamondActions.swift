@@ -2,6 +2,7 @@
 
 import ReSwift
 import Geth
+import Security
 
 struct DiamondActions {
     struct CreateFacet: Action {
@@ -21,4 +22,30 @@ struct DiamondActions {
         let identity: Identity
         let idToken: String
     }
+
+    struct CreateEncryptionKeyPair: Action {
+        let tag: String
+        init(
+            tag: String,
+            keyPairCreateFunction: KeyPairCreateFunction = SecKeyCreateRandomKey
+        ) {
+            self.tag = tag
+            let parameters: [String:Any] = [
+                kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
+                kSecAttrKeySizeInBits as String: 2048,
+                kSecPrivateKeyAttrs as String: [
+                    kSecAttrIsPermanent as String: true,
+                    kSecAttrCanEncrypt as String: true,
+                    kSecAttrCanDecrypt as String: true,
+                    kSecAttrApplicationTag as String: tag.data(using: .utf8)!
+                ]
+            ]
+            _ = keyPairCreateFunction(parameters as CFDictionary, nil)
+        }
+    }
+
+    typealias KeyPairCreateFunction = (
+        _ parameters: CFDictionary,
+        _ error: UnsafeMutablePointer<Unmanaged<CFError>?>?
+    ) -> SecKey?
 }

@@ -42,6 +42,7 @@
 		027603F41F6ACD1600788B0A /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F21F6ACD1600788B0A /* Debug.storyboard */; };
 		027603F61F6ACD1600788B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027603F51F6ACD1600788B0A /* Assets.xcassets */; };
 		027603F91F6ACD1600788B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F71F6ACD1600788B0A /* LaunchScreen.storyboard */; };
+		028776272084D918006DD25A /* DiamondActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028776262084D918006DD25A /* DiamondActionsSpec.swift */; };
 		028F4EEC1F7AA64D0015C4AF /* GethReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EEB1F7AA64D0015C4AF /* GethReducerSpec.swift */; };
 		028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EED1F7CE12A0015C4AF /* SyncProgress.swift */; };
 		028F4EEF1F7CE12A0015C4AF /* SyncProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EED1F7CE12A0015C4AF /* SyncProgress.swift */; };
@@ -265,6 +266,7 @@
 		027603FF1F6ACD1600788B0A /* CogitoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CogitoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		027604051F6ACD1600788B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0276040E1F6BFF6D00788B0A /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		028776262084D918006DD25A /* DiamondActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondActionsSpec.swift; sourceTree = "<group>"; };
 		028F4EEB1F7AA64D0015C4AF /* GethReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethReducerSpec.swift; sourceTree = "<group>"; };
 		028F4EED1F7CE12A0015C4AF /* SyncProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProgress.swift; sourceTree = "<group>"; };
 		028F4EF41F7CF7EB0015C4AF /* DebugViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewControllerSpec.swift; sourceTree = "<group>"; };
@@ -675,6 +677,7 @@
 				02A15B031F86732500A94163 /* DiamondStateSpec.swift */,
 				02A15B051F86733000A94163 /* DiamondReducerSpec.swift */,
 				C00B5807D4B578AAA0D57B47 /* IdentitySpec.swift */,
+				028776262084D918006DD25A /* DiamondActionsSpec.swift */,
 			);
 			path = Diamond;
 			sourceTree = "<group>";
@@ -1296,6 +1299,7 @@
 				02021D3E1F8C16370092DD89 /* AppActionsSpec.swift in Sources */,
 				5C20A0FC1FA1FC7C00B443C9 /* TelepathState.swift in Sources */,
 				5C0C74FA200DF71D009463F9 /* JsonRpcIdSpec.swift in Sources */,
+				028776272084D918006DD25A /* DiamondActionsSpec.swift in Sources */,
 				5C20A0F91FA1FC5300B443C9 /* TelepathReducer.swift in Sources */,
 				5C0C74F7200DF705009463F9 /* JsonRpcId.swift in Sources */,
 				5CAC2D66206BD0CB00F74462 /* Configuration.swift in Sources */,
