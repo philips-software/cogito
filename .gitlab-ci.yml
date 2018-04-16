@@ -10,7 +10,7 @@ before_script:
 test javascript:
   stage: test
   script:
-    - yarn lerna run --scope @philips/** --scope @cogito/** build
+    - yarn lerna run --scope "@philips/**" --scope "@cogito/**" build
     - yarn test
 
 test cogito-ios-app:
