@@ -25,10 +25,5 @@ struct DiamondActions {
     struct StoreEncryptionKeyPair: Action {
         let identity: Identity
         let tag: String
-
-        init(identity: Identity, tag: String) {
-            self.identity = identity
-            self.tag = tag
-        }
     }
 }
