@@ -1,0 +1,17 @@
+{
+  "javascript.validate.enable": false,
+  "standard.usePackageJson": true,
+  "standard.autoFixOnSave": true,
+  "jest.pathToJest": "npm test --",
+  "jest.restartJestOnSnapshotUpdate": true,
+  "spellright.language": "en",
+  "spellright.documentTypes": [
+    "markdown",
+    "latex",
+    "plaintext"
+  ],
+  "solidity.solidityRoot": "./truffle",
+  "solidity.compilerRemappings": [
+    {"prefix": "ROOT", "target": "./truffle"}
+  ]
+}

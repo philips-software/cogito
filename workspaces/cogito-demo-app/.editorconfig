@@ -1,0 +1,9 @@
+[*]
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.sol]
+tab_width = 4
+
+[*.js]
+tab_width = 2

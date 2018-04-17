@@ -1,0 +1,1 @@
+export { CogitoContract } from './CogitoContract'
