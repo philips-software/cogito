@@ -59,6 +59,14 @@ class DiamondReducerSpec: QuickSpec {
             expect(nextState.facets[identity.identifier]!.idTokens).to(contain(idToken))
         }
 
+        it("stores a newly created encryption keypair") {
+            let identity = Identity(description: "test identity", address: Address.testAddress1)
+            let initialState = DiamondState(facets: [identity])
+            let action = DiamondActions.CreateEncryptionKeyPair(identity: identity)
+            let nextState = diamondReducer(action: action, state: initialState)
+            expect(nextState.facets[identity.identifier]!.encryptionKeyPairs).to(contain(action.tag))
+        }
+
         it("handles DeleteFacet") {
             let identity = Identity(description: "test identity", address: Address.testAddress1)
             let initialState = DiamondState(facets: [identity])

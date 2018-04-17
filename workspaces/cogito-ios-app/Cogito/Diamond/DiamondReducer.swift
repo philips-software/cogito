@@ -29,6 +29,8 @@ func diamondReducer(action: Action, state: DiamondState?) -> DiamondState {
         if state.facets[action.uuid] != nil {
             state.selectedFacetId = action.uuid
         }
+    case let action as DiamondActions.CreateEncryptionKeyPair:
+        state.facets[action.identity.identifier]?.encryptionKeyPairs.append(action.tag)
     default:
         break
     }
