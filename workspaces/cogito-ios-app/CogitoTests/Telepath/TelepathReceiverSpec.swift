@@ -45,7 +45,7 @@ class TelepathReceiverSpec: QuickSpec {
         }
 
         it("has a sensible polling interval") {
-            expect(TelepathReceiver(store: store).pollInterval) == 0.5
+            expect(TelepathReceiver(store: store).pollInterval) == 1.0
         }
     }
 }
