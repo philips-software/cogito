@@ -6,6 +6,7 @@ import Nimble
 class DiamondActionsSpec: QuickSpec {
     override func spec() {
         context("when creating a key pair") {
+            var action: DiamondActions.CreateEncryptionKeyPair!
             var creationParameters: [String:Any]? = nil
 
             beforeEach {
@@ -14,8 +15,7 @@ class DiamondActionsSpec: QuickSpec {
                     return nil
                 }
 
-                _ = DiamondActions.CreateEncryptionKeyPair(
-                    tag: "test tag",
+                action = DiamondActions.CreateEncryptionKeyPair(
                     keyPairCreateFunction: keyPairCreateFunction
                 )
             }
@@ -36,10 +36,16 @@ class DiamondActionsSpec: QuickSpec {
                 expect(privateKeyAttributes?[kSecAttrCanDecrypt as String] as? Bool).to(beTrue())
             }
 
-            it("is stored under the specified tag") {
+            it("is stored under a tag") {
                 let privateKeyAttributes = creationParameters?[kSecPrivateKeyAttrs as String] as? [String:Any]
                 let tagData = privateKeyAttributes?[kSecAttrApplicationTag as String] as? Data
-                expect(tagData) == "test tag".data(using: .utf8)
+                expect(tagData) == action.tag.data(using: .utf8)
+            }
+
+            it("generates unique tags") {
+                let tag1 = DiamondActions.CreateEncryptionKeyPair().tag
+                let tag2 = DiamondActions.CreateEncryptionKeyPair().tag
+                expect(tag1) != tag2
             }
 
             it("has access control flags") {
