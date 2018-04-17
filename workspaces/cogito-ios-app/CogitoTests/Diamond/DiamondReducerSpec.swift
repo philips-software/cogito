@@ -63,7 +63,7 @@ class DiamondReducerSpec: QuickSpec {
             let identity = Identity(description: "test identity", address: Address.testAddress1)
             let tag = "some tag"
             let initialState = DiamondState(facets: [identity])
-            let action = DiamondActions.CreateEncryptionKeyPair(identity: identity, tag: tag)
+            let action = DiamondActions.StoreEncryptionKeyPair(identity: identity, tag: tag)
             let nextState = diamondReducer(action: action, state: initialState)
             expect(nextState.facets[identity.identifier]!.encryptionKeyPairs).to(contain(tag))
         }

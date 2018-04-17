@@ -22,7 +22,7 @@ struct DiamondActions {
         let idToken: String
     }
 
-    struct CreateEncryptionKeyPair: Action {
+    struct StoreEncryptionKeyPair: Action {
         let identity: Identity
         let tag: String
 

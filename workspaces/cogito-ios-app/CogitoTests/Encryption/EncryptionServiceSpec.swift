@@ -46,20 +46,19 @@ class EncryptionServiceSpec: QuickSpec {
                 expect(tag1) != tag2
             }
 
-            it("dispatches CreateEncryptionKeyPair action") {
-                let action = store.firstAction(ofType: DiamondActions.CreateEncryptionKeyPair.self)
+            it("dispatches StoreEncryptionKeyPair action") {
+                let action = store.firstAction(ofType: DiamondActions.StoreEncryptionKeyPair.self)
                 expect(action).toNot(beNil())
             }
 
             it("uses the identity that is associated with the channel") {
-                let action = store.firstAction(ofType: DiamondActions.CreateEncryptionKeyPair.self)
+                let action = store.firstAction(ofType: DiamondActions.StoreEncryptionKeyPair.self)
                 expect(action?.identity) == store.state.telepath.channels[channel]
             }
 
             it("sends response on Telepath channel") {
                 let sendPendingAction = store.firstAction(ofType: TelepathActions.SendPending.self)
-                let createKeyPairAction = store.firstAction(ofType: DiamondActions.CreateEncryptionKeyPair.self)
-                expect(sendPendingAction?.message).to(contain(createKeyPairAction!.tag))
+                expect(sendPendingAction?.message).to(contain(keyPairCreator.latestTag!))
             }
         }
 
