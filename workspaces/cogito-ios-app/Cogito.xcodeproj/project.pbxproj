@@ -64,6 +64,9 @@
 		0292451A1F7AA17300F2C0C1 /* GethState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245191F7AA17300F2C0C1 /* GethState.swift */; };
 		0292451B1F7AA17300F2C0C1 /* GethState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245191F7AA17300F2C0C1 /* GethState.swift */; };
 		0292451D1F7AA3B100F2C0C1 /* AppStateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */; };
+		0295A01F2085E6CD0060400A /* EncryptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295A01E2085E6CD0060400A /* EncryptionService.swift */; };
+		0295A0212085E6DD0060400A /* EncryptionServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295A0202085E6DD0060400A /* EncryptionServiceSpec.swift */; };
+		0295A0222085E6F00060400A /* EncryptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295A01E2085E6CD0060400A /* EncryptionService.swift */; };
 		029691531F7166AC00654BD0 /* KeyStoreReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029691521F7166AC00654BD0 /* KeyStoreReducer.swift */; };
 		029691551F7166EE00654BD0 /* KeyStoreState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029691541F7166EE00654BD0 /* KeyStoreState.swift */; };
 		0298D4271F7A43C90070998D /* KeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3661F7012E1003A9787 /* KeyStore.swift */; };
@@ -279,6 +282,8 @@
 		029245161F7AA13F00F2C0C1 /* GethReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethReducer.swift; sourceTree = "<group>"; };
 		029245191F7AA17300F2C0C1 /* GethState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethState.swift; sourceTree = "<group>"; };
 		0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateHelper.swift; sourceTree = "<group>"; };
+		0295A01E2085E6CD0060400A /* EncryptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionService.swift; sourceTree = "<group>"; };
+		0295A0202085E6DD0060400A /* EncryptionServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionServiceSpec.swift; sourceTree = "<group>"; };
 		029691521F7166AC00654BD0 /* KeyStoreReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreReducer.swift; sourceTree = "<group>"; };
 		029691541F7166EE00654BD0 /* KeyStoreState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreState.swift; sourceTree = "<group>"; };
 		0298D4341F7A45150070998D /* GethSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethSpec.swift; sourceTree = "<group>"; };
@@ -505,6 +510,7 @@
 				5C48E23E1FA1F8A900B8BF6E /* Telepath */,
 				022621261FAB1CE700692126 /* Identity manager */,
 				02E90F501FE03319008D81F9 /* DialogPresenter */,
+				0295A01C2085E6900060400A /* Encryption */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
 				0230F9461FA1E5F3006A36FC /* LaunchActions.swift */,
 				5CAC2D64206BD0CB00F74462 /* Configuration.swift */,
@@ -537,6 +543,7 @@
 				5C48E23B1FA1D06900B8BF6E /* Telepath */,
 				022621271FAB1D0600692126 /* Identity manager */,
 				02E90F541FE27547008D81F9 /* DialogPresenter */,
+				0295A01D2085E69E0060400A /* Encryption */,
 				0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
 				5C014F511FAA07FF00F95071 /* RecordingStore.swift */,
@@ -610,6 +617,22 @@
 				C00B5412CBC3B026E362474C /* CreateIdentityStateSpec.swift */,
 			);
 			path = "Create identity";
+			sourceTree = "<group>";
+		};
+		0295A01C2085E6900060400A /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
+				0295A01E2085E6CD0060400A /* EncryptionService.swift */,
+			);
+			path = Encryption;
+			sourceTree = "<group>";
+		};
+		0295A01D2085E69E0060400A /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
+				0295A0202085E6DD0060400A /* EncryptionServiceSpec.swift */,
+			);
+			path = Encryption;
 			sourceTree = "<group>";
 		};
 		0298D4321F7A44EF0070998D /* Geth */ = {
@@ -1204,6 +1227,7 @@
 				02A15AFE1F8671D200A94163 /* Identity.swift in Sources */,
 				C00B5D39FC0D970348A5E0C6 /* DiamondActions.swift in Sources */,
 				C00B5AF3F2ECB1BD9415E765 /* Address.swift in Sources */,
+				0295A01F2085E6CD0060400A /* EncryptionService.swift in Sources */,
 				C00B5ACC20A8568692E88D7A /* DialogPresenterState.swift in Sources */,
 				C00B5164F17E8581AB40BA9E /* RequestedAlert.swift in Sources */,
 				C00B588AFDC9DD01CBAE511B /* DialogPresenterReducer.swift in Sources */,
@@ -1312,6 +1336,7 @@
 				02D0C0D51F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
 				02A15AFF1F8671D200A94163 /* Identity.swift in Sources */,
 				02DB90E82045546C00C4817C /* FacetDetailsViewController.swift in Sources */,
+				0295A0222085E6F00060400A /* EncryptionService.swift in Sources */,
 				C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */,
 				C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */,
 				02E90F561FE2755B008D81F9 /* DialogPresenterSpec.swift in Sources */,
@@ -1333,6 +1358,7 @@
 				5C59C9C52008B01D00186D29 /* JsonRpcRequestSpec.swift in Sources */,
 				C00B5559989C9FF92C6C70FA /* IdentitySpec.swift in Sources */,
 				C00B565D47B7F81FE21339CF /* DialogPresenterState.swift in Sources */,
+				0295A0212085E6DD0060400A /* EncryptionServiceSpec.swift in Sources */,
 				C00B524676276F6E1FDAAE98 /* RequestedAlert.swift in Sources */,
 				C00B52E1B28440BB32322784 /* DialogPresenterReducer.swift in Sources */,
 				C00B50288844174B2DCC9AD6 /* DialogPresenterActions.swift in Sources */,
