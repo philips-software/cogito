@@ -6,6 +6,7 @@ import Nimble
 class DiamondActionsSpec: QuickSpec {
     override func spec() {
         context("when creating a key pair") {
+            let identity = Identity(description: "test identity", address: Address.testAddress1)
             var action: DiamondActions.CreateEncryptionKeyPair!
             var creationParameters: [String:Any]? = nil
 
@@ -16,6 +17,7 @@ class DiamondActionsSpec: QuickSpec {
                 }
 
                 action = DiamondActions.CreateEncryptionKeyPair(
+                    identity: identity,
                     keyPairCreateFunction: keyPairCreateFunction
                 )
             }
@@ -43,8 +45,8 @@ class DiamondActionsSpec: QuickSpec {
             }
 
             it("generates unique tags") {
-                let tag1 = DiamondActions.CreateEncryptionKeyPair().tag
-                let tag2 = DiamondActions.CreateEncryptionKeyPair().tag
+                let tag1 = DiamondActions.CreateEncryptionKeyPair(identity: identity).tag
+                let tag2 = DiamondActions.CreateEncryptionKeyPair(identity: identity).tag
                 expect(tag1) != tag2
             }
 
