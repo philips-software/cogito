@@ -36,8 +36,17 @@ struct EncryptionService: TelepathService {
     }
 
     private func requestPublicKey(request: JsonRpcRequest, identity: Identity, channel: TelepathChannel) {
-        let publicKey = publicKeyLoader?(request.params["tag"].stringValue)
-        store.dispatch(TelepathActions.Send(id: request.id, result: publicKey!, on: channel))
+        guard let tag = request.params["tag"].string else {
+            store.dispatch(TelepathActions.Send(id: request.id, error: EncryptionError.tagMissing, on: channel))
+            return
+        }
+
+        guard let publicKey = publicKeyLoader!(tag) else {
+            store.dispatch(TelepathActions.Send(id: request.id, error: EncryptionError.keyNotFound, on: channel))
+            return
+        }
+        
+        store.dispatch(TelepathActions.Send(id: request.id, result: publicKey, on: channel))
     }
 
     private func loadPublicKeyFromKeychain(tag: String) -> PublicKey? {

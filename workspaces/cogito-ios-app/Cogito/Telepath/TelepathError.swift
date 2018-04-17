@@ -45,3 +45,17 @@ enum AttestationError: Int, TelepathError {
         }
     }
 }
+
+enum EncryptionError: Int, TelepathError {
+    case tagMissing = 3000
+    case keyNotFound
+
+    var code: Int { return self.rawValue }
+
+    var message: String {
+        switch self {
+        case .tagMissing: return "request parameter 'tag' is missing"
+        case .keyNotFound: return "no key with requested tag is found"
+        }
+    }
+}
