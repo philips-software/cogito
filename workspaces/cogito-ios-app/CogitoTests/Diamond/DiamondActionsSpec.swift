@@ -41,6 +41,11 @@ class DiamondActionsSpec: QuickSpec {
                 let tagData = privateKeyAttributes?[kSecAttrApplicationTag as String] as? Data
                 expect(tagData) == "test tag".data(using: .utf8)
             }
+
+            it("has access control flags") {
+                let privateKeyAttributes = creationParameters?[kSecPrivateKeyAttrs as String] as? [String:Any]
+                expect(privateKeyAttributes?[kSecAttrAccessControl as String]).toNot(beNil())
+            }
         }
     }
 }
