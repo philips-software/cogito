@@ -24,10 +24,11 @@ struct DiamondActions {
     }
 
     struct CreateEncryptionKeyPair: Action {
+        let identity: Identity
         let tag: String
-        init(
-            keyPairCreateFunction: KeyPairCreateFunction = SecKeyCreateRandomKey
-        ) {
+
+        init(identity: Identity, keyPairCreateFunction: KeyPairCreateFunction = SecKeyCreateRandomKey) {
+            self.identity = identity
             self.tag = UUID().uuidString
             let accessFlags = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
                                                               kSecAttrAccessibleAfterFirstUnlock,
