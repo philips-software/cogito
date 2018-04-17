@@ -8,14 +8,8 @@ import builtins from 'rollup-plugin-node-builtins'
 const config = {
   input: 'source/index.js',
   output: {
-    name: 'telepath-js',
-    globals: {
-      'node-fetch': 'fetch'
-    }
+    name: 'telepath-js'
   },
-  external: [
-    'node-fetch'
-  ],
   plugins: [
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
@@ -23,7 +17,7 @@ const config = {
     babel({
       exclude: 'node_modules/**'
     }),
-    resolve(),
+    resolve({browser: true}),
     commonjs({
       include: /node_modules/
     }),
