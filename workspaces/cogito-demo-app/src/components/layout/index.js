@@ -1,7 +1,6 @@
 export { Centered } from './Centered'
 export { Row } from './Row'
 export { Spacer } from './Spacer'
-export { StandardLayout } from './StandardLayout'
 export { PageCentered } from './PageCentered'
 export { FullWidth } from './FullWidth'
 export { DistributedHorizontally } from './DistributedHorizontally'
