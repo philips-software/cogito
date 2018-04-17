@@ -4,7 +4,7 @@
   "description": "Secure communication channel between mobile app and web app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/telepath-js",
   "license": "UNLICENSED",
-  "main": "lib/index.js",
+  "main": "umd/telepath-js.min.js",
   "module": "es/index.js",
   "scripts": {
     "build": "node ./tools/build.js"
