@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storePersister: StorePersister?
     var telepathReceiver: TelepathReceiver?
     var telepathSubscriber: TelepathSubscriber?
-    var geth: Geth?
     var syncProgressReporter: SyncProgressReporter!
     var peerReporter: PeerReporter!
     var debugGestureHandler: DebugGestureHandler!
@@ -36,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             appStore.dispatch(KeyStoreActions.Create())
         }
 
-//        startGeth()
         debugGestureHandler = DebugGestureHandler()
         debugGestureHandler.installGestureRecognizer(on: window!)
 
@@ -53,29 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         storePersister?.start()
         telepathReceiver?.start()
         telepathSubscriber?.start()
-    }
-
-    func startGeth() {
-        geth = Geth()
-        do {
-            try geth!.node.start()
-
-            peerReporter = PeerReporter(node: geth!.node, pollInterval: 1)
-            peerReporter.onPeerCountAvailable = { count in
-                appStore.dispatch(PeersUpdated(count: count))
-            }
-            peerReporter.start()
-
-            let ethereumClient = try geth!.node.ethereumClient()
-            syncProgressReporter = SyncProgressReporter(ethereumClient: ethereumClient, pollInterval: 1)
-            syncProgressReporter.onSyncProgressAvailable = { progress in
-                appStore.dispatch(SyncProgressUpdated(progress: progress))
-            }
-            syncProgressReporter.start()
-        } catch let error {
-            print(error)
-            abort()
-        }
     }
 
     func application(_ application: UIApplication,
