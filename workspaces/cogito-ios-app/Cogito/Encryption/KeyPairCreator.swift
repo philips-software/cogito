@@ -3,7 +3,7 @@
 import Foundation
 import Security
 
-struct KeyPairCreator {
+struct KeyPairCreator: KeyPairCreatorType {
     var keyPairCreateFunction: KeyPairCreateFunction = SecKeyCreateRandomKey
 
     func create(tag: String) {
@@ -29,4 +29,8 @@ struct KeyPairCreator {
         _ parameters: CFDictionary,
         _ error: UnsafeMutablePointer<Unmanaged<CFError>?>?
     ) -> SecKey?
+}
+
+protocol KeyPairCreatorType {
+    func create(tag: String)
 }

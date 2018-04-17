@@ -5,6 +5,7 @@ import ReSwift
 
 struct EncryptionService: TelepathService {
     let store: Store<AppState>
+    var keyPairCreator: KeyPairCreatorType = KeyPairCreator()
     var publicKeyLoader: ((String) -> PublicKey?)!
 
     init(store: Store<AppState>) {
@@ -26,6 +27,7 @@ struct EncryptionService: TelepathService {
     }
 
     private func createKeyPair(request: JsonRpcRequest, identity: Identity, channel: TelepathChannel) {
+        keyPairCreator.create(tag: "replace me")
         let createKeyPairAction = DiamondActions.CreateEncryptionKeyPair(identity: identity)
         store.dispatch(createKeyPairAction)
         store.dispatch(TelepathActions.Send(

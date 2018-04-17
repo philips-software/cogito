@@ -18,7 +18,11 @@ class EncryptionServiceSpec: QuickSpec {
         }
 
         context("when a create encryption key pair request comes in") {
+            var keyPairCreator: KeyPairCreatorSpy!
+
             beforeEach {
+                keyPairCreator = KeyPairCreatorSpy()
+                service.keyPairCreator = keyPairCreator
                 store.state = appState(
                     telepath: TelepathState(channels: [channel: identity])
                 )
@@ -28,6 +32,10 @@ class EncryptionServiceSpec: QuickSpec {
                     params: JsonRpcParams()
                 )
                 service.onRequest(request, on: channel)
+            }
+
+            it("creates an new key pair in keychain") {
+                expect(keyPairCreator.createWasCalled).to(beTrue())
             }
 
             it("dispatches CreateEncryptionKeyPair action") {
