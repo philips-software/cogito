@@ -30,6 +30,10 @@ struct DiamondActions {
             keyPairCreateFunction: KeyPairCreateFunction = SecKeyCreateRandomKey
         ) {
             self.tag = tag
+            let accessFlags = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
+                                                              kSecAttrAccessibleAfterFirstUnlock,
+                                                              .userPresence,
+                                                              nil)!
             let parameters: [String:Any] = [
                 kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
                 kSecAttrKeySizeInBits as String: 2048,
@@ -37,7 +41,8 @@ struct DiamondActions {
                     kSecAttrIsPermanent as String: true,
                     kSecAttrCanEncrypt as String: true,
                     kSecAttrCanDecrypt as String: true,
-                    kSecAttrApplicationTag as String: tag.data(using: .utf8)!
+                    kSecAttrApplicationTag as String: tag.data(using: .utf8)!,
+                    kSecAttrAccessControl as String: accessFlags
                 ]
             ]
             _ = keyPairCreateFunction(parameters as CFDictionary, nil)
