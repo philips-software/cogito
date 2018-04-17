@@ -29,4 +29,4 @@ class QueuingService {
   }
 }
 
-export default QueuingService
+export { QueuingService }

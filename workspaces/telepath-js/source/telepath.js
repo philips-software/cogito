@@ -1,8 +1,8 @@
 import base64url from 'base64url'
 import { random, keySize } from './crypto'
-import SecureChannel from './secure-channel'
-import JsonRpcChannel from './json-rpc-channel'
-import QueuingService from './queuing-service'
+import { SecureChannel } from './secure-channel'
+import { JsonRpcChannel } from './json-rpc-channel'
+import { QueuingService } from './queuing-service'
 
 class Telepath {
   constructor (queuingServiceUrl) {
@@ -32,4 +32,4 @@ async function createRandomKey () {
   return random(await keySize())
 }
 
-export default Telepath
+export { Telepath }
