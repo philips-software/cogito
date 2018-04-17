@@ -1,6 +1,6 @@
 import nock from 'nock'
 import base64url from 'base64url'
-import QueuingService from './queuing-service'
+import { QueuingService } from './queuing-service'
 
 describe('Queuing Service', () => {
   const baseUrl = 'https://queuing.example.com'

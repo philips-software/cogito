@@ -19,7 +19,7 @@ class SecureChannel {
     const nonce = await random(await nonceSize())
     const plainText = new Uint8Array(Buffer.from(message))
     const cypherText = await encrypt(plainText, nonce, this.key)
-    const nonceAndCypherText = Buffer.concat([nonce, cypherText])
+    const nonceAndCypherText = Buffer.concat([Buffer.from(nonce), Buffer.from(cypherText)])
     await this.queuing.send(queueId, nonceAndCypherText)
   }
 
@@ -40,4 +40,4 @@ class SecureChannel {
   }
 }
 
-export default SecureChannel
+export { SecureChannel }

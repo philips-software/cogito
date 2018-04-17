@@ -49,4 +49,4 @@ function parseResponse (response) {
   }
 }
 
-export default JsonRpcChannel
+export { JsonRpcChannel }

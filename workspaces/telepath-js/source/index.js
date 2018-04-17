@@ -1,1 +1,1 @@
-export { default } from './telepath'
+export { Telepath } from './telepath'

@@ -1,6 +1,6 @@
 import { random, encrypt, decrypt, keySize, nonceSize } from './crypto'
 import base64url from 'base64url'
-import SecureChannel from './secure-channel'
+import { SecureChannel } from './secure-channel'
 
 describe('Secure Channel', () => {
   const channelId = 'channel_id'

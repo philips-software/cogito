@@ -1,6 +1,6 @@
 import base64url from 'base64url'
-import JsonRpcChannel from './json-rpc-channel'
-import Telepath from './telepath'
+import { JsonRpcChannel } from './json-rpc-channel'
+import { Telepath } from './telepath'
 import { random, keySize } from './crypto'
 
 jest.mock('./crypto')
