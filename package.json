@@ -23,7 +23,6 @@
 			"workspaces/cogito-web3",
 			"workspaces/telepath-js",
 			"workspaces/telepath-queuing-service",
-			"workspaces/demo-app",
 			"workspaces/cogito-demo-app"
 		],
 		"testMatch": [ "**/*.test.js" ],
@@ -38,7 +37,7 @@
 		]
 	},
 	"scripts": {
-		"test": "yarn standard && NODE_PATH=./workspaces/demo-app/src:./workspaces/cogito-demo-app/src jest",
+		"test": "yarn standard && NODE_PATH=./workspaces/cogito-demo-app/src jest",
 		"lint": "yarn standard",
 		"lint-fix": "yarn standard --fix --verbose"
 	},
