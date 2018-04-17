@@ -19,6 +19,11 @@ class EncryptionServiceSpec: QuickSpec {
 
         context("when a create encryption key pair request comes in") {
             var keyPairCreator: KeyPairCreatorSpy!
+            let request = JsonRpcRequest(
+                id: JsonRpcId(1),
+                method: "createEncryptionKeyPair",
+                params: JsonRpcParams()
+            )
 
             beforeEach {
                 keyPairCreator = KeyPairCreatorSpy()
@@ -26,16 +31,19 @@ class EncryptionServiceSpec: QuickSpec {
                 store.state = appState(
                     telepath: TelepathState(channels: [channel: identity])
                 )
-                let request = JsonRpcRequest(
-                    id: JsonRpcId(1),
-                    method: "createEncryptionKeyPair",
-                    params: JsonRpcParams()
-                )
                 service.onRequest(request, on: channel)
             }
 
             it("creates an new key pair in keychain") {
                 expect(keyPairCreator.createWasCalled).to(beTrue())
+            }
+
+            it("generates unique ids") {
+                service.onRequest(request, on: channel)
+                let tag1 = keyPairCreator.latestTag
+                service.onRequest(request, on: channel)
+                let tag2 = keyPairCreator.latestTag
+                expect(tag1) != tag2
             }
 
             it("dispatches CreateEncryptionKeyPair action") {

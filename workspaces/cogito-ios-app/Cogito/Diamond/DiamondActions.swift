@@ -26,10 +26,9 @@ struct DiamondActions {
         let identity: Identity
         let tag: String
 
-        init(identity: Identity) {
+        init(identity: Identity, tag: String) {
             self.identity = identity
-            self.tag = UUID().uuidString
-            KeyPairCreator().create(tag: tag)
+            self.tag = tag
         }
     }
 }
