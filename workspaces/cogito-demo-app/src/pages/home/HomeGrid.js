@@ -1,6 +1,6 @@
 import glamorous from 'glamorous'
 
-import { Grid } from 'services/grid'
+import { Grid } from '@react-frontend-developer/css-grid-helper'
 
 let grid = new Grid([
   'header',

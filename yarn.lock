@@ -1240,6 +1240,10 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@react-frontend-developer/css-grid-helper@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@react-frontend-developer/css-grid-helper/-/css-grid-helper-1.0.3.tgz#e1cf8dfe6a6dad8c040362f94c7296bcfb0f8e8a"
+
 "@react-frontend-developer/react-scripts@2.0.0-next.b2fd8db8.11":
   version "2.0.0-next.b2fd8db8.11"
   resolved "https://registry.yarnpkg.com/@react-frontend-developer/react-scripts/-/react-scripts-2.0.0-next.b2fd8db8.11.tgz#1e491d741b7f80f624eb60e4d4ee39356599ada2"
@@ -9008,12 +9012,6 @@ rollup-plugin-commonjs@^9.1.0:
     estree-walker "^0.5.1"
     magic-string "^0.22.4"
     resolve "^1.5.0"
-    rollup-pluginutils "^2.0.1"
-
-rollup-plugin-json@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-json/-/rollup-plugin-json-2.3.0.tgz#3c07a452c1b5391be28006fbfff3644056ce0add"
-  dependencies:
     rollup-pluginutils "^2.0.1"
 
 rollup-plugin-node-builtins@^2.1.2:
