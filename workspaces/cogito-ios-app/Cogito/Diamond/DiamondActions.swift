@@ -26,10 +26,9 @@ struct DiamondActions {
     struct CreateEncryptionKeyPair: Action {
         let tag: String
         init(
-            tag: String,
             keyPairCreateFunction: KeyPairCreateFunction = SecKeyCreateRandomKey
         ) {
-            self.tag = tag
+            self.tag = UUID().uuidString
             let accessFlags = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
                                                               kSecAttrAccessibleAfterFirstUnlock,
                                                               .userPresence,

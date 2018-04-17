@@ -28,7 +28,7 @@ struct Identity: Codable {
         }
     }
 
-    typealias Tag = Data
+    typealias Tag = String
 }
 
 extension Identity: Equatable {
