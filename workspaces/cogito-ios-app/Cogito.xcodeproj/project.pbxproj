@@ -167,6 +167,9 @@
 		5C48E2401FA1F8BB00B8BF6E /* TelepathActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */; };
 		5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */; };
 		5C59C9C52008B01D00186D29 /* JsonRpcRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */; };
+		5C7BCE6620864709006E33A5 /* PublicKeyLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7BCE6520864709006E33A5 /* PublicKeyLoader.swift */; };
+		5C7BCE6720864709006E33A5 /* PublicKeyLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7BCE6520864709006E33A5 /* PublicKeyLoader.swift */; };
+		5C7BCE69208647E9006E33A5 /* PublicKeyLoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7BCE68208647E9006E33A5 /* PublicKeyLoaderSpy.swift */; };
 		5C7C238F1FA3501C009E9CE7 /* TelepathReceiverSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C238E1FA3501C009E9CE7 /* TelepathReceiverSpec.swift */; };
 		5C7C23911FA3502C009E9CE7 /* TelepathReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C23901FA3502C009E9CE7 /* TelepathReceiver.swift */; };
 		5C7C23921FA3502F009E9CE7 /* TelepathReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C23901FA3502C009E9CE7 /* TelepathReceiver.swift */; };
@@ -351,6 +354,8 @@
 		5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathActions.swift; sourceTree = "<group>"; };
 		5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducerSpec.swift; sourceTree = "<group>"; };
 		5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcRequestSpec.swift; sourceTree = "<group>"; };
+		5C7BCE6520864709006E33A5 /* PublicKeyLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyLoader.swift; sourceTree = "<group>"; };
+		5C7BCE68208647E9006E33A5 /* PublicKeyLoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyLoaderSpy.swift; sourceTree = "<group>"; };
 		5C7C238E1FA3501C009E9CE7 /* TelepathReceiverSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelepathReceiverSpec.swift; sourceTree = "<group>"; };
 		5C7C23901FA3502C009E9CE7 /* TelepathReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelepathReceiver.swift; sourceTree = "<group>"; };
 		5C7C23931FA35093009E9CE7 /* TelepathDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathDefaults.swift; sourceTree = "<group>"; };
@@ -629,6 +634,7 @@
 			children = (
 				0295A01E2085E6CD0060400A /* EncryptionService.swift */,
 				0295A02720863B370060400A /* KeyPairCreator.swift */,
+				5C7BCE6520864709006E33A5 /* PublicKeyLoader.swift */,
 			);
 			path = Encryption;
 			sourceTree = "<group>";
@@ -639,6 +645,7 @@
 				0295A0202085E6DD0060400A /* EncryptionServiceSpec.swift */,
 				0295A025208639600060400A /* KeyPairCreatorSpec.swift */,
 				0295A02A20863C8A0060400A /* KeyPairCreatorSpy.swift */,
+				5C7BCE68208647E9006E33A5 /* PublicKeyLoaderSpy.swift */,
 			);
 			path = Encryption;
 			sourceTree = "<group>";
@@ -1174,6 +1181,7 @@
 				02CD30A41F73F251006BA756 /* StorePersister.swift in Sources */,
 				02D0C0DB1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */,
 				029245171F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
+				5C7BCE6620864709006E33A5 /* PublicKeyLoader.swift in Sources */,
 				0298D4371F7A45680070998D /* Geth.swift in Sources */,
 				5C20A0FB1FA1FC6500B443C9 /* TelepathState.swift in Sources */,
 				02A15AFB1F86719400A94163 /* DiamondState.swift in Sources */,
@@ -1345,6 +1353,7 @@
 				02D0C0D51F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
 				02A15AFF1F8671D200A94163 /* Identity.swift in Sources */,
 				02DB90E82045546C00C4817C /* FacetDetailsViewController.swift in Sources */,
+				5C7BCE6720864709006E33A5 /* PublicKeyLoader.swift in Sources */,
 				0295A0222085E6F00060400A /* EncryptionService.swift in Sources */,
 				C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */,
 				C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */,
@@ -1355,6 +1364,7 @@
 				02A15B021F8672C000A94163 /* DiamondReducer.swift in Sources */,
 				02E90F4E1FDEC1D7008D81F9 /* AttestationServiceSpec.swift in Sources */,
 				5C7C23981FA37CF9009E9CE7 /* ExampleError.swift in Sources */,
+				5C7BCE69208647E9006E33A5 /* PublicKeyLoaderSpy.swift in Sources */,
 				5C9331981FA324460056869F /* TelepathChannelExample.swift in Sources */,
 				C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */,
 				C00B5F4394A34E4348285CB9 /* DiamondActions.swift in Sources */,

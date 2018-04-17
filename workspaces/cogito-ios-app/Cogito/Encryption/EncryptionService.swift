@@ -6,11 +6,10 @@ import ReSwift
 struct EncryptionService: TelepathService {
     let store: Store<AppState>
     var keyPairCreator: KeyPairCreatorType = KeyPairCreator()
-    var publicKeyLoader: ((String) -> PublicKey?)!
+    var publicKeyLoader: PublicKeyLoaderType = PublicKeyLoader()
 
     init(store: Store<AppState>) {
         self.store = store
-        self.publicKeyLoader = loadPublicKeyFromKeychain
     }
 
     func onRequest(_ request: JsonRpcRequest, on channel: TelepathChannel) {
@@ -39,18 +38,11 @@ struct EncryptionService: TelepathService {
             return
         }
 
-        guard identity.encryptionKeyPairs.contains(tag), let publicKey = publicKeyLoader!(tag) else {
+        guard identity.encryptionKeyPairs.contains(tag), let publicKey = publicKeyLoader.load(tag: tag) else {
             store.dispatch(TelepathActions.Send(id: request.id, error: EncryptionError.keyNotFound, on: channel))
             return
         }
 
         store.dispatch(TelepathActions.Send(id: request.id, result: publicKey, on: channel))
     }
-
-    private func loadPublicKeyFromKeychain(tag: String) -> PublicKey? {
-        assert(false, "to be implemented")
-        return nil
-    }
-
-    typealias PublicKey = Data
 }

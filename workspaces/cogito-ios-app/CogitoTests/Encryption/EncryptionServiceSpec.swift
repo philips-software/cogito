@@ -9,16 +9,21 @@ class EncryptionServiceSpec: QuickSpec {
         var store: RecordingStore!
         var channel: TelepathChannel!
         var identity: Identity!
+        var keyPairCreator: KeyPairCreatorSpy!
+        var publicKeyLoader: PublicKeyLoaderSpy!
 
         beforeEach {
             store = RecordingStore()
             service = EncryptionService(store: store)
             channel = TelepathChannelSpy()
             identity = Identity(description: "example", address: Address.testAddress)
+            keyPairCreator = KeyPairCreatorSpy()
+            publicKeyLoader = PublicKeyLoaderSpy()
+            service.publicKeyLoader = publicKeyLoader
+            service.keyPairCreator = keyPairCreator
         }
 
         context("when a create encryption key pair request comes in") {
-            var keyPairCreator: KeyPairCreatorSpy!
             let request = JsonRpcRequest(
                 id: JsonRpcId(1),
                 method: "createEncryptionKeyPair",
@@ -26,8 +31,6 @@ class EncryptionServiceSpec: QuickSpec {
             )
 
             beforeEach {
-                keyPairCreator = KeyPairCreatorSpy()
-                service.keyPairCreator = keyPairCreator
                 store.state = appState(
                     telepath: TelepathState(channels: [channel: identity])
                 )
@@ -72,13 +75,17 @@ class EncryptionServiceSpec: QuickSpec {
                     store.state = appState(
                         telepath: TelepathState(channels: [channel: identity])
                     )
-                    service.publicKeyLoader = { requestedTag in
-                        if requestedTag == tag {
-                            return publicKey
-                        } else {
-                            return nil
-                        }
-                    }
+                    publicKeyLoader.publicKeyToReturn = publicKey
+                }
+
+                it("loads the public key with the correct tag") {
+                    let request = JsonRpcRequest(
+                        id: JsonRpcId(1),
+                        method: "getEncryptionPublicKey",
+                        params: JsonRpcParams(["tag": tag])
+                    )
+                    service.onRequest(request, on: channel)
+                    expect(publicKeyLoader.latestTag).to(equal(tag))
                 }
 
                 it("sends response on Telepath channel") {
@@ -110,7 +117,6 @@ class EncryptionServiceSpec: QuickSpec {
                     store.state = appState(
                         telepath: TelepathState(channels: [channel: identity])
                     )
-                    service.publicKeyLoader = { _ in return nil }
                 }
 
                 it("returns an error") {
@@ -131,7 +137,7 @@ class EncryptionServiceSpec: QuickSpec {
                     store.state = appState(
                         telepath: TelepathState(channels: [channel: identity])
                     )
-                    service.publicKeyLoader = { _ in return publicKey }
+                    publicKeyLoader.publicKeyToReturn = publicKey
                 }
 
                 it("returns an error") {
