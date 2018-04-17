@@ -68,6 +68,8 @@
 		0295A0212085E6DD0060400A /* EncryptionServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295A0202085E6DD0060400A /* EncryptionServiceSpec.swift */; };
 		0295A0222085E6F00060400A /* EncryptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295A01E2085E6CD0060400A /* EncryptionService.swift */; };
 		0295A026208639600060400A /* KeyPairCreatorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295A025208639600060400A /* KeyPairCreatorSpec.swift */; };
+		0295A02820863B370060400A /* KeyPairCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295A02720863B370060400A /* KeyPairCreator.swift */; };
+		0295A02920863B370060400A /* KeyPairCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295A02720863B370060400A /* KeyPairCreator.swift */; };
 		029691531F7166AC00654BD0 /* KeyStoreReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029691521F7166AC00654BD0 /* KeyStoreReducer.swift */; };
 		029691551F7166EE00654BD0 /* KeyStoreState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029691541F7166EE00654BD0 /* KeyStoreState.swift */; };
 		0298D4271F7A43C90070998D /* KeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3661F7012E1003A9787 /* KeyStore.swift */; };
@@ -286,6 +288,7 @@
 		0295A01E2085E6CD0060400A /* EncryptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionService.swift; sourceTree = "<group>"; };
 		0295A0202085E6DD0060400A /* EncryptionServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionServiceSpec.swift; sourceTree = "<group>"; };
 		0295A025208639600060400A /* KeyPairCreatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPairCreatorSpec.swift; sourceTree = "<group>"; };
+		0295A02720863B370060400A /* KeyPairCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPairCreator.swift; sourceTree = "<group>"; };
 		029691521F7166AC00654BD0 /* KeyStoreReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreReducer.swift; sourceTree = "<group>"; };
 		029691541F7166EE00654BD0 /* KeyStoreState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreState.swift; sourceTree = "<group>"; };
 		0298D4341F7A45150070998D /* GethSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethSpec.swift; sourceTree = "<group>"; };
@@ -625,6 +628,7 @@
 			isa = PBXGroup;
 			children = (
 				0295A01E2085E6CD0060400A /* EncryptionService.swift */,
+				0295A02720863B370060400A /* KeyPairCreator.swift */,
 			);
 			path = Encryption;
 			sourceTree = "<group>";
@@ -1205,6 +1209,7 @@
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
 				029CDFFD1FA22DEB00281369 /* AttestationsReducer.swift in Sources */,
 				027603F11F6ACD1600788B0A /* DebugViewController.swift in Sources */,
+				0295A02820863B370060400A /* KeyPairCreator.swift in Sources */,
 				0230F9471FA1E5F3006A36FC /* LaunchActions.swift in Sources */,
 				0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */,
 				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
@@ -1363,6 +1368,7 @@
 				C00B5559989C9FF92C6C70FA /* IdentitySpec.swift in Sources */,
 				C00B565D47B7F81FE21339CF /* DialogPresenterState.swift in Sources */,
 				0295A0212085E6DD0060400A /* EncryptionServiceSpec.swift in Sources */,
+				0295A02920863B370060400A /* KeyPairCreator.swift in Sources */,
 				C00B524676276F6E1FDAAE98 /* RequestedAlert.swift in Sources */,
 				C00B52E1B28440BB32322784 /* DialogPresenterReducer.swift in Sources */,
 				C00B50288844174B2DCC9AD6 /* DialogPresenterActions.swift in Sources */,
