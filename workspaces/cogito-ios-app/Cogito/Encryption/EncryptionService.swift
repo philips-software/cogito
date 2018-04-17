@@ -41,11 +41,11 @@ struct EncryptionService: TelepathService {
             return
         }
 
-        guard let publicKey = publicKeyLoader!(tag) else {
+        guard identity.encryptionKeyPairs.contains(tag), let publicKey = publicKeyLoader!(tag) else {
             store.dispatch(TelepathActions.Send(id: request.id, error: EncryptionError.keyNotFound, on: channel))
             return
         }
-        
+
         store.dispatch(TelepathActions.Send(id: request.id, result: publicKey, on: channel))
     }
 
