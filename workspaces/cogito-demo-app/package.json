@@ -1,0 +1,80 @@
+{
+  "name": "dsp-demo",
+  "version": "1.0.0",
+  "description": "A demo project for using blockchain in dsp",
+  "repository": "https://gitlab.ta.philips.com/blockchain-lab/dsp-demo",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cogito/cogito-web3": "^0.1.0",
+    "@cogito/telepath-js": "^0.1.0",
+    "babel-polyfill": "^6.26.0",
+    "glamor": "^2.20.40",
+    "glamorous": "^4.11.4",
+    "jsrsasign": "^8.0.6",
+    "libsodium-wrappers": "^0.7.3",
+    "prop-types": "^15.6.1",
+    "qrcode.react": "^0.8.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
+    "semantic-ui-css": "2.2.14",
+    "semantic-ui-react": "^0.79.1",
+    "truffle-contract": "^3.0.3",
+    "web3": "^1.0.0-beta.29"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.44",
+    "@react-frontend-developer/react-scripts": "2.0.0-next.b2fd8db8.11",
+    "babel-eslint": "^8.2.3",
+    "deep-freeze-es6": "^1.0.1",
+    "react-test-renderer": "^16.2.0",
+    "standard": "^11.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "yarn lint && react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "yarn standard",
+    "lint-fix": "yarn standard --fix --verbose",
+    "link-contracts": "cd src && ln -s ../truffle/build/contracts contracts"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "build/**",
+      "node_modules/**",
+      "src/contracts/**",
+      "truffle/node_modules/**"
+    ],
+    "envs": [
+      "es6",
+      "browser",
+      "jest"
+    ],
+    "globals": [
+      "artifacts",
+      "contract",
+      "assert"
+    ]
+  },
+  "browserslist": {
+    "development": [
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 edge versions"
+    ],
+    "production": [
+      ">1%",
+      "last 4 versions",
+      "Firefox ESR",
+      "not ie < 11"
+    ]
+  }
+}
