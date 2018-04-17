@@ -13,11 +13,11 @@ class EncryptionServiceSpec: QuickSpec {
         beforeEach {
             store = RecordingStore()
             service = EncryptionService(store: store)
-            channel = TelepathChannel.example
+            channel = TelepathChannelSpy()
             store.state = appState(telepath: TelepathState(channels: [channel: identity]))
         }
 
-        context("when a matching request comes in") {
+        context("when a create encryption key pair request comes in") {
             beforeEach {
                 let request = JsonRpcRequest(
                     id: JsonRpcId(1),
@@ -35,6 +35,25 @@ class EncryptionServiceSpec: QuickSpec {
             it("uses the identity that is associated with the channel") {
                 let action = store.firstAction(ofType: DiamondActions.CreateEncryptionKeyPair.self)
                 expect(action?.identity) == store.state.telepath.channels[channel]
+            }
+
+            it("sends response on Telepath channel") {
+                let sendPendingAction = store.firstAction(ofType: TelepathActions.SendPending.self)
+                let createKeyPairAction = store.firstAction(ofType: DiamondActions.CreateEncryptionKeyPair.self)
+                expect(sendPendingAction?.message).to(contain(createKeyPairAction!.tag))
+            }
+        }
+
+        context("when another request comes in") {
+            it("does not dispatch anything") {
+                let actionCountBefore = store.actions.count
+                let request = JsonRpcRequest(
+                    id: JsonRpcId(1),
+                    method: "some other request",
+                    params: JsonRpcParams()
+                )
+                service.onRequest(request, on: channel)
+                expect(store.actions.count) == actionCountBefore
             }
         }
     }
