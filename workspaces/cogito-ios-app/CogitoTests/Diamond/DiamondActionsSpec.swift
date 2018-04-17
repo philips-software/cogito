@@ -11,7 +11,7 @@ class DiamondActionsSpec: QuickSpec {
             var creationParameters: [String:Any]? = nil
 
             beforeEach {
-                let keyPairCreateFunction: DiamondActions.KeyPairCreateFunction = { parameters, error in
+                let keyPairCreateFunction: KeyPairCreateFunction = { parameters, error in
                     creationParameters = parameters as? [String:Any]
                     return nil
                 }
