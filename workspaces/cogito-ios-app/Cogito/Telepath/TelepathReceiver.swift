@@ -8,7 +8,7 @@ class TelepathReceiver: StoreSubscriber {
     var timers: [TelepathChannel:Timer] = [:]
     var onNewState = recreatePollingTimers
 
-    init(store: Store<AppState>, pollInterval: TimeInterval = 0.5) {
+    init(store: Store<AppState>, pollInterval: TimeInterval = 1.0) {
         self.store = store
         self.pollInterval = pollInterval
     }
