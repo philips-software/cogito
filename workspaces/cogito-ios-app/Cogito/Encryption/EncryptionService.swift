@@ -29,7 +29,7 @@ struct EncryptionService: TelepathService {
     private func createKeyPair(request: JsonRpcRequest, identity: Identity, channel: TelepathChannel) {
         let tag = UUID().uuidString
         keyPairCreator.create(tag: tag)
-        store.dispatch(DiamondActions.CreateEncryptionKeyPair(identity: identity, tag: tag))
+        store.dispatch(DiamondActions.StoreEncryptionKeyPair(identity: identity, tag: tag))
         store.dispatch(TelepathActions.Send(id: request.id, result: tag, on: channel))
     }
 
