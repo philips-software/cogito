@@ -26,7 +26,7 @@ From top level folder do:
 
 ### Creating a local network that allows you to sign transactions
 
-First, forget about `truffle develop` followed by `compile` and `migrate`. There are nice...for children ;). We need a local network with at least one account that has enough funds. It is easy to create that account using [ganache-cli](https://github.com/trufflesuite/ganache-cli). Install it with `yarn global add ganache-cli`. Once you have it, start the network with the following command:
+ We need a local network with at least one account that has enough funds. It is easy to create that account using [ganache-cli](https://github.com/trufflesuite/ganache-cli). Install it with `yarn global add ganache-cli`. Once you have it, start the network with the following command:
 
 ```bash
 ganache-cli --account="0xc87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3,10000000000000000000000" -p 8545
