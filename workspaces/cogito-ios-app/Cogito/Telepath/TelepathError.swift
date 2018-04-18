@@ -49,6 +49,9 @@ enum AttestationError: Int, TelepathError {
 enum EncryptionError: Int, TelepathError {
     case tagMissing = 3000
     case keyNotFound
+    case cipherTextMissing
+    case cipherTextInvalid
+    case decryptionFailed
 
     var code: Int { return self.rawValue }
 
@@ -56,6 +59,9 @@ enum EncryptionError: Int, TelepathError {
         switch self {
         case .tagMissing: return "request parameter 'tag' is missing"
         case .keyNotFound: return "no key with requested tag is found"
+        case .cipherTextMissing: return "request parameter 'cipherText' is missing"
+        case .cipherTextInvalid: return "request parameter 'cipherText' is not a valid hex string"
+        case .decryptionFailed: return "unable to decrypt"
         }
     }
 }
