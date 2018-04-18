@@ -8,6 +8,12 @@ struct JsonRpcRequest {
     let id: JsonRpcId
     let method: String
     let params: JsonRpcParams
+
+    init(id: JsonRpcId, method: String, params: JsonRpcParams = JsonRpcParams()) {
+        self.id = id
+        self.method = method
+        self.params = params
+    }
 }
 
 extension JsonRpcRequest {
