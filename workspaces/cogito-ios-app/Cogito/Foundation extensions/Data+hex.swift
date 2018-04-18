@@ -16,7 +16,12 @@ extension Data {
         }
         while index < hex.endIndex {
             let nextIndex = hex.index(index, offsetBy: 1)
-            let byte = hexNibble(hex[index].value) * 16 + hexNibble(hex[nextIndex].value)
+            let leftNibble = hexNibble(hex[index].value)
+            let rightNibble = hexNibble(hex[nextIndex].value)
+            guard leftNibble < 16 && rightNibble < 16 else {
+                return nil
+            }
+            let byte = leftNibble * 16 + rightNibble
             bytes.append(byte)
             index = hex.index(index, offsetBy: 2)
         }
