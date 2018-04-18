@@ -164,6 +164,9 @@
 		5C20A1031FA224C000B443C9 /* TelepathChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A1021FA224C000B443C9 /* TelepathChannel.swift */; };
 		5C20A1041FA224D700B443C9 /* TelepathChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A1021FA224C000B443C9 /* TelepathChannel.swift */; };
 		5C20A1061FA224E000B443C9 /* TelepathChannelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C20A1051FA224E000B443C9 /* TelepathChannelSpec.swift */; };
+		5C3C8F28208732C50042AC2F /* DecrypterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C8F27208732C50042AC2F /* DecrypterSpy.swift */; };
+		5C3C8F2A2087337C0042AC2F /* Decrypter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C8F292087337C0042AC2F /* Decrypter.swift */; };
+		5C3C8F2B2087337C0042AC2F /* Decrypter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C8F292087337C0042AC2F /* Decrypter.swift */; };
 		5C48E2401FA1F8BB00B8BF6E /* TelepathActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */; };
 		5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */; };
 		5C59C9C52008B01D00186D29 /* JsonRpcRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */; };
@@ -288,7 +291,7 @@
 		029245191F7AA17300F2C0C1 /* GethState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethState.swift; sourceTree = "<group>"; };
 		0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateHelper.swift; sourceTree = "<group>"; };
 		0295A01E2085E6CD0060400A /* EncryptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionService.swift; sourceTree = "<group>"; };
-		0295A0202085E6DD0060400A /* EncryptionServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionServiceSpec.swift; sourceTree = "<group>"; };
+		0295A0202085E6DD0060400A /* EncryptionServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionServiceSpec.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		0295A025208639600060400A /* KeyPairCreatorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPairCreatorSpec.swift; sourceTree = "<group>"; };
 		0295A02720863B370060400A /* KeyPairCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPairCreator.swift; sourceTree = "<group>"; };
 		0295A02A20863C8A0060400A /* KeyPairCreatorSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPairCreatorSpy.swift; sourceTree = "<group>"; };
@@ -351,6 +354,8 @@
 		5C20A0FA1FA1FC6500B443C9 /* TelepathState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathState.swift; sourceTree = "<group>"; };
 		5C20A1021FA224C000B443C9 /* TelepathChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathChannel.swift; sourceTree = "<group>"; };
 		5C20A1051FA224E000B443C9 /* TelepathChannelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathChannelSpec.swift; sourceTree = "<group>"; };
+		5C3C8F27208732C50042AC2F /* DecrypterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecrypterSpy.swift; sourceTree = "<group>"; };
+		5C3C8F292087337C0042AC2F /* Decrypter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decrypter.swift; sourceTree = "<group>"; };
 		5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathActions.swift; sourceTree = "<group>"; };
 		5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducerSpec.swift; sourceTree = "<group>"; };
 		5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcRequestSpec.swift; sourceTree = "<group>"; };
@@ -635,6 +640,7 @@
 				0295A01E2085E6CD0060400A /* EncryptionService.swift */,
 				0295A02720863B370060400A /* KeyPairCreator.swift */,
 				5C7BCE6520864709006E33A5 /* PublicKeyLoader.swift */,
+				5C3C8F292087337C0042AC2F /* Decrypter.swift */,
 			);
 			path = Encryption;
 			sourceTree = "<group>";
@@ -646,6 +652,7 @@
 				0295A025208639600060400A /* KeyPairCreatorSpec.swift */,
 				0295A02A20863C8A0060400A /* KeyPairCreatorSpy.swift */,
 				5C7BCE68208647E9006E33A5 /* PublicKeyLoaderSpy.swift */,
+				5C3C8F27208732C50042AC2F /* DecrypterSpy.swift */,
 			);
 			path = Encryption;
 			sourceTree = "<group>";
@@ -1196,6 +1203,7 @@
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
 				02021D191F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
+				5C3C8F2A2087337C0042AC2F /* Decrypter.swift in Sources */,
 				5C04E4501FA788D200A70C60 /* AccountActions.swift in Sources */,
 				5CAC2D65206BD0CB00F74462 /* Configuration.swift in Sources */,
 				02A15B011F8672C000A94163 /* DiamondReducer.swift in Sources */,
@@ -1261,6 +1269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02BE32CE1F7A5C55006C7287 /* SyncProgressReporterSpec.swift in Sources */,
+				5C3C8F28208732C50042AC2F /* DecrypterSpy.swift in Sources */,
 				5CDB58DC203589CC00A28D60 /* TelepathSubscriberSpec.swift in Sources */,
 				028F4EF51F7CF7EB0015C4AF /* DebugViewControllerSpec.swift in Sources */,
 				026779B02007B49A00C2D45C /* TransactionSignerSpec.swift in Sources */,
@@ -1303,6 +1312,7 @@
 				0298D42C1F7A43C90070998D /* AppState.swift in Sources */,
 				02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */,
 				0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */,
+				5C3C8F2B2087337C0042AC2F /* Decrypter.swift in Sources */,
 				022621311FAB1FF100692126 /* FacetTableViewCell.swift in Sources */,
 				02021D1A1F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				5C20A0F61FA1FAED00B443C9 /* TelepathActions.swift in Sources */,

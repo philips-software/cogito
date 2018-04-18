@@ -7,6 +7,7 @@ struct EncryptionService: TelepathService {
     let store: Store<AppState>
     var keyPairCreator: KeyPairCreatorType = KeyPairCreator()
     var publicKeyLoader: PublicKeyLoaderType = PublicKeyLoader()
+    var decrypter: DecrypterType = Decrypter()
 
     init(store: Store<AppState>) {
         self.store = store
@@ -19,6 +20,8 @@ struct EncryptionService: TelepathService {
                 createKeyPair(request: request, identity: identity, channel: channel)
             case "getEncryptionPublicKey":
                 requestPublicKey(request: request, identity: identity, channel: channel)
+            case "decrypt":
+                decrypt(request: request, identity: identity, channel: channel)
             default:
                 break
             }
@@ -44,5 +47,32 @@ struct EncryptionService: TelepathService {
         }
 
         store.dispatch(TelepathActions.Send(id: request.id, result: publicKey, on: channel))
+    }
+
+    private func decrypt(request: JsonRpcRequest, identity: Identity, channel: TelepathChannel) {
+        guard let tag = request.params["keyTag"].string else {
+            store.dispatch(TelepathActions.Send(id: request.id, error: EncryptionError.tagMissing, on: channel))
+            return
+        }
+
+        guard let cipherTextHex = request.params["cipherText"].string else {
+            store.dispatch(TelepathActions.Send(id: request.id, error: EncryptionError.cipherTextMissing, on: channel))
+            return
+        }
+
+        guard let cipherText = Data(fromHex: cipherTextHex) else {
+            store.dispatch(TelepathActions.Send(id: request.id, error: EncryptionError.cipherTextInvalid, on: channel))
+            return
+        }
+
+        guard
+            identity.encryptionKeyPairs.contains(tag),
+            let plainText = decrypter.decrypt(keyTag: tag, cipherText: cipherText) else
+        {
+            store.dispatch(TelepathActions.Send(id: request.id, error: EncryptionError.decryptionFailed, on: channel))
+            return
+        }
+
+        store.dispatch(TelepathActions.Send(id: request.id, result: plainText, on: channel))
     }
 }

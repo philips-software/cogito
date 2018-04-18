@@ -11,6 +11,7 @@ class EncryptionServiceSpec: QuickSpec {
         var identity: Identity!
         var keyPairCreator: KeyPairCreatorSpy!
         var publicKeyLoader: PublicKeyLoaderSpy!
+        var decrypter: DecrypterSpy!
 
         beforeEach {
             store = RecordingStore()
@@ -19,8 +20,10 @@ class EncryptionServiceSpec: QuickSpec {
             identity = Identity(description: "example", address: Address.testAddress)
             keyPairCreator = KeyPairCreatorSpy()
             publicKeyLoader = PublicKeyLoaderSpy()
+            decrypter = DecrypterSpy()
             service.publicKeyLoader = publicKeyLoader
             service.keyPairCreator = keyPairCreator
+            service.decrypter = decrypter
         }
 
         context("when a create encryption key pair request comes in") {
@@ -150,6 +153,105 @@ class EncryptionServiceSpec: QuickSpec {
                     let sendPendingAction = store.firstAction(ofType: TelepathActions.SendPending.self)
                     expect(sendPendingAction?.message).to(contain("\"code\" : \(EncryptionError.keyNotFound.rawValue)"))
                 }
+            }
+        }
+
+        context("when decryption is requested") {
+            let tag = "1234-5678"
+            let cipherText = "some encrypted data".data(using: .utf8)!
+            let plainText = "some decrypted data".data(using: .utf8)!
+            let request = JsonRpcRequest(
+                id: JsonRpcId(1),
+                method: "decrypt",
+                params: JsonRpcParams([
+                    "keyTag": tag,
+                    "cipherText": cipherText.hexEncodedString()
+                ])
+            )
+
+            beforeEach {
+                identity.encryptionKeyPairs = [tag]
+                store.state = appState(
+                    telepath: TelepathState(channels: [channel: identity])
+                )
+                decrypter.plainTextToReturn = plainText
+            }
+
+            it("decrypts the data") {
+                service.onRequest(request, on: channel)
+                expect(decrypter.latestKeyTag) == tag
+                expect(decrypter.latestCipherText) == cipherText
+            }
+
+            it("sends response on telepath channel") {
+                service.onRequest(request, on: channel)
+                let sendPendingAction = store.firstAction(ofType: TelepathActions.SendPending.self)
+                expect(sendPendingAction?.message).to(contain(plainText.hexEncodedString()))
+            }
+
+            it("sends an error when tag is missing in the request") {
+                let wrongRequest = JsonRpcRequest(
+                    id: JsonRpcId(1),
+                    method: "decrypt",
+                    params: JsonRpcParams([
+                        "cipherText": cipherText.hexEncodedString()
+                    ])
+                )
+                service.onRequest(wrongRequest, on: channel)
+                let sendPendingAction = store.firstAction(ofType: TelepathActions.SendPending.self)
+                let expectedError = EncryptionError.tagMissing
+                expect(sendPendingAction?.message).to(contain("\"code\" : \(expectedError.rawValue)"))
+
+            }
+
+            it("sends an error when cipherText is missing in the request") {
+                let wrongRequest = JsonRpcRequest(
+                    id: JsonRpcId(1),
+                    method: "decrypt",
+                    params: JsonRpcParams([
+                        "keyTag": tag
+                    ])
+                )
+                service.onRequest(wrongRequest, on: channel)
+                let sendPendingAction = store.firstAction(ofType: TelepathActions.SendPending.self)
+                let expectedError = EncryptionError.cipherTextMissing
+                expect(sendPendingAction?.message).to(contain("\"code\" : \(expectedError.rawValue)"))
+
+            }
+
+            it("sends an error when cipherText is invalid") {
+                let wrongRequest = JsonRpcRequest(
+                    id: JsonRpcId(1),
+                    method: "decrypt",
+                    params: JsonRpcParams([
+                        "keyTag": tag,
+                        "cipherText": "invalid hex string"
+                    ])
+                )
+                service.onRequest(wrongRequest, on: channel)
+                let sendPendingAction = store.firstAction(ofType: TelepathActions.SendPending.self)
+                let expectedError = EncryptionError.cipherTextInvalid
+                expect(sendPendingAction?.message).to(contain("\"code\" : \(expectedError.rawValue)"))
+
+            }
+
+            it("sends an error when decryption fails") {
+                decrypter.plainTextToReturn = nil
+                service.onRequest(request, on: channel)
+                let sendPendingAction = store.firstAction(ofType: TelepathActions.SendPending.self)
+                let expectedError = EncryptionError.decryptionFailed
+                expect(sendPendingAction?.message).to(contain("\"code\" : \(expectedError.rawValue)"))
+            }
+
+            it("sends an error when the identity does not contain the key") {
+                identity.encryptionKeyPairs = []
+                store.state = appState(
+                    telepath: TelepathState(channels: [channel: identity])
+                )
+                service.onRequest(request, on: channel)
+                let sendPendingAction = store.firstAction(ofType: TelepathActions.SendPending.self)
+                let expectedError = EncryptionError.decryptionFailed
+                expect(sendPendingAction?.message).to(contain("\"code\" : \(expectedError.rawValue)"))
             }
         }
 
