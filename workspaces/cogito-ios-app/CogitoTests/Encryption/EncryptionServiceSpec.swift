@@ -17,7 +17,7 @@ class EncryptionServiceSpec: QuickSpec {
             store = RecordingStore()
             service = EncryptionService(store: store)
             channel = TelepathChannelSpy()
-            identity = Identity(description: "example", address: Address.testAddress)
+            identity = Identity.example
             keyPairCreator = KeyPairCreatorSpy()
             publicKeyLoader = PublicKeyLoaderSpy()
             decrypter = DecrypterSpy()

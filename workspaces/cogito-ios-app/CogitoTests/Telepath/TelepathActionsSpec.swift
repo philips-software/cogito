@@ -16,7 +16,7 @@ class TelepathActionsSpec: QuickSpec {
             let connectUrl = URL(
                 string: "https://cogito.example.com/telepath/connect#I=1234&E=abcd"
             )!
-            let identity = Identity(description: "test", address: Address.testAddress)
+            let identity = Identity.example
 
             it("connects to a channel") {
                 store.dispatch(TelepathActions.Connect(url: connectUrl, for: identity))
@@ -33,7 +33,7 @@ class TelepathActionsSpec: QuickSpec {
 
         describe("sending and receiving") {
             var channel: TelepathChannelSpy!
-            let identity = Identity(description: "test", address: Address.testAddress)
+            let identity = Identity.example
 
             beforeEach {
                 channel = TelepathChannelSpy()

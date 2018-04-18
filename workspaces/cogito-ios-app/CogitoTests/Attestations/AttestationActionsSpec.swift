@@ -33,7 +33,7 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             it("dispatches FinishRejected when subject is incorrect") {
-                let identity = Identity(description: "test identity", address: Address.testAddress1)
+                let identity = Identity.example
                 let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
                 let dispatchRecorder = DispatchRecorder<AttestationActions.FinishRejected>()
                 finishAction.action(dispatchRecorder.dispatch, {
@@ -57,7 +57,7 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             it("dispatches Fulfilled when token has correct nonce") {
-                let identity = Identity(description: "test identity", address: Address.testAddress1)
+                let identity = Identity.example
                 let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
                 let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
                 finishAction.action(dispatchRecorder.dispatch, {
@@ -86,7 +86,7 @@ class AttestationActionsSpec: QuickSpec {
                 // the OpenID Connect server; hence the web app doesn't know what subject to
                 // provide.
                 // https://gitlab.ta.philips.com/blockchain-lab/Cogito/issues/11
-                let identity = Identity(description: "test identity", address: Address.testAddress1)
+                let identity = Identity.example
                 let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
                 let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
                 finishAction.action(dispatchRecorder.dispatch, {
@@ -110,7 +110,7 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             it("also dispatches DiamondActions.AddAttestation") {
-                let identity = Identity(description: "test identity", address: Address.testAddress1)
+                let identity = Identity.example
                 let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
                 let dispatchRecorder = DispatchRecorder<DiamondActions.AddJWTAttestation>()
                 finishAction.action(dispatchRecorder.dispatch, {
@@ -155,8 +155,8 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             beforeEach {
-                identityWithoutAttestation = Identity(description: "test", address: Address.testAddress)
-                identityWithAttestation = Identity(description: "test", address: Address.testAddress)
+                identityWithoutAttestation = Identity.example
+                identityWithAttestation = Identity.example
                 identityWithAttestation.idTokens = [idToken]
                 channel = TelepathChannelSpy()
                 telepathState = TelepathState(channels: [channel: identityWithoutAttestation], connectionError: nil,

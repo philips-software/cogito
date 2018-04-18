@@ -8,7 +8,7 @@ class IdentitySpec: QuickSpec {
         var identity: Identity!
 
         beforeEach {
-            identity = Identity(description: "test", address: Address.testAddress)
+            identity = Identity.example
         }
 
         it("cannot find a token when there are none") {
