@@ -19,7 +19,7 @@ class HomeViewControllerSpec: QuickSpec {
 
         describe("connecting to a telepath url") {
             var recorder: DispatchRecorder<ThunkAction<AppState>>!
-            let identity = Identity(description: "test", address: Address.testAddress)
+            let identity = Identity.example
 
             beforeEach {
                 recorder = DispatchRecorder<ThunkAction<AppState>>()

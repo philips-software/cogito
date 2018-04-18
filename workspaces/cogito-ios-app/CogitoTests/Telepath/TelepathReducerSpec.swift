@@ -6,7 +6,7 @@ import Nimble
 class TelepathReducerSpec: QuickSpec {
     override func spec() {
         let channel = TelepathChannel.example
-        let identity = Identity(description: "test", address: Address.testAddress)
+        let identity = Identity.example
         let message = TelepathMessage(message: "a message", channel: channel)
 
         it("stores the channel in the state") {

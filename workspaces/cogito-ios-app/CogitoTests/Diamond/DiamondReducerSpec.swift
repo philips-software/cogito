@@ -51,7 +51,7 @@ class DiamondReducerSpec: QuickSpec {
         }
 
         it("handles AddJWTAttestation") {
-            let identity = Identity(description: "test identity", address: Address.testAddress1)
+            let identity = Identity.example
             let idToken = "some token"
             let initialState = DiamondState(facets: [identity])
             let action = DiamondActions.AddJWTAttestation(identity: identity, idToken: idToken)
@@ -60,7 +60,7 @@ class DiamondReducerSpec: QuickSpec {
         }
 
         it("stores a newly created encryption keypair") {
-            let identity = Identity(description: "test identity", address: Address.testAddress1)
+            let identity = Identity.example
             let tag = "some tag"
             let initialState = DiamondState(facets: [identity])
             let action = DiamondActions.StoreEncryptionKeyPair(identity: identity, tag: tag)
@@ -69,7 +69,7 @@ class DiamondReducerSpec: QuickSpec {
         }
 
         it("handles DeleteFacet") {
-            let identity = Identity(description: "test identity", address: Address.testAddress1)
+            let identity = Identity.example
             let initialState = DiamondState(facets: [identity])
             let action = DiamondActions.DeleteFacet(uuid: identity.identifier)
             let nextState = diamondReducer(action: action, state: initialState)
@@ -77,7 +77,7 @@ class DiamondReducerSpec: QuickSpec {
         }
 
         it("changes selectedFacet if DeleteFacet deletes the selected one") {
-            let identity = Identity(description: "test identity", address: Address.testAddress1)
+            let identity = Identity.example
             var initialState = DiamondState(facets: [identity])
             initialState.selectedFacetId = identity.identifier
             let action = DiamondActions.DeleteFacet(uuid: identity.identifier)
@@ -86,7 +86,7 @@ class DiamondReducerSpec: QuickSpec {
         }
 
         it("handles SelectFacet") {
-            let identity = Identity(description: "test identity", address: Address.testAddress1)
+            let identity = Identity.example
             var initialState = DiamondState(facets: [identity])
             initialState.selectedFacetId = nil
             let action = DiamondActions.SelectFacet(uuid: identity.identifier)
