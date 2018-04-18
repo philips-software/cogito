@@ -6,11 +6,7 @@ import ReSwiftThunk
 
 class AccountServiceSpec: QuickSpec {
     override func spec() {
-        let accountRequest = JsonRpcRequest(
-            id: JsonRpcId(1),
-            method: "accounts",
-            params: JsonRpcParams()
-        )
+        let accountRequest = JsonRpcRequest(method: "accounts")
 
         var service: AccountService!
         var store: StoreSpy!
@@ -32,11 +28,7 @@ class AccountServiceSpec: QuickSpec {
 
         describe("when a different request comes in") {
             beforeEach {
-                let request = JsonRpcRequest(
-                    id: JsonRpcId(),
-                    method: "other",
-                    params: JsonRpcParams()
-                )
+                let request = JsonRpcRequest(method: "other")
                 service.onRequest(request, on: TelepathChannel.example)
             }
 

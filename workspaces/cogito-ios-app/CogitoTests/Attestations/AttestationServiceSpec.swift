@@ -8,7 +8,6 @@ class AttestationServiceSpec: QuickSpec {
     override func spec() {
         let realmUrl = "https://iam-blockchain-dev.cogito.mobi/auth/realms/master"
         let attestationsRequest = JsonRpcRequest(
-            id: JsonRpcId(1),
             method: "attestations",
             params: JsonRpcParams([
                 "app": "test",
@@ -37,7 +36,6 @@ class AttestationServiceSpec: QuickSpec {
         describe("when a different request comes in") {
             beforeEach {
                 let request = JsonRpcRequest(
-                    id: JsonRpcId(),
                     method: "other",
                     params: JsonRpcParams([
                         "app": "test",

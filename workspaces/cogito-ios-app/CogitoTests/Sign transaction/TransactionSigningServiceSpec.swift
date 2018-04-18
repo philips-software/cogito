@@ -6,11 +6,7 @@ import ReSwiftThunk
 
 class TransactionSigningServiceSpec: QuickSpec {
     override func spec() {
-        let signRequest = JsonRpcRequest(
-            id: JsonRpcId(1),
-            method: "sign",
-            params: JsonRpcParams(parseJSON: "[{}]")
-        )
+        let signRequest = JsonRpcRequest(method: "sign", params: JsonRpcParams(parseJSON: "[{}]"))
 
         var service: TransactionSigningService!
         var store: StoreSpy!
@@ -32,11 +28,7 @@ class TransactionSigningServiceSpec: QuickSpec {
 
         context("when a different request comes in") {
             beforeEach {
-                let request = JsonRpcRequest(
-                    id: JsonRpcId(),
-                    method: "other",
-                    params: JsonRpcParams()
-                )
+                let request = JsonRpcRequest(method: "other")
                 service.onRequest(request, on: TelepathChannel.example)
             }
 

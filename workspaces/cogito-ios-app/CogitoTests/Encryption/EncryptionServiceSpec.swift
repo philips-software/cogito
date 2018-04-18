@@ -27,11 +27,7 @@ class EncryptionServiceSpec: QuickSpec {
         }
 
         context("when a create encryption key pair request comes in") {
-            let request = JsonRpcRequest(
-                id: JsonRpcId(1),
-                method: "createEncryptionKeyPair",
-                params: JsonRpcParams()
-            )
+            let request = JsonRpcRequest(method: "createEncryptionKeyPair")
 
             beforeEach {
                 store.state = appState(
@@ -83,7 +79,6 @@ class EncryptionServiceSpec: QuickSpec {
 
                 it("loads the public key with the correct tag") {
                     let request = JsonRpcRequest(
-                        id: JsonRpcId(1),
                         method: "getEncryptionPublicKey",
                         params: JsonRpcParams(["tag": tag])
                     )
@@ -93,7 +88,6 @@ class EncryptionServiceSpec: QuickSpec {
 
                 it("sends response on Telepath channel") {
                     let request = JsonRpcRequest(
-                        id: JsonRpcId(1),
                         method: "getEncryptionPublicKey",
                         params: JsonRpcParams(["tag": tag])
                     )
@@ -103,11 +97,7 @@ class EncryptionServiceSpec: QuickSpec {
                 }
 
                 it("sends an error when tag is missing in request") {
-                    let request = JsonRpcRequest(
-                        id: JsonRpcId(1),
-                        method: "getEncryptionPublicKey",
-                        params: JsonRpcParams()
-                    )
+                    let request = JsonRpcRequest(method: "getEncryptionPublicKey")
                     service.onRequest(request, on: channel)
                     let sendPendingAction = store.firstAction(ofType: TelepathActions.SendPending.self)
                     expect(sendPendingAction?.message).to(contain("\"code\" : \(EncryptionError.tagMissing.rawValue)"))
@@ -124,7 +114,6 @@ class EncryptionServiceSpec: QuickSpec {
 
                 it("returns an error") {
                     let request = JsonRpcRequest(
-                        id: JsonRpcId(1),
                         method: "getEncryptionPublicKey",
                         params: JsonRpcParams(["tag": tag])
                     )
@@ -145,7 +134,6 @@ class EncryptionServiceSpec: QuickSpec {
 
                 it("returns an error") {
                     let request = JsonRpcRequest(
-                        id: JsonRpcId(1),
                         method: "getEncryptionPublicKey",
                         params: JsonRpcParams(["tag": tag])
                     )
@@ -161,7 +149,6 @@ class EncryptionServiceSpec: QuickSpec {
             let cipherText = "some encrypted data".data(using: .utf8)!
             let plainText = "some decrypted data".data(using: .utf8)!
             let request = JsonRpcRequest(
-                id: JsonRpcId(1),
                 method: "decrypt",
                 params: JsonRpcParams([
                     "keyTag": tag,
@@ -191,7 +178,6 @@ class EncryptionServiceSpec: QuickSpec {
 
             it("sends an error when tag is missing in the request") {
                 let wrongRequest = JsonRpcRequest(
-                    id: JsonRpcId(1),
                     method: "decrypt",
                     params: JsonRpcParams([
                         "cipherText": cipherText.hexEncodedString()
@@ -206,7 +192,6 @@ class EncryptionServiceSpec: QuickSpec {
 
             it("sends an error when cipherText is missing in the request") {
                 let wrongRequest = JsonRpcRequest(
-                    id: JsonRpcId(1),
                     method: "decrypt",
                     params: JsonRpcParams([
                         "keyTag": tag
@@ -221,7 +206,6 @@ class EncryptionServiceSpec: QuickSpec {
 
             it("sends an error when cipherText is invalid") {
                 let wrongRequest = JsonRpcRequest(
-                    id: JsonRpcId(1),
                     method: "decrypt",
                     params: JsonRpcParams([
                         "keyTag": tag,
@@ -258,11 +242,7 @@ class EncryptionServiceSpec: QuickSpec {
         context("when another request comes in") {
             it("does not dispatch anything") {
                 let actionCountBefore = store.actions.count
-                let request = JsonRpcRequest(
-                    id: JsonRpcId(1),
-                    method: "some other request",
-                    params: JsonRpcParams()
-                )
+                let request = JsonRpcRequest(method: "other")
                 service.onRequest(request, on: channel)
                 expect(store.actions.count) == actionCountBefore
             }
