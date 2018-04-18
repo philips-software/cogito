@@ -13,6 +13,10 @@ class DataPlusHexSpec: QuickSpec {
             expect(Data(fromHex: "0")).to(beNil())
         }
 
+        it("cannot initalize from invalid characters") {
+            expect(Data(fromHex: "xy")).to(beNil())
+        }
+
         it("can initialize from two characters") {
             expect(Data(fromHex: "ff")) == Data(bytes: [255])
         }
