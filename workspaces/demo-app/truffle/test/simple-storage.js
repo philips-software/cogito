@@ -19,10 +19,8 @@ contract('SimpleStorage', function (accounts) {
   })
 
   context('when adding one', function () {
-    let requestTx
-
     beforeEach(async function () {
-      requestTx = await simpleStorage.increase(1)
+      await simpleStorage.increase(1)
     })
 
     it('increases the value', async function () {
