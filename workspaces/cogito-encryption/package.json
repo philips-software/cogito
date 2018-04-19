@@ -1,0 +1,39 @@
+{
+  "name": "@cogito/cogito-encryption",
+  "version": "0.1.0",
+  "description": "Supports encryption and decryption through the Cogito app",
+  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito-encryption",
+  "license": "UNLICENSED",
+  "main": "umd/cogito-encryption.min.js",
+  "module": "es/index.js",
+  "scripts": {
+    "build": "node ./tools/build.js"
+  },
+  "engines": {
+    "node": ">=9.0.0"
+  },
+  "files": [
+    "lib",
+    "es",
+    "umd",
+    "source"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.44",
+    "@babel/core": "7.0.0-beta.44",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
+    "gzip-size": "^4.1.0",
+    "lodash": "^4.17.5",
+    "pretty-bytes": "^4.0.2",
+    "rollup": "^0.56.5",
+    "rollup-plugin-babel": "^4.0.0-beta.2",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-resolve": "^3.2.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-uglify": "^3.0.0"
+  },
+  "publishConfig": {
+    "registry": "http://artifactory-ehv.ta.philips.com/artifactory/api/npm/dl-common-publish-npm-local"
+  }
+}
