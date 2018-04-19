@@ -115,6 +115,7 @@
 		5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */; };
 		5C59C9C52008B01D00186D29 /* JsonRpcRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */; };
 		5C61A0022088871E00867747 /* PublicKeyLoaderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C61A0012088871E00867747 /* PublicKeyLoaderSpec.swift */; };
+		5C61A0042088A01100867747 /* DecrypterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C61A0032088A01100867747 /* DecrypterSpec.swift */; };
 		5C7BCE6620864709006E33A5 /* PublicKeyLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7BCE6520864709006E33A5 /* PublicKeyLoader.swift */; };
 		5C7BCE69208647E9006E33A5 /* PublicKeyLoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7BCE68208647E9006E33A5 /* PublicKeyLoaderSpy.swift */; };
 		5C7C238F1FA3501C009E9CE7 /* TelepathReceiverSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C238E1FA3501C009E9CE7 /* TelepathReceiverSpec.swift */; };
@@ -286,6 +287,7 @@
 		5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducerSpec.swift; sourceTree = "<group>"; };
 		5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcRequestSpec.swift; sourceTree = "<group>"; };
 		5C61A0012088871E00867747 /* PublicKeyLoaderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyLoaderSpec.swift; sourceTree = "<group>"; };
+		5C61A0032088A01100867747 /* DecrypterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecrypterSpec.swift; sourceTree = "<group>"; };
 		5C7BCE6520864709006E33A5 /* PublicKeyLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyLoader.swift; sourceTree = "<group>"; };
 		5C7BCE68208647E9006E33A5 /* PublicKeyLoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyLoaderSpy.swift; sourceTree = "<group>"; };
 		5C7C238E1FA3501C009E9CE7 /* TelepathReceiverSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelepathReceiverSpec.swift; sourceTree = "<group>"; };
@@ -581,6 +583,7 @@
 				5C7BCE68208647E9006E33A5 /* PublicKeyLoaderSpy.swift */,
 				5C3C8F27208732C50042AC2F /* DecrypterSpy.swift */,
 				5C61A0012088871E00867747 /* PublicKeyLoaderSpec.swift */,
+				5C61A0032088A01100867747 /* DecrypterSpec.swift */,
 			);
 			path = Encryption;
 			sourceTree = "<group>";
@@ -1229,6 +1232,7 @@
 				0292451D1F7AA3B100F2C0C1 /* AppStateHelper.swift in Sources */,
 				02A15AF71F864F8700A94163 /* HomeViewControllerSpec.swift in Sources */,
 				5C04E44A1FA77CA400A70C60 /* AccountServiceSpec.swift in Sources */,
+				5C61A0042088A01100867747 /* DecrypterSpec.swift in Sources */,
 				5C61A0022088871E00867747 /* PublicKeyLoaderSpec.swift in Sources */,
 				5C04E4471FA77C0D00A70C60 /* StoreSpy.swift in Sources */,
 				0270D71D1F9F5A5F00CC9038 /* AttestationActionsSpec.swift in Sources */,
