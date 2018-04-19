@@ -13,8 +13,8 @@ struct KeyPairCreator: KeyPairCreatorType {
             kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
             kSecAttrKeySizeInBits as String: 2048,
             kSecAttrApplicationTag as String: tag.data(using: .utf8)!,
+            kSecAttrIsPermanent as String: true,
             kSecPrivateKeyAttrs as String: [
-                kSecAttrIsPermanent as String: true,
                 kSecAttrCanEncrypt as String: true,
                 kSecAttrCanDecrypt as String: true,
                 kSecAttrAccessControl as String: accessFlags
