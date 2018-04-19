@@ -7,48 +7,36 @@ import Nimble
 class KeyPairCreatorSpec: QuickSpec {
     override func spec() {
         var creator: KeyPairCreator!
-        var creationParameters: [String:Any]? = nil
 
         beforeEach {
             creator = KeyPairCreator()
-            creator.keyPairCreateFunction = { parameters, error in
-                creationParameters = parameters as? [String:Any]
-                return nil
-            }
         }
 
         context("when creating") {
-            let tag = "some tag"
+            let tag = UUID().uuidString
 
             beforeEach {
                 creator.create(tag: tag)
             }
 
             it("uses RSA algorithm") {
-                expect(creationParameters?[kSecAttrKeyType as String] as? String) == kSecAttrKeyTypeRSA as String
-                expect(creationParameters?[kSecAttrKeySizeInBits as String] as? Int) == 2048
-            }
-
-            it("is stored permanently") {
-                let privateKeyAttributes = creationParameters?[kSecPrivateKeyAttrs as String] as? [String:Any]
-                expect(privateKeyAttributes?[kSecAttrIsPermanent as String] as? Bool).to(beTrue())
+                let query: [String:Any] = [
+                    kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
+                    kSecAttrKeySizeInBits as String: 2048,
+                    kSecAttrApplicationTag as String: tag.data(using: .utf8)!,
+                    kSecClass as String: kSecClassKey
+                ]
+                expect(SecItemCopyMatching(query as CFDictionary, nil)) == errSecSuccess
             }
 
             it("can be used for encryption and decryption") {
-                let privateKeyAttributes = creationParameters?[kSecPrivateKeyAttrs as String] as? [String:Any]
-                expect(privateKeyAttributes?[kSecAttrCanEncrypt as String] as? Bool).to(beTrue())
-                expect(privateKeyAttributes?[kSecAttrCanDecrypt as String] as? Bool).to(beTrue())
-            }
-
-            it("is stored under a tag") {
-                let privateKeyAttributes = creationParameters?[kSecPrivateKeyAttrs as String] as? [String:Any]
-                let tagData = privateKeyAttributes?[kSecAttrApplicationTag as String] as? Data
-                expect(tagData) == tag.data(using: .utf8)
-            }
-
-            it("has access control flags") {
-                let privateKeyAttributes = creationParameters?[kSecPrivateKeyAttrs as String] as? [String:Any]
-                expect(privateKeyAttributes?[kSecAttrAccessControl as String]).toNot(beNil())
+                let query: [String:Any] = [
+                    kSecAttrCanEncrypt as String: true,
+                    kSecAttrCanDecrypt as String: true,
+                    kSecAttrApplicationTag as String: tag.data(using: .utf8)!,
+                    kSecClass as String: kSecClassKey
+                ]
+                expect(SecItemCopyMatching(query as CFDictionary, nil)) == errSecSuccess
             }
         }
     }
