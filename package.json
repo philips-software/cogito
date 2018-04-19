@@ -21,6 +21,7 @@
 	"jest": {
 		"projects": [
 			"workspaces/cogito-web3",
+			"workspaces/cogito-encryption",
 			"workspaces/telepath-js",
 			"workspaces/telepath-queuing-service",
 			"workspaces/demo-app"
