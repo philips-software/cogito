@@ -4,8 +4,16 @@ import Foundation
 
 struct PublicKeyLoader: PublicKeyLoaderType {
     func load(tag: String) -> PublicKey? {
-        assert(false, "to be implemented")
-        return nil
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassKey,
+            kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
+            kSecAttrApplicationTag as String: tag.data(using: .utf8)!,
+            kSecMatchLimit as String: kSecMatchLimitOne,
+            kSecReturnData as String: true
+        ]
+        var result: AnyObject?
+        SecItemCopyMatching(query as CFDictionary, &result)
+        return result as? Data
     }
 }
 
