@@ -4,8 +4,6 @@ import Foundation
 import Security
 
 struct KeyPairCreator: KeyPairCreatorType {
-    var keyPairCreateFunction: KeyPairCreateFunction = SecKeyCreateRandomKey
-
     func create(tag: String) {
         let accessFlags = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
                                                           kSecAttrAccessibleAfterFirstUnlock,
@@ -14,21 +12,18 @@ struct KeyPairCreator: KeyPairCreatorType {
         let parameters: [String:Any] = [
             kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
             kSecAttrKeySizeInBits as String: 2048,
+            kSecAttrApplicationTag as String: tag.data(using: .utf8)!,
             kSecPrivateKeyAttrs as String: [
                 kSecAttrIsPermanent as String: true,
                 kSecAttrCanEncrypt as String: true,
                 kSecAttrCanDecrypt as String: true,
-                kSecAttrApplicationTag as String: tag.data(using: .utf8)!,
                 kSecAttrAccessControl as String: accessFlags
             ]
         ]
-        _ = keyPairCreateFunction(parameters as CFDictionary, nil)
-    }
+        var error: Unmanaged<CFError>?
+        SecKeyCreateRandomKey(parameters as CFDictionary, &error)
 
-    typealias KeyPairCreateFunction = (
-        _ parameters: CFDictionary,
-        _ error: UnsafeMutablePointer<Unmanaged<CFError>?>?
-    ) -> SecKey?
+    }
 }
 
 protocol KeyPairCreatorType {
