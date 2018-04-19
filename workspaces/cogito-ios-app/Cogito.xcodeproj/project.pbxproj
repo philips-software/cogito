@@ -580,10 +580,10 @@
 				0295A0202085E6DD0060400A /* EncryptionServiceSpec.swift */,
 				0295A025208639600060400A /* KeyPairCreatorSpec.swift */,
 				0295A02A20863C8A0060400A /* KeyPairCreatorSpy.swift */,
-				5C7BCE68208647E9006E33A5 /* PublicKeyLoaderSpy.swift */,
-				5C3C8F27208732C50042AC2F /* DecrypterSpy.swift */,
 				5C61A0012088871E00867747 /* PublicKeyLoaderSpec.swift */,
+				5C7BCE68208647E9006E33A5 /* PublicKeyLoaderSpy.swift */,
 				5C61A0032088A01100867747 /* DecrypterSpec.swift */,
+				5C3C8F27208732C50042AC2F /* DecrypterSpy.swift */,
 			);
 			path = Encryption;
 			sourceTree = "<group>";
