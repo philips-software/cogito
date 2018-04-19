@@ -22,7 +22,7 @@ class CogitoContract extends React.Component {
   }
 
   onClosed = async (dispatch) => {
-    const { deployedContract, web3 } = this.props
+    const { contracts: { simpleStorage: deployedContract }, web3 } = this.props
     console.log('action', this.state.action)
     if (this.state.action === 'increase') {
       console.log('will increase contract value...')
@@ -52,7 +52,7 @@ class CogitoContract extends React.Component {
       })
     } else {
       console.log('props=', this.props)
-      const { deployedContract, web3 } = this.props
+      const { contracts: { simpleStorage: deployedContract }, web3 } = this.props
       console.log('will read contract value...')
       dispatch(ContractActions.read({
         deployedContract,
@@ -69,7 +69,7 @@ class CogitoContract extends React.Component {
       })
     } else {
       console.log('props=', this.props)
-      const { deployedContract, web3 } = this.props
+      const { contracts: { simpleStorage: deployedContract }, web3 } = this.props
       console.log('will increase contract value...')
       dispatch(ContractActions.increase({
         deployedContract,
