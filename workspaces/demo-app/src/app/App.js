@@ -13,8 +13,8 @@ const renderComponent = (Component, routeProps, web3Props) =>
   <Component {...web3Props}
     {...routeProps} />
 
-const web3IsReady = ({web3, channel, deployedContract}) => {
-  return (web3 && channel && deployedContract)
+const web3IsReady = ({web3, channel, contracts}) => {
+  return (web3 && channel && contracts)
 }
 
 const App = () =>
