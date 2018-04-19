@@ -15,8 +15,6 @@ struct KeyPairCreator: KeyPairCreatorType {
             kSecAttrApplicationTag as String: tag.data(using: .utf8)!,
             kSecAttrIsPermanent as String: true,
             kSecPrivateKeyAttrs as String: [
-                kSecAttrCanEncrypt as String: true,
-                kSecAttrCanDecrypt as String: true,
                 kSecAttrAccessControl as String: accessFlags
             ]
         ]
