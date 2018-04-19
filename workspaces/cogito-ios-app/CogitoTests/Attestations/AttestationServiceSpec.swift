@@ -3,6 +3,7 @@
 import Quick
 import Nimble
 import ReSwiftThunk
+@testable import Cogito
 
 class AttestationServiceSpec: QuickSpec {
     override func spec() {

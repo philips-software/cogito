@@ -4,6 +4,7 @@ import Quick
 import Nimble
 import Geth
 import BigInt
+@testable import Cogito
 
 class KeyStoreSpec: QuickSpec {
     override func spec() {

@@ -2,6 +2,7 @@
 
 import Quick
 import Nimble
+@testable import Cogito
 
 class GethReducerSpec: QuickSpec {
     override func spec() {

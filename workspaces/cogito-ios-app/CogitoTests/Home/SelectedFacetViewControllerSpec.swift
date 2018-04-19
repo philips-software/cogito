@@ -5,6 +5,7 @@ import Nimble
 import UIKit
 import Geth
 import ReSwift
+@testable import Cogito
 
 class SelectedFacetViewControllerSpec: QuickSpec {
     override func spec() {
@@ -17,7 +18,7 @@ class SelectedFacetViewControllerSpec: QuickSpec {
         var viewController: SelectedFacetViewController!
 
         beforeEach {
-            let storyboard = UIStoryboard(name: "Home", bundle: Bundle(for: type(of: self)))
+            let storyboard = UIStoryboard(name: "Home", bundle: Bundle(for: SelectedFacetViewController.self))
             viewController = storyboard.instantiateViewController(withIdentifier: "SelectedFacet")
                 as! SelectedFacetViewController // swiftlint:disable:this force_cast
             expect(viewController.view).toNot(beNil())

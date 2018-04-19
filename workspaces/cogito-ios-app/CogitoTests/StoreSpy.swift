@@ -1,4 +1,5 @@
 import ReSwift
+@testable import Cogito
 
 class StoreSpy: Store<AppState> {
     var actions = [Action]()

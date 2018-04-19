@@ -3,13 +3,14 @@
 import Quick
 import Nimble
 import UIKit
+@testable import Cogito
 
 class DebugViewControllerSpec: QuickSpec {
     override func spec() {
         var viewController: DebugViewController!
 
         beforeEach {
-            let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: type(of: self)))
+            let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: DebugViewController.self))
             // swiftlint:disable:next force_cast
             viewController = storyboard.instantiateInitialViewController() as! DebugViewController
             expect(viewController.view).toNot(beNil())
@@ -50,7 +51,7 @@ class DebugViewControllerSpec: QuickSpec {
                 resetAppState: {},
                 startOpenIdConnectAttestation: { _, _, _, _ in }
             )
-            let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: type(of: self)))
+            let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: CreateIdentityViewController.self))
             let createIdentityViewController = storyboard.instantiateViewController(withIdentifier: "CreateIdentity")
                 as! CreateIdentityViewController // swiftlint:disable:this force_cast
             let segue = UIStoryboardSegue(identifier: nil,
