@@ -1,6 +1,6 @@
 {
   "name": "telepath-queuing-service",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Telepath Queuing Service",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service",
   "private": true,
