@@ -2,6 +2,7 @@
 
 import Quick
 import Nimble
+@testable import Cogito
 
 class TelepathReducerSpec: QuickSpec {
     override func spec() {

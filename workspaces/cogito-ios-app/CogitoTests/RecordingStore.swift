@@ -2,6 +2,7 @@
 
 import ReSwift
 import ReSwiftThunk
+@testable import Cogito
 
 class RecordingStore: Store<AppState> {
     var actions = [Action]()

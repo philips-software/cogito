@@ -1,6 +1,7 @@
 //  Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
 
 import ReSwift
+@testable import Cogito
 
 class DispatchRecorder<ActionType> {
     var actions = [ActionType]()

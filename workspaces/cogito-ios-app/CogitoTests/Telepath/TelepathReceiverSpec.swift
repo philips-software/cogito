@@ -4,6 +4,7 @@ import Quick
 import Nimble
 import ReSwift
 import Telepath
+@testable import Cogito
 
 class TelepathReceiverSpec: QuickSpec {
     override func spec() {

@@ -3,6 +3,7 @@
 import Quick
 import Nimble
 import SwiftyJSON
+@testable import Cogito
 
 class JsonRpcIdSpec: QuickSpec {
     override func spec() {

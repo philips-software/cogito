@@ -5,6 +5,7 @@ import Nimble
 import ReSwift
 import ReSwiftThunk
 import Geth
+@testable import Cogito
 
 class CreateIdentityActionsSpec: QuickSpec {
     override func spec() {

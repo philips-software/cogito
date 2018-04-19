@@ -1,6 +1,7 @@
 //  Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
 
 import Foundation
+@testable import Cogito
 
 func appState(keyStore: KeyStoreState = initialKeyStoreState,
               geth: GethState = initialGethState,

@@ -3,6 +3,7 @@
 import Quick
 import Nimble
 import UIKit
+@testable import Cogito
 
 class DialogPresenterSpec: QuickSpec {
     override func spec() {
@@ -10,7 +11,7 @@ class DialogPresenterSpec: QuickSpec {
         var windowSpy: WindowSpy!
 
         beforeEach {
-            let storyboard = UIStoryboard(name: "Home", bundle: Bundle(for: type(of: self)))
+            let storyboard = UIStoryboard(name: "Home", bundle: Bundle(for: DialogPresenter.self))
             viewController = storyboard.instantiateViewController(withIdentifier: "DialogPresenter")
                 as! DialogPresenter // swiftlint:disable:this force_cast
             expect(viewController.view).toNot(beNil())

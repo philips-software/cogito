@@ -5,6 +5,7 @@ import Nimble
 import ReSwift
 import ReSwiftThunk
 import Geth
+@testable import Cogito
 
 class KeyStoreActionsSpec: QuickSpec {
     override func spec() {

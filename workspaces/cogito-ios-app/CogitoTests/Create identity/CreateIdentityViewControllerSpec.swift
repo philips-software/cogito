@@ -4,13 +4,14 @@ import Quick
 import Nimble
 import UIKit
 import Geth
+@testable import Cogito
 
 class CreateIdentityViewControllerSpec: QuickSpec {
     override func spec() {
         var viewController: CreateIdentityViewController!
 
         beforeEach {
-            let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: type(of: self)))
+            let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: CreateIdentityViewController.self))
             viewController = storyboard.instantiateViewController(withIdentifier: "CreateIdentity")
                 as! CreateIdentityViewController // swiftlint:disable:this force_cast
             expect(viewController.view).toNot(beNil())

@@ -2,13 +2,15 @@
 
 import Quick
 import Nimble
+@testable import Cogito
 
 class IdentityManagerViewControllerSpec: QuickSpec {
     override func spec() {
         var identityManagerController: IdentityManagerViewController!
 
         beforeEach {
-            let storyboard = UIStoryboard(name: "IdentityManager", bundle: Bundle(for: type(of: self)))
+            let bundle = Bundle(for: IdentityManagerViewController.self)
+            let storyboard = UIStoryboard(name: "IdentityManager", bundle: bundle)
             let viewController = storyboard.instantiateViewController(withIdentifier: "IdentityManager")
             identityManagerController = viewController as? IdentityManagerViewController
             expect(viewController.view).toNot(beNil())

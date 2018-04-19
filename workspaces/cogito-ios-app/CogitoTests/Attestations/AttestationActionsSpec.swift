@@ -5,6 +5,7 @@ import Nimble
 import ReSwiftThunk
 import Telepath
 import SwiftyJSON
+@testable import Cogito
 
 // swiftlint:disable:next type_body_length
 class AttestationActionsSpec: QuickSpec {

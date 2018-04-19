@@ -2,6 +2,7 @@
 
 import Quick
 import Nimble
+@testable import Cogito
 
 class JsonRpcRequestSpec: QuickSpec {
     override func spec() {

@@ -4,6 +4,7 @@ import Quick
 import Nimble
 import ReSwift
 import ReSwiftThunk
+@testable import Cogito
 
 class HomeViewControllerSpec: QuickSpec {
     override func spec() {
@@ -39,7 +40,7 @@ class HomeViewControllerSpec: QuickSpec {
     }
 
     func instantiateViewController() -> HomeViewController? {
-        let bundle = Bundle(for: type(of: self))
+        let bundle = Bundle(for: HomeViewController.self)
         let storyboard = UIStoryboard(name: "Home", bundle: bundle)
         let viewController = storyboard.instantiateViewController(withIdentifier: "Home")
         return viewController as? HomeViewController

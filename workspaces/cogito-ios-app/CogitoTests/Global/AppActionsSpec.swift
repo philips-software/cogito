@@ -4,6 +4,7 @@ import Quick
 import Nimble
 import ReSwift
 import ReSwiftThunk
+@testable import Cogito
 
 class AppActionsSpec: QuickSpec {
     override func spec() {

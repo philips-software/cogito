@@ -3,6 +3,7 @@
 import Quick
 import Nimble
 import Mockingjay
+@testable import Cogito
 
 class OpenIDAttestationHandlerSpec: QuickSpec {
     override func spec() {

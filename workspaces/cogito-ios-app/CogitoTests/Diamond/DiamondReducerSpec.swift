@@ -3,6 +3,7 @@
 import Quick
 import Nimble
 import Geth
+@testable import Cogito
 
 class DiamondReducerSpec: QuickSpec {
     override func spec() {

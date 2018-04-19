@@ -3,6 +3,7 @@
 import Quick
 import Nimble
 import Geth
+@testable import Cogito
 
 class DiamondStateSpec: QuickSpec {
     override func spec() {

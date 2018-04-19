@@ -3,6 +3,7 @@
 import Quick
 import Nimble
 import SwiftyJSON
+@testable import Cogito
 
 class AccountActionsSpec: QuickSpec {
     override func spec() {

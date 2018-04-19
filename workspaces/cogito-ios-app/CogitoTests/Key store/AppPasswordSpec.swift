@@ -3,6 +3,7 @@
 import Quick
 import Nimble
 import KeychainAccess
+@testable import Cogito
 
 class AppPasswordSpec: QuickSpec {
     override func spec() {
