@@ -10,7 +10,7 @@ before_script:
 test javascript:
   stage: test
   script:
-    - yarn lerna run --scope "@philips/**" --scope "@cogito/**" build
+    - yarn lerna run --scope "@philips/**" --scope "@cogitojs/**" build
     - yarn test
 
 test cogito-ios-app:
@@ -42,7 +42,7 @@ test telepath-ios:
 build cogito-web3:
   stage: build
   script:
-    - yarn lerna run --scope @cogito/cogito-web3 build
+    - yarn lerna run --scope @cogitojs/cogito-web3 build
   cache:
     paths:
       - node_modules/
@@ -51,7 +51,7 @@ build cogito-web3:
 build telepath-js:
   stage: build
   script:
-    - yarn lerna run --scope @cogito/telepath-js build
+    - yarn lerna run --scope @cogitojs/telepath-js build
   cache:
     paths:
       - node_modules/
