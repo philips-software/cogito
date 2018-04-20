@@ -9,4 +9,14 @@ supports interaction with Ethereum blockchains and OpenID.
 
 [Documentation][1]
 
+Development
+-----------
+After cloning, run:
+- `yarn install` to install all dependencies
+- `yarn lerna run --scope @cogito/** build` to build all workspaces (or use `"@cogito/**"`, with
+  quotes, as required by your shell)
+
+Then you can go to the folder `workspaces/demo-app` and start it using `yarn start`.
+
+
 [1]: http://blockchain-lab.gitlab-pages.ta.philips.com/cogito
