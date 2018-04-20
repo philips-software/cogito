@@ -1,13 +1,13 @@
 {
   "name": "dsp-demo",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A demo project for using blockchain in dsp",
   "repository": "https://gitlab.ta.philips.com/blockchain-lab/dsp-demo",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@cogitojs/cogito-web3": "^0.1.1",
-    "@cogitojs/telepath-js": "^0.1.1",
+    "@cogitojs/cogito-web3": "^0.1.2",
+    "@cogitojs/telepath-js": "^0.1.2",
     "@react-frontend-developer/css-grid-helper": "^1.0.3",
     "babel-polyfill": "^6.26.0",
     "glamor": "^2.20.40",
