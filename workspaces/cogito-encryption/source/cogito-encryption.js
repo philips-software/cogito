@@ -14,7 +14,8 @@ class CogitoEncryption {
     if (response.error) {
       throw new Error(response.error.message)
     }
-    return response.result
+    const tag = response.result
+    return tag
   }
 
   nextRequestId () {
