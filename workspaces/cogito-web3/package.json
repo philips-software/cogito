@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-web3",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An Ethereum web3 provider that signs transactions with the Cogito app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito-web3",
   "license": "UNLICENSED",
