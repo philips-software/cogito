@@ -10,8 +10,7 @@
 		"jest": "^22.4.3",
 		"lerna": "^2.9.1",
 		"regenerator-runtime": "^0.11.1",
-		"standard": "^11.0.1",
-		"web3": "^1.0.0-beta.33"
+		"standard": "^11.0.1"
 	},
 	"workspaces": {
 		"packages": [
