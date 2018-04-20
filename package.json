@@ -16,7 +16,8 @@
 	"workspaces": {
 		"packages": [
 			"workspaces/*"
-		]
+		],
+		"nohoist": ["**/truffle-contract", "**/truffle-contract/**"]
 	},
 	"jest": {
 		"projects": [
