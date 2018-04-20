@@ -1,6 +1,6 @@
 import Web3 from 'web3'
-import { Telepath } from '@cogito/telepath-js'
-import { CogitoProvider } from '@cogito/cogito-web3'
+import { Telepath } from '@cogitojs/telepath-js'
+import { CogitoProvider } from '@cogitojs/cogito-web3'
 import { Contracts } from './Contracts'
 import { getWeb3 } from 'services/web3/getWeb3'
 

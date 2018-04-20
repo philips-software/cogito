@@ -1,5 +1,5 @@
 {
-  "name": "@cogito/telepath-js",
+  "name": "@cogitojs/telepath-js",
   "version": "0.1.1",
   "description": "Secure communication channel between mobile app and web app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/telepath-js",

@@ -6,8 +6,8 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@cogito/cogito-web3": "^0.1.1",
-    "@cogito/telepath-js": "^0.1.1",
+    "@cogitojs/cogito-web3": "^0.1.1",
+    "@cogitojs/telepath-js": "^0.1.1",
     "@react-frontend-developer/css-grid-helper": "^1.0.3",
     "babel-polyfill": "^6.26.0",
     "glamor": "^2.20.40",
