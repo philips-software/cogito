@@ -18,6 +18,21 @@ class CogitoEncryption {
     return tag
   }
 
+  async getPublicKey ({ tag }) {
+    const request = {
+      jsonrpc: '2.0',
+      id: this.nextRequestId(),
+      method: 'getEncryptionPublicKey',
+      params: [{ tag }]
+    }
+    const response = await this.channel.send(request)
+    if (response.error) {
+      throw new Error(response.error.message)
+    }
+    const publicKey = response.result
+    return publicKey
+  }
+
   nextRequestId () {
     return this.requestId++
   }

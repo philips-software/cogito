@@ -41,4 +41,38 @@ describe('encryption', () => {
       expect(id1).not.toBe(id2)
     })
   })
+
+  describe('retrieving the public key', () => {
+    const tag = 'some tag'
+    const request = { jsonrpc: '2.0', method: 'getEncryptionPublicKey', params: [{ tag }] }
+    const publicKey = 'the public key'
+    const response = { jsonrpc: '2.0', result: publicKey }
+
+    beforeEach(() => {
+      telepathChannel.send.mockResolvedValue(response)
+    })
+
+    it('gets the public key', async () => {
+      await cogitoEncryption.getPublicKey({tag})
+      expect(telepathChannel.send.mock.calls[0][0]).toMatchObject(request)
+    })
+
+    it('returns the public key after getting it', async () => {
+      expect(await cogitoEncryption.getPublicKey(tag)).toBe(publicKey)
+    })
+
+    it('throws when error is returned', async () => {
+      const error = { code: -42, message: 'some error' }
+      telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
+      await expect(cogitoEncryption.getPublicKey('nonexisting tag')).rejects.toBeDefined()
+    })
+
+    it('uses different JSON-RPC ids for subsequent requests', async () => {
+      await cogitoEncryption.getPublicKey({tag})
+      await cogitoEncryption.getPublicKey({tag})
+      const id1 = telepathChannel.send.mock.calls[0][0].id
+      const id2 = telepathChannel.send.mock.calls[1][0].id
+      expect(id1).not.toBe(id2)
+    })
+  })
 })
