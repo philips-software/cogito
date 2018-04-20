@@ -17,11 +17,7 @@ After cloning, run:
   quotes, as required by your shell)
 - in the folder `workspaces/demo-app/truffle`, run `yarn install`
 
-### Running the demo app
-Run local blockchain using Truffle:
-- inside folder `workspaces/demo-app/truffle`, run `yarn truffle dev` to enter Truffle development mode; keep this running
-- inside that Truffle development console, run `migrate` to deploy the smart contracts
-- using a separate terminal, inside the folder `workspaces/demo-app` start the demo app using `yarn start`
+Refer to [demo-app](workspaces/demo-app/Readme.md) for details on running the demo app.
 
 
 [1]: http://blockchain-lab.gitlab-pages.ta.philips.com/cogito
