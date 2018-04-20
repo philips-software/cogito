@@ -1,6 +1,6 @@
 import React from 'react'
 import simpleStorage from 'contracts/SimpleStorage.json'
-import { CogitoWeb3 } from 'services/web3'
+import { Cogito } from '@cogitojs/cogito'
 
 import { UserDataActions } from 'user-data'
 
@@ -13,7 +13,7 @@ const contractsInfo = {
 
 export class ReactWeb3 extends React.Component {
   state = { web3: null, channel: null, contracts: null }
-  cogitoWeb3 = new CogitoWeb3(contractsInfo)
+  cogitoWeb3 = new Cogito(contractsInfo)
 
   updateState = async (props) => {
     const { channelId, channelKey } = props
