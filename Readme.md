@@ -13,7 +13,7 @@ Development
 -----------
 After cloning, run:
 - `yarn install` to install all dependencies
-- `yarn lerna run --scope @cogito/** build` to build all workspaces (or use `"@cogito/**"`, with
+- `yarn lerna run --scope @cogitojs/** build` to build all workspaces (or use `"@cogitojs/**"`, with
   quotes, as required by your shell)
 - in the folder `workspaces/demo-app/truffle`, run `yarn install`
 
