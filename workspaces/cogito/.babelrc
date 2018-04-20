@@ -1,0 +1,54 @@
+{
+  "env": {
+    "commonjs": {
+      "presets": [
+        "@babel/preset-env"
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-proposal-class-properties"
+      ],
+      "ignore": [
+        "**/*.test.js",
+        "**/__mocks__/**"
+      ]
+    },
+    "es": {
+      "presets": [
+        ["@babel/preset-env", {
+          "modules": false
+        }]
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-proposal-class-properties"
+      ],
+      "ignore": [
+        "**/*.test.js",
+        "**/__mocks__/**"
+      ]
+    },
+    "umd": {
+      "presets": [
+        ["@babel/preset-env", {
+          "modules": false
+        }]
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-proposal-class-properties"
+      ],
+      "ignore": [
+        "**/*.test.js",
+        "**/__mocks__/**"
+      ]
+    },
+    "test": {
+      "presets": ["@babel/preset-env"],
+      "plugins": [
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-proposal-class-properties"
+      ]
+    }
+  }
+}
