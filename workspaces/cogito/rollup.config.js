@@ -4,16 +4,17 @@ import replace from 'rollup-plugin-replace'
 import commonjs from 'rollup-plugin-commonjs'
 import resolve from 'rollup-plugin-node-resolve'
 import builtins from 'rollup-plugin-node-builtins'
-import json from 'rollup-plugin-json'
 
 const config = {
   input: 'source/index.js',
   output: {
     name: 'cogito'
   },
-  external: ['web3'],
+  external: [
+    'web3',
+    'truffle-contract'
+  ],
   plugins: [
-    json(),
     replace({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),

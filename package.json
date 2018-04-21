@@ -15,8 +15,7 @@
 	"workspaces": {
 		"packages": [
 			"workspaces/*"
-		],
-		"nohoist": ["**/truffle-contract", "**/truffle-contract/**"]
+		]
 	},
 	"jest": {
 		"projects": [
@@ -26,7 +25,9 @@
 			"workspaces/telepath-queuing-service",
 			"workspaces/demo-app"
 		],
-		"testMatch": [ "**/*.test.js" ],
+		"testMatch": [
+			"**/*.test.js"
+		],
 		"collectCoverage": true,
 		"collectCoverageFrom": [
 			"source/**.js",
