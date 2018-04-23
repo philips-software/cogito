@@ -1,3 +1,5 @@
+import forge from 'node-forge'
+
 class CogitoEncryption {
   constructor ({ telepathChannel }) {
     this.channel = telepathChannel
@@ -29,8 +31,8 @@ class CogitoEncryption {
     if (response.error) {
       throw new Error(response.error.message)
     }
-    const publicKey = response.result
-    return publicKey
+    const publicKeyPEM = response.result
+    return publicKeyPEM
   }
 
   async decrypt ({ tag, cipherText }) {
@@ -46,6 +48,12 @@ class CogitoEncryption {
     }
     const plainText = response.result
     return plainText
+  }
+
+  async encrypt ({ tag, plainText }) {
+    const publicKeyPEM = await this.getPublicKey({ tag })
+    const publicKey = forge.pki.publicKeyFromPem(publicKeyPEM)
+    return publicKey.encrypt(plainText, 'RSA-OAEP')
   }
 
   nextRequestId () {

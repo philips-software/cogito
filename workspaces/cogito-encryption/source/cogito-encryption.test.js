@@ -1,4 +1,7 @@
 import { CogitoEncryption } from './cogito-encryption'
+import forge from 'node-forge'
+import base64url from 'base64url'
+import keyto from '@trust/keyto'
 
 describe('encryption', () => {
   let cogitoEncryption
@@ -28,6 +31,7 @@ describe('encryption', () => {
     })
 
     it('throws when error is returned', async () => {
+      expect.assertions(1)
       const error = { code: -42, message: 'some error' }
       telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
       await expect(cogitoEncryption.createNewKeyPair()).rejects.toBeDefined()
@@ -62,6 +66,7 @@ describe('encryption', () => {
     })
 
     it('throws when error is returned', async () => {
+      expect.assertions(1)
       const error = { code: -42, message: 'some error' }
       telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
       await expect(cogitoEncryption.getPublicKey({tag: 'nonexisting tag'})).rejects.toBeDefined()
@@ -97,6 +102,7 @@ describe('encryption', () => {
     })
 
     it('throws when error is returned', async () => {
+      expect.assertions(1)
       const error = { code: -42, message: 'some error' }
       telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
       await expect(cogitoEncryption.decrypt({ tag, cipherText })).rejects.toBeDefined()
@@ -110,4 +116,68 @@ describe('encryption', () => {
       expect(id1).not.toBe(id2)
     })
   })
+
+  describe('encrypting data', () => {
+    const plainText = 'plain text'
+
+    describe('when public key cannot be retrieved', () => {
+      const error = new Error('some error')
+
+      beforeEach(() => {
+        telepathChannel = {
+          send: jest.fn((request) => {
+            if (request['method'] === 'getEncryptionPublicKey') {
+              return Promise.reject(error)
+            }
+          })
+        }
+        cogitoEncryption = new CogitoEncryption({ telepathChannel })
+      })
+
+      it('throws', async () => {
+        expect.assertions(1)
+        await expect(
+          cogitoEncryption.encrypt({ tag: 'invalid tag', plainText })
+        ).rejects.toThrow(error)
+      })
+    })
+
+    describe('when public key can be retrieved', () => {
+      let encryption
+      let keyPair
+
+      beforeEach(async () => {
+        telepathChannel = { send: jest.fn() }
+        encryption = new CogitoEncryption({ telepathChannel })
+        keyPair = await generateKeyPair({bits: 2048, workers: -1})
+        const publicKeyJWK = {
+          'kty': 'RSA',
+          'n': base64url.encode(keyPair.publicKey.n.toByteArray()),
+          'e': base64url.encode(keyPair.publicKey.e.toByteArray()),
+          'alg': 'RS256'
+        }
+        const publicKey = keyto.from(publicKeyJWK, 'jwk')
+        const publicKeyPEM = publicKey.toString('pem')
+        telepathChannel.send.mockResolvedValue({ result: publicKeyPEM })
+      })
+
+      it('returns cipher text', async () => {
+        const cipherText = await encryption.encrypt({ tag: 'some tag', plainText })
+        const decrypted = keyPair.privateKey.decrypt(cipherText, 'RSA-OAEP')
+        expect(decrypted).toBe(plainText)
+      })
+    })
+  })
 })
+
+async function generateKeyPair (...args) {
+  return new Promise(function (resolve, reject) {
+    forge.pki.rsa.generateKeyPair(...args, function (error, result) {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(result)
+      }
+    })
+  })
+}
