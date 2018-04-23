@@ -1,5 +1,5 @@
 import base64url from 'base64url'
-import { random, keySize } from './crypto'
+import { random, keySize } from '@cogitojs/crypto'
 import { SecureChannel } from './secure-channel'
 import { JsonRpcChannel } from './json-rpc-channel'
 import { QueuingService } from './queuing-service'

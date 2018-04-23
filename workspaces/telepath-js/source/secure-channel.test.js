@@ -1,4 +1,4 @@
-import { random, encrypt, decrypt, keySize, nonceSize } from './crypto'
+import { random, encrypt, decrypt, keySize, nonceSize } from '@cogitojs/crypto'
 import base64url from 'base64url'
 import { SecureChannel } from './secure-channel'
 
