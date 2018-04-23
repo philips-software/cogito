@@ -17,7 +17,6 @@ build cogito:
 test javascript:
   stage: test
   script:
-    - yarn lerna run --scope "@philips/**" --scope "@cogitojs/**" build
     - yarn test
 
 test cogito-ios-app:
