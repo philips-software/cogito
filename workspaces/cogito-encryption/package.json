@@ -35,5 +35,10 @@
   },
   "publishConfig": {
     "registry": "http://artifactory-ehv.ta.philips.com/artifactory/api/npm/dl-common-publish-npm-local"
+  },
+  "dependencies": {
+    "@trust/keyto": "^0.3.2",
+    "base64url": "^2.0.0",
+    "node-forge": "^0.7.5"
   }
 }
