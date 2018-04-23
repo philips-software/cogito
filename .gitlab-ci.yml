@@ -17,6 +17,8 @@ test javascript:
   stage: test
   script:
     - yarn test
+  cache:
+    untracked: true
 
 test cogito-ios-app:
   stage: test
