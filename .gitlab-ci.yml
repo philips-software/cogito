@@ -4,11 +4,10 @@ stages:
   - build
   - test
 
-before_script:
-  - yarn install
-
 build cogito:
   stage: build
+  before_script:
+    - yarn install
   script:
     - yarn lerna run --scope @cogitojs/** build
   cache:
