@@ -1,11 +1,18 @@
 image: node:latest
 
 stages:
-  - test
   - build
+  - test
 
 before_script:
   - yarn install
+
+build cogito:
+  stage: build
+  script:
+    - yarn lerna run --scope @cogitojs/** build
+  cache:
+    untracked: true
 
 test javascript:
   stage: test
@@ -38,21 +45,3 @@ test telepath-ios:
     - bundle exec slather coverage
   tags:
     - ios
-
-build cogito-web3:
-  stage: build
-  script:
-    - yarn lerna run --scope @cogitojs/cogito-web3 build
-  cache:
-    paths:
-      - node_modules/
-      - workspaces/cogito-web3/node_modules/
-
-build telepath-js:
-  stage: build
-  script:
-    - yarn lerna run --scope @cogitojs/telepath-js build
-  cache:
-    paths:
-      - node_modules/
-      - workspaces/telepath-js/node_modules/
