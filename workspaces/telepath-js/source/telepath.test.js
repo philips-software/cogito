@@ -3,8 +3,6 @@ import { JsonRpcChannel } from './json-rpc-channel'
 import { Telepath } from './telepath'
 import { random, keySize } from '@cogitojs/crypto'
 
-jest.mock('@cogitojs/crypto')
-
 describe('Telepath', () => {
   let telepath
   let queuing
