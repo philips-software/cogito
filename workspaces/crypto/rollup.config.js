@@ -8,7 +8,7 @@ import builtins from 'rollup-plugin-node-builtins'
 const config = {
   input: 'source/index.js',
   output: {
-    name: 'telepath-js'
+    name: 'crypto'
   },
   plugins: [
     replace({
