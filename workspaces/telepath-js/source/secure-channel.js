@@ -1,5 +1,5 @@
 import base64url from 'base64url'
-import { random, encrypt, decrypt, nonceSize } from './crypto'
+import { random, encrypt, decrypt, nonceSize } from '@cogitojs/crypto'
 import { Poller } from './poller'
 
 class SecureChannel {
