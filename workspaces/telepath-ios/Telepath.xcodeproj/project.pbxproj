@@ -16,7 +16,6 @@
 		5C4048841F7E385C00B19C9D /* SecureChannelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4048831F7E385C00B19C9D /* SecureChannelSpec.swift */; };
 		5C4048861F7E3AB100B19C9D /* QueuingServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4048851F7E3AB100B19C9D /* QueuingServiceMock.swift */; };
 		5C4048881F7E3B1E00B19C9D /* ChannelKeyExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4048871F7E3B1E00B19C9D /* ChannelKeyExample.swift */; };
-		5C990A1F1F82613300FF8F9F /* Base64urlSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C990A1E1F82613300FF8F9F /* Base64urlSpec.swift */; };
 		5C9F22F31F792C68007C013E /* Telepath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9F22F21F792C68007C013E /* Telepath.swift */; };
 		5CAA828D1F7A909E0000A9D9 /* QueuingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */; };
 		5CC99AFB1F78FE0400ED602C /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 5CC99AF91F78FE0400ED602C /* Podfile */; };
@@ -26,7 +25,6 @@
 		5CF521D11F78F4780004C494 /* Telepath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CF521C71F78F4780004C494 /* Telepath.framework */; };
 		5CF521D61F78F4780004C494 /* TelepathSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF521D51F78F4780004C494 /* TelepathSpec.swift */; };
 		5CF521D81F78F4780004C494 /* Telepath.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CF521CA1F78F4780004C494 /* Telepath.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5CF7567D1F7CE5630088C2AD /* Base64url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF7567C1F7CE5630088C2AD /* Base64url.swift */; };
 		5CF7567F1F7CF9110088C2AD /* UrlParameterParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF7567E1F7CF9110088C2AD /* UrlParameterParserSpec.swift */; };
 		5CF756811F7CF9250088C2AD /* UrlParameterParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF756801F7CF9250088C2AD /* UrlParameterParser.swift */; };
 /* End PBXBuildFile section */
@@ -55,7 +53,6 @@
 		5C4048851F7E3AB100B19C9D /* QueuingServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueuingServiceMock.swift; sourceTree = "<group>"; };
 		5C4048871F7E3B1E00B19C9D /* ChannelKeyExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelKeyExample.swift; sourceTree = "<group>"; };
 		5C40488A1F7E437A00B19C9D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
-		5C990A1E1F82613300FF8F9F /* Base64urlSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base64urlSpec.swift; sourceTree = "<group>"; };
 		5C9F22F21F792C68007C013E /* Telepath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telepath.swift; sourceTree = "<group>"; };
 		5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueuingService.swift; sourceTree = "<group>"; };
 		5CAA828E1F7B970B0000A9D9 /* .gitlab-ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".gitlab-ci.yml"; sourceTree = "<group>"; };
@@ -69,7 +66,6 @@
 		5CF521D01F78F4780004C494 /* TelepathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TelepathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CF521D51F78F4780004C494 /* TelepathSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathSpec.swift; sourceTree = "<group>"; };
 		5CF521D71F78F4780004C494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5CF7567C1F7CE5630088C2AD /* Base64url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base64url.swift; sourceTree = "<group>"; };
 		5CF7567E1F7CF9110088C2AD /* UrlParameterParserSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlParameterParserSpec.swift; sourceTree = "<group>"; };
 		5CF756801F7CF9250088C2AD /* UrlParameterParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlParameterParser.swift; sourceTree = "<group>"; };
 		893E0DFF64A9DA89C3F0EB6A /* Pods_Telepath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telepath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,7 +97,6 @@
 		5CF32CFF1F7D4DA800F887F4 /* URL */ = {
 			isa = PBXGroup;
 			children = (
-				5CF7567C1F7CE5630088C2AD /* Base64url.swift */,
 				5C3C1D551F7BC159001E5563 /* UrlCodec.swift */,
 				5CF756801F7CF9250088C2AD /* UrlParameterParser.swift */,
 			);
@@ -111,7 +106,6 @@
 		5CF32D001F7D4DC600F887F4 /* URL */ = {
 			isa = PBXGroup;
 			children = (
-				5C990A1E1F82613300FF8F9F /* Base64urlSpec.swift */,
 				5C3C1D531F7BBFCE001E5563 /* UrlCodecSpec.swift */,
 				5CF7567E1F7CF9110088C2AD /* UrlParameterParserSpec.swift */,
 			);
@@ -124,7 +118,6 @@
 				5CC99AFA1F78FE0400ED602C /* Readme.md */,
 				5CC99AF91F78FE0400ED602C /* Podfile */,
 				5C1AA3211F94FFC400697FE8 /* Telepath.podspec */,
-				5CAA828E1F7B970B0000A9D9 /* .gitlab-ci.yml */,
 				5C40488A1F7E437A00B19C9D /* .swiftlint.yml */,
 				5CF521C91F78F4780004C494 /* Telepath */,
 				5CF521D41F78F4780004C494 /* TelepathTests */,
@@ -216,7 +209,6 @@
 				5CF521C31F78F4780004C494 /* Frameworks */,
 				5CF521C41F78F4780004C494 /* Headers */,
 				5CF521C51F78F4780004C494 /* Resources */,
-				005BF01A359EC2B69284B41A /* [CP] Copy Pods Resources */,
 				5C4048891F7E42F600B19C9D /* Swift Lint */,
 			);
 			buildRules = (
@@ -237,7 +229,6 @@
 				5CF521CD1F78F4780004C494 /* Frameworks */,
 				5CF521CE1F78F4780004C494 /* Resources */,
 				F4726A4ABDA9AF867B436403 /* [CP] Embed Pods Frameworks */,
-				0387D15936A823E9D8CC0AA2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -256,7 +247,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Philips;
 				TargetAttributes = {
 					5CF521C61F78F4780004C494 = {
@@ -308,36 +299,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		005BF01A359EC2B69284B41A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Telepath/Pods-Telepath-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0387D15936A823E9D8CC0AA2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		55111520065A507E80745B32 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -397,6 +358,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
+				"${BUILT_PRODUCTS_DIR}/base64url/base64url.framework",
 				"${BUILT_PRODUCTS_DIR}/Mockingjay/Mockingjay.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
@@ -406,6 +368,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/base64url.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mockingjay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
@@ -428,7 +391,6 @@
 				5C3C1D561F7BC159001E5563 /* UrlCodec.swift in Sources */,
 				5CF756811F7CF9250088C2AD /* UrlParameterParser.swift in Sources */,
 				5CD810F11F91074400CCD769 /* QueuingServiceClient.swift in Sources */,
-				5CF7567D1F7CE5630088C2AD /* Base64url.swift in Sources */,
 				5C4048801F7E375000B19C9D /* SecureChannel.swift in Sources */,
 				5C4048821F7E379700B19C9D /* ChannelKey.swift in Sources */,
 				5C9F22F31F792C68007C013E /* Telepath.swift in Sources */,
@@ -444,7 +406,6 @@
 				5CD810EF1F91064800CCD769 /* QueuingServiceClientSpec.swift in Sources */,
 				5CF7567F1F7CF9110088C2AD /* UrlParameterParserSpec.swift in Sources */,
 				5C3C1D541F7BBFCE001E5563 /* UrlCodecSpec.swift in Sources */,
-				5C990A1F1F82613300FF8F9F /* Base64urlSpec.swift in Sources */,
 				5C4048881F7E3B1E00B19C9D /* ChannelKeyExample.swift in Sources */,
 				5C4048861F7E3AB100B19C9D /* QueuingServiceMock.swift in Sources */,
 			);
@@ -475,6 +436,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -482,6 +444,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -535,6 +498,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -542,6 +506,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
