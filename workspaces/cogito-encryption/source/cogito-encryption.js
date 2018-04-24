@@ -7,11 +7,7 @@ class CogitoEncryption {
   }
 
   async createNewKeyPair () {
-    const request = {
-      jsonrpc: '2.0',
-      id: this.nextRequestId(),
-      method: 'createEncryptionKeyPair'
-    }
+    const request = this.createRequest('createEncryptionKeyPair')
     const response = await this.channel.send(request)
     if (response.error) {
       throw new Error(response.error.message)
@@ -21,12 +17,7 @@ class CogitoEncryption {
   }
 
   async getPublicKey ({ tag }) {
-    const request = {
-      jsonrpc: '2.0',
-      id: this.nextRequestId(),
-      method: 'getEncryptionPublicKey',
-      params: [{ tag }]
-    }
+    const request = this.createRequest('getEncryptionPublicKey', [{ tag }])
     const response = await this.channel.send(request)
     if (response.error) {
       throw new Error(response.error.message)
@@ -36,12 +27,7 @@ class CogitoEncryption {
   }
 
   async decrypt ({ tag, cipherText }) {
-    const request = {
-      jsonrpc: '2.0',
-      id: this.nextRequestId(),
-      method: 'decrypt',
-      params: [{ tag, cipherText }]
-    }
+    const request = this.createRequest('decrypt', [{ tag, cipherText }])
     const response = await this.channel.send(request)
     if (response.error) {
       throw new Error('some error')
@@ -54,6 +40,15 @@ class CogitoEncryption {
     const publicKeyPEM = await this.getPublicKey({ tag })
     const publicKey = forge.pki.publicKeyFromPem(publicKeyPEM)
     return publicKey.encrypt(plainText, 'RSA-OAEP')
+  }
+
+  createRequest (method, params) {
+    return {
+      jsonrpc: '2.0',
+      id: this.nextRequestId(),
+      method,
+      params
+    }
   }
 
   nextRequestId () {
