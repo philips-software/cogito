@@ -1,67 +1,67 @@
 {
-	"private": true,
-	"devDependencies": {
-		"@babel/core": "^7.0.0-beta.44",
-		"@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
-		"@babel/preset-react": "^7.0.0-beta.44",
-		"babel-core": "^7.0.0-0",
-		"babel-eslint": "^8.0.0",
-		"babel-jest": "^22.4.3",
-		"jest": "^22.4.3",
-		"lerna": "^2.9.1",
-		"regenerator-runtime": "^0.11.1",
-		"standard": "^11.0.1"
-	},
-	"workspaces": {
-		"packages": [
-			"workspaces/*"
-		]
-	},
-	"jest": {
-		"projects": [
-			"workspaces/cogito-web3",
-			"workspaces/cogito-encryption",
-			"workspaces/telepath-js",
-			"workspaces/telepath-queuing-service",
-			"workspaces/demo-app"
-		],
-		"testMatch": [
-			"**/*.test.js"
-		],
-		"collectCoverage": true,
-		"collectCoverageFrom": [
-			"source/**.js",
-			"!**/*.test.js",
-			"!**/node_modules/**"
-		],
-		"coverageReporters": [
-			"text-summary"
-		]
-	},
-	"scripts": {
-		"test": "yarn standard && NODE_PATH=./workspaces/demo-app/src jest",
-		"lint": "yarn standard",
-		"lint-fix": "yarn standard --fix --verbose",
+    "private": true,
+    "devDependencies": {
+        "@babel/core": "^7.0.0-beta.44",
+        "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
+        "@babel/preset-react": "^7.0.0-beta.44",
+        "babel-core": "^7.0.0-0",
+        "babel-eslint": "^8.0.0",
+        "babel-jest": "^22.4.3",
+        "jest": "^22.4.3",
+        "lerna": "^2.9.1",
+        "regenerator-runtime": "^0.11.1",
+        "standard": "^11.0.1"
+    },
+    "workspaces": {
+        "packages": [
+            "workspaces/*"
+        ]
+    },
+    "jest": {
+        "projects": [
+            "workspaces/cogito-web3",
+            "workspaces/cogito-encryption",
+            "workspaces/telepath-js",
+            "workspaces/telepath-queuing-service",
+            "workspaces/demo-app"
+        ],
+        "testMatch": [
+            "**/*.test.js"
+        ],
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+            "source/**.js",
+            "!**/*.test.js",
+            "!**/node_modules/**"
+        ],
+        "coverageReporters": [
+            "text-summary"
+        ]
+    },
+    "scripts": {
+        "test": "yarn standard && NODE_PATH=./workspaces/demo-app/src jest",
+        "lint": "yarn standard",
+        "lint-fix": "yarn standard --fix --verbose",
         "build": "yarn lerna run --scope @cogitojs/** build"
-	},
-	"standard": {
-		"parser": "babel-eslint",
-		"ignore": [
-			"**/node_modules/**",
-			"**/umd/**",
-			"**/es/**",
-			"**/lib/**"
-		],
-		"envs": [
-			"es6",
-			"browser",
-			"jest"
-		],
-		"globals": [
-			"artifacts",
-			"contract",
-			"assert",
-			"context"
-		]
-	}
+    },
+    "standard": {
+        "parser": "babel-eslint",
+        "ignore": [
+            "**/node_modules/**",
+            "**/umd/**",
+            "**/es/**",
+            "**/lib/**"
+        ],
+        "envs": [
+            "es6",
+            "browser",
+            "jest"
+        ],
+        "globals": [
+            "artifacts",
+            "contract",
+            "assert",
+            "context"
+        ]
+    }
 }
