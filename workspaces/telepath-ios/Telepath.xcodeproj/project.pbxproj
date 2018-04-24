@@ -55,7 +55,6 @@
 		5C40488A1F7E437A00B19C9D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		5C9F22F21F792C68007C013E /* Telepath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telepath.swift; sourceTree = "<group>"; };
 		5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueuingService.swift; sourceTree = "<group>"; };
-		5CAA828E1F7B970B0000A9D9 /* .gitlab-ci.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".gitlab-ci.yml"; sourceTree = "<group>"; };
 		5CC99AF91F78FE0400ED602C /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5CC99AFA1F78FE0400ED602C /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		5CD810EE1F91064800CCD769 /* QueuingServiceClientSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueuingServiceClientSpec.swift; sourceTree = "<group>"; };
