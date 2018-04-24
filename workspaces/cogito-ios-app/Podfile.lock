@@ -1,4 +1,5 @@
 PODS:
+  - base64url (1.0.0)
   - BigInt (3.0.1):
     - SipHash (~> 1.2)
   - Differentiator (3.0.2)
@@ -36,6 +37,7 @@ PODS:
   - SwiftLint (0.21.0)
   - SwiftyJSON (4.0.0)
   - Telepath (0.1.0):
+    - base64url (~> 1.0)
     - Sodium (~> 0.5)
   - Toast-Swift (3.0.1)
   - URITemplate (2.0.3)
@@ -65,6 +67,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - base64url
     - BigInt
     - Differentiator
     - FontAwesome.swift
@@ -101,6 +104,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/mikecole20/ReSwiftThunk.git
 
 SPEC CHECKSUMS:
+  base64url: 5b31be020705fcbedf88ef82af8039ce5c8c25de
   BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
   Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
   FontAwesome.swift: b4e4c8ccbbecb12f9b592bc533ff237af3706667
@@ -122,7 +126,7 @@ SPEC CHECKSUMS:
   Sodium: bf524b0a3d5ad6870dcf343205cca7e659c15ad5
   SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
-  Telepath: be22939200889f0acf17dae0b4c3cdcab39d666e
+  Telepath: c366ed212175effec195925accc66d8551fd5208
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
   URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
