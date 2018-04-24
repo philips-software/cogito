@@ -2,6 +2,7 @@
 
 import Quick
 import Nimble
+import SwiftyJSON
 @testable import Cogito
 
 class EncryptionServiceSpec: QuickSpec {
@@ -67,7 +68,7 @@ class EncryptionServiceSpec: QuickSpec {
 
         context("when a public key is requested") {
             let tag = "1234-5678"
-            let publicKey = "some public key".data(using: .utf8)!
+            let publicKey = JSON(["some": "public key"])
 
             context("when the public key is available") {
                 beforeEach {
@@ -75,7 +76,7 @@ class EncryptionServiceSpec: QuickSpec {
                     store.state = appState(
                         telepath: TelepathState(channels: [channel: identity])
                     )
-                    publicKeyLoader.publicKeyToReturn = publicKey
+                    publicKeyLoader.jsonWebKeyToReturn = publicKey
                 }
 
                 it("loads the public key with the correct tag") {
@@ -94,7 +95,7 @@ class EncryptionServiceSpec: QuickSpec {
                     )
                     service.onRequest(request, on: channel)
                     let sendPendingAction = store.firstAction(ofType: TelepathActions.SendPending.self)
-                    expect(sendPendingAction?.message).to(contain(publicKey.hexEncodedString()))
+                    expect(sendPendingAction?.message).to(contain("\"some\" : \"public key\""))
                 }
 
                 it("sends an error when tag is missing in request") {
@@ -130,7 +131,7 @@ class EncryptionServiceSpec: QuickSpec {
                     store.state = appState(
                         telepath: TelepathState(channels: [channel: identity])
                     )
-                    publicKeyLoader.publicKeyToReturn = publicKey
+                    publicKeyLoader.jsonWebKeyToReturn = publicKey
                 }
 
                 it("returns an error") {
