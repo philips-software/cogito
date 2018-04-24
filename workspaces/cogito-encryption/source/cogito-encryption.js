@@ -1,4 +1,6 @@
 import forge from 'node-forge'
+import base64url from 'base64url'
+import { random, keySize, nonceSize, encrypt } from '@cogitojs/crypto'
 
 class CogitoEncryption {
   constructor ({ telepathChannel }) {
@@ -39,7 +41,13 @@ class CogitoEncryption {
   async encrypt ({ tag, plainText }) {
     const publicKeyPEM = await this.getPublicKey({ tag })
     const publicKey = forge.pki.publicKeyFromPem(publicKeyPEM)
-    return publicKey.encrypt(plainText, 'RSA-OAEP')
+
+    const symmetricalKey = await this.createRandomKey()
+    const nonce = await random(await nonceSize())
+    const cipherText = await encrypt(plainText, nonce, symmetricalKey)
+
+    const encryptedKey = publicKey.encrypt(symmetricalKey, 'RSA-OAEP')
+    return base64url.encode(cipherText) + '.' + base64url.encode(encryptedKey)
   }
 
   createRequest (method, params) {
@@ -53,6 +61,10 @@ class CogitoEncryption {
 
   nextRequestId () {
     return this.requestId++
+  }
+
+  async createRandomKey () {
+    return random(await keySize())
   }
 }
 
