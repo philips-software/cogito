@@ -2,6 +2,9 @@ import { CogitoEncryption } from './cogito-encryption'
 import forge from 'node-forge'
 import base64url from 'base64url'
 import keyto from '@trust/keyto'
+import { random, keySize, encrypt } from '@cogitojs/crypto'
+
+jest.mock('@cogitojs/crypto')
 
 describe('encryption', () => {
   let cogitoEncryption
@@ -149,7 +152,7 @@ describe('encryption', () => {
       beforeEach(async () => {
         telepathChannel = { send: jest.fn() }
         encryption = new CogitoEncryption({ telepathChannel })
-        keyPair = await generateKeyPair({bits: 2048, workers: -1})
+        keyPair = await generateKeyPair({bits: 512, workers: -1})
         const publicKeyJWK = {
           'kty': 'RSA',
           'n': base64url.encode(keyPair.publicKey.n.toByteArray()),
@@ -159,12 +162,28 @@ describe('encryption', () => {
         const publicKey = keyto.from(publicKeyJWK, 'jwk')
         const publicKeyPEM = publicKey.toString('pem')
         telepathChannel.send.mockResolvedValue({ result: publicKeyPEM })
+
+        random.mockReturnValue('randomData')
+        keySize.mockImplementation(() => Promise.resolve(10))
+        encrypt.mockImplementation(() => Promise.resolve('encryptedData'))
       })
 
-      it('returns cipher text', async () => {
-        const cipherText = await encryption.encrypt({ tag: 'some tag', plainText })
-        const decrypted = keyPair.privateKey.decrypt(cipherText, 'RSA-OAEP')
-        expect(decrypted).toBe(plainText)
+      it('uses symmetrical encryption to encrypt the plain text', async () => {
+        await encryption.encrypt({ tag: 'some tag', plainText })
+        expect(encrypt.mock.calls[0][0]).toBe(plainText)
+      })
+
+      it('uses public key to encrypt symmetrical key', async () => {
+        const encryptionResult = await encryption.encrypt({ tag: 'some tag', plainText })
+        const encryptedKey = base64url.decode(encryptionResult.split('.')[1])
+        const decryptedKey = keyPair.privateKey.decrypt(encryptedKey, 'RSA-OAEP')
+        expect(decryptedKey).toBe('randomData')
+      })
+
+      it('returns cipherText', async () => {
+        const encryptionResult = await encryption.encrypt({ tag: 'some tag', plainText })
+        const cipherText = base64url.decode(encryptionResult.split('.')[0])
+        expect(cipherText).toBe('encryptedData')
       })
     })
   })
