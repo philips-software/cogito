@@ -40,8 +40,7 @@ class PublicKeyLoaderSpec: QuickSpec {
 
             beforeEach {
                 publicKey = PublicKeyLoader().load(tag: tag)
-                let jwkString = PublicKeyLoader().loadJsonWebKey(tag: tag)!
-                jwk = JSON(parseJSON: jwkString)
+                jwk = PublicKeyLoader().loadJsonWebKey(tag: tag)!
             }
 
             it("outputs the correct key type") {

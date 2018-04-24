@@ -17,7 +17,7 @@ struct PublicKeyLoader: PublicKeyLoaderType {
         return result as? Data
     }
 
-    func loadJsonWebKey(tag: String) -> String? {
+    func loadJsonWebKey(tag: String) -> JsonWebKey? {
         guard let publicKey = load(tag: tag) else {
             return nil
         }
@@ -28,7 +28,7 @@ struct PublicKeyLoader: PublicKeyLoaderType {
             "kty": "RSA",
             "n": modulus.base64urlEncodedString(),
             "e": exponent.base64urlEncodedString()
-        ]).rawString()
+        ])
     }
 }
 
@@ -44,6 +44,8 @@ func extractRSAParameters(publicKeyRSA2048Bits key: Data) -> (modulus: Data, exp
 
 protocol PublicKeyLoaderType {
     typealias PublicKey = Data
+    typealias JsonWebKey = JSON
 
     func load(tag: String) -> PublicKey?
+    func loadJsonWebKey(tag: String) -> JsonWebKey?
 }
