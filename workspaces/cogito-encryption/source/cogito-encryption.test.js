@@ -1,8 +1,7 @@
 import { CogitoEncryption } from './cogito-encryption'
 import forge from 'node-forge'
 import base64url from 'base64url'
-import keyto from '@trust/keyto'
-import { random, keySize, encrypt, decrypt } from '@cogitojs/crypto'
+import { random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
 
 jest.mock('@cogitojs/crypto')
 
@@ -166,12 +165,15 @@ describe('encryption', () => {
           'e': base64url.encode(keyPair.publicKey.e.toByteArray()),
           'alg': 'RS256'
         }
-        const publicKey = keyto.from(publicKeyJWK, 'jwk')
-        const publicKeyPEM = publicKey.toString('pem')
-        telepathChannel.send.mockResolvedValue({ result: publicKeyPEM })
+        telepathChannel.send.mockResolvedValue({ result: publicKeyJWK })
 
-        random.mockReturnValue('randomData')
-        keySize.mockImplementation(() => Promise.resolve(10))
+        const fakeNonceSize = 1
+        const fakeKeySize = 2
+        nonceSize.mockImplementation(() => Promise.resolve(fakeNonceSize))
+        keySize.mockImplementation(() => Promise.resolve(fakeKeySize))
+        random.mockImplementation((size) => {
+          return size === fakeNonceSize ? 'nonce' : 'symmetricalKey'
+        })
         encrypt.mockImplementation(() => Promise.resolve('encryptedData'))
       })
 
@@ -184,7 +186,7 @@ describe('encryption', () => {
         const encryptionResult = await encryption.encrypt({ tag: 'some tag', plainText })
         const encryptedSymmetricalKey = base64url.decode(encryptionResult.split('.')[1])
         const decryptedKey = keyPair.privateKey.decrypt(encryptedSymmetricalKey, 'RSA-OAEP')
-        expect(decryptedKey).toBe('randomData')
+        expect(decryptedKey).toBe('symmetricalKey')
       })
 
       it('returns cipherText', async () => {
@@ -196,7 +198,7 @@ describe('encryption', () => {
       it('returns the nonce', async () => {
         const encryptionResult = await encryption.encrypt({ tag: 'some tag', plainText })
         const nonce = base64url.decode(encryptionResult.split('.')[2])
-        expect(nonce).toBeDefined()
+        expect(nonce).toBe('nonce')
       })
     })
   })

@@ -24,8 +24,8 @@ class CogitoEncryption {
     if (response.error) {
       throw new Error(response.error.message)
     }
-    const publicKeyPEM = response.result
-    return publicKeyPEM
+    const publicKeyJWK = response.result
+    return publicKeyJWK
   }
 
   async decrypt ({ tag, encryptionData }) {
@@ -45,8 +45,10 @@ class CogitoEncryption {
   }
 
   async encrypt ({ tag, plainText }) {
-    const publicKeyPEM = await this.getPublicKey({ tag })
-    const publicKey = forge.pki.publicKeyFromPem(publicKeyPEM)
+    const publicKeyJWK = await this.getPublicKey({ tag })
+    const n = new forge.jsbn.BigInteger(base64url.toBuffer(publicKeyJWK.n))
+    const e = new forge.jsbn.BigInteger(base64url.toBuffer(publicKeyJWK.e), 256)
+    const publicKey = forge.pki.setRsaPublicKey(n, e)
 
     const symmetricalKey = await this.createRandomKey()
     const nonce = await random(await nonceSize())
