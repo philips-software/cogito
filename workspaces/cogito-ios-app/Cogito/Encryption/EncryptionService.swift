@@ -41,7 +41,7 @@ struct EncryptionService: TelepathService {
             return
         }
 
-        guard identity.encryptionKeyPairs.contains(tag), let publicKey = publicKeyLoader.load(tag: tag) else {
+        guard identity.encryptionKeyPairs.contains(tag), let publicKey = publicKeyLoader.loadJsonWebKey(tag: tag) else {
             store.dispatch(TelepathActions.Send(id: request.id, error: EncryptionError.keyNotFound, on: channel))
             return
         }
