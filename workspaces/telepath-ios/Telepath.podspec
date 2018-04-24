@@ -12,4 +12,5 @@ Pod::Spec.new do |spec|
   }
   spec.source_files = 'Telepath/**/*.swift'
   spec.dependency 'Sodium', '~> 0.5'
+  spec.dependency 'base64url', '~> 1.0'
 end

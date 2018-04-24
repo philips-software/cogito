@@ -1,6 +1,7 @@
 //Copyright © 2017 Philips. All rights reserved.
 
 import Foundation
+import base64url
 
 public struct QueuingServiceClient: QueuingService {
 
