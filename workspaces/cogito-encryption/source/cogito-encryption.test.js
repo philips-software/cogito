@@ -2,7 +2,7 @@ import { CogitoEncryption } from './cogito-encryption'
 import forge from 'node-forge'
 import base64url from 'base64url'
 import keyto from '@trust/keyto'
-import { random, keySize, encrypt } from '@cogitojs/crypto'
+import { random, keySize, encrypt, decrypt } from '@cogitojs/crypto'
 
 jest.mock('@cogitojs/crypto')
 
@@ -87,21 +87,19 @@ describe('encryption', () => {
   describe('decrypting data', () => {
     const tag = 'some tag'
     const cipherText = '0xsomeencryptedstuff'
-    const request = { jsonrpc: '2.0', method: 'decrypt', params: [{ tag, cipherText }] }
     const plainText = 'decrypted plain text'
-    const response = { jsonrpc: '2.0', result: plainText }
+    const symmetricalKey = 'symmetricalKey'
+    const encryptedSymmetricalKey = 'encryptedSymmetricalKey'
+    const request = {
+      jsonrpc: '2.0', method: 'decrypt', params: [{ tag, cipherText: encryptedSymmetricalKey }]
+    }
+    const response = { jsonrpc: '2.0', result: symmetricalKey }
+    const nonce = 'nonce'
+    const encryptionData = base64url.encode(cipherText) + '.' + base64url.encode(encryptedSymmetricalKey) + '.' + base64url.encode(nonce)
 
     beforeEach(() => {
+      decrypt.mockResolvedValue(Promise.resolve(plainText))
       telepathChannel.send.mockResolvedValue(response)
-    })
-
-    it('decrypts', async () => {
-      await cogitoEncryption.decrypt({ tag, cipherText })
-      expect(telepathChannel.send.mock.calls[0][0]).toMatchObject(request)
-    })
-
-    it('returns the plain text when decrypting', async () => {
-      expect(await cogitoEncryption.decrypt({ tag, cipherText })).toBe(plainText)
     })
 
     it('throws when error is returned', async () => {
@@ -111,12 +109,21 @@ describe('encryption', () => {
       await expect(cogitoEncryption.decrypt({ tag, cipherText })).rejects.toBeDefined()
     })
 
-    it('uses different JSON-RPC ids for subsequent requests', async () => {
-      await cogitoEncryption.decrypt({ tag, cipherText })
-      await cogitoEncryption.decrypt({ tag, cipherText })
-      const id1 = telepathChannel.send.mock.calls[0][0].id
-      const id2 = telepathChannel.send.mock.calls[1][0].id
-      expect(id1).not.toBe(id2)
+    it('asks Cogito to decrypt the symmetrical key', async () => {
+      await cogitoEncryption.decrypt({ tag, encryptionData: encryptionData })
+      expect(telepathChannel.send.mock.calls[0][0]).toMatchObject(request)
+    })
+
+    it('decrypts the cipher text using the symmetrical key', async () => {
+      await cogitoEncryption.decrypt({ tag, encryptionData })
+      expect(decrypt.mock.calls[0][0]).toBe(cipherText)
+      expect(decrypt.mock.calls[0][1]).toBe(nonce)
+      expect(decrypt.mock.calls[0][2]).toBe(symmetricalKey)
+    })
+
+    it('decrypts the cipher text', async () => {
+      const decryptedText = await cogitoEncryption.decrypt({ tag, encryptionData })
+      expect(decryptedText).toBe(plainText)
     })
   })
 
@@ -175,8 +182,8 @@ describe('encryption', () => {
 
       it('uses public key to encrypt symmetrical key', async () => {
         const encryptionResult = await encryption.encrypt({ tag: 'some tag', plainText })
-        const encryptedKey = base64url.decode(encryptionResult.split('.')[1])
-        const decryptedKey = keyPair.privateKey.decrypt(encryptedKey, 'RSA-OAEP')
+        const encryptedSymmetricalKey = base64url.decode(encryptionResult.split('.')[1])
+        const decryptedKey = keyPair.privateKey.decrypt(encryptedSymmetricalKey, 'RSA-OAEP')
         expect(decryptedKey).toBe('randomData')
       })
 
@@ -184,6 +191,12 @@ describe('encryption', () => {
         const encryptionResult = await encryption.encrypt({ tag: 'some tag', plainText })
         const cipherText = base64url.decode(encryptionResult.split('.')[0])
         expect(cipherText).toBe('encryptedData')
+      })
+
+      it('returns the nonce', async () => {
+        const encryptionResult = await encryption.encrypt({ tag: 'some tag', plainText })
+        const nonce = base64url.decode(encryptionResult.split('.')[2])
+        expect(nonce).toBeDefined()
       })
     })
   })

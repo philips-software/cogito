@@ -1,6 +1,6 @@
 import forge from 'node-forge'
 import base64url from 'base64url'
-import { random, keySize, nonceSize, encrypt } from '@cogitojs/crypto'
+import { random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
 
 class CogitoEncryption {
   constructor ({ telepathChannel }) {
@@ -28,13 +28,19 @@ class CogitoEncryption {
     return publicKeyPEM
   }
 
-  async decrypt ({ tag, cipherText }) {
-    const request = this.createRequest('decrypt', [{ tag, cipherText }])
+  async decrypt ({ tag, encryptionData }) {
+    const splitEncryptionData = encryptionData.split('.')
+    const keyPart = splitEncryptionData[1]
+    const encryptedSymmetricalKey = base64url.decode(keyPart)
+    const request = this.createRequest('decrypt', [{ tag, cipherText: encryptedSymmetricalKey }])
     const response = await this.channel.send(request)
     if (response.error) {
-      throw new Error('some error')
+      throw new Error(response.error)
     }
-    const plainText = response.result
+    const symmetricalKey = response.result
+    const cipherText = base64url.decode(splitEncryptionData[0])
+    const nonce = base64url.decode(splitEncryptionData[2])
+    const plainText = await decrypt(cipherText, nonce, symmetricalKey)
     return plainText
   }
 
@@ -47,7 +53,11 @@ class CogitoEncryption {
     const cipherText = await encrypt(plainText, nonce, symmetricalKey)
 
     const encryptedKey = publicKey.encrypt(symmetricalKey, 'RSA-OAEP')
-    return base64url.encode(cipherText) + '.' + base64url.encode(encryptedKey)
+
+    const cipherTextPart = base64url.encode(cipherText)
+    const keyPart = base64url.encode(encryptedKey)
+    const noncePart = base64url.encode(nonce)
+    return cipherTextPart + '.' + keyPart + '.' + noncePart
   }
 
   createRequest (method, params) {
