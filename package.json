@@ -41,7 +41,8 @@
 	"scripts": {
 		"test": "yarn standard && NODE_PATH=./workspaces/demo-app/src jest",
 		"lint": "yarn standard",
-		"lint-fix": "yarn standard --fix --verbose"
+		"lint-fix": "yarn standard --fix --verbose",
+        "build": "yarn lerna run --scope @cogitojs/** build"
 	},
 	"standard": {
 		"parser": "babel-eslint",
