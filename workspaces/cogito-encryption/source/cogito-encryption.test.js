@@ -105,7 +105,7 @@ describe('encryption', () => {
       expect.assertions(1)
       const error = { code: -42, message: 'some error' }
       telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
-      await expect(cogitoEncryption.decrypt({ tag, cipherText })).rejects.toBeDefined()
+      await expect(cogitoEncryption.decrypt({ tag, encryptionData })).rejects.toBeDefined()
     })
 
     it('asks Cogito to decrypt the symmetrical key', async () => {
