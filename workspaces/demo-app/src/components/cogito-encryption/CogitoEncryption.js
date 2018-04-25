@@ -1,6 +1,11 @@
 import React from 'react'
 import glamorous from 'glamorous'
 import { FullWidthCentered } from 'components/layout'
+import { Button, TextArea } from 'semantic-ui-react'
+import {
+  EncryptionGrid, PlainTextGridItem, CipherTextGridItem,
+  EncryptGridItem, DecryptGridItem
+} from './EncryptionGrid'
 
 const P = glamorous.p({
   maxWidth: '40rem'
@@ -17,6 +22,20 @@ class CogitoEncryption extends React.Component {
         the browser. Decryption on the other hand requires that the private key
         is used, so the Cogito mobile app is involved.
       </P>
+      <EncryptionGrid>
+        <PlainTextGridItem>
+          <TextInput placeholder='Enter some text' />
+        </PlainTextGridItem>
+        <EncryptGridItem>
+          <Button basic color='pink'>―Encrypt→</Button>
+        </EncryptGridItem>
+        <DecryptGridItem>
+          <Button basic color='pink'>←Decrypt―</Button>
+        </DecryptGridItem>
+        <CipherTextGridItem>
+          <TextInput placeholder='Encrypted text appears here' />
+        </CipherTextGridItem>
+      </EncryptionGrid>
       <P>
         What actually happens is this: on <em>encryption</em>, a symmetrical key
         is generated in the browser. This key is used for encrypting the data
@@ -32,5 +51,9 @@ class CogitoEncryption extends React.Component {
     </FullWidthCentered>
   }
 }
+
+const TextInput = ({...args}) => (
+  <TextArea {...args} style={{ width: '13em', height: '10em' }} />
+)
 
 export { CogitoEncryption }
