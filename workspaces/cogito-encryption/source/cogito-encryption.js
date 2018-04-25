@@ -40,8 +40,7 @@ class CogitoEncryption {
     const symmetricalKey = response.result
     const cipherText = base64url.decode(splitEncryptionData[0])
     const nonce = base64url.decode(splitEncryptionData[2])
-    const plainText = await decrypt(cipherText, nonce, symmetricalKey)
-    return plainText
+    return decrypt(cipherText, nonce, symmetricalKey)
   }
 
   async encrypt ({ tag, plainText }) {
