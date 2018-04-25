@@ -6,7 +6,7 @@ import { HomeGrid, HeaderGridItem, AddressesGridItem,
 import { TopBar } from 'components/top-bar'
 import { CogitoAddress } from 'components/cogito-address'
 import { CogitoContract } from 'components/cogito-contract'
-import { CogitoEncryption } from 'components/cogito-encryption'
+import { CogitoCrypto } from 'components/cogito-crypto'
 import { Footer } from 'components/footer'
 
 class Home extends React.Component {
@@ -23,7 +23,7 @@ class Home extends React.Component {
           <CogitoContract {...this.props} />
         </ContractGridItem>
         <EncryptionGridItem>
-          <CogitoEncryption {...this.props} />
+          <CogitoCrypto {...this.props} />
         </EncryptionGridItem>
         <FooterGridItem>
           <Footer />

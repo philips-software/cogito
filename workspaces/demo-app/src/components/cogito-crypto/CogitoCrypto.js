@@ -11,32 +11,37 @@ const P = glamorous.p({
   maxWidth: '40rem'
 })
 
-class CogitoEncryption extends React.Component {
+class CogitoCrypto extends React.Component {
   render () {
-    return <FullWidthCentered>
-      <P>
+    return (
+      <FullWidthCentered>
+        <P>
         Cogito can encrypt and decrypt data for you. The public-private key pair
         used for encryption and decryption lives in the user's Cogito mobile
         app. Since the public key can be known by anyone, it can be retrieved
         from the Cogito app. Using that public key, encryption is done purely in
         the browser. Decryption on the other hand requires that the private key
         is used, so the Cogito mobile app is involved.
-      </P>
-      <EncryptionGrid>
-        <PlainTextGridItem>
-          <TextInput placeholder='Enter some text' />
-        </PlainTextGridItem>
-        <EncryptGridItem>
-          <Button basic color='pink'>―Encrypt→</Button>
-        </EncryptGridItem>
-        <DecryptGridItem>
-          <Button basic color='pink'>←Decrypt―</Button>
-        </DecryptGridItem>
-        <CipherTextGridItem>
-          <TextInput placeholder='Encrypted text appears here' />
-        </CipherTextGridItem>
-      </EncryptionGrid>
-      <P>
+        </P>
+        <EncryptionGrid>
+          <PlainTextGridItem>
+            <TextInput placeholder='Enter some text' />
+          </PlainTextGridItem>
+          <EncryptGridItem>
+            <Button basic color='pink' onClick={() => this.encrypt()}>
+            ―Encrypt→
+            </Button>
+          </EncryptGridItem>
+          <DecryptGridItem>
+            <Button basic color='pink' onClick={() => this.decrypt()}>
+            ←Decrypt―
+            </Button>
+          </DecryptGridItem>
+          <CipherTextGridItem>
+            <TextInput placeholder='Encrypted text appears here' />
+          </CipherTextGridItem>
+        </EncryptionGrid>
+        <P>
         What actually happens is this: on <em>encryption</em>, a symmetrical key
         is generated in the browser. This key is used for encrypting the data
         that is provided. The symmetrical key itself is also encrypted, using
@@ -47,8 +52,9 @@ class CogitoEncryption extends React.Component {
         that is encrypted never leaves the browser. Also, the amount of data
         that is exchanged with the Cogito mobile app is very small (just the
         symmetrical key).
-      </P>
-    </FullWidthCentered>
+        </P>
+      </FullWidthCentered>
+    )
   }
 }
 
@@ -56,4 +62,4 @@ const TextInput = ({...args}) => (
   <TextArea {...args} style={{ width: '13em', height: '10em' }} />
 )
 
-export { CogitoEncryption }
+export { CogitoCrypto }
