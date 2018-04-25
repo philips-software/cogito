@@ -1,1 +1,0 @@
-export { CogitoEncryption } from './CogitoEncryption'
