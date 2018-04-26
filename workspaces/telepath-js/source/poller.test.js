@@ -89,6 +89,23 @@ describe('Poller', () => {
     await second
   })
 
+  it('does not invoke poll function more than strictly necessary', async () => {
+    let invocations = 0
+
+    pollFunction
+      .mockImplementation(async () => {
+        invocations++
+        await delay(1)
+        return {}
+      })
+
+    await poller.poll()
+    await poller.poll()
+    await delay(1)
+
+    expect(invocations).toBe(2)
+  })
+
   it('has sensible defaults', () => {
     const poller = new Poller({ pollFunction })
     expect(poller.retries).toBe(10)

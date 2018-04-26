@@ -38,6 +38,9 @@ class Poller {
     if (result) {
       this.waiting.shift().resolve(result)
     }
+    if (this.waiting.length === 0) {
+      return
+    }
     await delay(this.interval)
     return this.attempt()
   }
