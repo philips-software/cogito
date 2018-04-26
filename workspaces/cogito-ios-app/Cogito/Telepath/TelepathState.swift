@@ -4,13 +4,13 @@ import Foundation
 import Telepath
 
 struct TelepathState: Equatable, Codable {
-    var channels: [TelepathChannel:Identity]
+    var channels: [TelepathChannel:IdentityReference]
     var connectionError: String?
     var receivedMessages: [TelepathMessage] = []
     var receiveError: String?
 
     init(
-        channels: [TelepathChannel:Identity] = [:],
+        channels: [TelepathChannel:IdentityReference] = [:],
         connectionError: String? = nil,
         receivedMessages: [TelepathMessage] = [],
         receiveError: String? = nil
@@ -28,6 +28,8 @@ struct TelepathState: Equatable, Codable {
     static func == (lhs: TelepathState, rhs: TelepathState) -> Bool {
         return lhs.channels == rhs.channels
     }
+
+    typealias IdentityReference = UUID
 }
 
 struct TelepathMessage: Codable {

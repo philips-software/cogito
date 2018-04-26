@@ -38,7 +38,7 @@ class TelepathActionsSpec: QuickSpec {
 
             beforeEach {
                 channel = TelepathChannelSpy()
-                store.state = appState(telepath: TelepathState(channels: [channel: identity]))
+                store.state = appState(telepath: TelepathState(channels: [channel: identity.identifier]))
             }
 
             it("receives messages") {

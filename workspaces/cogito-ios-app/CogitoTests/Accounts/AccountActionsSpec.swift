@@ -22,35 +22,12 @@ class AccountActionsSpec: QuickSpec {
                 let identity = Identity(description: "me", address: address)
                 store.state = appState(
                     diamond: DiamondState(facets: [identity]),
-                    telepath: TelepathState(channels: [channel: identity],
+                    telepath: TelepathState(channels: [channel: identity.identifier],
                                             connectionError: nil, receivedMessages: [], receiveError: nil)
                 )
             }
 
             it("sends out its Ethereum address via Telepath") {
-                store.dispatch(AccountActions.GetAccounts(requestId: JsonRpcId(1),
-                                                          channel: channel))
-                let send = store.firstAction(ofType: TelepathActions.SendPending.self)
-                let response = JSON(parseJSON: send!.message)
-                expect(response["result"]) == JSON(["\(address)"])
-            }
-        }
-
-        context("when no facet was selected") {
-            let address = Address.testAddress
-            var channel: TelepathChannel!
-
-            beforeEach {
-                channel = TelepathChannelSpy()
-                let identity = Identity(description: "me", address: address)
-                store.state = appState(
-                    diamond: DiamondState(facets: []),
-                    telepath: TelepathState(channels: [channel: identity],
-                                            connectionError: nil, receivedMessages: [], receiveError: nil)
-                )
-            }
-
-            it("still returns the account matching the channel") {
                 store.dispatch(AccountActions.GetAccounts(requestId: JsonRpcId(1),
                                                           channel: channel))
                 let send = store.firstAction(ofType: TelepathActions.SendPending.self)
@@ -72,7 +49,7 @@ class AccountActionsSpec: QuickSpec {
                 channel2 = TelepathChannelSpy(id: "2")
                 store.state = appState(
                     diamond: DiamondState(facets: [identity1, identity2]),
-                    telepath: TelepathState(channels: [channel1: identity1, channel2: identity2],
+                    telepath: TelepathState(channels: [channel1: identity1.identifier, channel2: identity2.identifier],
                                             connectionError: nil, receivedMessages: [], receiveError: nil)
                 )
             }

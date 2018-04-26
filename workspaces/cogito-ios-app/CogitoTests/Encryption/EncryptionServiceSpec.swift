@@ -33,7 +33,8 @@ class EncryptionServiceSpec: QuickSpec {
 
             beforeEach {
                 store.state = appState(
-                    telepath: TelepathState(channels: [channel: identity])
+                    diamond: DiamondState(facets: [identity]),
+                    telepath: TelepathState(channels: [channel: identity.identifier])
                 )
                 service.onRequest(request, on: channel)
             }
@@ -57,7 +58,7 @@ class EncryptionServiceSpec: QuickSpec {
 
             it("uses the identity that is associated with the channel") {
                 let action = store.firstAction(ofType: DiamondActions.StoreEncryptionKeyPair.self)
-                expect(action?.identity) == store.state.telepath.channels[channel]
+                expect(action?.identity) == identity
             }
 
             it("sends response on Telepath channel") {
@@ -74,7 +75,8 @@ class EncryptionServiceSpec: QuickSpec {
                 beforeEach {
                     identity.encryptionKeyPairs = [tag]
                     store.state = appState(
-                        telepath: TelepathState(channels: [channel: identity])
+                        diamond: DiamondState(facets: [identity]),
+                        telepath: TelepathState(channels: [channel: identity.identifier])
                     )
                     publicKeyLoader.jsonWebKeyToReturn = publicKey
                 }
@@ -110,7 +112,8 @@ class EncryptionServiceSpec: QuickSpec {
                 beforeEach {
                     identity.encryptionKeyPairs = [tag]
                     store.state = appState(
-                        telepath: TelepathState(channels: [channel: identity])
+                        diamond: DiamondState(facets: [identity]),
+                        telepath: TelepathState(channels: [channel: identity.identifier])
                     )
                 }
 
@@ -129,7 +132,8 @@ class EncryptionServiceSpec: QuickSpec {
                 beforeEach {
                     identity.encryptionKeyPairs = []
                     store.state = appState(
-                        telepath: TelepathState(channels: [channel: identity])
+                        diamond: DiamondState(facets: [identity]),
+                        telepath: TelepathState(channels: [channel: identity.identifier])
                     )
                     publicKeyLoader.jsonWebKeyToReturn = publicKey
                 }
@@ -161,7 +165,8 @@ class EncryptionServiceSpec: QuickSpec {
             beforeEach {
                 identity.encryptionKeyPairs = [tag]
                 store.state = appState(
-                    telepath: TelepathState(channels: [channel: identity])
+                    diamond: DiamondState(facets: [identity]),
+                    telepath: TelepathState(channels: [channel: identity.identifier])
                 )
                 decrypter.plainTextToReturn = plainText
             }
@@ -232,7 +237,8 @@ class EncryptionServiceSpec: QuickSpec {
             it("sends an error when the identity does not contain the key") {
                 identity.encryptionKeyPairs = []
                 store.state = appState(
-                    telepath: TelepathState(channels: [channel: identity])
+                    diamond: DiamondState(facets: [identity]),
+                    telepath: TelepathState(channels: [channel: identity.identifier])
                 )
                 service.onRequest(request, on: channel)
                 let sendPendingAction = store.firstAction(ofType: TelepathActions.SendPending.self)

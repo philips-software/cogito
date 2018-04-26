@@ -6,7 +6,7 @@ func telepathReducer(_ action: Action, _ state: TelepathState?) -> TelepathState
     var nextState = state ?? initialTelepathState
     switch action {
     case let connected as TelepathActions.ConnectFulfilled:
-        nextState.channels[connected.channel] = connected.identity
+        nextState.channels[connected.channel] = connected.identity.identifier
     case let connectFailure as TelepathActions.ConnectRejected:
         nextState.connectionError = connectFailure.error.localizedDescription
     case let received as TelepathActions.ReceiveFulfilled:

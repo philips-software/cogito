@@ -130,6 +130,7 @@
 		5CC4D2CB1FE7F724002F2450 /* TransactionSigningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2CA1FE7F724002F2450 /* TransactionSigningService.swift */; };
 		5CC4D2CE1FE801DE002F2450 /* TransactionSigningActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2CD1FE801DE002F2450 /* TransactionSigningActions.swift */; };
 		5CC4D2D41FE81815002F2450 /* JSONDecodeFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */; };
+		5CC9C7AD2091A16D008DB49C /* OpenIdExampleValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC9C7AC2091A16D008DB49C /* OpenIdExampleValues.swift */; };
 		5CDB58DC203589CC00A28D60 /* TelepathSubscriberSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB58DB203589CC00A28D60 /* TelepathSubscriberSpec.swift */; };
 		5CDB58DE20358B4100A28D60 /* TelepathSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB58DD20358B4100A28D60 /* TelepathSubscriber.swift */; };
 		C00B505E972138AEEFC08864 /* AttestationsReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */; };
@@ -302,6 +303,7 @@
 		5CC4D2CA1FE7F724002F2450 /* TransactionSigningService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningService.swift; sourceTree = "<group>"; };
 		5CC4D2CD1FE801DE002F2450 /* TransactionSigningActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningActions.swift; sourceTree = "<group>"; };
 		5CC4D2D31FE81815002F2450 /* JSONDecodeFromString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecodeFromString.swift; sourceTree = "<group>"; };
+		5CC9C7AC2091A16D008DB49C /* OpenIdExampleValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenIdExampleValues.swift; sourceTree = "<group>"; };
 		5CDB58DB203589CC00A28D60 /* TelepathSubscriberSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathSubscriberSpec.swift; sourceTree = "<group>"; };
 		5CDB58DD20358B4100A28D60 /* TelepathSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathSubscriber.swift; sourceTree = "<group>"; };
 		8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -411,6 +413,7 @@
 				0270D71E1F9F6C6D00CC9038 /* OpenIDAttestationStarterSpec.swift */,
 				C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */,
 				02E90F4D1FDEC1D7008D81F9 /* AttestationServiceSpec.swift */,
+				5CC9C7AC2091A16D008DB49C /* OpenIdExampleValues.swift */,
 			);
 			path = Attestations;
 			sourceTree = "<group>";
@@ -1228,6 +1231,7 @@
 				0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */,
 				0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */,
 				022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */,
+				5CC9C7AD2091A16D008DB49C /* OpenIdExampleValues.swift in Sources */,
 				02021D401F8C1C770092DD89 /* AppReducerSpec.swift in Sources */,
 				5C3C8F2D208765D50042AC2F /* IdentityExample.swift in Sources */,
 				02BE32C91F7A4DF9006C7287 /* PeerReporterSpec.swift in Sources */,

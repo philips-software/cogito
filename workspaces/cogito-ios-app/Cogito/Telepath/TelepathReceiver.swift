@@ -31,11 +31,11 @@ class TelepathReceiver: StoreSubscriber {
         store.unsubscribe(self)
     }
 
-    func newState(state channels: [TelepathChannel:Identity]?) {
+    func newState(state channels: [TelepathChannel:UUID]?) {
         self.onNewState(self)(channels)
     }
 
-    func recreatePollingTimers(channels: [TelepathChannel:Identity]?) {
+    func recreatePollingTimers(channels: [TelepathChannel:UUID]?) {
         for timer in timers.values {
             timer.invalidate()
         }
