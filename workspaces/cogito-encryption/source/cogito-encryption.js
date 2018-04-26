@@ -35,7 +35,7 @@ class CogitoEncryption {
     const request = this.createRequest('decrypt', { tag, cipherText: encryptedSymmetricalKey })
     const response = await this.channel.send(request)
     if (response.error) {
-      throw new Error(response.error)
+      throw new Error(response.error.message)
     }
     const symmetricalKey = response.result
     const cipherText = base64url.decode(splitEncryptionData[0])
