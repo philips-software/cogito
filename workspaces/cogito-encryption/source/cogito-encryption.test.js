@@ -190,7 +190,7 @@ describe('encryption', () => {
       it('uses public key to encrypt symmetrical key', async () => {
         const encryptionResult = await encryption.encrypt({ tag: 'some tag', plainText })
         const encryptedSymmetricalKey = base64url.decode(encryptionResult.split('.')[1])
-        const decryptedKey = keyPair.privateKey.decrypt(encryptedSymmetricalKey, 'RSA-OAEP')
+        const decryptedKey = keyPair.privateKey.decrypt(encryptedSymmetricalKey, 'RSA-OAEP', { md: forge.md.sha1.create() })
         expect(decryptedKey).toBe('symmetricalKey')
       })
 

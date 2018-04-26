@@ -53,7 +53,7 @@ class CogitoEncryption {
     const nonce = await random(await nonceSize())
     const cipherText = await encrypt(plainText, nonce, symmetricalKey)
 
-    const encryptedKey = publicKey.encrypt(symmetricalKey, 'RSA-OAEP')
+    const encryptedKey = publicKey.encrypt(symmetricalKey, 'RSA-OAEP', { md: forge.md.sha1.create() })
 
     const cipherTextPart = base64url.encode(cipherText)
     const keyPart = base64url.encode(encryptedKey)
