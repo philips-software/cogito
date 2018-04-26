@@ -157,7 +157,7 @@ class EncryptionServiceSpec: QuickSpec {
             let request = JsonRpcRequest(
                 method: "decrypt",
                 params: JsonRpcParams([
-                    "keyTag": tag,
+                    "tag": tag,
                     "cipherText": cipherText.hexEncodedString()
                 ])
             )
@@ -201,7 +201,7 @@ class EncryptionServiceSpec: QuickSpec {
                 let wrongRequest = JsonRpcRequest(
                     method: "decrypt",
                     params: JsonRpcParams([
-                        "keyTag": tag
+                        "tag": tag
                     ])
                 )
                 service.onRequest(wrongRequest, on: channel)
@@ -215,7 +215,7 @@ class EncryptionServiceSpec: QuickSpec {
                 let wrongRequest = JsonRpcRequest(
                     method: "decrypt",
                     params: JsonRpcParams([
-                        "keyTag": tag,
+                        "tag": tag,
                         "cipherText": "invalid hex string"
                     ])
                 )
