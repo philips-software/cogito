@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 import appEvents from 'app-events/reducer'
 import userData from 'user-data/reducer'
+import { encryptionReducer } from 'encryption-state/reducer'
 
 const appReducer = combineReducers({
   appEvents,
-  userData
+  userData,
+  encryption: encryptionReducer
 })
 
 // See answer from Dan Abramov: https://stackoverflow.com/a/35641992/1272679
