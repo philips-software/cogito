@@ -40,6 +40,7 @@
     },
     "scripts": {
         "test": "yarn standard && NODE_PATH=./workspaces/demo-app/src jest",
+        "test:watch": "NODE_PATH=./workspaces/demo-app/src jest --watch",
         "lint": "yarn standard",
         "lint-fix": "yarn standard --fix --verbose",
         "build": "yarn lerna run --scope @cogitojs/** build"
