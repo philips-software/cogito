@@ -10,6 +10,16 @@ class EncryptionActions {
     type: 'ENCRYPTION_SET_CIPHERTEXT',
     cipherText
   })
+
+  static encrypt = ({ telepathChannel }) => {
+    const encryption = new CogitoEncryption({ telepathChannel })
+    return async (dispatch, getState) => {
+      const plainText = getState().encryption.plainText
+      const tag = await encryption.createNewKeyPair()
+      const cipherText = await encryption.encrypt({ tag, plainText })
+      dispatch(EncryptionActions.setCipherText(cipherText))
+    }
+  }
 }
 
 export { EncryptionActions }
