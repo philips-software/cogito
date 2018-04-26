@@ -1,4 +1,4 @@
-const sodium = require('libsodium-wrappers')
+import sodium from 'libsodium-wrappers'
 let ready = false
 
 async function waitUntilReady () {
