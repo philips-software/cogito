@@ -49,5 +49,5 @@ private func loadPublicKey(tag: String) -> SecKey? {
 
 private func encrypt(key: SecKey, plainText: Data) -> Data? {
     let plainText = "some data".data(using: .utf8)!
-    return SecKeyCreateEncryptedData(key, .rsaEncryptionOAEPSHA512, plainText as CFData, nil) as Data?
+    return SecKeyCreateEncryptedData(key, .rsaEncryptionOAEPSHA1, plainText as CFData, nil) as Data?
 }

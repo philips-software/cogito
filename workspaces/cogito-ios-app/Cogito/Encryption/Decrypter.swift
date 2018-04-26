@@ -8,7 +8,7 @@ struct Decrypter: DecrypterType {
             return nil
         }
 
-        return SecKeyCreateDecryptedData(privateKey, .rsaEncryptionOAEPSHA512, cipherText as CFData, nil) as Data?
+        return SecKeyCreateDecryptedData(privateKey, .rsaEncryptionOAEPSHA1, cipherText as CFData, nil) as Data?
     }
 
     private func loadPrivateKey(tag: String) -> SecKey? {
