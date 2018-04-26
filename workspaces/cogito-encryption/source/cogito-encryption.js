@@ -31,7 +31,7 @@ class CogitoEncryption {
   async decrypt ({ tag, encryptionData }) {
     const splitEncryptionData = encryptionData.split('.')
     const keyPart = splitEncryptionData[1]
-    const encryptedSymmetricalKey = base64url.decode(keyPart)
+    const encryptedSymmetricalKey = '0x' + Buffer.from(base64url.decode(keyPart)).toString('hex')
     const request = this.createRequest('decrypt', { tag, cipherText: encryptedSymmetricalKey })
     const response = await this.channel.send(request)
     if (response.error) {
