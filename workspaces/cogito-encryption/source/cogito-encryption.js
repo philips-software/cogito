@@ -19,7 +19,7 @@ class CogitoEncryption {
   }
 
   async getPublicKey ({ tag }) {
-    const request = this.createRequest('getEncryptionPublicKey', [{ tag }])
+    const request = this.createRequest('getEncryptionPublicKey', { tag })
     const response = await this.channel.send(request)
     if (response.error) {
       throw new Error(response.error.message)
@@ -32,7 +32,7 @@ class CogitoEncryption {
     const splitEncryptionData = encryptionData.split('.')
     const keyPart = splitEncryptionData[1]
     const encryptedSymmetricalKey = base64url.decode(keyPart)
-    const request = this.createRequest('decrypt', [{ tag, cipherText: encryptedSymmetricalKey }])
+    const request = this.createRequest('decrypt', { tag, cipherText: encryptedSymmetricalKey })
     const response = await this.channel.send(request)
     if (response.error) {
       throw new Error(response.error)

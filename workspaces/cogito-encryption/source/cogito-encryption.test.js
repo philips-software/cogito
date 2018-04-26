@@ -50,7 +50,7 @@ describe('encryption', () => {
 
   describe('retrieving the public key', () => {
     const tag = 'some tag'
-    const request = { jsonrpc: '2.0', method: 'getEncryptionPublicKey', params: [{ tag }] }
+    const request = { jsonrpc: '2.0', method: 'getEncryptionPublicKey', params: { tag } }
     const publicKey = 'the public key'
     const response = { jsonrpc: '2.0', result: publicKey }
 
@@ -90,7 +90,7 @@ describe('encryption', () => {
     const symmetricalKey = 'symmetricalKey'
     const encryptedSymmetricalKey = 'encryptedSymmetricalKey'
     const request = {
-      jsonrpc: '2.0', method: 'decrypt', params: [{ tag, cipherText: encryptedSymmetricalKey }]
+      jsonrpc: '2.0', method: 'decrypt', params: { tag, cipherText: encryptedSymmetricalKey }
     }
     const response = { jsonrpc: '2.0', result: symmetricalKey }
     const nonce = 'nonce'
