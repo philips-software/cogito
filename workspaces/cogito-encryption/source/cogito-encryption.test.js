@@ -90,7 +90,12 @@ describe('encryption', () => {
     const symmetricalKey = 'symmetricalKey'
     const encryptedSymmetricalKey = 'encryptedSymmetricalKey'
     const request = {
-      jsonrpc: '2.0', method: 'decrypt', params: { tag, cipherText: encryptedSymmetricalKey }
+      jsonrpc: '2.0',
+      method: 'decrypt',
+      params: {
+        tag,
+        cipherText: '0x' + Buffer.from(encryptedSymmetricalKey).toString('hex')
+      }
     }
     const response = { jsonrpc: '2.0', result: symmetricalKey }
     const nonce = 'nonce'
