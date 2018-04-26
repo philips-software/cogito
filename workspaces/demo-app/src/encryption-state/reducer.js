@@ -4,6 +4,8 @@ const encryptionReducer = (state = initialState, action) => {
       return { ...state, plainText: action.plainText }
     case 'ENCRYPTION_SET_CIPHERTEXT':
       return { ...state, cipherText: action.cipherText }
+    case 'ENCRYPTION_SET_KEY_TAG':
+      return { ...state, keyTag: action.tag }
     default:
       return { ...state }
   }

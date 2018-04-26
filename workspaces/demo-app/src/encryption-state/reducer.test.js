@@ -32,4 +32,11 @@ describe('encryption state reducer', () => {
     const action = EncryptionActions.setCipherText(newCipherText)
     expect(encryptionReducer(state, action).cipherText).toBe(newCipherText)
   })
+
+  it('updates the key tag', () => {
+    const newKeyTag = 'new key tag'
+    const state = deepFreeze({ keyTag: 'old key tag' })
+    const action = EncryptionActions.setKeyTag(newKeyTag)
+    expect(encryptionReducer(state, action).keyTag).toBe(newKeyTag)
+  })
 })
