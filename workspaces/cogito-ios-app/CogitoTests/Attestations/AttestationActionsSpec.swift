@@ -27,7 +27,7 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             it("dispatches FinishRejected when token has incorrect nonce") {
-                let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
+                let finishAction = AttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
                 let dispatchRecorder = DispatchRecorder<AttestationActions.FinishRejected>()
                 finishAction.action(dispatchRecorder.dispatch, { return nil })
                 expect(dispatchRecorder.count) == 1
@@ -35,14 +35,14 @@ class AttestationActionsSpec: QuickSpec {
 
             it("dispatches FinishRejected when subject is incorrect") {
                 let identity = Identity.example
-                let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
+                let finishAction = AttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
                 let dispatchRecorder = DispatchRecorder<AttestationActions.FinishRejected>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
                         open: [
-                            validNonce: AttestationInProgress(
+                            OpenIdExampleValues.validNonce: AttestationInProgress(
                                 requestId: JsonRpcId(),
-                                nonce: validNonce,
+                                nonce: OpenIdExampleValues.validNonce,
                                 subject: "incorrect subject",
                                 identity: identity,
                                 status: .started,
@@ -59,15 +59,15 @@ class AttestationActionsSpec: QuickSpec {
 
             it("dispatches Fulfilled when token has correct nonce") {
                 let identity = Identity.example
-                let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
+                let finishAction = AttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
                 let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
                         open: [
-                            validNonce: AttestationInProgress(
+                            OpenIdExampleValues.validNonce: AttestationInProgress(
                                 requestId: JsonRpcId(),
-                                nonce: validNonce,
-                                subject: validSubject,
+                                nonce: OpenIdExampleValues.validNonce,
+                                subject: OpenIdExampleValues.validSubject,
                                 identity: identity,
                                 status: .started,
                                 error: nil,
@@ -88,14 +88,14 @@ class AttestationActionsSpec: QuickSpec {
                 // provide.
                 // https://gitlab.ta.philips.com/blockchain-lab/Cogito/issues/11
                 let identity = Identity.example
-                let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
+                let finishAction = AttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
                 let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
                         open: [
-                            validNonce: AttestationInProgress(
+                            OpenIdExampleValues.validNonce: AttestationInProgress(
                                 requestId: JsonRpcId(),
-                                nonce: validNonce,
+                                nonce: OpenIdExampleValues.validNonce,
                                 subject: nil,
                                 identity: identity,
                                 status: .started,
@@ -112,15 +112,15 @@ class AttestationActionsSpec: QuickSpec {
 
             it("also dispatches DiamondActions.AddAttestation") {
                 let identity = Identity.example
-                let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
+                let finishAction = AttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
                 let dispatchRecorder = DispatchRecorder<DiamondActions.AddJWTAttestation>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
                         open: [
-                            validNonce: AttestationInProgress(
+                            OpenIdExampleValues.validNonce: AttestationInProgress(
                                 requestId: JsonRpcId(),
-                                nonce: validNonce,
-                                subject: validSubject,
+                                nonce: OpenIdExampleValues.validNonce,
+                                subject: OpenIdExampleValues.validSubject,
                                 identity: identity,
                                 status: .started,
                                 error: nil,
@@ -133,13 +133,13 @@ class AttestationActionsSpec: QuickSpec {
                 })
                 expect(dispatchRecorder.count) == 1
                 expect(dispatchRecorder.actions.first!.identity) == identity
-                expect(dispatchRecorder.actions.first!.idToken) == validToken
+                expect(dispatchRecorder.actions.first!.idToken) == OpenIdExampleValues.validToken
             }
         }
 
         describe("getting attestations") {
             let requestId = JsonRpcId("a request id")
-            let idToken = validToken
+            let idToken = OpenIdExampleValues.validToken
             var store: RecordingStore!
             var identityWithAttestation: Identity!
             var identityWithoutAttestation: Identity!
@@ -160,13 +160,17 @@ class AttestationActionsSpec: QuickSpec {
                 identityWithAttestation = Identity.example
                 identityWithAttestation.idTokens = [idToken]
                 channel = TelepathChannelSpy()
-                telepathState = TelepathState(channels: [channel: identityWithoutAttestation], connectionError: nil,
-                                              receivedMessages: [], receiveError: nil)
+                telepathState = TelepathState(
+                    channels: [channel: identityWithoutAttestation.identifier],
+                    connectionError: nil,
+                    receivedMessages: [],
+                    receiveError: nil
+                )
                 store = RecordingStore()
                 getAttestationsAction = AttestationActions.GetAttestations(
                     requestId: requestId,
                     applicationName: "test",
-                    oidcRealmUrl: validIssuer,
+                    oidcRealmUrl: OpenIdExampleValues.validIssuer,
                     subject: nil,
                     channel: channel
                 )
@@ -174,8 +178,12 @@ class AttestationActionsSpec: QuickSpec {
 
             context("when requested attestation is present") {
                 beforeEach {
-                    telepathState = TelepathState(channels: [channel: identityWithAttestation], connectionError: nil,
-                                                  receivedMessages: [], receiveError: nil)
+                    telepathState = TelepathState(
+                        channels: [channel: identityWithAttestation.identifier],
+                        connectionError: nil,
+                        receivedMessages: [],
+                        receiveError: nil
+                    )
                 }
 
                 context("when this Telepath channel has been given the attestation before") {
@@ -287,8 +295,8 @@ class AttestationActionsSpec: QuickSpec {
                     func attestationInProgress(channelId: ChannelID) -> AttestationInProgress {
                         return AttestationInProgress(
                             requestId: requestId,
-                            nonce: validNonce,
-                            subject: validSubject,
+                            nonce: OpenIdExampleValues.validNonce,
+                            subject: OpenIdExampleValues.validSubject,
                             identity: identityWithoutAttestation,
                             status: .started,
                             error: nil,
@@ -299,12 +307,16 @@ class AttestationActionsSpec: QuickSpec {
 
                     context("when channel has not changed") {
                         it("dispatches Telepath send message") {
-                            let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
+                            let finishAction = AttestationActions.Finish(
+                                params: ["id_token": OpenIdExampleValues.validToken]
+                            )
                             store.state = appState(
                                 diamond: DiamondState(facets: [identityWithoutAttestation]),
                                 telepath: telepathState,
                                 attestations: AttestationsState(
-                                    open: [validNonce: attestationInProgress(channelId: channel.id)],
+                                    open: [
+                                        OpenIdExampleValues.validNonce: attestationInProgress(channelId: channel.id)
+                                    ],
                                     providedAttestations: [:])
                             )
                             store.dispatch(finishAction)
@@ -318,12 +330,14 @@ class AttestationActionsSpec: QuickSpec {
 
                     context("when channel has changed") {
                         it("does not dispatch Telepath send message") {
-                            let finishAction = AttestationActions.Finish(params: ["id_token": validToken])
+                            let finishAction = AttestationActions.Finish(
+                                params: ["id_token": OpenIdExampleValues.validToken]
+                            )
                             store.state = appState(
                                 diamond: DiamondState(facets: [identityWithoutAttestation]),
                                 telepath: telepathState,
                                 attestations: AttestationsState(
-                                    open: [validNonce: attestationInProgress(channelId: "other")],
+                                    open: [OpenIdExampleValues.validNonce: attestationInProgress(channelId: "other")],
                                     providedAttestations: [:])
                             )
                             store.dispatch(finishAction)
@@ -358,7 +372,12 @@ class AttestationActionsSpec: QuickSpec {
                 let state = appState(
                     diamond: diamondState,
                     telepath: TelepathState(
-                        channels: [channel: identity2], connectionError: nil, receivedMessages: [], receiveError: nil))
+                        channels: [channel: identity2.identifier],
+                        connectionError: nil,
+                        receivedMessages: [],
+                        receiveError: nil
+                    )
+                )
                 let builder = GetAttestationsBuilder(
                     requestId: JsonRpcId(1), oidcRealmUrlString: "https://test.realm", applicationName: "app",
                     subject: "sub", dispatch: { _ in }, getState: { return state }, channel: channel
@@ -369,25 +388,3 @@ class AttestationActionsSpec: QuickSpec {
         }
     }
 }
-
-private let validToken = "eyJhbGciOiJSUzI1NiIsInR5c" +
-                         "CIgOiAiSldUIiwia2lkIiA6ICJ0U1huMHQtVV9MWUFnTXZacFM0aF9KQUE5Y1RZWWQ2MX" +
-                         "M2aF8zT0dhLXVjIn0.eyJqdGkiOiJlN2NiZmY3Mi1lZDY3LTRkMTUtOGE2MC00NDdhMjl" +
-                         "iZGVjMDkiLCJleHAiOjE1MDkwMTEyMjEsIm5iZiI6MCwiaWF0IjoxNTA5MDEwMzIxLCJp" +
-                         "c3MiOiJodHRwOi8vZWMyLTM1LTE1OC0yMC0xNjEuZXUtY2VudHJhbC0xLmNvbXB1dGUuY" +
-                         "W1hem9uYXdzLmNvbTo4MDgwL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6ImNvZ2l0by" +
-                         "IsInN1YiI6IjkzYWIxMjc1LWY3ZTItNGFmNi04YWE5LTRjYzM0YjdiZTMwNyIsInR5cCI" +
-                         "6IklEIiwiYXpwIjoiY29naXRvIiwibm9uY2UiOiJhMGViMjkxYjhiYjYwMWVmMDhlNDVm" +
-                         "MWZjZWMzNWI3YjMyYWNiNzllNTUyZjY2NjY0YzRhMjUzMzMzMGVlZTcxIiwiYXV0aF90a" +
-                         "W1lIjoxNTA5MDEwMzIxLCJzZXNzaW9uX3N0YXRlIjoiMDYyNjFhN2EtMjgyZi00MTEzLT" +
-                         "hmYmQtNTFiMzJhMTY5YjI2IiwiYWNyIjoiMSIsIm5hbWUiOiJEZW1vIFVzZXIiLCJwcmV" +
-                         "mZXJyZWRfdXNlcm5hbWUiOiJkZW1vIiwiZ2l2ZW5fbmFtZSI6IkRlbW8iLCJmYW1pbHlf" +
-                         "bmFtZSI6IlVzZXIiLCJlbWFpbCI6ImRlbW9AZXhhbXBsZS5jb20ifQ.OxBNXYenPWDO93" +
-                         "XhNn9wa7thfuPW4hVarQd4ufZHNFKl2iagcByZ95rtGd065u-B5hSpgEcTXtencr2Gf5W" +
-                         "mWvQbMvoskyP5DXVtpNTz_hYwbS6ga24f-tr-WKGG6cqJzXEgrsN4P0YJzP6Uv_GIiLU6" +
-                         "qucGjpK-pNSN6kJr9IKlQEpow_ERkyVIFaBtuzVT0fi6nfIskKOwzhJwf0eK-VX7o6mJa" +
-                         "fzinyXc1wC-rGNb5rtbHbC1qx8Se4-gp-G0EDTa3iChS7m_ZDdXjMmnp22poRv1M8W3Ft" +
-                         "rnfAnMyyDxr8AZwTefCQN9-3ge3hmBS7nBjlrrYkmwSTpAlJGHOg"
-private let validNonce = "a0eb291b8bb601ef08e45f1fcec35b7b32acb79e552f66664c4a2533330eee71"
-private let validSubject = "93ab1275-f7e2-4af6-8aa9-4cc34b7be307"
-private let validIssuer = "http://ec2-35-158-20-161.eu-central-1.compute.amazonaws.com:8080/auth/realms/master"

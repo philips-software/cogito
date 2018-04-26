@@ -13,7 +13,7 @@ class AppReducerSpec: QuickSpec {
                 geth: GethState(peersCount: 1, syncProgress: nil),
                 createIdentity: CreateIdentityState(description: "test", pending: true, newAccount: nil, error: "test"),
                 diamond: DiamondState(facets: [identity]),
-                telepath: TelepathState(channels: [TelepathChannel.example: identity], connectionError: nil)
+                telepath: TelepathState(channels: [TelepathChannel.example: identity.identifier], connectionError: nil)
             )
             let action = ResetAppState()
             let nextState = appReducer(action: action, state: state)

@@ -13,7 +13,7 @@ class TelepathReducerSpec: QuickSpec {
         it("stores the channel in the state") {
             let action = TelepathActions.ConnectFulfilled(channel: channel, identity: identity)
             let nextState = telepathReducer(action, nil)
-            expect(nextState.channels[channel]) == identity
+            expect(nextState.channels[channel]) == identity.identifier
         }
 
         it("stores connection errors in the state") {

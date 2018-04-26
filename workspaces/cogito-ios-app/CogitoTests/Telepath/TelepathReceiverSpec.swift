@@ -41,7 +41,7 @@ class TelepathReceiverSpec: QuickSpec {
 
         it("continuously polls for new messages") {
             let identity = Identity.example
-            receiver.newState(state: [TelepathChannelSpy(): identity])
+            receiver.newState(state: [TelepathChannelSpy(): identity.identifier])
             expect(store.actions.count).toEventually(beGreaterThan(5))
         }
 

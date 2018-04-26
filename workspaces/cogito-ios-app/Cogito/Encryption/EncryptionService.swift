@@ -14,7 +14,10 @@ struct EncryptionService: TelepathService {
     }
 
     func onRequest(_ request: JsonRpcRequest, on channel: TelepathChannel) {
-        if let identity = store.state.telepath.channels[channel] {
+        if
+            let identityReference = store.state.telepath.channels[channel],
+            let identity = store.state.diamond.facets[identityReference]
+        {
             switch request.method {
             case "createEncryptionKeyPair":
                 createKeyPair(request: request, identity: identity, channel: channel)
