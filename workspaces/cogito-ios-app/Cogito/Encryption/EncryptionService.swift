@@ -53,7 +53,7 @@ struct EncryptionService: TelepathService {
     }
 
     private func decrypt(request: JsonRpcRequest, identity: Identity, channel: TelepathChannel) {
-        guard let tag = request.params["keyTag"].string else {
+        guard let tag = request.params["tag"].string else {
             store.dispatch(TelepathActions.Send(id: request.id, error: EncryptionError.tagMissing, on: channel))
             return
         }
