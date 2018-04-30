@@ -1,8 +1,9 @@
 {
-  "name": "dsp-demo",
+  "name": "demo-app",
   "version": "0.1.3",
-  "description": "A demo project for using blockchain in dsp",
-  "repository": "https://gitlab.ta.philips.com/blockchain-lab/dsp-demo",
+  "description": "A demo project for using Cogito",
+  "repository": "https://gitlab.ta.philips.com/blockchain-lab/cogito",
+  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/demo-app",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
