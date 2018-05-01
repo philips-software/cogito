@@ -18,7 +18,7 @@ contract('SimpleStorage', function (accounts) {
     expect(amount.toNumber()).to.equal(0)
   })
 
-  context('when adding one', function () {
+  context('when increasing by one', function () {
     beforeEach(async function () {
       await simpleStorage.increase(1)
     })
