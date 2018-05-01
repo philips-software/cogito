@@ -8,10 +8,9 @@ build cogito:
   stage: build
   before_script:
     - yarn install
-    - cd workspaces/demo-app/truffle && yarn install
   script:
     - yarn lerna run --scope @cogitojs/** build
-    - cd workspaces/demo-app/truffle && yarn truffle compile
+    - cd workspaces/demo-app/truffle && yarn install && yarn truffle compile
   cache:
     untracked: true
 
