@@ -10,6 +10,7 @@ build cogito:
     - yarn install
   script:
     - yarn lerna run --scope @cogitojs/** build
+    - cd workspaces/demo-app/truffle && yarn truffle compile
   cache:
     untracked: true
 
