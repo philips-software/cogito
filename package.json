@@ -1,9 +1,9 @@
 {
     "private": true,
     "devDependencies": {
-        "@babel/core": "^7.0.0-beta.46",
-        "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.46",
-        "@babel/preset-react": "^7.0.0-beta.46",
+        "@babel/core": "7.0.0-beta.44",
+        "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.44",
+        "@babel/preset-react": "7.0.0-beta.44",
         "babel-core": "^7.0.0-0",
         "babel-eslint": "8.2.2",
         "babel-jest": "^22.4.3",
@@ -40,7 +40,7 @@
         ]
     },
     "scripts": {
-        "test": "yarn standard && NODE_PATH=./workspaces/demo-app/src NODE_ENV=test yarn jest",
+        "test": "yarn standard && NODE_PATH=./workspaces/demo-app/src yarn jest",
         "test:watch": "NODE_PATH=./workspaces/demo-app/src yarn jest --watch",
         "lint": "yarn standard",
         "lint-fix": "yarn standard --fix --verbose",
