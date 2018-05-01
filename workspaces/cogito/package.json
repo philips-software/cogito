@@ -43,7 +43,7 @@
   },
   "peerDependencies": {
     "libsodium-wrappers": "^0.7.2",
-    "truffle-contract": "^3.0.3",
+    "truffle-contract": "^3.0.5",
     "web3": "^1.0.0-beta.34"
   },
   "publishConfig": {
