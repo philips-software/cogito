@@ -5,9 +5,9 @@ export class CogitoReact extends React.Component {
   state = { web3: null, channel: null, contracts: null }
   cogito
 
-  constructor (contractsInfo) {
+  constructor ({ contracts }) {
     super()
-    this.cogito = new Cogito(contractsInfo)
+    this.cogito = new Cogito(contracts)
   }
 
   updateState = async (props) => {

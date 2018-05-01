@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@cogitojs/cogito": "^0.1.3",
+    "@cogitojs/cogito-react": "^0.1.3",
     "@cogitojs/cogito-encryption": "^0.1.3",
     "@react-frontend-developer/css-grid-helper": "^1.0.3",
     "babel-polyfill": "^6.26.0",
