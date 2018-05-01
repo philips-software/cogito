@@ -9,9 +9,11 @@
         "babel-jest": "^22.4.3",
         "jest": "^22.4.3",
         "lerna": "^2.11.0",
-        "libsodium-wrappers": "^0.7.2",
         "regenerator-runtime": "^0.11.1",
-        "standard": "^11.0.1"
+        "standard": "^11.0.1",
+        "libsodium-wrappers": "^0.7.2",
+        "truffle-contract": "^3.0.5",
+        "web3": "^1.0.0-beta.34"
     },
     "workspaces": {
         "packages": [
