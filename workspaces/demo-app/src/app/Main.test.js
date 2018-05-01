@@ -1,17 +1,15 @@
-import React from 'react'
 import ReactDOM from 'react-dom'
 import renderer from 'react-test-renderer'
-import { App } from './App'
-
-jest.mock('components/web3/ReactWeb3')
+import { Main } from './Main'
+import { inRouter } from 'test-helpers/router'
 
 it('renders without crashing', async () => {
   const div = document.createElement('div')
-  await ReactDOM.render(<App />, div)
+  await ReactDOM.render(inRouter(Main, '/'), div)
 })
 
 it('renders correctly', async () => {
   const app = await renderer
-    .create(<App />)
+    .create(inRouter(Main, '/'))
   expect(app.toJSON()).toMatchSnapshot()
 })

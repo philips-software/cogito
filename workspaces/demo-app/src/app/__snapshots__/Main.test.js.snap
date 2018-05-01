@@ -1,0 +1,212 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="css-14x0z9n"
+>
+  <div
+    className="css-15ysuyo"
+  >
+    <div
+      className="css-829d7j"
+    >
+      <div>
+        Demo App
+      </div>
+    </div>
+  </div>
+  <div
+    className="css-1092ap8"
+  >
+    <div
+      className="css-1crpgfv"
+    >
+      <p>
+        Your Cogito account address is:
+      </p>
+      <div
+        className="css-h2wbwd"
+      >
+        unknown
+      </div>
+    </div>
+  </div>
+  <div
+    className="css-v3skhn"
+  >
+    <div
+      className="css-jbit82"
+    >
+      <p
+        className="css-huraai"
+      >
+        You have one contract deployed called 
+        <span>
+          Simple Storage
+        </span>
+        .
+      </p>
+      <p
+        className="css-huraai"
+      >
+        Simple storage allows you to store a value in a smart contract.
+      </p>
+      <p
+        className="css-1ej2l17"
+      >
+        Current value is:
+      </p>
+      <div
+        className="css-h2wbwd"
+      >
+        0
+      </div>
+      <p
+        className="css-huraai"
+      >
+        Using the buttons below you can read the currently stored value and also increase it. When increasing the value stored in the contract, you will need to sign the transaction using Cogito identity app. If this is your first transaction, a QR-code will be presented that will let you establish a secure connection between the browser and the iOS Cogito App. You can always request a new QR-code using the Show QR-code button.
+      </p>
+      <div
+        className="css-1gzlhve"
+      >
+        <button
+          className="ui pink basic button"
+          disabled={undefined}
+          onClick={[Function]}
+          role="button"
+          tabIndex={undefined}
+        >
+          Read...
+        </button>
+        <button
+          className="ui pink basic button"
+          disabled={undefined}
+          onClick={[Function]}
+          role="button"
+          tabIndex={undefined}
+        >
+          Increase by 5...
+        </button>
+        <button
+          className="ui pink basic button"
+          disabled={undefined}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          role="button"
+          tabIndex={undefined}
+        >
+          Show QRCode
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    className="css-athk3v"
+  >
+    <div
+      className="css-jbit82"
+    >
+      <p
+        className="css-huraai"
+      >
+        Cogito can encrypt and decrypt data for you. The public-private key pair used for encryption and decryption lives in the user's Cogito mobile app. Since the public key can be known by anyone, it can be retrieved from the Cogito app. Using that public key, encryption is done purely in the browser. Decryption on the other hand requires that the private key is used, so the Cogito mobile app is involved.
+      </p>
+      <div
+        className="css-47eutw"
+      >
+        <div
+          className="css-pepzuv"
+        >
+          <textarea
+            onChange={[Function]}
+            onInput={[Function]}
+            placeholder="Enter some text"
+            rows={3}
+            style={
+              Object {
+                "height": "10em",
+                "resize": "",
+                "width": "13em",
+              }
+            }
+            value=""
+          />
+        </div>
+        <div
+          className="css-1fuv6sj"
+        >
+          <button
+            className="ui pink basic button"
+            disabled={undefined}
+            onClick={[Function]}
+            role="button"
+            tabIndex={undefined}
+          >
+            ―Encrypt→
+          </button>
+        </div>
+        <div
+          className="css-gndo50"
+        >
+          <button
+            className="ui pink basic button"
+            disabled={undefined}
+            onClick={[Function]}
+            role="button"
+            tabIndex={undefined}
+          >
+            ←Decrypt―
+          </button>
+        </div>
+        <div
+          className="css-b0s7eq"
+        >
+          <textarea
+            onChange={[Function]}
+            onInput={[Function]}
+            placeholder="Encrypted text appears here"
+            rows={3}
+            style={
+              Object {
+                "height": "10em",
+                "resize": "",
+                "width": "13em",
+              }
+            }
+            value=""
+          />
+        </div>
+      </div>
+      <p
+        className="css-huraai"
+      >
+        What actually happens is this: on 
+        <em>
+          encryption
+        </em>
+        , a symmetrical key is generated in the browser. This key is used for encrypting the data that is provided. The symmetrical key itself is also encrypted, using the public key from the user's identity. On 
+        <em>
+          decryption
+        </em>
+        , the encrypted symmetrical key is sent to the Cogito mobile app, which decrypts it and returns the key itself. That key is then used to decrypt the actual data in the browser. This scheme ensures that the actual data that is encrypted never leaves the browser. Also, the amount of data that is exchanged with the Cogito mobile app is very small (just the symmetrical key).
+      </p>
+    </div>
+  </div>
+  <div
+    className="css-v8hqy9"
+  >
+    <div
+      className="css-y1c2qe"
+    >
+      <p
+        className="css-15pdwa0"
+      >
+        © 2018 by Charterhouse
+      </p>
+    </div>
+  </div>
+</div>
+`;

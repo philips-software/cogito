@@ -1,17 +1,15 @@
 import React from 'react'
 
 const contract = {
-  set: (balance, obj) => {
+  increase: (increment, obj) => {
     return new Promise(resolve => {
       resolve()
     })
   },
-  get: {
-    call: obj => {
-      return new Promise(resolve => {
-        resolve({ toNumber: () => 15 })
-      })
-    }
+  read: obj => {
+    return new Promise(resolve => {
+      resolve({ toNumber: () => 15 })
+    })
   }
 }
 
@@ -21,7 +19,7 @@ const channel = {
   createConnectUrl: jest.fn().mockReturnValue('connecturl')
 }
 
-export class ReactWeb3 extends React.Component {
+export class CogitoReact extends React.Component {
   state = {
     web3: {
       eth: {
@@ -31,7 +29,9 @@ export class ReactWeb3 extends React.Component {
       }
     },
     channel: channel,
-    deployedMarketplace: contract
+    contracts: {
+      simpleStorage: contract
+    }
   }
 
   render () {
