@@ -18,6 +18,7 @@ test javascript:
   stage: test
   script:
     - yarn test
+    - cd workspaces/demo-app/truffle && yarn test
   cache:
     untracked: true
 
