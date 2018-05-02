@@ -1,5 +1,5 @@
 import React from 'react'
-import { Centered, Spacer } from 'components/layout'
+import { Centered, Spacer } from '@react-frontend-developer/react-layout-helpers'
 import { Link } from 'react-router-dom'
 
 const Footer = () =>

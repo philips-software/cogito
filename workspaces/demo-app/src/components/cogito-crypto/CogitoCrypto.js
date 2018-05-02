@@ -1,6 +1,6 @@
 import React from 'react'
 import glamorous from 'glamorous'
-import { FullWidthCentered } from 'components/layout'
+import { FullWidthCentered } from '@react-frontend-developer/react-layout-helpers'
 import { Button, TextArea } from 'semantic-ui-react'
 import {
   EncryptionGrid, PlainTextGridItem, CipherTextGridItem,
