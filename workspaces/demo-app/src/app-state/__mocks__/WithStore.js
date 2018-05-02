@@ -12,7 +12,9 @@ class WithStore extends React.Component {
   }
 
   render () {
-    return this.props.render(this.select(), this.dispatch)
+    const { render, children } = this.props
+
+    return render ? render(this.select(), this.dispatch) : children(this.select(), this.dispatch)
   }
 }
 
