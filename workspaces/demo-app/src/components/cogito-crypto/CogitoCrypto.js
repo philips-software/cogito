@@ -7,7 +7,7 @@ import {
   EncryptGridItem, DecryptGridItem
 } from './EncryptionGrid'
 import { EncryptionActions } from 'encryption-state'
-import { WithStore } from 'app-state'
+import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 
 const P = glamorous.p({
   maxWidth: '40rem'

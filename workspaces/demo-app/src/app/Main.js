@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { PageCentered } from 'components/layout'
 import { CogitoReact } from '@cogitojs/cogito-react'
-import { WithStore } from 'app-state'
+import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { Dimmer, Loader, Segment } from 'semantic-ui-react'
 
 import { Home } from 'pages/home'

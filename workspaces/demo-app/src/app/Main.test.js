@@ -1,10 +1,8 @@
 import ReactDOM from 'react-dom'
 import renderer from 'react-test-renderer'
 import { Main } from './Main'
-import { WithStore } from 'app-state'
+import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { inRouter } from 'test-helpers/router'
-
-jest.mock('app-state/WithStore')
 
 const state = {
   userData: {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { WithStore } from 'app-state'
+import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { Centered, ValueWrapper } from 'components/layout'
 
 export const CogitoAddress = () =>
