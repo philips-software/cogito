@@ -1,0 +1,1 @@
+export { CogitoConnector } from './CogitoConnector'
