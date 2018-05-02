@@ -1,14 +1,14 @@
 import React from 'react'
 
-class WithStore extends React.Component {
+class WithStoreMock extends React.Component {
   dispatch = jest.fn()
 
   static mockStore = state => {
-    WithStore.state = state
+    WithStoreMock.state = state
   }
 
   select () {
-    return this.props.selector(WithStore.state)
+    return this.props.selector(WithStoreMock.state)
   }
 
   render () {
@@ -18,4 +18,4 @@ class WithStore extends React.Component {
   }
 }
 
-export { WithStore }
+export { WithStoreMock }

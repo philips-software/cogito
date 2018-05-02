@@ -1,7 +1,7 @@
 import React from 'react'
 import glamorous from 'glamorous'
 
-import { WithStore } from 'app-state'
+import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { TelepathConnector } from 'components/telepath'
 import { Row, Spacer, ValueWrapper, FullWidthCentered } from 'components/layout'
 import { Status } from 'components/styling'
