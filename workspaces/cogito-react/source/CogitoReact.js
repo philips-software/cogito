@@ -10,16 +10,18 @@ export class CogitoReact extends React.Component {
     this.cogito = new Cogito(contracts)
   }
 
+  normalizeKey = key => {
+    if (key instanceof Uint8Array || key === undefined) {
+      return key
+    } else {
+      return Uint8Array.from(Object.values(key))
+    }
+  }
+
   updateState = async (props) => {
     const { channelId, channelKey } = props
 
-    let telepathKey
-
-    if (channelKey instanceof Uint8Array || channelKey === undefined) {
-      telepathKey = channelKey
-    } else {
-      telepathKey = Uint8Array.from(Object.values(channelKey))
-    }
+    const telepathKey = this.normalizeKey(channelKey)
 
     const { web3, channel, contracts } = await this.cogito.update({ channelId, channelKey: telepathKey })
 
@@ -35,10 +37,12 @@ export class CogitoReact extends React.Component {
     this.updateState(this.props)
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.channelId !== this.props.channelId ||
-      nextProps.channelKey !== this.props.channelKey) {
-      this.updateState(nextProps)
+  componentDidUpdate (prevProps, prevState) {
+    const prevKey = this.normalizeKey(prevProps.channelKey)
+    const currentKey = this.normalizeKey(this.props.channelKey)
+    if (prevProps.channelId !== this.props.channelId ||
+      prevKey.toString() !== currentKey.toString()) {
+      this.updateState(this.props)
     }
   }
 
