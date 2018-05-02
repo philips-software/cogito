@@ -2,7 +2,7 @@
   "name": "@cogitojs/cogito-react",
   "version": "0.1.3",
   "description": "Cogito React library",
-  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito",
+  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito-react",
   "license": "UNLICENSED",
   "main": "umd/cogito-react.min.js",
   "module": "es/index.js",
