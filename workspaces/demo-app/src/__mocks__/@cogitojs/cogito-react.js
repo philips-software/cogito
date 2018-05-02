@@ -35,6 +35,7 @@ export class CogitoReact extends React.Component {
   }
 
   render () {
-    return this.props.render(this.state)
+    const { render, children } = this.props
+    return render ? render(this.state) : children(this.state)
   }
 }
