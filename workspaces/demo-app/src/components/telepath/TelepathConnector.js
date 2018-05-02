@@ -13,10 +13,11 @@ class TelepathConnector extends React.Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.open !== this.state.open) {
-      this.setState({ open: nextProps.open })
+  static getDerivedStateFromProps (nextProps, prevState) {
+    if (nextProps.open !== prevState.open) {
+      return { open: nextProps.open }
     }
+    return null
   }
 
   onClick = () => {
