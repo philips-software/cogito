@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
-import { Centered, ValueWrapper } from 'components/layout'
+import { Centered, ValueWrapper } from '@react-frontend-developer/react-layout-helpers'
 
 export const CogitoAddress = () =>
   <WithStore

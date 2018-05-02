@@ -1,7 +1,7 @@
 import React from 'react'
 
 import glamorous from 'glamorous'
-import { Centered } from 'components/layout'
+import { Centered } from '@react-frontend-developer/react-layout-helpers'
 
 const PinkText = glamorous.p({
   color: '#ff80c3',

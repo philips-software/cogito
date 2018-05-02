@@ -4,7 +4,7 @@ import glamorous from 'glamorous'
 import { HomeGrid, HeaderGridItem, AddressesGridItem,
   ContractGridItem, FooterGridItem } from 'pages/home/HomeGrid'
 
-import { Centered, FullWidthCentered } from 'components/layout'
+import { Centered, FullWidthCentered } from '@react-frontend-developer/react-layout-helpers'
 import { TopBar } from 'components/top-bar'
 import { Footer } from 'components/footer'
 

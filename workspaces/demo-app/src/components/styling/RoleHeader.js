@@ -1,6 +1,6 @@
 import React from 'react'
 import glamorous from 'glamorous'
-import { Spacer } from '../layout/Spacer'
+import { Spacer } from '@react-frontend-developer/react-layout-helpers'
 
 const RoleHeader = ({ color, children }) => {
   const Wrapper = glamorous.div({
