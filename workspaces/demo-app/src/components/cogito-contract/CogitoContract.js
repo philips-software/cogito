@@ -2,7 +2,7 @@ import React from 'react'
 import glamorous from 'glamorous'
 
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
-import { TelepathConnector } from 'components/telepath'
+import { CogitoConnector } from 'components/cogito-connector'
 import { Row, Spacer, ValueWrapper, FullWidthCentered } from 'components/layout'
 import { Status } from 'components/styling'
 import { TimedStatus } from 'components/utils'
@@ -106,9 +106,10 @@ class CogitoContract extends React.Component {
                   onClick={() => this.read(dispatch, channelReady)}>Read...</Button>
                 <Button basic color='pink' disabled={executingContractInProgress === true}
                   onClick={() => this.increase(dispatch, channelReady)}>Increase by 5...</Button>
-                <TelepathConnector open={this.state.forceQRCode}
-                  channel={this.props.channel}
-                  onClosed={() => this.onClosed(dispatch)} />
+                <CogitoConnector open={this.state.forceQRCode}
+                  connectUrl={this.props.channel.createConnectUrl('https://cogito.mobi')}
+                  onClosed={() => this.onClosed(dispatch)}
+                  buttonStyling={{basic: true, color: 'pink'}} />
               </Row>
               { executingContractInProgress === true &&
               <Spacer margin='10px'>

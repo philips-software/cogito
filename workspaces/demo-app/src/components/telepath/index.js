@@ -1,1 +1,0 @@
-export { TelepathConnector } from './TelepathConnector'
