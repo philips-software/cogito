@@ -3,7 +3,7 @@ import QRCode from 'qrcode.react'
 import { Button, Header, Modal } from 'semantic-ui-react'
 import { Centered, Spacer } from 'components/layout'
 
-class TelepathConnector extends React.Component {
+class CogitoConnector extends React.Component {
   state
 
   constructor ({ open = false }) {
@@ -26,9 +26,8 @@ class TelepathConnector extends React.Component {
   }
 
   render () {
-    const connectUrl = this.props.channel.createConnectUrl('https://cogito.mobi')
     return (
-      <Modal open={this.state.open} trigger={<Button basic color='pink' disabled={this.props.disabled} onClick={() => this.setState({open: true})}>Show QRCode</Button>}>
+      <Modal open={this.state.open} trigger={<Button {...this.props.buttonStyling} disabled={this.props.disabled} onClick={() => this.setState({open: true})}>Show QRCode</Button>}>
         <Modal.Header>Scan QRCode</Modal.Header>
         <Modal.Content>
           <Modal.Description>
@@ -37,9 +36,9 @@ class TelepathConnector extends React.Component {
               <Spacer
                 margin='20px 0 50px 0'
                 render={() =>
-                  <QRCode value={connectUrl} />
+                  <QRCode value={this.props.connectUrl} />
                 } />
-              <Button basic color='pink' onClick={() => this.onClick()}>Done</Button>
+              <Button {...this.props.buttonStyling} onClick={() => this.onClick()}>Done</Button>
             </Centered>
           </Modal.Description>
         </Modal.Content>
@@ -48,4 +47,4 @@ class TelepathConnector extends React.Component {
   }
 }
 
-export { TelepathConnector }
+export { CogitoConnector }
