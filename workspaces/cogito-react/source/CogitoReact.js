@@ -38,8 +38,8 @@ export class CogitoReact extends React.Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    const prevKey = this.normalizeKey(prevProps.channelKey)
-    const currentKey = this.normalizeKey(this.props.channelKey)
+    const prevKey = this.normalizeKey(prevProps.channelKey) || ''
+    const currentKey = this.normalizeKey(this.props.channelKey) || ''
     if (prevProps.channelId !== this.props.channelId ||
       prevKey.toString() !== currentKey.toString()) {
       this.updateState(this.props)
