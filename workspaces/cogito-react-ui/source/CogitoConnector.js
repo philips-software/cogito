@@ -27,7 +27,14 @@ class CogitoConnector extends React.Component {
 
   render () {
     return (
-      <Modal open={this.state.open} trigger={<Button {...this.props.buttonStyling} disabled={this.props.disabled} onClick={() => this.setState({open: true})}>Show QRCode</Button>}>
+      <Modal open={this.state.open}
+        trigger={
+          <Button {...this.props.buttonStyling}
+            disabled={this.props.disabled}
+            onClick={() => this.setState({open: true})}>
+            {this.props.triggerButtonText || 'Show QRCode'}
+          </Button>
+        }>
         <Modal.Header>Scan QRCode</Modal.Header>
         <Modal.Content>
           <Modal.Description>
