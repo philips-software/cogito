@@ -1,6 +1,6 @@
 {
   "name": "demo-app",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A demo project for using Cogito",
   "repository": "https://gitlab.ta.philips.com/blockchain-lab/cogito",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/demo-app",
@@ -9,7 +9,7 @@
   "dependencies": {
     "@cogitojs/cogito-encryption": "^0.1.4",
     "@cogitojs/cogito-react": "^0.1.4",
-    "@cogitojs/cogito-react-ui": "^0.1.4",
+    "@cogitojs/cogito-react-ui": "^0.1.5",
     "@react-frontend-developer/css-grid-helper": "^1.0.6",
     "@react-frontend-developer/react-layout-helpers": "^1.0.6",
     "@react-frontend-developer/react-redux-render-prop": "^1.0.6",
