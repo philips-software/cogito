@@ -29,6 +29,16 @@ struct TelepathActions {
     }
 
     // swiftlint:disable:next identifier_name
+    static func Invalidate() -> ThunkAction<AppState> {
+        return ThunkAction { _, getState in
+            guard let channels = getState()?.telepath.channels else { return }
+            for channel in channels.keys {
+                channel.invalidate()
+            }
+        }
+    }
+
+    // swiftlint:disable:next identifier_name
     static func Receive() -> ThunkAction<AppState> {
         return ThunkAction { dispatch, getState in
             guard let channels = getState()?.telepath.channels else { return }

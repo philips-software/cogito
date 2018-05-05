@@ -5,7 +5,8 @@ import ReSwift
 class TelepathReceiver: StoreSubscriber {
     let store: Store<AppState>
     let pollInterval: TimeInterval
-    var timers: [TelepathChannel:Timer] = [:]
+//    var timers: [TelepathChannel:Timer] = [:]
+    var timer: Timer?
     var onNewState = recreatePollingTimers
 
     init(store: Store<AppState>, pollInterval: TimeInterval = 1.0) {
@@ -14,9 +15,9 @@ class TelepathReceiver: StoreSubscriber {
     }
 
     deinit {
-        for timer in timers.values {
-            timer.invalidate()
-        }
+//        for timer in timers.values {
+        self.timer?.invalidate()
+//        }
     }
 
     func start() {
@@ -36,18 +37,24 @@ class TelepathReceiver: StoreSubscriber {
     }
 
     func recreatePollingTimers(channels: [TelepathChannel:UUID]?) {
-        for timer in timers.values {
-            timer.invalidate()
-        }
-        timers = [:]
+//        for timer in timers.values {
+        self.timer?.invalidate()
+//        }
+//        timers = [:]
 
-        guard let channels = channels else { return }
+//        guard let channels = channels else { return }
 
-        for channel in channels.keys {
-            let timer = Timer.scheduledTimer(withTimeInterval: pollInterval, repeats: true) { [weak self] _ in
-                self?.store.dispatch(TelepathActions.Receive())
-            }
-            timers[channel] = timer
+        self.store.dispatch(TelepathActions.Invalidate())
+
+        self.timer = Timer.scheduledTimer(withTimeInterval: pollInterval, repeats: true) { [weak self] _ in
+            self?.store.dispatch(TelepathActions.Receive())
         }
+
+//        for channel in channels.keys {
+//            let timer = Timer.scheduledTimer(withTimeInterval: pollInterval, repeats: true) { [weak self] _ in
+//                self?.store.dispatch(TelepathActions.Receive())
+//            }
+//            timers[channel] = timer
+//        }
     }
 }

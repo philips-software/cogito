@@ -22,6 +22,10 @@ class TelepathChannel: TelepathChannelType, Codable {
         try connect()
     }
 
+    func invalidate() {
+        self.channel.invalidate()
+    }
+
     private func connect() throws {
         self.channel = try Telepath().connect(url: connectUrl)
     }
