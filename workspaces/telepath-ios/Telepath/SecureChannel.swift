@@ -4,7 +4,7 @@ import Sodium
 
 public struct SecureChannel {
     public let id: ChannelID
-    let queuing: QueuingService
+    var queuing: QueuingService
     let key: ChannelKey
     let receivingQueue: QueueID
     let sendingQueue: QueueID
@@ -15,6 +15,10 @@ public struct SecureChannel {
         self.id = id
         self.receivingQueue = id + ".red"
         self.sendingQueue = id + ".blue"
+    }
+
+    public mutating func invalidate() {
+        queuing.invalidate()
     }
 
     public func send(message: String, completion: @escaping (Error?) -> Void) {

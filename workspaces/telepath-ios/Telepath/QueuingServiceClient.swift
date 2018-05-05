@@ -4,13 +4,19 @@ import Foundation
 import base64url
 
 public struct QueuingServiceClient: QueuingService {
-
     let url: URL
     let callbackQueue: DispatchQueue
+    var urlSession: URLSession
 
     public init(url: URL, callbackQueue: DispatchQueue = DispatchQueue.main) {
         self.url = url
         self.callbackQueue = callbackQueue
+        self.urlSession = URLSession(configuration: .ephemeral)
+    }
+
+    public mutating func invalidate() {
+        self.urlSession.invalidateAndCancel()
+        self.urlSession = URLSession(configuration: .ephemeral)
     }
 
     public func send(queueId: QueueID, message: Data, completion: @escaping (Error?) -> Void) {
@@ -18,7 +24,7 @@ public struct QueuingServiceClient: QueuingService {
         let queueUrl = url.appendingPathComponent(queueId)
         var request = URLRequest(url: queueUrl)
         request.httpMethod = "POST"
-        let task = URLSession(configuration: .ephemeral)
+        let task = self.urlSession
                              .uploadTask(with: request, from: encodedMessage) { _, response, error in
             self.callbackQueue.async {
                 completion(self.checkValidity(response: response, error: error))
@@ -29,7 +35,7 @@ public struct QueuingServiceClient: QueuingService {
 
     public func receive(queueId: QueueID, completion: @escaping (Data?, Error?) -> Void) {
         let queueUrl = url.appendingPathComponent(queueId)
-        let task = URLSession(configuration: .ephemeral)
+        let task = self.urlSession
                              .dataTask(with: queueUrl) { data, response, error in
             let (message, error) = self.extractMessage(response: response, data: data, error: error)
             self.callbackQueue.async {
