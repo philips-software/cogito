@@ -11,6 +11,7 @@ struct TelepathActions {
         return ThunkAction { dispatch, _ in
             do {
                 let channel = try TelepathChannel(connectUrl: url)
+                dispatch(Invalidate())
                 dispatch(ConnectFulfilled(channel: channel, identity: identity))
             } catch let error {
                 dispatch(ConnectRejected(error: error, identity: identity))
