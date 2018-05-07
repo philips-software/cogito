@@ -28,4 +28,8 @@ class QueuingServiceMock: QueuingService {
             completion(messageToReturn, nil)
         }
     }
+
+    public func invalidate() {
+        // do nothing for now
+    }
 }
