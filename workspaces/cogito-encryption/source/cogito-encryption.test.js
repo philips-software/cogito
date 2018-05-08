@@ -3,9 +3,9 @@ import forge from 'node-forge'
 import base64url from 'base64url'
 import { random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
 
-jest.mock('@cogitojs/crypto')
-
 describe('encryption', () => {
+  const { publicKey, privateKey } = forge.pki.rsa.generateKeyPair({ bits: 600 })
+
   let cogitoEncryption
   let telepathChannel
 
@@ -88,16 +88,24 @@ describe('encryption', () => {
 
   describe('decrypting data', () => {
     const tag = 'some tag'
-    const cipherText = '0xsomeencryptedstuff'
-    const plainText = 'decrypted plain text'
-    const symmetricalKey = 'symmetricalKey'
-    const encryptedSymmetricalKey = 'encryptedSymmetricalKey'
-    const nonce = 'nonce'
-    const encryptionData = base64url.encode(cipherText) + '.' + base64url.encode(encryptedSymmetricalKey) + '.' + base64url.encode(nonce)
+    const plainText = 'some plain text'
 
-    beforeEach(() => {
-      decrypt.mockResolvedValue(Promise.resolve(plainText))
-      const response = { jsonrpc: '2.0', result: symmetricalKey }
+    let symmetricKey
+    let nonce
+    let cipherText
+    let encryptedSymmetricKey
+    let encryptionData
+
+    beforeEach(async () => {
+      symmetricKey = await random(await keySize())
+      nonce = await random(await nonceSize())
+      cipherText = await encrypt(plainText, nonce, symmetricKey)
+      encryptedSymmetricKey = publicKey.encrypt(symmetricKey, 'RSA-OAEP')
+      encryptionData =
+        base64url.encode(cipherText) + '.' +
+        base64url.encode(encryptedSymmetricKey) + '.' +
+        base64url.encode(nonce)
+      const response = { jsonrpc: '2.0', result: '0x' + Buffer.from(symmetricKey).toString('hex') }
       telepathChannel.send.mockResolvedValue(response)
     })
 
@@ -108,7 +116,7 @@ describe('encryption', () => {
         method: 'decrypt',
         params: {
           tag,
-          cipherText: '0x' + Buffer.from(encryptedSymmetricalKey).toString('hex')
+          cipherText: '0x' + Buffer.from(encryptedSymmetricKey).toString('hex')
         }
       }
       expect(telepathChannel.send.mock.calls[0][0]).toMatchObject(request)
@@ -121,13 +129,6 @@ describe('encryption', () => {
       await expect(cogitoEncryption.decrypt({ tag, encryptionData })).rejects.toBeDefined()
     })
 
-    it('decrypts the cipher text using the symmetrical key', async () => {
-      await cogitoEncryption.decrypt({ tag, encryptionData })
-      expect(decrypt.mock.calls[0][0]).toBe(cipherText)
-      expect(decrypt.mock.calls[0][1]).toBe(nonce)
-      expect(decrypt.mock.calls[0][2]).toBe(symmetricalKey)
-    })
-
     it('decrypts the cipher text', async () => {
       const decryptedText = await cogitoEncryption.decrypt({ tag, encryptionData })
       expect(decryptedText).toBe(plainText)
@@ -136,90 +137,41 @@ describe('encryption', () => {
 
   describe('encrypting data', () => {
     const plainText = 'plain text'
+    const tag = 'some tag'
 
-    describe('when public key cannot be retrieved', () => {
-      const error = new Error('some error')
-
-      beforeEach(() => {
-        telepathChannel = {
-          send: jest.fn((request) => {
-            if (request['method'] === 'getEncryptionPublicKey') {
-              return Promise.reject(error)
-            }
-          })
-        }
-        cogitoEncryption = new CogitoEncryption({ telepathChannel })
-      })
-
-      it('throws', async () => {
-        expect.assertions(1)
-        await expect(
-          cogitoEncryption.encrypt({ tag: 'invalid tag', plainText })
-        ).rejects.toThrow(error)
-      })
+    beforeEach(async () => {
+      const publicKeyJWK = {
+        'kty': 'RSA',
+        'n': base64url.encode(publicKey.n.toByteArray()),
+        'e': base64url.encode(publicKey.e.toByteArray()),
+        'alg': 'RS256'
+      }
+      telepathChannel.send.mockResolvedValue({ result: publicKeyJWK })
     })
 
-    describe('when public key can be retrieved', () => {
-      let encryption
-      let keyPair
+    it('returns encrypted symmetric key, cipherText and nonce', async () => {
+      const encryptionData = await cogitoEncryption.encrypt({ tag, plainText })
 
-      beforeEach(async () => {
-        telepathChannel = { send: jest.fn() }
-        encryption = new CogitoEncryption({ telepathChannel })
-        keyPair = await generateKeyPair({bits: 512, workers: -1})
-        const publicKeyJWK = {
-          'kty': 'RSA',
-          'n': base64url.encode(keyPair.publicKey.n.toByteArray()),
-          'e': base64url.encode(keyPair.publicKey.e.toByteArray()),
-          'alg': 'RS256'
-        }
-        telepathChannel.send.mockResolvedValue({ result: publicKeyJWK })
+      const parts = encryptionData.split('.')
+      const cipherText = base64url.toBuffer(parts[0])
+      const encryptedSymmetricKey = base64url.toBuffer(parts[1])
+      const nonce = base64url.toBuffer(parts[2])
 
-        const fakeNonceSize = 1
-        const fakeKeySize = 2
-        nonceSize.mockImplementation(() => Promise.resolve(fakeNonceSize))
-        keySize.mockImplementation(() => Promise.resolve(fakeKeySize))
-        random.mockImplementation((size) => {
-          return size === fakeNonceSize ? 'nonce' : 'symmetricalKey'
-        })
-        encrypt.mockImplementation(() => Promise.resolve('encryptedData'))
-      })
+      const symmetricKey = Buffer.from(
+        privateKey.decrypt(
+          encryptedSymmetricKey.toString('binary'),
+          'RSA-OAEP'
+        ),
+        'binary'
+      )
 
-      it('uses symmetrical encryption to encrypt the plain text', async () => {
-        await encryption.encrypt({ tag: 'some tag', plainText })
-        expect(encrypt.mock.calls[0][0]).toBe(plainText)
-      })
+      expect(await decrypt(cipherText, nonce, symmetricKey, 'text')).toBe(plainText)
+    })
 
-      it('uses public key to encrypt symmetrical key', async () => {
-        const encryptionResult = await encryption.encrypt({ tag: 'some tag', plainText })
-        const encryptedSymmetricalKey = base64url.decode(encryptionResult.split('.')[1])
-        const decryptedKey = keyPair.privateKey.decrypt(encryptedSymmetricalKey, 'RSA-OAEP', { md: forge.md.sha1.create() })
-        expect(decryptedKey).toBe('symmetricalKey')
-      })
-
-      it('returns cipherText', async () => {
-        const encryptionResult = await encryption.encrypt({ tag: 'some tag', plainText })
-        const cipherText = base64url.decode(encryptionResult.split('.')[0])
-        expect(cipherText).toBe('encryptedData')
-      })
-
-      it('returns the nonce', async () => {
-        const encryptionResult = await encryption.encrypt({ tag: 'some tag', plainText })
-        const nonce = base64url.decode(encryptionResult.split('.')[2])
-        expect(nonce).toBe('nonce')
-      })
+    it('throws when public key cannot be retrieved', async () => {
+      const error = { code: -42, message: 'some error' }
+      telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
+      await expect(cogitoEncryption.encrypt({ tag, plainText })).rejects.toBeDefined()
     })
   })
 })
-
-async function generateKeyPair (...args) {
-  return new Promise(function (resolve, reject) {
-    forge.pki.rsa.generateKeyPair(...args, function (error, result) {
-      if (error) {
-        reject(error)
-      } else {
-        resolve(result)
-      }
-    })
-  })
-}

@@ -31,16 +31,16 @@ class CogitoEncryption {
   async decrypt ({ tag, encryptionData }) {
     const splitEncryptionData = encryptionData.split('.')
     const keyPart = splitEncryptionData[1]
-    const encryptedSymmetricalKey = '0x' + Buffer.from(base64url.decode(keyPart)).toString('hex')
+    const encryptedSymmetricalKey = '0x' + base64url.toBuffer(keyPart).toString('hex')
     const request = this.createRequest('decrypt', { tag, cipherText: encryptedSymmetricalKey })
     const response = await this.channel.send(request)
     if (response.error) {
       throw new Error(response.error.message)
     }
-    const symmetricalKey = response.result
-    const cipherText = base64url.decode(splitEncryptionData[0])
-    const nonce = base64url.decode(splitEncryptionData[2])
-    return decrypt(cipherText, nonce, symmetricalKey)
+    const symmetricKey = Buffer.from(response.result.slice(2), 'hex')
+    const cipherText = base64url.toBuffer(splitEncryptionData[0])
+    let nonce = base64url.toBuffer(splitEncryptionData[2])
+    return decrypt(cipherText, nonce, symmetricKey, 'text')
   }
 
   async encrypt ({ tag, plainText }) {
@@ -52,17 +52,23 @@ class CogitoEncryption {
     const unsignedE = Buffer.concat([Buffer.from([0]), signedE])
     const e = new forge.jsbn.BigInteger(unsignedE, 256)
     const publicKey = forge.pki.setRsaPublicKey(n, e)
-
-    const symmetricalKey = await this.createRandomKey()
+    const symmetricKey = await this.createRandomKey()
     const nonce = await random(await nonceSize())
-    const cipherText = await encrypt(plainText, nonce, symmetricalKey)
+    const cipherText = await encrypt(plainText, nonce, symmetricKey)
 
-    const encryptedKey = publicKey.encrypt(symmetricalKey, 'RSA-OAEP', { md: forge.md.sha1.create() })
+    const encryptedSymmetricKey = Buffer.from(
+      publicKey.encrypt(
+        Buffer.from(symmetricKey).toString('binary'),
+        'RSA-OAEP'
+      ),
+      'binary'
+    )
 
-    const cipherTextPart = base64url.encode(cipherText)
-    const keyPart = base64url.encode(encryptedKey)
-    const noncePart = base64url.encode(nonce)
-    return cipherTextPart + '.' + keyPart + '.' + noncePart
+    return (
+      base64url.encode(cipherText) + '.' +
+      base64url.encode(encryptedSymmetricKey) + '.' +
+      base64url.encode(nonce)
+    )
   }
 
   createRequest (method, params) {
