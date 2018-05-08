@@ -1,4 +1,4 @@
-import forge from 'node-forge'
+import { rsaCreatePublicKey, rsaEncrypt } from './rsa'
 import base64url from 'base64url'
 import { random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
 
@@ -46,23 +46,15 @@ class CogitoEncryption {
   async encrypt ({ tag, plainText }) {
     const publicKeyJWK = await this.getPublicKey({ tag })
     const signedN = base64url.toBuffer(publicKeyJWK.n)
-    const unsignedN = Buffer.concat([Buffer.from([0]), signedN])
-    const n = new forge.jsbn.BigInteger(unsignedN, 256)
+    const n = Buffer.concat([Buffer.from([0]), signedN])
     const signedE = base64url.toBuffer(publicKeyJWK.e)
-    const unsignedE = Buffer.concat([Buffer.from([0]), signedE])
-    const e = new forge.jsbn.BigInteger(unsignedE, 256)
-    const publicKey = forge.pki.setRsaPublicKey(n, e)
+    const e = Buffer.concat([Buffer.from([0]), signedE])
+    const publicKey = rsaCreatePublicKey({ n, e })
     const symmetricKey = await this.createRandomKey()
     const nonce = await random(await nonceSize())
     const cipherText = await encrypt(plainText, nonce, symmetricKey)
 
-    const encryptedSymmetricKey = Buffer.from(
-      publicKey.encrypt(
-        Buffer.from(symmetricKey).toString('binary'),
-        'RSA-OAEP'
-      ),
-      'binary'
-    )
+    const encryptedSymmetricKey = rsaEncrypt({ publicKey, plainText: symmetricKey })
 
     return (
       base64url.encode(cipherText) + '.' +
