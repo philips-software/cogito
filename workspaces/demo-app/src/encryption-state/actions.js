@@ -22,7 +22,8 @@ class EncryptionActions {
       const plainText = getState().encryption.plainText
       const tag = await encryption.createNewKeyPair()
       dispatch(EncryptionActions.setKeyTag(tag))
-      const cipherText = await encryption.encrypt({ tag, plainText })
+      const jsonWebKey = await encryption.getPublicKey({ tag })
+      const cipherText = await encryption.encrypt({ jsonWebKey, plainText })
       dispatch(EncryptionActions.setPlainText(''))
       dispatch(EncryptionActions.setCipherText(cipherText))
     }
