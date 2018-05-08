@@ -44,16 +44,11 @@ class CogitoEncryption {
   }
 
   async encrypt ({ tag, plainText }) {
-    const publicKeyJWK = await this.getPublicKey({ tag })
-    const signedN = base64url.toBuffer(publicKeyJWK.n)
-    const n = Buffer.concat([Buffer.from([0]), signedN])
-    const signedE = base64url.toBuffer(publicKeyJWK.e)
-    const e = Buffer.concat([Buffer.from([0]), signedE])
-    const publicKey = rsaCreatePublicKey({ n, e })
+    const jsonWebKey = await this.getPublicKey({ tag })
+    const publicKey = this.createRsaPublicKey({ jsonWebKey })
     const symmetricKey = await this.createRandomKey()
     const nonce = await random(await nonceSize())
     const cipherText = await encrypt(plainText, nonce, symmetricKey)
-
     const encryptedSymmetricKey = rsaEncrypt({ publicKey, plainText: symmetricKey })
 
     return (
@@ -61,6 +56,14 @@ class CogitoEncryption {
       base64url.encode(encryptedSymmetricKey) + '.' +
       base64url.encode(nonce)
     )
+  }
+
+  createRsaPublicKey ({ jsonWebKey }) {
+    const signedN = base64url.toBuffer(jsonWebKey.n)
+    const signedE = base64url.toBuffer(jsonWebKey.e)
+    const n = Buffer.concat([Buffer.from([0]), signedN])
+    const e = Buffer.concat([Buffer.from([0]), signedE])
+    return rsaCreatePublicKey({ n, e })
   }
 
   createRequest (method, params) {
