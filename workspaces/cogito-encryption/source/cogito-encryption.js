@@ -45,8 +45,12 @@ class CogitoEncryption {
 
   async encrypt ({ tag, plainText }) {
     const publicKeyJWK = await this.getPublicKey({ tag })
-    const n = new forge.jsbn.BigInteger(base64url.toBuffer(publicKeyJWK.n))
-    const e = new forge.jsbn.BigInteger(base64url.toBuffer(publicKeyJWK.e), 256)
+    const signedN = base64url.toBuffer(publicKeyJWK.n)
+    const unsignedN = Buffer.concat([Buffer.from([0]), signedN])
+    const n = new forge.jsbn.BigInteger(unsignedN, 256)
+    const signedE = base64url.toBuffer(publicKeyJWK.e)
+    const unsignedE = Buffer.concat([Buffer.from([0]), signedE])
+    const e = new forge.jsbn.BigInteger(unsignedE, 256)
     const publicKey = forge.pki.setRsaPublicKey(n, e)
 
     const symmetricalKey = await this.createRandomKey()
