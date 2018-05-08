@@ -43,8 +43,7 @@ class CogitoEncryption {
     return decrypt(cipherText, nonce, symmetricKey, 'text')
   }
 
-  async encrypt ({ tag, plainText }) {
-    const jsonWebKey = await this.getPublicKey({ tag })
+  async encrypt ({ jsonWebKey, plainText }) {
     const publicKey = this.createRsaPublicKey({ jsonWebKey })
     const symmetricKey = await this.createRandomKey()
     const nonce = await random(await nonceSize())

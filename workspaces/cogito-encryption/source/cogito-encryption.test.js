@@ -137,20 +137,15 @@ describe('encryption', () => {
 
   describe('encrypting data', () => {
     const plainText = 'plain text'
-    const tag = 'some tag'
-
-    beforeEach(async () => {
-      const publicKeyJWK = {
-        'kty': 'RSA',
-        'n': base64url.encode(publicKey.n.toByteArray()),
-        'e': base64url.encode(publicKey.e.toByteArray()),
-        'alg': 'RS256'
-      }
-      telepathChannel.send.mockResolvedValue({ result: publicKeyJWK })
-    })
+    const jsonWebKey = {
+      'kty': 'RSA',
+      'n': base64url.encode(publicKey.n.toByteArray()),
+      'e': base64url.encode(publicKey.e.toByteArray()),
+      'alg': 'RS256'
+    }
 
     it('returns encrypted symmetric key, cipherText and nonce', async () => {
-      const encryptionData = await cogitoEncryption.encrypt({ tag, plainText })
+      const encryptionData = await cogitoEncryption.encrypt({ jsonWebKey, plainText })
 
       const parts = encryptionData.split('.')
       const cipherText = base64url.toBuffer(parts[0])
@@ -160,12 +155,6 @@ describe('encryption', () => {
       const symmetricKey = rsaDecrypt({ privateKey, cipherText: encryptedSymmetricKey })
 
       expect(await decrypt(cipherText, nonce, symmetricKey, 'text')).toBe(plainText)
-    })
-
-    it('throws when public key cannot be retrieved', async () => {
-      const error = { code: -42, message: 'some error' }
-      telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
-      await expect(cogitoEncryption.encrypt({ tag, plainText })).rejects.toBeDefined()
     })
   })
 })
