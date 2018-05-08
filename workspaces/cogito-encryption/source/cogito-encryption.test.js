@@ -16,15 +16,15 @@ describe('encryption', () => {
 
   describe('creating new key pairs', () => {
     const tag = 'some tag'
-    const request = { jsonrpc: '2.0', method: 'createEncryptionKeyPair' }
-    const response = { jsonrpc: '2.0', result: tag }
 
     beforeEach(() => {
+      const response = { jsonrpc: '2.0', result: tag }
       telepathChannel.send.mockResolvedValue(response)
     })
 
     it('creates new key pairs', async () => {
       await cogitoEncryption.createNewKeyPair()
+      const request = { jsonrpc: '2.0', method: 'createEncryptionKeyPair' }
       expect(telepathChannel.send.mock.calls[0][0]).toMatchObject(request)
     })
 
@@ -50,16 +50,20 @@ describe('encryption', () => {
 
   describe('retrieving the public key', () => {
     const tag = 'some tag'
-    const request = { jsonrpc: '2.0', method: 'getEncryptionPublicKey', params: { tag } }
     const publicKey = 'the public key'
-    const response = { jsonrpc: '2.0', result: publicKey }
 
     beforeEach(() => {
+      const response = { jsonrpc: '2.0', result: publicKey }
       telepathChannel.send.mockResolvedValue(response)
     })
 
     it('gets the public key', async () => {
       await cogitoEncryption.getPublicKey({tag})
+      const request = {
+        jsonrpc: '2.0',
+        method: 'getEncryptionPublicKey',
+        params: { tag }
+      }
       expect(telepathChannel.send.mock.calls[0][0]).toMatchObject(request)
     })
 
@@ -68,10 +72,9 @@ describe('encryption', () => {
     })
 
     it('throws when error is returned', async () => {
-      expect.assertions(1)
       const error = { code: -42, message: 'some error' }
       telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
-      await expect(cogitoEncryption.getPublicKey({tag: 'nonexisting tag'})).rejects.toBeDefined()
+      await expect(cogitoEncryption.getPublicKey({tag})).rejects.toBeDefined()
     })
 
     it('uses different JSON-RPC ids for subsequent requests', async () => {
@@ -89,21 +92,26 @@ describe('encryption', () => {
     const plainText = 'decrypted plain text'
     const symmetricalKey = 'symmetricalKey'
     const encryptedSymmetricalKey = 'encryptedSymmetricalKey'
-    const request = {
-      jsonrpc: '2.0',
-      method: 'decrypt',
-      params: {
-        tag,
-        cipherText: '0x' + Buffer.from(encryptedSymmetricalKey).toString('hex')
-      }
-    }
-    const response = { jsonrpc: '2.0', result: symmetricalKey }
     const nonce = 'nonce'
     const encryptionData = base64url.encode(cipherText) + '.' + base64url.encode(encryptedSymmetricalKey) + '.' + base64url.encode(nonce)
 
     beforeEach(() => {
       decrypt.mockResolvedValue(Promise.resolve(plainText))
+      const response = { jsonrpc: '2.0', result: symmetricalKey }
       telepathChannel.send.mockResolvedValue(response)
+    })
+
+    it('asks Cogito to decrypt the symmetrical key', async () => {
+      await cogitoEncryption.decrypt({ tag, encryptionData: encryptionData })
+      const request = {
+        jsonrpc: '2.0',
+        method: 'decrypt',
+        params: {
+          tag,
+          cipherText: '0x' + Buffer.from(encryptedSymmetricalKey).toString('hex')
+        }
+      }
+      expect(telepathChannel.send.mock.calls[0][0]).toMatchObject(request)
     })
 
     it('throws when error is returned', async () => {
@@ -111,11 +119,6 @@ describe('encryption', () => {
       const error = { code: -42, message: 'some error' }
       telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
       await expect(cogitoEncryption.decrypt({ tag, encryptionData })).rejects.toBeDefined()
-    })
-
-    it('asks Cogito to decrypt the symmetrical key', async () => {
-      await cogitoEncryption.decrypt({ tag, encryptionData: encryptionData })
-      expect(telepathChannel.send.mock.calls[0][0]).toMatchObject(request)
     })
 
     it('decrypts the cipher text using the symmetrical key', async () => {
