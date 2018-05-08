@@ -1,10 +1,10 @@
 import { CogitoEncryption } from './cogito-encryption'
-import forge from 'node-forge'
+import { rsaGenerateKeyPair, rsaDecrypt } from './rsa'
 import base64url from 'base64url'
 import { random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
 
 describe('encryption', () => {
-  const { publicKey, privateKey } = forge.pki.rsa.generateKeyPair({ bits: 600 })
+  const { publicKey, privateKey } = rsaGenerateKeyPair({ bits: 600 })
 
   let cogitoEncryption
   let telepathChannel
@@ -157,13 +157,7 @@ describe('encryption', () => {
       const encryptedSymmetricKey = base64url.toBuffer(parts[1])
       const nonce = base64url.toBuffer(parts[2])
 
-      const symmetricKey = Buffer.from(
-        privateKey.decrypt(
-          encryptedSymmetricKey.toString('binary'),
-          'RSA-OAEP'
-        ),
-        'binary'
-      )
+      const symmetricKey = rsaDecrypt({ privateKey, cipherText: encryptedSymmetricKey })
 
       expect(await decrypt(cipherText, nonce, symmetricKey, 'text')).toBe(plainText)
     })
