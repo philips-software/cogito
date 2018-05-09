@@ -19,7 +19,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     @IBOutlet weak var rightShutter: UIView!
     @IBOutlet weak var selectedFacetView: UIView!
     var embeddedSelectedFacetController: SelectedFacetViewController!
-    lazy var bleepPlayer: AVAudioPlayer? = {
+    private lazy var bleepPlayer: AVAudioPlayer? = {
         guard let url = Bundle.main.url(forResource: "198414__divinux__infobleep", withExtension: "wav") else {
             return nil
         }
@@ -122,7 +122,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
 
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
         guard let identity = self.props.selectedFacet else { return }
-        bleepPlayer?.play()
+        bleep()
         actions.connectToTelepathChannel(result.value, identity)
         stopScanning()
     }
@@ -135,6 +135,12 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         if let selectedFacetViewController = segue.destination as? SelectedFacetViewController {
             embeddedSelectedFacetController = selectedFacetViewController
         }
+    }
+
+    private func bleep() {
+        try? AVAudioSession.sharedInstance().setActive(true)
+        bleepPlayer?.play()
+        try? AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
     }
 
     struct Props {
