@@ -15,7 +15,7 @@ public struct QueuingServiceClient: QueuingService {
     }
 
     public mutating func invalidate() {
-        self.urlSession.invalidateAndCancel()
+        self.urlSession.finishTasksAndInvalidate()
         self.urlSession = URLSession(configuration: .ephemeral)
     }
 
