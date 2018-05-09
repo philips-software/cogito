@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-encryption",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "Supports encryption and decryption through the Cogito app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito-encryption",
   "license": "UNLICENSED",
