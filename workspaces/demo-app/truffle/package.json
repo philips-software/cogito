@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "license": "UNLICENSED",
   "scripts": {
-    "test": "yarn truffle test --network testing"
+    "test": "yarn lint && yarn truffle test --network testing",
+    "lint": "yarn solium lint -d contracts"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "dirty-chai": "^2.0.1",
     "ganache-cli": "^6.0.3",
+    "solium": "^1.1.7",
     "truffle": "^4.0.6"
   }
 }
