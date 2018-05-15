@@ -46,9 +46,9 @@
         ]
     },
     "scripts": {
-        "test": "yarn standard && NODE_PATH=./workspaces/demo-app/src yarn jest",
+        "test": "yarn lint && NODE_PATH=./workspaces/demo-app/src yarn jest",
         "test:watch": "NODE_PATH=./workspaces/demo-app/src yarn jest --watch",
-        "lint": "yarn standard",
+        "lint": "yarn standard && cd ./workspaces/demo-app/truffle && yarn lint",
         "lint-fix": "yarn standard --fix --verbose",
         "build": "yarn lerna run --scope @cogitojs/** build"
     },
