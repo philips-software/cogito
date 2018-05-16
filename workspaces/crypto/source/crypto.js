@@ -43,4 +43,9 @@ async function toHex (...args) {
   return sodium.to_hex(...args)
 }
 
-export { toHex, random, randomHex, encrypt, decrypt, keySize, nonceSize }
+async function cryptoGenericHash (...args) {
+  await waitUntilReady()
+  return sodium.crypto_generichash(sodium.crypto_generichash_BYTES, ...args)
+}
+
+export { toHex, random, randomHex, encrypt, decrypt, keySize, nonceSize, cryptoGenericHash }
