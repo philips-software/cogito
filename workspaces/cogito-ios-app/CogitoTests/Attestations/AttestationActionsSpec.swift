@@ -9,8 +9,10 @@ class AttestationActionsSpec: QuickSpec {
         var store: RecordingStore!
 
         beforeEach {
+            var identity = Identity.example
+            identity.attestations = ["twitter:@examplebob", "email:bob@example.com", "phone:+1234567890"]
             store = RecordingStore()
-            store.state = appState(diamond: DiamondState(facets: [Identity.example]))
+            store.state = appState(diamond: DiamondState(facets: [identity]))
         }
 
         context("when an attestation is received") {
@@ -23,6 +25,25 @@ class AttestationActionsSpec: QuickSpec {
             it("parses the attestation") {
                 let action = store.firstAction(ofType: DiamondActions.StoreAttestation.self)
                 expect(action?.attestation) == "abcdef"
+            }
+        }
+
+        context("when attestations are requested") {
+            var channel: TelepathChannelSpy!
+
+            beforeEach {
+                channel = TelepathChannelSpy()
+                store.dispatch(AttestationActions.GetAttestations(
+                    type: "email",
+                    requestId: JsonRpcId(),
+                    channel: channel
+                ))
+            }
+
+            it("replies with matching attestations") {
+                expect(channel.sentMessage).toNot(contain("twitter:@examplebob"))
+                expect(channel.sentMessage).toNot(contain("phone:+1234567890"))
+                expect(channel.sentMessage).to(contain("email:bob@example.com"))
             }
         }
     }

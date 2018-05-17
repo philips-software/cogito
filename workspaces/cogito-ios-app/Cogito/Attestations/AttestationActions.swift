@@ -3,7 +3,8 @@
 import ReSwift
 
 struct AttestationActions {
-    static func ReceiveAttestation(url: URL) -> Thunk { //swiftlint:disable:this identifier_name
+    // swiftlint:disable:next identifier_name
+    static func ReceiveAttestation(url: URL) -> Thunk {
         return Thunk { dispatch, getState in
             guard let attestation = parseAttestationUrl(url: url) else {
                 return
@@ -17,9 +18,12 @@ struct AttestationActions {
         }
     }
 
-    static func GetAttestations() -> Thunk { // swiftlint:disable:this identifier_name
-        return Thunk { _, _ in
-
+    // swiftlint:disable:next identifier_name
+    static func GetAttestations(type: String, requestId: JsonRpcId, channel: TelepathChannel) -> Thunk {
+        return Thunk { dispatch, getState in
+            let attestations = getState()?.diamond.selectedFacet()?.attestations
+            let selectedAttestations = attestations?.filter { $0.hasPrefix(type) } ?? []
+            dispatch(TelepathActions.Send(id: requestId, result: selectedAttestations, on: channel))
         }
     }
 }
