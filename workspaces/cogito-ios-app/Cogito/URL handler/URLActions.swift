@@ -13,7 +13,7 @@ struct URLActions {
             case ["telepath", "connect"]:
                 dispatch(TelepathActions.Connect(url: url, for: identity))
             case ["attestations", "receive"]:
-                dispatch(AttestationActions.AttestationReceived())
+                dispatch(AttestationActions.ReceiveAttestation(url: url))
             default:
                 break
             }
