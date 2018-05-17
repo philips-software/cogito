@@ -39,7 +39,7 @@ class FacetDetailsViewController: UITableViewController {
             ])
         ]
 
-        for token in facet.idTokens {
+        for token in facet.openIDTokens {
             if let jwt = try? JWTDecode.decode(jwt: token) {
                 let items = createItems(for: jwt)
                 if items.count > 0 {

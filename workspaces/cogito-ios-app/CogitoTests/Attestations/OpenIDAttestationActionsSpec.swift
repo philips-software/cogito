@@ -158,7 +158,7 @@ class OpenIDAttestationActionsSpec: QuickSpec {
             beforeEach {
                 identityWithoutAttestation = Identity.example
                 identityWithAttestation = Identity.example
-                identityWithAttestation.idTokens = [idToken]
+                identityWithAttestation.openIDTokens = [idToken]
                 channel = TelepathChannelSpy()
                 telepathState = TelepathState(
                     channels: [channel: identityWithoutAttestation.identifier],

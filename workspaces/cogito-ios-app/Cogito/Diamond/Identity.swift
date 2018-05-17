@@ -8,21 +8,21 @@ struct Identity: Codable {
     let description: String
     let address: Address
     let created: Date
-    var idTokens: [String]
+    var openIDTokens: [String]
     var encryptionKeyPairs: [Tag]
 
     init(description: String, address: Address) {
         self.identifier = UUID()
         self.description = description
         self.address = address
-        self.idTokens = []
+        self.openIDTokens = []
         self.created = Date()
         self.encryptionKeyPairs = []
     }
 
-    func findToken(claim: String, value: String) -> String? {
-        if let index = self.idTokens.index(where: { $0.has(claim: claim, value: value) }) {
-            return self.idTokens[index]
+    func findOpenIDToken(claim: String, value: String) -> String? {
+        if let index = self.openIDTokens.index(where: { $0.has(claim: claim, value: value) }) {
+            return self.openIDTokens[index]
         } else {
             return nil
         }
@@ -36,7 +36,7 @@ extension Identity: Equatable {
         return lhs.identifier == rhs.identifier &&
                lhs.description == rhs.description &&
                lhs.address == rhs.address &&
-               lhs.idTokens == rhs.idTokens &&
+               lhs.openIDTokens == rhs.openIDTokens &&
                lhs.created == rhs.created &&
                lhs.encryptionKeyPairs == rhs.encryptionKeyPairs
     }

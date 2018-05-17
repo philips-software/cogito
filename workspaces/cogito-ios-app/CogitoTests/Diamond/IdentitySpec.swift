@@ -13,12 +13,12 @@ class IdentitySpec: QuickSpec {
         }
 
         it("cannot find a token when there are none") {
-            expect(identity.findToken(claim: "iss", value: "https://something")).to(beNil())
+            expect(identity.findOpenIDToken(claim: "iss", value: "https://something")).to(beNil())
         }
 
         it("can find a token") {
-            identity.idTokens = [token]
-            expect(identity.findToken(claim: "iss", value: issuer)) == token
+            identity.openIDTokens = [token]
+            expect(identity.findOpenIDToken(claim: "iss", value: issuer)) == token
         }
 
         it("has no encryption key pairs initially") {

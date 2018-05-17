@@ -98,7 +98,7 @@ struct GetAttestationsValid: GetAttestations {
     }
 
     func execute() {
-        if let idToken = facet.findToken(claim: "iss", value: oidcRealmUrl.absoluteString) {
+        if let idToken = facet.findOpenIDToken(claim: "iss", value: oidcRealmUrl.absoluteString) {
             if GetAttestationsValid.alreadyProvided(idToken: idToken, state: state, on: channel) {
                 send(requestId: requestId, idToken: idToken, on: channel)
             } else {
