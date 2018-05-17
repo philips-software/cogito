@@ -42,7 +42,7 @@ struct AttestationService: TelepathService {
     }
 
     func onAttestationRequest(_ request: JsonRpcRequest, type: String, on channel: TelepathChannel) {
-        store.dispatch(AttestationActions.GetAttestations())
+        store.dispatch(AttestationActions.GetAttestations(type: type, requestId: request.id, channel: channel))
     }
 }
 
