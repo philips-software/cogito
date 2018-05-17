@@ -113,7 +113,7 @@ class OpenIDAttestationActionsSpec: QuickSpec {
             it("also dispatches DiamondActions.AddAttestation") {
                 let identity = Identity.example
                 let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
-                let dispatchRecorder = DispatchRecorder<DiamondActions.AddJWTAttestation>()
+                let dispatchRecorder = DispatchRecorder<DiamondActions.StoreOpenIDAttestation>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
                         open: [

@@ -52,7 +52,7 @@ struct OpenIDAttestationActions {
                     dispatch(FinishRejected(nonce: nonce, error: "unexpected nonce or subject"))
                     return
                 }
-                dispatch(DiamondActions.AddJWTAttestation(identity: pendingAttestation.identity,
+                dispatch(DiamondActions.StoreOpenIDAttestation(identity: pendingAttestation.identity,
                                                           idToken: idToken))
                 dispatch(Fulfilled(nonce: nonce, idToken: idToken))
                 if let channelId = pendingAttestation.requestedOnChannel,

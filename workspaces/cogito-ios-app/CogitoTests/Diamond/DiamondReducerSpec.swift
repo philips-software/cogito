@@ -51,11 +51,11 @@ class DiamondReducerSpec: QuickSpec {
             expect(newState.selectedFacetId) == someIdentifier
         }
 
-        it("handles AddJWTAttestation") {
+        it("stores OpenID attestations") {
             let identity = Identity.example
             let idToken = "some token"
             let initialState = DiamondState(facets: [identity])
-            let action = DiamondActions.AddJWTAttestation(identity: identity, idToken: idToken)
+            let action = DiamondActions.StoreOpenIDAttestation(identity: identity, idToken: idToken)
             let nextState = diamondReducer(action: action, state: initialState)
             expect(nextState.facets[identity.identifier]!.openIDTokens).to(contain(idToken))
         }

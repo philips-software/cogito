@@ -17,7 +17,7 @@ struct DiamondActions {
         let uuid: UUID
     }
 
-    struct AddJWTAttestation: Action {
+    struct StoreOpenIDAttestation: Action {
         let identity: Identity
         let idToken: String
     }
