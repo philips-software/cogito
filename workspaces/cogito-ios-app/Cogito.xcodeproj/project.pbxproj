@@ -113,6 +113,7 @@
 		5C3C8F2F208767790042AC2F /* JsonRcpRequestConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C8F2E208767790042AC2F /* JsonRcpRequestConvenience.swift */; };
 		5C48E2401FA1F8BB00B8BF6E /* TelepathActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */; };
 		5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */; };
+		5C4D7F5020AD72340008107C /* URLActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F4F20AD72340008107C /* URLActions.swift */; };
 		5C4D7F5220AD72940008107C /* Thunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5120AD72940008107C /* Thunk.swift */; };
 		5C59C9C52008B01D00186D29 /* JsonRpcRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */; };
 		5C61A0022088871E00867747 /* PublicKeyLoaderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C61A0012088871E00867747 /* PublicKeyLoaderSpec.swift */; };
@@ -287,6 +288,7 @@
 		5C3C8F2E208767790042AC2F /* JsonRcpRequestConvenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRcpRequestConvenience.swift; sourceTree = "<group>"; };
 		5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathActions.swift; sourceTree = "<group>"; };
 		5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducerSpec.swift; sourceTree = "<group>"; };
+		5C4D7F4F20AD72340008107C /* URLActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLActions.swift; sourceTree = "<group>"; };
 		5C4D7F5120AD72940008107C /* Thunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thunk.swift; sourceTree = "<group>"; };
 		5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcRequestSpec.swift; sourceTree = "<group>"; };
 		5C61A0012088871E00867747 /* PublicKeyLoaderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyLoaderSpec.swift; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 				022621261FAB1CE700692126 /* Identity manager */,
 				02E90F501FE03319008D81F9 /* DialogPresenter */,
 				0295A01C2085E6900060400A /* Encryption */,
+				5C4D7F4E20AD71FC0008107C /* URL handler */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
 				0230F9461FA1E5F3006A36FC /* LaunchActions.swift */,
 				5CAC2D64206BD0CB00F74462 /* Configuration.swift */,
@@ -795,6 +798,14 @@
 				C00B5357D2CD9D8091E64E4A /* TelepathError.swift */,
 			);
 			path = Telepath;
+			sourceTree = "<group>";
+		};
+		5C4D7F4E20AD71FC0008107C /* URL handler */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D7F4F20AD72340008107C /* URLActions.swift */,
+			);
+			path = "URL handler";
 			sourceTree = "<group>";
 		};
 		889FB079C347A157FEFC695F /* Pods */ = {
@@ -1163,6 +1174,7 @@
 				0270D7211F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift in Sources */,
 				02BE32D31F7A8165006C7287 /* EthereumClient.swift in Sources */,
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
+				5C4D7F5020AD72340008107C /* URLActions.swift in Sources */,
 				029CDFFD1FA22DEB00281369 /* AttestationsReducer.swift in Sources */,
 				027603F11F6ACD1600788B0A /* DebugViewController.swift in Sources */,
 				0295A02820863B370060400A /* KeyPairCreator.swift in Sources */,
