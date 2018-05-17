@@ -20,7 +20,6 @@ class HomeViewControllerSpec: QuickSpec {
 
         describe("connecting to a telepath url") {
             var recorder: DispatchRecorder<ThunkAction<AppState>>!
-            let identity = Identity.example
 
             beforeEach {
                 recorder = DispatchRecorder<ThunkAction<AppState>>()
@@ -28,12 +27,12 @@ class HomeViewControllerSpec: QuickSpec {
             }
 
             it("dispatches the connect action") {
-                home.actions.connectToTelepathChannel("http://valid.url", identity)
+                home.actions.handleScannedQRCode("http://valid.url")
                 expect(recorder.count) == 1
             }
 
             it("does not dispatch when the URL is incorrect") {
-                home.actions.connectToTelepathChannel("invalid url", identity)
+                home.actions.handleScannedQRCode("invalid url")
                 expect(recorder.count) == 0
             }
         }
