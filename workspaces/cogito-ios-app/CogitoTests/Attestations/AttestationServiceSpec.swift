@@ -7,15 +7,6 @@ import ReSwiftThunk
 
 class AttestationServiceSpec: QuickSpec {
     override func spec() {
-        let realmUrl = "https://iam-blockchain-dev.cogito.mobi/auth/realms/master"
-        let attestationsRequest = JsonRpcRequest(
-            method: "attestations",
-            params: JsonRpcParams([
-                "app": "test",
-                "realmUrl": realmUrl
-            ])
-        )
-
         var service: AttestationService!
         var store: StoreSpy!
 
@@ -24,32 +15,50 @@ class AttestationServiceSpec: QuickSpec {
             service = AttestationService(store: store)
         }
 
-        describe("when an attestations request comes in") {
+        describe("when an OpenID attestations request comes in") {
+            let realmUrl = "https://iam-blockchain-dev.cogito.mobi/auth/realms/master"
+            let attestationsRequest = JsonRpcRequest(
+                method: "attestations",
+                params: JsonRpcParams([
+                    "app": "test",
+                    "realmUrl": realmUrl
+                    ])
+            )
+
             beforeEach {
                 service.onRequest(attestationsRequest, on: TelepathChannel.example)
             }
 
-            it("dispatches the GetAttestations action") {
-                expect(store.actions.last as? ThunkAction<AppState>).toNot(beNil())
+            it("dispatches the OpenID GetAttestations action") {
+                expect(store.actions.last as? Thunk).toNot(beNil())
             }
+        }
+
+        describe("when an attestations request comes in") {
+            let request = JsonRpcRequest(
+                method: "attestations",
+                params: JsonRpcParams([ "type": "email" ])
+            )
+
+            beforeEach {
+                service.onRequest(request, on: TelepathChannel.example)
+            }
+
+            it("dispatches the GetAttestations action") {
+                expect(store.actions.last as? Thunk).toNot(beNil())
+            }
+
         }
 
         describe("when a different request comes in") {
             beforeEach {
-                let request = JsonRpcRequest(
-                    method: "other",
-                    params: JsonRpcParams([
-                        "app": "test",
-                        "realmUrl": realmUrl
-                    ])
-                )
+                let request = JsonRpcRequest(method: "other")
                 service.onRequest(request, on: TelepathChannel.example)
             }
 
             it("is ignored") {
-                expect(store.actions.last as? ThunkAction<AppState>).to(beNil())
+                expect(store.actions.last as? Thunk).to(beNil())
             }
-
         }
     }
 }
