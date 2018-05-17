@@ -12,7 +12,7 @@ struct AttestationService: TelepathService {
               let realmUrl = request.params["realmUrl"].string else { return }
 
         let subject = request.params["subject"].string
-        let action = AttestationActions.GetAttestations(
+        let action = OpenIDAttestationActions.GetAttestations(
             requestId: request.id,
             applicationName: appName,
             oidcRealmUrl: realmUrl,

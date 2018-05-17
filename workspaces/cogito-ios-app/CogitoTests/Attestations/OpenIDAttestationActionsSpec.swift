@@ -8,35 +8,35 @@ import SwiftyJSON
 @testable import Cogito
 
 // swiftlint:disable:next type_body_length
-class AttestationActionsSpec: QuickSpec {
+class OpenIDAttestationActionsSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
         describe("Finish") {
             it("dispatches FinishRejected when no token present") {
-                let finishAction = AttestationActions.Finish(params: [:])
-                let dispatchRecorder = DispatchRecorder<AttestationActions.FinishRejected>()
+                let finishAction = OpenIDAttestationActions.Finish(params: [:])
+                let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.FinishRejected>()
                 finishAction.action(dispatchRecorder.dispatch, { return nil })
                 expect(dispatchRecorder.count) == 1
             }
 
             it("dispatches FinishRejected when token is invalid") {
-                let finishAction = AttestationActions.Finish(params: ["id_token": "invalid token"])
-                let dispatchRecorder = DispatchRecorder<AttestationActions.FinishRejected>()
+                let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": "invalid token"])
+                let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.FinishRejected>()
                 finishAction.action(dispatchRecorder.dispatch, { return nil })
                 expect(dispatchRecorder.count) == 1
             }
 
             it("dispatches FinishRejected when token has incorrect nonce") {
-                let finishAction = AttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
-                let dispatchRecorder = DispatchRecorder<AttestationActions.FinishRejected>()
+                let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
+                let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.FinishRejected>()
                 finishAction.action(dispatchRecorder.dispatch, { return nil })
                 expect(dispatchRecorder.count) == 1
             }
 
             it("dispatches FinishRejected when subject is incorrect") {
                 let identity = Identity.example
-                let finishAction = AttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
-                let dispatchRecorder = DispatchRecorder<AttestationActions.FinishRejected>()
+                let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
+                let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.FinishRejected>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
                         open: [
@@ -59,8 +59,8 @@ class AttestationActionsSpec: QuickSpec {
 
             it("dispatches Fulfilled when token has correct nonce") {
                 let identity = Identity.example
-                let finishAction = AttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
-                let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
+                let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
+                let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.Fulfilled>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
                         open: [
@@ -88,8 +88,8 @@ class AttestationActionsSpec: QuickSpec {
                 // provide.
                 // https://gitlab.ta.philips.com/blockchain-lab/Cogito/issues/11
                 let identity = Identity.example
-                let finishAction = AttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
-                let dispatchRecorder = DispatchRecorder<AttestationActions.Fulfilled>()
+                let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
+                let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.Fulfilled>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
                         open: [
@@ -112,7 +112,7 @@ class AttestationActionsSpec: QuickSpec {
 
             it("also dispatches DiamondActions.AddAttestation") {
                 let identity = Identity.example
-                let finishAction = AttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
+                let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
                 let dispatchRecorder = DispatchRecorder<DiamondActions.AddJWTAttestation>()
                 finishAction.action(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
@@ -167,7 +167,7 @@ class AttestationActionsSpec: QuickSpec {
                     receiveError: nil
                 )
                 store = RecordingStore()
-                getAttestationsAction = AttestationActions.GetAttestations(
+                getAttestationsAction = OpenIDAttestationActions.GetAttestations(
                     requestId: requestId,
                     applicationName: "test",
                     oidcRealmUrl: OpenIdExampleValues.validIssuer,
@@ -234,7 +234,7 @@ class AttestationActionsSpec: QuickSpec {
                             let response = JSON(parseJSON: sendPendingAction()!.message)
                             expect(response["id"]) == requestId.json
                             expect(response["result"].string) == idToken
-                            let attestationProvided = store.actions.contains { $0 is AttestationActions.Provided }
+                            let attestationProvided = store.actions.contains { $0 is OpenIDAttestationActions.Provided }
                             expect(attestationProvided).to(beTrue())
                         }
                     }
@@ -276,7 +276,7 @@ class AttestationActionsSpec: QuickSpec {
                         let alert = requestAlertAction()!
                         let loginAction = alert.requestedAlert.actions.filter({ $0.style == .default }).first!
                         loginAction.handler!(loginAction)
-                        let pending = store.firstAction(ofType: AttestationActions.Pending.self)
+                        let pending = store.firstAction(ofType: OpenIDAttestationActions.Pending.self)
                         expect(pending?.requestedOnChannel) == channel.id
                     }
                 }
@@ -307,7 +307,7 @@ class AttestationActionsSpec: QuickSpec {
 
                     context("when channel has not changed") {
                         it("dispatches Telepath send message") {
-                            let finishAction = AttestationActions.Finish(
+                            let finishAction = OpenIDAttestationActions.Finish(
                                 params: ["id_token": OpenIdExampleValues.validToken]
                             )
                             store.state = appState(
@@ -323,14 +323,14 @@ class AttestationActionsSpec: QuickSpec {
                             let response = JSON(parseJSON: sendPendingAction()!.message)
                             expect(response["id"]) == requestId.json
                             expect(response["result"].string) == idToken
-                            let attestationProvided = store.actions.contains { $0 is AttestationActions.Provided }
+                            let attestationProvided = store.actions.contains { $0 is OpenIDAttestationActions.Provided }
                             expect(attestationProvided).to(beTrue())
                         }
                     }
 
                     context("when channel has changed") {
                         it("does not dispatch Telepath send message") {
-                            let finishAction = AttestationActions.Finish(
+                            let finishAction = OpenIDAttestationActions.Finish(
                                 params: ["id_token": OpenIdExampleValues.validToken]
                             )
                             store.state = appState(
@@ -348,7 +348,7 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             it("sends error when realm URL is invalid") {
-                let action = AttestationActions.GetAttestations(
+                let action = OpenIDAttestationActions.GetAttestations(
                     requestId: requestId,
                     applicationName: "test",
                     oidcRealmUrl: "invalid url",

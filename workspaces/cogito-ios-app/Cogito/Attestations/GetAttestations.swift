@@ -115,7 +115,7 @@ struct GetAttestationsValid: GetAttestations {
                      state: AppState,
                      on channel: TelepathChannel) {
         dispatch(TelepathActions.Send(id: requestId, result: idToken, on: channel))
-        dispatch(AttestationActions.Provided(idToken: idToken, channel: channel.id))
+        dispatch(OpenIDAttestationActions.Provided(idToken: idToken, channel: channel.id))
     }
 
     func send(requestId: JsonRpcId, idToken: String, on channel: TelepathChannel) {
@@ -178,7 +178,7 @@ struct GetAttestationsValid: GetAttestations {
     }
 
     func startAttestation() {
-        self.dispatch(AttestationActions.StartAttestation(
+        self.dispatch(OpenIDAttestationActions.StartAttestation(
             for: self.facet,
             requestId: requestId,
             oidcRealmUrl: self.oidcRealmUrl,

@@ -8,7 +8,7 @@ import JWTDecode
 
 import Telepath
 
-struct AttestationActions {
+struct OpenIDAttestationActions {
     static func StartAttestation(
         for identity: Identity,
         requestId: JsonRpcId,

@@ -24,7 +24,7 @@ class LaunchActionsSpec: QuickSpec {
             let linkString = "https://cogito.mobi/applinks/openid-callback#id_token=whatever&not-before-policy=0"
             // swiftlint:disable:next force_cast
             let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! ThunkAction<AppState>
-            let dispatchRecorder = DispatchRecorder<AttestationActions.FinishRejected>()
+            let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.FinishRejected>()
             startAction.action(dispatchRecorder.dispatch, { return nil })
             expect(dispatchRecorder.count) == 1
         }
