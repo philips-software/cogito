@@ -57,9 +57,7 @@ class DialogPresenter: UIViewController, Connectable {
             let alertAction = UIAlertAction(
                 title: action.title,
                 style: action.style) { _ in
-                    self.alertWindow.isHidden = true
-                    action.handler?(action)
-                    self.actions.didDismissAlert()
+                self.handleAlertAction(action: action)
             }
             alert.addAction(alertAction)
             if action.style == .default {
@@ -69,6 +67,12 @@ class DialogPresenter: UIViewController, Connectable {
 
         self.alertWindow.makeKeyAndVisible()
         self.alertWindow.rootViewController?.present(alert, animated: true)
+    }
+
+    func handleAlertAction(action: AlertAction) {
+        self.alertWindow.isHidden = true
+        action.handler?(action)
+        self.actions.didDismissAlert()
     }
 
     let connection = Connection(store: appStore,
