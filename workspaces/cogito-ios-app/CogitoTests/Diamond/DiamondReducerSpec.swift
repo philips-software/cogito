@@ -57,7 +57,7 @@ class DiamondReducerSpec: QuickSpec {
             let initialState = DiamondState(facets: [identity])
             let action = DiamondActions.AddJWTAttestation(identity: identity, idToken: idToken)
             let nextState = diamondReducer(action: action, state: initialState)
-            expect(nextState.facets[identity.identifier]!.idTokens).to(contain(idToken))
+            expect(nextState.facets[identity.identifier]!.openIDTokens).to(contain(idToken))
         }
 
         it("stores a newly created encryption keypair") {
