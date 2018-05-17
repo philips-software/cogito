@@ -25,6 +25,8 @@ func diamondReducer(action: Action, state: DiamondState?) -> DiamondState {
         }
     case let action as DiamondActions.StoreOpenIDAttestation:
         state.facets[action.identity.identifier]?.openIDTokens.append(action.idToken)
+    case let action as DiamondActions.StoreAttestation:
+        state.facets[action.identity.identifier]?.attestations.append(action.attestation)
     case let action as DiamondActions.SelectFacet:
         if state.facets[action.uuid] != nil {
             state.selectedFacetId = action.uuid

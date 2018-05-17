@@ -60,6 +60,15 @@ class DiamondReducerSpec: QuickSpec {
             expect(nextState.facets[identity.identifier]!.openIDTokens).to(contain(idToken))
         }
 
+        it("stores attestations") {
+            let attestation = "some attestation"
+            let identity = Identity.example
+            let state = DiamondState(facets: [identity])
+            let action = DiamondActions.StoreAttestation(identity: identity, attestation: attestation)
+            let nextState = diamondReducer(action: action, state: state)
+            expect(nextState.selectedFacet()?.attestations).to(contain(attestation))
+        }
+
         it("stores a newly created encryption keypair") {
             let identity = Identity.example
             let tag = "some tag"

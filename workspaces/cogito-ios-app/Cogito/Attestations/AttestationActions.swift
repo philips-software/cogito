@@ -4,17 +4,17 @@ import ReSwift
 
 struct AttestationActions {
     static func ReceiveAttestation(url: URL) -> Thunk { //swiftlint:disable:this identifier_name
-        return Thunk { dispatch, _ in
+        return Thunk { dispatch, getState in
             guard let attestation = parseAttestationUrl(url: url) else {
                 return
             }
 
-            dispatch(AttestationReceived(attestation: attestation))
-        }
-    }
+            guard let identity = getState()?.diamond.selectedFacet() else {
+                return
+            }
 
-    struct AttestationReceived: Action {
-        let attestation: String
+            dispatch(DiamondActions.StoreAttestation(identity: identity, attestation: attestation))
+        }
     }
 }
 

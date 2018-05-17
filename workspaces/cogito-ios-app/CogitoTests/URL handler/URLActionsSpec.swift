@@ -30,8 +30,8 @@ class URLActionsSpec: QuickSpec {
                 store.dispatch(URLActions.HandleIncomingURL(url: url))
             }
 
-            it("dispatches the attestation received action") {
-                expect(store.firstAction(ofType: AttestationActions.AttestationReceived.self)).toNot(beNil())
+            it("stores the attestation") {
+                expect(store.firstAction(ofType: DiamondActions.StoreAttestation.self)).toNot(beNil())
             }
         }
     }

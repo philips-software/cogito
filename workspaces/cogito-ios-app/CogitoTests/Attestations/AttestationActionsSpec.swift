@@ -10,6 +10,7 @@ class AttestationActionsSpec: QuickSpec {
 
         beforeEach {
             store = RecordingStore()
+            store.state = appState(diamond: DiamondState(facets: [Identity.example]))
         }
 
         context("when an attestation is received") {
@@ -20,7 +21,7 @@ class AttestationActionsSpec: QuickSpec {
             }
 
             it("parses the attestation") {
-                let action = store.firstAction(ofType: AttestationActions.AttestationReceived.self)
+                let action = store.firstAction(ofType: DiamondActions.StoreAttestation.self)
                 expect(action?.attestation) == "abcdef"
             }
         }
