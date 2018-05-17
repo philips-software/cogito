@@ -24,8 +24,8 @@
 		026779AD2007B47E00C2D45C /* TransactionSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AC2007B47E00C2D45C /* TransactionSigner.swift */; };
 		026779B02007B49A00C2D45C /* TransactionSignerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */; };
 		0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
-		0270D71A1F9F58CA00CC9038 /* AttestationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7191F9F58CA00CC9038 /* AttestationActions.swift */; };
-		0270D71D1F9F5A5F00CC9038 /* AttestationActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D71C1F9F5A5F00CC9038 /* AttestationActionsSpec.swift */; };
+		0270D71A1F9F58CA00CC9038 /* OpenIDAttestationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7191F9F58CA00CC9038 /* OpenIDAttestationActions.swift */; };
+		0270D71D1F9F5A5F00CC9038 /* OpenIDAttestationActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D71C1F9F5A5F00CC9038 /* OpenIDAttestationActionsSpec.swift */; };
 		0270D71F1F9F6C6D00CC9038 /* OpenIDAttestationStarterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D71E1F9F6C6D00CC9038 /* OpenIDAttestationStarterSpec.swift */; };
 		0270D7211F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7201F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift */; };
 		027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027603EE1F6ACD1600788B0A /* AppDelegate.swift */; };
@@ -192,8 +192,8 @@
 		026779AC2007B47E00C2D45C /* TransactionSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigner.swift; sourceTree = "<group>"; };
 		026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSignerSpec.swift; sourceTree = "<group>"; };
 		0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
-		0270D7191F9F58CA00CC9038 /* AttestationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActions.swift; sourceTree = "<group>"; };
-		0270D71C1F9F5A5F00CC9038 /* AttestationActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActionsSpec.swift; sourceTree = "<group>"; };
+		0270D7191F9F58CA00CC9038 /* OpenIDAttestationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenIDAttestationActions.swift; sourceTree = "<group>"; };
+		0270D71C1F9F5A5F00CC9038 /* OpenIDAttestationActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenIDAttestationActionsSpec.swift; sourceTree = "<group>"; };
 		0270D71E1F9F6C6D00CC9038 /* OpenIDAttestationStarterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenIDAttestationStarterSpec.swift; sourceTree = "<group>"; };
 		0270D7201F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenIDAttestationStarter.swift; sourceTree = "<group>"; };
 		027603EB1F6ACD1600788B0A /* Cogito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cogito.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -400,7 +400,7 @@
 		0270D7171F9F445F00CC9038 /* Attestations */ = {
 			isa = PBXGroup;
 			children = (
-				0270D7191F9F58CA00CC9038 /* AttestationActions.swift */,
+				0270D7191F9F58CA00CC9038 /* OpenIDAttestationActions.swift */,
 				029CDFFB1FA22DEB00281369 /* AttestationsReducer.swift */,
 				029CDFFA1FA22DEB00281369 /* AttestationsState.swift */,
 				0270D7201F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift */,
@@ -413,7 +413,7 @@
 		0270D7181F9F446C00CC9038 /* Attestations */ = {
 			isa = PBXGroup;
 			children = (
-				0270D71C1F9F5A5F00CC9038 /* AttestationActionsSpec.swift */,
+				0270D71C1F9F5A5F00CC9038 /* OpenIDAttestationActionsSpec.swift */,
 				0270D71E1F9F6C6D00CC9038 /* OpenIDAttestationStarterSpec.swift */,
 				C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */,
 				02E90F4D1FDEC1D7008D81F9 /* AttestationServiceSpec.swift */,
@@ -1159,7 +1159,7 @@
 				5CAC2D65206BD0CB00F74462 /* Configuration.swift in Sources */,
 				02A15B011F8672C000A94163 /* DiamondReducer.swift in Sources */,
 				02DB90E72045546C00C4817C /* FacetDetailsViewController.swift in Sources */,
-				0270D71A1F9F58CA00CC9038 /* AttestationActions.swift in Sources */,
+				0270D71A1F9F58CA00CC9038 /* OpenIDAttestationActions.swift in Sources */,
 				028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
 				02BE32D01F7A6D92006C7287 /* SyncProgressReporter.swift in Sources */,
@@ -1259,7 +1259,7 @@
 				5C61A0042088A01100867747 /* DecrypterSpec.swift in Sources */,
 				5C61A0022088871E00867747 /* PublicKeyLoaderSpec.swift in Sources */,
 				5C04E4471FA77C0D00A70C60 /* StoreSpy.swift in Sources */,
-				0270D71D1F9F5A5F00CC9038 /* AttestationActionsSpec.swift in Sources */,
+				0270D71D1F9F5A5F00CC9038 /* OpenIDAttestationActionsSpec.swift in Sources */,
 				5C3C8F2F208767790042AC2F /* JsonRcpRequestConvenience.swift in Sources */,
 				02A15B041F86732500A94163 /* DiamondStateSpec.swift in Sources */,
 				02021D3E1F8C16370092DD89 /* AppActionsSpec.swift in Sources */,

@@ -18,7 +18,7 @@ struct LaunchActions {
                 print("invalid URL: fragment missing or invalid")
                 return nil
             }
-            return AttestationActions.Finish(params: params)
+            return OpenIDAttestationActions.Finish(params: params)
         }
     }
 

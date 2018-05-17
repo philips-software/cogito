@@ -25,7 +25,7 @@ class AttestationsReducerSpec: QuickSpec {
                 ],
                 providedAttestations: [:]
             )
-            let action = AttestationActions.Pending(
+            let action = OpenIDAttestationActions.Pending(
                 requestId: JsonRpcId(),
                 identity: identity2,
                 nonce: "nonce2",
@@ -73,7 +73,7 @@ class AttestationsReducerSpec: QuickSpec {
                 ],
                 providedAttestations: [:]
             )
-            let action = AttestationActions.Started(nonce: "nonce1")
+            let action = OpenIDAttestationActions.Started(nonce: "nonce1")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.started
         }
@@ -94,7 +94,7 @@ class AttestationsReducerSpec: QuickSpec {
                 ],
                 providedAttestations: [:]
             )
-            let action = AttestationActions.StartRejected(nonce: "nonce1", error: "some error")
+            let action = OpenIDAttestationActions.StartRejected(nonce: "nonce1", error: "some error")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.startRejected
             expect(nextState.open["nonce1"]!.error) == "some error"
@@ -116,7 +116,7 @@ class AttestationsReducerSpec: QuickSpec {
                 ],
                 providedAttestations: [:]
             )
-            let action = AttestationActions.FinishRejected(nonce: "nonce1", error: "some error")
+            let action = OpenIDAttestationActions.FinishRejected(nonce: "nonce1", error: "some error")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.finishRejected
             expect(nextState.open["nonce1"]!.error) == "some error"
@@ -138,7 +138,7 @@ class AttestationsReducerSpec: QuickSpec {
                 ],
                 providedAttestations: [:]
             )
-            let action = AttestationActions.Fulfilled(nonce: "nonce1", idToken: "some token")
+            let action = OpenIDAttestationActions.Fulfilled(nonce: "nonce1", idToken: "some token")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.open["nonce1"]!.status) == AttestationInProgress.Status.fulfilled
             expect(nextState.open["nonce1"]!.error).to(beNil())
@@ -147,21 +147,21 @@ class AttestationsReducerSpec: QuickSpec {
 
         it("handles Provided for new channel id") {
             let initialState = AttestationsState(open: [:], providedAttestations: [:])
-            let action = AttestationActions.Provided(idToken: "idToken", channel: "channelId")
+            let action = OpenIDAttestationActions.Provided(idToken: "idToken", channel: "channelId")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.providedAttestations["channelId"]) == ["idToken"]
         }
 
         it("handles Provided for existing channel id") {
             let initialState = AttestationsState(open: [:], providedAttestations: ["channelId": ["foo"]])
-            let action = AttestationActions.Provided(idToken: "idToken", channel: "channelId")
+            let action = OpenIDAttestationActions.Provided(idToken: "idToken", channel: "channelId")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.providedAttestations["channelId"]) == ["foo", "idToken"]
         }
 
         it("handles Provided for existing channel id: no duplicates") {
             let initialState = AttestationsState(open: [:], providedAttestations: ["channelId": ["idToken"]])
-            let action = AttestationActions.Provided(idToken: "idToken", channel: "channelId")
+            let action = OpenIDAttestationActions.Provided(idToken: "idToken", channel: "channelId")
             let nextState = attestationsReducer(action: action, state: initialState)
             expect(nextState.providedAttestations["channelId"]) == ["idToken"]
         }
