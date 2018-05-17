@@ -115,6 +115,8 @@
 		5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */; };
 		5C4D7F5020AD72340008107C /* URLActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F4F20AD72340008107C /* URLActions.swift */; };
 		5C4D7F5220AD72940008107C /* Thunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5120AD72940008107C /* Thunk.swift */; };
+		5C4D7F5520AD7D640008107C /* URLActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5420AD7D640008107C /* URLActionsSpec.swift */; };
+		5C4D7F5720AD84460008107C /* AttestationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5620AD84460008107C /* AttestationActions.swift */; };
 		5C59C9C52008B01D00186D29 /* JsonRpcRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */; };
 		5C61A0022088871E00867747 /* PublicKeyLoaderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C61A0012088871E00867747 /* PublicKeyLoaderSpec.swift */; };
 		5C61A0042088A01100867747 /* DecrypterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C61A0032088A01100867747 /* DecrypterSpec.swift */; };
@@ -290,6 +292,8 @@
 		5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducerSpec.swift; sourceTree = "<group>"; };
 		5C4D7F4F20AD72340008107C /* URLActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLActions.swift; sourceTree = "<group>"; };
 		5C4D7F5120AD72940008107C /* Thunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thunk.swift; sourceTree = "<group>"; };
+		5C4D7F5420AD7D640008107C /* URLActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLActionsSpec.swift; sourceTree = "<group>"; };
+		5C4D7F5620AD84460008107C /* AttestationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActions.swift; sourceTree = "<group>"; };
 		5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcRequestSpec.swift; sourceTree = "<group>"; };
 		5C61A0012088871E00867747 /* PublicKeyLoaderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyLoaderSpec.swift; sourceTree = "<group>"; };
 		5C61A0032088A01100867747 /* DecrypterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecrypterSpec.swift; sourceTree = "<group>"; };
@@ -406,6 +410,7 @@
 				0270D7201F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift */,
 				02E90F4B1FDEC1C4008D81F9 /* AttestationService.swift */,
 				C00B581D01FD60AA97FEEFBC /* GetAttestations.swift */,
+				5C4D7F5620AD84460008107C /* AttestationActions.swift */,
 			);
 			path = Attestations;
 			sourceTree = "<group>";
@@ -496,6 +501,7 @@
 				022621271FAB1D0600692126 /* Identity manager */,
 				02E90F541FE27547008D81F9 /* DialogPresenter */,
 				0295A01D2085E69E0060400A /* Encryption */,
+				5C4D7F5320AD7D450008107C /* URL handler */,
 				0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
 				5C014F511FAA07FF00F95071 /* RecordingStore.swift */,
@@ -804,6 +810,14 @@
 			isa = PBXGroup;
 			children = (
 				5C4D7F4F20AD72340008107C /* URLActions.swift */,
+			);
+			path = "URL handler";
+			sourceTree = "<group>";
+		};
+		5C4D7F5320AD7D450008107C /* URL handler */ = {
+			isa = PBXGroup;
+			children = (
+				5C4D7F5420AD7D640008107C /* URLActionsSpec.swift */,
 			);
 			path = "URL handler";
 			sourceTree = "<group>";
@@ -1163,6 +1177,7 @@
 				028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
 				02BE32D01F7A6D92006C7287 /* SyncProgressReporter.swift in Sources */,
+				5C4D7F5720AD84460008107C /* AttestationActions.swift in Sources */,
 				02A15AEF1F864F0900A94163 /* HomeViewController.swift in Sources */,
 				5C8CFD3E2007993500D383C0 /* JsonRpcRequest.swift in Sources */,
 				02E90F4C1FDEC1C4008D81F9 /* AttestationService.swift in Sources */,
@@ -1282,6 +1297,7 @@
 				C00B5370FDA0454E818FE2EB /* DialogPresenterReducerSpec.swift in Sources */,
 				C00B5F2F98B19D0B3884414E /* Data+hex.swift in Sources */,
 				C00B57F400C10AB0C6F066D8 /* Data+hexSpec.swift in Sources */,
+				5C4D7F5520AD7D640008107C /* URLActionsSpec.swift in Sources */,
 				C00B54321DC6AA59BE55E8C1 /* UnsignedTransactionSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

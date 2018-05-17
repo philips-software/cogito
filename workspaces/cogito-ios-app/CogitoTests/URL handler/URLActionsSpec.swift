@@ -1,0 +1,38 @@
+//  Copyright © 2018 Koninklijke Philips Nederland N.V. All rights reserved.
+
+import Quick
+import Nimble
+@testable import Cogito
+
+class URLActionsSpec: QuickSpec {
+    override func spec() {
+        var store: RecordingStore!
+
+        beforeEach {
+            store = RecordingStore()
+            store.state = appState(diamond: DiamondState(facets: [Identity.example]))
+        }
+
+        context("when a telepath connect url is received") {
+            beforeEach {
+                let url = URL(string: "https://cogito.example.com/telepath/connect#I=1234&E=abcd")!
+                store.dispatch(URLActions.HandleIncomingURL(url: url))
+            }
+
+            it("dispatches the telepath connect action") {
+                expect(store.firstAction(ofType: TelepathActions.ConnectFulfilled.self)).toNot(beNil())
+            }
+        }
+
+        context("when an attestation url is received") {
+            beforeEach {
+                let url = URL(string: "https://cogito.example.com/attestations/receive#A=abcdef")!
+                store.dispatch(URLActions.HandleIncomingURL(url: url))
+            }
+
+            it("dispatches the attestation received action") {
+                expect(store.firstAction(ofType: AttestationActions.AttestationReceived.self)).toNot(beNil())
+            }
+        }
+    }
+}
