@@ -152,7 +152,7 @@
 		C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5412CBC3B026E362474C /* CreateIdentityStateSpec.swift */; };
 		C00B57F400C10AB0C6F066D8 /* Data+hexSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B564B1F469FEE90CE761B /* Data+hexSpec.swift */; };
 		C00B588AFDC9DD01CBAE511B /* DialogPresenterReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B579EEF4EDAFB75E6221C /* DialogPresenterReducer.swift */; };
-		C00B58FCADEA882A76465278 /* GetAttestations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B581D01FD60AA97FEEFBC /* GetAttestations.swift */; };
+		C00B58FCADEA882A76465278 /* GetAttestationsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B581D01FD60AA97FEEFBC /* GetAttestationsBuilder.swift */; };
 		C00B59FD9E5EE7B21CEE8490 /* KeyStoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5F8B50D233D21FB7153C /* KeyStoreSpec.swift */; };
 		C00B5ACC20A8568692E88D7A /* DialogPresenterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B56F8009E903C75F86606 /* DialogPresenterState.swift */; };
 		C00B5AF3F2ECB1BD9415E765 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B542BA533252756727EF5 /* Address.swift */; };
@@ -334,7 +334,7 @@
 		C00B57766800CB3EFBE971EC /* AppPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppPassword.swift; sourceTree = "<group>"; };
 		C00B579EEF4EDAFB75E6221C /* DialogPresenterReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterReducer.swift; sourceTree = "<group>"; };
 		C00B5807D4B578AAA0D57B47 /* IdentitySpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentitySpec.swift; sourceTree = "<group>"; };
-		C00B581D01FD60AA97FEEFBC /* GetAttestations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAttestations.swift; sourceTree = "<group>"; };
+		C00B581D01FD60AA97FEEFBC /* GetAttestationsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAttestationsBuilder.swift; sourceTree = "<group>"; };
 		C00B58EF23AD635EAE304108 /* DialogPresenterActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogPresenterActions.swift; sourceTree = "<group>"; };
 		C00B5B1891702007BD67637B /* Encodable+json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+json.swift"; sourceTree = "<group>"; };
 		C00B5BCC0EDADAE701077CA0 /* RequestedAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestedAlert.swift; sourceTree = "<group>"; };
@@ -411,7 +411,7 @@
 				029CDFFA1FA22DEB00281369 /* AttestationsState.swift */,
 				0270D7201F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift */,
 				02E90F4B1FDEC1C4008D81F9 /* AttestationService.swift */,
-				C00B581D01FD60AA97FEEFBC /* GetAttestations.swift */,
+				C00B581D01FD60AA97FEEFBC /* GetAttestationsBuilder.swift */,
 				5C4D7F5620AD84460008107C /* AttestationActions.swift */,
 			);
 			path = Attestations;
@@ -1226,7 +1226,7 @@
 				C00B5164F17E8581AB40BA9E /* RequestedAlert.swift in Sources */,
 				C00B588AFDC9DD01CBAE511B /* DialogPresenterReducer.swift in Sources */,
 				C00B53178861BC297D2B8513 /* DialogPresenterActions.swift in Sources */,
-				C00B58FCADEA882A76465278 /* GetAttestations.swift in Sources */,
+				C00B58FCADEA882A76465278 /* GetAttestationsBuilder.swift in Sources */,
 				C00B54913224B9C03F32E185 /* Encodable+json.swift in Sources */,
 				C00B5B06165F3D5132AB7064 /* Data+hex.swift in Sources */,
 				C00B552C389894477CA10423 /* Transaction.swift in Sources */,
