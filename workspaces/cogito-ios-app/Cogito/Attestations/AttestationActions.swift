@@ -16,6 +16,12 @@ struct AttestationActions {
             dispatch(DiamondActions.StoreAttestation(identity: identity, attestation: attestation))
         }
     }
+
+    static func GetAttestations() -> Thunk { // swiftlint:disable:this identifier_name
+        return Thunk { _, _ in
+
+        }
+    }
 }
 
 private func parseAttestationUrl(url: URL) -> String? {
