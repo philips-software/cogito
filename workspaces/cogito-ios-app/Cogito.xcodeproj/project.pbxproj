@@ -117,6 +117,7 @@
 		5C4D7F5220AD72940008107C /* Thunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5120AD72940008107C /* Thunk.swift */; };
 		5C4D7F5520AD7D640008107C /* URLActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5420AD7D640008107C /* URLActionsSpec.swift */; };
 		5C4D7F5720AD84460008107C /* AttestationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5620AD84460008107C /* AttestationActions.swift */; };
+		5C4D7F5920AD869F0008107C /* AttestationActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5820AD869F0008107C /* AttestationActionsSpec.swift */; };
 		5C59C9C52008B01D00186D29 /* JsonRpcRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */; };
 		5C61A0022088871E00867747 /* PublicKeyLoaderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C61A0012088871E00867747 /* PublicKeyLoaderSpec.swift */; };
 		5C61A0042088A01100867747 /* DecrypterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C61A0032088A01100867747 /* DecrypterSpec.swift */; };
@@ -294,6 +295,7 @@
 		5C4D7F5120AD72940008107C /* Thunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thunk.swift; sourceTree = "<group>"; };
 		5C4D7F5420AD7D640008107C /* URLActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLActionsSpec.swift; sourceTree = "<group>"; };
 		5C4D7F5620AD84460008107C /* AttestationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActions.swift; sourceTree = "<group>"; };
+		5C4D7F5820AD869F0008107C /* AttestationActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActionsSpec.swift; sourceTree = "<group>"; };
 		5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcRequestSpec.swift; sourceTree = "<group>"; };
 		5C61A0012088871E00867747 /* PublicKeyLoaderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyLoaderSpec.swift; sourceTree = "<group>"; };
 		5C61A0032088A01100867747 /* DecrypterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecrypterSpec.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */,
 				02E90F4D1FDEC1D7008D81F9 /* AttestationServiceSpec.swift */,
 				5CC9C7AC2091A16D008DB49C /* OpenIdExampleValues.swift */,
+				5C4D7F5820AD869F0008107C /* AttestationActionsSpec.swift */,
 			);
 			path = Attestations;
 			sourceTree = "<group>";
@@ -1289,6 +1292,7 @@
 				C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */,
 				C00B5E26A7AC55AC03FD717B /* DispatchRecorder.swift in Sources */,
 				0226212E1FAB1EC200692126 /* IdentityManagerViewControllerSpec.swift in Sources */,
+				5C4D7F5920AD869F0008107C /* AttestationActionsSpec.swift in Sources */,
 				C00B505E972138AEEFC08864 /* AttestationsReducerSpec.swift in Sources */,
 				C00B51F86FA2BE636728F0F9 /* AddressSpec.swift in Sources */,
 				5C59C9C52008B01D00186D29 /* JsonRpcRequestSpec.swift in Sources */,
