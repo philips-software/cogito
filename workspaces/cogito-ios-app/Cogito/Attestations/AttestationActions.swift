@@ -30,7 +30,7 @@ struct AttestationActions {
 
 private func parseAttestationUrl(url: URL) -> String? {
     if let value = url.fragment?.split(separator: "=").last {
-        return String(value)
+        return String(value).removingPercentEncoding
     } else {
         return nil
     }
