@@ -37,6 +37,7 @@
     "@react-frontend-developer/react-scripts": "2.0.0-next.b2fd8db8.11",
     "babel-eslint": "^8.2.3",
     "deep-freeze-es6": "^1.0.1",
+    "jest-canvas-mock": "^1.0.2",
     "react-test-renderer": "^16.2.0",
     "standard": "^11.0.1"
   },
@@ -48,6 +49,9 @@
     "lint": "yarn standard",
     "lint-fix": "yarn standard --fix --verbose",
     "link-contracts": "cd src && ln -s ../truffle/build/contracts contracts"
+  },
+  "jest": {
+    "setupFiles": ["jest-canvas-mock"]
   },
   "standard": {
     "parser": "babel-eslint",

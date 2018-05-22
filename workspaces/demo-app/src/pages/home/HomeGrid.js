@@ -7,6 +7,7 @@ let grid = new Grid([
   'addresses',
   'contract',
   'encryption',
+  'attestations',
   'footer'
 ], {
   gridTemplateRows: 'max-content max-content autoauto max-content'
@@ -25,7 +26,10 @@ const HeaderGridItem = glamorous.div(grid.header, contentBaseStyle)
 const AddressesGridItem = glamorous.div(grid.addresses, contentBaseStyle)
 const ContractGridItem = glamorous.div(grid.contract, contentBaseStyle)
 const EncryptionGridItem = glamorous.div(grid.encryption, contentBaseStyle)
+const AttestationsGridItem = glamorous.div(grid.attestations, contentBaseStyle)
 const FooterGridItem = glamorous.div(grid.footer, contentBaseStyle)
 
-export { HomeGrid, HeaderGridItem, AddressesGridItem,
-  ContractGridItem, EncryptionGridItem, FooterGridItem }
+export {
+  HomeGrid, HeaderGridItem, AddressesGridItem, ContractGridItem,
+  EncryptionGridItem, AttestationsGridItem, FooterGridItem
+}
