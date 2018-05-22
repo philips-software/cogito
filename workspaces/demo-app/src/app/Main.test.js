@@ -3,18 +3,9 @@ import renderer from 'react-test-renderer'
 import { Main } from './Main'
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { inRouter } from 'test-helpers/router'
+import { rootReducer } from 'app-state/rootReducer'
 
-const state = {
-  userData: {
-    connectionEstablished: false,
-    balance: 0
-  },
-  appEvents: {},
-  encryption: {
-    plainText: '',
-    cipherText: ''
-  }
-}
+const state = rootReducer(undefined, '')
 
 WithStore.mockStore(state)
 
