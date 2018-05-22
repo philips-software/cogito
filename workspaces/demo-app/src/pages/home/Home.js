@@ -1,12 +1,13 @@
 import React from 'react'
 
 import { HomeGrid, HeaderGridItem, AddressesGridItem,
-  ContractGridItem, EncryptionGridItem, FooterGridItem } from './HomeGrid'
+  ContractGridItem, EncryptionGridItem, FooterGridItem, AttestationsGridItem } from './HomeGrid'
 
 import { TopBar } from 'components/top-bar'
 import { CogitoAddress } from 'components/cogito-address'
 import { CogitoContract } from 'components/cogito-contract'
 import { CogitoCrypto } from 'components/cogito-crypto'
+import { CogitoAttestations } from 'components/cogito-attestations/CogitoAttestations'
 import { Footer } from 'components/footer'
 
 class Home extends React.Component {
@@ -25,6 +26,9 @@ class Home extends React.Component {
         <EncryptionGridItem>
           <CogitoCrypto {...this.props} />
         </EncryptionGridItem>
+        <AttestationsGridItem>
+          <CogitoAttestations {...this.props} />
+        </AttestationsGridItem>
         <FooterGridItem>
           <Footer />
         </FooterGridItem>

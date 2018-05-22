@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="css-14x0z9n"
+  className="css-vm64bh"
 >
   <div
     className="css-15ysuyo"
@@ -193,6 +193,63 @@ exports[`renders correctly 1`] = `
         </em>
         , the encrypted symmetrical key is sent to the Cogito mobile app, which decrypts it and returns the key itself. That key is then used to decrypt the actual data in the browser. This scheme ensures that the actual data that is encrypted never leaves the browser. Also, the amount of data that is exchanged with the Cogito mobile app is very small (just the symmetrical key).
       </p>
+    </div>
+  </div>
+  <div
+    className="css-1j66vpb"
+  >
+    <div
+      className="css-jbit82"
+    >
+      <p
+        className="css-huraai"
+      >
+        Cogito can store attestations, which are claims about your identity.
+      </p>
+      <div
+        className="css-cv7f2a"
+      >
+        <div
+          className="css-10knj77"
+        >
+          <div
+            className="css-1crpgfv"
+          >
+            <p>
+              Scan to add a dummy attestation:
+            </p>
+            <canvas
+              height={128}
+              style={
+                Object {
+                  "height": 128,
+                  "width": 128,
+                }
+              }
+              width={128}
+            />
+          </div>
+          <div
+            className="css-1crpgfv"
+          >
+            Your attestation is:
+            <div
+              className="css-h2wbwd"
+            >
+              unknown
+            </div>
+            <button
+              className="ui pink basic button"
+              disabled={undefined}
+              onClick={[Function]}
+              role="button"
+              tabIndex={undefined}
+            >
+              Retrieve
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div
