@@ -6,8 +6,9 @@ import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import {
   Centered, DistributedHorizontally, FullWidthCentered, ValueWrapper
 } from '@react-frontend-developer/react-layout-helpers'
+import { AttestationsActions } from 'attestations-state/actions'
 
-export const CogitoAttestations = () => (
+export const CogitoAttestations = (props) => (
   <FullWidthCentered>
     <P>
       Cogito can store attestations, which are claims about your identity.
@@ -15,7 +16,7 @@ export const CogitoAttestations = () => (
     <Div>
       <DistributedHorizontally>
         <ShowAttestation />
-        <RetrieveAttestation />
+        <RetrieveAttestation {...props} />
       </DistributedHorizontally>
     </Div>
   </FullWidthCentered>
@@ -30,14 +31,22 @@ const ShowAttestation = () => (
   </Centered>
 )
 
-const RetrieveAttestation = () => (
+const RetrieveAttestation = ({ channel }) => (
   <WithStore selector={state => ({ attestation: state.attestations.retrieved })}>
     {
-      ({ attestation }) =>
+      ({ attestation }, dispatch) =>
         <Centered>
           Your attestation is:
           <ValueWrapper>{attestation || 'unknown'}</ValueWrapper>
-          <Button basic color='pink'>Retrieve</Button>
+          <Button
+            basic color='pink'
+            onClick={() => dispatch(AttestationsActions.retrieve({
+              type: 'dummy',
+              telepathChannel: channel
+            }))}
+          >
+            Retrieve
+          </Button>
         </Centered>
     }
   </WithStore>
