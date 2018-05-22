@@ -7,7 +7,7 @@ describe('attestations state reducer', () => {
 
   it('stores a retreived attestation', () => {
     const state = deepFreeze({ retrieved: 'old:attestation' })
-    const action = AttestationsActions.retrievedAttestation(attestation)
-    expect(attestationsReducer(state, action).retrieved).toBe(attestation)
+    const action = AttestationsActions.retrievedAttestations([attestation])
+    expect(attestationsReducer(state, action).retrieved).toEqual([attestation])
   })
 })

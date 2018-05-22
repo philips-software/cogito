@@ -32,12 +32,12 @@ const ShowAttestation = () => (
 )
 
 const RetrieveAttestation = ({ channel }) => (
-  <WithStore selector={state => ({ attestation: state.attestations.retrieved })}>
+  <WithStore selector={state => ({ attestations: state.attestations.retrieved })}>
     {
-      ({ attestation }, dispatch) =>
+      ({ attestations }, dispatch) =>
         <Centered>
           Your attestation is:
-          <ValueWrapper>{attestation || 'unknown'}</ValueWrapper>
+          <ValueWrapper>{attestations[0] || 'unknown'}</ValueWrapper>
           <Button
             basic color='pink'
             onClick={() => dispatch(AttestationsActions.retrieve({

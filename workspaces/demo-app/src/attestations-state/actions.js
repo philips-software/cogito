@@ -1,7 +1,7 @@
 export class AttestationsActions {
-  static retrievedAttestation = (attestation) => ({
-    type: 'RETRIEVED_ATTESTATION',
-    attestation
+  static retrievedAttestations = (attestations) => ({
+    type: 'RETRIEVED_ATTESTATIONS',
+    attestations
   })
 
   static retrieve = ({ type, telepathChannel }) => {
@@ -13,7 +13,7 @@ export class AttestationsActions {
         params: { type }
       }
       const response = await telepathChannel.send(request)
-      dispatch(AttestationsActions.retrievedAttestation(response.result))
+      dispatch(AttestationsActions.retrievedAttestations(response.result))
     }
   }
 }
