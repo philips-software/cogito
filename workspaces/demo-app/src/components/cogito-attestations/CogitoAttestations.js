@@ -2,6 +2,7 @@ import React from 'react'
 import glamorous from 'glamorous'
 import { Button } from 'semantic-ui-react'
 import QRCode from 'qrcode.react'
+import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import {
   Centered, DistributedHorizontally, FullWidthCentered, ValueWrapper
 } from '@react-frontend-developer/react-layout-helpers'
@@ -30,11 +31,16 @@ const ShowAttestation = () => (
 )
 
 const RetrieveAttestation = () => (
-  <Centered>
-    Your attestation is:
-    <ValueWrapper>{'unknown'}</ValueWrapper>
-    <Button basic color='pink'>Retrieve</Button>
-  </Centered>
+  <WithStore selector={state => ({ attestation: state.attestations.retrieved })}>
+    {
+      ({ attestation }) =>
+        <Centered>
+          Your attestation is:
+          <ValueWrapper>{attestation || 'unknown'}</ValueWrapper>
+          <Button basic color='pink'>Retrieve</Button>
+        </Centered>
+    }
+  </WithStore>
 )
 
 const P = glamorous.p({
