@@ -1,0 +1,1 @@
+export { CogitoAttestations } from './attestations'
