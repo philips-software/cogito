@@ -16,7 +16,9 @@ class AttestationActionsSpec: QuickSpec {
         }
 
         context("when an attestation is received") {
-            let attestationUrl = URL(string: "https://cogito.example.com/attestations/receive#A=abcdef")!
+            let attestationUrl = URL(string:
+                "https://cogito.example.com/attestations/receive#A=email%3Abob%40example.com"
+            )!
 
             beforeEach {
                 store.dispatch(AttestationActions.ReceiveAttestation(url: attestationUrl))
@@ -24,7 +26,7 @@ class AttestationActionsSpec: QuickSpec {
 
             it("parses the attestation") {
                 let action = store.firstAction(ofType: DiamondActions.StoreAttestation.self)
-                expect(action?.attestation) == "abcdef"
+                expect(action?.attestation) == "email:bob@example.com"
             }
         }
 
