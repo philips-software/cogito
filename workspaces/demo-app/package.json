@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@cogitojs/cogito-attestations": "^0.1.8",
     "@cogitojs/cogito-encryption": "^0.1.8",
     "@cogitojs/cogito-react": "^0.1.8",
     "@cogitojs/cogito-react-ui": "^0.1.5",

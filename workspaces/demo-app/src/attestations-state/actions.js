@@ -1,3 +1,5 @@
+import { CogitoAttestations } from '@cogitojs/cogito-attestations'
+
 export class AttestationsActions {
   static retrievedAttestations = (attestations) => ({
     type: 'RETRIEVED_ATTESTATIONS',
@@ -5,17 +7,10 @@ export class AttestationsActions {
   })
 
   static retrieve = ({ type, telepathChannel }) => {
+    const cogitoAttestations = new CogitoAttestations({ telepathChannel })
     return async (dispatch) => {
-      const request = {
-        jsonrpc: '2.0',
-        id: nextRequestId++,
-        method: 'attestations',
-        params: { type }
-      }
-      const response = await telepathChannel.send(request)
-      dispatch(AttestationsActions.retrievedAttestations(response.result))
+      const attestations = await cogitoAttestations.retrieve({ type })
+      dispatch(AttestationsActions.retrievedAttestations(attestations))
     }
   }
 }
-
-let nextRequestId = 0
