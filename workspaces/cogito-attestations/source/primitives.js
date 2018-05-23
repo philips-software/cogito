@@ -1,35 +1,39 @@
 import crypto from 'crypto'
-import eth from 'ethereumjs-util'
+import {
+  isValidPrivate, privateToAddress, pubToAddress,
+  bufferToHex, toBuffer,
+  sha3, ecsign, ecrecover
+} from 'ethereumjs-util'
 
 export function generatePrivateKey () {
   let result
   do {
     result = crypto.randomBytes(32)
-  } while (!eth.isValidPrivate(result))
-  return eth.bufferToHex(result)
+  } while (!isValidPrivate(result))
+  return bufferToHex(result)
 }
 
 export function privateKeyToAddress (privateKey) {
-  return eth.bufferToHex(eth.privateToAddress(eth.toBuffer(privateKey)))
+  return bufferToHex(privateToAddress(toBuffer(privateKey)))
 }
 
 export function keccak256 (...elements) {
-  return eth.sha3(Buffer.concat(elements.map(eth.toBuffer)))
+  return sha3(Buffer.concat(elements.map(toBuffer)))
 }
 
 export function sign (hash, privateKey) {
-  const signature = eth.ecsign(hash, eth.toBuffer(privateKey))
+  const signature = ecsign(hash, toBuffer(privateKey))
   return {
     v: signature.v,
-    r: eth.bufferToHex(signature.r),
-    s: eth.bufferToHex(signature.s)
+    r: bufferToHex(signature.r),
+    s: bufferToHex(signature.s)
   }
 }
 
 export function recover (hash, signature) {
   const v = signature.v
-  const r = eth.toBuffer(signature.r)
-  const s = eth.toBuffer(signature.s)
-  const publicKey = eth.ecrecover(hash, v, r, s)
-  return eth.bufferToHex(eth.pubToAddress(publicKey))
+  const r = toBuffer(signature.r)
+  const s = toBuffer(signature.s)
+  const publicKey = ecrecover(hash, v, r, s)
+  return bufferToHex(pubToAddress(publicKey))
 }
