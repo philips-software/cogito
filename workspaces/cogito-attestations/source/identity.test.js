@@ -24,4 +24,10 @@ describe('identity', () => {
     expect(serialized).toContain(identity.privateKey)
     expect(serialized).toContain(identity.address)
   })
+
+  it('can be deserialized', () => {
+    const serialized = `${identity}`
+    const deserialized = new Identity(serialized)
+    expect(deserialized).toEqual(identity)
+  })
 })
