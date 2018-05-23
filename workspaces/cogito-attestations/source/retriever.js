@@ -1,4 +1,4 @@
-export class CogitoAttestations {
+export class AttestationsRetriever {
   constructor ({ telepathChannel }) {
     this.telepathChannel = telepathChannel
     this.requestId = Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER / 2))

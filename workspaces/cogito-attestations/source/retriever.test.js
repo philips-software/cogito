@@ -1,12 +1,12 @@
-import { CogitoAttestations } from './attestations'
+import { AttestationsRetriever } from './retriever'
 
-describe('attestations', () => {
-  let cogitoAttestations
+describe('attestations retriever', () => {
+  let retriever
   let telepathChannel
 
   beforeEach(() => {
     telepathChannel = { send: jest.fn() }
-    cogitoAttestations = new CogitoAttestations({ telepathChannel })
+    retriever = new AttestationsRetriever({ telepathChannel })
   })
 
   describe('requesting attestations', () => {
@@ -19,7 +19,7 @@ describe('attestations', () => {
     })
 
     it('sends the correct request', async () => {
-      await cogitoAttestations.retrieve({ type })
+      await retriever.retrieve({ type })
       const request = {
         jsonrpc: '2.0',
         method: 'attestations',
@@ -29,18 +29,18 @@ describe('attestations', () => {
     })
 
     it('returns the attestations', async () => {
-      expect(await cogitoAttestations.retrieve({ type })).toEqual(attestations)
+      expect(await retriever.retrieve({ type })).toEqual(attestations)
     })
 
     it('throws when an error is returned', async () => {
       const error = { code: -42, message: 'some error' }
       telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
-      await expect(cogitoAttestations.retrieve({ type })).rejects.toBeDefined()
+      await expect(retriever.retrieve({ type })).rejects.toBeDefined()
     })
 
     it('uses different JSON-RPC ids for subsequent requests', async () => {
-      await cogitoAttestations.retrieve({ type })
-      await cogitoAttestations.retrieve({ type })
+      await retriever.retrieve({ type })
+      await retriever.retrieve({ type })
       const id1 = telepathChannel.send.mock.calls[0][0].id
       const id2 = telepathChannel.send.mock.calls[1][0].id
       expect(id1).not.toBe(id2)

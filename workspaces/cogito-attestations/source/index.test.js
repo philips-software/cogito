@@ -1,5 +1,5 @@
-import { CogitoAttestations } from './index'
+import { AttestationsRetriever } from './index'
 
 it('exports CogitoAttestations', () => {
-  expect(CogitoAttestations).toBeDefined()
+  expect(AttestationsRetriever).toBeDefined()
 })
