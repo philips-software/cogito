@@ -1,4 +1,9 @@
-import { AttestationsRetriever, Identity, issue, accept, verify } from './index'
+import {
+  AttestationsRetriever,
+  Identity,
+  issue, accept, verify,
+  serialize, deserialize
+} from './index'
 
 it('exports CogitoAttestations', () => {
   expect(AttestationsRetriever).toBeDefined()
@@ -18,4 +23,12 @@ it('exports the accept function', () => {
 
 it('exports the verify function', () => {
   expect(verify).toBeDefined()
+})
+
+it('exports the serialize function', () => {
+  expect(serialize).toBeDefined()
+})
+
+it('exports the deserialize function', () => {
+  expect(deserialize).toBeDefined()
 })
