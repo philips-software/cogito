@@ -1,4 +1,6 @@
-import { generatePrivateKey, privateKeyToAddress, keccak256, sign } from './primitives'
+import {
+  generatePrivateKey, privateKeyToAddress, keccak256, sign, recover
+} from './primitives'
 
 export function issue (attribute, issuerKey) {
   const issuer = privateKeyToAddress(issuerKey)
@@ -29,4 +31,19 @@ export function accept (protoAttestation, subjectKey) {
     attestationSignature,
     acceptingSignature
   })
+}
+
+export function verify (attestation) {
+  const {
+    issuer, subject, attribute,
+    issuingSignature, attestationSignature, acceptingSignature
+  } = attestation
+  const subjectHash = keccak256(subject)
+  const attestationId = recover(subjectHash, attestationSignature)
+  const issuingHash = keccak256(attestationId, attribute)
+  const acceptingHash = keccak256(attribute)
+  return (
+    recover(issuingHash, issuingSignature) === issuer &&
+    recover(acceptingHash, acceptingSignature) === subject
+  )
 }

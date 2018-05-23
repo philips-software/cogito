@@ -25,3 +25,11 @@ export function sign (hash, privateKey) {
     s: eth.bufferToHex(signature.s)
   }
 }
+
+export function recover (hash, signature) {
+  const v = signature.v
+  const r = eth.toBuffer(signature.r)
+  const s = eth.toBuffer(signature.s)
+  const publicKey = eth.ecrecover(hash, v, r, s)
+  return eth.bufferToHex(eth.pubToAddress(publicKey))
+}

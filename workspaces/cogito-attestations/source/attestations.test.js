@@ -1,5 +1,5 @@
 import { generatePrivateKey, privateKeyToAddress, sign, keccak256 } from './primitives'
-import { issue, accept } from './attestations'
+import { issue, accept, verify } from './attestations'
 
 describe('attestations', () => {
   const issuerKey = generatePrivateKey()
@@ -77,6 +77,47 @@ describe('attestations', () => {
       const acceptingHash = keccak256(attribute)
       const acceptingSignature = sign(acceptingHash, subjectKey)
       expect(attestation.acceptingSignature).toEqual(acceptingSignature)
+    })
+  })
+
+  describe('verifying', () => {
+    let protoAttestation
+    let attestation
+
+    beforeEach(() => {
+      protoAttestation = issue(attribute, issuerKey)
+      attestation = accept(protoAttestation, subjectKey)
+    })
+
+    it('accepts a correct attestation', () => {
+      expect(verify(attestation)).toBeTruthy()
+    })
+
+    it('rejects an attestation with an incorrect subject', () => {
+      const wrongSubject = privateKeyToAddress(generatePrivateKey())
+      const wrongAttestation = { ...attestation, subject: wrongSubject }
+      expect(verify(wrongAttestation)).toBeFalsy()
+    })
+
+    it('rejects an attestation with an incorrect attribute', () => {
+      const wrongAttestation = { ...attestation, attribute: 'wrong' }
+      expect(verify(wrongAttestation)).toBeFalsy()
+    })
+
+    it('rejects an attestation with an incorrect issuer', () => {
+      const wrongIssuer = privateKeyToAddress(generatePrivateKey())
+      const wrongAttestation = { ...attestation, issuer: wrongIssuer }
+      expect(verify(wrongAttestation)).toBeFalsy()
+    })
+
+    it('rejects an attestation signed with the wrong attestation key', () => {
+      const wrongAttestationKey = generatePrivateKey()
+      const wrongProtoAttestation = {
+        ...protoAttestation,
+        attestationKey: wrongAttestationKey
+      }
+      const wrongAttestation = accept(wrongProtoAttestation, subjectKey)
+      expect(verify(wrongAttestation)).toBeFalsy()
     })
   })
 })
