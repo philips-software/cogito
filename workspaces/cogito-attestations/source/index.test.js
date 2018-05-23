@@ -1,7 +1,11 @@
-import { AttestationsRetriever, issue, accept, verify } from './index'
+import { AttestationsRetriever, Identity, issue, accept, verify } from './index'
 
 it('exports CogitoAttestations', () => {
   expect(AttestationsRetriever).toBeDefined()
+})
+
+it('exports Identity', () => {
+  expect(Identity).toBeDefined()
 })
 
 it('exports the issue function', () => {
