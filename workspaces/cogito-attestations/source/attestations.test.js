@@ -1,22 +1,21 @@
 import { generatePrivateKey, privateKeyToAddress, sign, keccak256 } from './primitives'
+import { Identity } from './identity'
 import { issue, accept, verify } from './attestations'
 
 describe('attestations', () => {
-  const issuerKey = generatePrivateKey()
-  const subjectKey = generatePrivateKey()
-  const issuer = privateKeyToAddress(issuerKey)
-  const subject = privateKeyToAddress(subjectKey)
+  const issuer = new Identity()
+  const subject = new Identity()
   const attribute = 'email:bob@example.com'
 
   describe('issuing', () => {
     let protoAttestation
 
     beforeEach(() => {
-      protoAttestation = issue(attribute, issuerKey)
+      protoAttestation = issue(attribute, issuer)
     })
 
     it('returns the correct issuer', () => {
-      expect(protoAttestation.issuer).toBe(issuer)
+      expect(protoAttestation.issuer).toBe(issuer.address)
     })
 
     it('returns the correct attribute', () => {
@@ -32,7 +31,7 @@ describe('attestations', () => {
       const attestationId = privateKeyToAddress(attestationKey)
       const issuingHash = keccak256(attestationId, attribute)
       const signature = protoAttestation.issuingSignature
-      expect(signature).toEqual(sign(issuingHash, issuerKey))
+      expect(signature).toEqual(sign(issuingHash, issuer.privateKey))
     })
   })
 
@@ -41,8 +40,8 @@ describe('attestations', () => {
     let attestation
 
     beforeEach(() => {
-      protoAttestation = issue(attribute, issuerKey)
-      attestation = accept(protoAttestation, subjectKey)
+      protoAttestation = issue(attribute, issuer)
+      attestation = accept(protoAttestation, subject)
     })
 
     it('does not return the attestation key', () => {
@@ -50,11 +49,11 @@ describe('attestations', () => {
     })
 
     it('returns the issuer', () => {
-      expect(attestation.issuer).toBe(issuer)
+      expect(attestation.issuer).toBe(issuer.address)
     })
 
     it('returns the correct subject', () => {
-      expect(attestation.subject).toBe(subject)
+      expect(attestation.subject).toBe(subject.address)
     })
 
     it('returns the attribute', () => {
@@ -68,14 +67,14 @@ describe('attestations', () => {
 
     it('returns the correct attestation signature', () => {
       const { attestationKey } = protoAttestation
-      const subjectHash = keccak256(subject)
+      const subjectHash = keccak256(subject.address)
       const attestationSignature = sign(subjectHash, attestationKey)
       expect(attestation.attestationSignature).toEqual(attestationSignature)
     })
 
     it('returns the correct accepting signature', () => {
       const acceptingHash = keccak256(attribute)
-      const acceptingSignature = sign(acceptingHash, subjectKey)
+      const acceptingSignature = sign(acceptingHash, subject.privateKey)
       expect(attestation.acceptingSignature).toEqual(acceptingSignature)
     })
   })
@@ -85,8 +84,8 @@ describe('attestations', () => {
     let attestation
 
     beforeEach(() => {
-      protoAttestation = issue(attribute, issuerKey)
-      attestation = accept(protoAttestation, subjectKey)
+      protoAttestation = issue(attribute, issuer)
+      attestation = accept(protoAttestation, subject)
     })
 
     it('accepts a correct attestation', () => {
@@ -116,7 +115,7 @@ describe('attestations', () => {
         ...protoAttestation,
         attestationKey: wrongAttestationKey
       }
-      const wrongAttestation = accept(wrongProtoAttestation, subjectKey)
+      const wrongAttestation = accept(wrongProtoAttestation, subject)
       expect(verify(wrongAttestation)).toBeFalsy()
     })
   })
