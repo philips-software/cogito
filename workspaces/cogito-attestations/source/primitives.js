@@ -6,11 +6,11 @@ export function generatePrivateKey () {
   do {
     result = crypto.randomBytes(32)
   } while (!eth.isValidPrivate(result))
-  return result
+  return eth.bufferToHex(result)
 }
 
 export function privateKeyToAddress (privateKey) {
-  return eth.bufferToHex(eth.privateToAddress(privateKey))
+  return eth.bufferToHex(eth.privateToAddress(eth.toBuffer(privateKey)))
 }
 
 export function keccak256 (...elements) {
@@ -18,7 +18,7 @@ export function keccak256 (...elements) {
 }
 
 export function sign (hash, privateKey) {
-  const signature = eth.ecsign(hash, privateKey)
+  const signature = eth.ecsign(hash, eth.toBuffer(privateKey))
   return {
     v: signature.v,
     r: eth.bufferToHex(signature.r),
