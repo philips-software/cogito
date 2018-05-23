@@ -7,7 +7,7 @@
   "main": "umd/cogito-attestations.min.js",
   "module": "es/index.js",
   "scripts": {
-    "build": "node ./tools/build.js"
+    "build": "true || node ./tools/build.js #disabled for now"
   },
   "engines": {
     "node": ">=9.0.0"
