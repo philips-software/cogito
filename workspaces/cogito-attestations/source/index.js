@@ -1,1 +1,1 @@
-export { CogitoAttestations } from './attestations'
+export { AttestationsRetriever } from './retriever'
