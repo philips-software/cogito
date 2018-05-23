@@ -38,6 +38,7 @@
     "registry": "http://artifactory-ehv.ta.philips.com/artifactory/api/npm/dl-common-publish-npm-local"
   },
   "dependencies": {
+    "base64url": "^3.0.0",
     "ethereumjs-util": "^5.2.0"
   }
 }
