@@ -14,13 +14,21 @@ struct TransactionSignerBuilder {
         guard let transaction = UnsignedTransaction(from: transaction) else {
             return TransactionSignerInvalid(dispatch: dispatch,
                                             responseId: responseId,
-                                            channel: channel)
+                                            channel: channel,
+                                            error: SignTransactionError.invalidTransaction)
+        }
+        guard let identity = getState()?.diamond.findIdentity(address: transaction.from) else {
+            return TransactionSignerInvalid(dispatch: dispatch,
+                                            responseId: responseId,
+                                            channel: channel,
+                                            error: SignTransactionError.unknownIdentity)
         }
         return TransactionSignerValid(transaction: transaction,
                                       dispatch: dispatch,
                                       getState: getState,
                                       responseId: responseId,
-                                      channel: channel)
+                                      channel: channel,
+                                      identity: identity)
     }
 }
 
@@ -33,10 +41,11 @@ struct TransactionSignerInvalid: TransactionSigner {
     let dispatch: DispatchFunction
     let responseId: JsonRpcId
     let channel: TelepathChannel
+    let error: SignTransactionError
 
     func execute() {
         dispatch(TelepathActions.Send(id: responseId,
-                                      error: SignTransactionError.invalidTransaction,
+                                      error: error,
                                       on: channel))
     }
 }
@@ -47,6 +56,7 @@ struct TransactionSignerValid: TransactionSigner {
     let getState: () -> AppState?
     let responseId: JsonRpcId
     let channel: TelepathChannel
+    let identity: Identity
 
     func execute() {
         let storyBoard = UIStoryboard(name: "SignTransaction", bundle: nil)
@@ -58,7 +68,7 @@ struct TransactionSignerValid: TransactionSigner {
         // Values below should not be hard-coded; see https://gitlab.ta.philips.com/blockchain-lab/Cogito/issues/5
         explanationViewController.appName = "HealthSuite Insights Marketplace"
         explanationViewController.actionDescription = "sign a blockchain transaction"
-        explanationViewController.identity = state.diamond.findIdentity(address: transaction.from)
+        explanationViewController.identity = identity
 
         let signingDone = { viewController.dismiss(animated: true) }
 
