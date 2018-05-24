@@ -16,6 +16,7 @@ enum SignTransactionError: Int, TelepathError {
     case invalidTransaction = 1000
     case signingFailed
     case userRejected
+    case unknownIdentity
 
     var code: Int { return self.rawValue }
 
@@ -24,6 +25,7 @@ enum SignTransactionError: Int, TelepathError {
         case .invalidTransaction: return "missing or invalid field(s) in transaction data"
         case .signingFailed: return "could not sign the transaction"
         case .userRejected: return "user rejected signing request"
+        case .unknownIdentity: return "signature requested for unknown identity"
         }
     }
 }

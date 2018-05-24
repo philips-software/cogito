@@ -45,4 +45,8 @@ extension Address {
     static var testAddress2: Address {
         return Address(fromHex: "0x2222222222222222222222222222222222222222")!
     }
+
+    static var testAddress3: Address {
+        return Address(fromHex: "0x3333333333333333333333333333333333333333")!
+    }
 }

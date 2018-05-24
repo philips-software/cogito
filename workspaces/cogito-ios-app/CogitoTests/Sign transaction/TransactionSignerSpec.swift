@@ -55,10 +55,29 @@ class TransactionSignerSpec: QuickSpec {
             expect(lastAction?.message).to(contain("missing or invalid field(s) in transaction data"))
         }
 
-        it("builds valid signer when transaction data is valid") {
-            let builder = TransactionSignerBuilder(transaction: validTransaction,
+        it("dispatches uknown identity if address to sign for is unknown") {
+            var transaction = validTransaction
+            transaction["from"] = Address.testAddress3.description
+
+            let builder = TransactionSignerBuilder(transaction: transaction,
                                                    dispatch: store.dispatch,
                                                    getState: { return nil },
+                                                   responseId: JsonRpcId(0),
+                                                   channel: TelepathChannelSpy())
+            let signer = builder.build()
+            expect(signer).to(beAKindOf(TransactionSignerInvalid.self))
+            signer.execute()
+            let lastAction = store.firstAction(ofType: TelepathActions.SendPending.self)
+            expect(lastAction?.message).to(contain("signature requested for unknown identity"))
+        }
+
+        it("builds valid signer when transaction data is valid") {
+            let state = appState(diamond: DiamondState(facets: [
+                Identity(description: "test", address: Address.testAddress1)
+            ]))
+            let builder = TransactionSignerBuilder(transaction: validTransaction,
+                                                   dispatch: store.dispatch,
+                                                   getState: { return state },
                                                    responseId: JsonRpcId(0),
                                                    channel: TelepathChannelSpy())
             let signer = builder.build()
