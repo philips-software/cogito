@@ -28,7 +28,8 @@ const config = {
     commonjs({
       include: /node_modules/
     })
-  ]
+  ],
+  external: [ 'ethereumjs-util' ]
 }
 
 if (process.env.NODE_ENV === 'production') {
