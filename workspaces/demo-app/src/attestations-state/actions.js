@@ -1,4 +1,4 @@
-import { CogitoAttestations } from '@cogitojs/cogito-attestations'
+import { AttestationsRetriever } from '@cogitojs/cogito-attestations'
 
 export class AttestationsActions {
   static retrievedAttestations = (attestations) => ({
@@ -7,9 +7,9 @@ export class AttestationsActions {
   })
 
   static retrieve = ({ type, telepathChannel }) => {
-    const cogitoAttestations = new CogitoAttestations({ telepathChannel })
+    const retriever = new AttestationsRetriever({ telepathChannel })
     return async (dispatch) => {
-      const attestations = await cogitoAttestations.retrieve({ type })
+      const attestations = await retriever.retrieve({ type })
       dispatch(AttestationsActions.retrievedAttestations(attestations))
     }
   }
