@@ -5,7 +5,7 @@ import {
   serialize, deserialize
 } from './index'
 
-it('exports CogitoAttestations', () => {
+it('exports AttestationsRetriever', () => {
   expect(AttestationsRetriever).toBeDefined()
 })
 
