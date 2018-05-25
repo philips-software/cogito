@@ -84,6 +84,25 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         dismiss(animated: true)
     }
 
+    @IBAction func share(_ sender: UIBarButtonItem) {
+        let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("accounts.json")
+        let content: [[[String:Any]]] = self.props.facetGroups.map { facetGroup in
+            return facetGroup.items.map { item in
+                return [
+                    "description": item.facet.description,
+                    "address": item.facet.address.value,
+                    "created": item.facet.created.description
+                ]
+            }
+        }
+        let joinedContent = [[String: Any]](content.joined())
+        let data = try? JSONSerialization.data(withJSONObject: joinedContent, options: .prettyPrinted)
+        try? data?.write(to: url)
+
+        let activityController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        present(activityController, animated: true)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? CreateIdentityViewController {
             destination.onDone = { [weak self] in
