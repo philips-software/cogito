@@ -4,6 +4,7 @@ import { Telepath } from './telepath'
 import { random, keySize } from '@cogitojs/crypto'
 
 describe('Telepath', () => {
+  const appName = 'some app name'
   let telepath
   let queuing
 
@@ -28,7 +29,7 @@ describe('Telepath', () => {
         }
       })
       keySize.mockResolvedValue(fakeRandomKey.length)
-      channel = await telepath.createChannel()
+      channel = await telepath.createChannel({ appName })
     })
 
     it('returns a JSON-RPC channel', () => {
@@ -50,10 +51,18 @@ describe('Telepath', () => {
     it('can create a channel with given id and key params', async () => {
       const id = base64url.encode([1, 2, 3])
       const key = [4, 5, 6]
-      channel = await telepath.createChannel({ id, key })
+      channel = await telepath.createChannel({ id, key, appName })
 
       expect(channel.channel.id).toEqual(id)
       expect(channel.channel.key).toEqual(key)
+      expect(channel.channel.appName).toEqual(appName)
+    })
+
+    it('throws when no app name is given', async () => {
+      const id = base64url.encode([1, 2, 3])
+      const key = [4, 5, 6]
+      expect.assertions(1)
+      await expect(telepath.createChannel({ id, key })).rejects.toBeDefined()
     })
   })
 })

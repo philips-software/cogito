@@ -3,10 +3,11 @@ import { random, encrypt, decrypt, nonceSize } from '@cogitojs/crypto'
 import { Poller } from './poller'
 
 class SecureChannel {
-  constructor ({ queuing, id, key }) {
+  constructor ({ queuing, id, key, appName }) {
     this.queuing = queuing
     this.id = id
     this.key = key
+    this.appName = appName
     this.poller = new Poller({
       pollFunction: () => queuing.receive(`${id}.blue`),
       interval: 1000,
@@ -36,7 +37,8 @@ class SecureChannel {
 
   createConnectUrl (baseUrl) {
     const encodedKey = base64url.encode(this.key)
-    return `${baseUrl}/telepath/connect#I=${this.id}&E=${encodedKey}`
+    const encodedAppName = base64url.encode(this.appName)
+    return `${baseUrl}/telepath/connect#I=${this.id}&E=${encodedKey}&A=${encodedAppName}`
   }
 }
 
