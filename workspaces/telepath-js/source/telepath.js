@@ -9,12 +9,16 @@ class Telepath {
     this.queuing = new QueuingService(queuingServiceUrl)
   }
 
-  async createChannel ({ id, key } = {}) {
+  async createChannel ({ id, key, appName }) {
+    if (!appName) {
+      throw new Error('appName is a required parameter')
+    }
     const channelId = id || await createRandomId()
     const channelKey = key || await createRandomKey()
     const channel = new SecureChannel({
       id: channelId,
       key: channelKey,
+      appName: appName,
       queuing: this.queuing
     })
     return new JsonRpcChannel({ channel })

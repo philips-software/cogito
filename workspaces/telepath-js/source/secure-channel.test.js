@@ -6,6 +6,7 @@ jest.unmock('@cogitojs/crypto')
 
 describe('Secure Channel', () => {
   const channelId = 'channel_id'
+  const appName = 'Some app name with unicode characters ✅😎'
   const blueQueue = `${channelId}.blue`
   const redQueue = `${channelId}.red`
   const message = 'a message'
@@ -20,7 +21,7 @@ describe('Secure Channel', () => {
       send: jest.fn(),
       receive: jest.fn()
     }
-    channel = new SecureChannel({ queuing, id: channelId, key })
+    channel = new SecureChannel({ queuing, id: channelId, key, appName })
     channel.poller.interval = 0
     channel.poller.retries = 10
   })
@@ -97,10 +98,11 @@ describe('Secure Channel', () => {
     expect(channel.poller.retries).toEqual(600) // at least 10 minutes
   })
 
-  it('encodes the channel id and key in a URL', () => {
+  it('encodes the channel id, key and app name in a URL', () => {
     const baseUrl = 'https://example.com'
     const encodedKey = base64url.encode(key)
-    const url = `${baseUrl}/telepath/connect#I=${channelId}&E=${encodedKey}`
+    const encodedAppName = base64url.encode(appName)
+    const url = `${baseUrl}/telepath/connect#I=${channelId}&E=${encodedKey}&A=${encodedAppName}`
     expect(channel.createConnectUrl(baseUrl)).toEqual(url)
   })
 })
