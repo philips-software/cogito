@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-encryption",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "Supports encryption and decryption through the Cogito app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito-encryption",
   "license": "UNLICENSED",
@@ -38,7 +38,7 @@
     "registry": "http://artifactory-ehv.ta.philips.com/artifactory/api/npm/dl-common-publish-npm-local"
   },
   "dependencies": {
-    "@cogitojs/crypto": "^0.1.8",
+    "@cogitojs/crypto": "^0.2.0",
     "@trust/keyto": "^0.3.2",
     "base64url": "^2.0.0",
     "node-forge": "^0.7.5"
