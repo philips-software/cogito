@@ -19,17 +19,22 @@ export class CogitoReact extends React.Component {
   }
 
   updateState = async (props) => {
-    const { channelId, channelKey } = props
+    const { channelId, channelKey, appName } = props
 
     const telepathKey = this.normalizeKey(channelKey)
 
-    const { web3, channel, contracts } = await this.cogito.update({ channelId, channelKey: telepathKey })
+    const { web3, channel, contracts } = await this.cogito.update({
+      channelId,
+      channelKey: telepathKey,
+      appName
+    })
 
     this.setState({ web3, channel, contracts })
 
     this.props.onTelepathChanged && this.props.onTelepathChanged({
       channelId: channel.id,
-      channelKey: channel.key
+      channelKey: channel.key,
+      appName: channel.appName
     })
   }
 
@@ -41,7 +46,8 @@ export class CogitoReact extends React.Component {
     const prevKey = this.normalizeKey(prevProps.channelKey) || ''
     const currentKey = this.normalizeKey(this.props.channelKey) || ''
     if (prevProps.channelId !== this.props.channelId ||
-      prevKey.toString() !== currentKey.toString()) {
+      prevKey.toString() !== currentKey.toString() ||
+      prevProps.appName !== this.props.appName) {
       this.updateState(this.props)
     }
   }

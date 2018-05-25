@@ -15,12 +15,13 @@ class Cogito {
     this.contractsInfo = contracts
   }
 
-  getCogitoWeb3 = async ({ channelId, channelKey }) => {
+  getCogitoWeb3 = async ({ channelId, channelKey, appName }) => {
     const web3 = await getWeb3()
 
     this.channel = await this.telepath.createChannel({
       id: channelId,
-      key: channelKey
+      key: channelKey,
+      appName
     })
 
     const cogitoProvider = new CogitoProvider({
@@ -31,9 +32,9 @@ class Cogito {
     this.web3 = new Web3(cogitoProvider)
   }
 
-  update = async ({ channelId, channelKey }) => {
+  update = async ({ channelId, channelKey, appName }) => {
     try {
-      await this.getCogitoWeb3({ channelId, channelKey })
+      await this.getCogitoWeb3({ channelId, channelKey, appName })
       this.contracts = new Contracts({
         web3: this.web3,
         contracts: this.contractsInfo
