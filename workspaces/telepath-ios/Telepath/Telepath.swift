@@ -9,13 +9,13 @@ public struct Telepath {
         queuing = QueuingServiceClient(url: queuingServiceUrl)
     }
 
-    public func connect(channel: ChannelID, key: ChannelKey) -> SecureChannel {
-        return SecureChannel(queuing: queuing, id: channel, key: key)
+    public func connect(channel: ChannelID, key: ChannelKey, appName: String) -> SecureChannel {
+        return SecureChannel(queuing: queuing, id: channel, key: key, appName: appName)
     }
 
     public func connect(url: URL) throws -> SecureChannel {
-        let (id, key) = try UrlCodec().decode(url: url)
-        return SecureChannel(queuing: queuing, id: id, key: key)
+        let (id, key, appName) = try UrlCodec().decode(url: url)
+        return SecureChannel(queuing: queuing, id: id, key: key, appName: appName)
     }
 }
 

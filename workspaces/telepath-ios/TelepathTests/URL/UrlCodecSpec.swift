@@ -10,6 +10,7 @@ class UrlCodecSpec: QuickSpec {
         let baseUrl = URL(string: "https://example.com/")!
         let channelId: ChannelID = "channel id abcd/+#1234"
         let channelKey = ChannelKey.example()
+        let appName = "Some app name with unicode characters ✅😎"
 
         let codec = UrlCodec()
 
@@ -20,7 +21,8 @@ class UrlCodecSpec: QuickSpec {
                 encoded = codec.encode(
                     baseUrl: baseUrl,
                     channelId: channelId,
-                    key: channelKey
+                    key: channelKey,
+                    appName: appName
                 )
             }
 
@@ -41,21 +43,29 @@ class UrlCodecSpec: QuickSpec {
                 let encodedEncryptionKey = channelKey.base64urlEncodedString()
                 expect(encoded.fragment).to(contain("E=\(encodedEncryptionKey)"))
             }
+
+            it("encodes the app name") {
+                let encodedAppName = appName.data(using: .utf8)!.base64urlEncodedString()
+                expect(encoded.fragment).to(contain("A=\(encodedAppName)"))
+            }
         }
 
         context("when decoding") {
             var decodedChannelId: ChannelID!
             var decodedChannelKey: ChannelKey!
+            var decodedAppName: String!
 
             beforeEach {
                 let encoded = codec.encode(
                     baseUrl: baseUrl,
                     channelId: channelId,
-                    key: channelKey
+                    key: channelKey,
+                    appName: appName
                 )
                 let decoded = try! codec.decode(url: encoded)
                 decodedChannelId = decoded.channelId
                 decodedChannelKey = decoded.channelKey
+                decodedAppName = decoded.appName
             }
 
             it("extracts the correct channeld id") {
@@ -65,6 +75,10 @@ class UrlCodecSpec: QuickSpec {
             it("extracts the correct encryption key") {
                 expect(decodedChannelKey) == channelKey
             }
+
+            it("extracts the correct app name") {
+                expect(decodedAppName) == appName
+            }
         }
 
         describe("decoding errors") {
@@ -73,7 +87,8 @@ class UrlCodecSpec: QuickSpec {
             let correctUrl = codec.encode(
                 baseUrl: baseUrl,
                 channelId: channelId,
-                key: channelKey
+                key: channelKey,
+                appName: appName
             )
 
             it("rejects URLs with missing fragment") {
@@ -88,16 +103,29 @@ class UrlCodecSpec: QuickSpec {
                 expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
             }
 
-            it("rejects URLS with missing encryption key") {
-                let wrongUrl = correctUrl.replacingAll(matching: "&E=[^&]*$", with: "&")!
+            it("rejects URLs with missing encryption key") {
+                let wrongUrl = correctUrl.replacingAll(matching: "&E=[^&]*&", with: "&")!
                 let error = DecodeError.missingEncryptionKey
                 expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
             }
 
             it("rejects encryption key that is not base64url encoded") {
                 let wrongKey = "&E=invalid!&"
-                let wrongUrl = correctUrl.replacingAll(matching: "&E=[^&]*$", with: wrongKey)!
+                let wrongUrl = correctUrl.replacingAll(matching: "&E=[^&]*&", with: wrongKey)!
                 let error = DecodeError.invalidEncryptionKey
+                expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
+            }
+
+            it("rejects URLs with missing app name") {
+                let wrongUrl = correctUrl.replacingAll(matching: "&A=[^&]*$", with: "&")!
+                let error = DecodeError.missingAppName
+                expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
+            }
+
+            it("rejects app name that is not base64url encoded") {
+                let wrongName = "&A=invalid!&"
+                let wrongUrl = correctUrl.replacingAll(matching: "&A=[^&]*$", with: wrongName)!
+                let error = DecodeError.invalidAppName
                 expect { try codec.decode(url: wrongUrl) }.to(throwError(error))
             }
 

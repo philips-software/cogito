@@ -1,20 +1,22 @@
 //Copyright © 2017 Philips. All rights reserved.
 
 struct UrlCodec {
-    func encode(baseUrl: URL, channelId: ChannelID, key: ChannelKey) -> URL {
+    func encode(baseUrl: URL, channelId: ChannelID, key: ChannelKey, appName: String) -> URL {
         var result = "telepath/connect#"
-        result += "I=\(channelId.encodeForUrlFragment())&"
-        result += "E=\(key.base64urlEncodedString())"
+        result += "I=\(channelId.encodeForUrlFragment())"
+        result += "&E=\(key.base64urlEncodedString())"
+        result += "&A=\(Data(appName.utf8).base64EncodedString())"
         return URL(string: result, relativeTo:baseUrl)!
     }
 
-    func decode(url: URL) throws -> (channelId: ChannelID, channelKey: ChannelKey) {
+    func decode(url: URL) throws -> (channelId: ChannelID, channelKey: ChannelKey, appName: String) {
         try checkUrl(url)
         let fragment = try extractFragment(url: url)
         let parameters = parseUrlParameters(fragment)
         let channelId = try extractChannelId(parameters: parameters)
         let encryptionKey = try extractEncryptionKey(parameters: parameters)
-        return (channelId, encryptionKey)
+        let appName = try extractAppName(parameters: parameters)
+        return (channelId, encryptionKey, appName)
     }
 
     private func checkUrl(_ url: URL) throws {
@@ -47,11 +49,26 @@ struct UrlCodec {
         return key
     }
 
+    private func extractAppName(parameters: [String: String]) throws -> String {
+        guard let encodedAppName = parameters["A"] else {
+            throw DecodeError.missingAppName
+        }
+        guard let appNameData = Data(base64urlEncoded: encodedAppName) else {
+            throw DecodeError.invalidAppName
+        }
+        guard let appName = String(data: appNameData, encoding: .utf8) else {
+            throw DecodeError.invalidAppName
+        }
+        return appName
+    }
+
     enum DecodeError: Error {
         case missingParameters
         case missingChannelId
         case missingEncryptionKey
         case invalidEncryptionKey
+        case missingAppName
+        case invalidAppName
         case invalidPath
     }
 }

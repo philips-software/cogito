@@ -8,13 +8,14 @@ class SecureChannelSpec: QuickSpec {
     override func spec() {
         let channelId: QueueID = "channel_id"
         let channelKey = ChannelKey.example()
+        let appName = "example"
 
         var channel: SecureChannel!
         var queuing: QueuingServiceMock!
 
         beforeEach {
             queuing = QueuingServiceMock()
-            channel = SecureChannel(queuing: queuing, id: channelId, key: channelKey)
+            channel = SecureChannel(queuing: queuing, id: channelId, key: channelKey, appName: appName)
         }
 
         context("when sending a message") {
