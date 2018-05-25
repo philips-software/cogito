@@ -15,7 +15,7 @@ class URLActionsSpec: QuickSpec {
 
         context("when a telepath connect url is received") {
             beforeEach {
-                let url = URL(string: "https://cogito.example.com/telepath/connect#I=1234&E=abcd")!
+                let url = URL(string: "https://cogito.example.com/telepath/connect#I=1234&E=abcd&A=QQ")!
                 store.dispatch(URLActions.HandleIncomingURL(url: url))
             }
 
