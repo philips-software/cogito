@@ -28,8 +28,8 @@ class Main extends React.Component {
     return (web3 && channel && contracts)
   }
 
-  onTelepathChanged = ({ channelId, channelKey }, dispatch) => {
-    dispatch(UserDataActions.setTelepath({ channelId, channelKey }))
+  onTelepathChanged = ({ channelId, channelKey, appName }, dispatch) => {
+    dispatch(UserDataActions.setTelepath({ channelId, channelKey, appName }))
   }
 
   render () {
@@ -43,6 +43,7 @@ class Main extends React.Component {
           <CogitoReact contracts={contractsInfo}
             channelId={channelId}
             channelKey={channelKey}
+            appName='Cogito Demo App'
             dispatch={dispatch}
             onTelepathChanged={(telepath) => this.onTelepathChanged(telepath, dispatch)}
           >
