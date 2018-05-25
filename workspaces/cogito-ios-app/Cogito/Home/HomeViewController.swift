@@ -19,11 +19,13 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     @IBOutlet weak var rightShutter: UIView!
     @IBOutlet weak var selectedFacetView: UIView!
     var embeddedSelectedFacetController: SelectedFacetViewController!
+    private let audioSessionDeactivator = DeactivateAudioSessionOnStop()
     private lazy var bleepPlayer: AVAudioPlayer? = {
         guard let url = Bundle.main.url(forResource: "198414__divinux__infobleep", withExtension: "wav") else {
             return nil
         }
         let player = try? AVAudioPlayer(contentsOf: url)
+        player?.delegate = self.audioSessionDeactivator
         player?.prepareToPlay()
         return player
     }()
@@ -141,7 +143,6 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     private func bleep() {
         try? AVAudioSession.sharedInstance().setActive(true)
         bleepPlayer?.play()
-        try? AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
     }
 
     struct Props {
@@ -168,4 +169,10 @@ private func mapDispatchToActions(dispatch: @escaping DispatchFunction)
             }
         }
     )
+}
+
+@objc class DeactivateAudioSessionOnStop: NSObject, AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        try? AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
+    }
 }
