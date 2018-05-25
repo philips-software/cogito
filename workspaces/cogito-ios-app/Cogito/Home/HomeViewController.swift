@@ -121,7 +121,9 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     }
 
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
-        bleep()
+        DispatchQueue.global().async {
+            self.bleep()
+        }
         actions.handleScannedQRCode(result.value)
         stopScanning()
     }
