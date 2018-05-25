@@ -65,8 +65,7 @@ struct TransactionSignerValid: TransactionSigner {
         let explanationViewController = viewController.topViewController! as! ExplanationViewController
         // swiftlint:enable force_cast
         let state = self.getState()!
-        // Values below should not be hard-coded; see https://gitlab.ta.philips.com/blockchain-lab/Cogito/issues/5
-        explanationViewController.appName = "HealthSuite Insights Marketplace"
+        explanationViewController.appName = channel.appName
         explanationViewController.actionDescription = "sign a blockchain transaction"
         explanationViewController.identity = identity
 
