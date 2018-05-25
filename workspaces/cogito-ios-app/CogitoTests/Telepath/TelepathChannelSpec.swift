@@ -6,7 +6,7 @@ import Nimble
 
 class TelepathChannelSpec: QuickSpec {
     override func spec() {
-        let connectUrl = URL(string: "http://example.com/telepath/connect#I=1234&E=abcd")!
+        let connectUrl = URL(string: "http://example.com/telepath/connect#I=1234&E=abcd&A=QQ")!
 
         var channel: TelepathChannel!
 

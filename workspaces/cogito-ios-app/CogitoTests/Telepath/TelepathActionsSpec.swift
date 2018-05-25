@@ -15,7 +15,7 @@ class TelepathActionsSpec: QuickSpec {
 
         describe("connection") {
             let connectUrl = URL(
-                string: "https://cogito.example.com/telepath/connect#I=1234&E=abcd"
+                string: "https://cogito.example.com/telepath/connect#I=1234&E=abcd&A=QQ"
             )!
             let identity = Identity.example
 
