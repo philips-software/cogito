@@ -6,13 +6,15 @@ public struct SecureChannel {
     public let id: ChannelID
     var queuing: QueuingService
     let key: ChannelKey
+    let appName: String
     let receivingQueue: QueueID
     let sendingQueue: QueueID
 
-    init(queuing: QueuingService, id: ChannelID, key: ChannelKey) {
+    init(queuing: QueuingService, id: ChannelID, key: ChannelKey, appName: String) {
         self.queuing = queuing
         self.key = key
         self.id = id
+        self.appName = appName
         self.receivingQueue = id + ".red"
         self.sendingQueue = id + ".blue"
     }
