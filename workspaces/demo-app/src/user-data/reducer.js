@@ -19,7 +19,8 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         channelId: action.channelId,
-        channelKey: action.channelKey
+        channelKey: action.channelKey,
+        appName: action.appName
       }
     case 'SET_BALANCE':
       return {
