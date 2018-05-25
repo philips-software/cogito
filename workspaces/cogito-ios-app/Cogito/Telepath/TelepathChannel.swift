@@ -39,6 +39,7 @@ class TelepathChannel: TelepathChannelType, Codable {
     }
 
     var id: ChannelID { return channel.id }
+    var appName: String { return channel.appName }
 
     enum CodingKeys: String, CodingKey {
         case connectUrl
