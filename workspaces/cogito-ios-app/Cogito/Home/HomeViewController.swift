@@ -141,6 +141,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     }
 
     private func bleep() {
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
         try? AVAudioSession.sharedInstance().setActive(true)
         bleepPlayer?.play()
     }
