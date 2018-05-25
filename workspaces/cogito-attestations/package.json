@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-attestations",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "Allows retrieval of attestations through the Cogito app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito-attestations",
   "license": "UNLICENSED",

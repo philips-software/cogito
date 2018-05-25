@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/crypto",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "Crypto utilities for cogito",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/crypto",
   "license": "UNLICENSED",

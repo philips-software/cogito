@@ -1,15 +1,15 @@
 {
   "name": "demo-app",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "A demo project for using Cogito",
   "repository": "https://gitlab.ta.philips.com/blockchain-lab/cogito",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/demo-app",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@cogitojs/cogito-attestations": "^0.1.8",
-    "@cogitojs/cogito-encryption": "^0.1.8",
-    "@cogitojs/cogito-react": "^0.1.8",
+    "@cogitojs/cogito-attestations": "^0.2.0",
+    "@cogitojs/cogito-encryption": "^0.2.0",
+    "@cogitojs/cogito-react": "^0.2.0",
     "@cogitojs/cogito-react-ui": "^0.1.5",
     "@react-frontend-developer/css-grid-helper": "^1.0.6",
     "@react-frontend-developer/react-layout-helpers": "^1.0.6",
@@ -52,7 +52,9 @@
     "link-contracts": "cd src && ln -s ../truffle/build/contracts contracts"
   },
   "jest": {
-    "setupFiles": ["jest-canvas-mock"]
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
   },
   "standard": {
     "parser": "babel-eslint",

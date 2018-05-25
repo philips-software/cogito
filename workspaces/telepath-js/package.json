@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/telepath-js",
-  "version": "0.1.8",
+  "version": "0.2.0",
   "description": "Secure communication channel between mobile app and web app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/telepath-js",
   "license": "UNLICENSED",
@@ -38,7 +38,7 @@
     "rollup-plugin-uglify": "^3.0.0"
   },
   "dependencies": {
-    "@cogitojs/crypto": "^0.1.8",
+    "@cogitojs/crypto": "^0.2.0",
     "base64url": "^2.0.0",
     "cross-fetch": "^2.1.1"
   },
