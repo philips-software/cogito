@@ -6,7 +6,8 @@ public class Identity {
     public init() {
         let context = Javascript.context
         let attestations = context.objectForKeyedSubscript("cogitoAttestations")!
-        javascriptValue = attestations.invokeMethod("Identity", withArguments: [])!
+        let identity = attestations.objectForKeyedSubscript("Identity")!
+        javascriptValue = identity.construct(withArguments: [])!
     }
 
     public var address: String {
