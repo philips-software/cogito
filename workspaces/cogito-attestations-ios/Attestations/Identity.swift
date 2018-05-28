@@ -5,7 +5,7 @@ public class Identity {
 
     public init() {
         let context = Javascript.context
-        let attestations = context.objectForKeyedSubscript("cogito-attestations")!
+        let attestations = context.objectForKeyedSubscript("cogitoAttestations")!
         javascriptValue = attestations.invokeMethod("Identity", withArguments: [])!
     }
 
