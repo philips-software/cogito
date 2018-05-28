@@ -1,8 +1,10 @@
 import JavaScriptCore
+import Security
 
 class Javascript {
     static let context = JSContext()!
         .setExceptionHandler(onException)
+        .addCrypto()
         .load(filename: "polyfill.min")
         .load(filename: "cogito-attestations.min")
 }
@@ -20,6 +22,21 @@ private extension JSContext {
         exceptionHandler = handler
         return self
     }
+
+    func addCrypto() -> JSContext {
+        let crypto = JSValue(newObjectIn: self)
+        crypto?.setValue(randomBytes, forProperty: "randomBytes")
+        globalObject.setValue(crypto, forProperty: "crypto")
+        return self
+    }
+}
+
+let randomBytes: @convention(block) (Int) -> String = { amount in
+    var buffer = Data(capacity: amount)
+    _ = buffer.withUnsafeMutableBytes {
+        assert(SecRandomCopyBytes(kSecRandomDefault, amount, $0) == errSecSuccess)
+    }
+    return buffer.base64EncodedString()
 }
 
 private func onException(context: JSContext?, value: JSValue?) {
