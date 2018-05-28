@@ -1,6 +1,6 @@
 import Quick
 import Nimble
-@testable import Attestations
+import Attestations
 
 class AttestationsSpec: QuickSpec {
     override func spec() {
