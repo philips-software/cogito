@@ -9,7 +9,7 @@ import json from 'rollup-plugin-json'
 const config = {
   input: 'source/index.js',
   output: {
-    name: 'cogito-attestations'
+    name: 'cogitoAttestations'
   },
   plugins: [
     autoExternal({
