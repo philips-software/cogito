@@ -1,0 +1,6 @@
+module Pods_AttestationsTests {
+  umbrella header "Pods-AttestationsTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
