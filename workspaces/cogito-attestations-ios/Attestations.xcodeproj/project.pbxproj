@@ -12,6 +12,8 @@
 		5C14877520BBF71A009589A8 /* Attestations.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C14876720BBF71A009589A8 /* Attestations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5CD3C57920BBFE4A006BBE38 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3C57820BBFE4A006BBE38 /* Identity.swift */; };
 		5CD3C57B20BBFEC8006BBE38 /* JavaScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3C57A20BBFEC8006BBE38 /* JavaScript.swift */; };
+		5CD3C58120BC1D70006BBE38 /* cogito-attestations.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 5CD3C58020BC1D70006BBE38 /* cogito-attestations.min.js */; };
+		5CD3C58320BC2675006BBE38 /* polyfill.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 5CD3C58220BC2675006BBE38 /* polyfill.min.js */; };
 		E06422CC72FC8F1838B0AE16 /* libPods-AttestationsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF9E4B68C38D7FDDFC7519F /* libPods-AttestationsTests.a */; };
 		F42A5A7B0791BE216F225175 /* libPods-Attestations.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAFDD1415694DACB1E85086 /* libPods-Attestations.a */; };
 /* End PBXBuildFile section */
@@ -37,6 +39,8 @@
 		5C14877E20BBF86A009589A8 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5CD3C57820BBFE4A006BBE38 /* Identity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
 		5CD3C57A20BBFEC8006BBE38 /* JavaScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScript.swift; sourceTree = "<group>"; };
+		5CD3C58020BC1D70006BBE38 /* cogito-attestations.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = "cogito-attestations.min.js"; path = "../../cogito-attestations/umd/cogito-attestations.min.js"; sourceTree = "<group>"; };
+		5CD3C58220BC2675006BBE38 /* polyfill.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = polyfill.min.js; path = "../../../node_modules/@babel/polyfill/dist/polyfill.min.js"; sourceTree = "<group>"; };
 		60290FB2DADFA26A6FDD9BE2 /* Pods-Attestations.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Attestations.release.xcconfig"; path = "Pods/Target Support Files/Pods-Attestations/Pods-Attestations.release.xcconfig"; sourceTree = "<group>"; };
 		6946344988B8C7D2F405F219 /* Pods-AttestationsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AttestationsTests/Pods-AttestationsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6FAFDD1415694DACB1E85086 /* libPods-Attestations.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Attestations.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +106,8 @@
 			children = (
 				5CD3C57820BBFE4A006BBE38 /* Identity.swift */,
 				5CD3C57A20BBFEC8006BBE38 /* JavaScript.swift */,
+				5CD3C58220BC2675006BBE38 /* polyfill.min.js */,
+				5CD3C58020BC1D70006BBE38 /* cogito-attestations.min.js */,
 				5C14876720BBF71A009589A8 /* Attestations.h */,
 				5C14876820BBF71A009589A8 /* Info.plist */,
 			);
@@ -220,6 +226,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CD3C58120BC1D70006BBE38 /* cogito-attestations.min.js in Resources */,
+				5CD3C58320BC2675006BBE38 /* polyfill.min.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
