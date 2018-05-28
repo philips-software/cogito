@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		5C14876E20BBF71A009589A8 /* Attestations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C14876420BBF71A009589A8 /* Attestations.framework */; };
-		5C14877320BBF71A009589A8 /* AttestationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14877220BBF71A009589A8 /* AttestationsTests.swift */; };
+		5C14877320BBF71A009589A8 /* AttestationsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C14877220BBF71A009589A8 /* AttestationsSpec.swift */; };
 		5C14877520BBF71A009589A8 /* Attestations.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C14876720BBF71A009589A8 /* Attestations.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CD3C57920BBFE4A006BBE38 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3C57820BBFE4A006BBE38 /* Identity.swift */; };
+		5CD3C57B20BBFEC8006BBE38 /* JavaScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD3C57A20BBFEC8006BBE38 /* JavaScript.swift */; };
 		E06422CC72FC8F1838B0AE16 /* libPods-AttestationsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BAF9E4B68C38D7FDDFC7519F /* libPods-AttestationsTests.a */; };
 		F42A5A7B0791BE216F225175 /* libPods-Attestations.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FAFDD1415694DACB1E85086 /* libPods-Attestations.a */; };
 /* End PBXBuildFile section */
@@ -30,9 +32,11 @@
 		5C14876720BBF71A009589A8 /* Attestations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attestations.h; sourceTree = "<group>"; };
 		5C14876820BBF71A009589A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C14876D20BBF71A009589A8 /* AttestationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AttestationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C14877220BBF71A009589A8 /* AttestationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationsTests.swift; sourceTree = "<group>"; };
+		5C14877220BBF71A009589A8 /* AttestationsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationsSpec.swift; sourceTree = "<group>"; };
 		5C14877420BBF71A009589A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C14877E20BBF86A009589A8 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		5CD3C57820BBFE4A006BBE38 /* Identity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
+		5CD3C57A20BBFEC8006BBE38 /* JavaScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScript.swift; sourceTree = "<group>"; };
 		60290FB2DADFA26A6FDD9BE2 /* Pods-Attestations.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Attestations.release.xcconfig"; path = "Pods/Target Support Files/Pods-Attestations/Pods-Attestations.release.xcconfig"; sourceTree = "<group>"; };
 		6946344988B8C7D2F405F219 /* Pods-AttestationsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AttestationsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AttestationsTests/Pods-AttestationsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6FAFDD1415694DACB1E85086 /* libPods-Attestations.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Attestations.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +100,8 @@
 		5C14876620BBF71A009589A8 /* Attestations */ = {
 			isa = PBXGroup;
 			children = (
+				5CD3C57820BBFE4A006BBE38 /* Identity.swift */,
+				5CD3C57A20BBFEC8006BBE38 /* JavaScript.swift */,
 				5C14876720BBF71A009589A8 /* Attestations.h */,
 				5C14876820BBF71A009589A8 /* Info.plist */,
 			);
@@ -105,7 +111,7 @@
 		5C14877120BBF71A009589A8 /* AttestationsTests */ = {
 			isa = PBXGroup;
 			children = (
-				5C14877220BBF71A009589A8 /* AttestationsTests.swift */,
+				5C14877220BBF71A009589A8 /* AttestationsSpec.swift */,
 				5C14877420BBF71A009589A8 /* Info.plist */,
 			);
 			path = AttestationsTests;
@@ -184,6 +190,7 @@
 				TargetAttributes = {
 					5C14876320BBF71A009589A8 = {
 						CreatedOnToolsVersion = 9.3.1;
+						LastSwiftMigration = 0930;
 					};
 					5C14876C20BBF71A009589A8 = {
 						CreatedOnToolsVersion = 9.3.1;
@@ -269,6 +276,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CD3C57B20BBFEC8006BBE38 /* JavaScript.swift in Sources */,
+				5CD3C57920BBFE4A006BBE38 /* Identity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C14877320BBF71A009589A8 /* AttestationsTests.swift in Sources */,
+				5C14877320BBF71A009589A8 /* AttestationsSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +424,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 407CAC843A077FF7D12D9F2F /* Pods-Attestations.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -431,6 +441,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cogito.Attestations;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -440,6 +451,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 60290FB2DADFA26A6FDD9BE2 /* Pods-Attestations.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -465,6 +477,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6946344988B8C7D2F405F219 /* Pods-AttestationsTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AttestationsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -483,6 +496,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 969FC319A9C689ADF68FACCB /* Pods-AttestationsTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AttestationsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
