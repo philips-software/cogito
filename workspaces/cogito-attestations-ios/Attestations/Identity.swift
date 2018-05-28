@@ -4,9 +4,9 @@ public class Identity {
     let javascriptValue: JSValue
 
     public init() {
-        let context = Javascript.context
-        let attestations = context.objectForKeyedSubscript("cogitoAttestations")!
-        let identity = attestations.objectForKeyedSubscript("Identity")!
+        let global = Javascript.context.globalObject!
+        let attestations = global.forProperty("cogitoAttestations")!
+        let identity = attestations.forProperty("Identity")!
         javascriptValue = identity.construct(withArguments: [])!
     }
 
