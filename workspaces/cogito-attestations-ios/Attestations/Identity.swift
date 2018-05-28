@@ -1,15 +1,15 @@
 import JavaScriptCore
 
-class Identity {
+public class Identity {
     let javascriptValue: JSValue
 
-    init() {
+    public init() {
         let context = Javascript.context
         let attestations = context.objectForKeyedSubscript("cogito-attestations")!
         javascriptValue = attestations.invokeMethod("Identity", withArguments: [])!
     }
 
-    var address: String {
+    public var address: String {
         return javascriptValue.forProperty("address").toString()!
     }
 }
