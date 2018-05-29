@@ -55,6 +55,8 @@ test cogito-attestations-ios:
   before_script:
     - cd workspaces/cogito-attestations-ios
     - bundle install
+    - yarn install
+    - yarn build
   script:
     - bundle exec fastlane tests
     - bundle exec slather coverage
