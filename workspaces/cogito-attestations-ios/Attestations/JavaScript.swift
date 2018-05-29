@@ -5,6 +5,7 @@ class Javascript {
     static let context = JSContext()!
         .setExceptionHandler(onException)
         .addCrypto()
+        .load(filename: "crypto")
         .load(filename: "polyfill.min")
         .load(filename: "cogito-attestations.min")
 }
