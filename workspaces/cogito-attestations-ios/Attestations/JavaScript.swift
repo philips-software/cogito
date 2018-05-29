@@ -4,6 +4,7 @@ import Security
 class Javascript {
     static let context = JSContext()!
         .setExceptionHandler(onException)
+        .addConsole()
         .addCrypto()
         .load(filename: "crypto")
         .load(filename: "polyfill.min")
@@ -24,12 +25,23 @@ private extension JSContext {
         return self
     }
 
+    func addConsole() -> JSContext {
+        let console = JSValue(newObjectIn: self)!
+        console.setValue(log, forProperty: "log")
+        globalObject.setValue(console, forProperty: "console")
+        return self
+    }
+
     func addCrypto() -> JSContext {
         let crypto = JSValue(newObjectIn: self)!
         crypto.setValue(randomBytes, forProperty: "randomBytes")
         globalObject.setValue(crypto, forProperty: "crypto")
         return self
     }
+}
+
+let log: @convention(block) (String) -> Void = { message in
+    print(message)
 }
 
 let randomBytes: @convention(block) (Int) -> [UInt8] = { amount in
