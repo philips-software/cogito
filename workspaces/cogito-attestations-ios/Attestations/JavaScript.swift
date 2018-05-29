@@ -25,19 +25,19 @@ private extension JSContext {
     }
 
     func addCrypto() -> JSContext {
-        let crypto = JSValue(newObjectIn: self)
-        crypto?.setValue(randomBytes, forProperty: "randomBytes")
+        let crypto = JSValue(newObjectIn: self)!
+        crypto.setValue(randomBytes, forProperty: "randomBytes")
         globalObject.setValue(crypto, forProperty: "crypto")
         return self
     }
 }
 
-let randomBytes: @convention(block) (Int) -> String = { amount in
-    var buffer = Data(capacity: amount)
+let randomBytes: @convention(block) (Int) -> [UInt8] = { amount in
+    var buffer = Data(count: amount)
     _ = buffer.withUnsafeMutableBytes {
         assert(SecRandomCopyBytes(kSecRandomDefault, amount, $0) == errSecSuccess)
     }
-    return buffer.base64EncodedString()
+    return Array(buffer)
 }
 
 private func onException(context: JSContext?, value: JSValue?) {
