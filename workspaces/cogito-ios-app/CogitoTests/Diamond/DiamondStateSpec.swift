@@ -60,5 +60,11 @@ class DiamondStateSpec: QuickSpec {
             let state = DiamondState(facets: [])
             expect(state.findIdentity(address: identity0.address)).to(beNil())
         }
+
+        it("finding matches case insensitive") {
+            let state = DiamondState(facets: [identity0])
+            let address = Address(fromHex: identity0.address.value.uppercased())!
+            expect(state.findIdentity(address: address)) == identity0
+        }
     }
 }
