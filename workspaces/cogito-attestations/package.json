@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "base64url": "^3.0.0",
-    "ethereumjs-util": "^5.2.0"
+    "browserify": "^16.2.2",
+    "ethereumjs-util": "^5.2.0",
+    "uglify": "^0.1.5"
   }
 }

@@ -23,17 +23,11 @@ exec('babel source -d es --delete-dir-on-start', {
 
 console.log('\nBuilding cogito-attestations.js ...')
 
-exec('rollup -c -f umd -o umd/cogito-attestations.js', {
-  BABEL_ENV: 'umd',
-  NODE_ENV: 'development'
-})
+exec('browserify lib/index.js --standalone cogito-attestations > umd/cogito-attestations.js')
 
 console.log('\nBuilding cogito-attestations.min.js ...')
 
-exec('rollup -c -f umd -o umd/cogito-attestations.min.js', {
-  BABEL_ENV: 'umd',
-  NODE_ENV: 'production'
-})
+exec('uglifyjs umd/cogito-attestations.js > umd/cogito-attestations.min.js')
 
 const size = gzipSize.sync(
   fs.readFileSync('umd/cogito-attestations.min.js')
