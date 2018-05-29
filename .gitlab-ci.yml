@@ -48,18 +48,18 @@ test telepath-ios:
   tags:
     - ios
 
-test cogito-attestations-ios:
-  stage: test
-  variables:
-    BUNDLE_GEMFILE: .ruby-dependencies/Gemfile
-  before_script:
-    - cd workspaces/cogito-attestations-ios
-    - bundle install
-    - brew install yarn || brew upgrade yarn
-    - yarn install
-    - yarn build
-  script:
-    - bundle exec fastlane tests
-    - bundle exec slather coverage
-  tags:
-    - ios
+# test cogito-attestations-ios:
+#   stage: test
+#   variables:
+#     BUNDLE_GEMFILE: .ruby-dependencies/Gemfile
+#   before_script:
+#     - cd workspaces/cogito-attestations-ios
+#     - bundle install
+#     - brew install yarn || brew upgrade yarn
+#     - yarn install
+#     - yarn build
+#   script:
+#     - bundle exec fastlane tests
+#     - bundle exec slather coverage
+#   tags:
+#     - ios
