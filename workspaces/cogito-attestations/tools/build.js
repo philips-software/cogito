@@ -23,11 +23,11 @@ exec('babel source -d es --delete-dir-on-start', {
 
 console.log('\nBuilding cogito-attestations.js ...')
 
-exec('browserify lib/index.js --standalone cogito-attestations --outfile umd/cogito-attestations.js')
+exec('webpack --mode=development -o umd/cogito-attestations.js')
 
 console.log('\nBuilding cogito-attestations.min.js ...')
 
-exec('uglifyjs umd/cogito-attestations.js > umd/cogito-attestations.min.js')
+exec('webpack --mode=production -o umd/cogito-attestations.min.js')
 
 const size = gzipSize.sync(
   fs.readFileSync('umd/cogito-attestations.min.js')
