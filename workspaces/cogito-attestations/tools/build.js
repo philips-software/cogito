@@ -23,7 +23,7 @@ exec('babel source -d es --delete-dir-on-start', {
 
 console.log('\nBuilding cogito-attestations.js ...')
 
-exec('browserify lib/index.js --standalone cogito-attestations > umd/cogito-attestations.js')
+exec('browserify lib/index.js --standalone cogito-attestations --outfile umd/cogito-attestations.js')
 
 console.log('\nBuilding cogito-attestations.min.js ...')
 
