@@ -1,3 +1,5 @@
+import { CogitoIdentity } from '@cogitojs/cogito-identity'
+
 class UserDataActions {
   static connectionEstablished = () => ({
     type: 'CONNECTION_ESTABLISHED'
@@ -18,6 +20,23 @@ class UserDataActions {
   static setBalance = balance => ({
     type: 'SET_BALANCE',
     balance
+  })
+
+  static getIdentityInfo = (channel) => {
+    const requestedProperties = [
+      CogitoIdentity.Property.EthereumAddress,
+      CogitoIdentity.Property.Username
+    ]
+    return async (dispatch) => {
+      const cogitoIdentity = new CogitoIdentity({ channel })
+      const info = await cogitoIdentity.getInfo({ properties: requestedProperties })
+      dispatch(UserDataActions.setIdentityInfo(info))
+    }
+  }
+
+  static setIdentityInfo = info => ({
+    type: 'SET_IDENTITY_INFO',
+    info
   })
 }
 

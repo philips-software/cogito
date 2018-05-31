@@ -6,13 +6,16 @@ import { Centered, ValueWrapper } from '@react-frontend-developer/react-layout-h
 export const CogitoAddress = () =>
   <WithStore
     selector={state => ({
-      address: state.userData.account
+      address: state.userData.account,
+      username: state.userData.username
     })}>
     {
-      ({address}) =>
+      ({address, username}) =>
         <Centered>
           <p>Your Cogito account address is:</p>
           <ValueWrapper>{address || 'unknown'}</ValueWrapper>
+          <p>You are known as:</p>
+          <ValueWrapper>{username || 'unknown'}</ValueWrapper>
         </Centered>
     }
   </WithStore>

@@ -37,9 +37,10 @@ class Main extends React.Component {
       <WithStore
         selector={state => ({
           channelId: state.userData.channelId,
-          channelKey: state.userData.channelKey
+          channelKey: state.userData.channelKey,
+          username: state.userData.username
         })}
-        render={({channelId, channelKey}, dispatch) =>
+        render={({channelId, channelKey, username}, dispatch) =>
           <CogitoReact contracts={contractsInfo}
             channelId={channelId}
             channelKey={channelKey}
@@ -49,6 +50,9 @@ class Main extends React.Component {
           >
             {web3Props => {
               if (this.web3IsReady(web3Props)) {
+                if (!username) {
+                  dispatch(UserDataActions.getIdentityInfo(web3Props.channel))
+                }
                 return (
                   <Switch>
                     <Route exact path='/' render={routeProps => this.renderComponent(Home, routeProps, web3Props)} />

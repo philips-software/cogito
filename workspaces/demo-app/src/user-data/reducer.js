@@ -27,6 +27,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         balance: action.balance
       }
+    case 'SET_IDENTITY_INFO':
+      return {
+        ...state,
+        ethereumAddress: action.info.ethereumAddress,
+        username: action.info.username
+      }
     default:
       return state
   }
