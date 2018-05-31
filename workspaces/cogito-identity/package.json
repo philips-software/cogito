@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-identity",
-  "version": "0.0.0",
+  "version": "0.2.1",
   "description": "Supports getting identity info from the Cogito app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito-identity",
   "license": "UNLICENSED",
