@@ -4,9 +4,6 @@ import Attestations
 
 class AttestationsSpec: QuickSpec {
     override func spec() {
-        let issuer = Identity()
-        let attribute = "email:bob@example.com"
-
         it("can create new identities") {
             let identity1 = Identity()
             let identity2 = Identity()
@@ -14,6 +11,8 @@ class AttestationsSpec: QuickSpec {
         }
 
         it("can issue new attestations") {
+            let issuer = Identity()
+            let attribute = "email:bob@example.com"
             let protoAttestation = issue(attribute: attribute, issuer: issuer)
             expect(protoAttestation.issuer) == issuer.address
             expect(protoAttestation.attribute) == attribute
@@ -31,6 +30,18 @@ class AttestationsSpec: QuickSpec {
             let protoAttestation = ProtoAttestation.example
             let deserialized = ProtoAttestation("\(protoAttestation)")
             expect(deserialized) == protoAttestation
+        }
+
+        it("can accept an attestation") {
+            let subject = Identity()
+            let protoAttestation = ProtoAttestation.example
+            let attestation = accept(protoAttestation: protoAttestation, subject: subject)
+            expect(attestation.issuer) == protoAttestation.issuer
+            expect(attestation.subject) == subject.address
+            expect(attestation.attribute) == protoAttestation.attribute
+            expect(attestation.issuingSignature) != "undefined"
+            expect(attestation.attestationSignature) != "undefined"
+            expect(attestation.acceptingSignature) != "undefined"
         }
     }
 }
