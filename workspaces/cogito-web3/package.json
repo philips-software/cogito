@@ -35,7 +35,8 @@
     "rollup-plugin-uglify": "^3.0.0"
   },
   "peerDependencies": {
-    "web3": "^1.0.0-beta.34"
+    "web3": "^1.0.0-beta.34",
+    "@cogitojs/telepath-js": "^0.2.0"
   },
   "publishConfig": {
     "registry": "http://artifactory-ehv.ta.philips.com/artifactory/api/npm/dl-common-publish-npm-local"

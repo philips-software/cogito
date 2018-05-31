@@ -44,6 +44,7 @@
     "node-forge": "^0.7.5"
   },
   "peerDependencies": {
-    "libsodium-wrappers": "^0.7.2"
+    "libsodium-wrappers": "^0.7.2",
+    "@cogitojs/telepath-js": "^0.2.0"
   }
 }
