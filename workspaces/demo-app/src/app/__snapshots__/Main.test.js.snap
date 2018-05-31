@@ -29,6 +29,14 @@ exports[`renders correctly 1`] = `
       >
         unknown
       </div>
+      <p>
+        You are known as:
+      </p>
+      <div
+        className="css-h2wbwd"
+      >
+        unknown
+      </div>
     </div>
   </div>
   <div
