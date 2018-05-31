@@ -6,6 +6,12 @@ public func issue(attribute: String, issuer: Identity) -> ProtoAttestation {
     return ProtoAttestation(javascriptValue: result)
 }
 
+public func accept(protoAttestation: ProtoAttestation, subject: Identity) -> Attestation {
+    let accept = Javascript.cogitoAttestations.forProperty("accept")!
+    let result = accept.call(withArguments: [protoAttestation.javascriptValue, subject.javascriptValue])!
+    return Attestation(javascriptValue: result)
+}
+
 public class ProtoAttestation {
     let javascriptValue: JSValue
 
@@ -37,5 +43,37 @@ extension ProtoAttestation: Equatable {
             lhs.attribute == rhs.attribute &&
             lhs.attestationKey == rhs.attestationKey &&
             lhs.issuingSignature == rhs.issuingSignature
+    }
+}
+
+public class Attestation {
+    let javascriptValue: JSValue
+
+    init(javascriptValue: JSValue) {
+        self.javascriptValue = javascriptValue
+    }
+
+    public var issuer: String {
+        return javascriptValue.forProperty("issuer").toString()
+    }
+
+    public var subject: String {
+        return javascriptValue.forProperty("subject").toString()
+    }
+
+    public var attribute: String {
+        return javascriptValue.forProperty("attribute").toString()
+    }
+
+    public var issuingSignature: String {
+        return javascriptValue.forProperty("issuingSignature").toString()
+    }
+
+    public var attestationSignature: String {
+        return javascriptValue.forProperty("attestationSignature").toString()
+    }
+
+    public var acceptingSignature: String {
+        return javascriptValue.forProperty("acceptingSignature").toString()
     }
 }
