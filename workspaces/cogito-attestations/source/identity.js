@@ -1,4 +1,4 @@
-import { generatePrivateKey, privateKeyToAddress } from './primitives'
+import { generatePrivateKey, privateKeyToAddress, sign } from './primitives'
 
 export class Identity {
   constructor (string = undefined) {
@@ -10,6 +10,10 @@ export class Identity {
       this.privateKey = generatePrivateKey()
       this.address = privateKeyToAddress(this.privateKey)
     }
+  }
+
+  sign (hash) {
+    return sign(hash, this.privateKey)
   }
 
   toString () {
