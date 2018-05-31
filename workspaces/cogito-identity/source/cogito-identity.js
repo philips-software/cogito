@@ -1,6 +1,6 @@
 import uuidv4 from 'uuid/v4'
 
-class CogitoAccount {
+class CogitoIdentity {
   static Property = {
     Username: 'username',
     EthereumAddress: 'ethereumAddress'
@@ -10,8 +10,8 @@ class CogitoAccount {
     this.channel = channel
   }
 
-  async getAccountInfo ({ properties }) {
-    const request = this.createRequest('getAccountInfo', { properties })
+  async getInfo ({ properties }) {
+    const request = this.createRequest('getIdentityInfo', { properties })
     const response = await this.channel.send(request)
     if (response.error) {
       throw new Error(response.error.message)
@@ -34,4 +34,4 @@ class CogitoAccount {
   }
 }
 
-export { CogitoAccount }
+export { CogitoIdentity }

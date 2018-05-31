@@ -1,17 +1,17 @@
-import { CogitoAccount } from './cogito-account'
+import { CogitoIdentity } from './cogito-identity'
 
-describe('cogito account', () => {
+describe('cogito identity', () => {
   const channel = { send: jest.fn() }
   const ethereumAddress = '0xsomeAddress'
   const username = 'some user name'
-  const account = new CogitoAccount({ channel })
+  const identity = new CogitoIdentity({ channel })
   const requestedProperties = [
-    CogitoAccount.Property.EthereumAddress,
-    CogitoAccount.Property.Username
+    CogitoIdentity.Property.EthereumAddress,
+    CogitoIdentity.Property.Username
   ]
 
-  it('creates CogitoAccount with channel', () => {
-    expect(account.channel).toBe(channel)
+  it('creates CogitoIdentity with channel', () => {
+    expect(identity.channel).toBe(channel)
   })
 
   describe('when telepath returns result', () => {
@@ -28,10 +28,10 @@ describe('cogito account', () => {
     })
 
     it('sends proper telepath request', async () => {
-      await account.getAccountInfo({ properties: requestedProperties })
+      await identity.getInfo({ properties: requestedProperties })
       const expectedRequest = {
         jsonrpc: '2.0',
-        method: 'getAccountInfo',
+        method: 'getIdentityInfo',
         params: { properties: requestedProperties }
       }
       let actualRequest = channel.send.mock.calls[0][0]
@@ -40,8 +40,8 @@ describe('cogito account', () => {
       expect(actualRequest).toEqual(expectedRequest)
     })
 
-    it('returns account info from telepath response', async () => {
-      const properties = await account.getAccountInfo({ properties: requestedProperties })
+    it('returns identity info from telepath response', async () => {
+      const properties = await identity.getInfo({ properties: requestedProperties })
       expect(properties.ethereumAddress).toEqual(ethereumAddress)
       expect(properties.username).toEqual(username)
     })
@@ -59,7 +59,7 @@ describe('cogito account', () => {
 
     it('throws', async () => {
       expect.assertions(1)
-      await expect(account.getAccountInfo({ properties: requestedProperties })).rejects.toBeDefined()
+      await expect(identity.getInfo({ properties: requestedProperties })).rejects.toBeDefined()
     })
   })
 
@@ -74,7 +74,7 @@ describe('cogito account', () => {
     })
 
     it('this is not an error', async () => {
-      const properties = await account.getAccountInfo({ properties: requestedProperties })
+      const properties = await identity.getInfo({ properties: requestedProperties })
       expect(properties).toEqual({})
     })
   })
