@@ -1,5 +1,5 @@
 import { Identity } from './identity'
-import { privateKeyToAddress } from './primitives'
+import { generatePrivateKey, privateKeyToAddress, sign, keccak256 } from './primitives'
 
 describe('identity', () => {
   const identity = new Identity()
@@ -29,5 +29,24 @@ describe('identity', () => {
     const serialized = `${identity}`
     const deserialized = new Identity(serialized)
     expect(deserialized).toEqual(identity)
+  })
+
+  describe('when constructed with a signing function', () => {
+    const privateKey = generatePrivateKey()
+    const signingFunction = (hash) => sign(hash, privateKey)
+    const identity = new Identity(signingFunction)
+
+    it('does not have a private key', () => {
+      expect(identity.privateKey).not.toBeDefined()
+    })
+
+    it('derives the address from the signing function', () => {
+      expect(identity.address).toEqual(privateKeyToAddress(privateKey))
+    })
+
+    it('signs using the signing function', () => {
+      const hash = keccak256('some hash')
+      expect(identity.sign(hash)).toEqual(signingFunction(hash))
+    })
   })
 })
