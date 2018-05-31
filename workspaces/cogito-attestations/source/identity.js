@@ -5,6 +5,9 @@ export class Identity {
     switch (typeof argument) {
       case 'string':
         const deserialized = JSON.parse(argument)
+        if (!deserialized.privateKey) {
+          throw new Error('missing privateKey field')
+        }
         this.privateKey = deserialized.privateKey
         this.address = deserialized.address
         break

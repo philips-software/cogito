@@ -48,5 +48,10 @@ describe('identity', () => {
       const hash = keccak256('some hash')
       expect(identity.sign(hash)).toEqual(signingFunction(hash))
     })
+
+    it('cannot be deserialized', () => {
+      const serialized = `${identity}`
+      expect(() => new Identity(serialized)).toThrow()
+    })
   })
 })
