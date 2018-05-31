@@ -43,5 +43,17 @@ class AttestationsSpec: QuickSpec {
             expect(attestation.attestationSignature) != "undefined"
             expect(attestation.acceptingSignature) != "undefined"
         }
+
+        it("can serialize an attestation") {
+            let attestation = Attestation.example
+            let serialized = "\(attestation)"
+            expect(serialized) != "undefined"
+        }
+
+        it("can deserialize an attestation") {
+            let attestation = Attestation.example
+            let deserialized = Attestation("\(attestation)")
+            expect(deserialized) == attestation
+        }
     }
 }

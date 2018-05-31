@@ -77,3 +77,14 @@ public class Attestation {
         return javascriptValue.forProperty("acceptingSignature").toString()
     }
 }
+
+extension Attestation: Equatable {
+    public static func == (lhs: Attestation, rhs: Attestation) -> Bool {
+        return
+            lhs.issuer == rhs.issuer &&
+            lhs.attribute == rhs.attribute &&
+            lhs.issuingSignature == rhs.issuingSignature &&
+            lhs.attestationSignature == rhs.attestationSignature &&
+            lhs.acceptingSignature == rhs.acceptingSignature
+    }
+}
