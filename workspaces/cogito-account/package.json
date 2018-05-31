@@ -41,5 +41,6 @@
     "uuid": "^3.2.1"
   },
   "peerDependencies": {
+    "@cogitojs/telepath-js": "^0.2.0"
   }
 }
