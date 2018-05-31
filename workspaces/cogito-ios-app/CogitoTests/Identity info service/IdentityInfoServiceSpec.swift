@@ -21,7 +21,7 @@ class IdentityInfoServiceSpec: QuickSpec {
         context("when a request for identity properties comes in") {
             let request = JsonRpcRequest(
                 method: "getIdentityInfo",
-                params: JsonRpcParams(parseJSON: "[{\"properties\":[\"username\",\"ethereumAddress\"]}]")
+                params: JsonRpcParams(parseJSON: "{\"properties\":[\"username\",\"ethereumAddress\"]}")
             )
 
             beforeEach {

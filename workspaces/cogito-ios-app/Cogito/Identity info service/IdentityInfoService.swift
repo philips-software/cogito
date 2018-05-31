@@ -24,7 +24,7 @@ struct IdentityInfoService: TelepathService {
 
     private func getIdentityInfo(request: JsonRpcRequest, identity: Identity, channel: TelepathChannel) {
         var identityInfo: [String: Any] = [:]
-        guard let params = request.params[0].dictionaryObject,
+        guard let params = request.params.dictionaryObject,
               let requestedProperties = params["properties"] as? [String] else {
             return
         }
