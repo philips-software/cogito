@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-web3",
-  "version": "0.1.4",
+  "version": "0.2.1",
   "description": "An Ethereum web3 provider that signs transactions with the Cogito app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito-web3",
   "license": "UNLICENSED",
@@ -35,8 +35,8 @@
     "rollup-plugin-uglify": "^3.0.0"
   },
   "peerDependencies": {
-    "web3": "^1.0.0-beta.34",
-    "@cogitojs/telepath-js": "^0.2.0"
+    "@cogitojs/telepath-js": "^0.2.0",
+    "web3": "^1.0.0-beta.34"
   },
   "publishConfig": {
     "registry": "http://artifactory-ehv.ta.philips.com/artifactory/api/npm/dl-common-publish-npm-local"

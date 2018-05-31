@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-encryption",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Supports encryption and decryption through the Cogito app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito-encryption",
   "license": "UNLICENSED",
@@ -44,7 +44,7 @@
     "node-forge": "^0.7.5"
   },
   "peerDependencies": {
-    "libsodium-wrappers": "^0.7.2",
-    "@cogitojs/telepath-js": "^0.2.0"
+    "@cogitojs/telepath-js": "^0.2.0",
+    "libsodium-wrappers": "^0.7.2"
   }
 }

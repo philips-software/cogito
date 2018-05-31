@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Cogito library for web app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito",
   "license": "UNLICENSED",
@@ -38,7 +38,7 @@
     "rollup-plugin-uglify": "^3.0.0"
   },
   "dependencies": {
-    "@cogitojs/cogito-web3": "^0.1.4",
+    "@cogitojs/cogito-web3": "^0.2.1",
     "@cogitojs/telepath-js": "^0.2.0"
   },
   "peerDependencies": {
