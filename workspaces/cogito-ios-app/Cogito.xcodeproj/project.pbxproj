@@ -363,7 +363,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0212E0321F9E392500EEDE34 /* Sign transaction */ = {
+		0212E0321F9E392500EEDE34 /* Sign transaction service */ = {
 			isa = PBXGroup;
 			children = (
 				0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */,
@@ -372,16 +372,16 @@
 				5CC4D2CD1FE801DE002F2450 /* TransactionSigningActions.swift */,
 				026779AC2007B47E00C2D45C /* TransactionSigner.swift */,
 			);
-			path = "Sign transaction";
+			path = "Sign transaction service";
 			sourceTree = "<group>";
 		};
-		0212E0331F9E393A00EEDE34 /* Sign transaction */ = {
+		0212E0331F9E393A00EEDE34 /* Sign transaction service */ = {
 			isa = PBXGroup;
 			children = (
 				5CC4D2C81FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift */,
 				026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */,
 			);
-			path = "Sign transaction";
+			path = "Sign transaction service";
 			sourceTree = "<group>";
 		};
 		022621261FAB1CE700692126 /* Identity manager */ = {
@@ -403,7 +403,7 @@
 			path = "Identity manager";
 			sourceTree = "<group>";
 		};
-		0270D7171F9F445F00CC9038 /* Attestations */ = {
+		0270D7171F9F445F00CC9038 /* Attestations service */ = {
 			isa = PBXGroup;
 			children = (
 				0270D7191F9F58CA00CC9038 /* OpenIDAttestationActions.swift */,
@@ -414,10 +414,10 @@
 				C00B581D01FD60AA97FEEFBC /* GetAttestationsBuilder.swift */,
 				5C4D7F5620AD84460008107C /* AttestationActions.swift */,
 			);
-			path = Attestations;
+			path = "Attestations service";
 			sourceTree = "<group>";
 		};
-		0270D7181F9F446C00CC9038 /* Attestations */ = {
+		0270D7181F9F446C00CC9038 /* Attestations service */ = {
 			isa = PBXGroup;
 			children = (
 				0270D71C1F9F5A5F00CC9038 /* OpenIDAttestationActionsSpec.swift */,
@@ -427,7 +427,7 @@
 				5CC9C7AC2091A16D008DB49C /* OpenIdExampleValues.swift */,
 				5C4D7F5820AD869F0008107C /* AttestationActionsSpec.swift */,
 			);
-			path = Attestations;
+			path = "Attestations service";
 			sourceTree = "<group>";
 		};
 		027603E21F6ACD1600788B0A = {
@@ -454,7 +454,7 @@
 		027603ED1F6ACD1600788B0A /* Cogito */ = {
 			isa = PBXGroup;
 			children = (
-				5C04E44B1FA77D0400A70C60 /* Accounts */,
+				5C04E44B1FA77D0400A70C60 /* Accounts service */,
 				028F4EF21F7CE37E0015C4AF /* Global state */,
 				028F4EF01F7CE22D0015C4AF /* Geth state */,
 				0298D4331F7A45040070998D /* Geth */,
@@ -464,12 +464,12 @@
 				02D0C0D61F8B59C30001223E /* Initial setup wizard */,
 				02F0CA071F8754F5000C428F /* Debug view */,
 				028F4EF71F7D34030015C4AF /* Create identity */,
-				0212E0321F9E392500EEDE34 /* Sign transaction */,
-				0270D7171F9F445F00CC9038 /* Attestations */,
+				0212E0321F9E392500EEDE34 /* Sign transaction service */,
+				0270D7171F9F445F00CC9038 /* Attestations service */,
 				5C48E23E1FA1F8A900B8BF6E /* Telepath */,
 				022621261FAB1CE700692126 /* Identity manager */,
 				02E90F501FE03319008D81F9 /* DialogPresenter */,
-				0295A01C2085E6900060400A /* Encryption */,
+				0295A01C2085E6900060400A /* Encryption service */,
 				5C4D7F4E20AD71FC0008107C /* URL handler */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
 				0230F9461FA1E5F3006A36FC /* LaunchActions.swift */,
@@ -489,7 +489,7 @@
 		027604021F6ACD1600788B0A /* CogitoTests */ = {
 			isa = PBXGroup;
 			children = (
-				5C04E4481FA77CA400A70C60 /* Accounts */,
+				5C04E4481FA77CA400A70C60 /* Accounts service */,
 				028F4EF31F7CE3A10015C4AF /* Global */,
 				028F4EF11F7CE25F0015C4AF /* Geth state */,
 				0298D4321F7A44EF0070998D /* Geth */,
@@ -498,12 +498,12 @@
 				02A15AEC1F864EAB00A94163 /* Home */,
 				02C305461F87592800351B4A /* Debug view */,
 				028F4EF81F7D340D0015C4AF /* Create identity */,
-				0212E0331F9E393A00EEDE34 /* Sign transaction */,
-				0270D7181F9F446C00CC9038 /* Attestations */,
+				0212E0331F9E393A00EEDE34 /* Sign transaction service */,
+				0270D7181F9F446C00CC9038 /* Attestations service */,
 				5C48E23B1FA1D06900B8BF6E /* Telepath */,
 				022621271FAB1D0600692126 /* Identity manager */,
 				02E90F541FE27547008D81F9 /* DialogPresenter */,
-				0295A01D2085E69E0060400A /* Encryption */,
+				0295A01D2085E69E0060400A /* Encryption service */,
 				5C4D7F5320AD7D450008107C /* URL handler */,
 				0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
@@ -581,7 +581,7 @@
 			path = "Create identity";
 			sourceTree = "<group>";
 		};
-		0295A01C2085E6900060400A /* Encryption */ = {
+		0295A01C2085E6900060400A /* Encryption service */ = {
 			isa = PBXGroup;
 			children = (
 				0295A01E2085E6CD0060400A /* EncryptionService.swift */,
@@ -589,10 +589,10 @@
 				5C7BCE6520864709006E33A5 /* PublicKeyLoader.swift */,
 				5C3C8F292087337C0042AC2F /* Decrypter.swift */,
 			);
-			path = Encryption;
+			path = "Encryption service";
 			sourceTree = "<group>";
 		};
-		0295A01D2085E69E0060400A /* Encryption */ = {
+		0295A01D2085E69E0060400A /* Encryption service */ = {
 			isa = PBXGroup;
 			children = (
 				0295A0202085E6DD0060400A /* EncryptionServiceSpec.swift */,
@@ -603,7 +603,7 @@
 				5C61A0032088A01100867747 /* DecrypterSpec.swift */,
 				5C3C8F27208732C50042AC2F /* DecrypterSpy.swift */,
 			);
-			path = Encryption;
+			path = "Encryption service";
 			sourceTree = "<group>";
 		};
 		0298D4321F7A44EF0070998D /* Geth */ = {
@@ -756,22 +756,22 @@
 			path = "Debug view";
 			sourceTree = "<group>";
 		};
-		5C04E4481FA77CA400A70C60 /* Accounts */ = {
+		5C04E4481FA77CA400A70C60 /* Accounts service */ = {
 			isa = PBXGroup;
 			children = (
 				5C04E4491FA77CA400A70C60 /* AccountServiceSpec.swift */,
 				5C04E4521FA87D5200A70C60 /* AccountActionsSpec.swift */,
 			);
-			path = Accounts;
+			path = "Accounts service";
 			sourceTree = "<group>";
 		};
-		5C04E44B1FA77D0400A70C60 /* Accounts */ = {
+		5C04E44B1FA77D0400A70C60 /* Accounts service */ = {
 			isa = PBXGroup;
 			children = (
 				5C04E44C1FA77D1C00A70C60 /* AccountService.swift */,
 				5C04E44F1FA788D200A70C60 /* AccountActions.swift */,
 			);
-			path = Accounts;
+			path = "Accounts service";
 			sourceTree = "<group>";
 		};
 		5C48E23B1FA1D06900B8BF6E /* Telepath */ = {
