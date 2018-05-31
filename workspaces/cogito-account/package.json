@@ -38,6 +38,7 @@
     "registry": "http://artifactory-ehv.ta.philips.com/artifactory/api/npm/dl-common-publish-npm-local"
   },
   "dependencies": {
+    "uuid": "^3.2.1"
   },
   "peerDependencies": {
   }
