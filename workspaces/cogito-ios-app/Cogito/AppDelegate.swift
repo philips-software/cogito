@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         telepathSubscriber?.addService(AttestationService(store: appStore))
         telepathSubscriber?.addService(TransactionSigningService(store: appStore))
         telepathSubscriber?.addService(EncryptionService(store: appStore))
+        telepathSubscriber?.addService(IdentityInfoService(store: appStore))
 
         if appStore.state.keyStore.keyStore == nil {
             appStore.dispatch(KeyStoreActions.Create())
