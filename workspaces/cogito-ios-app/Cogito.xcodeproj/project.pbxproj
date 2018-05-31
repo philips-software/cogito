@@ -468,7 +468,7 @@
 				0270D7171F9F445F00CC9038 /* Attestations service */,
 				5C48E23E1FA1F8A900B8BF6E /* Telepath */,
 				022621261FAB1CE700692126 /* Identity manager */,
-				02E90F501FE03319008D81F9 /* DialogPresenter */,
+				02E90F501FE03319008D81F9 /* Dialog presenter */,
 				0295A01C2085E6900060400A /* Encryption service */,
 				5C4D7F4E20AD71FC0008107C /* URL handler */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
@@ -502,7 +502,7 @@
 				0270D7181F9F446C00CC9038 /* Attestations service */,
 				5C48E23B1FA1D06900B8BF6E /* Telepath */,
 				022621271FAB1D0600692126 /* Identity manager */,
-				02E90F541FE27547008D81F9 /* DialogPresenter */,
+				02E90F541FE27547008D81F9 /* Dialog presenter */,
 				0295A01D2085E69E0060400A /* Encryption service */,
 				5C4D7F5320AD7D450008107C /* URL handler */,
 				0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */,
@@ -725,7 +725,7 @@
 			path = "Key store";
 			sourceTree = "<group>";
 		};
-		02E90F501FE03319008D81F9 /* DialogPresenter */ = {
+		02E90F501FE03319008D81F9 /* Dialog presenter */ = {
 			isa = PBXGroup;
 			children = (
 				02E90F511FE03348008D81F9 /* DialogPresenter.swift */,
@@ -734,16 +734,16 @@
 				C00B579EEF4EDAFB75E6221C /* DialogPresenterReducer.swift */,
 				C00B58EF23AD635EAE304108 /* DialogPresenterActions.swift */,
 			);
-			path = DialogPresenter;
+			path = "Dialog presenter";
 			sourceTree = "<group>";
 		};
-		02E90F541FE27547008D81F9 /* DialogPresenter */ = {
+		02E90F541FE27547008D81F9 /* Dialog presenter */ = {
 			isa = PBXGroup;
 			children = (
 				02E90F551FE2755B008D81F9 /* DialogPresenterSpec.swift */,
 				C00B5417AE458FB345850039 /* DialogPresenterReducerSpec.swift */,
 			);
-			path = DialogPresenter;
+			path = "Dialog presenter";
 			sourceTree = "<group>";
 		};
 		02F0CA071F8754F5000C428F /* Debug view */ = {
