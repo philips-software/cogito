@@ -67,6 +67,8 @@
 		02A15B061F86733000A94163 /* DiamondReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15B051F86733000A94163 /* DiamondReducerSpec.swift */; };
 		02B9A683203C762100ADB44F /* UIWindow+CurrentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9A682203C762100ADB44F /* UIWindow+CurrentViewController.swift */; };
 		02B9A684203C7B9200ADB44F /* UIWindow+CurrentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9A682203C762100ADB44F /* UIWindow+CurrentViewController.swift */; };
+		02BB61FD20C0226100F03625 /* IdentityInfoServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BB61FC20C0226100F03625 /* IdentityInfoServiceSpec.swift */; };
+		02BB61FF20C0227A00F03625 /* IdentityInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BB61FE20C0227A00F03625 /* IdentityInfoService.swift */; };
 		02BE32C91F7A4DF9006C7287 /* PeerReporterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */; };
 		02BE32CB1F7A511A006C7287 /* PeerReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CA1F7A511A006C7287 /* PeerReporter.swift */; };
 		02BE32CE1F7A5C55006C7287 /* SyncProgressReporterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BE32CD1F7A5C55006C7287 /* SyncProgressReporterSpec.swift */; };
@@ -242,6 +244,8 @@
 		02A15B031F86732500A94163 /* DiamondStateSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondStateSpec.swift; sourceTree = "<group>"; };
 		02A15B051F86733000A94163 /* DiamondReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondReducerSpec.swift; sourceTree = "<group>"; };
 		02B9A682203C762100ADB44F /* UIWindow+CurrentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+CurrentViewController.swift"; sourceTree = "<group>"; };
+		02BB61FC20C0226100F03625 /* IdentityInfoServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityInfoServiceSpec.swift; sourceTree = "<group>"; };
+		02BB61FE20C0227A00F03625 /* IdentityInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityInfoService.swift; sourceTree = "<group>"; };
 		02BE32C81F7A4DF9006C7287 /* PeerReporterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerReporterSpec.swift; sourceTree = "<group>"; };
 		02BE32CA1F7A511A006C7287 /* PeerReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeerReporter.swift; sourceTree = "<group>"; };
 		02BE32CD1F7A5C55006C7287 /* SyncProgressReporterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProgressReporterSpec.swift; sourceTree = "<group>"; };
@@ -470,6 +474,7 @@
 				022621261FAB1CE700692126 /* Identity manager */,
 				02E90F501FE03319008D81F9 /* Dialog presenter */,
 				0295A01C2085E6900060400A /* Encryption service */,
+				02BB61FA20C0221500F03625 /* Identity info service */,
 				5C4D7F4E20AD71FC0008107C /* URL handler */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
 				0230F9461FA1E5F3006A36FC /* LaunchActions.swift */,
@@ -504,6 +509,7 @@
 				022621271FAB1D0600692126 /* Identity manager */,
 				02E90F541FE27547008D81F9 /* Dialog presenter */,
 				0295A01D2085E69E0060400A /* Encryption service */,
+				02BB61FB20C0222700F03625 /* Identity info service */,
 				5C4D7F5320AD7D450008107C /* URL handler */,
 				0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */,
 				0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */,
@@ -682,6 +688,22 @@
 				02B9A682203C762100ADB44F /* UIWindow+CurrentViewController.swift */,
 			);
 			path = "UIKit reference";
+			sourceTree = "<group>";
+		};
+		02BB61FA20C0221500F03625 /* Identity info service */ = {
+			isa = PBXGroup;
+			children = (
+				02BB61FE20C0227A00F03625 /* IdentityInfoService.swift */,
+			);
+			path = "Identity info service";
+			sourceTree = "<group>";
+		};
+		02BB61FB20C0222700F03625 /* Identity info service */ = {
+			isa = PBXGroup;
+			children = (
+				02BB61FC20C0226100F03625 /* IdentityInfoServiceSpec.swift */,
+			);
+			path = "Identity info service";
 			sourceTree = "<group>";
 		};
 		02C305461F87592800351B4A /* Debug view */ = {
@@ -1171,6 +1193,7 @@
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
 				02021D191F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
+				02BB61FF20C0227A00F03625 /* IdentityInfoService.swift in Sources */,
 				5C3C8F2A2087337C0042AC2F /* Decrypter.swift in Sources */,
 				5C04E4501FA788D200A70C60 /* AccountActions.swift in Sources */,
 				5CAC2D65206BD0CB00F74462 /* Configuration.swift in Sources */,
@@ -1264,6 +1287,7 @@
 				02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */,
 				0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */,
 				0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */,
+				02BB61FD20C0226100F03625 /* IdentityInfoServiceSpec.swift in Sources */,
 				022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */,
 				5CC9C7AD2091A16D008DB49C /* OpenIdExampleValues.swift in Sources */,
 				02021D401F8C1C770092DD89 /* AppReducerSpec.swift in Sources */,
