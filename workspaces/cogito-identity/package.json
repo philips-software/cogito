@@ -1,10 +1,10 @@
 {
-  "name": "@cogitojs/cogito-account",
+  "name": "@cogitojs/cogito-identity",
   "version": "0.0.0",
-  "description": "Supports getting account info from the Cogito app",
-  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito-account",
+  "description": "Supports getting identity info from the Cogito app",
+  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito-identity",
   "license": "UNLICENSED",
-  "main": "umd/cogito-account.min.js",
+  "main": "umd/cogito-identity.min.js",
   "module": "es/index.js",
   "scripts": {
     "build": "node ./tools/build.js"

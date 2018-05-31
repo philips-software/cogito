@@ -8,7 +8,7 @@ import autoExternal from 'rollup-plugin-auto-external'
 const config = {
   input: 'source/index.js',
   output: {
-    name: 'cogito-account'
+    name: 'cogito-identity'
   },
   plugins: [
     autoExternal({

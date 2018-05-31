@@ -21,22 +21,22 @@ exec('babel source -d es --delete-dir-on-start', {
   BABEL_ENV: 'es'
 })
 
-console.log('\nBuilding cogito-account.js ...')
+console.log('\nBuilding cogito-identity.js ...')
 
-exec('rollup -c -f umd -o umd/cogito-account.js', {
+exec('rollup -c -f umd -o umd/cogito-identity.js', {
   BABEL_ENV: 'umd',
   NODE_ENV: 'development'
 })
 
-console.log('\nBuilding cogito-account.min.js ...')
+console.log('\nBuilding cogito-identity.min.js ...')
 
-exec('rollup -c -f umd -o umd/cogito-account.min.js', {
+exec('rollup -c -f umd -o umd/cogito-identity.min.js', {
   BABEL_ENV: 'umd',
   NODE_ENV: 'production'
 })
 
 const size = gzipSize.sync(
-  fs.readFileSync('umd/cogito-account.min.js')
+  fs.readFileSync('umd/cogito-identity.min.js')
 )
 
 console.log('\ngzipped, the UMD build is %s', prettyBytes(size))
