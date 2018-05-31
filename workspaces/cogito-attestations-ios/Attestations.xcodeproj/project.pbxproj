@@ -14,6 +14,7 @@
 		5CCAE5FE20BFFC2500249BB1 /* JavaScriptAttestations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCAE5FD20BFFC2500249BB1 /* JavaScriptAttestations.swift */; };
 		5CCAE60020BFFF5300249BB1 /* ProtoAttestationExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCAE5FF20BFFF5300249BB1 /* ProtoAttestationExample.swift */; };
 		5CCAE60220C0006200249BB1 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCAE60120C0006200249BB1 /* Serialization.swift */; };
+		5CCAE60420C014CC00249BB1 /* AttestationExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCAE60320C014CC00249BB1 /* AttestationExample.swift */; };
 		5CD1841E20BD6F7200411C8B /* crypto.js in Resources */ = {isa = PBXBuildFile; fileRef = 5CD1841D20BD6F7200411C8B /* crypto.js */; };
 		5CD1843820BD83EA00411C8B /* JavaScriptConsole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD1843720BD83EA00411C8B /* JavaScriptConsole.swift */; };
 		5CD1843A20BD844000411C8B /* JavaScriptCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD1843920BD844000411C8B /* JavaScriptCrypto.swift */; };
@@ -48,6 +49,7 @@
 		5CCAE5FD20BFFC2500249BB1 /* JavaScriptAttestations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScriptAttestations.swift; sourceTree = "<group>"; };
 		5CCAE5FF20BFFF5300249BB1 /* ProtoAttestationExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtoAttestationExample.swift; sourceTree = "<group>"; };
 		5CCAE60120C0006200249BB1 /* Serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
+		5CCAE60320C014CC00249BB1 /* AttestationExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationExample.swift; sourceTree = "<group>"; };
 		5CD1841D20BD6F7200411C8B /* crypto.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = crypto.js; sourceTree = "<group>"; };
 		5CD1843720BD83EA00411C8B /* JavaScriptConsole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScriptConsole.swift; sourceTree = "<group>"; };
 		5CD1843920BD844000411C8B /* JavaScriptCrypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScriptCrypto.swift; sourceTree = "<group>"; };
@@ -124,12 +126,12 @@
 				5CD1843720BD83EA00411C8B /* JavaScriptConsole.swift */,
 				5CD1843920BD844000411C8B /* JavaScriptCrypto.swift */,
 				5CCAE5FD20BFFC2500249BB1 /* JavaScriptAttestations.swift */,
+				5CCAE60120C0006200249BB1 /* Serialization.swift */,
 				5C14876720BBF71A009589A8 /* Attestations.h */,
 				5C14876820BBF71A009589A8 /* Info.plist */,
 				5C5EE7BC20BC2BB100B7C014 /* cogito-attestations */,
 				5CD1841C20BD6F4900411C8B /* crypto */,
 				5C5EE7BA20BC2B9200B7C014 /* babel-polyfill */,
-				5CCAE60120C0006200249BB1 /* Serialization.swift */,
 			);
 			path = Attestations;
 			sourceTree = "<group>";
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				5C14877220BBF71A009589A8 /* AttestationsSpec.swift */,
+				5CCAE60320C014CC00249BB1 /* AttestationExample.swift */,
 				5CCAE5FF20BFFF5300249BB1 /* ProtoAttestationExample.swift */,
 				5C14877420BBF71A009589A8 /* Info.plist */,
 			);
@@ -345,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CCAE60020BFFF5300249BB1 /* ProtoAttestationExample.swift in Sources */,
+				5CCAE60420C014CC00249BB1 /* AttestationExample.swift in Sources */,
 				5C14877320BBF71A009589A8 /* AttestationsSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
