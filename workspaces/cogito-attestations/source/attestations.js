@@ -6,7 +6,7 @@ export function issue (attribute, issuer) {
   const attestationKey = generatePrivateKey()
   const attestationId = privateKeyToAddress(attestationKey)
   const issuingHash = keccak256(attestationId, attribute)
-  const issuingSignature = sign(issuingHash, issuer.privateKey)
+  const issuingSignature = issuer.sign(issuingHash)
   return ({
     issuer: issuer.address,
     attribute,
@@ -20,7 +20,7 @@ export function accept (protoAttestation, subject) {
   const subjectHash = keccak256(subject.address)
   const attestationSignature = sign(subjectHash, attestationKey)
   const acceptingHash = keccak256(attribute)
-  const acceptingSignature = sign(acceptingHash, subject.privateKey)
+  const acceptingSignature = subject.sign(acceptingHash)
   return ({
     issuer,
     subject: subject.address,
