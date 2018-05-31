@@ -7,3 +7,9 @@ extension JSContext {
             .load(filename: "cogito-attestations.min")
     }
 }
+
+extension Javascript {
+    static var cogitoAttestations: JSValue {
+        return context.globalObject.forProperty("cogitoAttestations")
+    }
+}

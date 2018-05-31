@@ -1,9 +1,8 @@
 import JavaScriptCore
 
 public func issue(attribute: String, issuer: Identity) -> ProtoAttestation {
-    let global = Javascript.context.globalObject!
-    let attestations = global.forProperty("cogitoAttestations")!
-    let result = attestations.invokeMethod("issue", withArguments: [attribute, issuer.javascriptValue])!
+    let issue = Javascript.cogitoAttestations.forProperty("issue")!
+    let result = issue.call(withArguments: [attribute, issuer.javascriptValue])!
     return ProtoAttestation(javascriptValue: result)
 }
 
