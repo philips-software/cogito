@@ -29,3 +29,13 @@ public class ProtoAttestation {
         return javascriptValue.forProperty("issuingSignature").toString()
     }
 }
+
+extension ProtoAttestation: Equatable {
+    public static func == (lhs: ProtoAttestation, rhs: ProtoAttestation) -> Bool {
+        return
+            lhs.issuer == rhs.issuer &&
+            lhs.attribute == rhs.attribute &&
+            lhs.attestationKey == rhs.attestationKey &&
+            lhs.issuingSignature == rhs.issuingSignature
+    }
+}
