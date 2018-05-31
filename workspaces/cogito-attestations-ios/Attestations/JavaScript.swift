@@ -6,8 +6,7 @@ class Javascript {
         .setExceptionHandler(onException)
         .addConsole()
         .addCrypto()
-        .load(filename: "polyfill.min")
-        .load(filename: "cogito-attestations.min")
+        .addAttestations()
 }
 
 extension JSContext {
