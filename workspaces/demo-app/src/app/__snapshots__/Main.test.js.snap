@@ -106,7 +106,7 @@ exports[`renders correctly 1`] = `
           role="button"
           tabIndex={undefined}
         >
-          Show QRCode
+          Show QR code
         </button>
       </div>
     </div>

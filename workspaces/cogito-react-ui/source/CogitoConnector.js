@@ -38,14 +38,14 @@ class CogitoConnector extends React.Component {
           <Button {...this.props.buttonStyling}
             disabled={this.props.disabled}
             onClick={() => this.onTrigger()}>
-            {this.props.triggerButtonText || 'Show QRCode'}
+            {this.props.triggerButtonText || 'Show QR code'}
           </Button>
         }>
         <Modal.Header>Scan QRCode</Modal.Header>
         <Modal.Content>
           <Modal.Description>
             <Centered>
-              <Header>Please scan the QRCode below with your mobile device.</Header>
+              <Header>Please scan the QR code below with your mobile device.</Header>
               <Spacer
                 margin='20px 0 50px 0'
                 render={() =>
