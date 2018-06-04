@@ -1,47 +1,58 @@
 import { AppEventsActions } from 'app-events'
 import { UserDataActions } from 'user-data'
+import { FaucetService } from 'faucet'
 
-const fetchAccount = async (dispatch, web3) => {
-  dispatch(AppEventsActions.accountsFetchingInProgress())
+import { CogitoIdentity } from '@cogitojs/cogito-identity'
 
-  const accounts = await web3.eth.getAccounts()
-
-  dispatch(AppEventsActions.accountsFetchingFulfilled())
-  dispatch(UserDataActions.connectionEstablished())
-  if (accounts.length === 0) {
-    return undefined
+const getFaucetURL = () => {
+  if (process.env.NODE_ENV === 'production') {
+    return process.env.FAUCET_URL_PRODUCTION
   }
-  return accounts[0]
+
+  return process.env.FAUCET_URL || 'http://localhost:3001/donate'
 }
 
-const getAccount = async (getState, dispatch, web3) => {
-  const { userData: { account } } = getState()
+const transferFunds = async (account) => {
+  const faucet = new FaucetService(getFaucetURL())
+  await faucet.transferFunds(account)
+}
+
+const getAccount = async (getState, dispatch, channel) => {
+  const { userData: { ethereumAddress } } = getState()
 
   let fetchedAccount
 
-  if (!account) {
-    fetchedAccount = await fetchAccount(dispatch, web3)
-    if (!fetchedAccount) return undefined
-    console.log('fetchedAccount', fetchedAccount)
-    dispatch(UserDataActions.setAccount(fetchedAccount))
+  if (!ethereumAddress) {
+    const requestedProperties = [
+      CogitoIdentity.Property.EthereumAddress,
+      CogitoIdentity.Property.Username
+    ]
+    const cogitoIdentity = new CogitoIdentity({ channel })
+    const info = await cogitoIdentity.getInfo({ properties: requestedProperties })
+    if (!info) return undefined
+    dispatch(UserDataActions.setIdentityInfo(info))
+    console.log('userIdentity:', info)
   } else {
-    fetchedAccount = account
+    fetchedAccount = ethereumAddress
   }
 
   return fetchedAccount
 }
 
 class ContractActions {
-  static increase = ({ increment, deployedContract: contract, web3 }) => {
+  static increase = ({ increment, deployedContract: contract, channel }) => {
     return async (dispatch, getState) => {
       dispatch(AppEventsActions.executingContractInProgress())
-      const account = await getAccount(getState, dispatch, web3)
+      const account = await getAccount(getState, dispatch, channel)
 
       if (!account) {
         console.error('No accounts. Please handle that first!')
         dispatch(AppEventsActions.executingContractError())
         return
       }
+
+      // let's make sure the account has some funds
+      transferFunds(account)
 
       try {
         await contract.increase(
@@ -56,10 +67,10 @@ class ContractActions {
     }
   }
 
-  static read = ({ deployedContract: contract, web3 }) => {
+  static read = ({ deployedContract: contract, channel }) => {
     return async (dispatch, getState) => {
       dispatch(AppEventsActions.executingContractInProgress())
-      const account = await getAccount(getState, dispatch, web3)
+      const account = await getAccount(getState, dispatch, channel)
 
       if (!account) {
         console.error('No accounts. Please handle that first!')

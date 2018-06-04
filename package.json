@@ -33,7 +33,8 @@
             "workspaces/telepath-js",
             "workspaces/telepath-queuing-service",
             "workspaces/demo-app",
-            "workspaces/crypto"
+            "workspaces/crypto",
+            "workspaces/faucet"
         ],
         "testMatch": [
             "**/*.test.js"
