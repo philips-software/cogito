@@ -18,6 +18,14 @@ class AppEventsActions {
   static executingContractFulfilled = () => ({
     type: 'EXECUTING_CONTRACT_FULFILLED'
   })
+
+  static setDialogOpen = () => ({
+    type: 'DIALOG_OPEN'
+  })
+
+  static setDialogClosed = () => ({
+    type: 'DIALOG_CLOSED'
+  })
 }
 
 export { AppEventsActions }

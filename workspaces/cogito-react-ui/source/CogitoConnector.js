@@ -25,13 +25,19 @@ class CogitoConnector extends React.Component {
     this.props.onClosed()
   }
 
+  onTrigger = () => {
+    const { onTrigger } = this.props
+    this.setState({open: true})
+    onTrigger && onTrigger()
+  }
+
   render () {
     return (
       <Modal open={this.state.open}
         trigger={
           <Button {...this.props.buttonStyling}
             disabled={this.props.disabled}
-            onClick={() => this.setState({open: true})}>
+            onClick={() => this.onTrigger()}>
             {this.props.triggerButtonText || 'Show QRCode'}
           </Button>
         }>
