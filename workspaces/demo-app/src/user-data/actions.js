@@ -30,6 +30,9 @@ class UserDataActions {
     return async (dispatch) => {
       const cogitoIdentity = new CogitoIdentity({ channel })
       const info = await cogitoIdentity.getInfo({ properties: requestedProperties })
+      if (info && info.ethereumAddress) {
+        dispatch(UserDataActions.connectionEstablished())
+      }
       dispatch(UserDataActions.setIdentityInfo(info))
     }
   }

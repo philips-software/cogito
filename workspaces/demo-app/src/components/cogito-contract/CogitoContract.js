@@ -21,6 +21,10 @@ class CogitoContract extends React.Component {
     error: false
   }
 
+  onTrigger = (dispatch) => {
+    dispatch(AppEventsActions.setDialogOpen())
+  }
+
   onClosed = async (dispatch) => {
     const { contracts: { simpleStorage: deployedContract }, web3 } = this.props
     console.log('action', this.state.action)
@@ -38,6 +42,7 @@ class CogitoContract extends React.Component {
         web3
       }))
     }
+    dispatch(AppEventsActions.setDialogClosed())
     this.setState({
       forceQRCode: false,
       action: ''
@@ -46,6 +51,7 @@ class CogitoContract extends React.Component {
 
   read = async (dispatch, channelReady) => {
     if (!channelReady) {
+      dispatch(AppEventsActions.setDialogOpen())
       this.setState({
         forceQRCode: true,
         action: 'read'
@@ -63,6 +69,7 @@ class CogitoContract extends React.Component {
 
   increase = async (dispatch, channelReady) => {
     if (!channelReady) {
+      dispatch(AppEventsActions.setDialogOpen())
       this.setState({
         forceQRCode: true,
         action: 'increase'
@@ -85,10 +92,11 @@ class CogitoContract extends React.Component {
         selector={state => ({
           balance: state.userData.balance,
           channelReady: state.userData.connectionEstablished,
-          executingContractInProgress: state.appEvents.executingContractInProgress
+          executingContractInProgress: state.appEvents.executingContractInProgress,
+          dialogOpen: state.appEvents.dialogOpen
         })}>
         {
-          ({ balance, channelReady, executingContractInProgress }, dispatch) =>
+          ({ balance, channelReady, executingContractInProgress, dialogOpen }, dispatch) =>
             <FullWidthCentered>
               <P>You have one contract deployed called <span>Simple Storage</span>.</P>
               <P>Simple storage allows you to store a value in a smart contract.</P>
@@ -106,7 +114,8 @@ class CogitoContract extends React.Component {
                   onClick={() => this.read(dispatch, channelReady)}>Read...</Button>
                 <Button basic color='pink' disabled={executingContractInProgress === true}
                   onClick={() => this.increase(dispatch, channelReady)}>Increase by 5...</Button>
-                <CogitoConnector open={this.state.forceQRCode}
+                <CogitoConnector open={dialogOpen}
+                  onTrigger={() => this.onTrigger(dispatch)}
                   connectUrl={this.props.channel.createConnectUrl('https://cogito.mobi')}
                   onClosed={() => this.onClosed(dispatch)}
                   buttonStyling={{basic: true, color: 'pink'}} />

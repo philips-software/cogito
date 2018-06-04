@@ -18,7 +18,7 @@ const transferFunds = async (account) => {
 }
 
 const getAccount = async (getState, dispatch, channel) => {
-  const { userData: { ethereumAddress } } = getState()
+  const { userData: { connectionEstablished, ethereumAddress } } = getState()
 
   let fetchedAccount
 
@@ -31,9 +31,13 @@ const getAccount = async (getState, dispatch, channel) => {
     const info = await cogitoIdentity.getInfo({ properties: requestedProperties })
     if (!info) return undefined
     dispatch(UserDataActions.setIdentityInfo(info))
+    dispatch(UserDataActions.connectionEstablished())
     console.log('userIdentity:', info)
   } else {
     fetchedAccount = ethereumAddress
+    if (!connectionEstablished) {
+      dispatch(UserDataActions.connectionEstablished())
+    }
   }
 
   return fetchedAccount

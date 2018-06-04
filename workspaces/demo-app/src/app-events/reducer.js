@@ -25,6 +25,16 @@ const reducer = (state = {}, action) => {
         ...state,
         executingContractInProgress: false
       }
+    case 'DIALOG_OPEN':
+      return {
+        ...state,
+        dialogOpen: true
+      }
+    case 'DIALOG_CLOSED':
+      return {
+        ...state,
+        dialogOpen: false
+      }
     default:
       return state
   }
