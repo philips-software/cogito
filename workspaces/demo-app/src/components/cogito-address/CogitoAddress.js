@@ -6,7 +6,7 @@ import { Centered, ValueWrapper } from '@react-frontend-developer/react-layout-h
 export const CogitoAddress = () =>
   <WithStore
     selector={state => ({
-      address: state.userData.account,
+      address: state.userData.ethereumAddress,
       username: state.userData.username
     })}>
     {

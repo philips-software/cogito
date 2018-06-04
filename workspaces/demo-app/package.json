@@ -34,6 +34,7 @@
     "web3": "^1.0.0-beta.34"
   },
   "devDependencies": {
+    "@cogitojs/faucet": "^0.1.0",
     "@babel/plugin-proposal-class-properties": "7.0.0-beta.44",
     "@react-frontend-developer/react-scripts": "2.0.0-next.b2fd8db8.11",
     "babel-eslint": "^8.2.3",
@@ -45,6 +46,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "start-faucet": "cogito-faucet",
+    "start-all": "yarn start-ganache & cogito-faucet & react-scripts start & wait",
+    "start-with-faucet": "cogito-faucet & react-scripts start & wait",
+    "start-ganache": "(ganache-cli --account='0xc87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3,10000000000000000000000' -p 8545) & (sleep 3 && cd truffle && yarn truffle migrate) & wait",
     "test": "yarn lint && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "yarn standard",
