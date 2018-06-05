@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/faucet",
-  "version": "0.1.0",
+  "version": "0.2.2",
   "description": "Simple faucet with REST API",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/faucet",
   "license": "UNLICENSED",
