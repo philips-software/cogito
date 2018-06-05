@@ -1,16 +1,16 @@
 {
   "name": "demo-app",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A demo project for using Cogito",
   "repository": "https://gitlab.ta.philips.com/blockchain-lab/cogito",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/demo-app",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@cogitojs/cogito-attestations": "^0.2.1",
+    "@cogitojs/cogito-attestations": "^0.2.2",
     "@cogitojs/cogito-encryption": "^0.2.1",
     "@cogitojs/cogito-react": "^0.2.1",
-    "@cogitojs/cogito-react-ui": "^0.1.5",
+    "@cogitojs/cogito-react-ui": "^0.2.2",
     "@react-frontend-developer/css-grid-helper": "^1.0.6",
     "@react-frontend-developer/react-layout-helpers": "^1.0.6",
     "@react-frontend-developer/react-redux-render-prop": "^1.0.6",
@@ -34,8 +34,8 @@
     "web3": "^1.0.0-beta.34"
   },
   "devDependencies": {
-    "@cogitojs/faucet": "^0.1.0",
     "@babel/plugin-proposal-class-properties": "7.0.0-beta.44",
+    "@cogitojs/faucet": "^0.2.2",
     "@react-frontend-developer/react-scripts": "2.0.0-next.b2fd8db8.11",
     "babel-eslint": "^8.2.3",
     "deep-freeze-es6": "^1.0.1",
