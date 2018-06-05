@@ -33,6 +33,7 @@ const getAccount = async (getState, dispatch, channel) => {
     dispatch(UserDataActions.setIdentityInfo(info))
     dispatch(UserDataActions.connectionEstablished())
     console.log('userIdentity:', info)
+    fetchedAccount = info.ethereumAddress
   } else {
     fetchedAccount = ethereumAddress
     if (!connectionEstablished) {

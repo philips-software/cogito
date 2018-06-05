@@ -8,7 +8,7 @@ import { Status } from 'components/styling'
 import { TimedStatus } from 'components/utils'
 import { Segment, Button } from 'semantic-ui-react'
 import { ContractActions } from './actions'
-import { AppEventsActions } from '../../app-events/actions'
+import { AppEventsActions } from 'app-events'
 
 const P = glamorous.p({
   maxWidth: '40rem'
@@ -16,7 +16,6 @@ const P = glamorous.p({
 
 class CogitoContract extends React.Component {
   state = {
-    forceQRCode: false,
     action: '',
     error: false
   }
@@ -26,25 +25,24 @@ class CogitoContract extends React.Component {
   }
 
   onClosed = async (dispatch) => {
-    const { contracts: { simpleStorage: deployedContract }, web3 } = this.props
+    const { contracts: { simpleStorage: deployedContract }, channel } = this.props
     console.log('action', this.state.action)
     if (this.state.action === 'increase') {
       console.log('will increase contract value...')
       dispatch(ContractActions.increase({
         deployedContract,
-        web3,
+        channel,
         increment: 5
       }))
     } else if (this.state.action === 'read') {
       console.log('will read contract value...')
       dispatch(ContractActions.read({
         deployedContract,
-        web3
+        channel
       }))
     }
     dispatch(AppEventsActions.setDialogClosed())
     this.setState({
-      forceQRCode: false,
       action: ''
     })
   }
@@ -53,16 +51,14 @@ class CogitoContract extends React.Component {
     if (!channelReady) {
       dispatch(AppEventsActions.setDialogOpen())
       this.setState({
-        forceQRCode: true,
         action: 'read'
       })
     } else {
-      console.log('props=', this.props)
-      const { contracts: { simpleStorage: deployedContract }, web3 } = this.props
+      const { contracts: { simpleStorage: deployedContract }, channel } = this.props
       console.log('will read contract value...')
       dispatch(ContractActions.read({
         deployedContract,
-        web3
+        channel
       }))
     }
   }
@@ -71,16 +67,14 @@ class CogitoContract extends React.Component {
     if (!channelReady) {
       dispatch(AppEventsActions.setDialogOpen())
       this.setState({
-        forceQRCode: true,
         action: 'increase'
       })
     } else {
-      console.log('props=', this.props)
-      const { contracts: { simpleStorage: deployedContract }, web3 } = this.props
+      const { contracts: { simpleStorage: deployedContract }, channel } = this.props
       console.log('will increase contract value...')
       dispatch(ContractActions.increase({
         deployedContract,
-        web3,
+        channel,
         increment: 5
       }))
     }
