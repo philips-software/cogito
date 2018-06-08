@@ -4,7 +4,7 @@
   "description": "Simple faucet with REST API",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/faucet",
   "license": "UNLICENSED",
-  "main": "lib/server.js",
+  "main": "lib/faucet-server.js",
   "scripts": {
     "build": "node ./tools/build.js"
   },
