@@ -17,3 +17,6 @@ xcuserdata
 
 # lerna
 lerna-debug.log
+
+# SonarQube
+.scannerwork
