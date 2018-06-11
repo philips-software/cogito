@@ -34,7 +34,8 @@
             "workspaces/telepath-queuing-service",
             "workspaces/demo-app",
             "workspaces/crypto",
-            "workspaces/faucet"
+            "workspaces/faucet",
+            "workspaces/cogito-ios-app-distribution"
         ],
         "testMatch": [
             "**/*.test.js"
@@ -62,7 +63,8 @@
             "**/node_modules/**",
             "**/umd/**",
             "**/es/**",
-            "**/lib/**"
+            "**/lib/**",
+            "**/build/**"
         ],
         "envs": [
             "es6",

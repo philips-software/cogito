@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="css-1wixu57"
+>
+  <div
+    style={
+      Object {
+        "height": "200px",
+        "width": "300px",
+      }
+    }
+  >
+    <div
+      className="ui segment"
+      style={
+        Object {
+          "height": "100%",
+          "width": "100%",
+        }
+      }
+    >
+      <button
+        className="ui pink basic fade animated button"
+        disabled={undefined}
+        onClick={[Function]}
+        role="button"
+        tabIndex={undefined}
+      >
+        Cogito ios App
+      </button>
+    </div>
+  </div>
+</div>
+`;

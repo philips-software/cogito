@@ -1,0 +1,68 @@
+{
+  "name": "cogito-ios-app-distribution",
+  "version": "0.1.0",
+  "description": "A simple page for Cogito App distribution",
+  "repository": "https://gitlab.ta.philips.com/blockchain-lab/cogito",
+  "private": true,
+  "dependencies": {
+    "@react-frontend-developer/css-grid-helper": "^1.0.6",
+    "@react-frontend-developer/react-layout-helpers": "^1.0.6",
+    "glamorous": "^4.13.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "semantic-ui-react": "^0.79.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "7.0.0-beta.44",
+    "@cogitojs/faucet": "^0.2.2",
+    "@react-frontend-developer/react-scripts": "2.0.0-next.b2fd8db8.11",
+    "babel-eslint": "^8.2.3",
+    "deep-freeze-es6": "^1.0.1",
+    "jest-canvas-mock": "^1.0.2",
+    "react-test-renderer": "^16.2.0",
+    "standard": "^11.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "build/**",
+      "node_modules/**",
+      "src/contracts/**",
+      "truffle/node_modules/**"
+    ],
+    "envs": [
+      "es6",
+      "browser",
+      "jest"
+    ],
+    "globals": [
+      "artifacts",
+      "contract",
+      "assert"
+    ]
+  },
+  "browserslist": {
+    "development": [
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 edge versions"
+    ],
+    "production": [
+      ">1%",
+      "last 4 versions",
+      "Firefox ESR",
+      "not ie < 11"
+    ]
+  }
+}
