@@ -25,21 +25,23 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "yarn lint && react-scripts test --env=jsdom",
+    "lint": "yarn standard",
+    "lint-fix": "yarn standard --fix --verbose"
   },
   "jest": {
     "setupFiles": [
       "jest-canvas-mock"
-    ]
+    ],
+    "moduleNameMapper": {
+      "\\.(png|gif|jpg)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   },
   "standard": {
     "parser": "babel-eslint",
     "ignore": [
       "build/**",
-      "node_modules/**",
-      "src/contracts/**",
-      "truffle/node_modules/**"
+      "node_modules/**"
     ],
     "envs": [
       "es6",
