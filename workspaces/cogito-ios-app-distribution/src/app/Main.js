@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PageCentered } from '@react-frontend-developer/react-layout-helpers'
-import { ImageAppLink } from 'components/ImageAppLink'
+import { ImageAppLink } from '../components/imageAppLink'
 import { P, B } from 'glamorous'
 import { Button } from 'semantic-ui-react'
 
