@@ -4,36 +4,18 @@ import { Button, Header, Modal } from 'semantic-ui-react'
 import { Centered, Spacer } from '@react-frontend-developer/react-layout-helpers'
 
 class CogitoConnector extends React.Component {
-  state
-
-  constructor ({ open = false }) {
-    super()
-    this.state = {
-      open: open
-    }
-  }
-
-  static getDerivedStateFromProps (nextProps, prevState) {
-    if (nextProps.open !== prevState.open) {
-      return { open: nextProps.open }
-    }
-    return null
-  }
-
   onClick = () => {
-    this.setState({open: false})
     this.props.onClosed()
   }
 
   onTrigger = () => {
     const { onTrigger } = this.props
-    this.setState({open: true})
     onTrigger && onTrigger()
   }
 
   render () {
     return (
-      <Modal open={this.state.open}
+      <Modal open={this.props.open}
         trigger={
           <Button {...this.props.buttonStyling}
             disabled={this.props.disabled}
