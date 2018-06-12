@@ -3,6 +3,7 @@ image: node:9.11.1
 stages:
   - build
   - test
+  - qa
   - deploy
 
 build cogito:
@@ -64,6 +65,12 @@ test cogito-attestations-ios:
     - bundle exec slather coverage
   tags:
     - ios
+
+sonar:
+  image: gitlab.ta.philips.com:5432/forest/docker/sonar-ci:3.1.0.1141-02
+  stage: qa
+  script:
+    - sonar-scanner -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=https://sonar.ta.philips.com/
 
 deploy faucet:
   image: docker:latest
