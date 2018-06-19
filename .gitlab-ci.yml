@@ -4,7 +4,6 @@ stages:
   - build
   - test
   - qa
-  - deploy
 
 build cogito:
   stage: build
@@ -71,26 +70,3 @@ sonar:
   stage: qa
   script:
     - sonar-scanner -Dsonar.login=$SONAR_LOGIN -Dsonar.host.url=https://sonar.ta.philips.com/
-
-deploy faucet:
-  image: docker:latest
-  services:
-    - docker:dind
-  stage: deploy
-  variables:
-    TMP_IMAGE_TAG: faucet
-    AWS_REPOSITORY_URL: 212699287803.dkr.ecr.eu-central-1.amazonaws.com/blockchainlab
-  before_script:
-    - cd workspaces/faucet
-    - apk add --no-cache curl jq python py-pip
-    - pip install awscli
-    - $(aws ecr get-login --no-include-email --region eu-central-1)
-  script:
-    - cd workspaces/faucet
-    - docker build -t $TMP_IMAGE_TAG .
-    - docker tag $TMP_IMAGE_TAG $AWS_REPOSITORY_URL:$TMP_IMAGE_TAG-latest
-    - docker push $AWS_REPOSITORY_URL:$TMP_IMAGE_TAG-latest
-    - docker tag $TMP_IMAGE_TAG $AWS_REPOSITORY_URL:$TMP_IMAGE_TAG-$CI_COMMIT_TAG
-    - docker push $AWS_REPOSITORY_URL:$TMP_IMAGE_TAG-$CI_COMMIT_TAG
-  only:
-    - tags
