@@ -23,10 +23,10 @@ export const CogitoAttestations = (props) => (
 )
 
 const ShowAttestation = () => (
-  <Centered>
+  <Centered css={{padding: '10px', backgroundColor: 'white'}}>
     <p>Scan to add a dummy attestation:</p>
     <QRCode
-      value='https://cogito.example.com/attestations/receive#A=dummy%3Ahello%20world'
+      value='https://cogito.example.com/attestations/receive#A=email%3Atest.user%40philips.com'
     />
   </Centered>
 )
@@ -41,7 +41,7 @@ const RetrieveAttestation = ({ channel }) => (
           <Button
             basic color='pink'
             onClick={() => dispatch(AttestationsActions.retrieve({
-              type: 'dummy',
+              type: 'email',
               telepathChannel: channel
             }))}
           >
