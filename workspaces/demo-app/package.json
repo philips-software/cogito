@@ -1,6 +1,6 @@
 {
   "name": "demo-app",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "A demo project for using Cogito",
   "repository": "https://gitlab.ta.philips.com/blockchain-lab/cogito",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/demo-app",
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.0.0-beta.44",
-    "@cogitojs/faucet": "^0.2.7",
+    "@cogitojs/faucet": "^0.2.8",
     "@react-frontend-developer/react-scripts": "2.0.0-next.b2fd8db8.11",
     "babel-eslint": "^8.2.3",
     "deep-freeze-es6": "^1.0.1",
