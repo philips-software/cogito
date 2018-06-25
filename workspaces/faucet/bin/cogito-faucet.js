@@ -11,7 +11,7 @@ var configurationFile = fs.readFileSync('faucet-config-' + environment + '.json'
 var configuration = JSON.parse(configurationFile)
 
 if (providerUrl) {
-  configuration.providerUrl = 'http://' + providerUrl + ':8545'
+  configuration.providerUrl = providerUrl
 }
 
 console.log('Using configuration:')
