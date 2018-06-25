@@ -8,6 +8,7 @@
     "@react-frontend-developer/css-grid-helper": "^1.0.6",
     "@react-frontend-developer/react-layout-helpers": "^1.0.6",
     "glamorous": "^4.13.1",
+    "glamor": "^2.20.40",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "semantic-ui-react": "^0.79.1"
