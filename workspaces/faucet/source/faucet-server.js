@@ -14,6 +14,7 @@ export default class FaucetServer {
   }
 
   donateHandler (request, response) {
+    request.setTimeout(600 * 1000) // 600 second timeout
     if (this.queue.length > 0) {
       // still processing previous request
       this.queue.push({request, response})
