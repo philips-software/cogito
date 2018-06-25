@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/faucet",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Simple faucet with REST API",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/faucet",
   "license": "UNLICENSED",
@@ -29,8 +29,8 @@
   },
   "dependencies": {
     "@babel/core": "7.0.0-beta.44",
-    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.44",
     "@babel/plugin-proposal-class-properties": "7.0.0-beta.44",
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.44",
     "@babel/plugin-transform-runtime": "7.0.0-beta.44",
     "@babel/preset-env": "7.0.0-beta.44",
     "@babel/register": "7.0.0-beta.44",
