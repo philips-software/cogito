@@ -88,8 +88,22 @@ After faucet is started, you can use test it by performing a post using e.g. `cu
 curl -X POST -D - http://localhost:3001/donate/0xdf562290eceb83d659e23252ae8d38fa0bbc06e8
 ```
 
-or using `http`:
+or using [httpie](https://httpie.org):
 
 ```bash
 http POST http://localhost:3001/donate/0xdf562290eceb83d659e23252ae8d38fa0bbc06e8
 ```
+
+When using a deployed network, you may want to increase the timeouts. For `curl`:
+
+```bash
+curl -X POST -m 600 -D - https://blockchain.deployed.com/faucet/donate/0x6b0be084e6ffc7d6cace8e01e2814c869257c3aa
+```
+
+for `httpie`:
+
+```bash
+http --timeout=600 POST https://blockchain.deployed.com/faucet/donate/0x6b0be084e6ffc7d6cace8e01e2814c869257c3aa
+```
+
+This will give the network `10min`.
