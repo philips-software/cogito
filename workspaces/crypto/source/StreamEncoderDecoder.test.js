@@ -149,4 +149,66 @@ describe('StreamEncoderDecoder', () => {
     expect(decryptedMessages).toEqual(messages)
     expect(decryptedTags).toEqual(expectedTags(N))
   })
+
+  describe('Stream Encoder', () => {
+    describe('when Sodium has not been initialized', () => {
+      const error = new Error('Sodium not initialized! Did you forget to call `await Sodium.wait()`?')
+
+      beforeEach(() => {
+        Sodium.ready = false
+      })
+
+      afterEach(() => {
+        Sodium.ready = true
+      })
+
+      it('throws an error if you try to create StreamEncoder', () => {
+        expect(() => { console.log(new StreamEncoder()) }).toThrow(error)
+      })
+
+      it('throws an error if you try to push to the stream', () => {
+        const dataChunk = Uint8Array.from({length: 10}, (v, k) => k)
+        expect(() => { streamEncoder.push(dataChunk) }).toThrow(error)
+      })
+
+      it('throws an error if you try to end the stream', () => {
+        const dataChunk = Uint8Array.from({length: 10}, (v, k) => k)
+        expect(() => { streamEncoder.end(dataChunk) }).toThrow(error)
+      })
+
+      it('throws an error if you access cryptoMaterial', () => {
+        expect(() => { console.log(streamEncoder.cryptoMaterial) }).toThrow(error)
+      })
+    })
+  })
+
+  describe('Stream Decoder', () => {
+    describe('when Sodium has not been initialized', () => {
+      const error = new Error('Sodium not initialized! Did you forget to call `await Sodium.wait()`?')
+      let cryptoMaterial
+      let streamDecoder
+
+      beforeEach(() => {
+        cryptoMaterial = streamEncoder.cryptoMaterial
+        streamDecoder = new StreamDecoder(cryptoMaterial)
+        Sodium.ready = false
+      })
+
+      afterEach(() => {
+        Sodium.ready = true
+      })
+
+      it('throws an error if you try to create StreamDecoder', () => {
+        expect(() => { console.log(new StreamDecoder(cryptoMaterial)) }).toThrow(error)
+      })
+
+      it('throws an error if you try to pull from the stream', () => {
+        Sodium.ready = true
+        const dataChunk = Uint8Array.from({length: 10}, (v, k) => k)
+        const encryptedChunk = streamEncoder.end(dataChunk)
+        Sodium.ready = false
+        expect(() => { streamDecoder.pull(encryptedChunk) }).toThrow(error)
+      })
+    })
+  })
 })

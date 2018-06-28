@@ -10,11 +10,19 @@ class Sodium {
     }
   }
 
+  static checkSodium () {
+    if (!Sodium.ready) {
+      throw new Error('Sodium not initialized! Did you forget to call `await Sodium.wait()`?')
+    }
+  }
+
   static get TAG_MESSAGE () {
+    Sodium.checkSodium()
     return sodium.crypto_secretstream_xchacha20poly1305_TAG_MESSAGE
   }
 
   static get TAG_FINAL () {
+    Sodium.checkSodium()
     return sodium.crypto_secretstream_xchacha20poly1305_TAG_FINAL
   }
 }
