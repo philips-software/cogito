@@ -15,6 +15,8 @@ await Sodium.wait()
 
 You can always check if Sodium is ready by checking value of `Sodium.ready`. It is `true` when Sodium is initialized correctly.
 
+> If you try to use any function (including constructors) that depends on Sodium library when Sodium is not initialized (i.e. when `Sodium.ready === false`), an exception will be thrown. This currently apply to `Sodium`, `StreamEncoder` and `StreamDecoder` classes.
+
 ### Using stream encoder and decoder
 
 Stream encoding/decoding is provided by the means of the `StreamEncoder` and `StreamDecoder` classes.
