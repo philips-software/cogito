@@ -1,6 +1,8 @@
 import { StreamEncoder } from './StreamEncoder'
 import { StreamDecoder } from './StreamDecoder'
 
+import { Sodium } from './Sodium'
+
 const str2ab = str => {
   var buf = new ArrayBuffer(str.length * 2) // 2 bytes for each char
   var bufView = new Uint16Array(buf)
@@ -24,23 +26,127 @@ const fromString = str => {
 
 describe('StreamEncoderDecoder', () => {
   let streamEncoder
-  let streamDecoder
+
+  beforeAll(async () => {
+    await Sodium.wait()
+  })
 
   beforeEach(() => {
     streamEncoder = new StreamEncoder()
-    streamDecoder = new StreamDecoder()
   })
 
-  it('can encode a one element stream', async () => {
+  const expectedTags = N => {
+    return [...Array(N).keys()].map((e, index) => {
+      return index < N - 1 ? Sodium.TAG_MESSAGE : Sodium.TAG_FINAL
+    })
+  }
+
+  const createTestTextMessages = N => {
+    return [...Array(N).keys()].map(e => `message_${e}`)
+  }
+
+  // This returns:
+  // [
+  //   '[0,0,0,0,...]',
+  //   '[1,1,1,1,...]',
+  //   '[2,2,2,2,...]',
+  //   ...
+  // ]
+  const createTestUint8ArrayMessages = (N, M) => {
+    return [...Array(N).keys()].map(e => Uint8Array.from({length: 5}, (v, k) => e))
+  }
+
+  it('can encode a one element stream', () => {
     const message = 'Great success!'
-    const keyAndHeader = await streamEncoder.prepare()
 
     const data = fromString(message)
     const cipherText = streamEncoder.end(data)
 
-    await streamDecoder.prepare(keyAndHeader)
-    const clearText = streamDecoder.pull(cipherText)
+    const streamDecoder = new StreamDecoder(streamEncoder.cryptoMaterial)
+    const {message: clearText, tag} = streamDecoder.pull(cipherText)
 
     expect(toString(clearText)).toBe(message)
+    expect(tag).toBe(Sodium.TAG_FINAL)
+  })
+
+  it('can encode two element stream', async () => {
+    const message1 = 'Message 1'
+    const message2 = 'Message 2'
+
+    const data1 = fromString(message1)
+    const data2 = fromString(message2)
+    const cipherText1 = streamEncoder.push(data1)
+    const cipherText2 = streamEncoder.end(data2)
+
+    const streamDecoder = new StreamDecoder(streamEncoder.cryptoMaterial)
+    const {message: clearText1, tag: tag1} = streamDecoder.pull(cipherText1)
+    const {message: clearText2, tag: tag2} = streamDecoder.pull(cipherText2)
+
+    expect(toString(clearText1)).toBe(message1)
+    expect(tag1).toBe(Sodium.TAG_MESSAGE)
+    expect(toString(clearText2)).toBe(message2)
+    expect(tag2).toBe(Sodium.TAG_FINAL)
+  })
+
+  it('can encode multiple element stream', () => {
+    const N = 1000
+    const messages = createTestTextMessages(N)
+
+    const encryptedData = messages.map((m, index) => {
+      return index === N - 1
+        ? streamEncoder.end(fromString(m))
+        : streamEncoder.push(fromString(m))
+    })
+
+    const streamDecoder = new StreamDecoder(streamEncoder.cryptoMaterial)
+
+    const decryptedData = encryptedData.map(m => streamDecoder.pull(m))
+
+    const decryptedMessages = decryptedData.map(d => toString(d.message))
+    const decryptedTags = decryptedData.map(d => d.tag)
+
+    expect(decryptedMessages).toEqual(messages)
+    expect(decryptedTags).toEqual(expectedTags(N))
+  })
+
+  it('can encode multiple element stream when working directly with array buffers', () => {
+    const N = 10
+    const messages = createTestUint8ArrayMessages(N, 5)
+
+    const encryptedData = messages.map((m, index) => {
+      return index === N - 1
+        ? streamEncoder.end(m)
+        : streamEncoder.push(m)
+    })
+
+    const streamDecoder = new StreamDecoder(streamEncoder.cryptoMaterial)
+
+    const decryptedData = encryptedData.map(m => streamDecoder.pull(m))
+
+    const decryptedMessages = decryptedData.map(d => d.message)
+    const decryptedTags = decryptedData.map(d => d.tag)
+
+    expect(decryptedMessages).toEqual(messages)
+    expect(decryptedTags).toEqual(expectedTags(N))
+  })
+
+  it('can encode multiple element stream - large amounts of data', () => {
+    const N = 5 * 1024
+    const messages = createTestUint8ArrayMessages(N, 1024)
+
+    const encryptedData = messages.map((m, index) => {
+      return index === N - 1
+        ? streamEncoder.end(m)
+        : streamEncoder.push(m)
+    })
+
+    const streamDecoder = new StreamDecoder(streamEncoder.cryptoMaterial)
+    const decryptedData = encryptedData.map(m => streamDecoder.pull(m))
+
+    const decryptedMessages = decryptedData.map(d => d.message)
+    const decryptedTags = decryptedData.map(d => d.tag)
+
+    expect(decryptedMessages).toEqual(messages)
+    expect(decryptedTags).toEqual(expectedTags(N))
   })
 })
