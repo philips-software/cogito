@@ -1,0 +1,75 @@
+import { rsaCreatePublicKey, rsaEncrypt } from './rsa'
+import base64url from 'base64url'
+import { random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
+
+import { CogitoRequest } from './CogitoRequest'
+
+class CogitoEncryption {
+  channel
+
+  constructor ({ telepathChannel }) {
+    this.channel = telepathChannel
+  }
+
+  extractEncryptionData (encryptionData) {
+    const split = encryptionData.split('.')
+
+    const cipherText = base64url.toBuffer(split[0])
+    const encryptedSymmetricKey = '0x' + base64url.toBuffer(split[1]).toString('hex')
+    const nonce = base64url.toBuffer(split[2])
+
+    return {
+      cipherText,
+      encryptedSymmetricKey,
+      nonce
+    }
+  }
+
+  async decryptSymmetricKey ({encryptedSymmetricKey, tag}) {
+    const request = CogitoRequest.create('decrypt', { tag, cipherText: encryptedSymmetricKey })
+    const response = await this.channel.send(request)
+    if (response.error) {
+      throw new Error(response.error.message)
+    }
+    return Buffer.from(response.result.slice(2), 'hex')
+  }
+
+  async decrypt ({ tag: iOSKeyTag, encryptionData }) {
+    const {cipherText, encryptedSymmetricKey, nonce} = this.extractEncryptionData(encryptionData)
+
+    const symmetricKey = await this.decryptSymmetricKey({
+      encryptedSymmetricKey,
+      tag: iOSKeyTag
+    })
+
+    return decrypt(cipherText, nonce, symmetricKey, 'text')
+  }
+
+  async encrypt ({ jsonWebKey: iOSPublicKey, plainText }) {
+    const publicKey = this.createRsaPublicKey({ jsonWebKey: iOSPublicKey })
+    const symmetricKey = await this.createRandomKey()
+    const nonce = await random(await nonceSize())
+    const cipherText = await encrypt(plainText, nonce, symmetricKey)
+    const encryptedSymmetricKey = rsaEncrypt({ publicKey, plainText: symmetricKey })
+
+    return (
+      base64url.encode(cipherText) + '.' +
+      base64url.encode(encryptedSymmetricKey) + '.' +
+      base64url.encode(nonce)
+    )
+  }
+
+  createRsaPublicKey ({ jsonWebKey }) {
+    const signedN = base64url.toBuffer(jsonWebKey.n)
+    const signedE = base64url.toBuffer(jsonWebKey.e)
+    const n = Buffer.concat([Buffer.from([0]), signedN])
+    const e = Buffer.concat([Buffer.from([0]), signedE])
+    return rsaCreatePublicKey({ n, e })
+  }
+
+  async createRandomKey () {
+    return random(await keySize())
+  }
+}
+
+export { CogitoEncryption }

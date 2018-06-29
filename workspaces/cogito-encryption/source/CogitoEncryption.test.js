@@ -1,4 +1,4 @@
-import { CogitoEncryption } from './cogito-encryption'
+import { CogitoEncryption } from './CogitoEncryption'
 import { rsaGenerateKeyPair, rsaDecrypt } from './rsa'
 import base64url from 'base64url'
 import { random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
@@ -12,78 +12,6 @@ describe('encryption', () => {
   beforeEach(() => {
     telepathChannel = { send: jest.fn() }
     cogitoEncryption = new CogitoEncryption({ telepathChannel })
-  })
-
-  describe('creating new key pairs', () => {
-    const tag = 'some tag'
-
-    beforeEach(() => {
-      const response = { jsonrpc: '2.0', result: tag }
-      telepathChannel.send.mockResolvedValue(response)
-    })
-
-    it('creates new key pairs', async () => {
-      await cogitoEncryption.createNewKeyPair()
-      const request = { jsonrpc: '2.0', method: 'createEncryptionKeyPair' }
-      expect(telepathChannel.send.mock.calls[0][0]).toMatchObject(request)
-    })
-
-    it('returns tag after creating new key pair', async () => {
-      expect(await cogitoEncryption.createNewKeyPair()).toBe(tag)
-    })
-
-    it('throws when error is returned', async () => {
-      expect.assertions(1)
-      const error = { code: -42, message: 'some error' }
-      telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
-      await expect(cogitoEncryption.createNewKeyPair()).rejects.toBeDefined()
-    })
-
-    it('uses different JSON-RPC ids for subsequent requests', async () => {
-      await cogitoEncryption.createNewKeyPair()
-      await cogitoEncryption.createNewKeyPair()
-      const id1 = telepathChannel.send.mock.calls[0][0].id
-      const id2 = telepathChannel.send.mock.calls[1][0].id
-      expect(id1).not.toBe(id2)
-    })
-  })
-
-  describe('retrieving the public key', () => {
-    const tag = 'some tag'
-    const publicKey = 'the public key'
-
-    beforeEach(() => {
-      const response = { jsonrpc: '2.0', result: publicKey }
-      telepathChannel.send.mockResolvedValue(response)
-    })
-
-    it('gets the public key', async () => {
-      await cogitoEncryption.getPublicKey({tag})
-      const request = {
-        jsonrpc: '2.0',
-        method: 'getEncryptionPublicKey',
-        params: { tag }
-      }
-      expect(telepathChannel.send.mock.calls[0][0]).toMatchObject(request)
-    })
-
-    it('returns the public key after getting it', async () => {
-      expect(await cogitoEncryption.getPublicKey(tag)).toBe(publicKey)
-    })
-
-    it('throws when error is returned', async () => {
-      const error = { code: -42, message: 'some error' }
-      telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
-      await expect(cogitoEncryption.getPublicKey({tag})).rejects.toBeDefined()
-    })
-
-    it('uses different JSON-RPC ids for subsequent requests', async () => {
-      await cogitoEncryption.getPublicKey({tag})
-      await cogitoEncryption.getPublicKey({tag})
-      const id1 = telepathChannel.send.mock.calls[0][0].id
-      const id2 = telepathChannel.send.mock.calls[1][0].id
-      expect(id1).not.toBe(id2)
-    })
   })
 
   describe('decrypting data', () => {
