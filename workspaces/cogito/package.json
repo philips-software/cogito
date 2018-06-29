@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito",
-  "version": "0.2.1",
+  "version": "0.2.9",
   "description": "Cogito library for web app",
   "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito",
   "license": "UNLICENSED",
@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@cogitojs/cogito-web3": "^0.2.1",
-    "@cogitojs/telepath-js": "^0.2.0"
+    "@cogitojs/telepath-js": "^0.2.9"
   },
   "peerDependencies": {
     "libsodium-wrappers": "^0.7.2",

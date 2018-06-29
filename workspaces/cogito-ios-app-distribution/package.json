@@ -1,6 +1,6 @@
 {
   "name": "cogito-ios-app-distribution",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "A simple page for Cogito App distribution",
   "repository": "https://gitlab.ta.philips.com/blockchain-lab/cogito",
   "private": true,
@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.0.0-beta.44",
-    "@cogitojs/faucet": "^0.2.8",
+    "@cogitojs/faucet": "^0.2.9",
     "@react-frontend-developer/react-scripts": "2.0.0-next.b2fd8db8.11",
     "babel-eslint": "^8.2.3",
     "deep-freeze-es6": "^1.0.1",
