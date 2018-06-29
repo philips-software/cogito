@@ -1,1 +1,2 @@
-export { CogitoEncryption } from './cogito-encryption'
+export { CogitoEncryption } from './CogitoEncryption'
+export { CogitoKeyProvider } from './CogitoKeyProvider'
