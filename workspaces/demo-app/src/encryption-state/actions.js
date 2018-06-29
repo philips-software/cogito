@@ -1,4 +1,4 @@
-import { CogitoEncryption } from '@cogitojs/cogito-encryption'
+import { CogitoEncryption, CogitoKeyProvider } from '@cogitojs/cogito-encryption'
 
 class EncryptionActions {
   static setPlainText = (plainText) => ({
@@ -17,13 +17,14 @@ class EncryptionActions {
   })
 
   static encrypt = ({ telepathChannel }) => {
-    const encryption = new CogitoEncryption({ telepathChannel })
+    const cogitoEncryption = new CogitoEncryption({ telepathChannel })
+    const cogitoKeyProvider = new CogitoKeyProvider({ telepathChannel })
     return async (dispatch, getState) => {
       const plainText = getState().encryption.plainText
-      const tag = await encryption.createNewKeyPair()
+      const tag = await cogitoKeyProvider.createNewKeyPair()
       dispatch(EncryptionActions.setKeyTag(tag))
-      const jsonWebKey = await encryption.getPublicKey({ tag })
-      const cipherText = await encryption.encrypt({ jsonWebKey, plainText })
+      const jsonWebKey = await cogitoKeyProvider.getPublicKey({ tag })
+      const cipherText = await cogitoEncryption.encrypt({ jsonWebKey, plainText })
       dispatch(EncryptionActions.setPlainText(''))
       dispatch(EncryptionActions.setCipherText(cipherText))
     }
