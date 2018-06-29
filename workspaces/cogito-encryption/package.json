@@ -21,6 +21,7 @@
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.44",
     "@babel/core": "7.0.0-beta.44",
+    "@babel/plugin-proposal-class-properties": "7.0.0-beta.44",
     "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.44",
     "@babel/preset-env": "7.0.0-beta.44",
     "gzip-size": "^4.1.0",
@@ -44,7 +45,7 @@
     "node-forge": "^0.7.5"
   },
   "peerDependencies": {
-    "@cogitojs/telepath-js": "^0.2.0",
+    "@cogitojs/telepath-js": "^0.2.9",
     "libsodium-wrappers": "^0.7.2"
   }
 }
