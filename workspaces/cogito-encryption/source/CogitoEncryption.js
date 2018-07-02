@@ -1,6 +1,6 @@
 import { rsaCreatePublicKey, rsaEncrypt } from './rsa'
 import base64url from 'base64url'
-import { random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
+import { Sodium, random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
 
 import { CogitoRequest } from './CogitoRequest'
 
@@ -9,6 +9,10 @@ class CogitoEncryption {
 
   constructor ({ telepathChannel }) {
     this.channel = telepathChannel
+  }
+
+  static async initialize () {
+    await Sodium.wait()
   }
 
   extractEncryptionData (encryptionData) {

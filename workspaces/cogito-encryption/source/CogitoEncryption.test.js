@@ -1,7 +1,7 @@
 import { CogitoEncryption } from './CogitoEncryption'
 import { rsaGenerateKeyPair, rsaDecrypt } from './rsa'
 import base64url from 'base64url'
-import { random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
+import { Sodium, random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
 
 describe('encryption', () => {
   const { publicKey, privateKey } = rsaGenerateKeyPair({ bits: 600 })
@@ -12,6 +12,21 @@ describe('encryption', () => {
   beforeEach(() => {
     telepathChannel = { send: jest.fn() }
     cogitoEncryption = new CogitoEncryption({ telepathChannel })
+  })
+
+  describe('initializing cogito encryption', () => {
+    afterEach(() => {
+      Sodium.wait.mockRestore()
+    })
+
+    it('waits for Sodium library to be ready', async () => {
+      expect.assertions(1)
+      Sodium.wait = jest.fn().mockResolvedValueOnce()
+
+      await CogitoEncryption.initialize()
+
+      expect(Sodium.wait.mock.calls.length).toBe(1)
+    })
   })
 
   describe('decrypting data', () => {
@@ -38,6 +53,7 @@ describe('encryption', () => {
     })
 
     it('asks Cogito to decrypt the symmetrical key', async () => {
+      expect.assertions(1)
       await cogitoEncryption.decrypt({ tag, encryptionData: encryptionData })
       const request = {
         jsonrpc: '2.0',
@@ -58,6 +74,7 @@ describe('encryption', () => {
     })
 
     it('decrypts the cipher text', async () => {
+      expect.assertions(1)
       const decryptedText = await cogitoEncryption.decrypt({ tag, encryptionData })
       expect(decryptedText).toBe(plainText)
     })
@@ -73,6 +90,7 @@ describe('encryption', () => {
     }
 
     it('returns encrypted symmetric key, cipherText and nonce', async () => {
+      expect.assertions(1)
       const encryptionData = await cogitoEncryption.encrypt({ jsonWebKey, plainText })
 
       const parts = encryptionData.split('.')
