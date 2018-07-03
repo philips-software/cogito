@@ -99,6 +99,13 @@ describe('CogitoStreamDecoder', () => {
   })
 
   describe('decrypting', () => {
+    const tag = 'some tag'
+    let encoder
+    let streamKey
+    let streamHeader
+    let cryptoMaterial
+    let cogitoStreamDecoder
+
     const createTestTextMessages = N => {
       return [...Array(N).keys()].map(e => `message_${e}`)
     }
@@ -117,13 +124,6 @@ describe('CogitoStreamDecoder', () => {
         return index < N - 1 ? Sodium.TAG_MESSAGE : Sodium.TAG_FINAL
       })
     }
-
-    const tag = 'some tag'
-    let encoder
-    let streamKey
-    let streamHeader
-    let cryptoMaterial
-    let cogitoStreamDecoder
 
     const setupTelepathMock = () => {
       const response = { jsonrpc: '2.0', result: '0x' + Buffer.from(streamKey.buffer).toString('hex') }
@@ -165,6 +165,8 @@ describe('CogitoStreamDecoder', () => {
 
     describe('when preparing', () => {
       it('asks Cogito iOS to decrypt the stream key when preparing the decoder', async () => {
+        expect.assertions(1)
+
         await cogitoStreamDecoder.prepare()
 
         const request = {
@@ -179,14 +181,24 @@ describe('CogitoStreamDecoder', () => {
       })
 
       it('retrieves the decrypted stream key from Cogito iOS', async () => {
+        expect.assertions(1)
+
         await cogitoStreamDecoder.prepare()
 
         expect(cogitoStreamDecoder.streamKey).toEqual(streamKey)
       })
+
+      it('throws when error is returned', async () => {
+        expect.assertions(1)
+
+        const error = new Error('some error')
+        telepath.send.mockResolvedValue({ jsonrpc: '2.0', error })
+        await expect(cogitoStreamDecoder.prepare()).rejects.toThrowError(error)
+      })
     })
 
-    describe('when deconding', function () {
-      it('delegates decrypting data chunks to underlying stream decoder', async () => {
+    describe('when decoding', function () {
+      it('delegates decrypting data chunks to underlying stream decoder', () => {
         const testMessage = 'message'
         const encryptedTestMessage = encryptMessage(testMessage)
 
@@ -202,7 +214,7 @@ describe('CogitoStreamDecoder', () => {
         expect(streamDecoder.pull.mock.calls[0][0]).toEqual(encryptedTestMessage)
       })
 
-      it('returns the value returned by the underlying stream decoder', async () => {
+      it('returns the value returned by the underlying stream decoder', () => {
         const testMessage = 'message'
         const encryptedTestMessage = encryptMessage(testMessage)
 
@@ -216,6 +228,8 @@ describe('CogitoStreamDecoder', () => {
       })
 
       it('decrypts the encrypted stream - end-to-end test', async () => {
+        expect.assertions(2)
+
         const N = 10
         const messages = createTestTextMessages(N)
         const encryptedStream = getTestEncryptedStream(N)
