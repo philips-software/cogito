@@ -1,0 +1,6 @@
+framework module ReRxSwift {
+  umbrella header "ReRxSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}

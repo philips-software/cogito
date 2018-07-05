@@ -1,0 +1,6 @@
+framework module RichString {
+  umbrella header "RichString-umbrella.h"
+
+  export *
+  module * { export * }
+}

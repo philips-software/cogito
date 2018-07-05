@@ -1,0 +1,109 @@
+PODS:
+  - BigInt (3.0.1):
+    - SipHash (~> 1.2)
+  - Differentiator (3.0.2)
+  - FontAwesome.swift (1.3.2)
+  - Geth (1.7.3)
+  - JWTDecode (2.1.1)
+  - KeychainAccess (3.1.0)
+  - Mockingjay (2.0.1):
+    - Mockingjay/Core (= 2.0.1)
+    - Mockingjay/XCTest (= 2.0.1)
+  - Mockingjay/Core (2.0.1):
+    - URITemplate (~> 2.0)
+  - Mockingjay/XCTest (2.0.1):
+    - Mockingjay/Core
+  - Nimble (7.0.3)
+  - QRCodeReader.swift (8.1.1)
+  - Quick (1.2.0)
+  - ReRxSwift (1.2.0):
+    - ReSwift (~> 4.0)
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+  - ReSwift (4.0.1)
+  - ReSwiftThunk (0.1.1):
+    - ReSwift (~> 4.0)
+  - RichString (2.1.0)
+  - RxCocoa (4.1.2):
+    - RxSwift (~> 4.0)
+  - RxDataSources (3.0.2):
+    - Differentiator (~> 3.0)
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
+  - RxSwift (4.1.2)
+  - SipHash (1.2.0)
+  - Sodium (0.6)
+  - SwiftLint (0.21.0)
+  - SwiftyJSON (4.0.0)
+  - Telepath (0.1.0):
+    - Sodium (~> 0.5)
+  - Toast-Swift (3.0.1)
+  - URITemplate (2.0.3)
+
+DEPENDENCIES:
+  - BigInt (~> 3.0)
+  - FontAwesome.swift (~> 1.3)
+  - Geth (~> 1.7.1)
+  - JWTDecode (~> 2.1)
+  - KeychainAccess (~> 3.1)
+  - Mockingjay (~> 2.0)
+  - Nimble (~> 7.0)
+  - QRCodeReader.swift (~> 8.0)
+  - Quick (~> 1.2)
+  - ReRxSwift (~> 1.1)
+  - ReSwift (~> 4.0)
+  - ReSwiftThunk (from `https://github.com/mikecole20/ReSwiftThunk.git`, branch `swift4.0`)
+  - RichString (~> 2.0)
+  - RxCocoa (~> 4.0)
+  - RxDataSources (~> 3.0)
+  - RxSwift (~> 4.0)
+  - SwiftLint (= 0.21.0)
+  - SwiftyJSON (~> 4.0)
+  - Telepath (from `https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git`)
+  - Toast-Swift (~> 3.0)
+  - URITemplate
+
+EXTERNAL SOURCES:
+  ReSwiftThunk:
+    :branch: swift4.0
+    :git: https://github.com/mikecole20/ReSwiftThunk.git
+  Telepath:
+    :git: https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git
+
+CHECKOUT OPTIONS:
+  ReSwiftThunk:
+    :commit: 2871ea34c919bbdaa236c870ce7e16242f16ffb0
+    :git: https://github.com/mikecole20/ReSwiftThunk.git
+  Telepath:
+    :commit: 36dcf1feec482c2b3bb399f1d11adf3fcda00169
+    :git: https://gitlab.ta.philips.com/blockchain-lab/telepath-ios.git
+
+SPEC CHECKSUMS:
+  BigInt: 8e8a52161c745cd3ab78e3dc346a9fbee51e6cf6
+  Differentiator: a87be69eba49ec4ab460c7671143ee3a9eececfd
+  FontAwesome.swift: b4e4c8ccbbecb12f9b592bc533ff237af3706667
+  Geth: 45a08eeef7a20e58dfc09a455563ffe210941a96
+  JWTDecode: 83e8b381aafe27158d9f692cbdca2b12d61d460c
+  KeychainAccess: 94c5540b32eabf7bc32bfb976a268e8ea05fd6da
+  Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
+  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
+  QRCodeReader.swift: b164a681887de276d405ff02bce854d82cd6360b
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  ReRxSwift: 1b01a673f5b9f88a4043588b15f1b2a924122430
+  ReSwift: f4012c613e13da7398827fe5aebdb938eaed40a3
+  ReSwiftThunk: 9b2ed720b51deabb4d49e7b6e76a618d1e4eb6f6
+  RichString: 10acd3e3bfd248c3e6f5ec84ef6d6ad125ab4ab2
+  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxDataSources: cb7c31e652a87ebb919da45f716bbb87b3765f6b
+  RxSwift: e49536837d9901277638493ea537394d4b55f570
+  SipHash: c6e9e43e9c531b5bc6602545130c26194a6d31ce
+  Sodium: bf524b0a3d5ad6870dcf343205cca7e659c15ad5
+  SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  Telepath: 14b8a4ad40df8c1f25ddc49ae7e1db3f1c427b7e
+  Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
+  URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
+
+PODFILE CHECKSUM: c2fa3bd6bec142fe10541b5ab20de2ff22c84964
+
+COCOAPODS: 1.4.0
