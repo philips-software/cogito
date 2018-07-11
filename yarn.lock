@@ -1800,6 +1800,10 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.0.tgz#50c1e2260ac0ed9439a181de3725a0168d59c48a"
 
+"@react-frontend-developer/buffers@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@react-frontend-developer/buffers/-/buffers-1.0.10.tgz#c7a918a1a410d4a53bc6c04a69199c8520e3b145"
+
 "@react-frontend-developer/css-grid-helper@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@react-frontend-developer/css-grid-helper/-/css-grid-helper-1.0.6.tgz#462c6f075a8eb53a84ab03362a9be66a214c9313"

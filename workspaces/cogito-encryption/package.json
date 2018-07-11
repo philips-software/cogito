@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@cogitojs/crypto": "^0.2.9",
+    "@react-frontend-developer/buffers": "^1.0.10",
     "@trust/keyto": "^0.3.2",
     "base64url": "^2.0.0",
     "node-forge": "^0.7.5"
