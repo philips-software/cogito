@@ -10,3 +10,5 @@ before_script:
   - (cd workspaces/demo-app/truffle && yarn truffle compile)
   # Build
   - yarn build
+script:
+  - yarn test --runInBand
