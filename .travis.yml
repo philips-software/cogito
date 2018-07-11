@@ -6,5 +6,7 @@ before_install:
 before_script:
   # Install Truffle dependencies
   - (cd workspaces/demo-app/truffle && yarn install)
+  # Compile smart contracts
+  - (cd workspaces/demo-app/truffle && yarn truffle compile)
   # Build
   - yarn build
