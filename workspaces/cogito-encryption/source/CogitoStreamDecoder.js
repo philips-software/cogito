@@ -1,16 +1,6 @@
 import { CogitoRequest } from './CogitoRequest'
 import { StreamDecoder } from '@cogitojs/crypto'
-
-const bufferToArrayBuffer = buf => {
-  if (buf.length === buf.buffer.byteLength) {
-    return buf.buffer
-  }
-  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength)
-}
-
-const bufferToUint8Array = buf => {
-  return new Uint8Array(bufferToArrayBuffer(buf))
-}
+import { TypedArrays } from '@react-frontend-developer/buffers'
 
 class CogitoStreamDecoder {
   telepath
@@ -63,7 +53,7 @@ class CogitoStreamDecoder {
       throw new Error(response.error.message)
     }
 
-    this.streamKey = bufferToUint8Array(Buffer.from(response.result.slice(2), 'hex'))
+    this.streamKey = TypedArrays.string2Uint8Array(response.result.slice(2), 'hex')
     this.decoder = new StreamDecoder({
       key: this.streamKey,
       header: this.cryptoMaterial.streamHeader
