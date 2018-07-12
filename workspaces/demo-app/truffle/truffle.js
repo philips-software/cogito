@@ -1,15 +1,10 @@
 const ganache = require('ganache-cli')
 
-const mnemonic = 'hair snack volcano shift tragic wrong wreck release vibrant gossip ugly debate'
+const mnemonic =
+  'hair snack volcano shift tragic wrong wreck release vibrant gossip ugly debate'
 
 module.exports = {
   networks: {
-    dsp: {
-      host: 'ec2-18-195-85-73.eu-central-1.compute.amazonaws.com',
-      port: 8545,
-      network_id: '5', // Match any network id
-      gas: 0x2eefd8
-    },
     development: {
       host: 'localhost',
       port: 8545,
@@ -23,7 +18,6 @@ module.exports = {
       }),
       gas: 4000000
     }
-
   },
   solc: {
     // Turns on the Solidity optimizer. For development the optimizer's
