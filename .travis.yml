@@ -47,6 +47,8 @@ matrix:
       - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
       - export PATH="$HOME/.yarn/bin:$PATH"
       # Build Javascript
+      - nvm install
+      - nvm use
       - yarn install
       - yarn build
     install:
