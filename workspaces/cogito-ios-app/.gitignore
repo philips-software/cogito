@@ -1,2 +1,3 @@
 fastlane/report.xml
+fastlane/test_output
 .idea/workspace.xml
