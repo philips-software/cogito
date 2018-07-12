@@ -1,40 +1,9 @@
 import { CogitoEncryption } from './CogitoEncryption'
 import { CogitoStreamDecoder } from './CogitoStreamDecoder'
 import { StreamEncoder, Sodium } from '@cogitojs/crypto'
+import { Buffers, TypedArrays } from '@react-frontend-developer/buffers'
 
 import { rsaGenerateKeyPair, rsaEncrypt } from './rsa'
-
-const str2ab = str => {
-  var buf = new ArrayBuffer(str.length * 2) // 2 bytes for each char
-  var bufView = new Uint16Array(buf)
-  for (let i = 0, strLen = str.length; i < strLen; i++) {
-    bufView[i] = str.charCodeAt(i)
-  }
-  return buf
-}
-
-const ab2str = buf => {
-  return String.fromCharCode.apply(null, new Uint16Array(buf))
-}
-
-const toString = uint8array => {
-  return ab2str(uint8array.buffer)
-}
-
-const fromString = str => {
-  return new Uint8Array(str2ab(str))
-}
-
-const bufferToArrayBuffer = buf => {
-  if (buf.length === buf.buffer.byteLength) {
-    return buf.buffer
-  }
-  return buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength)
-}
-
-const bufferToUint8Array = buf => {
-  return new Uint8Array(bufferToArrayBuffer(buf))
-}
 
 describe('CogitoStreamDecoder', () => {
   const { publicKey } = rsaGenerateKeyPair({ bits: 600 })
@@ -114,8 +83,8 @@ describe('CogitoStreamDecoder', () => {
       const messages = createTestTextMessages(N)
       return messages.map((m, index) => {
         return index === N - 1
-          ? encoder.end(fromString(m))
-          : encoder.push(fromString(m))
+          ? encoder.end(TypedArrays.string2Uint8Array(m))
+          : encoder.push(TypedArrays.string2Uint8Array(m))
       })
     }
 
@@ -126,7 +95,7 @@ describe('CogitoStreamDecoder', () => {
     }
 
     const setupTelepathMock = () => {
-      const response = { jsonrpc: '2.0', result: '0x' + Buffer.from(streamKey.buffer).toString('hex') }
+      const response = { jsonrpc: '2.0', result: '0x' + TypedArrays.uint8Array2string(streamKey, 'hex') }
       telepath.send.mockResolvedValue(response)
     }
 
@@ -142,7 +111,7 @@ describe('CogitoStreamDecoder', () => {
       })
 
       cryptoMaterial = {
-        encryptedStreamKey: bufferToUint8Array(encryptedStreamKey),
+        encryptedStreamKey: Buffers.copyToUint8Array(encryptedStreamKey),
         streamHeader
       }
     }
@@ -174,7 +143,7 @@ describe('CogitoStreamDecoder', () => {
           method: 'decrypt',
           params: {
             tag,
-            cipherText: '0x' + Buffer.from(cryptoMaterial.encryptedStreamKey.buffer).toString('hex')
+            cipherText: '0x' + TypedArrays.uint8Array2string(cryptoMaterial.encryptedStreamKey, 'hex')
           }
         }
         expect(telepath.send.mock.calls[0][0]).toMatchObject(request)
@@ -238,7 +207,7 @@ describe('CogitoStreamDecoder', () => {
 
         const decryptedData = encryptedStream.map(m => cogitoStreamDecoder.pull(m))
 
-        const decryptedMessages = decryptedData.map(d => toString(d.message))
+        const decryptedMessages = decryptedData.map(d => TypedArrays.uint8Array2string(d.message))
         const decryptedTags = decryptedData.map(d => d.tag)
 
         expect(decryptedMessages).toEqual(messages)
