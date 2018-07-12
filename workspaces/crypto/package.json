@@ -2,7 +2,7 @@
   "name": "@cogitojs/crypto",
   "version": "0.2.9",
   "description": "Crypto utilities for cogito",
-  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/crypto",
+  "homepage": "https://cogito.mobi",
   "license": "UNLICENSED",
   "main": "umd/crypto.min.js",
   "module": "es/index.js",

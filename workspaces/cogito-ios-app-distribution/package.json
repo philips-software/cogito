@@ -2,7 +2,7 @@
   "name": "cogito-ios-app-distribution",
   "version": "0.2.9",
   "description": "A simple page for Cogito App distribution",
-  "repository": "https://gitlab.ta.philips.com/blockchain-lab/cogito",
+  "homepage": "https://cogito.mobi",
   "private": true,
   "dependencies": {
     "@react-frontend-developer/css-grid-helper": "^1.0.6",

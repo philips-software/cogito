@@ -2,8 +2,7 @@
   "name": "demo-app",
   "version": "0.2.9",
   "description": "A demo project for using Cogito",
-  "repository": "https://gitlab.ta.philips.com/blockchain-lab/cogito",
-  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/demo-app",
+  "homepage": "https://cogito.mobi",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {

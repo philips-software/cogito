@@ -2,7 +2,7 @@
   "name": "telepath-queuing-service",
   "version": "0.1.4",
   "description": "Telepath Queuing Service",
-  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/telepath-queuing-service",
+  "homepage": "https://cogito.mobi",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

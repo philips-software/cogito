@@ -2,7 +2,7 @@
   "name": "@cogitojs/cogito-attestations",
   "version": "0.2.2",
   "description": "Allows retrieval of attestations through the Cogito app",
-  "homepage": "https://gitlab.ta.philips.com/blockchain-lab/cogito/tree/master/workspaces/cogito-attestations",
+  "homepage": "https://cogito.mobi",
   "license": "UNLICENSED",
   "main": "umd/cogito-attestations.min.js",
   "module": "es/index.js",
