@@ -2,6 +2,7 @@ import { CogitoEncryption } from './CogitoEncryption'
 import { rsaGenerateKeyPair, rsaDecrypt } from './rsa'
 import base64url from 'base64url'
 import { Sodium, random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
+import { Buffers, TypedArrays } from '@react-frontend-developer/buffers'
 
 describe('encryption', () => {
   const { publicKey, privateKey } = rsaGenerateKeyPair({ bits: 600 })
@@ -48,7 +49,7 @@ describe('encryption', () => {
         base64url.encode(cipherText) + '.' +
         base64url.encode(encryptedSymmetricKey) + '.' +
         base64url.encode(nonce)
-      const response = { jsonrpc: '2.0', result: '0x' + Buffer.from(symmetricKey).toString('hex') }
+      const response = { jsonrpc: '2.0', result: '0x' + TypedArrays.uint8Array2string(symmetricKey, 'hex') }
       telepathChannel.send.mockResolvedValue(response)
     })
 
@@ -60,7 +61,7 @@ describe('encryption', () => {
         method: 'decrypt',
         params: {
           tag,
-          cipherText: '0x' + Buffer.from(encryptedSymmetricKey).toString('hex')
+          cipherText: '0x' + Buffers.toString(Buffers.fromString(encryptedSymmetricKey, 'utf8'), 'hex')
         }
       }
       expect(telepathChannel.send.mock.calls[0][0]).toMatchObject(request)
