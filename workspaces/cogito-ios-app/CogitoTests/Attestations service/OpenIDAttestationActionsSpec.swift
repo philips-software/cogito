@@ -82,11 +82,10 @@ class OpenIDAttestationActionsSpec: QuickSpec {
             }
 
             it("dispatches Fulfilled also when subject is missing for easy demoing") {
-                // This should normally not be possible in production, but we want to demo
+                // TODO: this should normally not be possible in production, but we want to demo
                 // a use case without actually requiring the web app to also authenticate with
                 // the OpenID Connect server; hence the web app doesn't know what subject to
                 // provide.
-                // https://gitlab.ta.philips.com/blockchain-lab/Cogito/issues/11
                 let identity = Identity.example
                 let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
                 let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.Fulfilled>()
