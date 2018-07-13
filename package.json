@@ -61,7 +61,7 @@
         "lint": "yarn standard && cd ./workspaces/demo-app/truffle && yarn lint",
         "lint-fix": "yarn standard --fix --verbose",
         "build": "yarn lerna run --scope @cogitojs/** build",
-        "netlify-deploy": "yarn lerna run --scope @cogitojs/** build && yarn lerna run build --scope homepage"
+        "build-for-netlify": "yarn lerna run --scope @cogitojs/** build && yarn lerna run build --scope homepage"
     },
     "standard": {
         "parser": "babel-eslint",

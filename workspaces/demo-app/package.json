@@ -38,8 +38,7 @@
     "@react-frontend-developer/react-scripts": "2.0.0-next.3e165448.1",
     "deep-freeze-es6": "^1.0.1",
     "jest-canvas-mock": "^1.0.2",
-    "react-test-renderer": "^16.2.0",
-    "standard": "^11.0.1"
+    "react-test-renderer": "^16.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -57,25 +56,6 @@
   "jest": {
     "setupFiles": [
       "jest-canvas-mock"
-    ]
-  },
-  "standard": {
-    "parser": "babel-eslint",
-    "ignore": [
-      "build/**",
-      "node_modules/**",
-      "src/contracts/**",
-      "truffle/node_modules/**"
-    ],
-    "envs": [
-      "es6",
-      "browser",
-      "jest"
-    ],
-    "globals": [
-      "artifacts",
-      "contract",
-      "assert"
     ]
   },
   "browserslist": {
