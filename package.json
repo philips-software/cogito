@@ -2,23 +2,27 @@
     "private": true,
     "license": "MIT",
     "devDependencies": {
-        "@babel/core": "7.0.0-beta.44",
-        "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.44",
-        "@babel/preset-react": "7.0.0-beta.44",
+        "@babel/cli": "^7.0.0-beta.53",
+        "@babel/core": "^7.0.0-beta.53",
+        "@babel/plugin-proposal-class-properties": "^7.0.0-beta.53",
+        "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.53",
+        "@babel/preset-env": "^7.0.0-beta.53",
+        "@babel/preset-react": "^7.0.0-beta.53",
         "babel-core": "^7.0.0-0",
         "babel-eslint": "8.2.2",
         "babel-jest": "22.4.3",
         "jest": "22.4.3",
         "lerna": "^2.11.0",
         "libsodium-wrappers": "^0.7.2",
-        "react": "^16.3.2",
-        "react-dom": "^16.3.2",
+        "react": "^16.4.0",
+        "react-dom": "^16.4.0",
         "regenerator-runtime": "^0.11.1",
         "semantic-ui-css": "2.2.14",
         "semantic-ui-react": "^0.79.1",
         "standard": "^11.0.1",
         "truffle-contract": "^3.0.5",
-        "web3": "^1.0.0-beta.34"
+        "web3": "^1.0.0-beta.34",
+        "webpack": "4.8.3"
     },
     "workspaces": {
         "packages": [
@@ -56,11 +60,13 @@
         "test:watch": "NODE_PATH=./workspaces/demo-app/src yarn jest --watch",
         "lint": "yarn standard && cd ./workspaces/demo-app/truffle && yarn lint",
         "lint-fix": "yarn standard --fix --verbose",
-        "build": "yarn lerna run --scope @cogitojs/** build"
+        "build": "yarn lerna run --scope @cogitojs/** build",
+        "netlify-deploy": "yarn lerna run --scope @cogitojs/** build && yarn lerna run build --scope homepage"
     },
     "standard": {
         "parser": "babel-eslint",
         "ignore": [
+            "workspaces/homepage/public/**",
             "**/node_modules/**",
             "**/umd/**",
             "**/es/**",

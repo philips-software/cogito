@@ -5,6 +5,9 @@
   "homepage": "https://cogito.mobi",
   "license": "MIT",
   "private": true,
+  "workspaces": {
+    "nohoist": ["babel-preset-react-app", "babel-preset-react-app/**"]
+  },
   "dependencies": {
     "@cogitojs/cogito-attestations": "^0.2.2",
     "@cogitojs/cogito-encryption": "^0.2.9",
@@ -21,8 +24,8 @@
     "libsodium-wrappers": "^0.7.3",
     "prop-types": "^15.6.1",
     "qrcode.react": "^0.8.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
@@ -34,10 +37,18 @@
     "web3": "^1.0.0-beta.34"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.0.0-beta.44",
+    "@babel/cli": "7.0.0-beta.46",
+    "@babel/core": "7.0.0-beta.46",
+    "@babel/plugin-proposal-class-properties": "7.0.0-beta.46",
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.46",
+    "@babel/preset-env": "7.0.0-beta.46",
+    "@babel/preset-react": "7.0.0-beta.46",
+    "babel-core": "^7.0.0-0",
+    "babel-eslint": "8.2.2",
+    "babel-jest": "22.4.3",
+    "jest": "22.4.3",
     "@cogitojs/faucet": "^0.2.9",
-    "@react-frontend-developer/react-scripts": "2.0.0-next.b2fd8db8.11",
-    "babel-eslint": "^8.2.3",
+    "@react-frontend-developer/react-scripts": "2.0.0-next.3e165448.1",
     "deep-freeze-es6": "^1.0.1",
     "jest-canvas-mock": "^1.0.2",
     "react-test-renderer": "^16.2.0",
