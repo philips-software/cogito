@@ -9,7 +9,7 @@ build cogito:
   before_script:
     - yarn install
   script:
-    - yarn lerna run --scope @cogitojs/** build
+    - yarn build-for-netlify
     - cd workspaces/demo-app/truffle && yarn install && yarn truffle compile
   cache:
     untracked: true
