@@ -1,0 +1,13 @@
+ID = "<your app id on netlify"
+
+[build]
+  # This is the directory to change to before starting a build.
+  # NOTE: This is where we will look for package.json/.nvmrc/etc, not root.
+  base    = "."
+  # This is the directory that you are publishing from (relative to root of your repo)
+  publish = "workspaces/homepage/public/"
+  # This will be your default build command
+  command = "yarn netlify-deploy"
+
+[build.environment]
+  YARN_VERSION = "1.7.0"
