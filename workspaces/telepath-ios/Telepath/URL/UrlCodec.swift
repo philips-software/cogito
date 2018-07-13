@@ -1,5 +1,3 @@
-//Copyright © 2017 Philips. All rights reserved.
-
 struct UrlCodec {
     func encode(baseUrl: URL, channelId: ChannelID, key: ChannelKey, appName: String) -> URL {
         var result = "telepath/connect#"

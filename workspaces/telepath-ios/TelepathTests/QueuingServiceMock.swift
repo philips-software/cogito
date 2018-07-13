@@ -1,5 +1,3 @@
-//Copyright © 2017 Philips. All rights reserved.
-
 @testable import Telepath
 
 class QueuingServiceMock: QueuingService {

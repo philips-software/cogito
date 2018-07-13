@@ -1,5 +1,3 @@
-//  Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
-
 import ReSwift
 
 func gethReducer(action: Action, state: GethState?) -> GethState {

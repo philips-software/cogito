@@ -1,5 +1,3 @@
-//  Copyright © 2017 Koninklijke Philips Nederland N.V. All rights reserved.
-
 struct GethState: Codable {
     var peersCount: Int
     var syncProgress: SyncProgress?

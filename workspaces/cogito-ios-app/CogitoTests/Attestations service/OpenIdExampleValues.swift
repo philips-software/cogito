@@ -1,5 +1,3 @@
-//  Copyright © 2018 Koninklijke Philips Nederland N.V. All rights reserved.
-
 struct OpenIdExampleValues {
     static let validToken = "eyJhbGciOiJSUzI1NiIsInR5c" +
         "CIgOiAiSldUIiwia2lkIiA6ICJ0U1huMHQtVV9MWUFnTXZacFM0aF9KQUE5Y1RZWWQ2MX" +
