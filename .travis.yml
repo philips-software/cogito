@@ -11,8 +11,8 @@ matrix:
       - (cd workspaces/demo-app/truffle && yarn install)
       # Compile smart contracts
       - (cd workspaces/demo-app/truffle && yarn truffle compile)
-      # Build
-      - yarn build
+      # Build including homepage (Gatsby)
+      - yarn build-for-netlify
     script:
       - yarn test --runInBand
 
