@@ -15,12 +15,6 @@
     "semantic-ui-react": "^0.79.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.46",
-    "@babel/core": "7.0.0-beta.46",
-    "@babel/plugin-proposal-class-properties": "7.0.0-beta.46",
-    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.46",
-    "@babel/preset-env": "7.0.0-beta.46",
-    "@babel/preset-react": "7.0.0-beta.46",
     "@cogitojs/faucet": "^0.2.9",
     "@react-frontend-developer/react-scripts": "2.0.0-next.3e165448.1",
     "deep-freeze-es6": "^1.0.1",
