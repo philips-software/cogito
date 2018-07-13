@@ -3,7 +3,7 @@
   "version": "0.2.9",
   "description": "A demo project for using Cogito",
   "homepage": "https://cogito.mobi",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@cogitojs/cogito-attestations": "^0.2.2",

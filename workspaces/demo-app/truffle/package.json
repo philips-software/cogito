@@ -1,7 +1,7 @@
 {
   "name": "truffle-for-cogito-demo-app",
   "version": "1.0.0",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "test": "yarn lint && yarn truffle test --network testing",
     "lint": "yarn solium lint -d contracts"

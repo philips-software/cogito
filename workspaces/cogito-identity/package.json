@@ -3,7 +3,7 @@
   "version": "0.2.1",
   "description": "Supports getting identity info from the Cogito app",
   "homepage": "https://cogito.mobi",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "main": "umd/cogito-identity.min.js",
   "module": "es/index.js",
   "scripts": {

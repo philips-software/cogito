@@ -3,7 +3,7 @@
   "version": "0.2.9",
   "description": "Simple faucet with REST API",
   "homepage": "https://cogito.mobi",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "main": "lib/faucet-server.js",
   "scripts": {
     "build": "node ./tools/build.js"

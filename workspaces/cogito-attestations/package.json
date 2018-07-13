@@ -3,7 +3,7 @@
   "version": "0.2.2",
   "description": "Allows retrieval of attestations through the Cogito app",
   "homepage": "https://cogito.mobi",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "main": "umd/cogito-attestations.min.js",
   "module": "es/index.js",
   "scripts": {

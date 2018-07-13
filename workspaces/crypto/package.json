@@ -3,7 +3,7 @@
   "version": "0.2.9",
   "description": "Crypto utilities for cogito",
   "homepage": "https://cogito.mobi",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "main": "umd/crypto.min.js",
   "module": "es/index.js",
   "scripts": {

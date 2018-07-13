@@ -3,7 +3,7 @@
   "version": "0.2.3",
   "description": "Cogito React library",
   "homepage": "https://cogito.mobi",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "main": "umd/cogito-react-ui.min.js",
   "module": "es/index.js",
   "scripts": {
