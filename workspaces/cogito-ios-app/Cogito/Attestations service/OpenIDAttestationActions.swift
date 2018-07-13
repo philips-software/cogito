@@ -44,8 +44,7 @@ struct OpenIDAttestationActions {
                 }
                 guard let state = getState(),
                       let pendingAttestation = state.attestations.open[nonce],
-                      // TODO
-                      (pendingAttestation.subject == nil || pendingAttestation.subject! == jwt.subject) else {
+                      pendingAttestation.subject == jwt.subject else {
                     dispatch(FinishRejected(nonce: nonce, error: "unexpected nonce or subject"))
                     return
                 }
