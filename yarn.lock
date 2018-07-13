@@ -17,21 +17,6 @@
   optionalDependencies:
     chokidar "^1.6.1"
 
-"@babel/cli@7.0.0-beta.51":
-  version "7.0.0-beta.51"
-  resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.0.0-beta.51.tgz#d186cdd59f9236bc9156aaa8eda61638f566b7fc"
-  dependencies:
-    commander "^2.8.1"
-    convert-source-map "^1.1.0"
-    fs-readdir-recursive "^1.0.0"
-    glob "^7.0.0"
-    lodash "^4.17.5"
-    output-file-sync "^2.0.0"
-    slash "^1.0.0"
-    source-map "^0.5.0"
-  optionalDependencies:
-    chokidar "^2.0.3"
-
 "@babel/cli@^7.0.0-beta.53":
   version "7.0.0-beta.53"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.0.0-beta.53.tgz#f2caf09950224123845ec5077ed7ab0863d8d823"
@@ -1500,6 +1485,13 @@
     "@babel/helper-module-imports" "7.0.0-beta.51"
     "@babel/helper-plugin-utils" "7.0.0-beta.51"
 
+"@babel/plugin-transform-runtime@^7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-runtime/-/plugin-transform-runtime-7.0.0-beta.53.tgz#4de7ccfdec0697df0f70a46a6822937149c8e2b5"
+  dependencies:
+    "@babel/helper-module-imports" "7.0.0-beta.53"
+    "@babel/helper-plugin-utils" "7.0.0-beta.53"
+
 "@babel/plugin-transform-shorthand-properties@7.0.0-beta.46":
   version "7.0.0-beta.46"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-shorthand-properties/-/plugin-transform-shorthand-properties-7.0.0-beta.46.tgz#aa21512b0fef7b916fc5cbc87df717465c25515c"
@@ -1813,9 +1805,9 @@
     "@babel/plugin-transform-react-jsx-self" "7.0.0-beta.53"
     "@babel/plugin-transform-react-jsx-source" "7.0.0-beta.53"
 
-"@babel/register@7.0.0-beta.51":
-  version "7.0.0-beta.51"
-  resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.0.0-beta.51.tgz#31a6d27f124cc7a2a0a603b65d23d5644b979aa0"
+"@babel/register@^7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.0.0-beta.53.tgz#a3c62be5256b9ce0b940b6a34d793e8bc97b7654"
   dependencies:
     core-js "^2.5.7"
     find-cache-dir "^1.0.0"
@@ -1838,6 +1830,13 @@
   dependencies:
     core-js "^2.5.7"
     regenerator-runtime "^0.11.1"
+
+"@babel/runtime@^7.0.0-beta.53":
+  version "7.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.53.tgz#9df22ae34823ce89f790060594b83ee572e2c5d2"
+  dependencies:
+    core-js "^2.5.7"
+    regenerator-runtime "^0.12.0"
 
 "@babel/template@7.0.0-beta.44":
   version "7.0.0-beta.44"
@@ -12753,6 +12752,10 @@ regenerator-runtime@^0.10.5:
 regenerator-runtime@^0.11.0, regenerator-runtime@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
+
+regenerator-runtime@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.12.0.tgz#8052ac952d85b10f3425192cd0c53f45cf65c6cb"
 
 regenerator-transform@^0.12.3, regenerator-transform@^0.12.4:
   version "0.12.4"

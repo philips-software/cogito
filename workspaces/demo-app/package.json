@@ -5,9 +5,6 @@
   "homepage": "https://cogito.mobi",
   "license": "MIT",
   "private": true,
-  "workspaces": {
-    "nohoist": ["babel-preset-react-app", "babel-preset-react-app/**"]
-  },
   "dependencies": {
     "@cogitojs/cogito-attestations": "^0.2.2",
     "@cogitojs/cogito-encryption": "^0.2.9",
