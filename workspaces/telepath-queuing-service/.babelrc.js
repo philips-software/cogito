@@ -2,9 +2,9 @@ module.exports = function (api) {
   const babelEnv = api.env()
   api.cache(true)
 
-  console.log('babelEnv=', babelEnv)
+  console.log('[telepath-queueing] babelEnv=', babelEnv)
 
-  const presets = setupPresets(babelEnv)
+  const presets = setupPresets()
   const plugins = setupPlugins()
   const ignore = setupIgnoredFiles(babelEnv)
 
@@ -16,25 +16,13 @@ module.exports = function (api) {
 }
 
 function setupPresets (babelEnv) {
-  let presetEnv = '@babel/preset-env'
-
-  if (babelEnv === 'es' || babelEnv === 'umd') {
-    presetEnv = [
-      '@babel/preset-env',
-      { modules: false }
-    ]
-  }
-
-  return [
-    presetEnv,
-    '@babel/preset-react'
-  ]
+  return ['@babel/preset-env']
 }
 
 function setupPlugins () {
   return [
     '@babel/plugin-proposal-object-rest-spread',
-    '@babel/plugin-proposal-class-properties'
+    '@babel/plugin-transform-runtime'
   ]
 }
 

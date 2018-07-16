@@ -1,13 +1,5 @@
-const execSync = require('child_process').execSync
+const { Builder } = require('../../../tools/build')
 
-const exec = (command, extraEnv) =>
-  execSync(command, {
-    stdio: 'inherit',
-    env: Object.assign({}, process.env, extraEnv)
-  })
+const builder = new Builder({skipEsModules: true})
 
-console.log('Building CommonJS modules ...')
-
-exec('babel source -d lib --delete-dir-on-start', {
-  BABEL_ENV: 'commonjs'
-})
+builder.build()
