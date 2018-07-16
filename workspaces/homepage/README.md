@@ -1,6 +1,6 @@
-React Frontend Developer Homepage
-======================
+Cogito Homepage
+===============
 
-These are the source files of the React Frontend Developer Homepage:
+These are the source files of the Cogito Homepage:
 
-https://react-frontend-developer.club
+https://cogito.mobi

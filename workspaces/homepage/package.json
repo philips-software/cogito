@@ -1,12 +1,12 @@
 {
   "private": true,
   "name": "homepage",
-  "description": "React Frontend Developer homepage",
+  "description": "Cogito homepage",
   "version": "1.0.7",
   "author": "Marcin Czenko <mczenko@me.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Charterhouse/react-frontend-developer.git"
+    "url": "https://github.com/philips-software/cogito.git"
   },
   "dependencies": {
     "@react-frontend-developer/css-grid-helper": "^1.0.6",
