@@ -2,7 +2,7 @@
 
 ## Code organization
 
-We keep Cogito in a monorepo. We use a combination of [lerna] and [yarn workspaces] to manage it.
+We keep Cogito in a monorepo. We use a combination of [lerna](https://lernajs.io) and [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) to manage it.
 
 After you clone your forked repo, follow the following steps to bootstrap your local environment:
 
