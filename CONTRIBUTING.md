@@ -7,10 +7,13 @@ We keep Cogito in a monorepo. We use a combination of [lerna](https://lernajs.io
 After you clone your forked repo, follow the following steps to bootstrap your local environment:
 
 ```bash
-$ yarn install
-$ (cd workspaces/demo-app/truffle && yarn install && yarn truffle compile)
-$ yarn build-for-netlify
-$ yarn test
+» yarn install
+» (cd workspaces/demo-app/truffle && yarn install && yarn truffle compile)
+» yarn build-for-netlify
+» yarn test
+» (cd workspaces/demo-app && yarn start-all)
+» (cd workspaces/cogito-ios-app-distribution && yarn start)
+» (cd workspaces/homepage && yarn develop)
 ```
 
 Now step-by-step.
@@ -71,7 +74,14 @@ Our monorepo contains a number of packages. They have to be build before client 
 
 ### Run tests
 
-Finally, the tests to confirm that everything is not well in place. We run all the tests from top level - this is far more efficient especially if the number of workspaces in the monorepo increases.
+Finally, the tests to confirm that everything is not well in place. We run all the tests from top level - this is far more efficient especially if the number of workspaces in the monorepo increases:
+
+```bash
+» yarn test
+» yarn test --no-cache    // good to know this
+» yarn jest --clearCache  // a nice one
+```
+
 
 > Also the tests for React apps are run from the monorepo level.
 
@@ -83,7 +93,7 @@ To start a local Ethereum network with a local faucet you can use a convenience 
 
 ```bash
 » cd workspaces/demo-app
-» yarn start
+» yarn start-all
 ```
 
 ### Starting the cogito-ios-app-distribution
