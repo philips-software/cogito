@@ -8,9 +8,9 @@ supports interaction with Ethereum blockchains and OpenID.
 
 Development
 -----------
-After cloning, run:
-- `yarn install` to install all dependencies
-- `yarn build` to build all workspaces
-- in the folder `workspaces/demo-app/truffle`, run `yarn install`
+
+Please refer to our [Contribution Guide][2] for instructions on how to setup the
+development environment.
 
 [1]: https://cogito.mobi
+[2]: Contributing.md
