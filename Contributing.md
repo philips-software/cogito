@@ -2,7 +2,7 @@
 
 ## Code organization
 
-We keep Cogito in a monorepo. We use a combination of [lerna](https://lernajs.io) and [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) to manage it.
+We keep Cogito in a monorepo. Cogito consists of many packages that all live in this repository. We use a combination of [lerna](https://lernajs.io) and [yarn workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) to manage them.
 
 After you clone your forked repo, follow the following steps to bootstrap your local environment:
 
@@ -74,7 +74,7 @@ Our monorepo contains a number of packages. They have to be build before client 
 
 ### Run tests
 
-Finally, the tests to confirm that everything is not well in place. We run all the tests from top level - this is far more efficient especially if the number of workspaces in the monorepo increases:
+Finally, the tests to confirm that everything is well in place. We run all the tests from top level - this is far more efficient especially if the number of workspaces in the monorepo increases:
 
 ```bash
 » yarn test
@@ -87,7 +87,7 @@ Finally, the tests to confirm that everything is not well in place. We run all t
 
 ### Starting the demo-app
 
-`demo-app` is a React-based web app that we use to demonstrate the use of various cogito components. `demo-app` to run needs the Ethereum network with deployed contracts, a running `faucet` to seed the Ethereum accounts with some initial Ether needed to execute contracts, deployed telepath channel (we have deployed one to be used with cogito apps, but you can also deploy your own), and finally, you will need to have the iOS Cogito app on your iPhone running. All the components of this infrastructure are open-sourced, but you can use the one that we deploy just to make starting up with Cogito easier.
+`demo-app` is a React-based web app that we use to demonstrate the use of various cogito components. It requires an Ethereum network with deployed contracts, a running `faucet` to seed the Ethereum accounts with some initial Ether needed to execute contracts, a deployed telepath queuing service (we have deployed one to be used with cogito apps, but you can also deploy your own), and finally, you will need to have the iOS Cogito app on your iPhone running. All the components of this infrastructure are open-sourced, but you can use the one that we deploy just to make starting up with Cogito easier.
 
 To start a local Ethereum network with a local faucet you can use a convenience script:
 
@@ -125,15 +125,15 @@ The use of Babel 7 has impact on almost every aspect of the monorepo: running te
 
 Since version `beta.46` Babel changed how babel configuration is discovered. We have to admit it still a bit confusing to us, but we managed to have an operational version that works well across all of our workspaces.
 
-Babel 7 allows three different configuration files: `babel.config.js`, `.babelrc.js`, and familiar `.babelrc`. Semantics of the file discovery has changed. If `babel.config.js` is present at your current working directory, only this file will be used and `.babelrc` and `.babelrc.js` will be ignored (and it does not matter if they are in your `cwd` or in own of the subfolders).
+Babel 7 allows three different configuration files: `babel.config.js`, `.babelrc.js`, and the familiar `.babelrc`. The semantics of file discovery have changed. If `babel.config.js` is present at your current working directory, only this file will be used and `.babelrc` and `.babelrc.js` will be ignored (and it does not matter if they are in your `cwd` or in own of the subfolders).
 
-If `babel.config.js` is not present, you can decide to either use `.babelrc` for static configuration or `.babelrc.js` if you prefer to programmatically create your configuration. If you use `.babelrc` variant, however, please notice that new Babel will look for a `.babelrc` in the current directory (which defaults to `cwd`). If Babel finds other `.babelrc` files while transpiling files in a subfolder, it will merge the configuration together.
+If `babel.config.js` is not present, you can decide to either use `.babelrc` for static configuration or `.babelrc.js` if you prefer to programmatically create your configuration. If you use the `.babelrc` variant, please notice that the new Babel will look for a `.babelrc` in the current directory. If Babel finds other `.babelrc` files while transpiling files in a subfolder, it will merge the configurations together.
 
-Because most of our Cogito packages share the same Babel configuration, we liked the option to keep one, top-level `babel.config.js` where we can programmatically create the configuration based on the `BABEL_ENV` and `NODE_ENV` environment variables.
+Because most of our Cogito packages share the same Babel configuration, we chose to create a single top-level `babel.config.js` where we can programmatically create the configuration based on the `BABEL_ENV` and `NODE_ENV` environment variables.
 
-Also, we discovered that `jest` does not seem to like using anything but `babel.config.js` (it ignores `.babelrc` file even if `babel.config.js` is not present). When run from the top-level of the monorepo (as we want it to be), `jest` also does not seem to see `.babelrc` or `.babelrc.js` in the subfolders. Shortly, using top-level `babel.config.js` is the only option that worked for us with `jest`.
+Also, we discovered that `jest` does not seem to like using anything but `babel.config.js` (it ignores `.babelrc` file even if `babel.config.js` is not present). When run from the top-level of the monorepo (as we want it to be), `jest` also does not seem to see `.babelrc` or `.babelrc.js` in the subfolders. In short, using top-level `babel.config.js` is the only option that worked for us with `jest`.
 
-We could not avoid having babel configuration in subfolders as new babel is not continuing the search above first `package.json` that it finds, and we run the `yarn build` command for the packages via top-level `yarn lerna run --scope @cogitojs/** build`, which means it will be executed from the package folder. We hoped that we will be able to simply reuse the top-level `babel.config.js` by having the package-specific `babel.config.js` with just the following content:
+We could not avoid having babel configurations in subfolders because the new babel does not continue searching above the first `package.json` that it finds, and we run the `yarn build` command for the packages via top-level `yarn lerna run --scope @cogitojs/** build`, which means it will be executed from the package folder. We hoped that we will be able to simply reuse the top-level `babel.config.js` by having the package-specific `babel.config.js` with just the following content:
 
 ```javascript
 module.exports = {
@@ -151,11 +151,11 @@ const babelConfig = require('../../babel.config')
 module.exports = babelConfig
 ```
 
-The only exceptions in that are `@cogitojs/cogito-attestations` and `@cogitojs/faucet` where - as an illustration - we use `babel.config.js` that extends the top-level one. `@cogitojs/faucet` does need UMD build and `@cogitojs/cogito-attestations` uses `webpack` instead of `rollup` (which caused some other problems in this case).
+The only exceptions are `@cogitojs/cogito-attestations` and `@cogitojs/faucet` where - as an illustration - we use `babel.config.js` that extends the top-level one. `@cogitojs/faucet` doesn't need a UMD build and `@cogitojs/cogito-attestations` uses `webpack` (`rollup` caused other problems here).
 
 And finally, `telepath-queuing-service` uses its own simplified `.babelrc.js` - it is not intended to be published as an npm package and its configuration is a bit different than other cogito packages.
 
-Also notice that React apps do not need any extra babel configuration - running of the tests is nicely handled by the top-level `babel.config.js`. 
+Also notice that React apps do not need any extra babel configuration - running of the tests is nicely handled by the top-level `babel.config.js`.
 
 With all these varieties, we keep observing what's happening with Babel 7 and we are looking forward to settle down on something stable as soon as Babel 7 is out of beta.
 
@@ -169,7 +169,7 @@ For now, we recommend the user the following links to read more about new Babel:
 
 ## Staying in sync with upstream
 
-You can follow the steps described in [Syncing a fork](https://help.github.com/articles/syncing-a-fork/). You can also keep your master pointing to the upstream keeping in sync becomes really easy:
+You can follow the steps described in [Syncing a fork](https://help.github.com/articles/syncing-a-fork/). We recommend that you keep your local master branch pointing to the upstream master branch. Remaining in sync then becomes really easy:
 
 ```
 git remote add upstream https://github.com/philips-software/cogito.git
@@ -178,7 +178,7 @@ git branch --set-upstream-to=upstream/master master
 ```
 
 Now, when you do `git pull` from your local `master` branch git will fetch changes from the `upstream` remote. Then you can make all of your pull request branches based on this `master` branch.
- 
+
 
 ## Submitting a Pull Request
 
