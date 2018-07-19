@@ -18,14 +18,18 @@ describe('Server integration test', () => {
     faucetServer = new FaucetServer(configuration)
 
     const ganacheProvider = ganache.provider({
-      accounts: [{
-        balance: 100000000000000000000, // 100 ether
-        secretKey: '0xc87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3'
-      }]
+      accounts: [
+        {
+          balance: 100000000000000000000, // 100 ether
+          secretKey: '0xc87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3'
+        }
+      ]
     })
     faucetServer.donator.web3 = new Web3(ganacheProvider)
     faucetServer.donator.web3.eth.defaultAccount = configuration.account
-    faucetServer.donator.nonces = new TransactionNonces({ web3: faucetServer.donator.web3 })
+    faucetServer.donator.nonces = new TransactionNonces({
+      web3: faucetServer.donator.web3
+    })
 
     // suppress logging during integration test
     console.log = jest.fn()
@@ -33,11 +37,15 @@ describe('Server integration test', () => {
 
   it('transfers ether', async () => {
     jest.setTimeout(115000)
-    const balanceBefore = await faucetServer.donator.web3.eth.getBalance(account1)
+    const balanceBefore = await faucetServer.donator.web3.eth.getBalance(
+      account1
+    )
 
     await request(faucetServer.server).post(`/donate/${account1}`).expect(200)
 
-    const balanceAfter = await faucetServer.donator.web3.eth.getBalance(account1)
+    const balanceAfter = await faucetServer.donator.web3.eth.getBalance(
+      account1
+    )
     expect(parseInt(balanceAfter)).toBeGreaterThan(parseInt(balanceBefore))
   })
 })
