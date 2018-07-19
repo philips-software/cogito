@@ -1,7 +1,6 @@
 import FaucetServer from './faucet-server'
 import Web3 from 'web3'
 import ganache from 'ganache-cli'
-import fs from 'fs'
 import request from 'supertest'
 
 import { TransactionNonces } from './transaction-nonces'
@@ -12,10 +11,11 @@ describe('Server integration test', () => {
   let faucetServer
 
   beforeEach(() => {
-    const configurationFile = fs.readFileSync('workspaces/faucet/faucet-config-example.json', {encoding: 'utf-8'})
-    const configuration = JSON.parse(configurationFile)
-    configuration.account = account1
-    configuration.donationInEther = '0.01'
+    const configuration = {
+      account: account1,
+      privateKey: 'C87509A1C067BBDE78BEB793E6FA76530B6382A4C0241E5E4A9EC0A0F44DC0D3',
+      donationInEther: '0.01'
+    }
     faucetServer = new FaucetServer(configuration)
 
     const ganacheProvider = ganache.provider({
