@@ -51,13 +51,16 @@ You should see the output that looks like this:
 yarn run v1.5.1
 $ NODE_ENV='production' yarn start-faucet
 $ (...)/node_modules/.bin/cogito-faucet
-Using configuration:
-{ providerUrl: 'http://130.144.76.85:8545',
-  account: '0x627306090abaB3A6e1400e9345bC60c78a8BEf57',
-  privateKey: 'C87509A1C067BBDE78BEB793E6FA76530B6382A4C0241E5E4A9EC0A0F44DC0D3',
-  donationInEther: '1' }
 Running on port 3001
 ```
+
+## Parameters
+
+The start-faucet command takes the following parameters:
+
+   * `-p` or `--provider` followed by the provider URL. This specifies the full
+     URL of the node in your blockchain network (including `http` or `https` and
+     port number if needed). Defaults to `http://localhost:8545`.
 
 ## Configuration options
 
@@ -65,7 +68,6 @@ The following configuration options are available via the configuration file:
 
 | key  | value type  | description |
 |------|----------------|-------------|
-| providerUrl | URL | Full URL of the node in your blockchain network (including `http` or `https` and port number if needed). This option can be overwritten by the environment variable `PROVIDER_URL` |
 | privateKey | string | private key corresponding to the account (see below) |
 | account | string | the account number (with `0x` prefix) |
 | donationInEther | string | how much ether to donate, e.g. `"1"` |
@@ -74,18 +76,10 @@ Below is the example configuration file:
 
 ```json
 {
-    "providerUrl": "https://your-ethereum-provider-url",
     "account": "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
     "privateKey": "C87509A1C067BBDE78BEB793E6FA76530B6382A4C0241E5E4A9EC0A0F44DC0D3",
     "donationInEther": "1"
 }
-```
-
-and here is an example of the command that overwrites the `providerUrl` value
-from the configuration file by using environment variable:
-
-```bash
-$ NODE_ENV='production' PROVIDER_URL='http://192.168.1.112:8545' yarn start-faucet
 ```
 
 ## Using the faucet
