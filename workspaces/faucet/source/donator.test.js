@@ -12,8 +12,7 @@ describe('Donator', () => {
     providerUrl: 'http://localhost:8545',
     account: '0x1111111111111111111111111111111111111111',
     privateKey: '1111111111111111111111111111111111111111111111111111111111111111',
-    donationInEther: '0.001',
-    donationTxGas: 21000
+    donationInEther: '0.001'
   }
 
   beforeEach(() => {
@@ -54,8 +53,8 @@ describe('Donator', () => {
         expect(params.value).toBe(expectedValue)
       })
 
-      it('uses gas from config', () => {
-        expect(params.gas).toBe(config.donationTxGas)
+      it('uses correct gas amount for a transfer', () => {
+        expect(params.gas).toBe(21000)
       })
 
       it('uses nonce returned by TransactionNonces', () => {

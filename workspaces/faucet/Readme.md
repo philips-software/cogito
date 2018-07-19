@@ -45,7 +45,6 @@ Using configuration:
 { providerUrl: 'http://130.144.76.85:8545',
   account: '0x627306090abaB3A6e1400e9345bC60c78a8BEf57',
   privateKey: 'C87509A1C067BBDE78BEB793E6FA76530B6382A4C0241E5E4A9EC0A0F44DC0D3',
-  donationTxGas: 21000,
   donationInEther: '1' }
 Running on port 3001
 ```
@@ -59,7 +58,6 @@ The following configuration options are available via the configuration file:
 | providerUrl | URL | Full URL of the node in your blockchain network (including `http` or `https` and port number if needed). This option can be overwritten by the environment variable `PROVIDER_URL` |
 | privateKey | string | private key corresponding to the account (see below) |
 | account | string | the account number (with `0x` prefix) |
-| donationTxGas | number | gas: should be `21000` |
 | donationInEther | string | how much ether to donate, e.g. `"1"` |
 
 Below is the example configuration file:
@@ -69,7 +67,6 @@ Below is the example configuration file:
     "providerUrl": "https://your-ethereum-provider-url",
     "account": "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
     "privateKey": "C87509A1C067BBDE78BEB793E6FA76530B6382A4C0241E5E4A9EC0A0F44DC0D3",
-    "donationTxGas": 21000,
     "donationInEther": "1"
 }
 ```

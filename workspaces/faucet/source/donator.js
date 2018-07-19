@@ -41,7 +41,7 @@ class Donator {
     return {
       to,
       value: this.web3.utils.toHex(this.web3.utils.toWei(this.config.donationInEther, 'ether')),
-      gas: this.config.donationTxGas,
+      gas: 21000,
       nonce,
       chainId
     }
