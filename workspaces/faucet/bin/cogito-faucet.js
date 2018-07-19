@@ -8,6 +8,11 @@ program
   .usage('[options] <account>')
   .description('start an Ethereum faucet that hands out Ether')
   .option(
+    '-d --donation <ether>',
+    'The amount (in Ether) that is donated for each request',
+    '0.1'
+  )
+  .option(
     '-p --provider <url>',
     'URL of the Ethereum provider',
     'http://localhost:8545'
@@ -20,6 +25,7 @@ var configurationFile = fs.readFileSync('faucet-config-' + environment + '.json'
 var configuration = JSON.parse(configurationFile)
 configuration.providerUrl = program.providerUrl
 configuration.account = program.args[0]
+configuration.donationInEther = program.donation
 
 var faucetServer = new FaucetServer(configuration)
 faucetServer.server.listen(3001, function () {
