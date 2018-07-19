@@ -9,19 +9,28 @@ POST /donate/<ethereum address>
 
 ## Installation
 
-Faucet is an npm package. You normally add it to the dev dependencies in your project:
+Faucet is an npm package. You normally add it to the dev dependencies in your
+project:
 
 ```bash
 $ yarn add -D @cogitojs/faucet
 ```
 
-Faucet needs a configuration file to run. The name of the file depends on the value of the `NODE_ENV` variable and resolves to `faucet-config-<NODE_ENV>.json`. When `NODE_ENV` is not set it defaults to `faucet-config-development.json`. The configuration file needs to be in the same folder from where you start the faucet. If you put your configuration file in folder `config` then you must cd to that folder first before starting the faucet.
+Faucet needs a configuration file to run. The name of the file depends on the
+value of the `NODE_ENV` variable and resolves to
+`faucet-config-<NODE_ENV>.json`. When `NODE_ENV` is not set it defaults to
+`faucet-config-development.json`. The configuration file needs to be in the same
+folder from where you start the faucet. If you put your configuration file in
+folder `config` then you must cd to that folder first before starting the
+faucet.
 
 ## Starting the faucet server
 
-The easiest and recommended way of starting the faucet server is by adding a script to the `scripts` section of your `package.json`.
+The easiest and recommended way of starting the faucet server is by adding a
+script to the `scripts` section of your `package.json`.
 
-Assuming you have folder `faucet` and `faucet-config-production.json` inside it, you can use the following script:
+Assuming you have folder `faucet` and `faucet-config-production.json` inside it,
+you can use the following script:
 
 ```json
 "scripts": {
@@ -35,7 +44,8 @@ Then, you start the faucet by doing:
 $ NODE_ENV='production' yarn start-faucet
 ```
 
-This will start the faucet with the configuration provided by your config file. You should see the output that looks like this:
+This will start the faucet with the configuration provided by your config file.
+You should see the output that looks like this:
 
 ```bash
 yarn run v1.5.1
@@ -71,7 +81,8 @@ Below is the example configuration file:
 }
 ```
 
-and here is an example of the command that overwrites the `providerUrl` value from the configuration file by using environment variable:
+and here is an example of the command that overwrites the `providerUrl` value
+from the configuration file by using environment variable:
 
 ```bash
 $ NODE_ENV='production' PROVIDER_URL='http://192.168.1.112:8545' yarn start-faucet
@@ -79,7 +90,8 @@ $ NODE_ENV='production' PROVIDER_URL='http://192.168.1.112:8545' yarn start-fauc
 
 ## Using the faucet
 
-After faucet is started, you can use test it by performing a post using e.g. `curl`:
+After faucet is started, you can use test it by performing a post using e.g.
+`curl`:
 
 ```bash
 curl -X POST -D - http://localhost:3001/donate/0xdf562290eceb83d659e23252ae8d38fa0bbc06e8
@@ -91,7 +103,8 @@ or using [httpie](https://httpie.org):
 http POST http://localhost:3001/donate/0xdf562290eceb83d659e23252ae8d38fa0bbc06e8
 ```
 
-When using a deployed network, you may want to increase the timeouts. For `curl`:
+When using a deployed network, you may want to increase the timeouts. For
+`curl`:
 
 ```bash
 curl -X POST -m 600 -D - https://blockchain.deployed.com/faucet/donate/0x6b0be084e6ffc7d6cace8e01e2814c869257c3aa
