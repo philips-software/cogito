@@ -2,7 +2,6 @@
 require('babel-polyfill')
 var program = require('commander')
 var FaucetServer = require('@cogitojs/faucet').default
-var fs = require('fs')
 
 program
   .usage('[options] <account>')
