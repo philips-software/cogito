@@ -37,6 +37,7 @@
     "@babel/register": "^7.0.0-beta.53",
     "@babel/runtime": "^7.0.0-beta.53",
     "babel-core": "^7.0.0-0",
+    "commander": "^2.16.0",
     "cors": "^2.8.4",
     "ethereumjs-tx": "^1.3.4",
     "express": "^4.16.3",
