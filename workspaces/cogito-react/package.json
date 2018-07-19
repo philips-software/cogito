@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-react",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "Cogito React library",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -37,7 +37,7 @@
     "rollup-plugin-uglify": "^3.0.0"
   },
   "dependencies": {
-    "@cogitojs/cogito": "^0.2.9"
+    "@cogitojs/cogito": "^0.2.10"
   },
   "peerDependencies": {
     "libsodium-wrappers": "^0.7.2",

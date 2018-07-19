@@ -1,16 +1,16 @@
 {
   "name": "demo-app",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "A demo project for using Cogito",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@cogitojs/cogito-attestations": "^0.2.2",
-    "@cogitojs/cogito-encryption": "^0.2.9",
-    "@cogitojs/cogito-identity": "^0.2.1",
-    "@cogitojs/cogito-react": "^0.2.9",
-    "@cogitojs/cogito-react-ui": "^0.2.3",
+    "@cogitojs/cogito-attestations": "^0.2.10",
+    "@cogitojs/cogito-encryption": "^0.2.10",
+    "@cogitojs/cogito-identity": "^0.2.10",
+    "@cogitojs/cogito-react": "^0.2.10",
+    "@cogitojs/cogito-react-ui": "^0.2.10",
     "@react-frontend-developer/css-grid-helper": "^1.0.6",
     "@react-frontend-developer/react-layout-helpers": "^1.0.6",
     "@react-frontend-developer/react-redux-render-prop": "^1.0.6",
@@ -34,7 +34,7 @@
     "web3": "^1.0.0-beta.34"
   },
   "devDependencies": {
-    "@cogitojs/faucet": "^0.2.9",
+    "@cogitojs/faucet": "^0.2.10",
     "@react-frontend-developer/react-scripts": "2.0.0-next.3e165448.1",
     "deep-freeze-es6": "^1.0.1",
     "jest-canvas-mock": "^1.0.2",

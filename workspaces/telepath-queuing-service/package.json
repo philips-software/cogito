@@ -1,6 +1,6 @@
 {
   "name": "telepath-queuing-service",
-  "version": "0.1.4",
+  "version": "0.2.10",
   "description": "Telepath Queuing Service",
   "homepage": "https://cogito.mobi",
   "private": true,
