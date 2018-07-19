@@ -19,15 +19,13 @@ program
   )
   .parse(process.argv)
 
-var environment = process.env.NODE_ENV || 'development'
+var faucetServer = new FaucetServer({
+  providerUrl: program.providerUrl,
+  account: program.args[0],
+  donationInEther: program.donation,
+  privateKey: process.env.COGITO_FAUCET_PRIVATE_KEY
+})
 
-var configurationFile = fs.readFileSync('faucet-config-' + environment + '.json', {encoding: 'utf-8'})
-var configuration = JSON.parse(configurationFile)
-configuration.providerUrl = program.providerUrl
-configuration.account = program.args[0]
-configuration.donationInEther = program.donation
-
-var faucetServer = new FaucetServer(configuration)
 faucetServer.server.listen(3001, function () {
   console.log('Running on port 3001')
 })

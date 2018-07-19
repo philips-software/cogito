@@ -9,54 +9,17 @@ POST /donate/<ethereum address>
 
 ## Installation
 
-Faucet is an npm package. You normally add it to the dev dependencies in your
-project:
+Cogito Faucet is a NodeJS program. It can be installed by running
 
-```bash
-$ yarn add -D @cogitojs/faucet
-```
+`npm install -g @cogitojs/faucet`
 
-Faucet needs a configuration file to run. The name of the file depends on the
-value of the `NODE_ENV` variable and resolves to
-`faucet-config-<NODE_ENV>.json`. When `NODE_ENV` is not set it defaults to
-`faucet-config-development.json`. The configuration file needs to be in the same
-folder from where you start the faucet. If you put your configuration file in
-folder `config` then you must cd to that folder first before starting the
-faucet.
+or alternatively
 
-## Starting the faucet server
-
-The easiest and recommended way of starting the faucet server is by adding a
-script to the `scripts` section of your `package.json`.
-
-Assuming you have folder `faucet` and `faucet-config-production.json` inside it,
-you can use the following script:
-
-```json
-"scripts": {
-  "start-faucet": "(cd faucet && cogito-faucet)"
-}
-```
-
-Then, you start the faucet by doing:
-
-```bash
-$ NODE_ENV='production' yarn start-faucet 0x627306090abaB3A6e1400e9345bC60c78a8BEf57
-```
-
-This will start the faucet with the configuration provided by your config file.
-You should see the output that looks like this:
-
-```bash
-yarn run v1.5.1
-$ NODE_ENV='production' yarn start-faucet
-$ (...)/node_modules/.bin/cogito-faucet
-Running on port 3001
-```
+`yarn global install @cogitojs/faucet`
 
 ## Parameters
 
-The start-faucet command takes the following arguments:
+The `cogito-faucet` command takes the following arguments:
 
    * `<account>`, this first argument is the account number from which Ether
      will be donated. Needs to include the `0x` prefix.
@@ -66,25 +29,27 @@ The start-faucet command takes the following arguments:
      URL of the node in your blockchain network (including `http` or `https` and
      port number if needed). Defaults to `http://localhost:8545`.
 
-## Configuration options
+The private key that corresponds with the account is specified as an environment
+variable:
 
-The following configuration options are available via the configuration file:
+```bash
+COGITO_FAUCET_PRIVATE_KEY=C87509A1C067BBDE78BEB793E6FA76530B6382A4C0241E5E4A9EC0A0F44DC0D3
+```
 
-| key  | value type  | description |
-|------|----------------|-------------|
-| privateKey | string | private key corresponding to the account (see below) |
+## Example
 
-Below is the example configuration file:
+This runs a faucet that hands out Ether in amount of 0.01 from the account
+0x627306090abab3a6e1400e9345bc60c78a8bef57, using its corresponding private key.
+It uses the Ethereum node at ip address `192.168.1.112`:
 
-```json
-{
-    "privateKey": "C87509A1C067BBDE78BEB793E6FA76530B6382A4C0241E5E4A9EC0A0F44DC0D3"
-}
+```bash
+COGITO_FAUCET_PRIVATE_KEY=C87509A1C067BBDE78BEB793E6FA76530B6382A4C0241E5E4A9EC0A0F44DC0D3 \
+cogito-faucet --donation 0.01 --provider http://192.168.1.112:8545 0x627306090abab3a6e1400e9345bc60c78a8bef57
 ```
 
 ## Using the faucet
 
-After faucet is started, you can use test it by performing a post using e.g.
+After the faucet is started, you can use test it by performing a post using e.g.
 `curl`:
 
 ```bash
