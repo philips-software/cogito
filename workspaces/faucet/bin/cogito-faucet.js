@@ -19,7 +19,7 @@ program
   .parse(process.argv)
 
 var faucetServer = new FaucetServer({
-  providerUrl: program.providerUrl,
+  providerUrl: program.provider,
   account: program.args[0],
   donationInEther: program.donation,
   privateKey: process.env.COGITO_FAUCET_PRIVATE_KEY
