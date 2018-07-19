@@ -12,8 +12,13 @@ class Donator {
 
   async donate ({ to }) {
     const receipt = await this.sendDonateTransaction({ to })
-    this.nonces.commitNonce(this.config.account, this.lastTransactionParams.nonce)
-    console.log(`${new Date().toString()}: donated ${this.config.donationInEther} ether to ${to}`)
+    this.nonces.commitNonce(
+      this.config.account,
+      this.lastTransactionParams.nonce
+    )
+    console.log(
+      `${new Date().toString()}: donated ${this.config.donationInEther} ether to ${to}`
+    )
     return receipt
   }
 
@@ -32,7 +37,9 @@ class Donator {
 
   async sendTransaction ({ transaction }) {
     const serializedTransaction = transaction.serialize()
-    return this.web3.eth.sendSignedTransaction('0x' + serializedTransaction.toString('hex'))
+    return this.web3.eth.sendSignedTransaction(
+      '0x' + serializedTransaction.toString('hex')
+    )
   }
 
   async createTransactionParameters ({ to }) {
@@ -40,7 +47,9 @@ class Donator {
     const chainId = await this.web3.eth.net.getId()
     return {
       to,
-      value: this.web3.utils.toHex(this.web3.utils.toWei(this.config.donationInEther, 'ether')),
+      value: this.web3.utils.toHex(
+        this.web3.utils.toWei(this.config.donationInEther, 'ether')
+      ),
       gas: 21000,
       nonce,
       chainId
