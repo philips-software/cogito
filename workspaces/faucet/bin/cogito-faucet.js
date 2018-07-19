@@ -5,6 +5,7 @@ var FaucetServer = require('@cogitojs/faucet').default
 var fs = require('fs')
 
 program
+  .usage('[options] <account>')
   .description('start an Ethereum faucet that hands out Ether')
   .option(
     '-p --provider <url>',
@@ -18,6 +19,7 @@ var environment = process.env.NODE_ENV || 'development'
 var configurationFile = fs.readFileSync('faucet-config-' + environment + '.json', {encoding: 'utf-8'})
 var configuration = JSON.parse(configurationFile)
 configuration.providerUrl = program.providerUrl
+configuration.account = program.args[0]
 
 var faucetServer = new FaucetServer(configuration)
 faucetServer.server.listen(3001, function () {

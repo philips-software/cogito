@@ -14,6 +14,7 @@ describe('Server integration test', () => {
   beforeEach(() => {
     const configurationFile = fs.readFileSync('workspaces/faucet/faucet-config-example.json', {encoding: 'utf-8'})
     const configuration = JSON.parse(configurationFile)
+    configuration.account = account1
     faucetServer = new FaucetServer(configuration)
 
     const ganacheProvider = ganache.provider({

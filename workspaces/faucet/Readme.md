@@ -41,7 +41,7 @@ you can use the following script:
 Then, you start the faucet by doing:
 
 ```bash
-$ NODE_ENV='production' yarn start-faucet
+$ NODE_ENV='production' yarn start-faucet 0x627306090abaB3A6e1400e9345bC60c78a8BEf57
 ```
 
 This will start the faucet with the configuration provided by your config file.
@@ -56,8 +56,10 @@ Running on port 3001
 
 ## Parameters
 
-The start-faucet command takes the following parameters:
+The start-faucet command takes the following arguments:
 
+   * `<account>`, this first argument is the account number from which Ether
+     will be donated. Needs to include the `0x` prefix.
    * `-p` or `--provider` followed by the provider URL. This specifies the full
      URL of the node in your blockchain network (including `http` or `https` and
      port number if needed). Defaults to `http://localhost:8545`.
@@ -69,14 +71,12 @@ The following configuration options are available via the configuration file:
 | key  | value type  | description |
 |------|----------------|-------------|
 | privateKey | string | private key corresponding to the account (see below) |
-| account | string | the account number (with `0x` prefix) |
 | donationInEther | string | how much ether to donate, e.g. `"1"` |
 
 Below is the example configuration file:
 
 ```json
 {
-    "account": "0x627306090abaB3A6e1400e9345bC60c78a8BEf57",
     "privateKey": "C87509A1C067BBDE78BEB793E6FA76530B6382A4C0241E5E4A9EC0A0F44DC0D3",
     "donationInEther": "1"
 }
