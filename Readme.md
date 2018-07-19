@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/philips-software/cogito.svg?branch=master)](https://travis-ci.com/philips-software/cogito)
+
 Cogito Identity
 ===============
 
