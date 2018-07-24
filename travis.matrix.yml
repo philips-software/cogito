@@ -1,0 +1,59 @@
+matrix:
+  include:
+
+  - language: node_js
+    before_install:
+      # Use recent Yarn
+      - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
+      - export PATH="$HOME/.yarn/bin:$PATH"
+    before_script:
+      # Install Truffle dependencies
+      - (cd workspaces/demo-app/truffle && yarn install)
+      # Compile smart contracts
+      - (cd workspaces/demo-app/truffle && yarn truffle compile)
+      # Build including homepage (Gatsby)
+      - yarn build-for-netlify
+    script:
+      - yarn test --runInBand
+
+  - language: swift
+    osx_image: xcode9.4
+    env:
+      - BUNDLE_GEMFILE=.ruby-dependencies/Gemfile
+    install:
+      - cd workspaces/cogito-ios-app
+      - bundle install
+    script:
+      - bundle exec fastlane tests
+      - bundle exec slather coverage
+
+  - language: swift
+    osx_image: xcode9.4
+    env:
+      - BUNDLE_GEMFILE=.ruby-dependencies/Gemfile
+    install:
+      - cd workspaces/telepath-ios
+      - bundle install
+    script:
+      - bundle exec fastlane tests
+      - bundle exec slather coverage
+
+  - language: swift
+    osx_image: xcode9.4
+    env:
+      - BUNDLE_GEMFILE=.ruby-dependencies/Gemfile
+    before_install:
+      # Use recent Yarn
+      - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
+      - export PATH="$HOME/.yarn/bin:$PATH"
+      # Build Javascript
+      - nvm install
+      - nvm use
+      - yarn install
+      - yarn build
+    install:
+      - cd workspaces/cogito-attestations-ios
+      - bundle install
+    script:
+      - bundle exec fastlane tests
+      - bundle exec slather coverage
