@@ -35,9 +35,11 @@
   },
   "devDependencies": {
     "@cogitojs/faucet": "^0.2.10",
+    "@react-frontend-developer/jsdom-worker": "^0.1.1",
     "@react-frontend-developer/react-scripts": "2.0.0-next.3e165448.1",
     "deep-freeze-es6": "^1.0.1",
     "jest-canvas-mock": "^1.0.2",
+    "node-fetch": "^2.2.0",
     "react-test-renderer": "^16.2.0"
   },
   "scripts": {

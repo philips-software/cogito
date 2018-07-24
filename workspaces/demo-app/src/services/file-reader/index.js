@@ -1,0 +1,1 @@
+export { FileStreamReader } from './FileStreamReader'
