@@ -3,6 +3,7 @@ import { ReactWebWorker } from './ReactWebWorker'
 
 class FileStreamReader {
   file
+  callback
   fileStreamReaderWorker = ReactWebWorker.createFromScript(
     FileStreamReaderWorkerScript
   )
@@ -33,11 +34,12 @@ class FileStreamReader {
   constructor (params) {
     this.checkParams(params)
     this.file = params.file
+    this.callback = params.callback
     this.fileStreamReaderWorker.onmessage = m => this.processDataChunk(m.data)
   }
 
-  processDataChunk (datachunk) {
-    console.log(datachunk)
+  processDataChunk (dataChunk) {
+    this.callback && this.callback(dataChunk)
   }
 
   startReading () {
@@ -46,7 +48,7 @@ class FileStreamReader {
     })
   }
 
-  read (callback) {
+  read () {
     this.startReading()
   }
 }
