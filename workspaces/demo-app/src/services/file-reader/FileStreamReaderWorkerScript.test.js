@@ -1,24 +1,7 @@
 import '@react-frontend-developer/jsdom-worker'
 import { FileStreamReaderWorkerScript } from './FileStreamReaderWorkerScript'
-import { ExampleScript } from './ExampleScript'
 import { ReactWebWorker } from './ReactWebWorker'
 import { TypedArrays } from '@react-frontend-developer/buffers'
-
-const readAsArrayBuffer = async blob => {
-  let outerResolve
-  const fr = new FileReader()
-  const promise = new Promise(resolve => {
-    outerResolve = resolve
-  })
-  fr.onloadend = function (evt) {
-    if (evt.target.readyState === FileReader.DONE) {
-      outerResolve(evt.target.result)
-    }
-  }
-  fr.readAsArrayBuffer(blob)
-  const data = await promise
-  return data
-}
 
 const FileReaderSyncMock = function () {
   this.count = 0
@@ -45,7 +28,6 @@ class FileStreamReaderAsync {
   numberOfChunks
   callback
   constructor (file, callback) {
-    // eslint-disable-next-line no-undef
     this.reader = new FileReader()
     this.start = 0
     this.endExclusive = 4096
@@ -119,40 +101,6 @@ describe('FileStreamReaderWorkerScript', () => {
   })
 
   describe('creating a worker', () => {
-    beforeEach(() => {
-      FileReaderSyncMock.reset()
-    })
-
-    it('works', done => {
-      let code = `onmessage = e => postMessage(e.data*2)`
-      const blob = new Blob([code], {type: 'application/javascript'})
-      let worker = new Worker(URL.createObjectURL(blob))
-      worker.onmessage = data => {
-        expect(data).toEqual({ data: 10 })
-        done()
-      }
-      worker.postMessage(5) // 10
-    })
-
-    it('works 2', async done => {
-      const testFile = new File(
-        [TypedArrays.string2ab('ala ma kota')],
-        'test-file.png',
-        { type: 'image/png' }
-      )
-      const blob = testFile.slice(0, 10)
-      const ab = await readAsArrayBuffer(blob)
-      FileReaderSyncMock.prepare([ab])
-      let worker = ReactWebWorker.createFromScript(
-        ExampleScript
-      )
-      worker.onmessage = d => {
-        expect(d.data).toEqual(new Uint8Array(ab))
-        done()
-      }
-      worker.postMessage({file: testFile})
-    })
-
     it('creates worker', () => {
       let streamReaderWorker
       expect(() => {
