@@ -2,6 +2,7 @@ jobs:
   include:
     - stage: "Build and Test"
       name: javascript
+      os: linux
       language: node_js
       before_install:
         # Use recent Yarn
@@ -16,7 +17,9 @@ jobs:
         - yarn build-for-netlify
       script:
         - yarn test --runInBand
+    
     - name: cogito-ios-app
+      os: osx
       language: swift
       osx_image: xcode9.4
       env:
@@ -27,7 +30,9 @@ jobs:
       script:
         - bundle exec fastlane tests
         - bundle exec slather coverage
+    
     - name: telepath-ios
+      os: osx
       language: swift
       osx_image: xcode9.4
       env:
@@ -38,7 +43,9 @@ jobs:
       script:
         - bundle exec fastlane tests
         - bundle exec slather coverage
+    
     - name: cogito-attestations-ios
+      os: osx
       language: swift
       osx_image: xcode9.4
       env:
