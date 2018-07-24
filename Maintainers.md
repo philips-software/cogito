@@ -1,4 +1,4 @@
-Marcin Czenko <marcin.czenko@philips.com>
+Marcin Czenko
 Mark Spanbroek
 Stefan van den Oord
-Jeroen Knoops <jeroen.knoops@philips.com>
+Jeroen Knoops
