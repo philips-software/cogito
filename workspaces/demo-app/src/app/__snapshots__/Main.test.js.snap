@@ -29,6 +29,15 @@ exports[`renders correctly 1`] = `
       >
         unknown
       </div>
+      <div
+        style={
+          Object {
+            "boxSizing": "border-box",
+            "margin": "20px 0 0 0",
+            "padding": 0,
+          }
+        }
+      />
       <p>
         You are known as:
       </p>
@@ -36,6 +45,32 @@ exports[`renders correctly 1`] = `
         className="css-h2wbwd"
       >
         unknown
+      </div>
+      <div
+        className="css-1gzlhve"
+      >
+        <button
+          className="ui black secondary button"
+          disabled={undefined}
+          onClick={[Function]}
+          role="button"
+          tabIndex={undefined}
+        >
+          Read your identity...
+        </button>
+        <button
+          className="ui black secondary button"
+          disabled={undefined}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          role="button"
+          tabIndex={undefined}
+        >
+          Show QR code
+        </button>
       </div>
     </div>
   </div>

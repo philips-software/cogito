@@ -35,6 +35,27 @@ const reducer = (state = {}, action) => {
         ...state,
         dialogOpen: false
       }
+    case 'TELEPATH_IN_PROGRESS':
+      return {
+        ...state,
+        telepathInProgress: true
+      }
+    case 'TELEPATH_ERROR':
+      return {
+        ...state,
+        telepathInProgress: false,
+        telepathError: action.reason || 'error'
+      }
+    case 'TELEPATH_ERROR_CLEAR':
+      return {
+        ...state,
+        telepathError: undefined
+      }
+    case 'TELEPATH_FULFILLED':
+      return {
+        ...state,
+        telepathInProgress: false
+      }
     default:
       return state
   }

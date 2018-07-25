@@ -15,5 +15,5 @@ const CenteredBottomContent = glamorous(Centered)({
 
 export const Footer = () =>
   <CenteredBottomContent>
-    <PinkText>© 2018 by Charterhouse</PinkText>
+    <PinkText>© 2018 by Cogito</PinkText>
   </CenteredBottomContent>

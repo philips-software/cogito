@@ -15,6 +15,23 @@ class AppEventsActions {
     type: 'EXECUTING_CONTRACT_ERROR'
   })
 
+  static telepathInProgress = () => ({
+    type: 'TELEPATH_IN_PROGRESS'
+  })
+
+  static telepathFulfilled = () => ({
+    type: 'TELEPATH_FULFILLED'
+  })
+
+  static telepathError = obj => ({
+    type: 'TELEPATH_ERROR',
+    reason: (obj && obj.reason) || 'error'
+  })
+
+  static telepathErrorClear = () => ({
+    type: 'TELEPATH_ERROR_CLEAR'
+  })
+
   static executingContractFulfilled = () => ({
     type: 'EXECUTING_CONTRACT_FULFILLED'
   })

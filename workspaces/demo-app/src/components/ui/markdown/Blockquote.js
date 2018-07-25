@@ -10,9 +10,7 @@ const blockQuoteStyle = {
 
 const Blockquote = ({children}) => (
   <blockquote style={blockQuoteStyle}>
-    <p>
-      {children}
-    </p>
+    {children}
   </blockquote>
 )
 

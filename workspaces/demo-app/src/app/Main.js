@@ -7,6 +7,7 @@ import { Dimmer, Loader, Segment } from 'semantic-ui-react'
 import { UserDataActions } from 'user-data'
 
 import { Home } from 'pages/home'
+import { CogitoId } from 'pages/cogito-id'
 import { StreamEncryption } from 'pages/stream-encryption'
 import { NoMatch404 } from 'pages/404'
 
@@ -53,6 +54,7 @@ class Main extends React.Component {
                 return (
                   <Switch>
                     <Route exact path='/' render={routeProps => this.renderComponent(Home, routeProps, web3Props)} />
+                    <Route exact path='/cogito-id' render={routeProps => this.renderComponent(CogitoId, routeProps, web3Props)} />
                     <Route exact path='/stream-encryption' render={routeProps => this.renderComponent(StreamEncryption, routeProps, web3Props)} />
                     <Route component={NoMatch404} />
                   </Switch>

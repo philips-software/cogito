@@ -24,7 +24,7 @@ const DemoGridItem = glamorous.div(grid.demo, contentBaseStyle)
 const DocumentationGridItem = glamorous.div(
   grid.documentation,
   contentBaseStyle,
-  { borderLeft: '1px solid black' }
+  { borderLeft: '1px solid black', overflow: 'auto' }
 )
 const FooterGridItem = glamorous.div(grid.footer, contentBaseStyle)
 
