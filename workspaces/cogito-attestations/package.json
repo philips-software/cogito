@@ -30,7 +30,7 @@
     "webpack-command": "^0.2.0"
   },
   "publishConfig": {
-    "registry": "http://artifactory-ehv.ta.philips.com/artifactory/api/npm/dl-common-publish-npm-local"
+    "access": "public"
   },
   "dependencies": {
     "base64url": "^3.0.0",

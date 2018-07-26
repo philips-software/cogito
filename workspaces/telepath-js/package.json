@@ -46,6 +46,6 @@
     "libsodium-wrappers": "^0.7.3"
   },
   "publishConfig": {
-    "registry": "http://artifactory-ehv.ta.philips.com/artifactory/api/npm/dl-common-publish-npm-local"
+    "access": "public"
   }
 }
