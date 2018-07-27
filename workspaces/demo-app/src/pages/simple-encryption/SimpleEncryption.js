@@ -8,9 +8,9 @@ import {
   DocumentationGridItem, FooterGridItem
 } from 'components/ui/layout'
 
-import { CogitoContract } from 'components/cogito-contract'
+import { CogitoSimpleEncryption } from 'components/cogito-crypto'
 
-class Contracts extends React.Component {
+class SimpleEncryption extends React.Component {
   state = {}
 
   render () {
@@ -19,18 +19,18 @@ class Contracts extends React.Component {
         <HeaderGridItem>
           <HeaderBar>
             <Title>Cogito</Title>
-            <Subtitle>Executing contracts</Subtitle>
+            <Subtitle>Simple Encryption</Subtitle>
           </HeaderBar>
         </HeaderGridItem>
         <DemoGridItem>
           <Centered>
             <Spacer margin='20px 0 20px 0'>
-              <CogitoContract {...this.props} />
+              <CogitoSimpleEncryption {...this.props} />
             </Spacer>
           </Centered>
         </DemoGridItem>
         <DocumentationGridItem>
-          <Documentation source='documentation/contracts.md' />
+          <Documentation source='documentation/simple-encryption.md' />
         </DocumentationGridItem>
         <FooterGridItem>
           <Footer />
@@ -40,4 +40,4 @@ class Contracts extends React.Component {
   }
 }
 
-export { Contracts }
+export { SimpleEncryption }
