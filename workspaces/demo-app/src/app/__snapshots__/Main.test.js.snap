@@ -78,25 +78,9 @@ exports[`renders correctly 1`] = `
     className="css-v3skhn"
   >
     <div
-      className="css-jbit82"
+      className="css-1crpgfv"
     >
-      <p
-        className="css-huraai"
-      >
-        You have one contract deployed called 
-        <span>
-          Simple Storage
-        </span>
-        .
-      </p>
-      <p
-        className="css-huraai"
-      >
-        Simple storage allows you to store a value in a smart contract.
-      </p>
-      <p
-        className="css-1ej2l17"
-      >
+      <p>
         Current value is:
       </p>
       <div
@@ -104,16 +88,11 @@ exports[`renders correctly 1`] = `
       >
         0
       </div>
-      <p
-        className="css-huraai"
-      >
-        Using the buttons below you can read the currently stored value and also increase it. When increasing the value stored in the contract, you will need to sign the transaction using Cogito identity app. If this is your first transaction, a QR-code will be presented that will let you establish a secure connection between the browser and the iOS Cogito App. You can always request a new QR-code using the Show QR-code button.
-      </p>
       <div
         className="css-1gzlhve"
       >
         <button
-          className="ui pink basic button"
+          className="ui black secondary button"
           disabled={undefined}
           onClick={[Function]}
           role="button"
@@ -122,7 +101,7 @@ exports[`renders correctly 1`] = `
           Read...
         </button>
         <button
-          className="ui pink basic button"
+          className="ui black secondary button"
           disabled={undefined}
           onClick={[Function]}
           role="button"
@@ -131,7 +110,7 @@ exports[`renders correctly 1`] = `
           Increase by 5...
         </button>
         <button
-          className="ui pink basic button"
+          className="ui black secondary button"
           disabled={undefined}
           onBlur={[Function]}
           onClick={[Function]}

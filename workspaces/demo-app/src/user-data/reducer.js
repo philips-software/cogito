@@ -15,6 +15,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         connectionEstablished: true
       }
+    case 'CLEAR_CONNECTION_ESTABLISHED':
+      return {
+        ...state,
+        connectionEstablished: false
+      }
     case 'SET_TELEPATH':
       return {
         ...state,

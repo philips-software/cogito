@@ -10,7 +10,7 @@ import { CogitoConnector } from '@cogitojs/cogito-react-ui'
 import { IdentityActions } from './actions'
 import { AppEventsActions } from 'app-events'
 
-export class CogitoAddress extends React.PureComponent {
+class CogitoAddress extends React.PureComponent {
   onTrigger = (dispatch) => {
     dispatch(AppEventsActions.setDialogOpen())
   }
@@ -87,3 +87,5 @@ export class CogitoAddress extends React.PureComponent {
     )
   }
 }
+
+export { CogitoAddress }

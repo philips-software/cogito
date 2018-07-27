@@ -8,6 +8,7 @@ import { UserDataActions } from 'user-data'
 
 import { Home } from 'pages/home'
 import { CogitoId } from 'pages/cogito-id'
+import { Contracts } from 'pages/contracts'
 import { StreamEncryption } from 'pages/stream-encryption'
 import { NoMatch404 } from 'pages/404'
 
@@ -55,6 +56,7 @@ class Main extends React.Component {
                   <Switch>
                     <Route exact path='/' render={routeProps => this.renderComponent(Home, routeProps, web3Props)} />
                     <Route exact path='/cogito-id' render={routeProps => this.renderComponent(CogitoId, routeProps, web3Props)} />
+                    <Route exact path='/contracts' render={routeProps => this.renderComponent(Contracts, routeProps, web3Props)} />
                     <Route exact path='/stream-encryption' render={routeProps => this.renderComponent(StreamEncryption, routeProps, web3Props)} />
                     <Route component={NoMatch404} />
                   </Switch>

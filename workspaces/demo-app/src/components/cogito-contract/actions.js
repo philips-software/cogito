@@ -17,82 +17,60 @@ const transferFunds = async (account) => {
   await faucet.transferFunds(account)
 }
 
-const getAccount = async (getState, dispatch, channel) => {
+const getAccount = async (getState, dispatch, channel, forceRefetchAddress) => {
   const { userData: { connectionEstablished, ethereumAddress } } = getState()
 
-  let fetchedAccount
-
-  if (!ethereumAddress) {
-    const requestedProperties = [
-      CogitoIdentity.Property.EthereumAddress,
-      CogitoIdentity.Property.Username
-    ]
-    const cogitoIdentity = new CogitoIdentity({ channel })
-    const info = await cogitoIdentity.getInfo({ properties: requestedProperties })
-    if (!info) return undefined
-    dispatch(UserDataActions.setIdentityInfo(info))
-    dispatch(UserDataActions.connectionEstablished())
-    console.log('userIdentity:', info)
-    fetchedAccount = info.ethereumAddress
-  } else {
-    fetchedAccount = ethereumAddress
-    if (!connectionEstablished) {
-      dispatch(UserDataActions.connectionEstablished())
-    }
+  if (connectionEstablished && !forceRefetchAddress) {
+    return ethereumAddress
   }
 
-  return fetchedAccount
+  const requestedProperties = [
+    CogitoIdentity.Property.EthereumAddress,
+    CogitoIdentity.Property.Username
+  ]
+  const cogitoIdentity = new CogitoIdentity({ channel })
+  const info = await cogitoIdentity.getInfo({ properties: requestedProperties })
+  if (!info) throw new Error('No identity found on the mobile device!')
+  dispatch(UserDataActions.setIdentityInfo(info))
+  dispatch(UserDataActions.connectionEstablished())
+
+  return info.ethereumAddress
 }
 
 class ContractActions {
-  static increase = ({ increment, deployedContract: contract, channel }) => {
+  static increase = ({ increment, deployedContract: contract, channel, forceRefetchAddress = false }) => {
     return async (dispatch, getState) => {
-      dispatch(AppEventsActions.executingContractInProgress())
-      const account = await getAccount(getState, dispatch, channel)
-
-      if (!account) {
-        console.error('No accounts. Please handle that first!')
-        dispatch(AppEventsActions.executingContractError())
-        return
-      }
-
-      // let's make sure the account has some funds
-      transferFunds(account)
-
+      dispatch(AppEventsActions.telepathInProgress())
       try {
+        const account = await getAccount(getState, dispatch, channel, forceRefetchAddress)
+        // let's make sure the account has some funds
+        transferFunds(account)
         await contract.increase(
           increment,
           { from: account }
         )
-        dispatch(AppEventsActions.executingContractFulfilled())
+        dispatch(AppEventsActions.telepathFulfilled())
       } catch (error) {
-        console.error('Error executing contract method increment: ', error)
-        dispatch(AppEventsActions.executingContractError())
+        console.error(error)
+        dispatch(AppEventsActions.telepathError({ reason: error.message }))
       }
     }
   }
 
-  static read = ({ deployedContract: contract, channel }) => {
+  static read = ({ deployedContract: contract, channel, forceRefetchAddress = false }) => {
     return async (dispatch, getState) => {
-      dispatch(AppEventsActions.executingContractInProgress())
-      const account = await getAccount(getState, dispatch, channel)
-
-      if (!account) {
-        console.error('No accounts. Please handle that first!')
-        dispatch(AppEventsActions.executingContractError())
-        return
-      }
-
+      dispatch(AppEventsActions.telepathInProgress())
       try {
+        const account = await getAccount(getState, dispatch, channel, forceRefetchAddress)
         const response = await contract.read(
           { from: account }
         )
         const balance = response.toNumber()
         dispatch(UserDataActions.setBalance(balance))
-        dispatch(AppEventsActions.executingContractFulfilled())
+        dispatch(AppEventsActions.telepathFulfilled())
       } catch (error) {
-        console.error('Error executing contract method read: ', error)
-        dispatch(AppEventsActions.executingContractError())
+        console.error(error)
+        dispatch(AppEventsActions.telepathError({ reason: error.message }))
       }
     }
   }

@@ -3,6 +3,10 @@ class UserDataActions {
     type: 'CONNECTION_ESTABLISHED'
   })
 
+  static clearConnectionEstablished = () => ({
+    type: 'CLEAR_CONNECTION_ESTABLISHED'
+  })
+
   static setAccount = account => ({
     type: 'SET_USER_ACCOUNT',
     account
