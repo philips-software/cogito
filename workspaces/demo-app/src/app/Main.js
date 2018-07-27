@@ -11,6 +11,7 @@ import { CogitoId } from 'pages/cogito-id'
 import { Contracts } from 'pages/contracts'
 import { SimpleEncryption } from 'pages/simple-encryption'
 import { StreamEncryption } from 'pages/stream-encryption'
+import { Attestations } from 'pages/attestations'
 import { NoMatch404 } from 'pages/404'
 
 import simpleStorage from 'contracts/SimpleStorage.json'
@@ -60,6 +61,7 @@ class Main extends React.Component {
                     <Route exact path='/contracts' render={routeProps => this.renderComponent(Contracts, routeProps, web3Props)} />
                     <Route exact path='/simple-encryption' render={routeProps => this.renderComponent(SimpleEncryption, routeProps, web3Props)} />
                     <Route exact path='/stream-encryption' render={routeProps => this.renderComponent(StreamEncryption, routeProps, web3Props)} />
+                    <Route exact path='/attestations' render={routeProps => this.renderComponent(Attestations, routeProps, web3Props)} />
                     <Route component={NoMatch404} />
                   </Switch>
                 )

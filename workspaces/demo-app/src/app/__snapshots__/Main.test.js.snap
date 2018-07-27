@@ -221,21 +221,16 @@ exports[`renders correctly 1`] = `
     className="css-1j66vpb"
   >
     <div
-      className="css-jbit82"
+      className="css-15173tg"
     >
-      <p
-        className="css-huraai"
-      >
-        Cogito can store attestations, which are claims about your identity.
-      </p>
       <div
-        className="css-cv7f2a"
+        className="css-1iycz54"
       >
         <div
-          className="css-10knj77"
+          className="css-vbisb0"
         >
           <div
-            className="css-m5rq82"
+            className="css-ynez49"
           >
             <p>
               Scan to add a dummy attestation:
@@ -261,7 +256,7 @@ exports[`renders correctly 1`] = `
               unknown
             </div>
             <button
-              className="ui pink basic button"
+              className="ui black secondary button"
               disabled={undefined}
               onClick={[Function]}
               role="button"

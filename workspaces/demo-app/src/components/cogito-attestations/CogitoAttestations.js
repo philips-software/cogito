@@ -3,27 +3,23 @@ import glamorous from 'glamorous'
 import { Button } from 'semantic-ui-react'
 import QRCode from 'qrcode.react'
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
-import {
-  Centered, DistributedHorizontally, FullWidthCentered, ValueWrapper
+import { FullWidth, Centered, ValueWrapper
 } from '@react-frontend-developer/react-layout-helpers'
 import { AttestationsActions } from 'attestations-state/actions'
 
 export const CogitoAttestations = (props) => (
-  <FullWidthCentered>
-    <P>
-      Cogito can store attestations, which are claims about your identity.
-    </P>
-    <Div>
-      <DistributedHorizontally>
+  <FullWidth>
+    <Centered css={{width: '100%'}}>
+      <Div>
         <ShowAttestation />
         <RetrieveAttestation {...props} />
-      </DistributedHorizontally>
-    </Div>
-  </FullWidthCentered>
+      </Div>
+    </Centered>
+  </FullWidth>
 )
 
 const ShowAttestation = () => (
-  <Centered css={{padding: '10px', backgroundColor: 'white'}}>
+  <Centered css={{padding: '10px', marginRight: '50px', backgroundColor: 'white'}}>
     <p>Scan to add a dummy attestation:</p>
     <QRCode
       value='https://cogito.example.com/attestations/receive#A=email%3Atest.user%40philips.com'
@@ -39,7 +35,7 @@ const RetrieveAttestation = ({ channel }) => (
           Your attestation is:
           <ValueWrapper>{attestations[0] || 'unknown'}</ValueWrapper>
           <Button
-            basic color='pink'
+            secondary color='black'
             onClick={() => dispatch(AttestationsActions.retrieve({
               type: 'email',
               telepathChannel: channel
@@ -52,10 +48,10 @@ const RetrieveAttestation = ({ channel }) => (
   </WithStore>
 )
 
-const P = glamorous.p({
-  maxWidth: '40rem'
-})
-
 const Div = glamorous.div({
-  width: '40rem'
+  width: '100%',
+  display: 'flex',
+  flexFlow: 'row nowrap',
+  justifyContent: 'space-evenly',
+  alignItems: 'center'
 })
