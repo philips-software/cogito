@@ -3,11 +3,12 @@ import glamorous from 'glamorous'
 import { Grid } from '@react-frontend-developer/css-grid-helper'
 
 let grid = new Grid([
-  'header header',
-  'demo   documentation',
-  'footer footer'
+  'header         header',
+  'demo           documentation',
+  'demoNavigation documentation',
+  'footer         footer'
 ], {
-  gridTemplateRows: 'max-content auto max-content'
+  gridTemplateRows: 'max-content 1fr max-content max-content'
 })
 
 const contentBaseStyle = {
@@ -21,6 +22,7 @@ const TheGrid = glamorous.div(grid.container, {
 
 const HeaderGridItem = glamorous.div(grid.header, contentBaseStyle)
 const DemoGridItem = glamorous.div(grid.demo, contentBaseStyle)
+const DemoNavigationGridItem = glamorous.div(grid.demoNavigation, contentBaseStyle)
 const DocumentationGridItem = glamorous.div(
   grid.documentation,
   contentBaseStyle,
@@ -29,6 +31,6 @@ const DocumentationGridItem = glamorous.div(
 const FooterGridItem = glamorous.div(grid.footer, contentBaseStyle)
 
 export {
-  TheGrid, HeaderGridItem, DemoGridItem,
+  TheGrid, HeaderGridItem, DemoGridItem, DemoNavigationGridItem,
   DocumentationGridItem, FooterGridItem
 }

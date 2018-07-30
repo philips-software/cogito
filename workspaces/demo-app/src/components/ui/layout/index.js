@@ -1,4 +1,4 @@
 export {
-  TheGrid, HeaderGridItem, DemoGridItem,
+  TheGrid, HeaderGridItem, DemoGridItem, DemoNavigationGridItem,
   DocumentationGridItem, FooterGridItem
 } from './TheGrid'

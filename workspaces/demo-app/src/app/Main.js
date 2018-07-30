@@ -6,7 +6,6 @@ import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { Dimmer, Loader, Segment } from 'semantic-ui-react'
 import { UserDataActions } from 'user-data'
 
-import { Home } from 'pages/home'
 import { CogitoId } from 'pages/cogito-id'
 import { Contracts } from 'pages/contracts'
 import { SimpleEncryption } from 'pages/simple-encryption'
@@ -56,8 +55,7 @@ class Main extends React.Component {
               if (this.web3IsReady(web3Props)) {
                 return (
                   <Switch>
-                    <Route exact path='/' render={routeProps => this.renderComponent(Home, routeProps, web3Props)} />
-                    <Route exact path='/cogito-id' render={routeProps => this.renderComponent(CogitoId, routeProps, web3Props)} />
+                    <Route exact path='/' render={routeProps => this.renderComponent(CogitoId, routeProps, web3Props)} />
                     <Route exact path='/contracts' render={routeProps => this.renderComponent(Contracts, routeProps, web3Props)} />
                     <Route exact path='/simple-encryption' render={routeProps => this.renderComponent(SimpleEncryption, routeProps, web3Props)} />
                     <Route exact path='/stream-encryption' render={routeProps => this.renderComponent(StreamEncryption, routeProps, web3Props)} />

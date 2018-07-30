@@ -1,41 +1,16 @@
 import React from 'react'
-import { Spacer, Centered } from '@react-frontend-developer/react-layout-helpers'
-import { HeaderBar, Title, Subtitle,
-  Footer, Documentation } from 'components/ui'
-
-import {
-  TheGrid, HeaderGridItem, DemoGridItem,
-  DocumentationGridItem, FooterGridItem
-} from 'components/ui/layout'
-
+import { Demo } from 'components/ui/demo'
 import { CogitoContract } from 'components/cogito-contract'
 
 class Contracts extends React.Component {
   state = {}
 
   render () {
+    const { match, location, history } = this.props
     return (
-      <TheGrid>
-        <HeaderGridItem>
-          <HeaderBar>
-            <Title>Cogito</Title>
-            <Subtitle>Executing contracts</Subtitle>
-          </HeaderBar>
-        </HeaderGridItem>
-        <DemoGridItem>
-          <Centered>
-            <Spacer margin='20px 0 20px 0'>
-              <CogitoContract {...this.props} />
-            </Spacer>
-          </Centered>
-        </DemoGridItem>
-        <DocumentationGridItem>
-          <Documentation source='documentation/contracts.md' />
-        </DocumentationGridItem>
-        <FooterGridItem>
-          <Footer />
-        </FooterGridItem>
-      </TheGrid>
+      <Demo routeProps={{match, location, history}} subtitle='Executing Contracts' documentation='documentation/contracts.md'>
+        <CogitoContract {...this.props} />
+      </Demo>
     )
   }
 }

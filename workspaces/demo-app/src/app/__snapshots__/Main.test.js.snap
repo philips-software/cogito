@@ -2,259 +2,83 @@
 
 exports[`renders correctly 1`] = `
 <div
-  className="css-vm64bh"
+  className="css-47avb8"
 >
   <div
     className="css-15ysuyo"
   >
     <div
-      className="css-829d7j"
+      className="css-zg3qmw"
     >
-      <div>
-        Demo App
+      <div
+        className="ui huge header"
+        style={
+          Object {
+            "color": "white",
+          }
+        }
+      >
+        Cogito
+      </div>
+      <div
+        className="ui medium header"
+        style={
+          Object {
+            "color": "white",
+            "marginTop": 0,
+          }
+        }
+      >
+        Identity
       </div>
     </div>
   </div>
   <div
-    className="css-1092ap8"
+    className="css-6d40pk"
   >
     <div
       className="css-1crpgfv"
     >
-      <p>
-        Your Cogito account address is:
-      </p>
-      <div
-        className="css-h2wbwd"
-      >
-        unknown
-      </div>
       <div
         style={
           Object {
             "boxSizing": "border-box",
-            "margin": "20px 0 0 0",
+            "margin": "20px 0 20px 0",
             "padding": 0,
           }
         }
-      />
-      <p>
-        You are known as:
-      </p>
-      <div
-        className="css-h2wbwd"
-      >
-        unknown
-      </div>
-      <div
-        className="css-1gzlhve"
-      >
-        <button
-          className="ui black secondary button"
-          disabled={undefined}
-          onClick={[Function]}
-          role="button"
-          tabIndex={undefined}
-        >
-          Read your identity...
-        </button>
-        <button
-          className="ui black secondary button"
-          disabled={undefined}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          role="button"
-          tabIndex={undefined}
-        >
-          Show QR code
-        </button>
-      </div>
-    </div>
-  </div>
-  <div
-    className="css-v3skhn"
-  >
-    <div
-      className="css-1crpgfv"
-    >
-      <p>
-        Current value is:
-      </p>
-      <div
-        className="css-h2wbwd"
-      >
-        0
-      </div>
-      <div
-        className="css-1gzlhve"
-      >
-        <button
-          className="ui black secondary button"
-          disabled={undefined}
-          onClick={[Function]}
-          role="button"
-          tabIndex={undefined}
-        >
-          Read...
-        </button>
-        <button
-          className="ui black secondary button"
-          disabled={undefined}
-          onClick={[Function]}
-          role="button"
-          tabIndex={undefined}
-        >
-          Increase by 5...
-        </button>
-        <button
-          className="ui black secondary button"
-          disabled={undefined}
-          onBlur={[Function]}
-          onClick={[Function]}
-          onFocus={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          role="button"
-          tabIndex={undefined}
-        >
-          Show QR code
-        </button>
-      </div>
-    </div>
-  </div>
-  <div
-    className="css-athk3v"
-  >
-    <div
-      className="css-jbit82"
-    >
-      <p
-        className="css-huraai"
-      >
-        Cogito can encrypt and decrypt data for you. The public-private key pair used for encryption and decryption lives in the user's Cogito mobile app. Since the public key can be known by anyone, it can be retrieved from the Cogito app. Using that public key, encryption is done purely in the browser. Decryption on the other hand requires that the private key is used, so the Cogito mobile app is involved.
-      </p>
-      <div
-        className="css-47eutw"
       >
         <div
-          className="css-pepzuv"
+          className="css-1crpgfv"
         >
-          <textarea
-            onChange={[Function]}
-            onInput={[Function]}
-            placeholder="Enter some text"
-            rows={3}
-            style={
-              Object {
-                "height": "10em",
-                "resize": "",
-                "width": "13em",
-              }
-            }
-            value=""
-          />
-        </div>
-        <div
-          className="css-1fuv6sj"
-        >
-          <button
-            className="ui pink basic button"
-            disabled={undefined}
-            onClick={[Function]}
-            role="button"
-            tabIndex={undefined}
-          >
-            ―Encrypt→
-          </button>
-        </div>
-        <div
-          className="css-gndo50"
-        >
-          <button
-            className="ui pink basic button"
-            disabled={undefined}
-            onClick={[Function]}
-            role="button"
-            tabIndex={undefined}
-          >
-            ←Decrypt―
-          </button>
-        </div>
-        <div
-          className="css-b0s7eq"
-        >
-          <textarea
-            onChange={[Function]}
-            onInput={[Function]}
-            placeholder="Encrypted text appears here"
-            rows={3}
-            style={
-              Object {
-                "height": "10em",
-                "resize": "",
-                "width": "13em",
-              }
-            }
-            value=""
-          />
-        </div>
-      </div>
-      <p
-        className="css-huraai"
-      >
-        What actually happens is this: on 
-        <em>
-          encryption
-        </em>
-        , a symmetrical key is generated in the browser. This key is used for encrypting the data that is provided. The symmetrical key itself is also encrypted, using the public key from the user's identity. On 
-        <em>
-          decryption
-        </em>
-        , the encrypted symmetrical key is sent to the Cogito mobile app, which decrypts it and returns the key itself. That key is then used to decrypt the actual data in the browser. This scheme ensures that the actual data that is encrypted never leaves the browser. Also, the amount of data that is exchanged with the Cogito mobile app is very small (just the symmetrical key).
-      </p>
-    </div>
-  </div>
-  <div
-    className="css-1j66vpb"
-  >
-    <div
-      className="css-15173tg"
-    >
-      <div
-        className="css-1iycz54"
-      >
-        <div
-          className="css-vbisb0"
-        >
+          <p>
+            Your Cogito account address is:
+          </p>
           <div
-            className="css-ynez49"
+            className="css-h2wbwd"
           >
-            <p>
-              Scan to add a dummy attestation:
-            </p>
-            <canvas
-              height={128}
-              style={
-                Object {
-                  "height": 128,
-                  "width": 128,
-                }
-              }
-              width={128}
-            />
+            unknown
           </div>
           <div
-            className="css-1crpgfv"
+            style={
+              Object {
+                "boxSizing": "border-box",
+                "margin": "20px 0 0 0",
+                "padding": 0,
+              }
+            }
+          />
+          <p>
+            You are known as:
+          </p>
+          <div
+            className="css-h2wbwd"
           >
-            Your attestation is:
-            <div
-              className="css-h2wbwd"
-            >
-              unknown
-            </div>
+            unknown
+          </div>
+          <div
+            className="css-1gzlhve"
+          >
             <button
               className="ui black secondary button"
               disabled={undefined}
@@ -262,12 +86,125 @@ exports[`renders correctly 1`] = `
               role="button"
               tabIndex={undefined}
             >
-              Retrieve
+              Read your identity...
+            </button>
+            <button
+              className="ui black secondary button"
+              disabled={undefined}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onFocus={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              role="button"
+              tabIndex={undefined}
+            >
+              Show QR code
             </button>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="css-syb5m9"
+  >
+    <div
+      className="css-1crpgfv"
+    >
+      <div
+        aria-busy={undefined}
+        aria-disabled={undefined}
+        aria-expanded={false}
+        aria-multiselectable={undefined}
+        className="ui button floating labeled upward top pointing dropdown icon"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onMouseDown={[Function]}
+        role="listbox"
+        tabIndex={0}
+      >
+        <div
+          aria-live="polite"
+          className="text"
+          role="alert"
+        >
+          Switch demo...
+        </div>
+        <i
+          aria-hidden="true"
+          className="exchange icon"
+          onClick={[Function]}
+        />
+        <div
+          className="menu transition"
+        >
+          <div
+            aria-checked={undefined}
+            aria-disabled={undefined}
+            aria-selected={undefined}
+            className="item"
+            onClick={[Function]}
+            role="option"
+          >
+            <span
+              className="text"
+            >
+              Executing Contracts
+            </span>
+          </div>
+          <div
+            aria-checked={undefined}
+            aria-disabled={undefined}
+            aria-selected={undefined}
+            className="item"
+            onClick={[Function]}
+            role="option"
+          >
+            <span
+              className="text"
+            >
+              Cogito Attestations
+            </span>
+          </div>
+          <div
+            aria-checked={undefined}
+            aria-disabled={undefined}
+            aria-selected={undefined}
+            className="item"
+            onClick={[Function]}
+            role="option"
+          >
+            <span
+              className="text"
+            >
+              Simple Encryption
+            </span>
+          </div>
+          <div
+            aria-checked={undefined}
+            aria-disabled={undefined}
+            aria-selected={undefined}
+            className="item"
+            onClick={[Function]}
+            role="option"
+          >
+            <span
+              className="text"
+            >
+              Stream Encryption
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="css-pef910"
+  >
+    <div />
   </div>
   <div
     className="css-v8hqy9"
@@ -278,7 +215,7 @@ exports[`renders correctly 1`] = `
       <p
         className="css-15pdwa0"
       >
-        © 2018 by Charterhouse
+        © 2018 by Cogito
       </p>
     </div>
   </div>
