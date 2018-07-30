@@ -6,7 +6,7 @@ import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { Dimmer, Loader, Segment } from 'semantic-ui-react'
 import { UserDataActions } from 'user-data'
 
-import { CogitoId } from 'pages/cogito-id'
+import { CogitoId } from 'pages/home'
 import { Contracts } from 'pages/contracts'
 import { SimpleEncryption } from 'pages/simple-encryption'
 import { StreamEncryption } from 'pages/stream-encryption'

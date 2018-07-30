@@ -1,12 +1,13 @@
 import React from 'react'
 import glamorous from 'glamorous'
+import { Centered } from '@react-frontend-developer/react-layout-helpers'
+import { HeaderBar, Title, Subtitle,
+  Footer } from 'components/ui'
 
-import { HomeGrid, HeaderGridItem, AddressesGridItem,
-  ContractGridItem, FooterGridItem } from 'pages/home/HomeGrid'
-
-import { Centered, FullWidthCentered } from '@react-frontend-developer/react-layout-helpers'
-import { TopBar } from 'components/top-bar'
-import { Footer } from 'components/footer'
+import {
+  NoMatch404Grid, HeaderGridItem,
+  ContentGridItem, FooterGridItem
+} from './NoMatch404Grid'
 
 const Big404 = glamorous.p({
   fontSize: '5rem',
@@ -14,23 +15,22 @@ const Big404 = glamorous.p({
 })
 
 const NoMatch404 = () =>
-  <HomeGrid>
+  <NoMatch404Grid>
     <HeaderGridItem>
-      <TopBar />
+      <HeaderBar>
+        <Title>Cogito</Title>
+        <Subtitle>404</Subtitle>
+      </HeaderBar>
     </HeaderGridItem>
-    <AddressesGridItem>
+    <ContentGridItem>
       <Centered>
         <Big404>:(</Big404>
-      </Centered>
-    </AddressesGridItem>
-    <ContractGridItem>
-      <FullWidthCentered>
         <p>You reached the end of the Internet. There is no way back...</p>
-      </FullWidthCentered>
-    </ContractGridItem>
+      </Centered>
+    </ContentGridItem>
     <FooterGridItem>
       <Footer />
     </FooterGridItem>
-  </HomeGrid>
+  </NoMatch404Grid>
 
 export { NoMatch404 }
