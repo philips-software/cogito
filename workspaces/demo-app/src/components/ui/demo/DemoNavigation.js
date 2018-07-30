@@ -18,19 +18,15 @@ class DemoNavigation extends React.PureComponent {
     history.push(demoUrl)
   }
 
-  componentDidMount () {
-    const { location: { pathname } } = this.props
-    const demos = allDemos.filter(d => d.url !== pathname)
-    this.setState({ demos })
-  }
-
   render () {
+    const { location: { pathname } } = this.props
+
     return (
       <Centered>
         <Dropdown upward icon='exchange' text='Switch demo...' pointing='top' floating labeled button className='icon'>
           <Dropdown.Menu>
-            { this.state.demos.map(({text, url}) => (
-              <Dropdown.Item key={text} text={text} onClick={() => this.switchDemo(url)} />
+            { allDemos.map(({text, url}) => (
+              <Dropdown.Item active={url === pathname} key={text} text={text} onClick={() => this.switchDemo(url)} />
             ))}
           </Dropdown.Menu>
         </Dropdown>
