@@ -1,5 +1,7 @@
-Faucet
-======
+---
+path: /faucet
+title: Faucet
+---
 
 This is a very simple faucet Express app. It supports the following REST call:
 
