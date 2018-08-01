@@ -15,8 +15,15 @@ jobs:
         - (cd workspaces/demo-app/truffle && yarn truffle compile)
         # Build including homepage (Gatsby)
         - yarn build-for-netlify
+        # Add Codeclimate reporter
+        - yarn global add nyc
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
       script:
-        - yarn test --runInBand
+        - nyc --reporter=lcov yarn test --runInBand
+      after_script:
+        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
     - stage: "iOS"
       name: cogito-ios-app
