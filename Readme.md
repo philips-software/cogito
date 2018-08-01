@@ -2,6 +2,7 @@
 [![NumberOfTotalDownloads](https://img.shields.io/npm/dt/@cogitojs/cogito.svg)](https://www.npmjs.com/package/@cogitojs/cogito)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/09e13ba748931cd3555e/test_coverage)](https://codeclimate.com/github/philips-software/cogito/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/09e13ba748931cd3555e/maintainability)](https://codeclimate.com/github/philips-software/cogito/maintainability)
+[![Slack](https://philips-software-slackin.now.sh/badge.svg)](https://philips-software-slackin.now.sh)
 
 
 Cogito
