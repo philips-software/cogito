@@ -1,4 +1,4 @@
-Marcin Czenko
-Mark Spanbroek
-Stefan van den Oord
-Jeroen Knoops
+* Marcin Czenko
+* Mark Spanbroek
+* Stefan van den Oord
+* Jeroen Knoops
