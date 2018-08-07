@@ -1,3 +1,6 @@
+env:
+  - CC_TEST_REPORTER_ID=62a314af9e8f1580690d6032a2998b5d9756097bcb662a029aa2e97935fa7d45
+
 jobs:
   include:
     - stage: "JavaScript"
