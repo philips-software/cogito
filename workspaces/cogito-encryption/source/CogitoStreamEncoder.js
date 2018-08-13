@@ -10,7 +10,10 @@ class CogitoStreamEncoder {
 
   get cryptoMaterial () {
     if (!this.encryptedStreamingKey) {
-      const { key: streamKey, header: streamHeader } = this.encoder.cryptoMaterial
+      const {
+        key: streamKey,
+        header: streamHeader
+      } = this.encoder.cryptoMaterial
       const publicKey = this.createRsaPublicKey({ jsonWebKey: this.jsonWebKey })
       this.encryptedStreamKey = rsaEncrypt({ publicKey, plainText: streamKey })
       this.streamHeader = streamHeader
@@ -42,13 +45,15 @@ class CogitoStreamEncoder {
     }
 
     if (errorMessage) {
-      throw new Error(`Missing or incomplete constructor arguments: ${errorMessage}.`)
+      throw new Error(
+        `Missing or incomplete constructor arguments: ${errorMessage}.`
+      )
     }
   }
 
-  constructor ({ jsonWebKey }) {
-    this.checkArguments(jsonWebKey)
-    this.jsonWebKey = jsonWebKey
+  constructor (args = {}) {
+    this.checkArguments(args.jsonWebKey)
+    this.jsonWebKey = args.jsonWebKey
   }
 
   push (data) {

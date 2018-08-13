@@ -31,15 +31,23 @@ describe('CogitoStreamEncoder', () => {
     })
 
     it('throws if JSON Web Key has not been provided in the constructor', () => {
-      let cogitoStreamEncoder
-      expect(() => { cogitoStreamEncoder = new CogitoStreamEncoder() }).toThrow()
-      expect(cogitoStreamEncoder).not.toBeDefined()
+      expect(() => {
+        new CogitoStreamEncoder() // eslint-disable-line no-new
+      }).toThrow(/key in JSON Web Key format/)
+    })
+
+    it('throws if JSON Web Key is incomplete', () => {
+      expect(() => {
+        new CogitoStreamEncoder({ jsonWebKey: {} }) // eslint-disable-line no-new
+      }).toThrow(/incomplete JSON Web Key/)
     })
   })
 
   describe('encrypting', function () {
     let streamKey
-    const streamHeader = TypedArrays.string2Uint8Array('stream initialization header as Uint8Array')
+    const streamHeader = TypedArrays.string2Uint8Array(
+      'stream initialization header as Uint8Array'
+    )
     const testCipher1 = 'cipherText1 as Uint8Array'
     const testCipher2 = 'cipherText2 as Uint8Array'
     let mockStreamEncoder
@@ -71,7 +79,9 @@ describe('CogitoStreamEncoder', () => {
 
       expect(cipher).toBe(testCipher1)
       expect(mockStreamEncoder.push).toHaveBeenCalledTimes(1)
-      expect(TypedArrays.uint8Array2string(mockStreamEncoder.push.mock.calls[0][0])).toBe(message)
+      expect(
+        TypedArrays.uint8Array2string(mockStreamEncoder.push.mock.calls[0][0])
+      ).toBe(message)
     })
 
     it('delegates to crypto library when ending the stream', () => {
@@ -82,13 +92,18 @@ describe('CogitoStreamEncoder', () => {
 
       expect(cipher).toBe(testCipher2)
       expect(mockStreamEncoder.end).toHaveBeenCalledTimes(1)
-      expect(TypedArrays.uint8Array2string(mockStreamEncoder.end.mock.calls[0][0])).toBe(message)
+      expect(
+        TypedArrays.uint8Array2string(mockStreamEncoder.end.mock.calls[0][0])
+      ).toBe(message)
     })
 
     it('returns streaming key that is encrypted using provided JSON Web Key', () => {
       const { encryptedStreamKey } = cogitoStreamEncoder.cryptoMaterial
 
-      const decryptedStreamingKey = rsaDecrypt({ privateKey, cipherText: encryptedStreamKey })
+      const decryptedStreamingKey = rsaDecrypt({
+        privateKey,
+        cipherText: encryptedStreamKey
+      })
 
       expect(Buffers.copyToUint8Array(decryptedStreamingKey)).toEqual(streamKey)
     })
@@ -110,15 +125,21 @@ describe('CogitoStreamEncoder', () => {
       const cipherText1 = cogitoStreamEncoder.push(data1)
       const cipherText2 = cogitoStreamEncoder.end(data2)
 
-      const { encryptedStreamKey, streamHeader } = cogitoStreamEncoder.cryptoMaterial
-      const decryptedStreamingKey = rsaDecrypt({ privateKey, cipherText: encryptedStreamKey })
+      const {
+        encryptedStreamKey,
+        streamHeader
+      } = cogitoStreamEncoder.cryptoMaterial
+      const decryptedStreamingKey = rsaDecrypt({
+        privateKey,
+        cipherText: encryptedStreamKey
+      })
 
       const streamDecoder = new StreamDecoder({
         key: Buffers.copyToUint8Array(decryptedStreamingKey),
         header: streamHeader
       })
-      const {message: clearText1, tag: tag1} = streamDecoder.pull(cipherText1)
-      const {message: clearText2, tag: tag2} = streamDecoder.pull(cipherText2)
+      const { message: clearText1, tag: tag1 } = streamDecoder.pull(cipherText1)
+      const { message: clearText2, tag: tag2 } = streamDecoder.pull(cipherText2)
 
       expect(TypedArrays.uint8Array2string(clearText1)).toBe(message1)
       expect(tag1).toBe(Sodium.TAG_MESSAGE)
