@@ -1,75 +1,45 @@
+language: swift
+os: osx
+osx_image: xcode9.4
 env:
-  - CC_TEST_REPORTER_ID=62a314af9e8f1580690d6032a2998b5d9756097bcb662a029aa2e97935fa7d45
-
-jobs:
-  include:
-    - stage: "JavaScript"
-      name: "npm packages and React apps"
-      os: linux
-      language: node_js
-      before_install:
-        # Use recent Yarn
-        - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
-        - export PATH="$HOME/.yarn/bin:$PATH"
-      before_script:
-        # Install Truffle dependencies
-        - (cd workspaces/demo-app/truffle && yarn install)
-        # Compile smart contracts
-        - (cd workspaces/demo-app/truffle && yarn truffle compile)
-        # Build including homepage (Gatsby)
-        - yarn build-for-netlify
-        # Add Codeclimate reporter
-        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        - chmod +x ./cc-test-reporter
-        - ./cc-test-reporter before-build
-      script:
-        - yarn test --runInBand
-      after_script:
-        - ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $TRAVIS_TEST_RESULT
-
-    - stage: "iOS"
-      name: cogito-ios-app
-      os: osx
-      language: swift
-      osx_image: xcode9.4
-      env:
-        - BUNDLE_GEMFILE=.ruby-dependencies/Gemfile
-      install:
-        - cd workspaces/cogito-ios-app
-        - bundle install
-      script:
-        - bundle exec fastlane tests
-        - bundle exec slather coverage
-    - name: telepath-ios
-      os: osx
-      language: swift
-      osx_image: xcode9.4
-      env:
-        - BUNDLE_GEMFILE=.ruby-dependencies/Gemfile
-      install:
-        - cd workspaces/telepath-ios
-        - bundle install
-      script:
-        - bundle exec fastlane tests
-        - bundle exec slather coverage
-    - name: cogito-attestations-ios
-      os: osx
-      language: swift
-      osx_image: xcode9.4
-      env:
-        - BUNDLE_GEMFILE=.ruby-dependencies/Gemfile
-      before_install:
-        # Use recent Yarn
-        - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
-        - export PATH="$HOME/.yarn/bin:$PATH"
-        # Build Javascript
-        - nvm install
-        - nvm use
-        - yarn install
-        - yarn build
-      install:
-        - cd workspaces/cogito-attestations-ios
-        - bundle install
-      script:
-        - bundle exec fastlane tests
-        - bundle exec slather coverage
+  global:
+    # Code coverage key
+    - CC_TEST_REPORTER_ID=62a314af9e8f1580690d6032a2998b5d9756097bcb662a029aa2e97935fa7d45
+    # Ruby setup
+    - BUNDLE_GEMFILE=.ruby-dependencies/Gemfile
+before_install:
+  # Use recent NodeJS
+  - nvm install 10
+  - nvm use 10
+  # Use recent Yarn
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.7.0
+  - export PATH="$HOME/.yarn/bin:$PATH"
+  # Install Code Climate reporter
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+install:
+  # Install NodeJS dependencies
+  - yarn install
+  # Install Truffle dependencies
+  - (cd workspaces/demo-app/truffle && yarn install)
+  # Compile smart contracts
+  - (cd workspaces/demo-app/truffle && yarn truffle compile)
+  # Transpile Javascript (including Gatsby homepage)
+  - yarn build-for-netlify
+  # Install fastlane for iOS builds
+  - (cd workspaces/cogito-ios-app && bundle install)
+  - (cd workspaces/telepath-ios && bundle install)
+  - (cd workspaces/cogito-attestations-ios && bundle install)
+script:
+  # Run NodeJS tests
+  - yarn test --runInBand
+  # Run iOS app tests
+  - (cd workspaces/cogito-ios-app && bundle exec fastlane tests && bundle exec fastlane coverage)
+  # Run Telepath iOS tests
+  - (cd workspaces/telepath-ios && bundle exec fastlane tests && bundle exec fastlane coverage)
+  # Run Attestations iOS tests
+  - (cd workspaces/cogito-attestations-ios && bundle exec fastlane tests && bundle exec fastlane coverage)
+after-script:
+  # Upload test coverage to Code Climate
+  - ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $TRAVIS_TEST_RESULT
