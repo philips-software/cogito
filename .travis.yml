@@ -35,11 +35,20 @@ script:
   # Run NodeJS tests
   - yarn test --runInBand
   # Run iOS app tests
-  - (cd workspaces/cogito-ios-app && bundle exec fastlane tests && bundle exec fastlane coverage)
-  # Run Telepath iOS tests
-  - (cd workspaces/telepath-ios && bundle exec fastlane tests && bundle exec fastlane coverage)
-  # Run Attestations iOS tests
-  - (cd workspaces/cogito-attestations-ios && bundle exec fastlane tests && bundle exec fastlane coverage)
-after-script:
+  - (cd workspaces/cogito-ios-app && bundle exec fastlane tests)
+  - (cd workspaces/telepath-ios && bundle exec fastlane tests)
+  - (cd workspaces/cogito-attestations-ios && bundle exec fastlane tests)
+after_success:
+  # Code coverage reports for iOS
+  - (cd workspaces/cogito-ios-app && bundle exec slather coverage -x)
+  - (cd workspaces/telepath-ios && bundle exec slather coverage -x)
+  - (cd workspaces/cogito-attestations-ios && bundle exec slather coverage -x)
+  # Convert coverage to Code Climate format
+  - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.nodejs.json
+  - ./cc-test-reporter format-coverage -t cobertura -o coverage/codeclimate.cogito-ios.json workspaces/cogito-ios-app/cobertura.xml
+  - ./cc-test-reporter format-coverage -t cobertura -o coverage/codeclimate.telepath-ios.json workspaces/telepath-ios/cobertura.xml
+  - ./cc-test-reporter format-coverage -t cobertura -o coverage/codeclimate.attestations-ios.json workspaces/cogito-attestations-ios/cobertura.xml
+  # Combine code coverage reports
+  - ./cc-test-reporter sum-coverage --parts 4 coverage/codeclimate.*.json
   # Upload test coverage to Code Climate
-  - ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter upload-coverage
