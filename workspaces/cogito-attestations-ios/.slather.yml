@@ -1,3 +1,5 @@
 xcodeproj: Attestations.xcodeproj
 workspace: Attestations.xcworkspace
 scheme: Attestations
+ignore:
+  - "Pods/**"
