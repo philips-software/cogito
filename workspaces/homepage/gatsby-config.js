@@ -15,6 +15,7 @@ module.exports = {
         path: `${__dirname}/../faucet`
       }
     },
+    'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',
       options: {
