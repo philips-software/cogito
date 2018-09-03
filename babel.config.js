@@ -21,7 +21,10 @@ function setupPresets (babelEnv) {
   if (babelEnv === 'es' || babelEnv === 'umd') {
     presetEnv = [
       '@babel/preset-env',
-      { modules: false }
+      {
+        modules: false,
+        exclude: ['transform-regenerator']
+      }
     ]
   }
 
