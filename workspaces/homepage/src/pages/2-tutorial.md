@@ -70,11 +70,12 @@ Cogito integration
 
 To enable signing with the Cogito app, we'll go through these steps:
 
-1. Set up Telepath to enable communication between the web app and the Cogito
-   mobile app.
-2. Replace the standard Ethereum Web3 provider with a Cogito specific version.
+1. Create a Telepath channel for communication between the web app and the
+   Cogito mobile app.
+2. Display a QR code that allows the mobile app to connect.
+3. Replace the standard Ethereum Web3 provider with a Cogito specific version.
 
-### Setup Telepath
+### Create Telepath channel
 
 The web app and the Cogito mobile app communicate with each other through an
 encrypted channel called Telepath. We start by adding the Telepath package to
@@ -109,14 +110,14 @@ are going to expand this code to create the Telepath channel as well. Change the
 code to read:
 
 ```javascript
-const telepath  = new Telepath('https://cogito.mobi')
+const telepath = new Telepath('https://telepath.cogito.mobi')
 const channel = await telepath.createChannel({ appName: 'Tutorial' })
+this.setState({ channel })
 
 const web3 = await getWeb3()
 const accounts = await getAccounts(web3)
 const contract = await getContractInstance(web3)
-
-this.setState({ channel, web3, accounts, contract })
+this.setState({ web3, accounts, contract })
 ```
 
 Notice how this code creates a new instance of Telepath, then creates a new
@@ -134,7 +135,53 @@ The code should now look like this:
 
 ![code for creating a telepath channel](images/AddingTelepath.png)
 
-TODO: display QR Code
+### Display QR Code
+
+Now that we created a Telepath channel, we are going to ensure that the Cogito
+mobile app can connect to it. We are going to show a QR code that contains the
+connection details. We'll need a module for displaying QR codes. You can
+install it using:
+
+    cd web-app
+    yarn add qrcode.react
+
+We can now open the `web-app/src/App.js` file and add the import for the module:
+
+```javascript
+import QRCode from 'qrcode.react'
+```
+
+Now we turn to the code that is displayed when loading web3:
+
+```javascript
+} else {
+  return <p>Loading web3, accounts, and contract.</p>
+}
+```
+
+We are going to change this code so that it displays the QRCode:
+
+```javascript
+} else if (web3Props.channel) {
+  const { channel } = web3Props
+  const connectUrl = channel.createConnectUrl('https://cogito.mobi')
+  return (
+    <div>
+      <p>Loading web3, accounts, and contract.</p>
+      <QRCode value={connectUrl} style={{ margin: '1em' }} />
+      <p>Please scan the QR Code with the Cogito mobile app.</p>
+    </div>
+  )
+} else {
+  return <p>Creating Telepath Channel..</p>
+}
+```
+
+The code now checks whether the Telepath channel has been created yet. When it's
+been created we ask the channel to create a connection URL, which we then pass
+on the QRCode component. We used `https://cogito.mobi` as the base url for the
+connection URL. This ensures that scanning the QRCode on your mobile device will
+take you to the Cogito mobile app when it's installed.
 
 ### Use Cogito-web3
 
