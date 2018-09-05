@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "Cogito library for web app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -38,8 +38,8 @@
     "rollup-plugin-uglify": "^3.0.0"
   },
   "dependencies": {
-    "@cogitojs/cogito-web3": "^0.2.11",
-    "@cogitojs/telepath-js": "^0.2.11"
+    "@cogitojs/cogito-web3": "^0.2.12",
+    "@cogitojs/telepath-js": "^0.2.12"
   },
   "peerDependencies": {
     "libsodium-wrappers": "^0.7.2",

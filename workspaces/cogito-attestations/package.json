@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-attestations",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "Allows retrieval of attestations through the Cogito app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",

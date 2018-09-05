@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-web3",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "An Ethereum web3 provider that signs transactions with the Cogito app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
