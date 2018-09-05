@@ -177,15 +177,89 @@ We are going to change this code so that it displays the QRCode:
 }
 ```
 
-The code now checks whether the Telepath channel has been created yet. When it's
+The code now checks whether the Telepath channel has been created. When it's
 been created we ask the channel to create a connection URL, which we then pass
 on the QRCode component. We used `https://cogito.mobi` as the base url for the
 connection URL. This ensures that scanning the QRCode on your mobile device will
 take you to the Cogito mobile app when it's installed.
 
+You may notice that when you reload the web-app it will show the QR Code only
+for the briefest of moments, to be replaced by the home screen within a fraction
+of a second. This happens because right after the Telepath channel has been
+created, we load the regular Web3 that doesn't use the Telepath channel but
+directly communicates with the Truffle development environment. We will change
+that behaviour now.
+
 ### Use Cogito-web3
 
-TODO
+We now return to the `web-app/src/component/web3/Web3.js` file. Remember that we
+updated the code in `componentDidMount` to look like this:
+
+```javascript
+const telepath = new Telepath('https://telepath.cogito.mobi')
+const channel = await telepath.createChannel({ appName: 'Tutorial' })
+this.setState({ channel })
+
+const web3 = await getWeb3()
+const accounts = await getAccounts(web3)
+const contract = await getContractInstance(web3)
+this.setState({ web3, accounts, contract })
+```
+
+We now want to use the Cogito web3 provider instead of the default one. We start
+by installing the cogito-web3 package:
+
+    cd web-app
+    yarn add @cogitojs/cogito-web3
+
+Then we add the following imports to the top of the file:
+
+```javascript
+import Web3 from 'web3'
+import { CogitoProvider } from '@cogitojs/cogito-web3'
+```
+
+Finally, we change the code in `componentDidMount` like this:
+
+```javascript
+const telepath = new Telepath('https://telepath.cogito.mobi')
+const channel = await telepath.createChannel({ appName: 'Tutorial' })
+this.setState({ channel })
+
+const originalWeb3 = await getWeb3()
+const web3 = new Web3(
+  new CogitoProvider({
+    originalProvider: originalWeb3.currentProvider,
+    telepathChannel: channel
+  })
+)
+
+const accounts = await getAccounts(web3)
+const contract = await getContractInstance(web3)
+this.setState({ web3, accounts, contract })
+```
+
+This code creates a new Web3 instance using the CogitoProvider. The
+CogitoProvider will forward most requests directly to the original Web3
+provider. But some requests, such as those asking for available accounts or
+requesting a transaction signature, will be forwarded to the Cogito mobile app,
+where the accounts and their private keys are kept.
+
+We've now completed all the steps in this tutorial. So go ahead, take the web
+app for a spin! You should be prompted in the Cogito mobile app whenever a new
+transaction is about to be performed.
+
+Further reading
+---------------
+
+We showed you how to integrate Cogito using Telepath and the Cogito Web3
+provider. This illustrates how you can use Cogito with React, and hopefully
+provides enough understanding to apply it in other web frameworks as well.
+
+If you're looking for a nicer integration with React we recommend you take a
+look at the [Cogito React](https://www.npmjs.com/package/@cogitojs/cogito-react)
+and [Cogito React UI](https://www.npmjs.com/package/@cogitojs/cogito-react-ui)
+packages.
 
 [1]: https://nodejs.org
 [2]: http://truffleframework.com
