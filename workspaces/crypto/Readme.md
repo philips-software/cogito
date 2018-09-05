@@ -59,7 +59,7 @@ const {message: decrypted1, tag: tag1} = streamDecoder.pull(encrypted1)
 const {message: decrypted2, tag: tag2} = streamDecoder.pull(encrypted2)
 
 console.log(`decrypted1=[${decrypted1}]`) // [0,1,2,3,4,5,6,7,8,9]
-console.log(`tag1=${tag1}`) // 0 
+console.log(`tag1=${tag1}`) // 0
 console.log(`decrypted2=[${decrypted2}]`) // [0,1,2,3,4,5,6,7,8,9]
 console.log(`tag2=${tag2}`) // 3
 
@@ -76,7 +76,7 @@ The `pull` function returns an object `{message, tag}`. All the tags except for 
 Below is the complete example you can use as a jest test:
 
 ```javascript
-describe('Stream Encryption Decryption, () => {
+describe('Stream Encryption Decryption', () => {
   beforeAll(async () => {
     await Sodium.wait()
   })
