@@ -245,6 +245,30 @@ provider. But some requests, such as those asking for available accounts or
 requesting a transaction signature, will be forwarded to the Cogito mobile app,
 where the accounts and their private keys are kept.
 
+Before you go ahead and test the web app, we should take care of one last thing.
+The accounts that are supplied by the Truffle development environment each had
+some Ether pre-allocated so that they could pay for transaction fees. Your
+Cogito account doesn't have any Ether, so you can't make any transactions yet.
+To remedy this, we'll transfer some Ether to your Cogito account.
+
+### Sending Ether to your account
+
+First, we need your Ethereum account address. Open the web app, use the Cogito
+mobile app to scan the QR code, and go the Accounts page. There you should see
+your Ethereum address. Copy it. Then, go to the Truffle development console, and
+enter the following command (substituting your own address):
+
+    web3.eth.sendTransaction({to: '<your address>', from: '0x627306090abab3a6e1400e9345bc60c78a8bef57', value: web3.utils.toWei('5', 'ether')})
+
+This should transfer 5 Ether from one of the test accounts to your account. You
+can check your current balance by entering the following command in the Truffle
+development console:
+
+    web3.eth.getBalance('<your address>').then(balance => web3.utils.fromWei(balance, 'ether'))
+
+Play around
+-----------
+
 We've now completed all the steps in this tutorial. So go ahead, take the web
 app for a spin! You should be prompted in the Cogito mobile app whenever a new
 transaction is about to be performed.
