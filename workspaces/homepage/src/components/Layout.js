@@ -5,7 +5,7 @@ import glamorous from 'glamorous'
 import { rhythm } from '../utils/typography'
 
 import { LayoutGrid, SidebarGridItem, ContentGridItem } from './LayoutGrid'
-import { Navigation } from './Navigation'
+import { Navigation } from './navigation'
 
 export const FixedNavigation = glamorous.div({
   display: 'block',
