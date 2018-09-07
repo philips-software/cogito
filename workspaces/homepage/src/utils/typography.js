@@ -13,6 +13,17 @@ moragaTheme.overrideThemeStyles = ({ rhythm }, options) => ({
   }
 })
 
+moragaTheme.googleFonts = [
+  {
+    name: 'Source Sans Pro',
+    styles: ['200', '400', '400i', '700']
+  },
+  {
+    name: 'Roboto Mono',
+    styles: ['100', '100i', '300', '300i', '400', '400i', '500', '500i']
+  }
+]
+
 const typography = new Typography(moragaTheme)
 
 const { rhythm, scale } = typography

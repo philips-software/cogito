@@ -5,10 +5,10 @@ import { graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
 
-const Template = ({ data: { doc } }) => {
+const Template = ({ data: { doc }, location }) => {
   const { html, fileAbsolutePath, frontmatter: { title } } = doc
   return (
-    <Layout>
+    <Layout location={location}>
       <Helmet title={title} />
       <EditFile fileAbsolutePath={fileAbsolutePath} />
       <h1>{title}</h1>
