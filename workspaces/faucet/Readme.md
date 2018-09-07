@@ -1,6 +1,7 @@
 ---
-path: /faucet
+path: /components/faucet
 title: Faucet
+tag: component
 ---
 
 This is a very simple faucet Express app. It supports the following REST call:

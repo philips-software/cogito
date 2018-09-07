@@ -1,6 +1,7 @@
 ---
 path: /
 title: Cogito
+tag: landing-page
 ---
 
 Homepage for Cogito Identity Management.

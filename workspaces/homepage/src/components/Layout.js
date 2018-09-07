@@ -15,8 +15,7 @@ export const FixedNavigation = glamorous.div({
   maxWidth: '300px',
   height: `calc(100vh - ${rhythm(2)})`,
   overflowY: 'auto',
-  backgroundColor: '#70a8a9',
-  borderRight: '1px solid #70a8a9',
+  backgroundColor: '#F7F7F7',
   WebkitOverflowScrolling: `touch`,
   '::-webkit-scrollbar': {
     width: `6px`,
@@ -40,6 +39,7 @@ const Layout = ({ children, location }) => (
               frontmatter {
                 title
                 path
+                tag
               }
               headings(depth: h2) {
                 value
@@ -55,7 +55,7 @@ const Layout = ({ children, location }) => (
         <LayoutGrid>
           <SidebarGridItem>
             <FixedNavigation>
-              <Navigation docs={docs} />
+              <Navigation docs={docs} location={location} />
             </FixedNavigation>
           </SidebarGridItem>
           <ContentGridItem>
