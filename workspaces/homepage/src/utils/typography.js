@@ -3,10 +3,12 @@ import moragaTheme from 'typography-theme-moraga'
 
 moragaTheme.overrideThemeStyles = ({ rhythm }, options) => ({
   'a': {
-    textDecoration: 'none'
+    textDecoration: 'none',
+    color: '#F486CA'
   },
   'a:hover': {
-    textDecoration: 'none'
+    color: '#F486CA',
+    textDecoration: 'underline'
   },
   'blockquote > p': {
     fontSize: '1rem'

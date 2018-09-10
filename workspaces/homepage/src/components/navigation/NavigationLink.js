@@ -10,7 +10,8 @@ const NavigationLink = glamorous(Link)(props => ({
   fontSize: '0.8rem',
   textDecoration: 'none',
   ':hover': {
-    color: 'black'
+    color: 'black',
+    textDecoration: 'none'
   },
   ':before': {
     backgroundColor: '#F486CA',

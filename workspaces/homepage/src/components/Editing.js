@@ -7,7 +7,11 @@ const A = glamorous.a({
   fontFamily: 'Roboto Mono, monospace',
   fontWeight: '100',
   fontSize: '0.8rem',
-  color: '#F486CA'
+  color: '#FF55BE',
+  ':hover': {
+    textDecoration: 'underline',
+    color: '#FF55BE'
+  }
 })
 
 const Wrapper = glamorous.div({
