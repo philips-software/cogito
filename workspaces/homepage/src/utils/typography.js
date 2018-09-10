@@ -10,6 +10,9 @@ moragaTheme.overrideThemeStyles = ({ rhythm }, options) => ({
   },
   'blockquote > p': {
     fontSize: '1rem'
+  },
+  'h2': {
+    marginTop: '2rem'
   }
 })
 
