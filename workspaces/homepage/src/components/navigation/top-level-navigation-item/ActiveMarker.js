@@ -3,7 +3,7 @@ import glamorous from 'glamorous'
 
 const MarkerPositioner = glamorous.div({
   position: 'absolute',
-  left: '15px'
+  left: '10px'
 })
 
 const Circle = glamorous.div(({radius}) => ({
