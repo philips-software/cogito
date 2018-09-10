@@ -5,7 +5,7 @@ import { Grid } from '@react-frontend-developer/css-grid-helper'
 let grid = new Grid([
   'sidebar content'
 ], {
-  gridTemplateColumns: '300px auto'
+  gridTemplateColumns: '300px calc(100vw - 350px)'
 })
 
 const LayoutGrid = glamorous.div(grid.container, {
