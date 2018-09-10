@@ -1,6 +1,7 @@
 ---
 title: Tutorial
-path: /tutorial
+path: /developer-documentation/tutorial
+tag: developer-documentation
 ---
 
 This tutorial teaches you how to add simple and safe signing of Ethereum
@@ -23,7 +24,7 @@ which will give us a React web app with support for Solidity smart contracts:
 
 After issuing these commands your terminal should resemble:
 
-![unbox output](images/TruffleUnbox.png)
+![unbox output](./images/TruffleUnbox.png)
 
 Running the web app
 -------------------
@@ -35,7 +36,7 @@ development console:
 
 Which should give you a prompt like this:
 
-![develop prompt](images/TruffleDevelop.png)
+![develop prompt](./images/TruffleDevelop.png)
 
 Our project includes an example smart contract in `contracts/SimpleStorage.sol`.
 Deploy this smart contract now by executing the following command in the
@@ -43,7 +44,7 @@ Truffle development console:
 
     migrate
 
-![migrate output](images/TruffleMigrate.png)
+![migrate output](./images/TruffleMigrate.png)
 
 Now that we have our Ethereum test environment with smart contracts setup, we
 can start a local server to test our web app. In a separate terminal issue the
@@ -52,12 +53,12 @@ following commands:
     cd web-app
     yarn start
 
-![react server output](images/ReactServer.png)
+![react server output](./images/ReactServer.png)
 
 You should now be able to browse to http://localhost:3000, and see the webapp in
 action.
 
-![web app](images/WebApp.png)
+![web app](./images/WebApp.png)
 
 When you play around with the web app you'll notice that you can interact with
 the smart contract without having to sign any transactions. This happens because
@@ -133,7 +134,7 @@ state = { channel: null, web3: null, accounts: null, contract: null }
 
 The code should now look like this:
 
-![code for creating a telepath channel](images/AddingTelepath.png)
+![code for creating a telepath channel](./images/AddingTelepath.png)
 
 ### Display QR Code
 
