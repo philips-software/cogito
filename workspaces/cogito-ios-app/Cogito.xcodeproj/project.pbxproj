@@ -34,7 +34,6 @@
 		027603F41F6ACD1600788B0A /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F21F6ACD1600788B0A /* Debug.storyboard */; };
 		027603F61F6ACD1600788B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027603F51F6ACD1600788B0A /* Assets.xcassets */; };
 		027603F91F6ACD1600788B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F71F6ACD1600788B0A /* LaunchScreen.storyboard */; };
-		028F4EEC1F7AA64D0015C4AF /* GethReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EEB1F7AA64D0015C4AF /* GethReducerSpec.swift */; };
 		028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EED1F7CE12A0015C4AF /* SyncProgress.swift */; };
 		028F4EF51F7CF7EB0015C4AF /* DebugViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EF41F7CF7EB0015C4AF /* DebugViewControllerSpec.swift */; };
 		028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EF91F7D34280015C4AF /* CreateIdentityViewController.swift */; };
@@ -44,9 +43,6 @@
 		028F4F061F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4F051F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift */; };
 		0291A3FA2208457700AFC6D6 /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291A3F92208457700AFC6D6 /* AudioFeedback.swift */; };
 		0291A3FC220851DF00AFC6D6 /* TestSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291A3FB220851DF00AFC6D6 /* TestSetup.swift */; };
-		029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245131F7AA00C00F2C0C1 /* GethActions.swift */; };
-		029245171F7AA13F00F2C0C1 /* GethReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245161F7AA13F00F2C0C1 /* GethReducer.swift */; };
-		0292451A1F7AA17300F2C0C1 /* GethState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245191F7AA17300F2C0C1 /* GethState.swift */; };
 		0292451D1F7AA3B100F2C0C1 /* AppStateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */; };
 		0295A01F2085E6CD0060400A /* EncryptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295A01E2085E6CD0060400A /* EncryptionService.swift */; };
 		0295A0212085E6DD0060400A /* EncryptionServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0295A0202085E6DD0060400A /* EncryptionServiceSpec.swift */; };
@@ -216,7 +212,6 @@
 		027603FF1F6ACD1600788B0A /* CogitoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CogitoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		027604051F6ACD1600788B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0276040E1F6BFF6D00788B0A /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
-		028F4EEB1F7AA64D0015C4AF /* GethReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethReducerSpec.swift; sourceTree = "<group>"; };
 		028F4EED1F7CE12A0015C4AF /* SyncProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncProgress.swift; sourceTree = "<group>"; };
 		028F4EF41F7CF7EB0015C4AF /* DebugViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewControllerSpec.swift; sourceTree = "<group>"; };
 		028F4EF91F7D34280015C4AF /* CreateIdentityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityViewController.swift; sourceTree = "<group>"; };
@@ -226,9 +221,6 @@
 		028F4F051F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityViewControllerSpec.swift; sourceTree = "<group>"; };
 		0291A3F92208457700AFC6D6 /* AudioFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
 		0291A3FB220851DF00AFC6D6 /* TestSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSetup.swift; sourceTree = "<group>"; };
-		029245131F7AA00C00F2C0C1 /* GethActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethActions.swift; sourceTree = "<group>"; };
-		029245161F7AA13F00F2C0C1 /* GethReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethReducer.swift; sourceTree = "<group>"; };
-		029245191F7AA17300F2C0C1 /* GethState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethState.swift; sourceTree = "<group>"; };
 		0292451C1F7AA3B100F2C0C1 /* AppStateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateHelper.swift; sourceTree = "<group>"; };
 		0295A01E2085E6CD0060400A /* EncryptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionService.swift; sourceTree = "<group>"; };
 		0295A0202085E6DD0060400A /* EncryptionServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionServiceSpec.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -468,7 +460,6 @@
 			children = (
 				5C04E44B1FA77D0400A70C60 /* Accounts service */,
 				028F4EF21F7CE37E0015C4AF /* Global state */,
-				028F4EF01F7CE22D0015C4AF /* Geth state */,
 				0298D4331F7A45040070998D /* Geth */,
 				02E792371F6FFDF000DC5973 /* Key store */,
 				02A15AF81F86714800A94163 /* Diamond */,
@@ -506,7 +497,6 @@
 				0291A3FB220851DF00AFC6D6 /* TestSetup.swift */,
 				5C04E4481FA77CA400A70C60 /* Accounts service */,
 				028F4EF31F7CE3A10015C4AF /* Global */,
-				028F4EF11F7CE25F0015C4AF /* Geth state */,
 				0298D4321F7A44EF0070998D /* Geth */,
 				02E792361F6FFDD600DC5973 /* Key store */,
 				02A15AF91F86715800A94163 /* Diamond */,
@@ -531,24 +521,6 @@
 				C00B5C92B3ECC155E7CB58ED /* Foundation extensions */,
 			);
 			path = CogitoTests;
-			sourceTree = "<group>";
-		};
-		028F4EF01F7CE22D0015C4AF /* Geth state */ = {
-			isa = PBXGroup;
-			children = (
-				029245131F7AA00C00F2C0C1 /* GethActions.swift */,
-				029245161F7AA13F00F2C0C1 /* GethReducer.swift */,
-				029245191F7AA17300F2C0C1 /* GethState.swift */,
-			);
-			path = "Geth state";
-			sourceTree = "<group>";
-		};
-		028F4EF11F7CE25F0015C4AF /* Geth state */ = {
-			isa = PBXGroup;
-			children = (
-				028F4EEB1F7AA64D0015C4AF /* GethReducerSpec.swift */,
-			);
-			path = "Geth state";
 			sourceTree = "<group>";
 		};
 		028F4EF21F7CE37E0015C4AF /* Global state */ = {
@@ -1191,7 +1163,6 @@
 				5CC4D2CE1FE801DE002F2450 /* TransactionSigningActions.swift in Sources */,
 				02CD30A41F73F251006BA756 /* StorePersister.swift in Sources */,
 				02D0C0DB1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */,
-				029245171F7AA13F00F2C0C1 /* GethReducer.swift in Sources */,
 				5C7BCE6620864709006E33A5 /* PublicKeyLoader.swift in Sources */,
 				0298D4371F7A45680070998D /* Geth.swift in Sources */,
 				5C20A0FB1FA1FC6500B443C9 /* TelepathState.swift in Sources */,
@@ -1207,7 +1178,6 @@
 				023C34F2217DD324000953FB /* Attestation.swift in Sources */,
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
 				02021D191F8BC5FF0092DD89 /* AppActions.swift in Sources */,
-				029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */,
 				02BB61FF20C0227A00F03625 /* IdentityInfoService.swift in Sources */,
 				5C3C8F2A2087337C0042AC2F /* Decrypter.swift in Sources */,
 				5C04E4501FA788D200A70C60 /* AccountActions.swift in Sources */,
@@ -1222,7 +1192,6 @@
 				02A15AEF1F864F0900A94163 /* HomeViewController.swift in Sources */,
 				5C8CFD3E2007993500D383C0 /* JsonRpcRequest.swift in Sources */,
 				02E90F4C1FDEC1C4008D81F9 /* AttestationService.swift in Sources */,
-				0292451A1F7AA17300F2C0C1 /* GethState.swift in Sources */,
 				02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */,
 				02E90F521FE03348008D81F9 /* DialogPresenter.swift in Sources */,
 				5C48E2401FA1F8BB00B8BF6E /* TelepathActions.swift in Sources */,
@@ -1284,7 +1253,6 @@
 				5CC4D2C91FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift in Sources */,
 				028F4F061F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift in Sources */,
 				5C04E4551FA8D61700A70C60 /* TelepathChannelSpy.swift in Sources */,
-				028F4EEC1F7AA64D0015C4AF /* GethReducerSpec.swift in Sources */,
 				02A15B061F86733000A94163 /* DiamondReducerSpec.swift in Sources */,
 				5C04E4531FA87D5200A70C60 /* AccountActionsSpec.swift in Sources */,
 				5C20A1061FA224E000B443C9 /* TelepathChannelSpec.swift in Sources */,

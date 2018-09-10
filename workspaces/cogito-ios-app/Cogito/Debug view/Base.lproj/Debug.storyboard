@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,36 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of connected peers:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cah-t9-UjB">
-                                <rect key="frame" x="16" y="90" width="220" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnB-ol-chg">
-                                <rect key="frame" x="244" y="90" width="11" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sync progress:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FpB-lq-rKm">
-                                <rect key="frame" x="16" y="119" width="115" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="idle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ter-0c-iwG">
-                                <rect key="frame" x="139" y="119" width="28" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ck5-ic-qsN">
-                                <rect key="frame" x="16" y="148" width="288" height="2"/>
-                            </progressView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YOH-04-cJJ">
-                                <rect key="frame" x="284" y="119" width="20" height="20"/>
-                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCw-7t-a0t">
                                 <rect key="frame" x="92" y="190" width="136" height="30"/>
                                 <state key="normal" title="Create New Identity"/>
@@ -112,40 +81,25 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="cah-t9-UjB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="70" id="2gg-ke-Q0h"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="up2-rU-YT4" secondAttribute="trailing" constant="16" id="6ln-ee-zRT"/>
                             <constraint firstItem="8mj-FC-Dc3" firstAttribute="top" secondItem="5UM-XJ-ZOF" secondAttribute="bottom" constant="8" id="7ZY-Wc-bPT"/>
                             <constraint firstItem="9cn-CC-wVc" firstAttribute="top" secondItem="8mj-FC-Dc3" secondAttribute="bottom" constant="8" id="8z7-xt-2tx"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YOH-04-cJJ" secondAttribute="trailing" constant="16" id="9Vd-In-HfO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8mj-FC-Dc3" secondAttribute="trailing" constant="16" id="B5h-eS-M2l"/>
-                            <constraint firstItem="Ck5-ic-qsN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="BT9-gF-PHv"/>
-                            <constraint firstItem="Ck5-ic-qsN" firstAttribute="top" secondItem="FpB-lq-rKm" secondAttribute="bottom" constant="8" id="D3a-xV-vX9"/>
-                            <constraint firstItem="FpB-lq-rKm" firstAttribute="top" secondItem="cah-t9-UjB" secondAttribute="bottom" constant="8" id="DAK-LN-QeK"/>
                             <constraint firstItem="M2e-EX-yQE" firstAttribute="top" secondItem="9cn-CC-wVc" secondAttribute="bottom" constant="8" id="H3X-VV-Sl8"/>
-                            <constraint firstItem="YOH-04-cJJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ter-0c-iwG" secondAttribute="trailing" constant="8" id="JqG-I8-D2w"/>
-                            <constraint firstItem="FpB-lq-rKm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="KUl-v7-AaE"/>
                             <constraint firstItem="9cn-CC-wVc" firstAttribute="leading" secondItem="ESy-qP-gRx" secondAttribute="trailing" constant="8" id="LTl-wL-cxR"/>
                             <constraint firstItem="ESy-qP-gRx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="NcS-Ei-S7g"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9cn-CC-wVc" secondAttribute="trailing" constant="16" id="Ne5-Et-Kve"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LnB-ol-chg" secondAttribute="trailing" constant="16" id="OE0-El-ALG"/>
-                            <constraint firstItem="YOH-04-cJJ" firstAttribute="centerY" secondItem="Ter-0c-iwG" secondAttribute="centerY" id="SeO-QL-RRJ"/>
                             <constraint firstItem="M2e-EX-yQE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Sml-ba-w6j"/>
                             <constraint firstItem="up2-rU-YT4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Tuo-mf-E1Q"/>
-                            <constraint firstItem="Ter-0c-iwG" firstAttribute="baseline" secondItem="FpB-lq-rKm" secondAttribute="baseline" id="Uvu-22-vnb"/>
-                            <constraint firstItem="LnB-ol-chg" firstAttribute="leading" secondItem="cah-t9-UjB" secondAttribute="trailing" constant="8" id="YWF-fR-kuR"/>
-                            <constraint firstItem="Ter-0c-iwG" firstAttribute="leading" secondItem="FpB-lq-rKm" secondAttribute="trailing" constant="8" id="apK-1z-Lie"/>
                             <constraint firstItem="8mj-FC-Dc3" firstAttribute="width" secondItem="9cn-CC-wVc" secondAttribute="width" id="bFq-uv-KDf"/>
                             <constraint firstItem="up2-rU-YT4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="bZi-9y-p34"/>
                             <constraint firstItem="5UM-XJ-ZOF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bx1-gi-hd0"/>
                             <constraint firstItem="ESy-qP-gRx" firstAttribute="baseline" secondItem="9cn-CC-wVc" secondAttribute="baseline" id="dkx-00-up2"/>
-                            <constraint firstItem="cah-t9-UjB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="eIS-t7-NAE"/>
                             <constraint firstItem="Nnu-Hw-Ldp" firstAttribute="baseline" secondItem="8mj-FC-Dc3" secondAttribute="baseline" id="iW9-cQ-sUv"/>
-                            <constraint firstItem="lCw-7t-a0t" firstAttribute="top" secondItem="Ck5-ic-qsN" secondAttribute="bottom" constant="40" id="jbf-db-j3j"/>
-                            <constraint firstItem="LnB-ol-chg" firstAttribute="baseline" secondItem="cah-t9-UjB" secondAttribute="baseline" id="jq2-Tb-PbP"/>
                             <constraint firstItem="8mj-FC-Dc3" firstAttribute="leading" secondItem="Nnu-Hw-Ldp" secondAttribute="trailing" constant="8" id="kdW-lA-rTr"/>
                             <constraint firstItem="Nnu-Hw-Ldp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="lzb-2F-eYu"/>
                             <constraint firstItem="5UM-XJ-ZOF" firstAttribute="top" secondItem="lCw-7t-a0t" secondAttribute="bottom" constant="8" id="o9R-r8-GvX"/>
-                            <constraint firstItem="Ck5-ic-qsN" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="wyS-9z-qYD"/>
+                            <constraint firstItem="lCw-7t-a0t" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="170" id="r1e-XN-vrC"/>
                             <constraint firstItem="lCw-7t-a0t" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ylx-ic-9ph"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -153,10 +107,6 @@
                     <connections>
                         <outlet property="oidcRealmUrlField" destination="8mj-FC-Dc3" id="DD7-ug-TwX"/>
                         <outlet property="oidcSubjectField" destination="9cn-CC-wVc" id="xyl-M7-IMq"/>
-                        <outlet property="peerCountLabel" destination="LnB-ol-chg" id="mt8-w3-SWK"/>
-                        <outlet property="syncActivityIndicator" destination="YOH-04-cJJ" id="kC0-op-417"/>
-                        <outlet property="syncProgressBar" destination="Ck5-ic-qsN" id="TxD-po-cHE"/>
-                        <outlet property="syncProgressLabel" destination="Ter-0c-iwG" id="wwa-Hy-aoh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

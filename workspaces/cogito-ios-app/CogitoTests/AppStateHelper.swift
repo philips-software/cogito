@@ -2,7 +2,6 @@ import Foundation
 @testable import Cogito
 
 func appState(keyStore: KeyStoreState = initialKeyStoreState,
-              geth: GethState = initialGethState,
               createIdentity: CreateIdentityState = initialCreateIdentityState,
               diamond: DiamondState = initialDiamondState,
               telepath: TelepathState = initialTelepathState,
@@ -10,7 +9,6 @@ func appState(keyStore: KeyStoreState = initialKeyStoreState,
               dialogPresenter: DialogPresenterState = initialDialogPresenterState
               ) -> AppState {
     return AppState(keyStore: keyStore,
-                    geth: geth,
                     createIdentity: createIdentity,
                     diamond: diamond,
                     telepath: telepath,

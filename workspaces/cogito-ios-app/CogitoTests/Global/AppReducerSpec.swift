@@ -8,7 +8,6 @@ class AppReducerSpec: QuickSpec {
             let identity = Identity.example
             let state = appState(
                 keyStore: KeyStoreState(keyStore: KeyStore(name: "test", scryptN: 0, scryptP: 0)),
-                geth: GethState(peersCount: 1, syncProgress: nil),
                 createIdentity: CreateIdentityState(description: "test", pending: true, newAccount: nil, error: "test"),
                 diamond: DiamondState(facets: [identity]),
                 telepath: TelepathState(channels: [TelepathChannel.example: identity.identifier], connectionError: nil)
