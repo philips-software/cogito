@@ -14,7 +14,8 @@ const List = glamorous.ul({
 export class Navigation extends React.PureComponent {
   state = {
     componentsDeltas: [],
-    userDocumentationDeltas: []
+    userDocumentationDeltas: [],
+    developerDocumentationDeltas: []
   }
 
   aggregateDeltas = deltas => {
@@ -41,6 +42,7 @@ export class Navigation extends React.PureComponent {
   render () {
     const { docs } = this.props
     const userDocumentation = docs.filter(d => d.node.frontmatter.tag === 'user-documentation')
+    const developerDocumentation = docs.filter(d => d.node.frontmatter.tag === 'developer-documentation')
     const components = docs.filter(d => d.node.frontmatter.tag === 'component')
     return (
       <div>
@@ -51,6 +53,16 @@ export class Navigation extends React.PureComponent {
           <div>
             <List>
               { userDocumentation.map((c, i) => (<NavigationItem key={i} {...c} onChange={delta => this.setDelta('userDocumentation', i, delta)} />)) }
+            </List>
+          </div>
+        </TopLevelNavigationItem>
+        <TopLevelNavigationItem
+          title='Developer Documentation'
+          active={this.isActive(developerDocumentation)}
+          delta={this.aggregateDeltas(this.state.developerDocumentationDeltas)}>
+          <div>
+            <List>
+              { developerDocumentation.map((c, i) => (<NavigationItem key={i} {...c} onChange={delta => this.setDelta('developerDocumentation', i, delta)} />)) }
             </List>
           </div>
         </TopLevelNavigationItem>
