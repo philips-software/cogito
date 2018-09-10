@@ -7,6 +7,24 @@ import { rhythm } from '../utils/typography'
 import { LayoutGrid, SidebarGridItem, ContentGridItem } from './LayoutGrid'
 import { Navigation } from './navigation'
 
+const Wrapper = glamorous.div({
+  backgroundColor: 'black',
+  color: 'white',
+  fontFamily: 'Roboto Mono, monospace',
+  fontWeight: '300',
+  fontSize: '1.2rem',
+  textAlign: 'center',
+  verticalAlign: 'middle',
+  padding: '10px',
+  marginBottom: '2rem'
+})
+
+const SiteTitle = ({title}) => (
+  <Wrapper>
+    { title }
+  </Wrapper>
+)
+
 export const FixedNavigation = glamorous.div({
   display: 'block',
   position: 'fixed',
@@ -30,6 +48,11 @@ const Layout = ({ children, location }) => (
   <StaticQuery
     query={graphql`
       query Navigation {
+        site {
+          siteMetadata {
+            title
+          }
+        }
         navigation: allMarkdownRemark(
           filter: { frontmatter: { path: { ne: "/404.html" } } }
           sort: { fields: [fileAbsolutePath], order: ASC }
@@ -50,11 +73,12 @@ const Layout = ({ children, location }) => (
       }
     `}
     render={data => {
-      const { navigation: { docs } } = data
+      const { site: { siteMetadata: { title } }, navigation: { docs } } = data
       return (
         <LayoutGrid>
           <SidebarGridItem>
             <FixedNavigation>
+              <SiteTitle title={title} />
               <Navigation docs={docs} location={location} />
             </FixedNavigation>
           </SidebarGridItem>
