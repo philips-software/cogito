@@ -40,7 +40,7 @@ export const FixedNavigation = glamorous.div({
     height: `6px`
   },
   '::-webkit-scrollbar-thumb': {
-    background: '#568e8f'
+    background: '#ccc'
   }
 })
 
