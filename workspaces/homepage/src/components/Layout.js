@@ -1,6 +1,6 @@
 import { React } from 'react'
 import '../prismjs/themes/prism-tomorrow.css'
-import { StaticQuery, graphql } from 'gatsby'
+import { StaticQuery, graphql, Link } from 'gatsby'
 import glamorous from 'glamorous'
 import { rhythm } from '../utils/typography'
 
@@ -19,10 +19,21 @@ const Wrapper = glamorous.div({
   marginBottom: '2rem'
 })
 
+const HomeLink = glamorous(Link)({
+  color: 'white',
+  fontWeight: '300',
+  ':hover': {
+    color: 'white',
+    textDecoration: 'none'
+  }
+})
+
 const SiteTitle = ({title}) => (
-  <Wrapper>
-    { title }
-  </Wrapper>
+  <HomeLink to='/'>
+    <Wrapper>
+      { title }
+    </Wrapper>
+  </HomeLink>
 )
 
 export const FixedNavigation = glamorous.div({
