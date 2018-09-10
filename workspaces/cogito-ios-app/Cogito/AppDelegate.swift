@@ -11,8 +11,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var storePersister: StorePersister?
     var telepathReceiver: TelepathReceiver?
     var telepathSubscriber: TelepathSubscriber?
-    var syncProgressReporter: SyncProgressReporter!
-    var peerReporter: PeerReporter!
     var debugGestureHandler: DebugGestureHandler!
 
     func application(_ application: UIApplication,
