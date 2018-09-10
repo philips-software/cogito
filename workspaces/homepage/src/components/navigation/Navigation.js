@@ -33,18 +33,15 @@ export class Navigation extends React.PureComponent {
   }
 
   setDelta = (group, index, d) => {
-    console.log('delta=', d)
     const deltas = this.state[`${group}Deltas`]
     deltas[index] = d
     this.setState({[`${group}Deltas`]: deltas})
   }
 
   render () {
-    const { docs, location } = this.props
-    console.log('docs=', docs)
+    const { docs } = this.props
     const userDocumentation = docs.filter(d => d.node.frontmatter.tag === 'user-documentation')
     const components = docs.filter(d => d.node.frontmatter.tag === 'component')
-    console.log('location:', location)
     return (
       <div>
         <TopLevelNavigationItem
