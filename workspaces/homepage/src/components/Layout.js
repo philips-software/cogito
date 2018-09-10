@@ -1,5 +1,5 @@
 import { React } from 'react'
-import 'prismjs/themes/prism-coy.css'
+import '../prismjs/themes/prism-tomorrow.css'
 import { StaticQuery, graphql } from 'gatsby'
 import glamorous from 'glamorous'
 import { rhythm } from '../utils/typography'
