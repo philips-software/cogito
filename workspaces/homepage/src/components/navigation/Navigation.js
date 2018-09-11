@@ -18,6 +18,39 @@ export class Navigation extends React.PureComponent {
     developerDocumentationDeltas: []
   }
 
+  navigationGroups
+
+  constructor (props) {
+    super(props)
+
+    this.navigationGroups = [
+      this.createNavigationGroupForTag({
+        title: 'User Documentation',
+        tag: 'user-documentation',
+        deltaGroupName: 'userDocumentation'
+      }),
+      this.createNavigationGroupForTag({
+        title: 'Developer Documentation',
+        tag: 'developer-documentation',
+        deltaGroupName: 'developerDocumentation'
+      }),
+      this.createNavigationGroupForTag({
+        title: 'Cogito Components',
+        tag: 'component',
+        deltaGroupName: 'components'
+      })
+    ]
+  }
+
+  createNavigationGroupForTag = ({title, tag, deltaGroupName}) => {
+    return {
+      title,
+      docs: this.props.docs.filter(d => d.node.frontmatter.tag === tag),
+      tag,
+      deltaGroupName
+    }
+  }
+
   aggregateDeltas = deltas => {
     if (deltas.length > 0) {
       return deltas.reduce((acc, val) => acc + val)
@@ -39,43 +72,28 @@ export class Navigation extends React.PureComponent {
     this.setState({[`${group}Deltas`]: deltas})
   }
 
+  renderNavigationGroup = group => (
+    <TopLevelNavigationItem
+      key={group.tag}
+      title={group.title}
+      active={this.isActive(group.docs)}
+      delta={this.aggregateDeltas(this.state[`${group.deltaGroupName}Deltas`])}>
+      <div>
+        <List>
+          {
+            group.docs.map((doc, i) => (
+              <NavigationItem key={i} {...doc} onChange={delta => this.setDelta(group.deltaGroupName, i, delta)} />
+            ))
+          }
+        </List>
+      </div>
+    </TopLevelNavigationItem>
+  )
+
   render () {
-    const { docs } = this.props
-    const userDocumentation = docs.filter(d => d.node.frontmatter.tag === 'user-documentation')
-    const developerDocumentation = docs.filter(d => d.node.frontmatter.tag === 'developer-documentation')
-    const components = docs.filter(d => d.node.frontmatter.tag === 'component')
     return (
       <div>
-        <TopLevelNavigationItem
-          title='User Documentation'
-          active={this.isActive(userDocumentation)}
-          delta={this.aggregateDeltas(this.state.userDocumentationDeltas)}>
-          <div>
-            <List>
-              { userDocumentation.map((c, i) => (<NavigationItem key={i} {...c} onChange={delta => this.setDelta('userDocumentation', i, delta)} />)) }
-            </List>
-          </div>
-        </TopLevelNavigationItem>
-        <TopLevelNavigationItem
-          title='Developer Documentation'
-          active={this.isActive(developerDocumentation)}
-          delta={this.aggregateDeltas(this.state.developerDocumentationDeltas)}>
-          <div>
-            <List>
-              { developerDocumentation.map((c, i) => (<NavigationItem key={i} {...c} onChange={delta => this.setDelta('developerDocumentation', i, delta)} />)) }
-            </List>
-          </div>
-        </TopLevelNavigationItem>
-        <TopLevelNavigationItem
-          title='Cogito Components'
-          active={this.isActive(components)}
-          delta={this.aggregateDeltas(this.state.componentsDeltas)}>
-          <div>
-            <List>
-              { components.map((c, i) => (<NavigationItem key={i} {...c} onChange={delta => this.setDelta('components', i, delta)} />)) }
-            </List>
-          </div>
-        </TopLevelNavigationItem>
+        { this.navigationGroups.map(g => this.renderNavigationGroup(g))}
       </div>
     )
   }
