@@ -1,10 +1,12 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
 import glamorous from 'glamorous'
 import cogitoSignVideo from './video/cogito-sign.mp4'
 import cogitoScanVideo from './video/cogito-scan.mp4'
 
 const page = () => <Page>
+  <Helmet title='Cogito' />
   <h1>Cogito - <Smaller>safe, simple blockchain transactions</Smaller></h1>
   <Section>
     <RightVideo autoPlay>

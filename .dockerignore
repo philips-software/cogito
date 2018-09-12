@@ -1,0 +1,6 @@
+*
+!workspaces/homepage/src
+!workspaces/homepage/gatsby-config.js
+!workspaces/homepage/gatsby-node.js
+!workspaces/homepage/package.json
+!workspaces/faucet/Readme.md
