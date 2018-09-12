@@ -60,7 +60,7 @@ export class Navigation extends React.PureComponent {
 
   isActive = docs => {
     if (docs && docs.length > 0) {
-      const filtered = docs.filter(d => d.node.frontmatter.path === this.props.location.pathname)
+      const filtered = docs.filter(d => d.node.frontmatter.path === this.props.location.pathname.replace(/\/$/, ''))
       return filtered.length > 0
     }
     return false
