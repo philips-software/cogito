@@ -17,7 +17,6 @@ class Collapsable extends React.Component {
 
   componentDidUpdate (prevProps) {
     if (this.props.delta !== prevProps.delta) {
-      console.log('componentDidUpdate', this.props.delta, this.div.scrollHeight)
       if (!this.state.folded) {
         this.setState({
           delta: this.props.delta,
