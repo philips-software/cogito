@@ -2,8 +2,10 @@ import glamorous from 'glamorous'
 import { Link } from 'gatsby'
 
 const NavigationLink = glamorous(Link)(props => ({
+  display: 'inline-block',
   position: 'relative',
   left: '1rem',
+  width: 'calc(100% - 1rem)',
   color: 'black',
   fontFamily: 'Roboto Mono, monospace',
   fontWeight: '300',

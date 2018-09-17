@@ -30,7 +30,7 @@
  /* Code blocks */
  pre[class*="language-"] {
    padding: 1em;
-   margin: .5em 0;
+   margin: .5em 0 1rem 0;
    overflow: auto;
  }
  
