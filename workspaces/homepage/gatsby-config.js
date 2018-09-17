@@ -15,6 +15,24 @@ module.exports = {
         path: `${__dirname}/../faucet`
       }
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/../telepath-js`
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/../telepath-queuing-service`
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/../telepath-ios/README.md`
+      }
+    },
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',
