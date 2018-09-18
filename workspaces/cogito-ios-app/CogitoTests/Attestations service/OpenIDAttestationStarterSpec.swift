@@ -7,8 +7,8 @@ class OpenIDAttestationHandlerSpec: QuickSpec {
     override func spec() {
         let realmUrl = "https://example.com/realms/master"
         let openIdConfiguration: [String: Any] = [
-            "authorization_endpoint": realmUrl + "/protocol/openid-connect/auth",
             "grant_types_supported": ["password", "implicit"],
+            "authorization_endpoint": realmUrl + "/protocol/openid-connect/auth",
             "response_types_supported": ["id_token"]
         ]
         var handler: OpenIDAttestationStarter!
@@ -186,7 +186,11 @@ class MockURLOpener: URLOpening {
         return canOpen
     }
 
-    func open(_ url: URL, options: [String: Any], completionHandler completion: ((Bool) -> Void)?) {
+    func open(
+        _ url: URL,
+        options: [UIApplication.OpenExternalURLOptionsKey : Any],
+        completionHandler completion: ((Bool) -> Void)?
+    ) {
         DispatchQueue.main.async {
             self.openedUrl = url
             completion?(self.openResult)

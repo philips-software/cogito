@@ -26,10 +26,10 @@ extension RequestedAlert: Equatable {
 
 struct AlertAction {
     let title: String
-    let style: UIAlertActionStyle
+    let style: UIAlertAction.Style
     let handler: ((AlertAction) -> Void)?
 
-    init(title: String, style: UIAlertActionStyle, handler: ((AlertAction) -> Void)? = nil) {
+    init(title: String, style: UIAlertAction.Style, handler: ((AlertAction) -> Void)? = nil) {
         self.title = title
         self.style = style
         self.handler = handler

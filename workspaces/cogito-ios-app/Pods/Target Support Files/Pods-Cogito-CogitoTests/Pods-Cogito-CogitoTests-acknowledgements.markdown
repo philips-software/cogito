@@ -312,7 +312,7 @@ SOFTWARE.
 
 ISC License
 
-Copyright (c) 2014-2017, Frank Denis <j at pureftpd dot org>
+Copyright (c) 2014-2018, Frank Denis <j at pureftpd dot org>
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
@@ -376,11 +376,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
-
-## Telepath
-
-Copyright © 2017 Philips. All rights reserved.
 
 
 ## Toast-Swift
