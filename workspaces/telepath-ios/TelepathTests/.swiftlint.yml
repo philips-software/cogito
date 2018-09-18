@@ -1,6 +1,4 @@
 disabled_rules:
   - force_try
   - large_tuple
-function_body_length:
-  - 200
-  - 300
+  - function_body_length

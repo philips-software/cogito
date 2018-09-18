@@ -2,9 +2,9 @@ struct UrlCodec {
     func encode(baseUrl: URL, channelId: ChannelID, key: ChannelKey, appName: String) -> URL {
         var result = "telepath/connect#"
         result += "I=\(channelId.encodeForUrlFragment())"
-        result += "&E=\(key.base64urlEncodedString())"
+        result += "&E=\(Data(key).base64urlEncodedString())"
         result += "&A=\(Data(appName.utf8).base64EncodedString())"
-        return URL(string: result, relativeTo:baseUrl)!
+        return URL(string: result, relativeTo: baseUrl)!
     }
 
     func decode(url: URL) throws -> (channelId: ChannelID, channelKey: ChannelKey, appName: String) {
@@ -14,7 +14,7 @@ struct UrlCodec {
         let channelId = try extractChannelId(parameters: parameters)
         let encryptionKey = try extractEncryptionKey(parameters: parameters)
         let appName = try extractAppName(parameters: parameters)
-        return (channelId, encryptionKey, appName)
+        return (channelId, [UInt8](encryptionKey), appName)
     }
 
     private func checkUrl(_ url: URL) throws {
