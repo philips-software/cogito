@@ -33,6 +33,12 @@ module.exports = {
         path: `${__dirname}/../telepath-ios/README.md`
       }
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/../crypto`
+      }
+    },
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',
