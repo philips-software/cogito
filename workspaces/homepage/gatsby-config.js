@@ -45,6 +45,12 @@ module.exports = {
         path: `${__dirname}/../cogito-web3`
       }
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/../cogito-identity`
+      }
+    },
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',
