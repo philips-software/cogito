@@ -1,15 +1,27 @@
-## `@cogitojs/crypto`
+---
+path: /components/crypto
+title: Crypto
+tag: component
+---
 
 The `@cogitojs/crypto` package provides cryptographic utilities used by other cogito packages.
 
-### Initializing Sodium
+## Usage
 
-Before using them, you have to make sure that Sodium is initialized and ready to use. You do that by using `Sodium` class (also provided by the `@cogitojs/crypto` package):
+Add `@cogitojs/crypto` to your dependencies:
+
+```bash
+$ yarn add @cogitojs/crypto
+```
+
+## Initializing Sodium
+
+Before using any of the other utilities provided in `@cogitojs/crypto`, you have to make sure that Sodium is initialized and ready to use. You do that by using `Sodium` class (also provided by the `@cogitojs/crypto` package):
 
 ```javascript
 import { Sodium } from '@cogitojs/crypto'
 
-// must be called before you can use any of the sodium functions
+// IMPORTANT!!! must be called before you can use any of the sodium functions
 await Sodium.wait()
 ```
 
@@ -17,7 +29,7 @@ You can always check if Sodium is ready by checking value of `Sodium.ready`. It 
 
 > If you try to use any function (including constructors) that depends on Sodium library when Sodium is not initialized (i.e. when `Sodium.ready === false`), an exception will be thrown. This currently apply to `Sodium`, `StreamEncoder` and `StreamDecoder` classes.
 
-### Using stream encoder and decoder
+## Using stream encoder and decoder
 
 Stream encoding/decoding is provided by the means of the `StreamEncoder` and `StreamDecoder` classes.
 
@@ -112,6 +124,6 @@ describe('Stream Encryption Decryption', () => {
 })
 ```
 
-### Using the tags
+## Using the tags
 
 If you are not interested in validating the final tag, you can decide not to use `end` for the final data chunk in encryption, and use `push` for all the data chunks. In the end the only difference between `push` and `end` is the tag value.
