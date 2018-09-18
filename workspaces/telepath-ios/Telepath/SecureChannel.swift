@@ -53,25 +53,25 @@ public struct SecureChannel {
     }
 
     enum Failure: Error {
-        case sendingFailed(cause: Error)
-        case receivingFailed(cause: Error)
+        case sendingFailed (cause: Error)
+        case receivingFailed (cause: Error)
         case decryptionFailed
     }
 }
 
-extension ChannelKey {
+extension Array where Element == UInt8 {
     func encrypt(plainText: Data) -> Data {
         let box = Sodium().secretBox
-        return box.seal(message: plainText, secretKey: self)!
+        return Data(box.seal(message: [UInt8](plainText), secretKey: self)!)
     }
 
     func decrypt(cypherText: Data) throws -> Data {
         let box = Sodium().secretBox
-        let opened = box.open(nonceAndAuthenticatedCipherText: cypherText, secretKey: self)
+        let opened = box.open(nonceAndAuthenticatedCipherText: [UInt8](cypherText), secretKey: self)
         guard let result = opened else {
             throw Errors.decryptionFailed
         }
-        return result
+        return Data(result)
     }
 
     enum Errors: Error {

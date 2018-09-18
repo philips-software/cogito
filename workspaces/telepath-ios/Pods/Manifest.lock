@@ -7,28 +7,27 @@ PODS:
     - URITemplate (~> 2.0.2)
   - Mockingjay/XCTest (2.0.2):
     - Mockingjay/Core
-  - Nimble (7.1.1)
-  - Quick (1.3.0)
-  - Sodium (0.5)
+  - Nimble (7.3.0)
+  - Quick (1.3.1)
+  - Sodium (0.6)
   - STRegex (1.1.0)
-  - SwiftLint (0.21.0)
-  - URITemplate (2.0.2)
+  - SwiftLint (0.27.0)
+  - URITemplate (2.0.3)
 
 DEPENDENCIES:
   - base64url (~> 1.0)
   - Mockingjay (from `https://github.com/metaltoad/Mockingjay.git`, branch `mt-swift4`)
   - Nimble (~> 7.1)
   - Quick (~> 1.3)
-  - Sodium (~> 0.5)
+  - Sodium (from `https://github.com/jedisct1/swift-sodium.git`, branch `master`)
   - STRegex (~> 1.1)
-  - SwiftLint (= 0.21.0)
+  - SwiftLint (= 0.27.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - base64url
     - Nimble
     - Quick
-    - Sodium
     - STRegex
     - SwiftLint
     - URITemplate
@@ -37,22 +36,28 @@ EXTERNAL SOURCES:
   Mockingjay:
     :branch: mt-swift4
     :git: https://github.com/metaltoad/Mockingjay.git
+  Sodium:
+    :branch: master
+    :git: https://github.com/jedisct1/swift-sodium.git
 
 CHECKOUT OPTIONS:
   Mockingjay:
     :commit: 121eb0ccb0ce282c23926ac78f2759a970e05588
     :git: https://github.com/metaltoad/Mockingjay.git
+  Sodium:
+    :commit: acabedbaaced5c7d3d71d627fa134fd52234849a
+    :git: https://github.com/jedisct1/swift-sodium.git
 
 SPEC CHECKSUMS:
   base64url: 5b31be020705fcbedf88ef82af8039ce5c8c25de
   Mockingjay: e44b65b6b4b919ad228929db83cb6b1d69fff623
-  Nimble: 391f07782af4b37914f9bd7b2ffbb952731b8202
-  Quick: 03278013f71aa05fe9ecabc94fbcc6835f1ee76f
-  Sodium: a3a17f2ba2dc1b83547e13db0075e7c5d426fc55
+  Nimble: c8d6a1f463701921c46de965c673e13cafa09196
+  Quick: d17304d58d0d169dd0bd1c6e5c28e3318de32a1a
+  Sodium: 3cd000dc8d21be5d448fbb4366a7b1c9392b1ae6
   STRegex: eb1f4c2fe9e2f0265b8df8634774cd8cd8914018
-  SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
-  URITemplate: d822aaa2f8ec9dcffffd13baa58bf9ee007e96cb
+  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
+  URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: b002a3b36623d11edd65dd401904bc09bc61a603
+PODFILE CHECKSUM: c1f31cd79f469bd4908d939f0e124e36de918df7
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

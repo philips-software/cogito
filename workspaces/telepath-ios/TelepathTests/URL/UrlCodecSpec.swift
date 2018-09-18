@@ -38,7 +38,7 @@ class UrlCodecSpec: QuickSpec {
             }
 
             it("encodes the encryption key") {
-                let encodedEncryptionKey = channelKey.base64urlEncodedString()
+                let encodedEncryptionKey = Data(channelKey).base64urlEncodedString()
                 expect(encoded.fragment).to(contain("E=\(encodedEncryptionKey)"))
             }
 
