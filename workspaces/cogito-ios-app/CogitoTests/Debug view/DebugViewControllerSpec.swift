@@ -9,8 +9,7 @@ class DebugViewControllerSpec: QuickSpec {
 
         beforeEach {
             let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: DebugViewController.self))
-            // swiftlint:disable:next force_cast
-            viewController = storyboard.instantiateInitialViewController() as! DebugViewController
+            viewController = storyboard.instantiateInitialViewController() as? DebugViewController
             expect(viewController.view).toNot(beNil())
         }
 

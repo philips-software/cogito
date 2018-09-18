@@ -38,7 +38,7 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         }
 
         let readerVC = QRCodeReaderViewController(builder: builder)
-        addChildViewController(readerVC)
+        addChild(readerVC)
         previewContainer.insertSubview(readerVC.view, at: 0)
         let frame = CGRect(x: 0, y: 0,
                            width: previewContainer.frame.size.width,
@@ -46,7 +46,9 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
         readerVC.view.frame = frame
         let cameraIconLabel = UILabel(frame: frame)
         cameraIconLabel.textAlignment = .center
-        let icon = String.fontAwesomeIcon(name: .videoCamera).font(Font.fontAwesome(ofSize: frame.size.width/2))
+        let icon = String
+            .fontAwesomeIcon(name: .video)
+            .font(Font.fontAwesome(ofSize: frame.size.width/2, style: .solid))
         cameraIconLabel.attributedText = icon
         cameraIconLabel.textColor = .white
         readerVC.view.insertSubview(cameraIconLabel, at: 0)
@@ -139,7 +141,8 @@ class HomeViewController: UIViewController, QRCodeReaderViewControllerDelegate, 
     }
 
     private func bleep() {
-        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
+
+        try? AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default, options: [])
         try? AVAudioSession.sharedInstance().setActive(true)
         bleepPlayer?.play()
     }
@@ -172,6 +175,11 @@ private func mapDispatchToActions(dispatch: @escaping DispatchFunction)
 
 @objc class DeactivateAudioSessionOnStop: NSObject, AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        try? AVAudioSession.sharedInstance().setActive(false, with: .notifyOthersOnDeactivation)
+        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+private func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
 }

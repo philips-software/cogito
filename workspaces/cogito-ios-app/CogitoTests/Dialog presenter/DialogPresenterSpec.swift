@@ -11,7 +11,7 @@ class DialogPresenterSpec: QuickSpec {
         beforeEach {
             let storyboard = UIStoryboard(name: "Home", bundle: Bundle(for: DialogPresenter.self))
             viewController = storyboard.instantiateViewController(withIdentifier: "DialogPresenter")
-                as! DialogPresenter // swiftlint:disable:this force_cast
+                as? DialogPresenter
             expect(viewController.view).toNot(beNil())
             windowSpy = WindowSpy()
             DialogPresenter.configure(alertWindow: windowSpy)
@@ -21,7 +21,7 @@ class DialogPresenterSpec: QuickSpec {
         it("has a window for presenting dialogs") {
             expect(viewController.alertWindow).toNot(beNil())
             expect(viewController.alertWindow.rootViewController).toNot(beNil())
-            expect(viewController.alertWindow.windowLevel) == UIWindowLevelAlert + 1
+            expect(viewController.alertWindow.windowLevel) == UIWindow.Level.alert + 1
             expect(viewController.alertWindow.isHidden).to(beTrue())
         }
 
@@ -89,7 +89,7 @@ private class WindowSpy: WindowType {
     var rootViewController: UIViewController?
     var isHidden: Bool = false
     var isKeyWindow: Bool = false
-    var windowLevel: UIWindowLevel = UIWindowLevelNormal
+    var windowLevel: UIWindow.Level = UIWindow.Level.normal
     init() {}
     func makeKeyAndVisible() {
         isHidden = false

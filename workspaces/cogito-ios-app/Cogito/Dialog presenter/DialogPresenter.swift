@@ -7,7 +7,7 @@ protocol WindowType: class {
     func makeKeyAndVisible()
     var rootViewController: UIViewController? { get set }
     var isHidden: Bool { get set }
-    var windowLevel: UIWindowLevel { get set }
+    var windowLevel: UIWindow.Level { get set }
     var isKeyWindow: Bool { get }
 }
 
@@ -22,7 +22,7 @@ class DialogPresenter: UIViewController, Connectable {
 
     static func configure(alertWindow: WindowType) {
         alertWindow.rootViewController = UIViewController()
-        alertWindow.windowLevel = UIWindowLevelAlert + 1
+        alertWindow.windowLevel = UIWindow.Level.alert + 1
         alertWindow.isHidden = true
     }
 

@@ -18,7 +18,7 @@ class SelectedFacetViewControllerSpec: QuickSpec {
         beforeEach {
             let storyboard = UIStoryboard(name: "Home", bundle: Bundle(for: SelectedFacetViewController.self))
             viewController = storyboard.instantiateViewController(withIdentifier: "SelectedFacet")
-                as! SelectedFacetViewController // swiftlint:disable:this force_cast
+                as? SelectedFacetViewController
             expect(viewController.view).toNot(beNil())
         }
 

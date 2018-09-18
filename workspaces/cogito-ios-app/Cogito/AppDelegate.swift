@@ -2,7 +2,7 @@ import UIKit
 import ReSwift
 import Geth
 
-typealias LaunchOptions = [UIApplicationLaunchOptionsKey: Any]?
+typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]?
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
-                     restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
             let url = userActivity.webpageURL,
             let action = LaunchActions.create(forLink: url) {
