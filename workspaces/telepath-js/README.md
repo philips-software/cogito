@@ -66,7 +66,7 @@ $ yarn add @cogitojs/telepath-js
 Then import `Telepath` in your own module:
 
 ```javascript
-import { Telepath } from '@cogito/telepath-js'
+import { Telepath } from '@cogitojs/telepath-js'
 ```
 
 ### Creating an instance of Telepath
@@ -133,3 +133,9 @@ will return `null`.
 ## Known Limitations
 
 Currently uses independent encryption of messages. A recipient can therefore not detect if some messages have been duplicated, deleted or reordered.
+
+## See also
+
+Telepath often comes hand in hand with [Cogito Web3].
+
+[Cogito Web3]: /components/cogito-web3
