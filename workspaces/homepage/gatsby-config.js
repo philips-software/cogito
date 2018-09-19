@@ -57,6 +57,12 @@ module.exports = {
         path: `${__dirname}/../cogito`
       }
     },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/../cogito-react`
+      }
+    },
     'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-transformer-remark',
