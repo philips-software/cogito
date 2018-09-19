@@ -4,7 +4,7 @@ title: Cogito React
 tag: component
 ---
 
-`@cogitojs/cogito-react` is a React version [@cogitojs/cogito].
+`@cogitojs/cogito-react` is a React version of [@cogitojs/cogito].
 
 ## Usage
 
@@ -31,7 +31,7 @@ The `CogitoReact` component accepts the following props:
 | channelKey | a symmetric key of the Telepath channel. If omitted a new random key will be created. |
 | appName    | the name of the app. Cogito app shows the `appName` when requesting user signature. |
 | onTelepathChanged | function to be called when the telepath channel has been updated. Provides an object `{ channelId, channelKey, appName }` as an argument. |
-| render     | render prop - a function that will be called every time the component is updated. It provides `{ web3, channel, contracts }` as an argument, where `web3` is an instance of Web3 that uses [CogitoProvider], `channel` is an instance of [Telepath], and `contracts` is an object holding the references to either deployed contracts or the raw proxies (see [Working with Contracts] below). If this prop is present, it will take precedence of the `childrens`. | 
+| render     | render prop - a function that will be called every time the component is updated. It provides `{ web3, channel, contracts }` as an argument, where `web3` is an instance of Web3 that uses [CogitoProvider], `channel` is an instance of [Telepath], and `contracts` is an object holding the references to either deployed contracts or the raw proxies (see [Working with Contracts] below). If this prop is present, it will take precedence over the `childrens`. | 
 
 ## Example
 
@@ -126,7 +126,7 @@ return an instance of the contract deployed at the default address managed by th
 a *raw* version for which you can request an instance of the contract *at* a specific address. The
 *deployed* contracts are often used as a *facade* that represents a fixed entry point to some more
 complex functionality. When you call methods of the *deployed* contracts, they often emit events
-carrying addresses of other contract instances created as result of the method invocation. In order to
+carrying addresses of other contract instances created as a result of the method invocation. In order to
 get a grip on those contract instances, you need to be able to call the `at` method of the contract
 proxy object.
 
@@ -154,7 +154,7 @@ const contractsInfo = {
 
 In the example above, we see that `dataStore` is requested to be a *deployed* version, while `dataRequest` and `dataResponse` are specified to be returned as *raw* instances.
 
-`CogitoReact` (and also [Cogito]) processes this input structure and returns an object holding the references to either deployed contracts or the raw proxies:
+`CogitoReact` (via [Cogito]) processes this input structure and returns an object holding the references to either deployed contracts or the raw proxies:
 
 ```javascript
 contracts.dataStore    // deployed
