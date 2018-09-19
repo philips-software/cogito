@@ -48,7 +48,6 @@ class Main extends React.Component {
             channelId={channelId}
             channelKey={channelKey}
             appName='Cogito Demo App'
-            dispatch={dispatch}
             onTelepathChanged={(telepath) => this.onTelepathChanged(telepath, dispatch)}
           >
             {web3Props => {
