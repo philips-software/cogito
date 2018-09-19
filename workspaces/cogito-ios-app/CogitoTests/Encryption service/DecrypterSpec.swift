@@ -34,7 +34,7 @@ class DecrypterSepc: QuickSpec {
 }
 
 private func loadPublicKey(tag: String) -> SecKey? {
-    let query: [String:Any] = [
+    let query: [String: Any] = [
         kSecClass as String: kSecClassKey,
         kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
         kSecAttrApplicationTag as String: tag.data(using: .utf8)!,

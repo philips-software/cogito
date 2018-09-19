@@ -2,7 +2,7 @@ import ReSwift
 import BigInt
 
 struct TransactionSignerBuilder {
-    let transaction: [String:Any]
+    let transaction: [String: Any]
     let dispatch: DispatchFunction
     let getState: () -> AppState?
     let responseId: JsonRpcId

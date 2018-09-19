@@ -49,7 +49,7 @@ class IdentityManagerViewControllerSpec: QuickSpec {
             }
 
             it("triggers delete identity action") {
-                var deletedUuid: UUID? = nil
+                var deletedUuid: UUID?
                 identityManagerController.actions = IdentityManagerViewController.Actions(
                     resetCreateIdentity: {},
                     deleteIdentity: { uuid in deletedUuid = uuid },
@@ -60,7 +60,7 @@ class IdentityManagerViewControllerSpec: QuickSpec {
             }
 
             it("triggers select identity action") {
-                var selectedUuid: UUID? = nil
+                var selectedUuid: UUID?
                 identityManagerController.actions = IdentityManagerViewController.Actions(
                     resetCreateIdentity: {},
                     deleteIdentity: { _ in },

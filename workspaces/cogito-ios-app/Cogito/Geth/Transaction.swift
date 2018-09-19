@@ -4,7 +4,7 @@ import SwiftyJSON
 
 struct UnsignedTransaction {
     let from: Address
-    let to: Address // swiftlint:disable:this identifier_name
+    let to: Address
     let data: Data
     let nonce: BigInt
     let gasPrice: BigInt

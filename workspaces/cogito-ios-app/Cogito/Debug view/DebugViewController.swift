@@ -109,7 +109,7 @@ private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> Debug
                 for: identity,
                 requestId: requestId,
                 oidcRealmUrl: url,
-                subject:subject
+                subject: subject
             ))
         }
     )

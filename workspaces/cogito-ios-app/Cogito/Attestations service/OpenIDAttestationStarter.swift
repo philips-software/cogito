@@ -7,7 +7,7 @@ protocol URLOpening {
     func canOpenURL(_ url: URL) -> Bool
     func open(
         _ url: URL,
-        options: [UIApplication.OpenExternalURLOptionsKey : Any],
+        options: [UIApplication.OpenExternalURLOptionsKey: Any],
         completionHandler completion: ((Bool) -> Void)?
     )
 }
@@ -57,7 +57,7 @@ struct OpenIDAttestationStarter {
          }
     }
 
-    func implicitFlowUrl(openIdConfiguration: [String:Any]) -> URL? {
+    func implicitFlowUrl(openIdConfiguration: [String: Any]) -> URL? {
         guard let baseUrl = openIdConfiguration["authorization_endpoint"] as? String,
               var urlComponents = URLComponents(string: baseUrl) else {
             return nil

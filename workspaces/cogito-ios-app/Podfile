@@ -11,7 +11,7 @@ target 'Cogito' do
   pod 'ReSwiftThunk', :git => 'https://github.com/mikecole20/ReSwiftThunk.git', :branch => 'swift4.0'
   pod 'Geth', '~> 1.7.1'
   pod 'BigInt', '~> 3.0'
-  pod 'SwiftLint', '0.21.0'
+  pod 'SwiftLint', '0.27.0'
   pod 'ReRxSwift', '~> 1.1'
   pod 'KeychainAccess', '~> 3.1'
   pod 'QRCodeReader.swift', '~> 8.0'
