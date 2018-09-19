@@ -8,7 +8,7 @@ class KeyStoreStateSpec: QuickSpec {
             let keyStore = KeyStore(name: "some name", scryptN: 42, scryptP: 24)
             let state = KeyStoreState(keyStore: keyStore)
             let encoder = JSONEncoder()
-            var encodedData: Data? = nil
+            var encodedData: Data?
             expect {
                 encodedData = try encoder.encode(state)
             }.toNot(throwError())

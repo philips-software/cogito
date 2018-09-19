@@ -34,7 +34,7 @@ PODS:
   - RxSwift (4.3.0)
   - SipHash (1.2.2)
   - Sodium (0.6)
-  - SwiftLint (0.21.0)
+  - SwiftLint (0.27.0)
   - SwiftyJSON (4.1.0)
   - Telepath (0.1.0):
     - base64url (~> 1.0)
@@ -61,7 +61,7 @@ DEPENDENCIES:
   - RxDataSources (~> 3.0)
   - RxSwift (~> 4.0)
   - Sodium (from `https://github.com/jedisct1/swift-sodium.git`, branch `master`)
-  - SwiftLint (= 0.21.0)
+  - SwiftLint (= 0.27.0)
   - SwiftyJSON (~> 4.0)
   - Telepath (from `../telepath-ios`)
   - Toast-Swift (~> 3.0)
@@ -131,12 +131,12 @@ SPEC CHECKSUMS:
   RxSwift: a9717a34df3179fe63563f76e046ad345078dd3a
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   Sodium: 3cd000dc8d21be5d448fbb4366a7b1c9392b1ae6
-  SwiftLint: 6de8b2d15f43c482bdec2953b8cfd696faa876e8
+  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Telepath: b84e1b4e4550bfc3f579be84d9302125ecbdc3b8
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
   URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: a0b23eb715e68eb0532a317a0393ec161be1ab39
+PODFILE CHECKSUM: a03b8217c6569446c7184d1e93bf77c89360badb
 
 COCOAPODS: 1.5.3

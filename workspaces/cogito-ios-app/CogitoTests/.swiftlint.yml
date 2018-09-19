@@ -1,6 +1,6 @@
-function_body_length: 200
 disabled_rules:
   - force_try
+  - function_body_length
 identifier_name:
   excluded:
     - id

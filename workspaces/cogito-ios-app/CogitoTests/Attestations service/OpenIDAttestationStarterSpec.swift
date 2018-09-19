@@ -183,7 +183,7 @@ class MockURLOpener: URLOpening {
 
     func open(
         _ url: URL,
-        options: [UIApplication.OpenExternalURLOptionsKey : Any],
+        options: [UIApplication.OpenExternalURLOptionsKey: Any],
         completionHandler completion: ((Bool) -> Void)?
     ) {
         DispatchQueue.main.async {

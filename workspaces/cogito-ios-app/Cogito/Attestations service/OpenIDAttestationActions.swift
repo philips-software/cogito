@@ -29,7 +29,7 @@ struct OpenIDAttestationActions {
         }
     }
 
-    static func Finish(params: [String:String]) -> ThunkAction<AppState> {
+    static func Finish(params: [String: String]) -> ThunkAction<AppState> {
         return ThunkAction { dispatch, getState in
             guard let idToken = params["id_token"] else {
                 dispatch(FinishRejected(nonce: nil, error: "id token missing"))

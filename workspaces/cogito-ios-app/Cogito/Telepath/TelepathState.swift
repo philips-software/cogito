@@ -2,13 +2,13 @@ import Foundation
 import Telepath
 
 struct TelepathState: Equatable, Codable {
-    var channels: [TelepathChannel:IdentityReference]
+    var channels: [TelepathChannel: IdentityReference]
     var connectionError: String?
     var receivedMessages: [TelepathMessage] = []
     var receiveError: String?
 
     init(
-        channels: [TelepathChannel:IdentityReference] = [:],
+        channels: [TelepathChannel: IdentityReference] = [:],
         connectionError: String? = nil,
         receivedMessages: [TelepathMessage] = [],
         receiveError: String? = nil

@@ -84,7 +84,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
 
     @IBAction func share(_ sender: UIBarButtonItem) {
         let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("accounts.json")
-        let content: [[[String:Any]]] = self.props.facetGroups.map { facetGroup in
+        let content: [[[String: Any]]] = self.props.facetGroups.map { facetGroup in
             return facetGroup.items.map { item in
                 return [
                     "description": item.facet.description,

@@ -18,7 +18,7 @@ class KeyPairCreatorSpec: QuickSpec {
             }
 
             it("uses RSA algorithm") {
-                let query: [String:Any] = [
+                let query: [String: Any] = [
                     kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
                     kSecAttrKeySizeInBits as String: 2048,
                     kSecAttrApplicationTag as String: tag.data(using: .utf8)!,
@@ -28,7 +28,7 @@ class KeyPairCreatorSpec: QuickSpec {
             }
 
             it("can be used for encryption and decryption") {
-                let query: [String:Any] = [
+                let query: [String: Any] = [
                     kSecAttrCanEncrypt as String: true,
                     kSecAttrCanDecrypt as String: true,
                     kSecAttrApplicationTag as String: tag.data(using: .utf8)!,

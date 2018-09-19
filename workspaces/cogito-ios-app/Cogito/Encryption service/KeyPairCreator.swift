@@ -7,7 +7,7 @@ struct KeyPairCreator: KeyPairCreatorType {
                                                           kSecAttrAccessibleAfterFirstUnlock,
                                                           .userPresence,
                                                           nil)!
-        let parameters: [String:Any] = [
+        let parameters: [String: Any] = [
             kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
             kSecAttrKeySizeInBits as String: 2048,
             kSecAttrApplicationTag as String: tag.data(using: .utf8)!,

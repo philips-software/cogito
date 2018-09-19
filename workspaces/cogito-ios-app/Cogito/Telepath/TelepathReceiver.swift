@@ -27,11 +27,11 @@ class TelepathReceiver: StoreSubscriber {
         store.unsubscribe(self)
     }
 
-    func newState(state channels: [TelepathChannel:UUID]?) {
+    func newState(state channels: [TelepathChannel: UUID]?) {
         self.onNewState(self)(channels)
     }
 
-    func recreatePollingTimers(channels: [TelepathChannel:UUID]?) {
+    func recreatePollingTimers(channels: [TelepathChannel: UUID]?) {
         self.timer?.invalidate()
 
         self.store.dispatch(TelepathActions.Invalidate())

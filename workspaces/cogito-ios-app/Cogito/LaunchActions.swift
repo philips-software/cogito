@@ -20,8 +20,8 @@ struct LaunchActions {
         }
     }
 
-    static func parse(fragment: String) -> [String:String]? {
-        var parsed: [String:String] = [:]
+    static func parse(fragment: String) -> [String: String]? {
+        var parsed: [String: String] = [:]
         for keyValuePair in fragment.split(separator: "&") {
             let split = keyValuePair.split(separator: "=")
             guard split.count == 2 else { return nil }

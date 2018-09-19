@@ -112,7 +112,7 @@ class SelectedFacetViewController: UIViewController, Connectable {
     struct Props {
         let selectedFacet: Identity?
         let createdNewAccount: GethAccount?
-        let facets: [UUID:Identity]
+        let facets: [UUID: Identity]
     }
 
     struct Actions {

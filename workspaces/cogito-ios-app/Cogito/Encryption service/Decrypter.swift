@@ -10,7 +10,7 @@ struct Decrypter: DecrypterType {
     }
 
     private func loadPrivateKey(tag: String) -> SecKey? {
-        let query: [String:Any] = [
+        let query: [String: Any] = [
             kSecClass as String: kSecClassKey,
             kSecAttrKeyClass as String: kSecAttrKeyClassPrivate,
             kSecAttrApplicationTag as String: tag.data(using: .utf8)!,

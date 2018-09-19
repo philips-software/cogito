@@ -54,7 +54,7 @@ class DialogPresenterSpec: QuickSpec {
                     actionTriggered = true
                 })
                 actionTriggered = false
-                viewController.handleAlertAction(action:alertAction)
+                viewController.handleAlertAction(action: alertAction)
             }
 
             it("triggers action when alert action handler is called") {
