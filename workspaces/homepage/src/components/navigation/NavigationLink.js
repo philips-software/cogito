@@ -5,7 +5,7 @@ const NavigationLink = glamorous(Link)(props => ({
   display: 'inline-block',
   position: 'relative',
   left: '1rem',
-  width: 'calc(100% - 1rem)',
+  width: 'calc(100% - 1.5rem)',
   color: 'black',
   fontFamily: 'Roboto Mono, monospace',
   fontWeight: '300',
