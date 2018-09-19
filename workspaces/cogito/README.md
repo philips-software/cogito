@@ -53,7 +53,7 @@ The *raw* representation is therefore more versatile, because you can either req
 version by calling `deployed()` method on the proxy object, or you can call `at(address)` to get
 an instance at a given `address`.
 
-`Cogito` allows you to choose which contracts you would like to have return as *deployed* contracts and which ones as *raw* contracts. Here is an example:
+`Cogito` allows you to choose which contracts you would like to have returned as *deployed* contracts and which ones as *raw* contracts. Here is an example:
 
 ```javascript
 import dataStore from 'contracts/DataStore.json'
