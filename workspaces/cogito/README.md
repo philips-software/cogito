@@ -45,7 +45,7 @@ return an instance of the contract deployed at the default address managed by th
 a *raw* version for which you can request an instance of the contract *at* a specific address. The
 *deployed* contracts are often used as a *facade* that represents a fixed entry point to some more
 complex functionality. When you call methods of the *deployed* contracts, they often emit events
-carrying addresses of other contract instances created as result of the method invocation. In order to
+carrying addresses of other contract instances created as a result of the method invocation. In order to
 get a grip on those contract instances, you need to be able to call the `at` method of the contract
 proxy object.
 
