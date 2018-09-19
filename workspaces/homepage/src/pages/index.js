@@ -43,7 +43,7 @@ const page = () => <Page>
       Provide a hassle free user experience for your Ethereum web app. Learn how
       to integrate Cogito into your web app by following
       the <Link to='/developer-documentation/tutorial'>tutorial</Link>, or browse
-      the <Link to='/user-documentation/what-is-cogito'>documentation</Link>.
+      the <Link to='/developer-documentation/introduction'>documentation</Link>.
     </p>
   </Section>
 </Page>

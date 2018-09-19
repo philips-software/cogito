@@ -25,11 +25,6 @@ export class Navigation extends React.PureComponent {
 
     this.navigationGroups = [
       this.createNavigationGroupForTag({
-        title: 'User Documentation',
-        tag: 'user-documentation',
-        deltaGroupName: 'userDocumentation'
-      }),
-      this.createNavigationGroupForTag({
         title: 'Developer Documentation',
         tag: 'developer-documentation',
         deltaGroupName: 'developerDocumentation'
