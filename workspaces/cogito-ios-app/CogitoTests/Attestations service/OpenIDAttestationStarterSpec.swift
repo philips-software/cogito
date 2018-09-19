@@ -1,6 +1,7 @@
 import Quick
 import Nimble
 import Mockingjay
+import SwiftyJSON
 @testable import Cogito
 
 class OpenIDAttestationHandlerSpec: QuickSpec {
@@ -54,13 +55,7 @@ class OpenIDAttestationHandlerSpec: QuickSpec {
             }
             expect(configuration).toEventuallyNot(beNil())
 
-            expect {
-                let expected = String(data: try JSONSerialization.data(withJSONObject: openIdConfiguration),
-                                      encoding: .utf8)
-                let actual = String(data: try JSONSerialization.data(withJSONObject: configuration!),
-                                    encoding: .utf8)
-                expect(actual) == expected
-            }.toNot(beNil())
+            expect(JSON(configuration!)).to(equal(JSON(openIdConfiguration)))
         }
 
         it("reports an error when it cannot load OpenID Connect configuration") {
