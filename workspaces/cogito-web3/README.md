@@ -47,6 +47,6 @@ Currently, `CogitoProvider` redirects two types of requests to telepath: [eth_ac
 
 
 [Web3]: https://github.com/ethereum/web3.js
-[telepath]: /components/telepath-js
+[telepath]: https://cogito.mobi/components/telepath-js
 [eth_accounts]: https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethaccounts
 [eth_sendTransaction]: https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethsendtransaction
