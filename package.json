@@ -9,9 +9,9 @@
         "@babel/preset-env": "^7.0.0",
         "@babel/preset-react": "^7.0.0",
         "babel-core": "^7.0.0-0",
-        "babel-eslint": "8.2.2",
-        "babel-jest": "22.4.3",
-        "jest": "22.4.3",
+        "babel-eslint": "^9.0.0",
+        "babel-jest": "^23.6.0",
+        "jest": "^23.6.0",
         "lerna": "^2.11.0",
         "libsodium-wrappers": "^0.7.2",
         "react": "^16.4.0",
@@ -45,6 +45,7 @@
         "testMatch": [
             "**/*.test.js"
         ],
+        "testUrl": "http://localhost",
         "collectCoverage": true,
         "collectCoverageFrom": [
             "source/**.js",
@@ -57,7 +58,7 @@
         ]
     },
     "scripts": {
-        "test": "yarn lint && NODE_PATH=./workspaces/demo-app/src yarn jest",
+        "test": "yarn lint && NODE_PATH=./workspaces/demo-app/src yarn jest --testURL=\"http://localhost\"",
         "test:watch": "NODE_PATH=./workspaces/demo-app/src yarn jest --watch",
         "lint": "yarn standard && cd ./workspaces/demo-app/truffle && yarn lint",
         "lint-fix": "yarn standard --fix --verbose",
