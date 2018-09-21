@@ -38,8 +38,8 @@
     "rollup-plugin-uglify": "^3.0.0"
   },
   "dependencies": {
-    "@cogitojs/cogito-web3": "^0.2.13",
-    "@cogitojs/telepath-js": "^0.2.13"
+    "@cogitojs/cogito-web3": "0.2.x",
+    "@cogitojs/telepath-js": "0.2.x"
   },
   "peerDependencies": {
     "libsodium-wrappers": "^0.7.2",

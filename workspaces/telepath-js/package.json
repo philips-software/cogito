@@ -38,7 +38,7 @@
     "rollup-plugin-uglify": "^3.0.0"
   },
   "dependencies": {
-    "@cogitojs/crypto": "^0.2.13",
+    "@cogitojs/crypto": "0.2.x",
     "base64url": "^2.0.0",
     "cross-fetch": "^2.1.1"
   },

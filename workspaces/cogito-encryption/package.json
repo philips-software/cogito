@@ -39,14 +39,14 @@
     "access": "public"
   },
   "dependencies": {
-    "@cogitojs/crypto": "^0.2.13",
+    "@cogitojs/crypto": "0.2.x",
     "@react-frontend-developer/buffers": "^1.0.10",
     "@trust/keyto": "^0.3.2",
     "base64url": "^2.0.0",
     "node-forge": "^0.7.5"
   },
   "peerDependencies": {
-    "@cogitojs/telepath-js": "^0.2.9",
+    "@cogitojs/telepath-js": "0.2.x",
     "libsodium-wrappers": "^0.7.2"
   }
 }
