@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-encryption",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "description": "Supports encryption and decryption through the Cogito app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -39,7 +39,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@cogitojs/crypto": "^0.2.12",
+    "@cogitojs/crypto": "^0.2.13",
     "@react-frontend-developer/buffers": "^1.0.10",
     "@trust/keyto": "^0.3.2",
     "base64url": "^2.0.0",
