@@ -37,6 +37,6 @@
     "ethereumjs-util": "^5.2.0"
   },
   "peerDependencies": {
-    "@cogitojs/telepath-js": "^0.2.0"
+    "@cogitojs/telepath-js": "0.2.x"
   }
 }
