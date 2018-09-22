@@ -9,7 +9,6 @@
         "@babel/preset-env": "^7.0.0",
         "@babel/preset-react": "^7.0.0",
         "babel-core": "^7.0.0-0",
-        "babel-eslint": "^9.0.0",
         "babel-jest": "^23.6.0",
         "jest": "^23.6.0",
         "lerna": "^2.11.0",
@@ -19,7 +18,7 @@
         "regenerator-runtime": "^0.11.1",
         "semantic-ui-css": "2.2.14",
         "semantic-ui-react": "^0.79.1",
-        "standard": "^11.0.1",
+        "standard": "^12.0.0",
         "truffle-contract": "^3.0.5",
         "web3": "^1.0.0-beta.34",
         "webpack": "4.8.3"
@@ -66,7 +65,6 @@
         "build-for-netlify": "yarn lerna run --scope @cogitojs/** build && yarn lerna run build --scope homepage"
     },
     "standard": {
-        "parser": "babel-eslint",
         "ignore": [
             "workspaces/homepage/public/**",
             "**/node_modules/**",
