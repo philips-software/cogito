@@ -72,12 +72,12 @@ describe('Secure Channel', () => {
 
   describe('errors', () => {
     it('throws when there is an error while sending', async () => {
-      queuing.send.mockRejectedValue('an error')
+      queuing.send.mockRejectedValue(new Error('an error'))
       await expect(channel.send('a message')).rejects.toThrow()
     })
 
     it('throws when there is an error while receiving', async () => {
-      queuing.receive.mockRejectedValue('an error')
+      queuing.receive.mockRejectedValue(new Error('an error'))
       await expect(channel.receive()).rejects.toThrow()
     })
 
