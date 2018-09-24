@@ -5,7 +5,6 @@ protocol GethKeyStoreT {
     // swiftlint:disable identifier_name
     func getAccounts() -> GethAccounts!
     func newAccount(_ passphrase: String!) throws -> GethAccount
-    func signTx(_ account: GethAccount!, tx: GethTransaction!, chainID: GethBigInt!) throws -> GethTransaction
     func signTxPassphrase(_ account: GethAccount!, passphrase: String!,
                           tx: GethTransaction!, chainID: GethBigInt!) throws -> GethTransaction
     // swiftlint:enable identifier_name
