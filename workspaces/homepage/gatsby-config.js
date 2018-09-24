@@ -106,6 +106,8 @@ module.exports = {
       }
     },
     'gatsby-plugin-glamor',
-    'gatsby-plugin-catch-links'
+    'gatsby-plugin-catch-links',
+    'gatsby-plugin-layout',
+    'gatsby-plugin-root-import'
   ]
 }

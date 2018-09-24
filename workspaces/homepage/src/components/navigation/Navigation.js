@@ -77,7 +77,7 @@ export class Navigation extends React.PureComponent {
         <List>
           {
             group.docs.map((doc, i) => (
-              <NavigationItem key={i} {...doc} onChange={delta => this.setDelta(group.deltaGroupName, i, delta)} />
+              <NavigationItem key={i} location={this.props.location} {...doc} onChange={delta => this.setDelta(group.deltaGroupName, i, delta)} />
             ))
           }
         </List>

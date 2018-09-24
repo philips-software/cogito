@@ -11,14 +11,24 @@ const List = glamorous.ul({
   margin: 0
 })
 
-const NavigationItem = ({ node: { headings, frontmatter: { title, path } }, onChange }) => (
-  <li key={path}>
-    <MidLevelNavigationItem path={path} title={title} onChange={onChange}>
-      { headings.length > 0 && <List>
-        { headings.map((heading, index) => NavigationHeading({ ...heading, path, index })) }
-      </List> }
-    </MidLevelNavigationItem>
-  </li>
-)
+class NavigationItem extends React.Component {
+  renderNavigationHeading = (heading, index, path) => (
+    <NavigationHeading key={index} {...heading} path={path} index={index} />
+  )
+
+  render () {
+    const { node: { headings, frontmatter: { title, path } }, onChange, location } = this.props
+
+    return (
+      <li key={path}>
+        <MidLevelNavigationItem location={location} path={path} title={title} onChange={onChange}>
+          { headings.length > 0 && <List>
+            { headings.map((heading, index) => this.renderNavigationHeading(heading, index, path)) }
+          </List> }
+        </MidLevelNavigationItem>
+      </li>
+    )
+  }
+}
 
 export { NavigationItem }

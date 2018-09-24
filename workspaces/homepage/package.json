@@ -13,6 +13,7 @@
     "gatsby": "^2.0.0",
     "gatsby-plugin-catch-links": "^2.0.0",
     "gatsby-plugin-glamor": "^2.0.0",
+    "gatsby-plugin-layout": "^1.0.2",
     "gatsby-plugin-react-helmet": "^3.0.0",
     "gatsby-plugin-sharp": "^2.0.0",
     "gatsby-plugin-typography": "^2.0.0",
@@ -25,11 +26,9 @@
     "glamor": "^2.20.40",
     "glamorous": "^4.12.5",
     "prismjs": "^1.13.0",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",
-    "react-hot-loader": "^4.3.3",
-    "react-router-dom": "^4.3.1",
     "react-typography": "0.16.13",
     "typography": "^0.16.17",
     "typography-theme-moraga": "^0.15.10"
@@ -46,9 +45,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "gatsby-cli": "^2.0.0"
-  },
-  "workspaces": {
-    "nohoist": ["eslint-plugin-flowtype", "eslint-plugin-flowtype/**"]
+    "gatsby-cli": "^2.0.0",
+    "gatsby-plugin-root-import": "^2.0.0"
   }
 }
