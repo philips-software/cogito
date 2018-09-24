@@ -20,12 +20,9 @@
     "cogito-faucet": "./bin/cogito-faucet.js"
   },
   "devDependencies": {
-    "babel-jest": "^22.4.3",
     "ganache-cli": "^6.1.0",
-    "jest": "^22.4.3",
-    "mock-fs": "^4.5.0",
-    "standard": "^11.0.1",
-    "supertest": "^3.1.0"
+    "supertest": "^3.3.0",
+    "mock-fs": "^4.7.0"
   },
   "dependencies": {
     "@babel/cli": "^7.0.0",
