@@ -33,11 +33,9 @@ exports[`renders correctly 1`] = `
     </a>
     <a
       className="ui pink basic fluid button"
-      disabled={undefined}
       href="itms-services://?action=download-manifest&url=https://app.cogito.mobi/manifest.plist"
       onClick={[Function]}
       role="button"
-      tabIndex={undefined}
     >
       Download Cogito iOS App
     </a>
