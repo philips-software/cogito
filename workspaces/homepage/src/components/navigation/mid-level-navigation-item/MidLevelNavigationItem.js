@@ -12,26 +12,23 @@ const Wrapper = glamorous.div({
 })
 
 class MidLevelNavigationItem extends React.Component {
-  isActiveGroup = (match, location) => {
-    return match && match.isExact
+  getActiveProps = (currentLocation, href) => {
+    const normalizedPathName = currentLocation.pathname.replace(/\/$/, '')
+    if (`${normalizedPathName}` === href) {
+      return 'active'
+    }
+    return ''
   }
 
   render () {
-    const { title, path } = this.props
+    const { title, path, location } = this.props
 
     return (
       <Collapsable onChange={this.props.onChange} trigger={(unfold, folded) => (
         <Wrapper onClick={() => unfold()}>
           <NavigationLink
             to={path}
-            activeStyle={{
-              color: 'black',
-              fontFamily: 'Roboto Mono, monospace',
-              fontWeight: '500',
-              fontSize: '0.8rem',
-              transition: 'color 0.2s ease-in-out 0s'
-            }}
-            isActive={this.isActiveGroup}
+            className={this.getActiveProps(location, path)}
           >
             {title}
           </NavigationLink>

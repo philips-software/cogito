@@ -8,29 +8,35 @@ const ListSubItem = glamorous.li({
   fontSize: '0.9rem'
 })
 
-const isActiveSubItem = (match, location, anchor) => {
-  return match && match.isExact && location.hash === `#${anchor}`
-}
+class NavigationHeading extends React.Component {
+  getActiveProps = (currentLocation, href) => {
+    const normalizedPathName = currentLocation.pathname.replace(/\/$/, '')
+    if (`${normalizedPathName}${currentLocation.hash}` === href) {
+      return { className: `${this.linkClassName} active` }
+    }
+    return null
+  }
 
-const NavigationHeading = ({ path, value, index }) => {
-  const slugger = new GithubSlugger()
-  const anchor = slugger.slug(value)
-  return <ListSubItem key={index}>
-    <NavigationLink
-      to={`${path}#${anchor}`}
-      activeClassName='active'
-      // activeStyle={{
-      //   color: 'black',
-      //   fontFamily: 'Roboto Mono, monospace',
-      //   fontWeight: '500',
-      //   fontSize: '0.8rem',
-      //   transition: 'color 0.2s ease-in-out 0s'
-      // }}
-      isActive={(match, location) => isActiveSubItem(match, location, anchor)}
-    >
-      { value }
-    </NavigationLink>
-  </ListSubItem>
+  recordLinkNode = node => {
+    this.linkClassName = node && node.className
+  }
+
+  render () {
+    const { path, value, index } = this.props
+    const slugger = new GithubSlugger()
+    const anchor = slugger.slug(value)
+    return (
+      <ListSubItem key={index}>
+        <NavigationLink
+          to={`${path}#${anchor}`}
+          ref={this.recordLinkNode}
+          getProps={({location, href}) => this.getActiveProps(location, href)}
+        >
+          { value }
+        </NavigationLink>
+      </ListSubItem>
+    )
+  }
 }
 
 export { NavigationHeading }

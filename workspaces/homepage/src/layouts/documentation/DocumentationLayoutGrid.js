@@ -1,5 +1,5 @@
 import glamorous from 'glamorous'
-import { rhythm } from '../utils/typography'
+import { rhythm } from 'src/utils/typography'
 import { Grid } from '@react-frontend-developer/css-grid-helper'
 
 let grid = new Grid([
@@ -8,7 +8,7 @@ let grid = new Grid([
   gridTemplateColumns: '300px calc(100vw - 350px)'
 })
 
-const LayoutGrid = glamorous.div(grid.container, {
+const DocumentationLayoutGrid = glamorous.div(grid.container, {
   boxSizing: 'border-box',
   margin: rhythm(1)
 })
@@ -16,4 +16,4 @@ const LayoutGrid = glamorous.div(grid.container, {
 const SidebarGridItem = glamorous.div(grid.sidebar)
 const ContentGridItem = glamorous.div(grid.content, { width: '100%', padding: '1rem' })
 
-export { LayoutGrid, SidebarGridItem, ContentGridItem }
+export { DocumentationLayoutGrid, SidebarGridItem, ContentGridItem }

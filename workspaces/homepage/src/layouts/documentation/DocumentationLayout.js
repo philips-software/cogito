@@ -1,40 +1,12 @@
 import { React } from 'react'
-import '../prismjs/themes/prism-tomorrow.css'
-import { StaticQuery, graphql, Link } from 'gatsby'
+import 'src/prismjs/themes/prism-tomorrow.css'
+import { StaticQuery, graphql } from 'gatsby'
 import glamorous from 'glamorous'
-import { rhythm } from '../utils/typography'
+import { rhythm } from 'src/utils/typography'
 
-import { LayoutGrid, SidebarGridItem, ContentGridItem } from './LayoutGrid'
-import { Navigation } from './navigation'
-
-const Wrapper = glamorous.div({
-  backgroundColor: 'black',
-  color: 'white',
-  fontFamily: 'Roboto Mono, monospace',
-  fontWeight: '300',
-  fontSize: '1.2rem',
-  textAlign: 'center',
-  verticalAlign: 'middle',
-  padding: '10px',
-  marginBottom: '2rem'
-})
-
-const HomeLink = glamorous(Link)({
-  color: 'white',
-  fontWeight: '300',
-  ':hover': {
-    color: 'white',
-    textDecoration: 'none'
-  }
-})
-
-const SiteTitle = ({title}) => (
-  <HomeLink to='/'>
-    <Wrapper>
-      { title }
-    </Wrapper>
-  </HomeLink>
-)
+import { DocumentationLayoutGrid, SidebarGridItem, ContentGridItem } from './DocumentationLayoutGrid'
+import { Navigation } from 'src/components/navigation'
+import { SiteTitle } from './SiteTitle'
 
 export const FixedNavigation = glamorous.div({
   display: 'block',
@@ -55,7 +27,7 @@ export const FixedNavigation = glamorous.div({
   }
 })
 
-const Layout = ({ children, location }) => (
+const DocumentationLayout = ({ children, location }) => (
   <StaticQuery
     query={graphql`
       query Navigation {
@@ -86,7 +58,7 @@ const Layout = ({ children, location }) => (
     render={data => {
       const { site: { siteMetadata: { title } }, navigation: { docs } } = data
       return (
-        <LayoutGrid>
+        <DocumentationLayoutGrid>
           <SidebarGridItem>
             <FixedNavigation>
               <SiteTitle title={title} />
@@ -96,10 +68,10 @@ const Layout = ({ children, location }) => (
           <ContentGridItem>
             { children }
           </ContentGridItem>
-        </LayoutGrid>
+        </DocumentationLayoutGrid>
       )
     }}
   />
 )
 
-export default Layout
+export { DocumentationLayout }

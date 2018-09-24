@@ -1,19 +1,17 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import { EditFile } from '../components/Editing'
+import { EditFile } from 'src/components/Editing'
 import { graphql } from 'gatsby'
-
-import Layout from '../components/Layout'
 
 const Template = ({ data: { doc }, location }) => {
   const { html, fileAbsolutePath, frontmatter: { title } } = doc
   return (
-    <Layout location={location}>
+    <div>
       <Helmet title={title} />
       <EditFile fileAbsolutePath={fileAbsolutePath} />
       <h1>{title}</h1>
       <div dangerouslySetInnerHTML={{ __html: html }} />
-    </Layout>
+    </div>
   )
 }
 
