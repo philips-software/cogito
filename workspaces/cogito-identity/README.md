@@ -32,4 +32,4 @@ console.log(info.ethereumAddress, info.username)
 Currently, `ethereumAddress` and `username` are the only identity attributes supported
 by `CogitoIdentity`.
 
-[telepath]: /components/telepath-js
+[telepath]: https://cogito.mobi/components/telepath-js

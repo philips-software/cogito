@@ -120,7 +120,7 @@ const {web3, channel, contracts} = await cogito.update({
 This will reuse an existing Telepath channel.
 
 [Web3]: https://github.com/ethereum/web3.js
-[cogito-web3]: /components/cogito-web3
-[telepath]: /components/telepath-js
-[telepath-js]: /components/telepath-js
+[cogito-web3]: https://cogito.mobi/components/cogito-web3
+[telepath]: https://cogito.mobi/components/telepath-js
+[telepath-js]: https://cogito.mobi/components/telepath-js
 [Ethereum contracts]: http://www.ethdocs.org/en/latest/contracts-and-transactions/index.html

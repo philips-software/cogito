@@ -15,4 +15,4 @@ you're more than welcome to. We even wrote
 to help you get started on your first contribution. If you need any help, feel
 free to reach out to us on [Slack](https://philips-software-slackin.now.sh/).
 
-[cogito.mobi]: /
+[cogito.mobi]: https://cogito.mobi
