@@ -1,8 +1,4 @@
----
-path: /components/cogito-web3
-title: Cogito Web3
-tag: component
----
+# @cogitojs/cogito-web3
 
 `@cogitojs/cogito-web3` provides a means to intercept some of the standard
 [Web3] requests and redirect them to the Cogito mobile app using the [telepath] channel.

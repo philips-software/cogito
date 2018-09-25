@@ -1,8 +1,4 @@
----
-path: /components/crypto
-title: Crypto
-tag: component
----
+# @cogitojs/crypto
 
 The `@cogitojs/crypto` package provides cryptographic utilities used by other cogito packages.
 

@@ -1,8 +1,4 @@
----
-path: /components/cogito-identity
-title: Cogito Identity
-tag: component
----
+# @cogitojs/cogito-identity
 
 `@cogitojs/cogito-identity` allows retrieving identity information over [telepath] (e.g. from a Cogito app).
 

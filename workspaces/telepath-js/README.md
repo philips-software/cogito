@@ -1,8 +1,4 @@
----
-path: /components/telepath-js
-title: Telepath (JavaScript)
-tag: component
----
+# @cogitojs/telepath-js
 
 Provides a secure channel for communication between a web app running in a browser and an app running on a mobile device.
 

@@ -1,8 +1,4 @@
----
-path: /components/cogito
-title: Cogito
-tag: component
----
+# @cogitojs/cogito
 
 `@cogitojs/cogito` is a high level convenience components that provides a more
 declarative way of working with [cogito-web3], [telepath], and [Ethereum contracts].

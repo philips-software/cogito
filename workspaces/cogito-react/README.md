@@ -1,8 +1,4 @@
----
-path: /components/cogito-react
-title: Cogito React
-tag: component
----
+# @cogitojs/cogito-react
 
 `@cogitojs/cogito-react` is a React version of [@cogitojs/cogito].
 

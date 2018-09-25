@@ -1,9 +1,4 @@
----
-path: /components/telepath-ios
-title: Telepath (iOS)
-tag: component
----
-
+# telepath-ios
 
 > For a general introduction to telepath, please check [telepath-js](/components/telepath-js).
 
