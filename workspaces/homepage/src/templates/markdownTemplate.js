@@ -8,7 +8,7 @@ const Template = ({ data: { doc }, location }) => {
   return (
     <div>
       <Helmet title={title} />
-      <EditFile fileAbsolutePath={fileAbsolutePath} />
+      <EditFile fileAbsolutePath={content ? content.childMarkdownRemark.fileAbsolutePath : fileAbsolutePath} />
       <h1>{title}</h1>
       <div dangerouslySetInnerHTML={{ __html: content ? content.childMarkdownRemark.html.split('\n').slice(1).join('\n') : html }} />
     </div>
@@ -25,6 +25,7 @@ export const pageQuery = graphql`
         content {
           childMarkdownRemark {
             html
+            fileAbsolutePath
           }
         }
       }
