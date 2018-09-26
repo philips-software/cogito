@@ -16,6 +16,7 @@ program
     'URL of the Ethereum provider',
     'http://localhost:8545'
   )
+  .option('--port <number>', 'Port number to listen on', '3001', parseInt)
   .parse(process.argv)
 
 var faucetServer = new FaucetServer({
@@ -25,6 +26,6 @@ var faucetServer = new FaucetServer({
   privateKey: process.env.COGITO_FAUCET_PRIVATE_KEY
 })
 
-faucetServer.server.listen(3001, function () {
-  console.log('Running on port 3001')
+faucetServer.server.listen(program.port, function () {
+  console.log(`Running on port ${program.port}`)
 })
