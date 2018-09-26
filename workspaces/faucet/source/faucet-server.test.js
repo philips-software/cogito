@@ -53,30 +53,14 @@ describe('Server', () => {
     it('returns response status 500', async () => {
       const address = '0x0000000000000000000000000000000000000001'
       const error = new Error('some error 2')
-
-      // THIS DOES NOT WORK FOR ERROR HANDLING - DO NOT KNOW WHY!
-      // donate.mockReturnValueOnce(Promise.reject(error))
-      // and
-      // donate.mockRejectedValueOnce(error)
-      donate.mockImplementationOnce(() => {
-        return Promise.reject(error)
-      })
-
+      donate.mockRejectedValueOnce(error)
       await request(faucetServer.server).post(`/donate/${address}`).expect(500)
     })
 
     it('returns correct error message when error does not have response.statusText field', async () => {
       const address = '0x0000000000000000000000000000000000000001'
       const error = new Error('some error 2')
-
-      // THIS DOES NOT WORK FOR ERROR HANDLING - DO NOT KNOW WHY!
-      // donate.mockReturnValueOnce(Promise.reject(error))
-      // and
-      // donate.mockRejectedValueOnce(error)
-      donate.mockImplementationOnce(() => {
-        return Promise.reject(error)
-      })
-
+      donate.mockRejectedValueOnce(error)
       await request(faucetServer.server)
         .post(`/donate/${address}`)
         .expect('some error 2 - please check logs')
@@ -95,15 +79,7 @@ describe('Server', () => {
         }
       }
       const error = new CustomError('error status text', 'error message')
-
-      // THIS DOES NOT WORK FOR ERROR HANDLING - DO NOT KNOW WHY!
-      // donate.mockReturnValueOnce(Promise.reject(error))
-      // and
-      // donate.mockRejectedValueOnce(error)
-      donate.mockImplementationOnce(() => {
-        return Promise.reject(error)
-      })
-
+      donate.mockRejectedValueOnce(error)
       await request(faucetServer.server)
         .post(`/donate/${address}`)
         .expect('error message - error status text')
