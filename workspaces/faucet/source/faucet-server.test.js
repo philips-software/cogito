@@ -20,7 +20,7 @@ describe('Server', () => {
 
   describe('happy flow', () => {
     beforeEach(() => {
-      donate.mockResolvedValueOnce({status: true})
+      donate.mockResolvedValueOnce({ status: true })
       console.log = jest.fn()
     })
 
@@ -30,16 +30,14 @@ describe('Server', () => {
 
     it('supports donate URL', async () => {
       const address = '0x0000000000000000000000000000000000000001'
-      await request(faucetServer.server)
-        .post(`/donate/${address}`)
-        .expect(200)
+      await request(faucetServer.server).post(`/donate/${address}`).expect(200)
     })
 
     it('returns correct message on success', async () => {
       const address = '0x0000000000000000000000000000000000000001'
       await request(faucetServer.server)
         .post(`/donate/${address}`)
-        .expect(200, JSON.stringify({status: true}))
+        .expect(200, JSON.stringify({ status: true }))
     })
   })
 
@@ -64,9 +62,7 @@ describe('Server', () => {
         return Promise.reject(error)
       })
 
-      await request(faucetServer.server)
-        .post(`/donate/${address}`)
-        .expect(500)
+      await request(faucetServer.server).post(`/donate/${address}`).expect(500)
     })
 
     it('returns correct error message when error does not have response.statusText field', async () => {
@@ -127,7 +123,7 @@ describe('Server', () => {
           console.log('queue=', faucetServer.queue.length)
           if (this.fulfilStatus) {
             expect(faucetServer.queue.length).toBe(this.maxExpectedQueueSize)
-            resolve({status: true})
+            resolve({ status: true })
           } else if (this.counter === 0) {
             reject(new Error('timeout'))
           } else {
@@ -160,13 +156,9 @@ describe('Server', () => {
 
     it('immediately schedules a donator call when no previous call is present', async () => {
       expect(faucetServer.queue.length).toBe(0)
-
-      donate.mockResolvedValueOnce({status: true})
-
+      donate.mockResolvedValueOnce({ status: true })
       const address = '0x0000000000000000000000000000000000000001'
-      await request(faucetServer.server)
-        .post(`/donate/${address}`)
-        .expect(200)
+      await request(faucetServer.server).post(`/donate/${address}`).expect(200)
     })
 
     it('puts a request on a waiting queue and removes the item from the queue after it is served', done => {
