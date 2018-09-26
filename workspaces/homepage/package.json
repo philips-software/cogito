@@ -2,7 +2,7 @@
   "private": true,
   "name": "homepage",
   "description": "Cogito homepage",
-  "version": "0.2.12",
+  "version": "0.2.16",
   "author": "Marcin Czenko <mczenko@me.com>",
   "repository": {
     "type": "git",

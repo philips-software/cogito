@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-identity",
-  "version": "0.2.15",
+  "version": "0.2.16",
   "description": "Supports getting identity info from the Cogito app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
