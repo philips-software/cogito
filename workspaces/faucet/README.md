@@ -27,6 +27,8 @@ The `cogito-faucet` command takes the following arguments:
    * `-p` or `--provider` followed by the provider URL. This specifies the full
      URL of the node in your blockchain network (including `http` or `https` and
      port number if needed). Defaults to `http://localhost:8545`.
+   * `--port` followed by a port number. The port that the faucet listens on.
+     Defaults to `3001`
 
 The private key that corresponds with the account is specified as an environment
 variable:
