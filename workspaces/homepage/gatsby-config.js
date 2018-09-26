@@ -30,7 +30,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/../telepath-ios/README.md`
+        path: `${__dirname}/../telepath-ios`,
+        ignore: [`**/Pods/**/*`]
       }
     },
     {

@@ -1,8 +1,4 @@
----
-path: /components/cogito-identity
-title: Cogito Identity
-tag: component
----
+# @cogitojs/cogito-identity
 
 `@cogitojs/cogito-identity` allows retrieving identity information over [telepath] (e.g. from a Cogito app).
 
@@ -36,4 +32,4 @@ console.log(info.ethereumAddress, info.username)
 Currently, `ethereumAddress` and `username` are the only identity attributes supported
 by `CogitoIdentity`.
 
-[telepath]: /components/telepath-js
+[telepath]: https://cogito.mobi/components/telepath-js

@@ -46,6 +46,14 @@ const DocumentationLayout = ({ children, location }) => (
                 title
                 path
                 tag
+                content {
+                  childMarkdownRemark {
+                    html
+                    headings(depth: h2) {
+                      value
+                    }
+                  }
+                }
               }
               headings(depth: h2) {
                 value

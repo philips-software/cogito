@@ -1,8 +1,4 @@
----
-path: /components/telepath-queuing-service
-title: Telepath Queuing Service
-tag: component
----
+# telepath-queuing-service
 
 Simple Queueing Service for use with Telepath. Allows two Telepath clients to
 communicate when they are behind a distinct NAT.

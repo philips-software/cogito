@@ -25,10 +25,12 @@ exports.createPages = async ({ actions, graphql }) => {
   }
 
   queryResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    createPage({
-      path: node.frontmatter.path,
-      component: markdownTemplate,
-      context: {}
-    })
+    if (node.frontmatter.path) {
+      createPage({
+        path: node.frontmatter.path,
+        component: markdownTemplate,
+        context: {}
+      })
+    }
   })
 }

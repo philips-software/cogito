@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/faucet",
-  "version": "0.2.13",
+  "version": "0.2.15",
   "description": "Simple faucet with REST API",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -21,8 +21,8 @@
   },
   "devDependencies": {
     "ganache-cli": "^6.1.0",
-    "supertest": "^3.3.0",
-    "mock-fs": "^4.7.0"
+    "mock-fs": "^4.7.0",
+    "supertest": "^3.3.0"
   },
   "dependencies": {
     "@babel/cli": "^7.0.0",

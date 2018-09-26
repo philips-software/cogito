@@ -1,8 +1,4 @@
----
-path: /components/cogito-react
-title: Cogito React
-tag: component
----
+# @cogitojs/cogito-react
 
 `@cogitojs/cogito-react` is a React version of [@cogitojs/cogito].
 
@@ -162,8 +158,8 @@ contracts.dataRequest  // raw
 contracts.dataResponse // raw
 ```
 
-[@cogitojs/cogito]: /components/cogito
-[Cogito]: /components/cogito
-[CogitoProvider]: /components/cogito-web3
-[Telepath]: /components/telepath-js
+[@cogitojs/cogito]: https://cogito.mobi/components/cogito
+[Cogito]: https://cogito.mobi/components/cogito
+[CogitoProvider]: https://cogito.mobi/components/cogito-web3
+[Telepath]: https://cogito.mobi/components/telepath-js
 [Working with Contracts]: #working-with-contracts

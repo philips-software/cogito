@@ -1,8 +1,4 @@
----
-path: /components/telepath-js
-title: Telepath (JavaScript)
-tag: component
----
+# @cogitojs/telepath-js
 
 Provides a secure channel for communication between a web app running in a browser and an app running on a mobile device.
 
@@ -138,4 +134,4 @@ Currently uses independent encryption of messages. A recipient can therefore not
 
 Telepath often comes hand in hand with [Cogito Web3].
 
-[Cogito Web3]: /components/cogito-web3
+[Cogito Web3]: https://cogito.mobi/components/cogito-web3

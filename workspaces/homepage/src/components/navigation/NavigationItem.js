@@ -17,13 +17,15 @@ class NavigationItem extends React.Component {
   )
 
   render () {
-    const { node: { headings, frontmatter: { title, path } }, onChange, location } = this.props
+    const { node: { headings, frontmatter: { title, path, content } }, onChange, location } = this.props
+
+    const actualHeadings = content ? content.childMarkdownRemark.headings : headings
 
     return (
       <li key={path}>
         <MidLevelNavigationItem location={location} path={path} title={title} onChange={onChange}>
-          { headings.length > 0 && <List>
-            { headings.map((heading, index) => this.renderNavigationHeading(heading, index, path)) }
+          { actualHeadings.length > 0 && <List>
+            { actualHeadings.map((heading, index) => this.renderNavigationHeading(heading, index, path)) }
           </List> }
         </MidLevelNavigationItem>
       </li>

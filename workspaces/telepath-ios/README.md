@@ -1,11 +1,6 @@
----
-path: /components/telepath-ios
-title: Telepath (iOS)
-tag: component
----
+# telepath-ios
 
-
-> For a general introduction to telepath, please check [telepath-js](/components/telepath-js).
+> For a general introduction to telepath, please check [telepath-js](https://cogito.mobi/components/telepath-js).
 
 ## Usage
 
@@ -60,4 +55,4 @@ channel.receive { message: String?, error: Error? in
 
 The received `message` will be `nil` when no message is available.
 
-[queuing]: /components/telepath-queuing-service
+[queuing]: https://cogito.mobi/components/telepath-queuing-service
