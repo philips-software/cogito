@@ -42,7 +42,7 @@
     "deep-freeze-es6": "^1.0.1",
     "jest-canvas-mock": "^1.0.2",
     "node-fetch": "^2.2.0",
-    "react-scripts": "2.0.0-next.2150693d",
+    "react-scripts": "^2.0.0",
     "react-test-renderer": "^16.2.0"
   },
   "scripts": {
