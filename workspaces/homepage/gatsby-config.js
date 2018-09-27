@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: 'Cogito'
+    title: 'Cogito',
+    editBaseUrl: 'https://github.com/philips-software/cogito/blob/master'
   },
   plugins: [
     {

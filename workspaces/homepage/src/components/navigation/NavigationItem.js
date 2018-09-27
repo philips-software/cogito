@@ -16,10 +16,15 @@ class NavigationItem extends React.Component {
     <NavigationHeading key={index} {...heading} path={path} index={index} />
   )
 
+  combineHeadings = (originalHeadings, content) => {
+    const externalHeadings = content ? content.childMarkdownRemark.headings : []
+    return externalHeadings.concat(originalHeadings)
+  }
+
   render () {
     const { node: { headings, frontmatter: { title, path, content } }, onChange, location } = this.props
 
-    const actualHeadings = content ? content.childMarkdownRemark.headings : headings
+    const actualHeadings = this.combineHeadings(headings, content)
 
     return (
       <li key={path}>
