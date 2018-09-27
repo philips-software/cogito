@@ -1,13 +1,12 @@
 import React from 'react'
 import glamorous from 'glamorous'
 
-const editUrl = 'https://github.com/philips-software/cogito/blob/master'
-
 const A = glamorous.a({
   fontFamily: 'Roboto Mono, monospace',
   fontWeight: '100',
   fontSize: '0.8rem',
   color: '#FF55BE',
+  marginRight: '2rem',
   ':hover': {
     textDecoration: 'underline',
     color: '#FF55BE'
@@ -15,18 +14,47 @@ const A = glamorous.a({
 })
 
 const Wrapper = glamorous.div({
+  display: 'flex',
+  flexFlow: 'row nowrap',
+  justifyContent: 'flex-start',
   paddingLeft: '3px'
 })
 
-export const EditFile = ({ fileAbsolutePath }) => {
-  const match = fileAbsolutePath.match(/workspaces.*$/)
-  if (match) {
-    const fileRelativePath = match[0]
+class EditFile extends React.Component {
+  renderEditThisPageLink = (fileAbsolutePath, linkText) => {
+    const match = fileAbsolutePath.match(/.*\/(src.*)$/) || fileAbsolutePath.match(/.*\/(.*)$/)
+    if (match) {
+      const fileRelativePath = match[1]
+      const { editBaseUrl } = this.props
+      return (
+        <A href={`${editBaseUrl}/${fileRelativePath}`}>{linkText}</A>
+      )
+    }
+    return null
+  }
+
+  renderOriginalContent = fileAbsolutePath => {
+    return this.renderEditThisPageLink(fileAbsolutePath, 'Edit this page')
+  }
+
+  renderExternalContent = externalContent => {
+    if (externalContent) {
+      const fileAbsolutePath = externalContent.childMarkdownRemark.fileAbsolutePath
+      return this.renderEditThisPageLink(fileAbsolutePath, 'Edit external content page')
+    }
+    return null
+  }
+
+  render () {
+    const { fileAbsolutePath, externalContent } = this.props
+
     return (
       <Wrapper>
-        <A href={`${editUrl}/${fileRelativePath}`}>Edit this page</A>
+        { this.renderOriginalContent(fileAbsolutePath) }
+        { this.renderExternalContent(externalContent) }
       </Wrapper>
     )
   }
-  return null
 }
+
+export { EditFile }
