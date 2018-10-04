@@ -1,6 +1,6 @@
 {
   "name": "cogito-ios-app-distribution",
-  "version": "0.2.16",
+  "version": "0.2.17",
   "description": "A simple page for Cogito App distribution",
   "homepage": "https://cogito.mobi",
   "private": true,
@@ -15,7 +15,7 @@
     "semantic-ui-react": "^0.79.1"
   },
   "devDependencies": {
-    "@cogitojs/faucet": "^0.2.16",
+    "@cogitojs/faucet": "^0.2.17",
     "deep-freeze-es6": "^1.0.1",
     "jest-canvas-mock": "^1.0.2",
     "react-scripts": "^2.0.0",

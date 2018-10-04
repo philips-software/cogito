@@ -1,6 +1,6 @@
 {
   "name": "demo-app",
-  "version": "0.2.16",
+  "version": "0.2.17",
   "description": "A demo project for using Cogito",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -37,7 +37,7 @@
     "web3": "^1.0.0-beta.34"
   },
   "devDependencies": {
-    "@cogitojs/faucet": "^0.2.16",
+    "@cogitojs/faucet": "^0.2.17",
     "@react-frontend-developer/jsdom-worker": "^0.1.1",
     "deep-freeze-es6": "^1.0.1",
     "jest-canvas-mock": "^1.0.2",
