@@ -1,6 +1,6 @@
 import { StreamEncoder } from '@cogitojs/crypto'
 import { rsaCreatePublicKey, rsaEncrypt } from './rsa'
-import base64url from 'base64url'
+import { extractRsaParameters } from './jwk'
 
 class CogitoStreamEncoder {
   jsonWebKey
@@ -25,10 +25,7 @@ class CogitoStreamEncoder {
   }
 
   createRsaPublicKey ({ jsonWebKey }) {
-    const signedN = base64url.toBuffer(jsonWebKey.n)
-    const signedE = base64url.toBuffer(jsonWebKey.e)
-    const n = Buffer.concat([Buffer.from([0]), signedN])
-    const e = Buffer.concat([Buffer.from([0]), signedE])
+    const { n, e } = extractRsaParameters({ jsonWebKey })
     return rsaCreatePublicKey({ n, e })
   }
 
