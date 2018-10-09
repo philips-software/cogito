@@ -1,6 +1,13 @@
 import { rsaCreatePublicKey, rsaEncrypt } from './rsa'
 import base64url from 'base64url'
-import { Sodium, random, keySize, nonceSize, encrypt, decrypt } from '@cogitojs/crypto'
+import {
+  Sodium,
+  random,
+  keySize,
+  nonceSize,
+  encrypt,
+  decrypt
+} from '@cogitojs/crypto'
 
 import { CogitoRequest } from './CogitoRequest'
 
@@ -19,7 +26,8 @@ class CogitoEncryption {
     const split = encryptionData.split('.')
 
     const cipherText = base64url.toBuffer(split[0])
-    const encryptedSymmetricKey = '0x' + base64url.toBuffer(split[1]).toString('hex')
+    const encryptedSymmetricKey =
+      '0x' + base64url.toBuffer(split[1]).toString('hex')
     const nonce = base64url.toBuffer(split[2])
 
     return {
@@ -29,8 +37,11 @@ class CogitoEncryption {
     }
   }
 
-  async decryptSymmetricKey ({encryptedSymmetricKey, tag}) {
-    const request = CogitoRequest.create('decrypt', { tag, cipherText: encryptedSymmetricKey })
+  async decryptSymmetricKey ({ encryptedSymmetricKey, tag }) {
+    const request = CogitoRequest.create('decrypt', {
+      tag,
+      cipherText: encryptedSymmetricKey
+    })
     const response = await this.channel.send(request)
     if (response.error) {
       throw new Error(response.error.message)
@@ -39,7 +50,11 @@ class CogitoEncryption {
   }
 
   async decrypt ({ tag: iOSKeyTag, encryptionData }) {
-    const {cipherText, encryptedSymmetricKey, nonce} = this.extractEncryptionData(encryptionData)
+    const {
+      cipherText,
+      encryptedSymmetricKey,
+      nonce
+    } = this.extractEncryptionData(encryptionData)
 
     const symmetricKey = await this.decryptSymmetricKey({
       encryptedSymmetricKey,
@@ -54,11 +69,16 @@ class CogitoEncryption {
     const symmetricKey = await this.createRandomKey()
     const nonce = await random(await nonceSize())
     const cipherText = await encrypt(plainText, nonce, symmetricKey)
-    const encryptedSymmetricKey = rsaEncrypt({ publicKey, plainText: symmetricKey })
+    const encryptedSymmetricKey = rsaEncrypt({
+      publicKey,
+      plainText: symmetricKey
+    })
 
     return (
-      base64url.encode(cipherText) + '.' +
-      base64url.encode(encryptedSymmetricKey) + '.' +
+      base64url.encode(cipherText) +
+      '.' +
+      base64url.encode(encryptedSymmetricKey) +
+      '.' +
       base64url.encode(nonce)
     )
   }
