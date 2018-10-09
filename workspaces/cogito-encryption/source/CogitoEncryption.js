@@ -23,13 +23,10 @@ class CogitoEncryption {
   }
 
   extractEncryptionData (encryptionData) {
-    const split = encryptionData.split('.')
-
-    const cipherText = base64url.toBuffer(split[0])
-    const encryptedSymmetricKey =
-      '0x' + base64url.toBuffer(split[1]).toString('hex')
-    const nonce = base64url.toBuffer(split[2])
-
+    const [cipherTextPart, keyPart, noncePart] = encryptionData.split('.')
+    const cipherText = base64url.toBuffer(cipherTextPart)
+    const encryptedSymmetricKey = bufferToHex(base64url.toBuffer(keyPart))
+    const nonce = base64url.toBuffer(noncePart)
     return {
       cipherText,
       encryptedSymmetricKey,
@@ -95,5 +92,7 @@ class CogitoEncryption {
     return random(await keySize())
   }
 }
+
+const bufferToHex = buffer => '0x' + buffer.toString('hex')
 
 export { CogitoEncryption }
