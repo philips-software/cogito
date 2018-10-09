@@ -1,6 +1,6 @@
 import { StreamEncoder } from '@cogitojs/crypto'
-import { rsaCreatePublicKey, rsaEncrypt } from './rsa'
-import { extractRsaParameters } from './jwk'
+import { rsaEncrypt } from './rsa'
+import { createRsaPublicKey } from './jwk2rsa'
 
 class CogitoStreamEncoder {
   jsonWebKey
@@ -14,7 +14,7 @@ class CogitoStreamEncoder {
         key: streamKey,
         header: streamHeader
       } = this.encoder.cryptoMaterial
-      const publicKey = this.createRsaPublicKey({ jsonWebKey: this.jsonWebKey })
+      const publicKey = createRsaPublicKey({ jsonWebKey: this.jsonWebKey })
       this.encryptedStreamKey = rsaEncrypt({ publicKey, plainText: streamKey })
       this.streamHeader = streamHeader
     }
@@ -22,11 +22,6 @@ class CogitoStreamEncoder {
       encryptedStreamKey: this.encryptedStreamKey,
       streamHeader: this.streamHeader
     }
-  }
-
-  createRsaPublicKey ({ jsonWebKey }) {
-    const { n, e } = extractRsaParameters({ jsonWebKey })
-    return rsaCreatePublicKey({ n, e })
   }
 
   checkArguments (jsonWebKey) {

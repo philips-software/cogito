@@ -1,5 +1,5 @@
-import { rsaCreatePublicKey, rsaEncrypt } from './rsa'
-import { extractRsaParameters } from './jwk'
+import { rsaEncrypt } from './rsa'
+import { createRsaPublicKey } from './jwk2rsa'
 import base64url from 'base64url'
 import {
   Sodium,
@@ -63,7 +63,7 @@ class CogitoEncryption {
   }
 
   async encrypt ({ jsonWebKey: iOSPublicKey, plainText }) {
-    const publicKey = this.createRsaPublicKey({ jsonWebKey: iOSPublicKey })
+    const publicKey = createRsaPublicKey({ jsonWebKey: iOSPublicKey })
     const symmetricKey = await this.createRandomKey()
     const nonce = await random(await nonceSize())
     const cipherText = await encrypt(plainText, nonce, symmetricKey)
@@ -79,11 +79,6 @@ class CogitoEncryption {
       '.' +
       base64url.encode(nonce)
     )
-  }
-
-  createRsaPublicKey ({ jsonWebKey }) {
-    const { n, e } = extractRsaParameters({ jsonWebKey })
-    return rsaCreatePublicKey({ n, e })
   }
 
   async createRandomKey () {
