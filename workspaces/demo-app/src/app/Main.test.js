@@ -5,6 +5,8 @@ import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { inRouter } from 'test-helpers/router'
 import { rootReducer } from 'app-state/rootReducer'
 
+jest.mock('../services/documentation-loader')
+
 const state = rootReducer(undefined, '')
 
 WithStore.mockStore(state)
