@@ -67,17 +67,6 @@ Writing artifacts to ./build/contracts
 ✨  Done in 6.79s.
 ```
 
-The React app needs to "see" the contracts. This happens via symbolic link:
-
-```bash
-» ls -l workspaces/demo-app/src/contracts
-lrwxr-xr-x  1 uname  ugroup  26 Jul 17 16:10 workspaces/demo-app/src/contracts -> ../truffle/build/contracts
-```
-
-If this is not what you see, you may need to recreate the link your self, either
-manually or by running `yarn link-contracts` from `workspaces/demo-app`
-directory.
-
 [truffle]: https://truffleframework.com
 
 ### Build packages
