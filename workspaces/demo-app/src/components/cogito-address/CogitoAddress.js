@@ -2,7 +2,12 @@ import React from 'react'
 import { Segment, Button } from 'semantic-ui-react'
 
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
-import { Centered, ValueWrapper, Spacer, Row } from '@react-frontend-developer/react-layout-helpers'
+import {
+  Centered,
+  ValueWrapper,
+  Spacer,
+  Row
+} from '@react-frontend-developer/react-layout-helpers'
 
 import { TimedStatus } from 'components/utils'
 import { Status } from 'components/styling'
@@ -11,11 +16,11 @@ import { IdentityActions } from './actions'
 import { AppEventsActions } from 'app-events'
 
 class CogitoAddress extends React.PureComponent {
-  onTrigger = (dispatch) => {
+  onTrigger = dispatch => {
     dispatch(AppEventsActions.setDialogOpen())
   }
 
-  onClosed = async (dispatch) => {
+  onClosed = async dispatch => {
     const { channel } = this.props
 
     dispatch(IdentityActions.read({ channel }))
@@ -41,37 +46,58 @@ class CogitoAddress extends React.PureComponent {
           telepathInProgress: state.appEvents.telepathInProgress,
           telepathError: state.appEvents.telepathError,
           dialogOpen: state.appEvents.dialogOpen
-        })}>
-        {
-          ({address, username, channelReady, telepathInProgress, telepathError, dialogOpen}, dispatch) =>
-            <Centered>
-              <p>Your Cogito account address is:</p>
-              <ValueWrapper>{address || 'unknown'}</ValueWrapper>
-              <Spacer margin='20px 0 0 0' />
-              <p>You are known as:</p>
-              <ValueWrapper>{username || 'unknown'}</ValueWrapper>
-              <Row css={{marginTop: '10px'}}>
-                <Button secondary color='black' disabled={telepathInProgress}
-                  onClick={() => this.read(dispatch, channelReady)}>Read your identity...</Button>
-                <CogitoConnector open={dialogOpen}
-                  onTrigger={() => this.onTrigger(dispatch)}
-                  connectUrl={this.props.channel.createConnectUrl('https://cogito.mobi')}
-                  onClosed={() => this.onClosed(dispatch)}
-                  buttonStyling={{secondary: true, color: 'black'}} />
-              </Row>
-              { telepathInProgress &&
+        })}
+      >
+        {(
+          {
+            address,
+            username,
+            channelReady,
+            telepathInProgress,
+            telepathError,
+            dialogOpen
+          },
+          dispatch
+        ) => (
+          <Centered>
+            <p>Your Cogito account address is:</p>
+            <ValueWrapper>{address || 'unknown'}</ValueWrapper>
+            <Spacer margin='20px 0 0 0' />
+            <p>You are known as:</p>
+            <ValueWrapper>{username || 'unknown'}</ValueWrapper>
+            <Row css={{ marginTop: '10px' }}>
+              <Button
+                secondary
+                color='black'
+                disabled={telepathInProgress}
+                onClick={() => this.read(dispatch, channelReady)}
+              >
+                Read your identity...
+              </Button>
+              <CogitoConnector
+                open={dialogOpen}
+                onTrigger={() => this.onTrigger(dispatch)}
+                connectUrl={this.props.channel.createConnectUrl(
+                  'https://cogito.mobi'
+                )}
+                onClosed={() => this.onClosed(dispatch)}
+                buttonStyling={{ secondary: true, color: 'black' }}
+              />
+            </Row>
+            {telepathInProgress &&
               <Spacer margin='10px'>
                 <Row>
                   <Segment>
                     <Status>Reading your Cogito Identity...</Status>
                   </Segment>
                 </Row>
-              </Spacer>
-              }
-              { telepathError &&
+              </Spacer>}
+            {telepathError &&
               <TimedStatus
                 timeout={3000}
-                onTimeout={() => dispatch(AppEventsActions.telepathErrorClear())}>
+                onTimeout={() =>
+                  dispatch(AppEventsActions.telepathErrorClear())}
+              >
                 <Spacer margin='10px'>
                   <Row>
                     <Segment>
@@ -79,10 +105,9 @@ class CogitoAddress extends React.PureComponent {
                     </Segment>
                   </Row>
                 </Spacer>
-              </TimedStatus>
-              }
-            </Centered>
-        }
+              </TimedStatus>}
+          </Centered>
+        )}
       </WithStore>
     )
   }
