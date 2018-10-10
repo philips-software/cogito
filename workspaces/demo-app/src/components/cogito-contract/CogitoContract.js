@@ -9,10 +9,10 @@ import {
   Centered
 } from '@react-frontend-developer/react-layout-helpers'
 import { Status } from 'components/styling'
-import { TimedStatus } from 'components/utils'
 import { Segment, Button } from 'semantic-ui-react'
 import { ContractActions } from './actions'
 import { AppEventsActions } from 'app-events'
+import { TelepathError } from '../telepath/TelepathError'
 
 class CogitoContract extends React.Component {
   state = {
@@ -156,20 +156,10 @@ class CogitoContract extends React.Component {
                   </Segment>
                 </Row>
               </Spacer>}
-            {telepathError &&
-              <TimedStatus
-                timeout={3000}
-                onTimeout={() =>
-                  dispatch(AppEventsActions.telepathErrorClear())}
-              >
-                <Spacer margin='10px'>
-                  <Row>
-                    <Segment>
-                      <Status>{telepathError}</Status>
-                    </Segment>
-                  </Row>
-                </Spacer>
-              </TimedStatus>}
+            <TelepathError
+              error={telepathError}
+              onTimeout={() => dispatch(AppEventsActions.telepathErrorClear())}
+            />
           </Centered>
         )}
       </WithStore>

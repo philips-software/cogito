@@ -9,11 +9,11 @@ import {
   Row
 } from '@react-frontend-developer/react-layout-helpers'
 
-import { TimedStatus } from 'components/utils'
 import { Status } from 'components/styling'
 import { CogitoConnector } from '@cogitojs/cogito-react-ui'
 import { IdentityActions } from './actions'
 import { AppEventsActions } from 'app-events'
+import { TelepathError } from '../telepath/TelepathError'
 
 class CogitoAddress extends React.PureComponent {
   onTrigger = dispatch => {
@@ -92,20 +92,10 @@ class CogitoAddress extends React.PureComponent {
                   </Segment>
                 </Row>
               </Spacer>}
-            {telepathError &&
-              <TimedStatus
-                timeout={3000}
-                onTimeout={() =>
-                  dispatch(AppEventsActions.telepathErrorClear())}
-              >
-                <Spacer margin='10px'>
-                  <Row>
-                    <Segment>
-                      <Status>{telepathError}</Status>
-                    </Segment>
-                  </Row>
-                </Spacer>
-              </TimedStatus>}
+            <TelepathError
+              error={telepathError}
+              onTimeout={() => dispatch(AppEventsActions.telepathErrorClear())}
+            />
           </Centered>
         )}
       </WithStore>
