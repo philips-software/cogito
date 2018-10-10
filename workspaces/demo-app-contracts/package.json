@@ -1,8 +1,11 @@
 {
-  "name": "truffle-for-cogito-demo-app",
-  "version": "1.0.0",
+  "name": "@cogitojs/demo-app-contracts",
+  "version": "0.2.17",
+  "private": true,
   "license": "MIT",
+  "main": "index.js",
   "scripts": {
+    "build": "yarn truffle compile",
     "test": "yarn lint && yarn truffle test --network testing",
     "lint": "yarn solium lint -d contracts"
   },

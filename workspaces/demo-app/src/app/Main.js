@@ -13,11 +13,11 @@ import { StreamEncryption } from 'pages/stream-encryption'
 import { Attestations } from 'pages/attestations'
 import { NoMatch404 } from 'pages/404'
 
-import simpleStorage from 'contracts/SimpleStorage.json'
+import { SimpleStorage } from '@cogitojs/demo-app-contracts'
 
 const contractsInfo = {
   deployedContractsInfo: [
-    { contractName: 'simpleStorage', contractDefinition: simpleStorage }
+    { contractName: 'simpleStorage', contractDefinition: SimpleStorage }
   ],
   rawContractsInfo: []
 }

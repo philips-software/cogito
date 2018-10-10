@@ -21,10 +21,6 @@ before_install:
 install:
   # Install NodeJS dependencies
   - yarn install
-  # Install Truffle dependencies
-  - (cd workspaces/demo-app/truffle && yarn install)
-  # Compile smart contracts
-  - (cd workspaces/demo-app/truffle && yarn truffle compile)
   # Transpile Javascript (including Gatsby homepage)
   - yarn build-for-netlify
   # Install fastlane for iOS builds
