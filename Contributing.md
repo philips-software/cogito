@@ -13,7 +13,6 @@ local environment:
 
 ```bash
 » yarn install
-» (cd workspaces/demo-app/truffle && yarn install && yarn truffle compile)
 » yarn build-for-netlify
 » yarn test
 » (cd workspaces/demo-app && yarn start-all)
@@ -40,34 +39,6 @@ warning "workspace-aggregator-a042c019-5e73-4ff2-8358-fc2678427cd2 > cogito-ios-
 [4/4] 📃  Building fresh packages...
 ✨  Done in 78.05s.
 ```
-
-### truffle
-
-Working with [truffle] can be tricky in a standard repo, and it is even more
-tricky in a monorepo. We want to keep all truffle stuff nicely separated from
-the React app and this is why for now, we have to perform these a bit
-inconvenient steps to get it properly initialized. We first install truffle
-specific dependencies and then we compile the contracts.
-
-```bash
-» (cd workspaces/demo-app/truffle && yarn install && yarn truffle compile)
-yarn install v1.7.0
-[1/4] 🔍  Resolving packages...
-[2/4] 🚚  Fetching packages...
-[3/4] 🔗  Linking dependencies...
-warning "ganache-cli > webpack-cli@2.0.14" has unmet peer dependency "webpack@^4.0.0".
-[4/4] 📃  Building fresh packages...
-✨  Done in 7.42s.
-yarn run v1.7.0
-$ ~/cogito/workspaces/demo-app/truffle/node_modules/.bin/truffle compile
-Compiling ./contracts/Migrations.sol...
-Compiling ./contracts/SimpleStorage.sol...
-Writing artifacts to ./build/contracts
-
-✨  Done in 6.79s.
-```
-
-[truffle]: https://truffleframework.com
 
 ### Build packages
 
