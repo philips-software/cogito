@@ -8,7 +8,9 @@ class AttestationActionsSpec: QuickSpec {
 
         beforeEach {
             var identity = Identity.example
-            identity.attestations = ["twitter:@examplebob", "email:bob@example.com", "phone:+1234567890"]
+            identity.attestations = [
+                "twitter:@examplebob", "email:bob@example.com", "phone:+1234567890"
+            ].map { Attestation(string: $0)! }
             store = RecordingStore()
             store.state = appState(diamond: DiamondState(facets: [identity]))
         }
@@ -24,7 +26,7 @@ class AttestationActionsSpec: QuickSpec {
 
             it("parses the attestation") {
                 let action = store.firstAction(ofType: DiamondActions.StoreAttestation.self)
-                expect(action?.attestation) == "email:bob@example.com"
+                expect(action?.attestation) == Attestation(string: "email:bob@example.com")
             }
         }
 

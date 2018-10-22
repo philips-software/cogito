@@ -22,7 +22,7 @@ struct DiamondActions {
 
     struct StoreAttestation: Action {
         let identity: Identity
-        let attestation: String
+        let attestation: Attestation
     }
 
     struct StoreEncryptionKeyPair: Action {

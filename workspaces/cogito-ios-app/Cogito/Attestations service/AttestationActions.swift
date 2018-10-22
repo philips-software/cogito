@@ -4,7 +4,8 @@ struct AttestationActions {
     // swiftlint:disable:next identifier_name
     static func ReceiveAttestation(url: URL) -> Thunk {
         return Thunk { dispatch, getState in
-            guard let attestation = parseAttestationUrl(url: url) else {
+            guard let attestationString = parseAttestationUrl(url: url),
+                  let attestation = Attestation(string: attestationString) else {
                 return
             }
 
@@ -20,8 +21,11 @@ struct AttestationActions {
     static func GetAttestations(type: String, requestId: JsonRpcId, channel: TelepathChannel) -> Thunk {
         return Thunk { dispatch, getState in
             let attestations = getState()?.diamond.selectedFacet()?.attestations
-            let selectedAttestations = attestations?.filter { $0.hasPrefix(type) } ?? []
-            dispatch(TelepathActions.Send(id: requestId, result: selectedAttestations, on: channel))
+            let selectedAttestations = attestations?.filter { $0.type == type } ?? []
+            dispatch(TelepathActions.Send(
+                id: requestId,
+                result: selectedAttestations.map { $0.description },
+                on: channel))
         }
     }
 }

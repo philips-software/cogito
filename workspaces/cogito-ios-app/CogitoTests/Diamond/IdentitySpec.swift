@@ -22,6 +22,12 @@ class IdentitySpec: QuickSpec {
         it("has no encryption key pairs initially") {
             expect(identity.encryptionKeyPairs.count) == 0
         }
+
+        it("holds attestations") {
+            let sampleAttestation = Attestation(type: "email", value: "test@example.com")
+            identity.attestations = [sampleAttestation]
+            expect(identity.attestations) == [sampleAttestation]
+        }
     }
 }
 

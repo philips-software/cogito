@@ -59,7 +59,7 @@ class DiamondReducerSpec: QuickSpec {
         }
 
         it("stores attestations") {
-            let attestation = "some attestation"
+            let attestation = Attestation(type: "x", value: "some attestation")
             let identity = Identity.example
             let state = DiamondState(facets: [identity])
             let action = DiamondActions.StoreAttestation(identity: identity, attestation: attestation)
