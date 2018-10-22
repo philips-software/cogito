@@ -39,6 +39,12 @@ class FacetDetailsViewController: UITableViewController {
 
         var attestations = facet.attestations
         let pivot = attestations.partition { $0.isOidcToken }
+        let attestationRows: [ViewModel.SectionItem] = attestations[0..<pivot].map {
+            .facetDetailItem(title: $0.type.capitalized + ":", detail: $0.value)
+        }
+        if attestationRows.count > 0 {
+            sections.append(.attestationsSection(title: "Attestations", items: attestationRows))
+        }
 
         for tokenAttestation in attestations[pivot...] {
             if let jwt = try? JWTDecode.decode(jwt: tokenAttestation.value) {
