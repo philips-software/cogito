@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="FUSProjectUsageTrigger">
-    <session id="161667166">
-      <usages-collector id="statistics.appcode.build">
-        <counts>
-          <entry key="buildservice" value="14" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.cidr.testingFrameworks.usages">
-        <counts>
-          <entry key="XCTest" value="9" />
-        </counts>
-      </usages-collector>
-    </session>
+  <component name="CidrRootsConfiguration">
+    <libraryRoots>
+      <file path="$PROJECT_DIR$/Pods" />
+    </libraryRoots>
   </component>
 </project>
