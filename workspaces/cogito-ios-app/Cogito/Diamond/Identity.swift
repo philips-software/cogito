@@ -6,9 +6,6 @@ struct Identity: Codable {
     let description: String
     let address: Address
     let created: Date
-    var openIDTokens: [String] {
-        return attestations.filter { $0.isOidcToken }.map { $0.value }
-    }
     var attestations: [Attestation]
     var encryptionKeyPairs: [Tag]
 
@@ -22,11 +19,9 @@ struct Identity: Codable {
     }
 
     func findOpenIDToken(claim: String, value: String) -> String? {
-        if let index = self.openIDTokens.index(where: { $0.has(claim: claim, value: value) }) {
-            return self.openIDTokens[index]
-        } else {
-            return nil
-        }
+        return self.attestations.first {
+            $0.isOidcToken && $0.value.has(claim: claim, value: value)
+        }?.value
     }
 
     typealias Tag = String
@@ -37,7 +32,7 @@ extension Identity: Equatable {
         return lhs.identifier == rhs.identifier &&
                lhs.description == rhs.description &&
                lhs.address == rhs.address &&
-               lhs.openIDTokens == rhs.openIDTokens &&
+               lhs.attestations == rhs.attestations &&
                lhs.created == rhs.created &&
                lhs.encryptionKeyPairs == rhs.encryptionKeyPairs
     }
