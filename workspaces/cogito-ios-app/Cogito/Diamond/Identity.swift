@@ -6,7 +6,9 @@ struct Identity: Codable {
     let description: String
     let address: Address
     let created: Date
-    var openIDTokens: [String]
+    var openIDTokens: [String] {
+        return attestations.filter { $0.isOidcToken }.map { $0.value }
+    }
     var attestations: [Attestation]
     var encryptionKeyPairs: [Tag]
 
@@ -14,7 +16,6 @@ struct Identity: Codable {
         self.identifier = UUID()
         self.description = description
         self.address = address
-        self.openIDTokens = []
         self.attestations = []
         self.created = Date()
         self.encryptionKeyPairs = []

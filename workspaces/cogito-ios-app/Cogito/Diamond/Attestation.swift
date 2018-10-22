@@ -1,12 +1,22 @@
 //  Copyright © 2018 Koninklijke Philips Nederland N.V. All rights reserved.
 
 struct Attestation: Codable, Equatable {
+    private let oidcTokenType = "oidcToken"
+
     let type: String
     let value: String
+    var isOidcToken: Bool {
+        return type == oidcTokenType
+    }
 
     init(type: String, value: String) {
         self.type = type
         self.value = value
+    }
+
+    init(oidcToken: String) {
+        self.type = oidcTokenType
+        self.value = oidcToken
     }
 
     init?(string: String) {
@@ -16,6 +26,7 @@ struct Attestation: Codable, Equatable {
         self.type = String(split[0])
         self.value = String(split[1])
     }
+
 }
 
 extension Attestation: CustomStringConvertible {

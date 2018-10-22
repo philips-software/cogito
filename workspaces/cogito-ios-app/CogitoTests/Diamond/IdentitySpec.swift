@@ -15,7 +15,7 @@ class IdentitySpec: QuickSpec {
         }
 
         it("can find a token") {
-            identity.openIDTokens = [token]
+            identity.attestations = [Attestation(oidcToken: token)]
             expect(identity.findOpenIDToken(claim: "iss", value: issuer)) == token
         }
 
