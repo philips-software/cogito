@@ -37,11 +37,14 @@ class FacetDetailsViewController: UITableViewController {
             ])
         ]
 
-        for token in facet.openIDTokens {
-            if let jwt = try? JWTDecode.decode(jwt: token) {
+        var attestations = facet.attestations
+        let pivot = attestations.partition { $0.isOidcToken }
+
+        for tokenAttestation in attestations[pivot...] {
+            if let jwt = try? JWTDecode.decode(jwt: tokenAttestation.value) {
                 let items = createItems(for: jwt)
                 if items.count > 0 {
-                    sections.append(.attestationsSection(title: "OpenID Attestation", items: items))
+                    sections.append(.attestationsSection(title: "OpenID Token", items: items))
                 }
             }
         }

@@ -8,7 +8,7 @@ private let formattedIdentityFont = UIFont(name: "Snell Roundhand", size: format
 
 extension Identity {
     func formatted(addSpacePadding: Int = 0) -> NSAttributedString {
-        let hasAttestations = self.openIDTokens.count > 0
+        let hasAttestations = self.attestations.count > 0
         let spacePadding = [Int](0..<addSpacePadding).map { _ in " " }.joined()
         var text = spacePadding + self.description
         if !hasAttestations { text += spacePadding }
