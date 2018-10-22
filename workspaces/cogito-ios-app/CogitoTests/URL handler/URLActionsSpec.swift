@@ -24,7 +24,7 @@ class URLActionsSpec: QuickSpec {
 
         context("when an attestation url is received") {
             beforeEach {
-                let url = URL(string: "https://cogito.example.com/attestations/receive#A=abcdef")!
+                let url = URL(string: "https://cogito.example.com/attestations/receive#A=k%3Av")!
                 store.dispatch(URLActions.HandleIncomingURL(url: url))
             }
 

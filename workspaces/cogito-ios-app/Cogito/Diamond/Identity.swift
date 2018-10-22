@@ -7,7 +7,7 @@ struct Identity: Codable {
     let address: Address
     let created: Date
     var openIDTokens: [String]
-    var attestations: [String]
+    var attestations: [Attestation]
     var encryptionKeyPairs: [Tag]
 
     init(description: String, address: Address) {
