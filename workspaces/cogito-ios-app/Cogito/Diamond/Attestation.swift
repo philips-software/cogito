@@ -20,13 +20,12 @@ struct Attestation: Codable, Equatable {
     }
 
     init?(string: String) {
-        let split = string.split(separator: ":", maxSplits: 2)
-        guard split.count == 2 else { return nil }
+        let split = string.split(separator: ":", maxSplits: 1)
+        guard split.count >= 2 else { return nil }
 
         self.type = String(split[0])
         self.value = String(split[1])
     }
-
 }
 
 extension Attestation: CustomStringConvertible {

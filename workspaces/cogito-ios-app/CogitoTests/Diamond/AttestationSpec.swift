@@ -12,10 +12,22 @@ class AttestationSpec: QuickSpec {
             expect(attestation.value) == "test@example.com"
         }
 
+        it("does not assume any specific syntax of the value part for email attestations") {
+            let attestation = Attestation(type: "email", value: "test@example.com:anything")
+            expect(attestation.type) == "email"
+            expect(attestation.value) == "test@example.com:anything"
+        }
+
         it("can initialize from string") {
             let attestation = Attestation(string: "email:test@example.com")
             expect(attestation?.type) == "email"
             expect(attestation?.value) == "test@example.com"
+        }
+
+        it("can parse extended email attestations from string") {
+            let attestation = Attestation(string: "email:test@example.com:anything")
+            expect(attestation?.type) == "email"
+            expect(attestation?.value) == "test@example.com:anything"
         }
 
         it("cannot initialize from incorrectly formatted string") {
