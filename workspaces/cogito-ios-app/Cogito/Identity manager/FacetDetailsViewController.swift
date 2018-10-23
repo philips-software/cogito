@@ -22,14 +22,22 @@ class FacetDetailsViewController: UITableViewController {
         bindToViewModel()
     }
 
-    func processOpenIdAttestations(_ attestations: [Attestation]) {
-        for tokenAttestation in attestations {
-            if let jwt = try? JWTDecode.decode(jwt: tokenAttestation.value) {
-                let items = createItems(for: jwt)
-                if items.count > 0 {
-                    sections.append(.attestationsSection(title: "OpenID Token", items: items))
-                }
+    func retireveJWTFrom(attestation: Attestation) -> JWT? {
+        return try? JWTDecode.decode(jwt: attestation.value)
+    }
+
+    func processOpenIdAttestation(_ attestation: Attestation) {
+        if let jwt = retireveJWTFrom(attestation: attestation) {
+            let items = createItems(for: jwt)
+            if items.count > 0 {
+                sections.append(.attestationsSection(title: "OpenID Token", items: items))
             }
+        }
+    }
+
+    func processOpenIdAttestations(_ attestations: [Attestation]) {
+        for attestation in attestations {
+            processOpenIdAttestation(attestation)
         }
     }
 
