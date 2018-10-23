@@ -7,7 +7,7 @@ export const ImageAppLink = () => (
     src={manifest}
     as='a'
     size='medium'
-    href='itms-services://?action=download-manifest&url=https://app.cogito.mobi/manifest.plist'
+    href='itms-services://?action=download-manifest&url=https://secure-transfer-app.charterlab.tech/manifest.plist'
     target='_blank'
   />
 )

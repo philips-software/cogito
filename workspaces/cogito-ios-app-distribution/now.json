@@ -2,12 +2,12 @@
   "features": {
     "cloud": "v1"
   },
-  "name": "app-cogito-mobi",
+  "name": "secure-transfer-app",
   "type": "docker",
-  "alias": "app",
+  "alias": "secure-transfer-app",
   "scale": {
     "bru1": {
-      "min": 1,
+      "min": 0,
       "max": 1
     }
   }
