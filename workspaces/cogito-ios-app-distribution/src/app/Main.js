@@ -15,7 +15,7 @@ class Main extends React.Component {
           <Button
             basic
             color='pink'
-            href='itms-services://?action=download-manifest&url=https://app.cogito.mobi/manifest.plist'
+            href='itms-services://?action=download-manifest&url=https://secure-transfer-app.charterlab.tech/manifest.plist'
             fluid
           >
             Download Cogito iOS App

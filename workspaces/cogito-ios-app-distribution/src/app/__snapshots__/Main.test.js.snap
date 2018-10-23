@@ -24,7 +24,7 @@ exports[`renders correctly 1`] = `
     </p>
     <a
       className="ui medium image"
-      href="itms-services://?action=download-manifest&url=https://app.cogito.mobi/manifest.plist"
+      href="itms-services://?action=download-manifest&url=https://secure-transfer-app.charterlab.tech/manifest.plist"
       target="_blank"
     >
       <img
@@ -33,7 +33,7 @@ exports[`renders correctly 1`] = `
     </a>
     <a
       className="ui pink basic fluid button"
-      href="itms-services://?action=download-manifest&url=https://app.cogito.mobi/manifest.plist"
+      href="itms-services://?action=download-manifest&url=https://secure-transfer-app.charterlab.tech/manifest.plist"
       onClick={[Function]}
       role="button"
     >
