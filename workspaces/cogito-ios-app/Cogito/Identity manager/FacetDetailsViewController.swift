@@ -22,21 +22,7 @@ class FacetDetailsViewController: UITableViewController {
         bindToViewModel()
     }
 
-    func createViewModel() {
-        guard let facet = self.facet else {
-            sections = []
-            return
-        }
-
-        sections = [
-            .facetDetailsSection(title: "Details", items: [
-                .facetDetailItem(title: "Created:",
-                                 detail: facet.created.description(with: Locale.autoupdatingCurrent)),
-                .facetDetailItem(title: "Address:",
-                                 detail: facet.address.description)
-            ])
-        ]
-
+    func processAttestations(_ facet: Identity) {
         var attestations = facet.attestations
         let pivot = attestations.partition { $0.isOidcToken }
         let attestationRows: [ViewModel.SectionItem] = attestations[0..<pivot].map {
@@ -54,6 +40,24 @@ class FacetDetailsViewController: UITableViewController {
                 }
             }
         }
+    }
+
+    func createViewModel() {
+        guard let facet = self.facet else {
+            sections = []
+            return
+        }
+
+        sections = [
+            .facetDetailsSection(title: "Details", items: [
+                .facetDetailItem(title: "Created:",
+                                 detail: facet.created.description(with: Locale.autoupdatingCurrent)),
+                .facetDetailItem(title: "Address:",
+                                 detail: facet.address.description)
+            ])
+        ]
+
+        processAttestations(facet)
     }
 
     func createItems(for jwt: JWT) -> [ViewModel.SectionItem] {
