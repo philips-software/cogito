@@ -27,13 +27,33 @@ const ShowAttestation = () => (
   </Centered>
 )
 
+const AttestationsWrapper = glamorous.div({
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  alignItems: 'center'
+})
+
+const Attestations = ({attestations}) => {
+  if (attestations.length === 0) {
+    return (
+      <ValueWrapper>No attestations</ValueWrapper>
+    )
+  } else {
+    return attestations.map((attestation, i) => (
+      <AttestationsWrapper key={i}>
+        <ValueWrapper>{attestation}</ValueWrapper>
+      </AttestationsWrapper>
+    ))
+  }
+}
+
 const RetrieveAttestation = ({ channel }) => (
   <WithStore selector={state => ({ attestations: state.attestations.retrieved })}>
     {
       ({ attestations }, dispatch) =>
         <Centered>
-          Your attestation is:
-          <ValueWrapper>{attestations[0] || 'unknown'}</ValueWrapper>
+          Your attestations:
+          <Attestations attestations={attestations} />
           <Button
             secondary color='black'
             onClick={() => dispatch(AttestationsActions.retrieve({
