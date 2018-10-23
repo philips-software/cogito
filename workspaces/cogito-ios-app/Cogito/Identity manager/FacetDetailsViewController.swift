@@ -22,17 +22,8 @@ class FacetDetailsViewController: UITableViewController {
         bindToViewModel()
     }
 
-    func processAttestations(_ facet: Identity) {
-        var attestations = facet.attestations
-        let pivot = attestations.partition { $0.isOidcToken }
-        let attestationRows: [ViewModel.SectionItem] = attestations[0..<pivot].map {
-            .facetDetailItem(title: $0.type.capitalized + ":", detail: $0.value)
-        }
-        if attestationRows.count > 0 {
-            sections.append(.attestationsSection(title: "Attestations", items: attestationRows))
-        }
-
-        for tokenAttestation in attestations[pivot...] {
+    func processOpenIdAttestations(_ attestations: [Attestation]) {
+        for tokenAttestation in attestations {
             if let jwt = try? JWTDecode.decode(jwt: tokenAttestation.value) {
                 let items = createItems(for: jwt)
                 if items.count > 0 {
@@ -40,6 +31,31 @@ class FacetDetailsViewController: UITableViewController {
                 }
             }
         }
+    }
+
+    func processRegularAttestations(_ attestations: [Attestation]) {
+        let attestationRows: [ViewModel.SectionItem] = attestations.map {
+            .facetDetailItem(title: $0.type.capitalized + ":", detail: $0.value)
+        }
+        if attestationRows.count > 0 {
+            sections.append(.attestationsSection(title: "Attestations", items: attestationRows))
+        }
+    }
+
+    func splitAttestationsIn(facet: Identity)
+        -> (regularAttestations: [Attestation], openIdAttestations: [Attestation]) {
+        var attestations = facet.attestations
+        let pivot = attestations.partition { $0.isOidcToken }
+        return (
+            regularAttestations: Array(attestations[0..<pivot]),
+            openIdAttestations: Array(attestations[pivot...])
+        )
+    }
+
+    func processAttestations(_ facet: Identity) {
+        let attestations = splitAttestationsIn(facet: facet)
+        processRegularAttestations(attestations.regularAttestations)
+        processOpenIdAttestations(attestations.openIdAttestations)
     }
 
     func createViewModel() {
