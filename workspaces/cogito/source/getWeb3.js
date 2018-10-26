@@ -5,11 +5,11 @@ const getProviderURL = () => {
     return process.env.REACT_APP_WEB3_PROVIDER_URL_PRODUCTION
   }
 
-  return process.env.REACT_APP_WEB3_PROVIDER_URL || 'http://localhost:8545'
+  return process.env.REACT_APP_WEB3_PROVIDER_URL || 'ws://localhost:8545'
 }
 
 const useLocalWeb3Provider = () => {
-  const provider = new Web3.providers.HttpProvider(getProviderURL())
+  const provider = new Web3.providers.WebsocketProvider(getProviderURL())
   return new Web3(provider)
 }
 
