@@ -20,7 +20,7 @@ class Builder {
   commonjs () {
     console.log('Building CommonJS modules ...')
 
-    this.exec('babel source -d lib --delete-dir-on-start', {
+    this.exec('babel source -d lib --delete-dir-on-start --copy-files', {
       BABEL_ENV: 'commonjs'
     })
   }
@@ -28,7 +28,7 @@ class Builder {
   es () {
     console.log('\nBuilding ES modules ...')
 
-    this.exec('babel source -d es --delete-dir-on-start', {
+    this.exec('babel source -d es --delete-dir-on-start --copy-files', {
       BABEL_ENV: 'es'
     })
   }

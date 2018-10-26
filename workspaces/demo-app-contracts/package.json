@@ -3,17 +3,25 @@
   "version": "0.2.17",
   "private": true,
   "license": "MIT",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "lib",
+    "es",
+    "umd",
+    "source"
+  ],
   "scripts": {
-    "build": "yarn truffle compile",
+    "build": "yarn compile && node ./tools/build.js",
+    "compile": "yarn truffle compile",
     "test": "yarn lint && yarn truffle test --network testing",
     "lint": "yarn solium lint -d contracts"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "dirty-chai": "^2.0.1",
-    "ganache-cli": "^6.0.3",
+    "ganache-cli": "^6.1.8",
     "solium": "^1.1.7",
-    "truffle": "^4.0.6"
+    "truffle": "^4.1.11"
   }
 }
