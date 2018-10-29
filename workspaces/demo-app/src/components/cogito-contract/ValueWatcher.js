@@ -30,7 +30,7 @@ class ValueWatcher {
       if (!error) {
         const value = result.args.value.toNumber()
 
-        this.onValueChanged(value)
+        this.onValueChanged && this.onValueChanged(value)
       }
     })
   }
