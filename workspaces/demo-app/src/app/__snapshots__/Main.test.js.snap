@@ -1,14 +1,98 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+.css-0,
+[data-css-0] {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-areas: "header         header" "demo           documentation" "demoNavigation documentation" "footer         footer";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content 1fr max-content max-content;
+  box-sizing: border-box;
+  height: 100vh;
+  -ms-grid-gap: 5px;
+  -ms-grid-template-areas: "header         header" "demo           documentation" "demoNavigation documentation" "footer         footer";
+  -ms-grid-template-columns: 1fr 1fr;
+  -ms-grid-template-rows: max-content 1fr max-content max-content;
+}
+
+.css-1,
+[data-css-1] {
+  grid-area: header;
+  padding: 15px;
+  -ms-grid-area: header;
+}
+
+.css-2,
+[data-css-2] {
+  width: 100%;
+  height: 100px;
+  background-color: black;
+  padding: 10px;
+}
+
+.css-3,
+[data-css-3] {
+  grid-area: demo;
+  padding: 15px;
+  -ms-grid-area: demo;
+}
+
+.css-4,
+[data-css-4] {
+  grid-area: demoNavigation;
+  padding: 15px;
+  -ms-grid-area: demoNavigation;
+}
+
+.css-5,
+[data-css-5] {
+  grid-area: documentation;
+  padding: 15px;
+  border-left: 1px solid black;
+  overflow: auto;
+  -ms-grid-area: documentation;
+}
+
+.css-6,
+[data-css-6] {
+  grid-area: footer;
+  padding: 15px;
+  -ms-grid-area: footer;
+}
+
+.css-7,
+[data-css-7] {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  -webkit-flex-flow: column nowrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+}
+
+.css-8,
+[data-css-8] {
+  color: #ff80c3;
+  font-size: 0.8rem;
+}
+
 <div
-  className="css-47avb8"
+  className="css-0"
 >
   <div
-    className="css-15ysuyo"
+    className="css-1"
   >
     <div
-      className="css-zg3qmw"
+      className="css-2"
     >
       <div
         className="ui huge header"
@@ -34,7 +118,7 @@ exports[`renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="css-6d40pk"
+    className="css-3"
   >
     <div
       className="css-1crpgfv"
@@ -103,7 +187,7 @@ exports[`renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="css-syb5m9"
+    className="css-4"
   >
     <div
       className="css-1crpgfv"
@@ -199,18 +283,18 @@ exports[`renders correctly 1`] = `
     </div>
   </div>
   <div
-    className="css-pef910"
+    className="css-5"
   >
     <div />
   </div>
   <div
-    className="css-v8hqy9"
+    className="css-6"
   >
     <div
-      className="css-y1c2qe"
+      className="css-7"
     >
       <p
-        className="css-15pdwa0"
+        className="css-8"
       >
         © 2018 by Cogito
       </p>
