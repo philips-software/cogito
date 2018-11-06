@@ -4,10 +4,11 @@ const prettyBytes = require('pretty-bytes')
 const gzipSize = require('gzip-size')
 
 class Builder {
-  constructor ({umdFileName, useWebpack, skipEsModules}) {
+  constructor ({umdFileName, useWebpack, skipEsModules, copyFiles}) {
     this.umdFileName = umdFileName
     this.useWebpack = useWebpack
     this.skipEsModules = skipEsModules
+    this.copyFiles = copyFiles ? '--copy-files' : ''
   }
 
   exec (command, extraEnv) {
@@ -20,7 +21,7 @@ class Builder {
   commonjs () {
     console.log('Building CommonJS modules ...')
 
-    this.exec('babel source -d lib --delete-dir-on-start --copy-files', {
+    this.exec(`babel source -d lib --delete-dir-on-start ${this.copyFiles}`, {
       BABEL_ENV: 'commonjs'
     })
   }
@@ -28,7 +29,7 @@ class Builder {
   es () {
     console.log('\nBuilding ES modules ...')
 
-    this.exec('babel source -d es --delete-dir-on-start --copy-files', {
+    this.exec(`babel source -d es --delete-dir-on-start ${this.copyFiles}`, {
       BABEL_ENV: 'es'
     })
   }
