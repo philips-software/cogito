@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C5C92D72191EEEE0073B981 /* EthersSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C92D62191EEEE0073B981 /* EthersSpec.swift */; };
+		5C5C92D92191F60A0073B981 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C92D82191F60A0073B981 /* Wallet.swift */; };
 		5CC0B2B02191EC8100D84CD8 /* Ethers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC0B2A62191EC8100D84CD8 /* Ethers.framework */; };
 		5CC0B2B72191EC8100D84CD8 /* Ethers.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC0B2A92191EC8100D84CD8 /* Ethers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		652114D3A02C37A7E6563836 /* libPods-EthersTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9285DAAA505228ADEC0F4C /* libPods-EthersTests.a */; };
@@ -25,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		1285463736333712AEE3A72B /* Pods-EthersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EthersTests.release.xcconfig"; path = "Target Support Files/Pods-EthersTests/Pods-EthersTests.release.xcconfig"; sourceTree = "<group>"; };
+		5C5C92D62191EEEE0073B981 /* EthersSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthersSpec.swift; sourceTree = "<group>"; };
+		5C5C92D82191F60A0073B981 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		5CC0B2A62191EC8100D84CD8 /* Ethers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ethers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC0B2A92191EC8100D84CD8 /* Ethers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ethers.h; sourceTree = "<group>"; };
 		5CC0B2AA2191EC8100D84CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 			children = (
 				5CC0B2A92191EC8100D84CD8 /* Ethers.h */,
 				5CC0B2AA2191EC8100D84CD8 /* Info.plist */,
+				5C5C92D82191F60A0073B981 /* Wallet.swift */,
 			);
 			path = Ethers;
 			sourceTree = "<group>";
@@ -93,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				5CC0B2B62191EC8100D84CD8 /* Info.plist */,
+				5C5C92D62191EEEE0073B981 /* EthersSpec.swift */,
 			);
 			path = EthersTests;
 			sourceTree = "<group>";
@@ -181,6 +187,7 @@
 				TargetAttributes = {
 					5CC0B2A52191EC8100D84CD8 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					5CC0B2AE2191EC8100D84CD8 = {
 						CreatedOnToolsVersion = 10.1;
@@ -274,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C5C92D92191F60A0073B981 /* Wallet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C5C92D72191EEEE0073B981 /* EthersSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +430,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 82D14E5BDDB47990464A55EA /* Pods-Ethers.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -437,6 +447,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cogito.Ethers;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -446,6 +457,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8A577C18D2A8A461D2DA2B34 /* Pods-Ethers.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -471,6 +483,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B5B8C8267D073FEFE6B59FDC /* Pods-EthersTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = EthersTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -489,6 +502,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1285463736333712AEE3A72B /* Pods-EthersTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = EthersTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
