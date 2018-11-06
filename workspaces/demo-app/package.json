@@ -42,9 +42,12 @@
     "@react-frontend-developer/jsdom-worker": "^0.1.1",
     "deep-freeze-es6": "^1.0.1",
     "jest-canvas-mock": "^1.0.2",
+    "jest-dom": "^2.1.1",
+    "jest-glamor-react": "^4.3.1",
     "node-fetch": "^2.2.0",
     "react-scripts": "^2.0.0",
-    "react-test-renderer": "^16.2.0"
+    "react-test-renderer": "^16.2.0",
+    "react-testing-library": "^5.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -57,11 +60,6 @@
     "eject": "react-scripts eject",
     "lint": "yarn standard",
     "lint-fix": "yarn standard --fix --verbose"
-  },
-  "jest": {
-    "setupFiles": [
-      "jest-canvas-mock"
-    ]
   },
   "browserslist": {
     "development": [
