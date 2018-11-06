@@ -1,0 +1,6 @@
+module Pods_EthersTests {
+  umbrella header "Pods-EthersTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
