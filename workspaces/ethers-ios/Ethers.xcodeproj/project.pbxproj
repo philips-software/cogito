@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5CC0B2B02191EC8100D84CD8 /* Ethers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC0B2A62191EC8100D84CD8 /* Ethers.framework */; };
-		5CC0B2B52191EC8100D84CD8 /* EthersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC0B2B42191EC8100D84CD8 /* EthersTests.swift */; };
 		5CC0B2B72191EC8100D84CD8 /* Ethers.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC0B2A92191EC8100D84CD8 /* Ethers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		652114D3A02C37A7E6563836 /* libPods-EthersTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9285DAAA505228ADEC0F4C /* libPods-EthersTests.a */; };
 		CAEE88D53C1A747BE5294C83 /* libPods-Ethers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD162BE0AA03C04496978AFB /* libPods-Ethers.a */; };
@@ -30,7 +29,6 @@
 		5CC0B2A92191EC8100D84CD8 /* Ethers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ethers.h; sourceTree = "<group>"; };
 		5CC0B2AA2191EC8100D84CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CC0B2AF2191EC8100D84CD8 /* EthersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EthersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5CC0B2B42191EC8100D84CD8 /* EthersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthersTests.swift; sourceTree = "<group>"; };
 		5CC0B2B62191EC8100D84CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CC0B2C02191ED9F00D84CD8 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		82D14E5BDDB47990464A55EA /* Pods-Ethers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ethers.debug.xcconfig"; path = "Target Support Files/Pods-Ethers/Pods-Ethers.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 		5CC0B2B32191EC8100D84CD8 /* EthersTests */ = {
 			isa = PBXGroup;
 			children = (
-				5CC0B2B42191EC8100D84CD8 /* EthersTests.swift */,
 				5CC0B2B62191EC8100D84CD8 /* Info.plist */,
 			);
 			path = EthersTests;
@@ -284,7 +281,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CC0B2B52191EC8100D84CD8 /* EthersTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
