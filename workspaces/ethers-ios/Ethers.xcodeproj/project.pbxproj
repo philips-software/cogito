@@ -10,6 +10,8 @@
 		5CC0B2B02191EC8100D84CD8 /* Ethers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC0B2A62191EC8100D84CD8 /* Ethers.framework */; };
 		5CC0B2B52191EC8100D84CD8 /* EthersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC0B2B42191EC8100D84CD8 /* EthersTests.swift */; };
 		5CC0B2B72191EC8100D84CD8 /* Ethers.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC0B2A92191EC8100D84CD8 /* Ethers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		652114D3A02C37A7E6563836 /* libPods-EthersTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9285DAAA505228ADEC0F4C /* libPods-EthersTests.a */; };
+		CAEE88D53C1A747BE5294C83 /* libPods-Ethers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD162BE0AA03C04496978AFB /* libPods-Ethers.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +25,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1285463736333712AEE3A72B /* Pods-EthersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EthersTests.release.xcconfig"; path = "Target Support Files/Pods-EthersTests/Pods-EthersTests.release.xcconfig"; sourceTree = "<group>"; };
 		5CC0B2A62191EC8100D84CD8 /* Ethers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ethers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC0B2A92191EC8100D84CD8 /* Ethers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ethers.h; sourceTree = "<group>"; };
 		5CC0B2AA2191EC8100D84CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CC0B2AF2191EC8100D84CD8 /* EthersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EthersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC0B2B42191EC8100D84CD8 /* EthersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthersTests.swift; sourceTree = "<group>"; };
 		5CC0B2B62191EC8100D84CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CC0B2C02191ED9F00D84CD8 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		82D14E5BDDB47990464A55EA /* Pods-Ethers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ethers.debug.xcconfig"; path = "Target Support Files/Pods-Ethers/Pods-Ethers.debug.xcconfig"; sourceTree = "<group>"; };
+		8A577C18D2A8A461D2DA2B34 /* Pods-Ethers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ethers.release.xcconfig"; path = "Target Support Files/Pods-Ethers/Pods-Ethers.release.xcconfig"; sourceTree = "<group>"; };
+		AE9285DAAA505228ADEC0F4C /* libPods-EthersTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EthersTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5B8C8267D073FEFE6B59FDC /* Pods-EthersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EthersTests.debug.xcconfig"; path = "Target Support Files/Pods-EthersTests/Pods-EthersTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CD162BE0AA03C04496978AFB /* libPods-Ethers.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Ethers.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAEE88D53C1A747BE5294C83 /* libPods-Ethers.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +54,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CC0B2B02191EC8100D84CD8 /* Ethers.framework in Frameworks */,
+				652114D3A02C37A7E6563836 /* libPods-EthersTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +67,9 @@
 				5CC0B2A82191EC8100D84CD8 /* Ethers */,
 				5CC0B2B32191EC8100D84CD8 /* EthersTests */,
 				5CC0B2A72191EC8100D84CD8 /* Products */,
+				5CC0B2C02191ED9F00D84CD8 /* Podfile */,
+				874BEBAB4F186DD2971CCBEB /* Pods */,
+				BB75B99D301AF769CDA9D048 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +100,26 @@
 			path = EthersTests;
 			sourceTree = "<group>";
 		};
+		874BEBAB4F186DD2971CCBEB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				82D14E5BDDB47990464A55EA /* Pods-Ethers.debug.xcconfig */,
+				8A577C18D2A8A461D2DA2B34 /* Pods-Ethers.release.xcconfig */,
+				B5B8C8267D073FEFE6B59FDC /* Pods-EthersTests.debug.xcconfig */,
+				1285463736333712AEE3A72B /* Pods-EthersTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		BB75B99D301AF769CDA9D048 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD162BE0AA03C04496978AFB /* libPods-Ethers.a */,
+				AE9285DAAA505228ADEC0F4C /* libPods-EthersTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -104,6 +138,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5CC0B2BA2191EC8100D84CD8 /* Build configuration list for PBXNativeTarget "Ethers" */;
 			buildPhases = (
+				0002A7115AE42068F4D932C4 /* [CP] Check Pods Manifest.lock */,
 				5CC0B2A12191EC8100D84CD8 /* Headers */,
 				5CC0B2A22191EC8100D84CD8 /* Sources */,
 				5CC0B2A32191EC8100D84CD8 /* Frameworks */,
@@ -122,6 +157,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5CC0B2BD2191EC8100D84CD8 /* Build configuration list for PBXNativeTarget "EthersTests" */;
 			buildPhases = (
+				C8F932AE3D4637426A90E3E7 /* [CP] Check Pods Manifest.lock */,
 				5CC0B2AB2191EC8100D84CD8 /* Sources */,
 				5CC0B2AC2191EC8100D84CD8 /* Frameworks */,
 				5CC0B2AD2191EC8100D84CD8 /* Resources */,
@@ -188,6 +224,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0002A7115AE42068F4D932C4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Ethers-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C8F932AE3D4637426A90E3E7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EthersTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5CC0B2A22191EC8100D84CD8 /* Sources */ = {
@@ -340,6 +423,7 @@
 		};
 		5CC0B2BB2191EC8100D84CD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82D14E5BDDB47990464A55EA /* Pods-Ethers.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -364,6 +448,7 @@
 		};
 		5CC0B2BC2191EC8100D84CD8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A577C18D2A8A461D2DA2B34 /* Pods-Ethers.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -388,6 +473,7 @@
 		};
 		5CC0B2BE2191EC8100D84CD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5B8C8267D073FEFE6B59FDC /* Pods-EthersTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = EthersTests/Info.plist;
@@ -405,6 +491,7 @@
 		};
 		5CC0B2BF2191EC8100D84CD8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1285463736333712AEE3A72B /* Pods-EthersTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = EthersTests/Info.plist;
