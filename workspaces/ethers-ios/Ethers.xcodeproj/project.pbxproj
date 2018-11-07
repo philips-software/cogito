@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5C5C92D72191EEEE0073B981 /* EthersSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C92D62191EEEE0073B981 /* EthersSpec.swift */; };
 		5C5C92D92191F60A0073B981 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C92D82191F60A0073B981 /* Wallet.swift */; };
+		5C5C92DB2192E3450073B981 /* Javascript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C92DA2192E3450073B981 /* Javascript.swift */; };
+		5C5C92DD2192E7CC0073B981 /* JavascriptEthers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C92DC2192E7CC0073B981 /* JavascriptEthers.swift */; };
+		5C5C92E32192F14B0073B981 /* ethers.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 5C5C92E22192F14B0073B981 /* ethers.min.js */; };
 		5CC0B2B02191EC8100D84CD8 /* Ethers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC0B2A62191EC8100D84CD8 /* Ethers.framework */; };
 		5CC0B2B72191EC8100D84CD8 /* Ethers.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC0B2A92191EC8100D84CD8 /* Ethers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		652114D3A02C37A7E6563836 /* libPods-EthersTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9285DAAA505228ADEC0F4C /* libPods-EthersTests.a */; };
@@ -29,6 +32,9 @@
 		1285463736333712AEE3A72B /* Pods-EthersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EthersTests.release.xcconfig"; path = "Target Support Files/Pods-EthersTests/Pods-EthersTests.release.xcconfig"; sourceTree = "<group>"; };
 		5C5C92D62191EEEE0073B981 /* EthersSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthersSpec.swift; sourceTree = "<group>"; };
 		5C5C92D82191F60A0073B981 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
+		5C5C92DA2192E3450073B981 /* Javascript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Javascript.swift; sourceTree = "<group>"; };
+		5C5C92DC2192E7CC0073B981 /* JavascriptEthers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptEthers.swift; sourceTree = "<group>"; };
+		5C5C92E22192F14B0073B981 /* ethers.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = ethers.min.js; path = ../../../node_modules/ethers/dist/ethers.min.js; sourceTree = "<group>"; };
 		5CC0B2A62191EC8100D84CD8 /* Ethers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ethers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC0B2A92191EC8100D84CD8 /* Ethers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ethers.h; sourceTree = "<group>"; };
 		5CC0B2AA2191EC8100D84CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,6 +69,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C5C92E12192F1210073B981 /* ethers */ = {
+			isa = PBXGroup;
+			children = (
+				5C5C92E22192F14B0073B981 /* ethers.min.js */,
+			);
+			name = ethers;
+			sourceTree = "<group>";
+		};
 		5CC0B29C2191EC8100D84CD8 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +104,9 @@
 				5CC0B2A92191EC8100D84CD8 /* Ethers.h */,
 				5CC0B2AA2191EC8100D84CD8 /* Info.plist */,
 				5C5C92D82191F60A0073B981 /* Wallet.swift */,
+				5C5C92DA2192E3450073B981 /* Javascript.swift */,
+				5C5C92DC2192E7CC0073B981 /* JavascriptEthers.swift */,
+				5C5C92E12192F1210073B981 /* ethers */,
 			);
 			path = Ethers;
 			sourceTree = "<group>";
@@ -217,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C5C92E32192F14B0073B981 /* ethers.min.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +299,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C5C92DD2192E7CC0073B981 /* JavascriptEthers.swift in Sources */,
+				5C5C92DB2192E3450073B981 /* Javascript.swift in Sources */,
 				5C5C92D92191F60A0073B981 /* Wallet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
