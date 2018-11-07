@@ -19,10 +19,10 @@ before_install:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 install:
-  # Install NodeJS dependencies
-  - yarn install
-  # Transpile Javascript (including Gatsby homepage)
-  - yarn build-for-netlify
+  # Install NodeJS dependencies, compile contracts and build packages
+  - yarn setup:dev
+  # Build Gatsby homepage)
+  - yarn build:homepage
   # Install fastlane for iOS builds
   - (cd workspaces/cogito-ios-app && bundle install)
   - (cd workspaces/telepath-ios && bundle install)
