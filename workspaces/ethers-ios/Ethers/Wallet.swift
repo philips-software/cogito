@@ -19,7 +19,7 @@ public class Wallet {
     }
 
     public func sign(_ transaction: Transaction, onComplete: @escaping SignCallback) {
-        let promise = javascriptValue.invokeMethod("sign", withArguments: [transaction])!
+        let promise = javascriptValue.invokeMethod("sign", withArguments: [transaction.asDictionary])!
         let callback: @convention(block) (JSValue?) -> Void = { signature in
             onComplete(signature!.toString())
         }
