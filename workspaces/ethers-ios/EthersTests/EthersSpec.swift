@@ -21,5 +21,25 @@ class EthersSpec: QuickSpec {
                 }
             }
         }
+
+        it("produces the same signature for the same transaction") {
+            let wallet = Wallet.createRandom()
+            let transaction = Transaction()
+            var signedTransaction1: SignedTransaction?
+            var signedTransaction2: SignedTransaction?
+            waitUntil { done in
+                wallet.sign(transaction) { signedTransaction in
+                    signedTransaction1 = signedTransaction
+                    done()
+                }
+            }
+            waitUntil { done in
+                wallet.sign(transaction) { signedTransaction in
+                    signedTransaction2 = signedTransaction
+                    done()
+                }
+            }
+            expect(signedTransaction1) == signedTransaction2
+        }
     }
 }
