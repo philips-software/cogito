@@ -1,4 +1,4 @@
-import createServer from './lib/server'
+import createServer from './source/server'
 
 const server = createServer()
 
