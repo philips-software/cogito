@@ -19,32 +19,19 @@ class EthersSpec: QuickSpec {
                 wallet = Wallet.createRandom()
             }
 
+            func sign(_ transaction: Transaction) -> SignedTransaction {
+                var result: SignedTransaction!
+                waitUntil { done in wallet.sign(transaction) { result = $0; done() } }
+                return result
+            }
+
             it("produces a signed transaction") {
                 let signatureLength = 65 * 2
-                waitUntil { done in
-                    wallet.sign(transaction) { signedTransaction in
-                        expect(signedTransaction.count) > "0x".count + signatureLength
-                        done()
-                    }
-                }
+                expect(sign(transaction).count) > "0x".count + signatureLength
             }
 
             it("is deterministic") {
-                var signedTransaction1: SignedTransaction?
-                var signedTransaction2: SignedTransaction?
-                waitUntil { done in
-                    wallet.sign(transaction) { signedTransaction in
-                        signedTransaction1 = signedTransaction
-                        done()
-                    }
-                }
-                waitUntil { done in
-                    wallet.sign(transaction) { signedTransaction in
-                        signedTransaction2 = signedTransaction
-                        done()
-                    }
-                }
-                expect(signedTransaction1) == signedTransaction2
+                expect(sign(transaction)) == sign(transaction)
             }
         }
     }
