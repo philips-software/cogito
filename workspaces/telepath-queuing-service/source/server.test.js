@@ -1,5 +1,5 @@
 import request from 'supertest'
-import createServer, { maximumMessageLength } from './server'
+import createServer, { maximumMessageLength, maximumQueueSize } from './server'
 import MockDate from 'mockdate'
 
 jest.useFakeTimers()
@@ -43,8 +43,8 @@ describe('Server', () => {
     await request(server).get('/non-existent').expect(204)
   })
 
-  it('allows a maximum of 10 messages in a queue', async () => {
-    for (var i = 0; i < 10; i++) {
+  it(`allows a maximum of ${maximumQueueSize} messages in a queue`, async () => {
+    for (var i = 0; i < maximumQueueSize; i++) {
       await request(server).post(`/${queueId}`).send('message').expect(200)
     }
     await request(server).post(`/${queueId}`).send('message').expect(429)
