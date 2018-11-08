@@ -10,78 +10,80 @@ class EthersSpec: QuickSpec {
             expect(wallet1.address) != wallet2.address
         }
 
-        context("signing transactions") {
-            let transaction = Transaction()
-
+        context("wallet") {
             var wallet: Wallet!
 
             beforeEach {
                 wallet = Wallet.createRandom()
             }
 
-            func sign(_ transaction: Transaction) throws -> SignedTransaction {
-                var result: SignedTransaction!
-                var error: WalletError!
-                waitUntil { done in wallet.sign(transaction) { error = $0; result = $1; done() } }
-                if (error != nil) { throw error }
-                return result
-            }
+            context("signing transactions") {
+                let transaction = Transaction()
 
-            it("produces a signed transaction") {
-                let signatureLength = 65 * 2
-                try! expect(sign(transaction).count) > "0x".count + signatureLength
-            }
+                func sign(_ transaction: Transaction) throws -> SignedTransaction {
+                    var result: SignedTransaction!
+                    var error: WalletError!
+                    waitUntil { done in wallet.sign(transaction) { error = $0; result = $1; done() } }
+                    if (error != nil) { throw error }
+                    return result
+                }
 
-            it("throws when signing fails") {
-                var incorrectTransaction = transaction
-                incorrectTransaction.to = "invalid address"
-                expect { try sign(incorrectTransaction) }.to(throwError())
-            }
+                it("produces a signed transaction") {
+                    let signatureLength = 65 * 2
+                    try! expect(sign(transaction).count) > "0x".count + signatureLength
+                }
 
-            it("is deterministic") {
-                try! expect(sign(transaction)) == sign(transaction)
-            }
+                it("throws when signing fails") {
+                    var incorrectTransaction = transaction
+                    incorrectTransaction.to = "invalid address"
+                    expect { try sign(incorrectTransaction) }.to(throwError())
+                }
 
-            it("incorporates the 'to' address") {
-                var differentTransaction = transaction
-                differentTransaction.to = "0xd115bffabbdd893a6f7cea402e7338643ced44a6"
-                try! expect(sign(transaction)) != sign(differentTransaction)
-            }
+                it("is deterministic") {
+                    try! expect(sign(transaction)) == sign(transaction)
+                }
 
-            it("incorporates the gas limit") {
-                var differentTransaction = transaction
-                differentTransaction.gasLimit = "0x42"
-                try! expect(sign(transaction)) != sign(differentTransaction)
-            }
+                it("incorporates the 'to' address") {
+                    var differentTransaction = transaction
+                    differentTransaction.to = "0xd115bffabbdd893a6f7cea402e7338643ced44a6"
+                    try! expect(sign(transaction)) != sign(differentTransaction)
+                }
 
-            it("incorporates the gas price") {
-                var differentTransaction = transaction
-                differentTransaction.gasPrice = "0x42"
-                try! expect(sign(transaction)) != sign(differentTransaction)
-            }
+                it("incorporates the gas limit") {
+                    var differentTransaction = transaction
+                    differentTransaction.gasLimit = "0x42"
+                    try! expect(sign(transaction)) != sign(differentTransaction)
+                }
 
-            it("incorporates the nonce") {
-                var differentTransaction = transaction
-                differentTransaction.nonce = "0x42"
-                try! expect(sign(transaction)) != sign(differentTransaction)
-            }
+                it("incorporates the gas price") {
+                    var differentTransaction = transaction
+                    differentTransaction.gasPrice = "0x42"
+                    try! expect(sign(transaction)) != sign(differentTransaction)
+                }
 
-            it("incorporates the data") {
-                var differentTransaction = transaction
-                differentTransaction.data = Data(bytes: [1, 2, 3])
-                try! expect(sign(transaction)) != sign(differentTransaction)
-            }
+                it("incorporates the nonce") {
+                    var differentTransaction = transaction
+                    differentTransaction.nonce = "0x42"
+                    try! expect(sign(transaction)) != sign(differentTransaction)
+                }
 
-            it("incorporates the value") {
-                var differentTransaction = transaction
-                differentTransaction.value = "0x42"
-                try! expect(sign(transaction)) != sign(differentTransaction)
-            }
+                it("incorporates the data") {
+                    var differentTransaction = transaction
+                    differentTransaction.data = Data(bytes: [1, 2, 3])
+                    try! expect(sign(transaction)) != sign(differentTransaction)
+                }
 
-            it("incorporates the chain id") {
-                var differentTransaction = transaction
-                differentTransaction.chainId = "0x42"
-                try! expect(sign(transaction)) != sign(differentTransaction)
+                it("incorporates the value") {
+                    var differentTransaction = transaction
+                    differentTransaction.value = "0x42"
+                    try! expect(sign(transaction)) != sign(differentTransaction)
+                }
+
+                it("incorporates the chain id") {
+                    var differentTransaction = transaction
+                    differentTransaction.chainId = "0x42"
+                    try! expect(sign(transaction)) != sign(differentTransaction)
+                }
             }
         }
     }
