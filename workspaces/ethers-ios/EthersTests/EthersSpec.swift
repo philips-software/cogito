@@ -23,7 +23,11 @@ class EthersSpec: QuickSpec {
                 func sign(_ transaction: Transaction) throws -> SignedTransaction {
                     var result: SignedTransaction!
                     var error: WalletError!
-                    waitUntil { done in wallet.sign(transaction) { error = $0; result = $1; done() } }
+                    waitUntil { done in
+                        wallet.sign(transaction) {
+                            error = $0; result = $1; done()
+                        }
+                    }
                     if (error != nil) { throw error }
                     return result
                 }
