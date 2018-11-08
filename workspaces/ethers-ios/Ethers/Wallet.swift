@@ -14,7 +14,11 @@ public class Wallet {
         return Wallet(javascriptValue: randomWallet)
     }
 
-    public static func fromEncryptedJson(json: String, password: String, onComplete: @escaping DecryptCallback) {
+    public static func fromEncryptedJson(
+        json: String,
+        password: String,
+        onComplete: @escaping DecryptCallback
+    ) {
         let ethers = Javascript.ethers
         let wallet = ethers.forProperty("Wallet")!
 
