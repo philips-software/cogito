@@ -3,9 +3,7 @@ import bodyParser from 'body-parser'
 import { wrap } from 'async-middleware'
 import cors from 'cors'
 import Cache from 'lru-cache'
-
-export const maximumMessageLength = 100000
-export const maximumQueueSize = 10
+import { MessageSender } from './message-sender'
 
 function createServer () {
   const server = express()
@@ -25,33 +23,18 @@ function createServer () {
 }
 
 function registerSendMessageEndpoint ({ server, state }) {
-  server.post(
-    '/:queueId',
-    wrap(async function (request, response) {
-      const queueId = request.params.queueId
-      const message = request.body
-      if (message.length > maximumMessageLength) {
-        response
-          .status(400)
-          .send(
-            `Message too large. Only ${maximumMessageLength} characters allowed.`
-          )
-        return
-      }
-      if (!state.get(queueId)) {
-        state.set(queueId, [])
-      }
-      const queue = state.get(queueId)
-      if (queue.length >= maximumQueueSize) {
-        response
-          .status(429)
-          .send('Too many requests, maximum queue size reached.')
-        return
-      }
-      queue.push(message)
+  const handleRequest = async (request, response) => {
+    const sender = new MessageSender({ state })
+    const queueId = request.params.queueId
+    const message = request.body
+    if (!sender.run({ message, queueId })) {
+      response.status(sender.statusCode).send(sender.error)
+    } else {
       response.status(200).end()
-    })
-  )
+    }
+  }
+
+  server.post('/:queueId', wrap(handleRequest))
 }
 
 function registerReadMessageEndpoint ({ server, state }) {
