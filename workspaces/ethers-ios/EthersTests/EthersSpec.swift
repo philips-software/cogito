@@ -89,6 +89,48 @@ class EthersSpec: QuickSpec {
                     try! expect(sign(transaction)) != sign(differentTransaction)
                 }
             }
+
+            context("serialization") {
+                let password = "secret 🤫"
+
+                func encrypt(password: String) throws -> EncryptedWallet {
+                    var result: EncryptedWallet!
+                    var error: WalletError!
+                    waitUntil(timeout: 10) { done in
+                        wallet.encrypt(password: password) {
+                            error = $0; result = $1; done()
+                        }
+                    }
+                    if (error != nil) { throw error }
+                    return result
+                }
+
+                func decrypt(json: String, password: String) throws -> Wallet {
+                    var result: Wallet!
+                    var error: WalletError!
+                    waitUntil(timeout: 10) { done in
+                        Wallet.fromEncryptedJson(json: json, password: password) {
+                            error = $0; result = $1; done()
+                        }
+                    }
+                    if (error != nil) { throw error }
+                    return result
+                }
+
+                it("can be encrypted") {
+                    try! expect(encrypt(password: password)).toNot(beNil())
+                }
+
+                it("can be decrypted") {
+                    let encrypted = try! encrypt(password: password)
+                    let decrypted = try! decrypt(json: encrypted, password: password)
+                    expect(decrypted.address) == wallet.address
+                }
+
+                it("throws when decryption fails") {
+                    expect { try decrypt(json: "invalid", password: password) }.to(throwError())
+                }
+            }
         }
     }
 }
