@@ -33,6 +33,12 @@ class EthersSpec: QuickSpec {
             it("is deterministic") {
                 expect(sign(transaction)) == sign(transaction)
             }
+
+            it("incorporates the 'to' address") {
+                var differentTransaction = transaction
+                differentTransaction.to = "0xd115bffabbdd893a6f7cea402e7338643ced44a6"
+                expect(sign(transaction)) != sign(differentTransaction)
+            }
         }
     }
 }
