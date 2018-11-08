@@ -17,4 +17,16 @@ public class Wallet {
     public var address: String {
         return javascriptValue.forProperty("address").toString()!
     }
+
+    public func sign(_ transaction: Transaction, onComplete: @escaping SignCallback) {
+        let promise = javascriptValue.invokeMethod("sign", withArguments: [transaction])!
+        let callback: @convention(block) (JSValue?) -> Void = { signature in
+            onComplete(signature!.toString())
+        }
+        promise.invokeMethod("then", withArguments: [unsafeBitCast(callback, to: AnyObject.self)])
+    }
+
+    public typealias SignCallback = (SignedTransaction) -> Void
 }
+
+public typealias SignedTransaction = String
