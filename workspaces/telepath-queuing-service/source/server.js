@@ -4,6 +4,8 @@ import { wrap } from 'async-middleware'
 import cors from 'cors'
 import Cache from 'lru-cache'
 
+export const maximumMessageLength = 100000
+
 function createServer () {
   const server = express()
   let state = Cache({ maxAge: 10 * 60 * 1000 })
@@ -27,10 +29,12 @@ function registerSendMessageEndpoint ({ server, state }) {
     wrap(async function (request, response) {
       const queueId = request.params.queueId
       const message = request.body
-      if (message.length > 100000) {
+      if (message.length > maximumMessageLength) {
         response
           .status(400)
-          .send('Message too large. Only 100000 characters allowed.')
+          .send(
+            `Message too large. Only ${maximumMessageLength} characters allowed.`
+          )
         return
       }
       if (!state.get(queueId)) {
