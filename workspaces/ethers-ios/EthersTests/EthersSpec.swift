@@ -19,25 +19,33 @@ class EthersSpec: QuickSpec {
                 wallet = Wallet.createRandom()
             }
 
-            func sign(_ transaction: Transaction) -> SignedTransaction {
+            func sign(_ transaction: Transaction) throws -> SignedTransaction {
                 var result: SignedTransaction!
-                waitUntil { done in wallet.sign(transaction) { result = $0; done() } }
+                var error: WalletError!
+                waitUntil { done in wallet.sign(transaction) { error = $0; result = $1; done() } }
+                if (error != nil) { throw error }
                 return result
             }
 
             it("produces a signed transaction") {
                 let signatureLength = 65 * 2
-                expect(sign(transaction).count) > "0x".count + signatureLength
+                try! expect(sign(transaction).count) > "0x".count + signatureLength
+            }
+
+            it("throws when signing fails") {
+                var incorrectTransaction = transaction
+                incorrectTransaction.to = "invalid address"
+                expect { try sign(incorrectTransaction) }.to(throwError())
             }
 
             it("is deterministic") {
-                expect(sign(transaction)) == sign(transaction)
+                try! expect(sign(transaction)) == sign(transaction)
             }
 
             it("incorporates the 'to' address") {
                 var differentTransaction = transaction
                 differentTransaction.to = "0xd115bffabbdd893a6f7cea402e7338643ced44a6"
-                expect(sign(transaction)) != sign(differentTransaction)
+                try! expect(sign(transaction)) != sign(differentTransaction)
             }
         }
     }

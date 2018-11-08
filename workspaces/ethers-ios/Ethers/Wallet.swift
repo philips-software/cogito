@@ -20,13 +20,23 @@ public class Wallet {
 
     public func sign(_ transaction: Transaction, onComplete: @escaping SignCallback) {
         let promise = javascriptValue.invokeMethod("sign", withArguments: [transaction.asDictionary])!
-        let callback: @convention(block) (JSValue?) -> Void = { signature in
-            onComplete(signature!.toString())
+        let onSuccess: @convention(block) (JSValue?) -> Void = { signature in
+            onComplete(nil, signature!.toString())
         }
-        promise.invokeMethod("then", withArguments: [unsafeBitCast(callback, to: AnyObject.self)])
+        let onFailure: @convention(block) (JSValue?) -> Void = { error in
+            let message = error!.forProperty("message")!.toString()!
+            onComplete(WalletError.SignError(message: message), nil)
+        }
+        promise
+            .invokeMethod("then", withArguments: [unsafeBitCast(onSuccess, to: AnyObject.self)])
+            .invokeMethod("catch", withArguments: [unsafeBitCast(onFailure, to: AnyObject.self)])
     }
 
-    public typealias SignCallback = (SignedTransaction) -> Void
+    public typealias SignCallback = (WalletError?, SignedTransaction?) -> Void
 }
 
 public typealias SignedTransaction = String
+
+public enum WalletError: Error {
+    case SignError(message: String)
+}
