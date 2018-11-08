@@ -10,36 +10,42 @@ class EthersSpec: QuickSpec {
             expect(wallet1.address) != wallet2.address
         }
 
-        it("signs transactions") {
-            let wallet = Wallet.createRandom()
+        context("signing transactions") {
             let transaction = Transaction()
-            let signatureLength = 65 * 2
-            waitUntil { done in
-                wallet.sign(transaction) { signedTransaction in
-                    expect(signedTransaction.count) > "0x".count + signatureLength
-                    done()
-                }
-            }
-        }
 
-        it("produces the same signature for the same transaction") {
-            let wallet = Wallet.createRandom()
-            let transaction = Transaction()
-            var signedTransaction1: SignedTransaction?
-            var signedTransaction2: SignedTransaction?
-            waitUntil { done in
-                wallet.sign(transaction) { signedTransaction in
-                    signedTransaction1 = signedTransaction
-                    done()
+            var wallet: Wallet!
+
+            beforeEach {
+                wallet = Wallet.createRandom()
+            }
+
+            it("produces a signed transaction") {
+                let signatureLength = 65 * 2
+                waitUntil { done in
+                    wallet.sign(transaction) { signedTransaction in
+                        expect(signedTransaction.count) > "0x".count + signatureLength
+                        done()
+                    }
                 }
             }
-            waitUntil { done in
-                wallet.sign(transaction) { signedTransaction in
-                    signedTransaction2 = signedTransaction
-                    done()
+
+            it("is deterministic") {
+                var signedTransaction1: SignedTransaction?
+                var signedTransaction2: SignedTransaction?
+                waitUntil { done in
+                    wallet.sign(transaction) { signedTransaction in
+                        signedTransaction1 = signedTransaction
+                        done()
+                    }
                 }
+                waitUntil { done in
+                    wallet.sign(transaction) { signedTransaction in
+                        signedTransaction2 = signedTransaction
+                        done()
+                    }
+                }
+                expect(signedTransaction1) == signedTransaction2
             }
-            expect(signedTransaction1) == signedTransaction2
         }
     }
 }
