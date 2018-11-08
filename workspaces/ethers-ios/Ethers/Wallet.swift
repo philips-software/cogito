@@ -50,7 +50,11 @@ public class Wallet {
             .invokeMethod("catch", withArguments: [unsafeBitCast(onFailure, to: AnyObject.self)])
     }
 
-    public func encrypt(password: String, onComplete: @escaping EncryptCallback) {
+    public func encrypt(
+        password: String,
+        options: [String: Any?] = [:],
+        onComplete: @escaping EncryptCallback
+    ) {
         let onSuccess: @convention(block) (JSValue?) -> Void = { encrypted in
             onComplete(nil, encrypted!.toString())
         }
@@ -58,7 +62,7 @@ public class Wallet {
             let message = error!.forProperty("message")!.toString()!
             onComplete(WalletError.EncryptError(message: message), nil)
         }
-        javascriptValue.invokeMethod("encrypt", withArguments: [password])!
+        javascriptValue.invokeMethod("encrypt", withArguments: [password, options])!
             .invokeMethod("then", withArguments: [unsafeBitCast(onSuccess, to: AnyObject.self)])
             .invokeMethod("catch", withArguments: [unsafeBitCast(onFailure, to: AnyObject.self)])
     }
