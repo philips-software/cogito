@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C2F7D222194441E00D86737 /* DataAsHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F7D212194441E00D86737 /* DataAsHex.swift */; };
 		5C5C92D72191EEEE0073B981 /* EthersSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C92D62191EEEE0073B981 /* EthersSpec.swift */; };
 		5C5C92D92191F60A0073B981 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C92D82191F60A0073B981 /* Wallet.swift */; };
 		5C5C92DB2192E3450073B981 /* Javascript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C92DA2192E3450073B981 /* Javascript.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		1285463736333712AEE3A72B /* Pods-EthersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EthersTests.release.xcconfig"; path = "Target Support Files/Pods-EthersTests/Pods-EthersTests.release.xcconfig"; sourceTree = "<group>"; };
+		5C2F7D212194441E00D86737 /* DataAsHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAsHex.swift; sourceTree = "<group>"; };
 		5C5C92D62191EEEE0073B981 /* EthersSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthersSpec.swift; sourceTree = "<group>"; };
 		5C5C92D82191F60A0073B981 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		5C5C92DA2192E3450073B981 /* Javascript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Javascript.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				5C5C92DA2192E3450073B981 /* Javascript.swift */,
 				5C5C92DC2192E7CC0073B981 /* JavascriptEthers.swift */,
 				5C5C92E4219310E90073B981 /* Transaction.swift */,
+				5C2F7D212194441E00D86737 /* DataAsHex.swift */,
 				5C5C92E12192F1210073B981 /* ethers */,
 			);
 			path = Ethers;
@@ -302,6 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C2F7D222194441E00D86737 /* DataAsHex.swift in Sources */,
 				5C5C92DD2192E7CC0073B981 /* JavascriptEthers.swift in Sources */,
 				5C5C92DB2192E3450073B981 /* Javascript.swift in Sources */,
 				5C5C92E5219310E90073B981 /* Transaction.swift in Sources */,
