@@ -1,5 +1,6 @@
 import request from 'supertest'
-import createServer, { maximumMessageLength, maximumQueueSize } from './server'
+import createServer from './server'
+import { maximumMessageLength, maximumQueueSize } from './message-sender'
 import MockDate from 'mockdate'
 
 jest.useFakeTimers()
