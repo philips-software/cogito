@@ -92,12 +92,13 @@ class EthersSpec: QuickSpec {
 
             context("serialization") {
                 let password = "secret 🤫"
+                let options = [ "scrypt": [ "N": 1 << 6, "p": 6 ] ] // sacrifice security for speed
 
-                func encrypt(password: String) throws -> EncryptedWallet {
+                func encrypt(password: String, options: [String: Any]) throws -> EncryptedWallet {
                     var result: EncryptedWallet!
                     var error: WalletError!
-                    waitUntil(timeout: 10) { done in
-                        wallet.encrypt(password: password) {
+                    waitUntil { done in
+                        wallet.encrypt(password: password, options: options) {
                             error = $0; result = $1; done()
                         }
                     }
@@ -108,7 +109,7 @@ class EthersSpec: QuickSpec {
                 func decrypt(json: String, password: String) throws -> Wallet {
                     var result: Wallet!
                     var error: WalletError!
-                    waitUntil(timeout: 10) { done in
+                    waitUntil { done in
                         Wallet.fromEncryptedJson(json: json, password: password) {
                             error = $0; result = $1; done()
                         }
@@ -118,11 +119,11 @@ class EthersSpec: QuickSpec {
                 }
 
                 it("can be encrypted") {
-                    try! expect(encrypt(password: password)).toNot(beNil())
+                    try! expect(encrypt(password: password, options: options)).toNot(beNil())
                 }
 
                 it("can be decrypted") {
-                    let encrypted = try! encrypt(password: password)
+                    let encrypted = try! encrypt(password: password, options: options)
                     let decrypted = try! decrypt(json: encrypted, password: password)
                     expect(decrypted.address) == wallet.address
                 }
