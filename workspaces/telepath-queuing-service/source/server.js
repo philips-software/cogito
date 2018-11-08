@@ -5,6 +5,7 @@ import cors from 'cors'
 import Cache from 'lru-cache'
 
 export const maximumMessageLength = 100000
+export const maximumQueueSize = 10
 
 function createServer () {
   const server = express()
@@ -41,7 +42,7 @@ function registerSendMessageEndpoint ({ server, state }) {
         state.set(queueId, [])
       }
       const queue = state.get(queueId)
-      if (queue.length >= 10) {
+      if (queue.length >= maximumQueueSize) {
         response
           .status(429)
           .send('Too many requests, maximum queue size reached.')
