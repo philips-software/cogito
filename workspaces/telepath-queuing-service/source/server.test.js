@@ -1,5 +1,5 @@
 import request from 'supertest'
-import createServer from './server'
+import createServer, { maximumMessageLength } from './server'
 import MockDate from 'mockdate'
 
 jest.useFakeTimers()
@@ -50,8 +50,8 @@ describe('Server', () => {
     await request(server).post(`/${queueId}`).send('message').expect(429)
   })
 
-  it('allows a maximum message size of 100000 characters', async () => {
-    const notTooBig = Array(100000 + 1).join('a')
+  it(`allows a maximum message size of ${maximumMessageLength} characters`, async () => {
+    const notTooBig = Array(maximumMessageLength + 1).join('a')
     const tooBig = notTooBig + 'a'
     await request(server).post(`/${queueId}`).send(notTooBig).expect(200)
     await request(server).post(`/${queueId}`).send(tooBig).expect(400)
@@ -69,7 +69,7 @@ describe('Server', () => {
       MockDate.reset()
     })
 
-    const forwardTime = (newTime) => {
+    const forwardTime = newTime => {
       MockDate.set(new Date(newTime))
       jest.runOnlyPendingTimers()
     }
