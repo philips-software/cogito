@@ -47,6 +47,42 @@ class EthersSpec: QuickSpec {
                 differentTransaction.to = "0xd115bffabbdd893a6f7cea402e7338643ced44a6"
                 try! expect(sign(transaction)) != sign(differentTransaction)
             }
+
+            it("incorporates the gas limit") {
+                var differentTransaction = transaction
+                differentTransaction.gasLimit = "0x42"
+                try! expect(sign(transaction)) != sign(differentTransaction)
+            }
+
+            it("incorporates the gas price") {
+                var differentTransaction = transaction
+                differentTransaction.gasPrice = "0x42"
+                try! expect(sign(transaction)) != sign(differentTransaction)
+            }
+
+            it("incorporates the nonce") {
+                var differentTransaction = transaction
+                differentTransaction.nonce = "0x42"
+                try! expect(sign(transaction)) != sign(differentTransaction)
+            }
+
+            it("incorporates the data") {
+                var differentTransaction = transaction
+                differentTransaction.data = Data(bytes: [1, 2, 3])
+                try! expect(sign(transaction)) != sign(differentTransaction)
+            }
+
+            it("incorporates the value") {
+                var differentTransaction = transaction
+                differentTransaction.value = "0x42"
+                try! expect(sign(transaction)) != sign(differentTransaction)
+            }
+
+            it("incorporates the chain id") {
+                var differentTransaction = transaction
+                differentTransaction.chainId = "0x42"
+                try! expect(sign(transaction)) != sign(differentTransaction)
+            }
         }
     }
 }
