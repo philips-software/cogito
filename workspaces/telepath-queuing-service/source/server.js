@@ -4,6 +4,7 @@ import { wrap } from 'async-middleware'
 import cors from 'cors'
 import Cache from 'lru-cache'
 import { MessageSender } from './message-sender'
+import { MessageReceiver } from './message-receiver'
 
 function createServer () {
   const server = express()
@@ -38,24 +39,19 @@ function registerSendMessageEndpoint ({ server, state }) {
 }
 
 function registerReadMessageEndpoint ({ server, state }) {
-  server.get(
-    '/:queueId',
-    wrap(async function (request, response) {
-      const queueId = request.params.queueId
-      const queue = state.get(queueId)
-      state.set(queueId, queue) // retain queue in cache
-      if (!queue) {
-        response.status(204).end()
-        return
-      }
-      const message = queue.shift()
-      if (!message) {
-        response.status(204).end()
-        return
-      }
+  const handleRequest = async (request, response) => {
+    const queueId = request.params.queueId
+    const receiver = new MessageReceiver({ state })
+    const message = receiver.run({ queueId })
+
+    if (message) {
       response.status(200).send(message)
-    })
-  )
+    } else {
+      response.status(204).end()
+    }
+  }
+
+  server.get('/:queueId', wrap(handleRequest))
 }
 
 export default createServer
