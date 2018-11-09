@@ -17,24 +17,16 @@
   "devDependencies": {
     "deep-freeze-es6": "^1.0.1",
     "jest-canvas-mock": "^1.0.2",
+    "jest-dom": "^2.1.1",
+    "jest-glamor-react": "^4.3.1",
     "react-scripts": "^2.0.0",
-    "react-test-renderer": "^16.2.0"
+    "react-test-renderer": "^16.2.0",
+    "react-testing-library": "^5.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "yarn lint && react-scripts test --env=jsdom",
-    "lint": "yarn standard",
-    "deploy": "(cp ../../yarn.lock .) && ((now -e HTPASSWD=$HTPASSWD --public && rm yarn.lock) || rm yarn.lock)",
-    "lint-fix": "yarn standard --fix --verbose"
-  },
-  "jest": {
-    "setupFiles": [
-      "jest-canvas-mock"
-    ],
-    "moduleNameMapper": {
-      "\\.(png|gif|jpg)$": "<rootDir>/__mocks__/fileMock.js"
-    }
+    "deploy": "(cp ../../yarn.lock .) && ((now -e HTPASSWD=$HTPASSWD --public && rm yarn.lock) || rm yarn.lock)"
   },
   "browserslist": {
     "development": [
