@@ -10,6 +10,7 @@ class GanacheTestNetwork {
     const provider = ganache.provider({
       mnemonic: this.mnemonic
     })
+    provider.setMaxListeners(11)
     this._web3 = new Web3(provider)
   }
 
