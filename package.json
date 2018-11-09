@@ -32,7 +32,7 @@
     },
     "scripts": {
         "setup:dev": "yarn && (cd workspaces/demo-app-contracts && yarn compile) && yarn build",
-        "test": "yarn lint && NODE_PATH=./workspaces/demo-app/src yarn jest",
+        "test": "yarn lint && yarn jest",
         "test:watch": "NODE_PATH=./workspaces/demo-app/src yarn jest --watch",
         "lint": "yarn standard && cd ./workspaces/demo-app-contracts && yarn lint",
         "lint-fix": "yarn standard --fix --verbose",
