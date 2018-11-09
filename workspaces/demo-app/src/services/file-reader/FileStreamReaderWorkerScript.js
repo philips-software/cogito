@@ -1,3 +1,4 @@
+/* istanbul ignore next */
 const FileStreamReaderWorkerScript = () => {
   const FileStreamReaderWorker = function (file, callback) {
     // eslint-disable-next-line no-undef
