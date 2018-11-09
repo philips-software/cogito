@@ -12,6 +12,7 @@
 		02425F372195CAC900587FE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02425F352195CAC900587FE3 /* Main.storyboard */; };
 		02425F392195CACA00587FE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02425F382195CACA00587FE3 /* Assets.xcassets */; };
 		02425F3C2195CACA00587FE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02425F3A2195CACA00587FE3 /* LaunchScreen.storyboard */; };
+		04E9D4FA948B6AB549246DD3 /* Pods_Telepath_Demo_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A82FF1303E4B197845534E4F /* Pods_Telepath_Demo_App.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		02425F382195CACA00587FE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02425F3B2195CACA00587FE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		02425F3D2195CACA00587FE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5D68796E460515E4AB9609CF /* Pods-Telepath Demo App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath Demo App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath Demo App/Pods-Telepath Demo App.release.xcconfig"; sourceTree = "<group>"; };
+		A82FF1303E4B197845534E4F /* Pods_Telepath_Demo_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telepath_Demo_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7E22B944CF1B7505232B839 /* Pods-Telepath Demo App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath Demo App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath Demo App/Pods-Telepath Demo App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E9D4FA948B6AB549246DD3 /* Pods_Telepath_Demo_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				02425F302195CAC900587FE3 /* Telepath Demo App */,
 				02425F2F2195CAC900587FE3 /* Products */,
+				85A590FB40A2F153F49FED6A /* Pods */,
+				CB5A5B3807056BE7B7ED3632 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = "Telepath Demo App";
 			sourceTree = "<group>";
 		};
+		85A590FB40A2F153F49FED6A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D7E22B944CF1B7505232B839 /* Pods-Telepath Demo App.debug.xcconfig */,
+				5D68796E460515E4AB9609CF /* Pods-Telepath Demo App.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CB5A5B3807056BE7B7ED3632 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A82FF1303E4B197845534E4F /* Pods_Telepath_Demo_App.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 02425F402195CACA00587FE3 /* Build configuration list for PBXNativeTarget "Telepath Demo App" */;
 			buildPhases = (
+				BFA19FDB85252A4C575EE45C /* [CP] Check Pods Manifest.lock */,
 				02425F2A2195CAC900587FE3 /* Sources */,
 				02425F2B2195CAC900587FE3 /* Frameworks */,
 				02425F2C2195CAC900587FE3 /* Resources */,
+				690FC39A2C6D497FB161E447 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,6 +155,57 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		690FC39A2C6D497FB161E447 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Telepath Demo App/Pods-Telepath Demo App-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
+				"${BUILT_PRODUCTS_DIR}/Telepath/Telepath.framework",
+				"${BUILT_PRODUCTS_DIR}/base64url/base64url.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Telepath.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/base64url.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Telepath Demo App/Pods-Telepath Demo App-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BFA19FDB85252A4C575EE45C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Telepath Demo App-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		02425F2A2195CAC900587FE3 /* Sources */ = {
@@ -280,6 +357,7 @@
 		};
 		02425F412195CACA00587FE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7E22B944CF1B7505232B839 /* Pods-Telepath Demo App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +376,7 @@
 		};
 		02425F422195CACA00587FE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D68796E460515E4AB9609CF /* Pods-Telepath Demo App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -1,0 +1,35 @@
+PODS:
+  - base64url (1.0.0)
+  - Sodium (0.7.0)
+  - Telepath (0.1.0):
+    - base64url (~> 1.0)
+    - Sodium (~> 0.6)
+
+DEPENDENCIES:
+  - Sodium (from `https://github.com/jedisct1/swift-sodium.git`, branch `master`)
+  - Telepath (from `../telepath-ios`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - base64url
+
+EXTERNAL SOURCES:
+  Sodium:
+    :branch: master
+    :git: https://github.com/jedisct1/swift-sodium.git
+  Telepath:
+    :path: "../telepath-ios"
+
+CHECKOUT OPTIONS:
+  Sodium:
+    :commit: 8d2e6302f9589f0e9ad5c5920afa0fc0e943dd8a
+    :git: https://github.com/jedisct1/swift-sodium.git
+
+SPEC CHECKSUMS:
+  base64url: 5b31be020705fcbedf88ef82af8039ce5c8c25de
+  Sodium: c5510cc6f5e1b27858e5f260b5cac80d4a3f9379
+  Telepath: b84e1b4e4550bfc3f579be84d9302125ecbdc3b8
+
+PODFILE CHECKSUM: bfd069b29fbd7a001d0cb68ecf7ec142724fdcd7
+
+COCOAPODS: 1.5.3
