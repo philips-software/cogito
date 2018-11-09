@@ -1,0 +1,24 @@
+{
+  "name": "Telepath",
+  "version": "0.1.0",
+  "license": "MIT",
+  "homepage": "https://cogito.mobi",
+  "authors": "The Telepath authors",
+  "summary": "Provides a secure channel for communication between a web app running in a browser and an app running on a mobile device.",
+  "platforms": {
+    "ios": "11.0"
+  },
+  "source": {
+    "git": "https://github.com/philips-software/cogito.git",
+    "tag": "0.1.0"
+  },
+  "source_files": "Telepath/**/*.swift",
+  "dependencies": {
+    "Sodium": [
+      "~> 0.6"
+    ],
+    "base64url": [
+      "~> 1.0"
+    ]
+  }
+}
