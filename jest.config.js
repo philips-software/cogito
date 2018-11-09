@@ -14,6 +14,7 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     'source/**.js',
+    'src/**.js',
     '!**/*.test.js',
     '!**/node_modules/**'
   ],
