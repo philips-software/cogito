@@ -234,3 +234,10 @@ you commit your changes.
 ```bash
 $ yarn build-for-netlify && yarn test
 ```
+
+When merging pull requests, we use the Github "Rebase and merge" button, meaning
+that the commits are rebased on master. This gives you, as a contributor, the
+responsibility to make sure your pull request contains the right set of commits.
+In other words, before making the pull request, please check whether your
+commits tell a clear story. If not, first squash / rebase commits as needed
+on your branch, and only then create the pull request.
