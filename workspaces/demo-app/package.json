@@ -57,10 +57,7 @@
     "start:faucet": "(cd ../faucet && yarn start)",
     "start:with-faucet": "yarn start:faucet & react-scripts start & wait",
     "start:all": "yarn start:ganache & yarn start:faucet & (sleep 3 && yarn deploy:contracts && react-scripts start) & wait",
-    "test": "yarn lint && react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "lint": "yarn standard",
-    "lint-fix": "yarn standard --fix --verbose"
+    "eject": "react-scripts eject"
   },
   "browserslist": {
     "development": [
