@@ -12,6 +12,7 @@
 		02425F372195CAC900587FE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02425F352195CAC900587FE3 /* Main.storyboard */; };
 		02425F392195CACA00587FE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02425F382195CACA00587FE3 /* Assets.xcassets */; };
 		02425F3C2195CACA00587FE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02425F3A2195CACA00587FE3 /* LaunchScreen.storyboard */; };
+		02425F442195D36500587FE3 /* TelepathHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02425F432195D36500587FE3 /* TelepathHandler.swift */; };
 		04E9D4FA948B6AB549246DD3 /* Pods_Telepath_Demo_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A82FF1303E4B197845534E4F /* Pods_Telepath_Demo_App.framework */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		02425F382195CACA00587FE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02425F3B2195CACA00587FE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		02425F3D2195CACA00587FE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02425F432195D36500587FE3 /* TelepathHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathHandler.swift; sourceTree = "<group>"; };
 		5D68796E460515E4AB9609CF /* Pods-Telepath Demo App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath Demo App.release.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath Demo App/Pods-Telepath Demo App.release.xcconfig"; sourceTree = "<group>"; };
 		A82FF1303E4B197845534E4F /* Pods_Telepath_Demo_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telepath_Demo_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7E22B944CF1B7505232B839 /* Pods-Telepath Demo App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath Demo App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath Demo App/Pods-Telepath Demo App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				02425F312195CAC900587FE3 /* AppDelegate.swift */,
+				02425F432195D36500587FE3 /* TelepathHandler.swift */,
 				02425F332195CAC900587FE3 /* ViewController.swift */,
 				02425F352195CAC900587FE3 /* Main.storyboard */,
 				02425F382195CACA00587FE3 /* Assets.xcassets */,
@@ -167,6 +170,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Telepath Demo App/Pods-Telepath Demo App-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Telepath/Telepath.framework",
 				"${BUILT_PRODUCTS_DIR}/base64url/base64url.framework",
 			);
@@ -175,6 +179,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Telepath.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/base64url.framework",
 			);
@@ -212,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02425F442195D36500587FE3 /* TelepathHandler.swift in Sources */,
 				02425F342195CAC900587FE3 /* ViewController.swift in Sources */,
 				02425F322195CAC900587FE3 /* AppDelegate.swift in Sources */,
 			);
