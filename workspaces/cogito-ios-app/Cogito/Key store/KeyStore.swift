@@ -1,22 +1,11 @@
 import Geth
 import BigInt
 
-protocol GethKeyStoreT {
-    // swiftlint:disable identifier_name
-    func getAccounts() -> GethAccounts!
-    func newAccount(_ passphrase: String!) throws -> GethAccount
-    func signTxPassphrase(_ account: GethAccount!, passphrase: String!,
-                          tx: GethTransaction!, chainID: GethBigInt!) throws -> GethTransaction
-    // swiftlint:enable identifier_name
-}
-
-extension GethKeyStore: GethKeyStoreT {}
-
 class KeyStore: Codable {
     let name: String
     let scryptN: Int
     let scryptP: Int
-    lazy var wrapped: GethKeyStoreT? = GethKeyStore(storeUrl.path, scryptN: scryptN, scryptP: scryptP)
+    lazy var wrapped: GethKeyStore? = GethKeyStore(storeUrl.path, scryptN: scryptN, scryptP: scryptP)
     var storeUrl: URL {
         let base = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return base.appendingPathComponent(name)
