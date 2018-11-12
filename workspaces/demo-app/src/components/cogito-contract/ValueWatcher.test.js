@@ -30,7 +30,7 @@ describe('ValueWatcher', () => {
     valueWatcher.start()
     await simpleStorage.increase(5, { from })
 
-    const value = await simpleStorage.read({ from })
+    const value = await simpleStorage.read()
 
     expect(await eventWaiter.wait()).toBe(value.toNumber())
   })
@@ -45,7 +45,7 @@ describe('ValueWatcher', () => {
     valueWatcher.start()
     await simpleStorage.increase(5, { from })
 
-    let value = await simpleStorage.read({ from })
+    let value = await simpleStorage.read()
 
     expect(await eventWaiter.wait()).toBe(value.toNumber())
 
@@ -53,7 +53,7 @@ describe('ValueWatcher', () => {
 
     await simpleStorage.increase(5, { from })
 
-    value = await simpleStorage.read({ from })
+    value = await simpleStorage.read()
 
     expect(await eventWaiter.wait()).toBe(value.toNumber())
   })
@@ -62,7 +62,7 @@ describe('ValueWatcher', () => {
     valueWatcher.start()
     await simpleStorage.increase(5, { from })
 
-    const value = await simpleStorage.read({ from })
+    const value = await simpleStorage.read()
 
     expect(await eventWaiter.wait()).toBe(value.toNumber())
 
@@ -78,9 +78,9 @@ describe('ValueWatcher', () => {
     valueWatcher.start()
     eventWaiter.expect(2)
     await simpleStorage.increase(5, { from })
-    const value1 = await simpleStorage.read({ from })
+    const value1 = await simpleStorage.read()
     await simpleStorage.increase(5, { from })
-    const value2 = await simpleStorage.read({ from })
+    const value2 = await simpleStorage.read()
 
     expect(await eventWaiter.wait()).toBe(value2.toNumber())
     expect(eventWaiter.intermediateValues).toEqual([value1.toNumber()])
