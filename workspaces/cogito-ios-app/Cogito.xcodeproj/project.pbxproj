@@ -111,6 +111,7 @@
 		5C4D7F5520AD7D640008107C /* URLActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5420AD7D640008107C /* URLActionsSpec.swift */; };
 		5C4D7F5720AD84460008107C /* AttestationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5620AD84460008107C /* AttestationActions.swift */; };
 		5C4D7F5920AD869F0008107C /* AttestationActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5820AD869F0008107C /* AttestationActionsSpec.swift */; };
+		5C54A85C2199B0A40078DA36 /* Ethers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C54A85B2199B0A40078DA36 /* Ethers.framework */; };
 		5C59C9C52008B01D00186D29 /* JsonRpcRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */; };
 		5C61A0022088871E00867747 /* PublicKeyLoaderSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C61A0012088871E00867747 /* PublicKeyLoaderSpec.swift */; };
 		5C61A0042088A01100867747 /* DecrypterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C61A0032088A01100867747 /* DecrypterSpec.swift */; };
@@ -283,6 +284,7 @@
 		5C4D7F5420AD7D640008107C /* URLActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLActionsSpec.swift; sourceTree = "<group>"; };
 		5C4D7F5620AD84460008107C /* AttestationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActions.swift; sourceTree = "<group>"; };
 		5C4D7F5820AD869F0008107C /* AttestationActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActionsSpec.swift; sourceTree = "<group>"; };
+		5C54A85B2199B0A40078DA36 /* Ethers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Ethers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C59C9C42008B01D00186D29 /* JsonRpcRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRpcRequestSpec.swift; sourceTree = "<group>"; };
 		5C61A0012088871E00867747 /* PublicKeyLoaderSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicKeyLoaderSpec.swift; sourceTree = "<group>"; };
 		5C61A0032088A01100867747 /* DecrypterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecrypterSpec.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C54A85C2199B0A40078DA36 /* Ethers.framework in Frameworks */,
 				C5BA5E19747B73A161EF0D57 /* Pods_Cogito.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -821,6 +824,7 @@
 		8A1300A8F9378A77B9DDFBEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C54A85B2199B0A40078DA36 /* Ethers.framework */,
 				8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */,
 				53940EFC96526AFDFA7CD5FC /* Pods_Cogito_CogitoTests.framework */,
 			);
