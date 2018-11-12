@@ -8,7 +8,7 @@ import json from 'rollup-plugin-json'
 const config = {
   input: 'source/index.js',
   output: {
-    name: 'secureTransferTruffleContracts'
+    name: 'DemoAppContracts'
   },
   plugins: [
     replace({
