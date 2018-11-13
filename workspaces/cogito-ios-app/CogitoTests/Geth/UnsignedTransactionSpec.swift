@@ -1,6 +1,5 @@
 import Quick
 import Nimble
-import Geth
 @testable import Cogito
 
 class UnsignedTransactionSpec: QuickSpec {

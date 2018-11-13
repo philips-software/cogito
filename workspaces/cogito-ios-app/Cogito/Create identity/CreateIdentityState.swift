@@ -1,5 +1,3 @@
-import Geth
-
 struct CreateIdentityState: Codable {
     var description: String
     var pending: Bool

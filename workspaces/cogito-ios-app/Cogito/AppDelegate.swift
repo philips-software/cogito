@@ -1,6 +1,5 @@
 import UIKit
 import ReSwift
-import Geth
 
 typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]?
 

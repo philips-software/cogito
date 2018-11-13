@@ -1,7 +1,6 @@
 import Quick
 import Nimble
 import UIKit
-import Geth
 import ReSwift
 @testable import Cogito
 
