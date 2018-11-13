@@ -1,6 +1,5 @@
 import ReSwift
 import ReSwiftThunk
-import Geth
 
 // In this file we disable SwiftLint `identifier_name`, because we don't want
 // to make a syntactic difference between normal actions and thunks; from the
@@ -23,15 +22,19 @@ struct CreateIdentityActions {
                 return
             }
             keyStore.newAccount { (account, error) in
-                guard let account = account else {
+                guard
+                    let account = account,
+                    let addressHex = account.getAddress()?.getHex(),
+                    let address = Address(fromHex: addressHex)
+                else {
                     dispatch(Rejected(message: error ?? "failed to create account"))
                     return
                 }
                 dispatch(DiamondActions.CreateFacet(
                     description: state.createIdentity.description,
-                    address: Address(fromHex: account.getAddress()!.getHex())!
+                    address: address
                 ))
-                dispatch(Fulfilled(account: account))
+                dispatch(Fulfilled(address: address))
             }
         })
     }
@@ -41,6 +44,6 @@ struct CreateIdentityActions {
         let message: String
     }
     struct Fulfilled: Action {
-        let account: GethAccount
+        let address: Address
     }
 }

@@ -1,15 +1,14 @@
 import Quick
 import Nimble
-import Geth
 @testable import Cogito
 
 class CreateIdentityStateSpec: QuickSpec {
     override func spec() {
         it("can encode and decode") {
-            let account = GethAccount()
+            let address = Address.example
             let state = CreateIdentityState(description: "desc",
                                             pending: true,
-                                            newAccount: account,
+                                            newAddress: address,
                                             error: "some error")
             let encoder = JSONEncoder()
             var data: Data!
@@ -27,7 +26,7 @@ class CreateIdentityStateSpec: QuickSpec {
 
             expect(state2.description) == state.description
             expect(state2.pending).to(beFalse())
-            expect(state2.newAccount).to(beNil())
+            expect(state2.newAddress).to(beNil())
             expect(state2.error).to(beNil())
         }
     }

@@ -1,6 +1,5 @@
 import Quick
 import Nimble
-import Geth
 @testable import Cogito
 
 class CreateIdentityReducerSpec: QuickSpec {
@@ -14,44 +13,44 @@ class CreateIdentityReducerSpec: QuickSpec {
         it("handles Reset") {
             let state = CreateIdentityState(description: "me",
                                             pending: true,
-                                            newAccount: GethAccount(),
+                                            newAddress: Address.example,
                                             error: "some error")
             let action = CreateIdentityActions.ResetForm()
             let nextState = createIdentityReducer(action: action, state: state)
             expect(nextState.description) == ""
             expect(nextState.pending).to(beFalse())
-            expect(nextState.newAccount).to(beNil())
+            expect(nextState.newAddress).to(beNil())
             expect(nextState.error).to(beNil())
         }
 
         it("handles Pending") {
             let state = CreateIdentityState(description: "me",
                                             pending: false,
-                                            newAccount: GethAccount(),
+                                            newAddress: Address.example,
                                             error: "some error")
             let action = CreateIdentityActions.Pending()
             let nextState = createIdentityReducer(action: action, state: state)
             expect(nextState.pending).to(beTrue())
-            expect(nextState.newAccount).to(beNil())
+            expect(nextState.newAddress).to(beNil())
             expect(nextState.error).to(beNil())
         }
 
         it("handles Fulfilled") {
             let state = CreateIdentityState(description: "me",
                                             pending: true,
-                                            newAccount: nil,
+                                            newAddress: nil,
                                             error: nil)
-            let account = GethAccount()!
-            let action = CreateIdentityActions.Fulfilled(account: account)
+            let address = Address.example
+            let action = CreateIdentityActions.Fulfilled(address: address)
             let nextState = createIdentityReducer(action: action, state: state)
             expect(nextState.pending).to(beFalse())
-            expect(nextState.newAccount) === account
+            expect(nextState.newAddress) == address
         }
 
         it("handles Rejected") {
             let state = CreateIdentityState(description: "me",
                                             pending: true,
-                                            newAccount: nil,
+                                            newAddress: nil,
                                             error: nil)
             let error = "some error"
             let action = CreateIdentityActions.Rejected(message: error)

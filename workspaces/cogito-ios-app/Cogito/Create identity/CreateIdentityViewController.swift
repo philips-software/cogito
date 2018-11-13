@@ -90,7 +90,7 @@ private func mapStateToProps(state: AppState) -> CreateIdentityViewController.Pr
     return CreateIdentityViewController.Props(
         description: state.createIdentity.description,
         pending: state.createIdentity.pending,
-        fulfilled: state.createIdentity.newAccount != nil,
+        fulfilled: state.createIdentity.newAddress != nil,
         error: state.createIdentity.error
     )
 }
