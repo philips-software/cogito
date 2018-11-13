@@ -100,7 +100,7 @@ class KeyStore: Codable {
         assert(gethChainId.string() == transaction.chainId.description, "chainId")
 
         let gethTx = GethTransaction(Int64(transaction.nonce),
-                                     to: transaction.to.toGethAddress(),
+                                     to: GethAddress(fromHex: transaction.to.value),
                                      amount: value,
                                      gasLimit: gasLimit,
                                      gasPrice: gasPrice,

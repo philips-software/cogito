@@ -1,17 +1,9 @@
 import Quick
 import Nimble
-import Geth
 @testable import Cogito
 
 class AddressSpec: QuickSpec {
     override func spec() {
-        it("can be created from a GethAddress") {
-            let hex = "0x1111111111111111111111111111111111111111"
-            let gethAddress = GethAddress(fromHex: hex)!
-            let address = Address(from: gethAddress)
-            expect(address.description) == hex
-        }
-
         it("can be created from a hex string") {
             let hex = "0x1111111111111111111111111111111111111111"
             let address = Address(fromHex: hex)
@@ -21,12 +13,6 @@ class AddressSpec: QuickSpec {
         it("cannot be created from an invalid hax string") {
             let invalidHex = "0x1"
             expect(Address(fromHex: invalidHex)).to(beNil())
-        }
-
-        it("can return equivalent GethAddress") {
-            let address = Address.testAddress1
-            let gethAddress = address.toGethAddress()
-            expect(gethAddress.getHex()) == address.description
         }
     }
 }

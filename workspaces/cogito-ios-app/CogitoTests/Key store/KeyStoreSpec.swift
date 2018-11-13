@@ -80,8 +80,10 @@ class KeyStoreSpec: QuickSpec {
                             expect(error).to(beNil())
                             expect(account).toNot(beNil())
                             createdAccount = account
-                            identity = Identity(description: "test",
-                                                address: Address(from: createdAccount.getAddress()!))
+                            identity = Identity(
+                                description: "test",
+                                address: Address(fromHex: createdAccount.getAddress()!.getHex())!
+                            )
                             done()
                         }
                     }

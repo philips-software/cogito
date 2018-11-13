@@ -27,8 +27,10 @@ struct CreateIdentityActions {
                     dispatch(Rejected(message: error ?? "failed to create account"))
                     return
                 }
-                dispatch(DiamondActions.CreateFacet(description: state.createIdentity.description,
-                                                    address: Address(from: account.getAddress()!)))
+                dispatch(DiamondActions.CreateFacet(
+                    description: state.createIdentity.description,
+                    address: Address(fromHex: account.getAddress()!.getHex())!
+                ))
                 dispatch(Fulfilled(account: account))
             }
         })
