@@ -105,6 +105,7 @@
 		5C3C8F2F208767790042AC2F /* JsonRcpRequestConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C8F2E208767790042AC2F /* JsonRcpRequestConvenience.swift */; };
 		5C48E2401FA1F8BB00B8BF6E /* TelepathActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */; };
 		5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */; };
+		5C4993C2219ACCE000BE9C4D /* AddressExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4993C1219ACCE000BE9C4D /* AddressExample.swift */; };
 		5C4D7F5020AD72340008107C /* URLActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F4F20AD72340008107C /* URLActions.swift */; };
 		5C4D7F5220AD72940008107C /* Thunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5120AD72940008107C /* Thunk.swift */; };
 		5C4D7F5520AD7D640008107C /* URLActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5420AD7D640008107C /* URLActionsSpec.swift */; };
@@ -276,6 +277,7 @@
 		5C3C8F2E208767790042AC2F /* JsonRcpRequestConvenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonRcpRequestConvenience.swift; sourceTree = "<group>"; };
 		5C48E23F1FA1F8BB00B8BF6E /* TelepathActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathActions.swift; sourceTree = "<group>"; };
 		5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducerSpec.swift; sourceTree = "<group>"; };
+		5C4993C1219ACCE000BE9C4D /* AddressExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressExample.swift; sourceTree = "<group>"; };
 		5C4D7F4F20AD72340008107C /* URLActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLActions.swift; sourceTree = "<group>"; };
 		5C4D7F5120AD72940008107C /* Thunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thunk.swift; sourceTree = "<group>"; };
 		5C4D7F5420AD7D640008107C /* URLActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLActionsSpec.swift; sourceTree = "<group>"; };
@@ -581,6 +583,7 @@
 			children = (
 				C00B54DD2E80DB0874E74DDD /* AddressSpec.swift */,
 				C00B56B7E4CA3836960336DF /* UnsignedTransactionSpec.swift */,
+				5C4993C1219ACCE000BE9C4D /* AddressExample.swift */,
 			);
 			path = Geth;
 			sourceTree = "<group>";
@@ -1258,6 +1261,7 @@
 				C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */,
 				02E90F561FE2755B008D81F9 /* DialogPresenterSpec.swift in Sources */,
 				02E90F4E1FDEC1D7008D81F9 /* AttestationServiceSpec.swift in Sources */,
+				5C4993C2219ACCE000BE9C4D /* AddressExample.swift in Sources */,
 				5C7C23981FA37CF9009E9CE7 /* ExampleError.swift in Sources */,
 				5C7BCE69208647E9006E33A5 /* PublicKeyLoaderSpy.swift in Sources */,
 				5C9331981FA324460056869F /* TelepathChannelExample.swift in Sources */,
