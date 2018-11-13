@@ -1,36 +1,15 @@
 import Quick
 import Nimble
-import Geth
 @testable import Cogito
 
 class DiamondStateSpec: QuickSpec {
     override func spec() {
-        var keyStoreDir: String!
-        var keyStore: GethKeyStore!
-        var account0: GethAccount!
+        let address = Address.example
+
         var identity0: Identity!
 
         beforeEach {
-            keyStoreDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory,
-                                                              .userDomainMask,
-                                                              true)[0] + "/test.keystore"
-            keyStore = GethKeyStore(keyStoreDir,
-                                    scryptN: GethLightScryptN,
-                                    scryptP: GethLightScryptP)
-            expect {
-                account0 = try keyStore.newAccount("some pass")
-            }.toNot(throwError())
-            let address = Address(from: account0.getAddress()!)
             identity0 = Identity(description: "first identity", address: address)
-        }
-
-        afterEach {
-            do {
-                try FileManager.default.removeItem(atPath: keyStoreDir)
-            } catch let error {
-                print(error)
-                abort()
-            }
         }
 
         it("can be encoded and decoded") {
@@ -61,7 +40,8 @@ class DiamondStateSpec: QuickSpec {
 
         it("finding matches case insensitive") {
             let state = DiamondState(facets: [identity0])
-            let address = Address(fromHex: identity0.address.value.uppercased())!
+            let uppercased = "0x" + identity0.address.value.dropFirst(2).uppercased()
+            let address = Address(fromHex: uppercased)!
             expect(state.findIdentity(address: address)) == identity0
         }
     }

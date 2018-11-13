@@ -47,7 +47,7 @@ class CreateIdentityActionsSpec: QuickSpec {
             it("dispatches DiamondActions.CreateFacet") {
                 let dispatchChecker = DispatchRecorder<DiamondActions.CreateFacet>()
                 let account = GethAccount()!
-                let address = Address(from: account.getAddress())
+                let address = Address(fromHex: account.getAddress()!.getHex())!
                 keyStore.newAccountReturn = account
                 createAction.action(dispatchChecker.dispatch, getState)
                 expect(dispatchChecker.count).toEventually(equal(1))
