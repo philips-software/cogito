@@ -2,7 +2,6 @@ import Quick
 import Nimble
 import ReSwift
 import ReSwiftThunk
-import Geth
 @testable import Cogito
 
 class CreateIdentityActionsSpec: QuickSpec {
@@ -46,9 +45,8 @@ class CreateIdentityActionsSpec: QuickSpec {
 
             it("dispatches DiamondActions.CreateFacet") {
                 let dispatchChecker = DispatchRecorder<DiamondActions.CreateFacet>()
-                let account = GethAccount()!
-                let address = Address(fromHex: account.getAddress()!.getHex())!
-                keyStore.newAccountReturn = account
+                let address = Address.example
+                keyStore.newAccountReturn = address
                 createAction.action(dispatchChecker.dispatch, getState)
                 expect(dispatchChecker.count).toEventually(equal(1))
                 expect(dispatchChecker.actions[0].description).toEventually(equal("desc"))
@@ -57,9 +55,8 @@ class CreateIdentityActionsSpec: QuickSpec {
 
             it("dispatches fulfilled with new account address") {
                 let dispatchChecker = DispatchRecorder<CreateIdentityActions.Fulfilled>()
-                let account = GethAccount()!
-                let address = Address(fromHex: account.getAddress()!.getHex())!
-                keyStore.newAccountReturn = account
+                let address = Address.example
+                keyStore.newAccountReturn = address
                 createAction.action(dispatchChecker.dispatch, getState)
                 expect(dispatchChecker.count).toEventually(equal(1))
                 expect(dispatchChecker.actions[0].address).toEventually(equal(address))
@@ -76,10 +73,10 @@ class CreateIdentityActionsSpec: QuickSpec {
 
 private class KeyStoreMock: KeyStore {
     var newAccountCallCount = 0
-    var newAccountReturn: GethAccount?
+    var newAccountReturn: Address?
     var newAccountError: String?
 
-    override func newAccount(onComplete: @escaping (_ account: GethAccount?, _ error: String?) -> Void) {
+    override func newAccount(onComplete: @escaping (_ address: Address?, _ error: String?) -> Void) {
         newAccountCallCount += 1
         DispatchQueue.global().async { [unowned self] in
             onComplete(self.newAccountReturn, self.newAccountError)

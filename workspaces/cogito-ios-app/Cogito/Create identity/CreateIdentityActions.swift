@@ -21,12 +21,8 @@ struct CreateIdentityActions {
                 dispatch(Rejected(message: "key store not found"))
                 return
             }
-            keyStore.newAccount { (account, error) in
-                guard
-                    let account = account,
-                    let addressHex = account.getAddress()?.getHex(),
-                    let address = Address(fromHex: addressHex)
-                else {
+            keyStore.newAccount { (address, error) in
+                guard let address = address else {
                     dispatch(Rejected(message: error ?? "failed to create account"))
                     return
                 }

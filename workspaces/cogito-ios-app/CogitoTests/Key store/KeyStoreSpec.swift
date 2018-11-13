@@ -71,18 +71,18 @@ class KeyStoreSpec: QuickSpec {
             }
 
             context("given an account") {
-                var createdAccount: GethAccount!
+                var createdAddress: Address!
                 var identity: Identity!
 
                 beforeEach {
                     waitUntil { done in
-                        keyStore.newAccount { account, error in
+                        keyStore.newAccount { address, error in
                             expect(error).to(beNil())
-                            expect(account).toNot(beNil())
-                            createdAccount = account
+                            expect(address).toNot(beNil())
+                            createdAddress = address
                             identity = Identity(
                                 description: "test",
-                                address: Address(fromHex: createdAccount.getAddress()!.getHex())!
+                                address: address!
                             )
                             done()
                         }
@@ -91,7 +91,7 @@ class KeyStoreSpec: QuickSpec {
 
                 it("finds the account matching an identity") {
                     let foundAccount = keyStore.findAccount(identity: identity)!
-                    expect(foundAccount.getAddress().getHex()) == createdAccount.getAddress().getHex()
+                    expect(foundAccount.getAddress()?.getHex()) == createdAddress.value
                 }
 
                 it("calls key store to sign a transaction") {

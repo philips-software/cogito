@@ -33,7 +33,7 @@ class KeyStore: Codable {
         wrapped = nil
     }
 
-    func newAccount(onComplete: @escaping (_ account: GethAccount?, _ error: String?) -> Void) {
+    func newAccount(onComplete: @escaping (_ address: Address?, _ error: String?) -> Void) {
         print("[debug] creating new account in key store at \(storeUrl)")
         guard let gethKeyStore = wrapped else {
             onComplete(nil, "failed to open key store")
@@ -43,7 +43,8 @@ class KeyStore: Codable {
             if let password = maybePassword {
                 do {
                     let gethAccount = try gethKeyStore.newAccount(password)
-                    onComplete(gethAccount, nil)
+                    let address = Address(fromHex: gethAccount.getAddress()!.getHex())!
+                    onComplete(address, nil)
                 } catch let error {
                     onComplete(nil, error.localizedDescription)
                 }
