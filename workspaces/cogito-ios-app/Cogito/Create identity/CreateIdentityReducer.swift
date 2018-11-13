@@ -8,14 +8,14 @@ func createIdentityReducer(action: Action, state: CreateIdentityState?) -> Creat
     case _ as CreateIdentityActions.ResetForm:
         state.description = ""
         state.pending = false
-        state.newAccount = nil
+        state.newAddress = nil
         state.error = nil
     case _ as CreateIdentityActions.Pending:
         state.pending = true
-        state.newAccount = nil
+        state.newAddress = nil
         state.error = nil
     case let action as CreateIdentityActions.Fulfilled:
-        state.newAccount = action.account
+        state.newAddress = action.address
         state.pending = false
     case let action as CreateIdentityActions.Rejected:
         state.error = action.message

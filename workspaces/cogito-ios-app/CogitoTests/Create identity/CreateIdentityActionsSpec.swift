@@ -35,7 +35,7 @@ class CreateIdentityActionsSpec: QuickSpec {
                 testState = appState(keyStore: KeyStoreState(keyStore: keyStore),
                                      createIdentity: CreateIdentityState(description: "desc",
                                                                          pending: true,
-                                                                         newAccount: nil,
+                                                                         newAddress: nil,
                                                                          error: nil))
             }
 
@@ -57,11 +57,12 @@ class CreateIdentityActionsSpec: QuickSpec {
 
             it("dispatches fulfilled with new account address") {
                 let dispatchChecker = DispatchRecorder<CreateIdentityActions.Fulfilled>()
-                let account = GethAccount()
+                let account = GethAccount()!
+                let address = Address(fromHex: account.getAddress()!.getHex())!
                 keyStore.newAccountReturn = account
                 createAction.action(dispatchChecker.dispatch, getState)
                 expect(dispatchChecker.count).toEventually(equal(1))
-                expect(dispatchChecker.actions[0].account).toEventually(beIdenticalTo(account))
+                expect(dispatchChecker.actions[0].address).toEventually(equal(address))
             }
 
             it("dispatches rejected when new account fails") {

@@ -2,7 +2,6 @@ import UIKit
 import ReSwift
 import ReRxSwift
 import RxSwift
-import Geth
 import RichString
 import FontAwesome_swift
 
@@ -20,7 +19,7 @@ class SelectedFacetViewController: UIViewController, Connectable {
         super.viewDidLoad()
 
         headerButton.titleLabel?.textAlignment = .center
-        connection.subscribe(\Props.createdNewAccount) { _ in self.configureUI() }
+        connection.subscribe(\Props.createdNewAddress) { _ in self.configureUI() }
         connection.subscribe(\Props.selectedFacet) { _ in self.configureUI() }
         connection.bind(\Props.selectedFacet, to: headerButton.rx.isUserInteractionEnabled) {
             $0 == nil
@@ -55,7 +54,7 @@ class SelectedFacetViewController: UIViewController, Connectable {
     }
 
     func firstFacetWasCreated() -> Bool {
-        return props.createdNewAccount != nil && props.selectedFacet != nil && props.facets.count == 1
+        return props.createdNewAddress != nil && props.selectedFacet != nil && props.facets.count == 1
     }
 
     private func transitionToSelectedFacet() {
@@ -111,7 +110,7 @@ class SelectedFacetViewController: UIViewController, Connectable {
 
     struct Props {
         let selectedFacet: Identity?
-        let createdNewAccount: GethAccount?
+        let createdNewAddress: Address?
         let facets: [UUID: Identity]
     }
 
@@ -123,7 +122,7 @@ class SelectedFacetViewController: UIViewController, Connectable {
 private func mapStateToProps(state: AppState) -> SelectedFacetViewController.Props {
     return SelectedFacetViewController.Props(
         selectedFacet: state.diamond.selectedFacet(),
-        createdNewAccount: state.createIdentity.newAccount,
+        createdNewAddress: state.createIdentity.newAddress,
         facets: state.diamond.facets
     )
 }

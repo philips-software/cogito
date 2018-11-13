@@ -3,13 +3,13 @@ import Geth
 struct CreateIdentityState: Codable {
     var description: String
     var pending: Bool
-    var newAccount: GethAccount?
+    var newAddress: Address?
     var error: String?
 
-    init(description: String, pending: Bool, newAccount: GethAccount?, error: String?) {
+    init(description: String, pending: Bool, newAddress: Address?, error: String?) {
         self.description = description
         self.pending = pending
-        self.newAccount = newAccount
+        self.newAddress = newAddress
         self.error = error
     }
 
@@ -17,7 +17,7 @@ struct CreateIdentityState: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         description = try container.decode(String.self, forKey: .description)
         pending = false
-        newAccount = nil
+        newAddress = nil
         error = nil
     }
 
@@ -35,7 +35,7 @@ extension CreateIdentityState: Equatable {
     static func == (lhs: CreateIdentityState, rhs: CreateIdentityState) -> Bool {
         return lhs.description == rhs.description &&
                lhs.pending == rhs.pending &&
-               lhs.newAccount === rhs.newAccount &&
+               lhs.newAddress == rhs.newAddress &&
                lhs.error == rhs.error
     }
 }
@@ -43,6 +43,6 @@ extension CreateIdentityState: Equatable {
 let initialCreateIdentityState = CreateIdentityState(
     description: "",
     pending: false,
-    newAccount: nil,
+    newAddress: nil,
     error: nil
 )

@@ -1,7 +1,6 @@
 import Quick
 import Nimble
 import UIKit
-import Geth
 @testable import Cogito
 
 class CreateIdentityViewControllerSpec: QuickSpec {
@@ -17,11 +16,11 @@ class CreateIdentityViewControllerSpec: QuickSpec {
 
         func createIdentityState(description: String = "",
                                  pending: Bool = false,
-                                 newAccount: GethAccount? = nil,
+                                 newAddress: Address? = nil,
                                  error: String? = nil) -> CreateIdentityState {
             return CreateIdentityState(description: description,
                                        pending: pending,
-                                       newAccount: newAccount,
+                                       newAddress: newAddress,
                                        error: error)
         }
 
@@ -74,7 +73,7 @@ class CreateIdentityViewControllerSpec: QuickSpec {
             viewController.onDone = {
                 done = true
             }
-            let state = appState(createIdentity: createIdentityState(newAccount: GethAccount()))
+            let state = appState(createIdentity: createIdentityState(newAddress: Address.example))
             viewController.connection.newState(state: state)
             expect(done).to(beTrue())
         }

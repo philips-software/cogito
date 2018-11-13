@@ -38,19 +38,19 @@ class SelectedFacetViewControllerSpec: QuickSpec {
             it("maps createdNewAccount when there is none") {
                 let state = appState(createIdentity: CreateIdentityState(description: "testdesc",
                                                                          pending: true,
-                                                                         newAccount: nil,
+                                                                         newAddress: nil,
                                                                          error: nil))
                 viewController.connection.newState(state: state)
-                expect(viewController.props.createdNewAccount).to(beNil())
+                expect(viewController.props.createdNewAddress).to(beNil())
             }
 
             it("maps createdNewAcount when there is one") {
                 let state = appState(createIdentity: CreateIdentityState(description: "testdesc",
                                                                          pending: false,
-                                                                         newAccount: GethAccount()!,
+                                                                         newAddress: Address.example,
                                                                          error: nil))
                 viewController.connection.newState(state: state)
-                expect(viewController.props.createdNewAccount).toNot(beNil())
+                expect(viewController.props.createdNewAddress).toNot(beNil())
             }
 
             it("maps facets") {
@@ -80,7 +80,7 @@ class SelectedFacetViewControllerSpec: QuickSpec {
             beforeEach {
                 viewController.props = SelectedFacetViewController.Props(
                     selectedFacet: nil,
-                    createdNewAccount: nil,
+                    createdNewAddress: nil,
                     facets: [:])
             }
 
@@ -99,7 +99,7 @@ class SelectedFacetViewControllerSpec: QuickSpec {
             beforeEach {
                 viewController.props = SelectedFacetViewController.Props(
                     selectedFacet: testIdentity,
-                    createdNewAccount: nil,
+                    createdNewAddress: nil,
                     facets: [UUID: Identity](uniqueKeysWithValues: [
                         (testIdentity.identifier, testIdentity),
                         (testIdentity2.identifier, testIdentity2)
@@ -128,22 +128,22 @@ class SelectedFacetViewControllerSpec: QuickSpec {
 
         it("knows if the first facets was just created") {
             viewController.props = SelectedFacetViewController.Props(selectedFacet: nil,
-                                                                     createdNewAccount: nil,
+                                                                     createdNewAddress: nil,
                                                                      facets: [:])
             expect(viewController.firstFacetWasCreated()).to(beFalse())
 
             viewController.props = SelectedFacetViewController.Props(selectedFacet: testIdentity,
-                                                                     createdNewAccount: nil,
+                                                                     createdNewAddress: nil,
                                                                      facets: [testIdentity.identifier: testIdentity])
             expect(viewController.firstFacetWasCreated()).to(beFalse())
 
             viewController.props = SelectedFacetViewController.Props(selectedFacet: testIdentity,
-                                                                     createdNewAccount: GethAccount()!,
+                                                                     createdNewAddress: Address.example,
                                                                      facets: [testIdentity.identifier: testIdentity])
             expect(viewController.firstFacetWasCreated()).to(beTrue())
 
             viewController.props = SelectedFacetViewController.Props(selectedFacet: testIdentity,
-                                                                     createdNewAccount: GethAccount()!,
+                                                                     createdNewAddress: Address.example,
                                                                      facets: [
                                                                          testIdentity.identifier: testIdentity,
                                                                          testIdentity2.identifier: testIdentity2
