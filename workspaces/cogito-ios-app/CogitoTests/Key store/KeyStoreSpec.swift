@@ -1,8 +1,10 @@
 import Quick
 import Nimble
-import Geth
 import BigInt
 @testable import Cogito
+
+let lightScryptN = 1 << 12
+let lightScryptP = 6
 
 class KeyStoreSpec: QuickSpec {
     override func spec() {
@@ -56,8 +58,8 @@ class KeyStoreSpec: QuickSpec {
                 keychainMock = KeychainMock()
                 appPassword = AppPassword(keychain: keychainMock)
                 keyStore = KeyStore(name: "testStore.keyStore",
-                                    scryptN: GethLightScryptN,
-                                    scryptP: GethLightScryptP)
+                                    scryptN: lightScryptN,
+                                    scryptP: lightScryptP)
                 keyStore.appPassword = appPassword
                 expect {
                     try FileManager.default.createDirectory(at: keyStore.storeUrl,
