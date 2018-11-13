@@ -1,14 +1,12 @@
 import ReSwift
-import Geth
 
 func diamondReducer(action: Action, state: DiamondState?) -> DiamondState {
     var state = state ?? initialDiamondState
     switch action {
     case let createFacet as DiamondActions.CreateFacet:
         var newFacets = state.facets
-        let gethAddress = createFacet.account.getAddress()!
         let identity = Identity(description: createFacet.description,
-                                address: Address(from: gethAddress))
+                                address: createFacet.address)
         newFacets[identity.identifier] = identity
         state.facets = newFacets
         if state.selectedFacetId == nil {

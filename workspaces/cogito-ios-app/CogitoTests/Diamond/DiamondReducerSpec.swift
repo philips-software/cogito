@@ -5,38 +5,15 @@ import Geth
 
 class DiamondReducerSpec: QuickSpec {
     override func spec() {
-        var keyStoreDir: String!
-        var keyStore: GethKeyStore!
-        var account0: GethAccount!
-
-        beforeEach {
-            keyStoreDir = NSSearchPathForDirectoriesInDomains(.cachesDirectory,
-                                                              .userDomainMask,
-                                                              true)[0] + "/test.keystore"
-            keyStore = GethKeyStore(keyStoreDir,
-                                    scryptN: GethLightScryptN,
-                                    scryptP: GethLightScryptP)
-            expect {
-                account0 = try keyStore.newAccount("some pass")
-            }.toNot(throwError())
-        }
-
-        afterEach {
-            do {
-                try FileManager.default.removeItem(atPath: keyStoreDir)
-            } catch let error {
-                print(error)
-                abort()
-            }
-        }
+        let address = Address.example
 
         it("handles CreateFacet") {
-            let action = DiamondActions.CreateFacet(description: "my id", account: account0)
+            let action = DiamondActions.CreateFacet(description: "my id", address: address)
             let newState = diamondReducer(action: action, state: nil)
             expect(newState.facets.count) == 1
             let firstFacet = newState.facets.values.first!
             expect(firstFacet.description) == "my id"
-            expect(firstFacet.address) == Address(from: account0.getAddress()!)
+            expect(firstFacet.address) == address
             expect(newState.selectedFacetId) == firstFacet.identifier
         }
 
@@ -44,7 +21,7 @@ class DiamondReducerSpec: QuickSpec {
             var state = DiamondState(facets: [])
             let someIdentifier = UUID()
             state.selectedFacetId = someIdentifier
-            let action = DiamondActions.CreateFacet(description: "my id", account: account0)
+            let action = DiamondActions.CreateFacet(description: "my id", address: address)
             let newState = diamondReducer(action: action, state: state)
             expect(newState.selectedFacetId) == someIdentifier
         }

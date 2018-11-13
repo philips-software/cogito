@@ -28,7 +28,7 @@ struct CreateIdentityActions {
                     return
                 }
                 dispatch(DiamondActions.CreateFacet(description: state.createIdentity.description,
-                                                    account: account))
+                                                    address: Address(from: account.getAddress()!)))
                 dispatch(Fulfilled(account: account))
             }
         })
