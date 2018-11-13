@@ -1,14 +1,16 @@
 import ReSwift
 import ReSwiftThunk
-import Geth
+
+let standardScryptN = 1 << 18
+let standardScryptP = 1
 
 // swiftlint:disable identifier_name
 struct KeyStoreActions {
     static func Create() -> ThunkAction<AppState> {
         return ThunkAction(action: { (dispatch, _) in
             let keyStore = KeyStore(name: "main.keystore",
-                                    scryptN: GethStandardScryptN / 4,
-                                    scryptP: GethStandardScryptP)
+                                    scryptN: standardScryptN / 4,
+                                    scryptP: standardScryptP)
             dispatch(Fulfilled(keyStore: keyStore))
         })
     }
