@@ -1,10 +1,9 @@
 import ReSwift
-import Geth
 
 struct DiamondActions {
     struct CreateFacet: Action {
         let description: String
-        let account: GethAccount
+        let address: Address
     }
 
     struct DeleteFacet: Action {
