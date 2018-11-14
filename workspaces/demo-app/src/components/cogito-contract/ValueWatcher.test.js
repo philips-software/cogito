@@ -16,7 +16,6 @@ describe('ValueWatcher', () => {
     simpleStorage = await ganacheTestNetwork.deploy(simpleStorageDef, { from })
     eventWaiter = new EventWaiter()
     valueWatcher = new ValueWatcher({
-      web3: ganacheTestNetwork.web3,
       contracts: { simpleStorage },
       onValueChanged: eventWaiter.onValueChanged
     })
