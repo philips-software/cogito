@@ -2,7 +2,6 @@ import React from 'react'
 import { render, fireEvent, wait, waitForElement } from 'test-helpers/render-props'
 import { CogitoContract } from './CogitoContract'
 
-// import { AppEventsActions } from 'app-events'
 import { UserDataActions } from 'user-data'
 
 jest.unmock('@react-frontend-developer/react-redux-render-prop')
@@ -34,6 +33,40 @@ jest.mock('components/utils/TimedStatus', () => {
   }
 })
 
+class InteractivePromise {
+  promise
+  resolve
+  reject
+  constructor () {
+    this.promise = new Promise((resolve, reject) => {
+      this.resolve = resolve
+      this.reject = reject
+    })
+  }
+  resolve (value) {
+    this.resolve(value)
+  }
+  reject (value) {
+    this.reject(value)
+  }
+  get () {
+    return this.promise
+  }
+}
+
+class SimpleStorageMock {
+  value = 5
+  read = jest.fn().mockReturnValueOnce({
+    toNumber: jest.fn().mockReturnValueOnce(this.value)
+  }).mockReturnValueOnce({
+    toNumber: jest.fn().mockReturnValueOnce(this.value + 1)
+  })
+  constructor ({ read, increase }) {
+    if (read) { this.read = read }
+    if (increase) { this.increase = increase }
+  }
+}
+
 describe('CogitoContract', () => {
   let channel
   let contracts
@@ -64,10 +97,6 @@ describe('CogitoContract', () => {
         })
       }
     }
-  })
-
-  afterEach(() => {
-    console.error.mockRestore && console.error.mockRestore()
   })
 
   describe('Initial State', () => {
@@ -105,6 +134,11 @@ describe('CogitoContract', () => {
   })
 
   describe('reading contract value', () => {
+    const setActiveTelepathChannel = dispatch => {
+      dispatch(UserDataActions.setIdentityInfo(channelIdentity1))
+      dispatch(UserDataActions.connectionEstablished())
+    }
+
     it('opens the "Scan QR Code" dialog if telepath channel is not yet established', () => {
       const { getByText } = render(<CogitoContract channel={channel} />)
       const readButton = getByText(/read/i)
@@ -117,11 +151,7 @@ describe('CogitoContract', () => {
       const { getByText, getByTestId, store: { dispatch } } = render(
         <CogitoContract channel={channel} contracts={contracts} />
       )
-      dispatch(UserDataActions.setIdentityInfo({
-        ethereumAddress: '0xabcd',
-        username: 'Test User'
-      }))
-      dispatch(UserDataActions.connectionEstablished())
+      setActiveTelepathChannel(dispatch)
       const readButton = getByText(/read/i)
       fireEvent.click(readButton)
       await wait(() => expect(getByTestId(/current-value/i)).toHaveTextContent(`${simpleStorageContractValue}`))
@@ -169,91 +199,85 @@ describe('CogitoContract', () => {
       await wait(() => expect(store.getState().userData).toMatchObject(channelIdentity2))
     })
 
-    it('shows the status when reading the contract value', async () => {
-      expect.assertions(1)
-      let readingContractPromiseResolve
-      const readingContractPromise = new Promise(resolve => {
-        readingContractPromiseResolve = resolve
-      })
-      contracts = {
-        simpleStorage: {
-          read: function () {
-            return readingContractPromise
-          }
+    describe('showing status info', () => {
+      let interactivePromise
+
+      beforeEach(() => {
+        interactivePromise = new InteractivePromise()
+        contracts = {
+          simpleStorage: new SimpleStorageMock({ read: () => interactivePromise.get() })
         }
-      }
-      const { getByText, queryByText, store: { dispatch } } = render(
-        <CogitoContract channel={channel} contracts={contracts} />
-      )
-      dispatch(UserDataActions.setIdentityInfo({
-        ethereumAddress: '0xabcd',
-        username: 'Test User'
-      }))
-      dispatch(UserDataActions.connectionEstablished())
-      const readButton = getByText(/read/i)
-      fireEvent.click(readButton)
-      await waitForElement(() => getByText(/executing contract/i))
-      readingContractPromiseResolve({
-        toNumber: jest.fn().mockReturnValueOnce(simpleStorageContractValue)
       })
-      await wait(() => expect(queryByText(/executing contract/i)).toBeNull())
+
+      it('shows the status when reading the contract value', async () => {
+        expect.assertions(1)
+        const { getByText, queryByText, store: { dispatch } } = render(
+          <CogitoContract channel={channel} contracts={contracts} />
+        )
+        setActiveTelepathChannel(dispatch)
+        const readButton = getByText(/read/i)
+        fireEvent.click(readButton)
+        await waitForElement(() => getByText(/executing contract/i))
+        interactivePromise.resolve({
+          toNumber: jest.fn().mockReturnValueOnce(simpleStorageContractValue)
+        })
+        await wait(() => expect(queryByText(/executing contract/i)).toBeNull())
+      })
     })
 
-    it('shows an error message when reading contract fails', async () => {
-      expect.assertions(1)
-      console.error = jest.fn()
-      let readingContractPromiseReject
-      const readingContractPromise = new Promise((resolve, reject) => {
-        readingContractPromiseReject = reject
-      })
-      contracts = {
-        simpleStorage: {
-          read: function () {
-            return readingContractPromise
-          }
+    describe('handling errors', () => {
+      let interactivePromise
+
+      beforeEach(() => {
+        console.error = jest.fn()
+        interactivePromise = new InteractivePromise()
+        contracts = {
+          simpleStorage: new SimpleStorageMock({ read: () => interactivePromise.get() })
         }
-      }
-      const { getByText, queryByText, store: { dispatch } } = render(
-        <CogitoContract channel={channel} contracts={contracts} />
-      )
-      dispatch(UserDataActions.setIdentityInfo({
-        ethereumAddress: '0xabcd',
-        username: 'Test User'
-      }))
-      dispatch(UserDataActions.connectionEstablished())
-      const readButton = getByText(/read/i)
-      fireEvent.click(readButton)
-      await waitForElement(() => getByText(/executing contract/i))
-      const error = new Error('reading contract error')
-      readingContractPromiseReject(error)
-      await waitForElement(() => getByText('reading contract error'))
-      await wait(() => expect(queryByText(/executing contract/i)).toBeNull())
-    })
+      })
 
-    it('shows an error message when fetching identity info fails', async () => {
-      console.error = jest.fn()
-      channel.error = new Error('Error fetching identity info')
-      const { getByText } = render(
-        <CogitoContract channel={channel} contracts={contracts} />
-      )
-      const readButton = getByText(/read/i)
-      fireEvent.click(readButton)
-      const doneButton = getByText(/done/i)
-      fireEvent.click(doneButton)
-      await waitForElement(() => getByText(channel.error.message))
-    })
+      afterEach(() => {
+        console.error.mockRestore()
+      })
 
-    it('shows an error message when fetching identity returns no identity', async () => {
-      console.error = jest.fn()
-      channel.mockIdentityInfo = jest.fn().mockResolvedValueOnce(null)
-      const { getByText } = render(
-        <CogitoContract channel={channel} contracts={contracts} />
-      )
-      const readButton = getByText(/read/i)
-      fireEvent.click(readButton)
-      const doneButton = getByText(/done/i)
-      fireEvent.click(doneButton)
-      await waitForElement(() => getByText('No identity found on the mobile device!'))
+      it('shows an error message when reading contract fails', async () => {
+        expect.assertions(1)
+        const { getByText, queryByText, store: { dispatch } } = render(
+          <CogitoContract channel={channel} contracts={contracts} />
+        )
+        setActiveTelepathChannel(dispatch)
+        const readButton = getByText(/read/i)
+        fireEvent.click(readButton)
+        await waitForElement(() => getByText(/executing contract/i))
+        const error = new Error('reading contract error')
+        interactivePromise.reject(error)
+        await waitForElement(() => getByText('reading contract error'))
+        await wait(() => expect(queryByText(/executing contract/i)).toBeNull())
+      })
+
+      it('shows an error message when fetching identity info fails', async () => {
+        channel.error = new Error('Error fetching identity info')
+        const { getByText } = render(
+          <CogitoContract channel={channel} contracts={contracts} />
+        )
+        const readButton = getByText(/read/i)
+        fireEvent.click(readButton)
+        const doneButton = getByText(/done/i)
+        fireEvent.click(doneButton)
+        await waitForElement(() => getByText(channel.error.message))
+      })
+
+      it('shows an error message when fetching identity returns no identity', async () => {
+        channel.mockIdentityInfo = jest.fn().mockResolvedValueOnce(null)
+        const { getByText } = render(
+          <CogitoContract channel={channel} contracts={contracts} />
+        )
+        const readButton = getByText(/read/i)
+        fireEvent.click(readButton)
+        const doneButton = getByText(/done/i)
+        fireEvent.click(doneButton)
+        await waitForElement(() => getByText('No identity found on the mobile device!'))
+      })
     })
   })
 })
