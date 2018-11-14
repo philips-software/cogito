@@ -19,6 +19,15 @@ contract('SimpleStorage', function (accounts) {
     expect(amount.toNumber()).to.equal(0)
   })
 
+  it('can be reset', async function () {
+    await simpleStorage.increase(5, { from: requester })
+    let amount = await simpleStorage.read()
+    expect(amount.toNumber()).to.equal(5)
+    await simpleStorage.reset({ from: requester })
+    amount = await simpleStorage.read()
+    expect(amount.toNumber()).to.equal(0)
+  })
+
   context('when increasing by one', function () {
     let transaction
     beforeEach(async function () {

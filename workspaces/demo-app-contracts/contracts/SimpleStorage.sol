@@ -12,5 +12,9 @@ contract SimpleStorage {
         return value;
     }
 
+    function reset() public {
+        value = 0;
+    }
+
     event ValueChanged(SimpleStorage simpleStorage, uint value, address sender);
 }
