@@ -120,7 +120,7 @@ class CogitoContract extends React.Component {
         ) => (
           <Centered>
             <p>Current value is:</p>
-            <ValueWrapper>{balance}</ValueWrapper>
+            <ValueWrapper data-testid='current-value'>{balance}</ValueWrapper>
             <Row css={{ marginTop: '10px' }}>
               <Button
                 secondary
