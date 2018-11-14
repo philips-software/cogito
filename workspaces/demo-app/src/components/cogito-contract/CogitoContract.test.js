@@ -1,5 +1,6 @@
 import React from 'react'
 import { render, fireEvent, wait, waitForElement } from 'test-helpers/render-props'
+import nock from 'nock'
 import { CogitoContract } from './CogitoContract'
 
 import { UserDataActions } from 'user-data'
@@ -55,47 +56,59 @@ class InteractivePromise {
 }
 
 class SimpleStorageMock {
-  value = 5
+  static value = 5
   read = jest.fn().mockReturnValueOnce({
-    toNumber: jest.fn().mockReturnValueOnce(this.value)
+    toNumber: jest.fn().mockReturnValueOnce(SimpleStorageMock.value)
   }).mockReturnValueOnce({
-    toNumber: jest.fn().mockReturnValueOnce(this.value + 1)
+    toNumber: jest.fn().mockReturnValueOnce(SimpleStorageMock.value + 1)
   })
-  constructor ({ read, increase }) {
+  increase = jest.fn().mockResolvedValueOnce()
+  constructor ({ read, increase } = {}) {
     if (read) { this.read = read }
     if (increase) { this.increase = increase }
+  }
+}
+
+class TelepathChannelMock {
+  firstChannelUrl = 'https://telepath.connect.url/channel1'
+  defaultChannelUrl = 'https://telepath.connect.url/channel2'
+  identities = [
+    {
+      ethereumAddress: '0xabcd',
+      username: 'Test User'
+    },
+    {
+      ethereumAddress: '0x1234',
+      username: 'Another Test User'
+    }
+  ]
+  createConnectUrl = jest.fn(() => this.defaultChannelUrl)
+    .mockReturnValueOnce(this.firstChannelUrl)
+  mockIdentityInfo = jest.fn()
+  constructor ({ identities, createConnectUrl, error } = {}) {
+    if (identities) {
+      this.identities = identities
+    }
+    if (createConnectUrl) {
+      this.createConnectUrl = createConnectUrl
+    }
+    if (error) {
+      this.error = error
+    }
+    this.identities.forEach(identity => {
+      this.mockIdentityInfo.mockReturnValueOnce(identity)
+    })
   }
 }
 
 describe('CogitoContract', () => {
   let channel
   let contracts
-  const simpleStorageContractValue = 5
-  const channelIdentity1 = {
-    ethereumAddress: '0xabcd',
-    username: 'Test User'
-  }
-  const channelIdentity2 = {
-    ethereumAddress: '0x1234',
-    username: 'Another Test User'
-  }
 
   beforeEach(() => {
-    channel = {
-      mockIdentityInfo: jest.fn()
-        .mockReturnValueOnce(channelIdentity1)
-        .mockReturnValueOnce(channelIdentity2),
-      createConnectUrl: jest.fn(() => 'https://telepath.connect.url/channel2')
-        .mockReturnValueOnce('https://telepath.connect.url/channel1')
-    }
+    channel = new TelepathChannelMock()
     contracts = {
-      simpleStorage: {
-        read: jest.fn().mockResolvedValueOnce({
-          toNumber: jest.fn().mockReturnValueOnce(simpleStorageContractValue)
-        }).mockResolvedValueOnce({
-          toNumber: jest.fn().mockReturnValueOnce(simpleStorageContractValue + 1)
-        })
-      }
+      simpleStorage: new SimpleStorageMock()
     }
   })
 
@@ -135,7 +148,7 @@ describe('CogitoContract', () => {
 
   describe('reading contract value', () => {
     const setActiveTelepathChannel = dispatch => {
-      dispatch(UserDataActions.setIdentityInfo(channelIdentity1))
+      dispatch(UserDataActions.setIdentityInfo(channel.identities[0]))
       dispatch(UserDataActions.connectionEstablished())
     }
 
@@ -154,7 +167,7 @@ describe('CogitoContract', () => {
       setActiveTelepathChannel(dispatch)
       const readButton = getByText(/read/i)
       fireEvent.click(readButton)
-      await wait(() => expect(getByTestId(/current-value/i)).toHaveTextContent(`${simpleStorageContractValue}`))
+      await wait(() => expect(getByTestId(/current-value/i)).toHaveTextContent(`${SimpleStorageMock.value}`))
     })
 
     it('shows the "Scan QR Code" dialog and then reads the contract value after confirming', async () => {
@@ -166,7 +179,7 @@ describe('CogitoContract', () => {
       fireEvent.click(readButton)
       const doneButton = getByText(/done/i)
       fireEvent.click(doneButton)
-      await wait(() => expect(getByTestId(/current-value/i)).toHaveTextContent(`${simpleStorageContractValue}`))
+      await wait(() => expect(getByTestId(/current-value/i)).toHaveTextContent(`${SimpleStorageMock.value}`))
       expect(queryByText(/scan the qr code/i)).toBeNull()
     })
 
@@ -179,7 +192,7 @@ describe('CogitoContract', () => {
       fireEvent.click(readButton)
       const doneButton = getByText(/done/i)
       fireEvent.click(doneButton)
-      await wait(() => expect(store.getState().userData).toMatchObject(channelIdentity1))
+      await wait(() => expect(store.getState().userData).toMatchObject(channel.identities[0]))
     })
 
     it('refetches user idenity if user explicitely requests a new QR Code', async () => {
@@ -191,12 +204,12 @@ describe('CogitoContract', () => {
       fireEvent.click(readButton)
       const doneButton = getByText(/done/i)
       fireEvent.click(doneButton)
-      await wait(() => expect(store.getState().userData).toMatchObject(channelIdentity1))
+      await wait(() => expect(store.getState().userData).toMatchObject(channel.identities[0]))
       const showQRCodeButton = getByText(/show qr code/i)
       fireEvent.click(showQRCodeButton)
       fireEvent.click(doneButton)
       fireEvent.click(readButton)
-      await wait(() => expect(store.getState().userData).toMatchObject(channelIdentity2))
+      await wait(() => expect(store.getState().userData).toMatchObject(channel.identities[1]))
     })
 
     describe('showing status info', () => {
@@ -219,7 +232,7 @@ describe('CogitoContract', () => {
         fireEvent.click(readButton)
         await waitForElement(() => getByText(/executing contract/i))
         interactivePromise.resolve({
-          toNumber: jest.fn().mockReturnValueOnce(simpleStorageContractValue)
+          toNumber: jest.fn().mockReturnValueOnce(SimpleStorageMock.value)
         })
         await wait(() => expect(queryByText(/executing contract/i)).toBeNull())
       })
@@ -256,7 +269,8 @@ describe('CogitoContract', () => {
       })
 
       it('shows an error message when fetching identity info fails', async () => {
-        channel.error = new Error('Error fetching identity info')
+        channel = new TelepathChannelMock({ error: new Error('Error fetching identity info') })
+        // channel.error = new Error('Error fetching identity info')
         const { getByText } = render(
           <CogitoContract channel={channel} contracts={contracts} />
         )
@@ -268,7 +282,7 @@ describe('CogitoContract', () => {
       })
 
       it('shows an error message when fetching identity returns no identity', async () => {
-        channel.mockIdentityInfo = jest.fn().mockResolvedValueOnce(null)
+        channel = new TelepathChannelMock({ identities: [] })
         const { getByText } = render(
           <CogitoContract channel={channel} contracts={contracts} />
         )
@@ -278,6 +292,36 @@ describe('CogitoContract', () => {
         fireEvent.click(doneButton)
         await waitForElement(() => getByText('No identity found on the mobile device!'))
       })
+    })
+  })
+
+  describe('increasing contract value', () => {
+    const setActiveTelepathChannel = dispatch => {
+      dispatch(UserDataActions.setIdentityInfo(channel.identities[0]))
+      dispatch(UserDataActions.connectionEstablished())
+    }
+    beforeEach(() => {
+      process.env.FAUCET_URL = 'https://faucet.url/donate'
+      nock(process.env.FAUCET_URL).post('/0xabcd', '').reply(200)
+    })
+
+    it('opens the "Scan QR Code" dialog if telepath channel is not yet established', () => {
+      const { getByText } = render(<CogitoContract channel={channel} />)
+      const increaseButton = getByText(/increase/i)
+      fireEvent.click(increaseButton)
+      expect(getByText(/scan the qr code/i)).toBeInTheDocument()
+    })
+
+    it('increases the contract value if telepath channel is already established', async () => {
+      expect.assertions(2)
+      const { getByText, getByTestId, store: { dispatch } } = render(
+        <CogitoContract channel={channel} contracts={contracts} />
+      )
+      expect(getByTestId(/current-value/i)).toHaveTextContent('0')
+      setActiveTelepathChannel(dispatch)
+      const increaseButton = getByText(/increase/i)
+      fireEvent.click(increaseButton)
+      await wait(() => expect(getByTestId(/current-value/i)).toHaveTextContent(`${0}`))
     })
   })
 })
