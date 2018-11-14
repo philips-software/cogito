@@ -1,5 +1,6 @@
 import React from 'react'
 import { render, fireEvent, wait, waitForElement } from 'test-helpers/render-props'
+import { TelepathChannelMock, SimpleStorageMock, InteractivePromise } from 'test-helpers'
 import nock from 'nock'
 import { CogitoContract } from './CogitoContract'
 
@@ -8,113 +9,11 @@ import { ValueWatcher } from './ValueWatcher'
 
 jest.unmock('@react-frontend-developer/react-redux-render-prop')
 
-jest.mock('@cogitojs/cogito-identity', () => {
-  return {
-    CogitoIdentity: class {
-      static Property = {
-        Username: 'username',
-        EthereumAddress: 'ethereumAddress'
-      }
-      constructor ({channel}) {
-        this.channel = channel
-      }
-      getInfo () {
-        if (this.channel.error) {
-          return Promise.reject(this.channel.error)
-        } else {
-          return Promise.resolve(this.channel.mockIdentityInfo())
-        }
-      }
-    }
-  }
-})
-
 jest.mock('components/utils/TimedStatus', () => {
   return {
     TimedStatus: ({children}) => children
   }
 })
-
-class InteractivePromise {
-  promise
-  resolve
-  reject
-  constructor () {
-    this.promise = new Promise((resolve, reject) => {
-      this.resolve = resolve
-      this.reject = reject
-    })
-  }
-  resolve (value) {
-    this.resolve(value)
-  }
-  reject (value) {
-    this.reject(value)
-  }
-  get () {
-    return this.promise
-  }
-}
-
-class SimpleStorageMock {
-  static value = 5
-  read = jest.fn().mockReturnValueOnce({
-    toNumber: jest.fn().mockReturnValueOnce(SimpleStorageMock.value)
-  }).mockReturnValueOnce({
-    toNumber: jest.fn().mockReturnValueOnce(SimpleStorageMock.value + 1)
-  })
-  increase = jest.fn().mockResolvedValueOnce()
-  watchEvent = callback => {
-    this.emitEvent = callback
-  }
-  ValueChanged = jest.fn().mockReturnValue({
-    watch: this.watchEvent,
-    stopWatching: jest.fn()
-  })
-  simulateValueChange (value) {
-    this.emitEvent && this.emitEvent(null, {
-      args: {
-        value: { toNumber: () => value }
-      }
-    })
-  }
-  constructor ({ read, increase } = {}) {
-    if (read) { this.read = read }
-    if (increase) { this.increase = increase }
-  }
-}
-
-class TelepathChannelMock {
-  firstChannelUrl = 'https://telepath.connect.url/channel1'
-  defaultChannelUrl = 'https://telepath.connect.url/channel2'
-  identities = [
-    {
-      ethereumAddress: '0xabcd',
-      username: 'Test User'
-    },
-    {
-      ethereumAddress: '0x1234',
-      username: 'Another Test User'
-    }
-  ]
-  createConnectUrl = jest.fn(() => this.defaultChannelUrl)
-    .mockReturnValueOnce(this.firstChannelUrl)
-  mockIdentityInfo = jest.fn()
-  constructor ({ identities, createConnectUrl, error } = {}) {
-    if (identities) {
-      this.identities = identities
-    }
-    if (createConnectUrl) {
-      this.createConnectUrl = createConnectUrl
-    }
-    if (error) {
-      this.error = error
-    }
-    this.identities.forEach(identity => {
-      this.mockIdentityInfo.mockReturnValueOnce(identity)
-    })
-  }
-}
 
 describe('CogitoContract', () => {
   let channel
