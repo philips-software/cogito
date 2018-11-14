@@ -18,7 +18,11 @@ jest.mock('@cogitojs/cogito-identity', () => {
         this.channel = channel
       }
       getInfo () {
-        return this.channel.mockIdentityInfo()
+        if (this.channel.error) {
+          return Promise.reject(this.channel.error)
+        } else {
+          return Promise.resolve(this.channel.mockIdentityInfo())
+        }
       }
     }
   }
@@ -166,6 +170,7 @@ describe('CogitoContract', () => {
     })
 
     it('shows the status when reading the contract value', async () => {
+      expect.assertions(1)
       let readingContractPromiseResolve
       const readingContractPromise = new Promise(resolve => {
         readingContractPromiseResolve = resolve
@@ -195,6 +200,7 @@ describe('CogitoContract', () => {
     })
 
     it('shows an error message when reading contract fails', async () => {
+      expect.assertions(1)
       console.error = jest.fn()
       let readingContractPromiseReject
       const readingContractPromise = new Promise((resolve, reject) => {
@@ -222,6 +228,32 @@ describe('CogitoContract', () => {
       readingContractPromiseReject(error)
       await waitForElement(() => getByText('reading contract error'))
       await wait(() => expect(queryByText(/executing contract/i)).toBeNull())
+    })
+
+    it('shows an error message when fetching identity info fails', async () => {
+      console.error = jest.fn()
+      channel.error = new Error('Error fetching identity info')
+      const { getByText } = render(
+        <CogitoContract channel={channel} contracts={contracts} />
+      )
+      const readButton = getByText(/read/i)
+      fireEvent.click(readButton)
+      const doneButton = getByText(/done/i)
+      fireEvent.click(doneButton)
+      await waitForElement(() => getByText(channel.error.message))
+    })
+
+    it('shows an error message when fetching identity returns no identity', async () => {
+      console.error = jest.fn()
+      channel.mockIdentityInfo = jest.fn().mockResolvedValueOnce(null)
+      const { getByText } = render(
+        <CogitoContract channel={channel} contracts={contracts} />
+      )
+      const readButton = getByText(/read/i)
+      fireEvent.click(readButton)
+      const doneButton = getByText(/done/i)
+      fireEvent.click(doneButton)
+      await waitForElement(() => getByText('No identity found on the mobile device!'))
     })
   })
 })
