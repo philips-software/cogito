@@ -4,12 +4,12 @@ import { Segment } from 'semantic-ui-react'
 import { Status } from 'components/styling'
 import { TimedStatus } from 'components/utils'
 
-export const TelepathError = ({ error, onTimeout }) => {
+export const TelepathError = ({ error, onTimeout, timeout = 3000 }) => {
   if (!error) {
     return null
   }
   return (
-    <TimedStatus timeout={3000} onTimeout={onTimeout}>
+    <TimedStatus timeout={timeout} onTimeout={onTimeout}>
       <Spacer margin='10px'>
         <Row>
           <Segment>

@@ -61,10 +61,8 @@ class ContractActions {
     return async (dispatch, getState) => {
       dispatch(AppEventsActions.telepathInProgress())
       try {
-        const account = await getAccount(getState, dispatch, channel, forceRefetchAddress)
-        const response = await contract.read(
-          { from: account }
-        )
+        await getAccount(getState, dispatch, channel, forceRefetchAddress)
+        const response = await contract.read()
         const balance = response.toNumber()
         dispatch(UserDataActions.setBalance(balance))
         dispatch(AppEventsActions.telepathFulfilled())
