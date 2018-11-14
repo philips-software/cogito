@@ -1,10 +1,8 @@
 class ValueWatcher {
-  web3
   onValueChanged
   contracts
 
-  constructor ({ web3, contracts, onValueChanged }) {
-    this.web3 = web3
+  constructor ({ contracts, onValueChanged }) {
     this.contracts = contracts
     this.onValueChanged = onValueChanged
   }
