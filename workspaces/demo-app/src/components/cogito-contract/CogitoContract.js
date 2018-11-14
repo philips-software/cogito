@@ -12,7 +12,30 @@ import { Status } from 'components/styling'
 import { Segment, Button } from 'semantic-ui-react'
 import { ContractActions } from './actions'
 import { AppEventsActions } from 'app-events'
+import { UserDataActions } from 'user-data'
 import { TelepathError } from '../telepath/TelepathError'
+import { ValueWatcher } from './ValueWatcher'
+
+class BalanceWatcher extends React.Component {
+  valueWatcher
+
+  componentDidMount () {
+    const { contracts, dispatch } = this.props
+    this.valueWatcher = new ValueWatcher({
+      contracts,
+      onValueChanged: value => dispatch(UserDataActions.setBalance(value))
+    })
+    this.valueWatcher.start()
+  }
+
+  componentWillUnmount () {
+    this.valueWatcher.stop()
+  }
+
+  render () {
+    return null
+  }
+}
 
 class CogitoContract extends React.Component {
   state = {
@@ -119,6 +142,7 @@ class CogitoContract extends React.Component {
           dispatch
         ) => (
           <Centered>
+            <BalanceWatcher dispatch={dispatch} contracts={this.props.contracts} />
             <p>Current value is:</p>
             <ValueWrapper data-testid='current-value'>{balance}</ValueWrapper>
             <Row css={{ marginTop: '10px' }}>

@@ -4,6 +4,7 @@ import nock from 'nock'
 import { CogitoContract } from './CogitoContract'
 
 import { UserDataActions } from 'user-data'
+import { ValueWatcher } from './ValueWatcher'
 
 jest.unmock('@react-frontend-developer/react-redux-render-prop')
 
@@ -63,6 +64,20 @@ class SimpleStorageMock {
     toNumber: jest.fn().mockReturnValueOnce(SimpleStorageMock.value + 1)
   })
   increase = jest.fn().mockResolvedValueOnce()
+  watchEvent = callback => {
+    this.emitEvent = callback
+  }
+  ValueChanged = jest.fn().mockReturnValue({
+    watch: this.watchEvent,
+    stopWatching: jest.fn()
+  })
+  simulateValueChange (value) {
+    this.emitEvent && this.emitEvent(null, {
+      args: {
+        value: { toNumber: () => value }
+      }
+    })
+  }
   constructor ({ read, increase } = {}) {
     if (read) { this.read = read }
     if (increase) { this.increase = increase }
@@ -114,34 +129,34 @@ describe('CogitoContract', () => {
 
   describe('Initial State', () => {
     it('shows the intial contract value of zero', () => {
-      const { getByText, getByTestId } = render(<CogitoContract channel={channel} />)
+      const { getByText, getByTestId } = render(<CogitoContract channel={channel} contracts={contracts} />)
       expect(getByText(/read/i)).toBeInTheDocument()
       expect(getByTestId(/current-value/i)).toHaveTextContent('0')
     })
 
     it('has active "Read" button', () => {
-      const { getByText } = render(<CogitoContract channel={channel} />)
+      const { getByText } = render(<CogitoContract channel={channel} contracts={contracts} />)
       const button = getByText(/read/i)
       expect(button).toBeInTheDocument()
       expect(button).not.toBeDisabled()
     })
 
     it('has active "Increase" button', () => {
-      const { getByText } = render(<CogitoContract channel={channel} />)
+      const { getByText } = render(<CogitoContract channel={channel} contracts={contracts} />)
       const button = getByText(/increase by 5/i)
       expect(button).toBeInTheDocument()
       expect(button).not.toBeDisabled()
     })
 
     it('has active "Show QR code" button', () => {
-      const { getByText } = render(<CogitoContract channel={channel} />)
+      const { getByText } = render(<CogitoContract channel={channel} contracts={contracts} />)
       const button = getByText(/show qr code/i)
       expect(button).toBeInTheDocument()
       expect(button).not.toBeDisabled()
     })
 
     it('does not show the cogito connector', () => {
-      const { queryByText } = render(<CogitoContract channel={channel} />)
+      const { queryByText } = render(<CogitoContract channel={channel} contracts={contracts} />)
       expect(queryByText(/scan the qr code/i)).toBeNull()
     })
   })
@@ -153,7 +168,7 @@ describe('CogitoContract', () => {
     }
 
     it('opens the "Scan QR Code" dialog if telepath channel is not yet established', () => {
-      const { getByText } = render(<CogitoContract channel={channel} />)
+      const { getByText } = render(<CogitoContract channel={channel} contracts={contracts} />)
       const readButton = getByText(/read/i)
       fireEvent.click(readButton)
       expect(getByText(/scan the qr code/i)).toBeInTheDocument()
@@ -305,8 +320,12 @@ describe('CogitoContract', () => {
       nock(process.env.FAUCET_URL).post('/0xabcd', '').reply(200)
     })
 
+    afterEach(() => {
+      console.log.mockRestore && console.log.mockRestore()
+    })
+
     it('opens the "Scan QR Code" dialog if telepath channel is not yet established', () => {
-      const { getByText } = render(<CogitoContract channel={channel} />)
+      const { getByText } = render(<CogitoContract channel={channel} contracts={contracts} />)
       const increaseButton = getByText(/increase/i)
       fireEvent.click(increaseButton)
       expect(getByText(/scan the qr code/i)).toBeInTheDocument()
@@ -314,6 +333,7 @@ describe('CogitoContract', () => {
 
     it('increases the contract value if telepath channel is already established', async () => {
       expect.assertions(2)
+      console.log = jest.fn()
       const { getByText, getByTestId, store: { dispatch } } = render(
         <CogitoContract channel={channel} contracts={contracts} />
       )
@@ -321,7 +341,22 @@ describe('CogitoContract', () => {
       setActiveTelepathChannel(dispatch)
       const increaseButton = getByText(/increase/i)
       fireEvent.click(increaseButton)
-      await wait(() => expect(getByTestId(/current-value/i)).toHaveTextContent(`${0}`))
+      contracts.simpleStorage.simulateValueChange(100)
+      await wait(() => expect(getByTestId(/current-value/i)).toHaveTextContent(`${100}`))
+    })
+
+    it('shows how to use ValueChanged event mock', async () => {
+      const onValueChanged = jest.fn()
+      const valueWatcher = new ValueWatcher({
+        contracts,
+        onValueChanged
+      })
+      valueWatcher.start()
+      contracts.simpleStorage.simulateValueChange(100)
+      await wait(() => {
+        expect(onValueChanged).toHaveBeenCalledTimes(1)
+        expect(onValueChanged.mock.calls[0][0]).toBe(100)
+      })
     })
   })
 })
