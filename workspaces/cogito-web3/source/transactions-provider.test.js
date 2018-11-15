@@ -41,7 +41,7 @@ describe('sending transactions', () => {
         return this
       },
       matchedInputFor: function (payload) {
-        const match = Object.values(this.payload).find(({request}) => {
+        const match = Object.values(this.payload).find(({ request }) => {
           return isMatch(payload, request)
         })
         return match ? match.result : this.payload['any']

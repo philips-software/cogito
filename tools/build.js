@@ -4,7 +4,7 @@ const prettyBytes = require('pretty-bytes')
 const gzipSize = require('gzip-size')
 
 class Builder {
-  constructor ({umdFileName, useWebpack, skipEsModules, copyFiles}) {
+  constructor ({ umdFileName, useWebpack, skipEsModules, copyFiles }) {
     this.umdFileName = umdFileName
     this.useWebpack = useWebpack
     this.skipEsModules = skipEsModules

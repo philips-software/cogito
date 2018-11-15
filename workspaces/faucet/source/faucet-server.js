@@ -17,11 +17,11 @@ export default class FaucetServer {
     request.setTimeout(600 * 1000) // 600 second timeout
     if (this.queue.length > 0) {
       // still processing previous request
-      this.queue.push({request, response})
+      this.queue.push({ request, response })
       return
     }
 
-    this.queue.push({request, response})
+    this.queue.push({ request, response })
     this.process()
   }
 

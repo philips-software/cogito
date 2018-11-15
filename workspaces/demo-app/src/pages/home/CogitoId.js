@@ -8,7 +8,7 @@ class CogitoId extends React.Component {
   render () {
     const { match, location, history } = this.props
     return (
-      <Demo routeProps={{match, location, history}} subtitle='Identity' documentation='documentation/cogito-id.md'>
+      <Demo routeProps={{ match, location, history }} subtitle='Identity' documentation='documentation/cogito-id.md'>
         <CogitoAddress {...this.props} />
       </Demo>
     )

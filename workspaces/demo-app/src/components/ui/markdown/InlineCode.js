@@ -18,7 +18,7 @@ const Code = glamorous.code({
   fontSize: '0.9em'
 })
 
-const InlineCode = ({children}) => (
+const InlineCode = ({ children }) => (
   <Code>{children}</Code>
 )
 

@@ -34,7 +34,7 @@ class MidLevelNavigationItem extends React.Component {
           </NavigationLink>
         </Wrapper>
       )}>
-        <div style={{marginLeft: '1rem', width: 'calc(100% - 1rem)'}}>
+        <div style={{ marginLeft: '1rem', width: 'calc(100% - 1rem)' }}>
           { this.props.children }
         </div>
       </Collapsable>

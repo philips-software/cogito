@@ -9,7 +9,7 @@ class Main extends React.Component {
   render () {
     return (
       <PageCentered>
-        <div style={{width: '300px', height: '400px'}}>
+        <div style={{ width: '300px', height: '400px' }}>
           <P>This is the download page for <B>Cogito iOS App</B></P>
           <ImageAppLink />
           <Button

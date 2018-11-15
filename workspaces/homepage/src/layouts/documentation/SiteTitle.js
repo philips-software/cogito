@@ -23,7 +23,7 @@ const HomeLink = glamorous(Link)({
   }
 })
 
-const SiteTitle = ({title}) => (
+const SiteTitle = ({ title }) => (
   <HomeLink to='/'>
     <Wrapper>
       { title }

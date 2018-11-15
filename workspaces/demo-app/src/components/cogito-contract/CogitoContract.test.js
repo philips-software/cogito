@@ -11,7 +11,7 @@ jest.unmock('@react-frontend-developer/react-redux-render-prop')
 
 jest.mock('components/utils/TimedStatus', () => {
   return {
-    TimedStatus: ({children}) => children
+    TimedStatus: ({ children }) => children
   }
 })
 

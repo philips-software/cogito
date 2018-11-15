@@ -67,7 +67,7 @@ class CogitoSimpleEncryption extends React.Component {
   }
 }
 
-const TextInput = ({...args}) => (
+const TextInput = ({ ...args }) => (
   <TextArea {...args} style={{ width: '13rem', height: '10rem' }} />
 )
 

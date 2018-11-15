@@ -3,7 +3,7 @@ export class CogitoIdentity {
     Username: 'username',
     EthereumAddress: 'ethereumAddress'
   }
-  constructor ({channel}) {
+  constructor ({ channel }) {
     this.channel = channel
   }
   getInfo () {

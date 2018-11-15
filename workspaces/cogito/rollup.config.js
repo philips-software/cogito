@@ -23,7 +23,7 @@ const config = {
     babel({
       exclude: 'node_modules/**'
     }),
-    resolve({browser: true}),
+    resolve({ browser: true }),
     commonjs({
       include: /node_modules/
     }),

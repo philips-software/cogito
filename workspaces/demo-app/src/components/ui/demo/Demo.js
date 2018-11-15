@@ -14,7 +14,7 @@ class Demo extends React.Component {
   state = {}
 
   render () {
-    const {children, title, subtitle, documentation, routeProps} = this.props
+    const { children, title, subtitle, documentation, routeProps } = this.props
 
     return (
       <TheGrid>

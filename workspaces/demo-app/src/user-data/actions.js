@@ -12,7 +12,7 @@ class UserDataActions {
     account
   })
 
-  static setTelepath = ({channelId, channelKey, appName}) => ({
+  static setTelepath = ({ channelId, channelKey, appName }) => ({
     type: 'SET_TELEPATH',
     channelId,
     channelKey,

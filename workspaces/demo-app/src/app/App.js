@@ -6,7 +6,7 @@ import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { Main } from './Main'
 
 const App = () =>
-  <WithStore.Provider value={{store}}>
+  <WithStore.Provider value={{ store }}>
     <Router>
       <Main />
     </Router>

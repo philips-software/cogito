@@ -17,7 +17,7 @@ const renderWithStore = (
   } = {}) => {
   return {
     ...render(
-      <WithStore.Provider value={{store}}>
+      <WithStore.Provider value={{ store }}>
         { ui }
       </WithStore.Provider>
     ),
