@@ -61,40 +61,11 @@ class CogitoContract extends React.Component {
           increment: 5
         })
       )
-    } else if (this.state.action === 'read') {
-      dispatch(
-        ContractActions.read({
-          deployedContract,
-          channel
-        })
-      )
     }
     dispatch(AppEventsActions.setDialogClosed())
     this.setState({
       action: ''
     })
-  }
-
-  read = async (dispatch, channelReady) => {
-    if (!channelReady) {
-      dispatch(AppEventsActions.setDialogOpen())
-      this.setState({
-        action: 'read'
-      })
-    } else {
-      const {
-        contracts: { simpleStorage: deployedContract },
-        channel
-      } = this.props
-      dispatch(
-        ContractActions.read({
-          deployedContract,
-          channel,
-          forceRefetchAddress: this.state.forceRefetchAddress
-        })
-      )
-      this.setState({ forceRefetchAddress: false })
-    }
   }
 
   increase = async (dispatch, channelReady) => {
@@ -146,14 +117,6 @@ class CogitoContract extends React.Component {
             <p>Current value is:</p>
             <ValueWrapper data-testid='current-value'>{balance}</ValueWrapper>
             <Row css={{ marginTop: '10px' }}>
-              <Button
-                secondary
-                color='black'
-                disabled={telepathInProgress}
-                onClick={() => this.read(dispatch, channelReady)}
-              >
-                Read...
-              </Button>
               <Button
                 secondary
                 color='black'
