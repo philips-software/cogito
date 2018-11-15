@@ -5,7 +5,6 @@ import { CogitoConnector } from '@cogitojs/cogito-react-ui'
 import {
   Row,
   Spacer,
-  ValueWrapper,
   Centered
 } from '@react-frontend-developer/react-layout-helpers'
 import { Status } from 'components/styling'
@@ -14,6 +13,7 @@ import { ContractActions } from './actions'
 import { AppEventsActions } from 'app-events'
 import { TelepathError } from '../telepath/TelepathError'
 import { BalanceWatcher } from './BalanceWatcher'
+import { Balance } from './Balance'
 
 class CogitoContract extends React.Component {
   state = {
@@ -73,7 +73,6 @@ class CogitoContract extends React.Component {
     return (
       <WithStore
         selector={state => ({
-          balance: state.userData.balance,
           channelReady: state.userData.connectionEstablished,
           telepathInProgress: state.appEvents.telepathInProgress,
           telepathError: state.appEvents.telepathError,
@@ -92,8 +91,7 @@ class CogitoContract extends React.Component {
         ) => (
           <Centered>
             <BalanceWatcher dispatch={dispatch} contracts={this.props.contracts} />
-            <p>Current value is:</p>
-            <ValueWrapper data-testid='current-value'>{balance}</ValueWrapper>
+            <Balance />
             <Row css={{ marginTop: '10px' }}>
               <Button
                 secondary
