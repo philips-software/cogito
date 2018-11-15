@@ -74,7 +74,6 @@ describe('CogitoContract', () => {
     })
 
     it('reads the contract value if telepath channel is already established', async () => {
-      expect.assertions(1)
       const { getByText, getByTestId, store: { dispatch } } = render(
         <CogitoContract channel={channel} contracts={contracts} />
       )
@@ -85,7 +84,6 @@ describe('CogitoContract', () => {
     })
 
     it('shows the "Scan QR Code" dialog and then reads the contract value after confirming', async () => {
-      expect.assertions(2)
       const { getByText, getByTestId, queryByText } = render(
         <CogitoContract channel={channel} contracts={contracts} />
       )
@@ -98,7 +96,6 @@ describe('CogitoContract', () => {
     })
 
     it('sets user identity and connection status in the redux store', async () => {
-      expect.assertions(1)
       const { getByText, store } = render(
         <CogitoContract channel={channel} contracts={contracts} />
       )
@@ -110,7 +107,6 @@ describe('CogitoContract', () => {
     })
 
     it('refetches user idenity if user explicitely requests a new QR Code', async () => {
-      expect.assertions(2)
       const { getByText, store } = render(
         <CogitoContract channel={channel} contracts={contracts} />
       )
@@ -137,7 +133,6 @@ describe('CogitoContract', () => {
       })
 
       it('shows the status when reading the contract value', async () => {
-        expect.assertions(1)
         const { getByText, queryByText, store: { dispatch } } = render(
           <CogitoContract channel={channel} contracts={contracts} />
         )
@@ -168,7 +163,6 @@ describe('CogitoContract', () => {
       })
 
       it('shows an error message when reading contract fails', async () => {
-        expect.assertions(1)
         const { getByText, queryByText, store: { dispatch } } = render(
           <CogitoContract channel={channel} contracts={contracts} />
         )
@@ -231,7 +225,6 @@ describe('CogitoContract', () => {
     })
 
     it('increases the contract value if telepath channel is already established', async () => {
-      expect.assertions(2)
       console.log = jest.fn()
       const { getByText, getByTestId, store: { dispatch } } = render(
         <CogitoContract channel={channel} contracts={contracts} />
