@@ -18,7 +18,7 @@ const Wrapper = glamorous.div({
   }
 })
 
-const Text = glamorous.div(({color = 'black'}) => ({
+const Text = glamorous.div(({ color = 'black' }) => ({
   fontFamily: 'Roboto Mono, monospace',
   fontWeight: '300',
   fontSize: '0.8rem',
@@ -42,7 +42,7 @@ class TopLevelNavigationItem extends React.Component {
           </ArrowPositioner>
         </Wrapper>
       )}>
-        <div style={{backgroundColor: 'white', border: '1px solid #F7F7F7', width: '100%'}}>
+        <div style={{ backgroundColor: 'white', border: '1px solid #F7F7F7', width: '100%' }}>
           { this.props.children }
         </div>
       </Collapsable>

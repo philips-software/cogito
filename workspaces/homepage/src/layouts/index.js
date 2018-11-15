@@ -1,7 +1,7 @@
 import { React } from 'react'
 import { DocumentationLayout } from './documentation'
 
-const Layout = ({location, children}) => {
+const Layout = ({ location, children }) => {
   if (location.pathname === '' || location.pathname === '/') {
     return (
       <div>{children}</div>

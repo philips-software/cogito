@@ -37,7 +37,7 @@ export class Navigation extends React.PureComponent {
     ]
   }
 
-  createNavigationGroupForTag = ({title, tag, deltaGroupName}) => {
+  createNavigationGroupForTag = ({ title, tag, deltaGroupName }) => {
     return {
       title,
       docs: this.props.docs.filter(d => d.node.frontmatter.tag === tag),
@@ -64,7 +64,7 @@ export class Navigation extends React.PureComponent {
   setDelta = (group, index, d) => {
     const deltas = this.state[`${group}Deltas`]
     deltas[index] = d
-    this.setState({[`${group}Deltas`]: deltas})
+    this.setState({ [`${group}Deltas`]: deltas })
   }
 
   renderNavigationGroup = group => (

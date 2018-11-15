@@ -53,7 +53,7 @@ describe('StreamEncoderDecoder', () => {
   //   ...
   // ]
   const createTestUint8ArrayMessages = (N, M) => {
-    return [...Array(N).keys()].map(e => Uint8Array.from({length: 5}, (v, k) => e))
+    return [...Array(N).keys()].map(e => Uint8Array.from({ length: 5 }, (v, k) => e))
   }
 
   it('can encode a one element stream', () => {
@@ -63,7 +63,7 @@ describe('StreamEncoderDecoder', () => {
     const cipherText = streamEncoder.end(data)
 
     const streamDecoder = new StreamDecoder(streamEncoder.cryptoMaterial)
-    const {message: clearText, tag} = streamDecoder.pull(cipherText)
+    const { message: clearText, tag } = streamDecoder.pull(cipherText)
 
     expect(toString(clearText)).toBe(message)
     expect(tag).toBe(Sodium.TAG_FINAL)
@@ -79,8 +79,8 @@ describe('StreamEncoderDecoder', () => {
     const cipherText2 = streamEncoder.end(data2)
 
     const streamDecoder = new StreamDecoder(streamEncoder.cryptoMaterial)
-    const {message: clearText1, tag: tag1} = streamDecoder.pull(cipherText1)
-    const {message: clearText2, tag: tag2} = streamDecoder.pull(cipherText2)
+    const { message: clearText1, tag: tag1 } = streamDecoder.pull(cipherText1)
+    const { message: clearText2, tag: tag2 } = streamDecoder.pull(cipherText2)
 
     expect(toString(clearText1)).toBe(message1)
     expect(tag1).toBe(Sodium.TAG_MESSAGE)
@@ -167,12 +167,12 @@ describe('StreamEncoderDecoder', () => {
       })
 
       it('throws an error if you try to push to the stream', () => {
-        const dataChunk = Uint8Array.from({length: 10}, (v, k) => k)
+        const dataChunk = Uint8Array.from({ length: 10 }, (v, k) => k)
         expect(() => { streamEncoder.push(dataChunk) }).toThrow(error)
       })
 
       it('throws an error if you try to end the stream', () => {
-        const dataChunk = Uint8Array.from({length: 10}, (v, k) => k)
+        const dataChunk = Uint8Array.from({ length: 10 }, (v, k) => k)
         expect(() => { streamEncoder.end(dataChunk) }).toThrow(error)
       })
 
@@ -204,7 +204,7 @@ describe('StreamEncoderDecoder', () => {
 
       it('throws an error if you try to pull from the stream', () => {
         Sodium.ready = true
-        const dataChunk = Uint8Array.from({length: 10}, (v, k) => k)
+        const dataChunk = Uint8Array.from({ length: 10 }, (v, k) => k)
         const encryptedChunk = streamEncoder.end(dataChunk)
         Sodium.ready = false
         expect(() => { streamDecoder.pull(encryptedChunk) }).toThrow(error)

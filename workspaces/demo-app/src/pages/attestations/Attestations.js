@@ -8,7 +8,7 @@ class Attestations extends React.Component {
   render () {
     const { match, location, history } = this.props
     return (
-      <Demo routeProps={{match, location, history}} subtitle='Attestations' documentation='documentation/attestations.md'>
+      <Demo routeProps={{ match, location, history }} subtitle='Attestations' documentation='documentation/attestations.md'>
         <CogitoAttestations {...this.props} />
       </Demo>
     )

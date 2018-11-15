@@ -8,7 +8,7 @@ class Contracts extends React.Component {
   render () {
     const { match, location, history } = this.props
     return (
-      <Demo routeProps={{match, location, history}} subtitle='Executing Contracts' documentation='documentation/contracts.md'>
+      <Demo routeProps={{ match, location, history }} subtitle='Executing Contracts' documentation='documentation/contracts.md'>
         <CogitoContract {...this.props} />
       </Demo>
     )

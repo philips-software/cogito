@@ -8,7 +8,7 @@ class SimpleEncryption extends React.Component {
   render () {
     const { match, location, history } = this.props
     return (
-      <Demo routeProps={{match, location, history}} subtitle='Simple Encryption' documentation='documentation/simple-encryption.md'>
+      <Demo routeProps={{ match, location, history }} subtitle='Simple Encryption' documentation='documentation/simple-encryption.md'>
         <CogitoSimpleEncryption {...this.props} />
       </Demo>
     )

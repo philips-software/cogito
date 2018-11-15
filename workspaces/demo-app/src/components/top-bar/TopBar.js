@@ -21,7 +21,7 @@ const Wrapper = glamorous.div({
   color: 'white'
 })
 
-const TopBar = ({user, switchUser}) => {
+const TopBar = ({ user, switchUser }) => {
   if (!user) {
     return <EmptyTopBar />
   } else {
@@ -31,13 +31,13 @@ const TopBar = ({user, switchUser}) => {
 
 const EmptyTopBar = () => <Wrapper><div>Demo App</div></Wrapper>
 
-const UserTopBar = ({user, switchUser}) =>
+const UserTopBar = ({ user, switchUser }) =>
   <Wrapper>
     <div>{user.role}</div>
     <div>
       <UserIcon name='user' size='big' />
       <Dropdown text={user.name}>
-        <Dropdown.Menu style={{top: '30px', left: '-20px'}} >
+        <Dropdown.Menu style={{ top: '30px', left: '-20px' }} >
           <Dropdown.Item text='Switch user...' onClick={switchUser} />
         </Dropdown.Menu>
       </Dropdown>

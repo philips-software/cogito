@@ -8,7 +8,7 @@ class StreamEncryption extends React.Component {
   render () {
     const { match, location, history } = this.props
     return (
-      <Demo routeProps={{match, location, history}} subtitle='Stream Encryption' documentation='documentation/stream-encryption.md'>
+      <Demo routeProps={{ match, location, history }} subtitle='Stream Encryption' documentation='documentation/stream-encryption.md'>
         <CogitoStreamEncryption {...this.props} />
       </Demo>
     )

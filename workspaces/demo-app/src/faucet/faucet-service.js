@@ -19,4 +19,4 @@ class FaucetService {
   }
 }
 
-export {FaucetService}
+export { FaucetService }

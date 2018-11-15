@@ -21,8 +21,8 @@
     "libsodium-wrappers": "^0.7.3",
     "prop-types": "^15.6.1",
     "qrcode.react": "^0.8.0",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "react-dropzone": "^4.2.13",
     "react-fontawesome": "^1.6.1",
     "react-markdown": "^3.3.4",
@@ -46,7 +46,7 @@
     "jest-glamor-react": "^4.3.1",
     "node-fetch": "^2.2.0",
     "react-scripts": "^2.0.0",
-    "react-test-renderer": "^16.2.0",
+    "react-test-renderer": "^16.6.3",
     "react-testing-library": "^5.2.3"
   },
   "scripts": {

@@ -30,7 +30,7 @@ class NavigationHeading extends React.Component {
         <NavigationLink
           to={`${path}#${anchor}`}
           ref={this.recordLinkNode}
-          getProps={({location, href}) => this.getActiveProps(location, href)}
+          getProps={({ location, href }) => this.getActiveProps(location, href)}
         >
           { value }
         </NavigationLink>

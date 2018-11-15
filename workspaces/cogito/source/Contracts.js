@@ -5,7 +5,7 @@ class Contracts {
 
   constructor ({
     web3,
-    contracts: {deployedContractsInfo, rawContractsInfo}
+    contracts: { deployedContractsInfo, rawContractsInfo }
   }) {
     this.web3 = web3
     this.getDeployedContracts(deployedContractsInfo)

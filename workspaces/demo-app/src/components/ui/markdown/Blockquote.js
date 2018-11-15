@@ -8,7 +8,7 @@ const blockQuoteStyle = {
   color: '#777'
 }
 
-const Blockquote = ({children}) => (
+const Blockquote = ({ children }) => (
   <blockquote style={blockQuoteStyle}>
     {children}
   </blockquote>

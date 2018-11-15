@@ -55,7 +55,7 @@ describe('CogitoKeyProvider', () => {
     })
 
     it('gets the public key', async () => {
-      await cogitoKeyProvider.getPublicKey({tag})
+      await cogitoKeyProvider.getPublicKey({ tag })
       const request = {
         jsonrpc: '2.0',
         method: 'getEncryptionPublicKey',
@@ -71,12 +71,12 @@ describe('CogitoKeyProvider', () => {
     it('throws when error is returned', async () => {
       const error = new Error('some error')
       telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
-      await expect(cogitoKeyProvider.getPublicKey({tag})).rejects.toThrow(error)
+      await expect(cogitoKeyProvider.getPublicKey({ tag })).rejects.toThrow(error)
     })
 
     it('uses different JSON-RPC ids for subsequent requests', async () => {
-      await cogitoKeyProvider.getPublicKey({tag})
-      await cogitoKeyProvider.getPublicKey({tag})
+      await cogitoKeyProvider.getPublicKey({ tag })
+      await cogitoKeyProvider.getPublicKey({ tag })
       const id1 = telepathChannel.send.mock.calls[0][0].id
       const id2 = telepathChannel.send.mock.calls[1][0].id
       expect(id1).not.toBe(id2)

@@ -25,7 +25,7 @@ class DemoNavigation extends React.PureComponent {
       <Centered>
         <Dropdown upward icon='exchange' text='Switch demo...' pointing='top' floating labeled button className='icon'>
           <Dropdown.Menu>
-            { allDemos.map(({text, url}) => (
+            { allDemos.map(({ text, url }) => (
               <Dropdown.Item active={url === pathname} key={text} text={text} onClick={() => this.switchDemo(url)} />
             ))}
           </Dropdown.Menu>

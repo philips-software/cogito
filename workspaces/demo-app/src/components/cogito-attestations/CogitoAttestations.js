@@ -9,7 +9,7 @@ import { AttestationsActions } from 'attestations-state/actions'
 
 export const CogitoAttestations = (props) => (
   <FullWidth>
-    <Centered css={{width: '100%'}}>
+    <Centered css={{ width: '100%' }}>
       <Div>
         <ShowAttestation />
         <RetrieveAttestation {...props} />
@@ -19,7 +19,7 @@ export const CogitoAttestations = (props) => (
 )
 
 const ShowAttestation = () => (
-  <Centered css={{padding: '10px', marginRight: '50px', backgroundColor: 'white'}}>
+  <Centered css={{ padding: '10px', marginRight: '50px', backgroundColor: 'white' }}>
     <p>Scan to add a dummy attestation:</p>
     <QRCode
       value='https://cogito.example.com/attestations/receive#A=email%3Atest.user%40philips.com'
@@ -33,7 +33,7 @@ const AttestationsWrapper = glamorous.div({
   alignItems: 'center'
 })
 
-const Attestations = ({attestations}) => {
+const Attestations = ({ attestations }) => {
   if (attestations.length === 0) {
     return (
       <ValueWrapper>No attestations</ValueWrapper>
