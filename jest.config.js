@@ -15,9 +15,14 @@ module.exports = {
   collectCoverageFrom: [
     'source/**.js',
     'src/**.js',
+    '!**/jest.config.js',
+    '!**/babel.config.js',
+    '!**/rollup.config.js',
+    '!**/.babelrc.js',
     '!**/*.test.js',
     '!**/__mocks__/**.js',
     '!**/test-helpers/**.js',
+    '!**/tools/**.js',
     '!**/node_modules/**'
   ],
   coverageReporters: [
