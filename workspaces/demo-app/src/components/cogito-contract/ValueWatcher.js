@@ -24,7 +24,7 @@ class ValueWatcher {
   }
 
   startWatchingFor (events) {
-    events.watch(async (error, result) => {
+    events.watch((error, result) => {
       if (!error) {
         const value = result.args.value.toNumber()
 
