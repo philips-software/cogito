@@ -17,6 +17,7 @@ module.exports = {
     'src/**.js',
     '!**/*.test.js',
     '!**/__mocks__/**.js',
+    '!**/test-helpers/**.js',
     '!**/node_modules/**'
   ],
   coverageReporters: [
