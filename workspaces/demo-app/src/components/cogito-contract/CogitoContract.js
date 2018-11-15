@@ -8,12 +8,13 @@ import {
   Centered
 } from '@react-frontend-developer/react-layout-helpers'
 import { Status } from 'components/styling'
-import { Segment, Button } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 import { ContractActions } from './actions'
 import { AppEventsActions } from 'app-events'
 import { TelepathError } from '../telepath/TelepathError'
 import { BalanceWatcher } from './BalanceWatcher'
 import { Balance } from './Balance'
+import { IncreaseContractButton } from './IncreaseContractButton'
 
 class CogitoContract extends React.Component {
   state = {
@@ -93,14 +94,7 @@ class CogitoContract extends React.Component {
             <BalanceWatcher dispatch={dispatch} contracts={this.props.contracts} />
             <Balance />
             <Row css={{ marginTop: '10px' }}>
-              <Button
-                secondary
-                color='black'
-                disabled={telepathInProgress}
-                onClick={() => this.increase(dispatch, channelReady)}
-              >
-                Increase by 5...
-              </Button>
+              <IncreaseContractButton onClick={() => this.increase(dispatch, channelReady)} />
               <CogitoConnector
                 open={dialogOpen}
                 onTrigger={() => this.onTrigger(dispatch)}

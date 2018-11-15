@@ -1,14 +1,14 @@
 import React from 'react'
 import { render, fireEvent } from 'test-helpers/render-props'
-import { ReadContractButton } from './ReadContractButton'
+import { IncreaseContractButton } from './IncreaseContractButton'
 import { AppEventsActions } from 'app-events'
 
 jest.unmock('@react-frontend-developer/react-redux-render-prop')
 
-describe('ReadContractButton', () => {
+describe('IncreaseContractButton', () => {
   it('renders without crashing', () => {
     const { container } = render(
-      <ReadContractButton />
+      <IncreaseContractButton />
     )
 
     expect(container).not.toBeEmpty()
@@ -16,12 +16,12 @@ describe('ReadContractButton', () => {
 
   it('is disabled if app event telepathInProgress is set', () => {
     const { getByText, store: { dispatch } } = render(
-      <ReadContractButton onClick={() => {
+      <IncreaseContractButton onClick={() => {
         dispatch(AppEventsActions.telepathInProgress())
       }} />
     )
 
-    const button = getByText(/read/i)
+    const button = getByText(/increase/i)
 
     expect(button).not.toBeDisabled()
     fireEvent.click(button)
@@ -30,12 +30,12 @@ describe('ReadContractButton', () => {
 
   it('gets enabled if app event telepathInProgress is reset', async () => {
     const { getByText, store: { dispatch } } = render(
-      <ReadContractButton onClick={() => {
+      <IncreaseContractButton onClick={() => {
         dispatch(AppEventsActions.telepathInProgress())
       }} />
     )
 
-    const button = getByText(/read/i)
+    const button = getByText(/increase/i)
     expect(button).not.toBeDisabled()
     fireEvent.click(button)
     expect(button).toBeDisabled()
