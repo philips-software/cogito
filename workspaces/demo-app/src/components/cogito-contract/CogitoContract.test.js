@@ -19,14 +19,22 @@ describe('CogitoContract', () => {
   let channel
   let contracts
 
+  const setActiveTelepathChannel = dispatch => {
+    dispatch(UserDataActions.setIdentityInfo(channel.identities[0]))
+    dispatch(UserDataActions.connectionEstablished())
+  }
+
   beforeEach(() => {
     channel = new TelepathChannelMock()
     contracts = {
       simpleStorage: new SimpleStorageMock()
     }
+    process.env.FAUCET_URL = 'https://faucet.url/donate'
+    nock(process.env.FAUCET_URL).post(`/${channel.identities[0].ethereumAddress}`, '').reply(200)
+    nock(process.env.FAUCET_URL).post(`/${channel.identities[1].ethereumAddress}`, '').reply(200)
   })
 
-  describe('Initial State', () => {
+  describe('when in initial state', () => {
     it('shows the intial contract value of zero', () => {
       const { getByText, getByTestId } = render(<CogitoContract channel={channel} contracts={contracts} />)
       expect(getByText(/current value is/i)).toBeInTheDocument()
@@ -53,17 +61,8 @@ describe('CogitoContract', () => {
     })
   })
 
-  describe('increasing contract value', () => {
+  describe('when increasing contract value', () => {
     const contractValueIncrement = 5
-    const setActiveTelepathChannel = dispatch => {
-      dispatch(UserDataActions.setIdentityInfo(channel.identities[0]))
-      dispatch(UserDataActions.connectionEstablished())
-    }
-    beforeEach(() => {
-      process.env.FAUCET_URL = 'https://faucet.url/donate'
-      nock(process.env.FAUCET_URL).post(`/${channel.identities[0].ethereumAddress}`, '').reply(200)
-      nock(process.env.FAUCET_URL).post(`/${channel.identities[1].ethereumAddress}`, '').reply(200)
-    })
 
     afterEach(() => {
       console.log.mockRestore && console.log.mockRestore()
@@ -82,7 +81,6 @@ describe('CogitoContract', () => {
         expect(onValueChanged.mock.calls[0][0]).toBe(100)
       })
     })
-
     it('opens the "Scan QR Code" dialog if telepath channel is not yet established', () => {
       const { getByText } = render(<CogitoContract channel={channel} contracts={contracts} />)
       const increaseButton = getByText(/increase/i)
@@ -90,7 +88,7 @@ describe('CogitoContract', () => {
       expect(getByText(/scan the qr code/i)).toBeInTheDocument()
     })
 
-    it('increases the contract value if telepath channel is already established', async () => {
+    it('directly increases the contract value if telepath channel is already established', async () => {
       console.log = jest.fn()
       const { getByText, getByTestId, store: { dispatch } } = render(
         <CogitoContract channel={channel} contracts={contracts} />
@@ -142,93 +140,93 @@ describe('CogitoContract', () => {
       fireEvent.click(increaseButton)
       await wait(() => expect(store.getState().userData).toMatchObject(channel.identities[1]))
     })
+  })
 
-    describe('showing status info', () => {
-      let increasePromise
-      let renderingContext
+  describe('when showing status info', () => {
+    let increasePromise
+    let renderingContext
 
-      beforeEach(() => {
-        increasePromise = new InteractivePromise()
-        contracts = {
-          simpleStorage: new SimpleStorageMock({ increase: () => increasePromise.get() })
-        }
-        renderingContext = render(
-          <CogitoContract channel={channel} contracts={contracts} />
-        )
-        const { getByText, store: { dispatch } } = renderingContext
-        setActiveTelepathChannel(dispatch)
-        const increaseButton = getByText(/increase/i)
-        fireEvent.click(increaseButton)
-      })
-
-      it('shows the status when reading the contract value', async () => {
-        const { getByText } = renderingContext
-
-        await waitForElement(() => getByText(/executing contract/i))
-      })
-
-      it('hides the status when increasing contract value finishes', async () => {
-        const { queryByText } = renderingContext
-
-        increasePromise.resolve({
-          toNumber: jest.fn().mockReturnValueOnce(SimpleStorageMock.value)
-        })
-        await wait(() => expect(queryByText(/executing contract/i)).toBeNull())
-      })
+    beforeEach(() => {
+      increasePromise = new InteractivePromise()
+      contracts = {
+        simpleStorage: new SimpleStorageMock({ increase: () => increasePromise.get() })
+      }
+      renderingContext = render(
+        <CogitoContract channel={channel} contracts={contracts} />
+      )
+      const { getByText, store: { dispatch } } = renderingContext
+      setActiveTelepathChannel(dispatch)
+      const increaseButton = getByText(/increase/i)
+      fireEvent.click(increaseButton)
     })
 
-    describe('handling errors', () => {
-      let increasePromise
+    it('shows the status when increasing the contract value', async () => {
+      const { getByText } = renderingContext
 
-      beforeEach(() => {
-        console.error = jest.fn()
-        increasePromise = new InteractivePromise()
-        contracts = {
-          simpleStorage: new SimpleStorageMock({ increase: () => increasePromise.get() })
-        }
-      })
+      await waitForElement(() => getByText(/executing contract/i))
+    })
 
-      afterEach(() => {
-        console.error.mockRestore()
-      })
+    it('hides the status when increasing contract value finishes', async () => {
+      const { queryByText } = renderingContext
 
-      it('shows an error message when increasing contract value fails', async () => {
-        const { getByText, queryByText, store: { dispatch } } = render(
-          <CogitoContract channel={channel} contracts={contracts} />
-        )
-        setActiveTelepathChannel(dispatch)
-        const increaseButton = getByText(/increase/i)
-        fireEvent.click(increaseButton)
-        await waitForElement(() => getByText(/executing contract/i))
-        const error = new Error('error increasing contract value')
-        increasePromise.reject(error)
-        await waitForElement(() => getByText(`${error.message}`))
-        await wait(() => expect(queryByText(/executing contract/i)).toBeNull())
+      increasePromise.resolve({
+        toNumber: jest.fn().mockReturnValueOnce(SimpleStorageMock.value)
       })
+      await wait(() => expect(queryByText(/executing contract/i)).toBeNull())
+    })
+  })
 
-      it('shows an error message when fetching identity info fails', async () => {
-        channel = new TelepathChannelMock({ error: new Error('Error fetching identity info') })
-        const { getByText } = render(
-          <CogitoContract channel={channel} contracts={contracts} />
-        )
-        const increaseButton = getByText(/increase/i)
-        fireEvent.click(increaseButton)
-        const doneButton = getByText(/done/i)
-        fireEvent.click(doneButton)
-        await waitForElement(() => getByText(channel.error.message))
-      })
+  describe('handling errors', () => {
+    let increasePromise
 
-      it('shows an error message when fetching identity returns no identity', async () => {
-        channel = new TelepathChannelMock({ identities: [] })
-        const { getByText } = render(
-          <CogitoContract channel={channel} contracts={contracts} />
-        )
-        const increaseButton = getByText(/increase/i)
-        fireEvent.click(increaseButton)
-        const doneButton = getByText(/done/i)
-        fireEvent.click(doneButton)
-        await waitForElement(() => getByText('No identity found on the mobile device!'))
-      })
+    beforeEach(() => {
+      console.error = jest.fn()
+      increasePromise = new InteractivePromise()
+      contracts = {
+        simpleStorage: new SimpleStorageMock({ increase: () => increasePromise.get() })
+      }
+    })
+
+    afterEach(() => {
+      console.error.mockRestore()
+    })
+
+    it('shows an error message when increasing contract value fails', async () => {
+      const { getByText, queryByText, store: { dispatch } } = render(
+        <CogitoContract channel={channel} contracts={contracts} />
+      )
+      setActiveTelepathChannel(dispatch)
+      const increaseButton = getByText(/increase/i)
+      fireEvent.click(increaseButton)
+      await waitForElement(() => getByText(/executing contract/i))
+      const error = new Error('error increasing contract value')
+      increasePromise.reject(error)
+      await waitForElement(() => getByText(`${error.message}`))
+      await wait(() => expect(queryByText(/executing contract/i)).toBeNull())
+    })
+
+    it('shows an error message when fetching identity info fails', async () => {
+      channel = new TelepathChannelMock({ error: new Error('Error fetching identity info') })
+      const { getByText } = render(
+        <CogitoContract channel={channel} contracts={contracts} />
+      )
+      const increaseButton = getByText(/increase/i)
+      fireEvent.click(increaseButton)
+      const doneButton = getByText(/done/i)
+      fireEvent.click(doneButton)
+      await waitForElement(() => getByText(channel.error.message))
+    })
+
+    it('shows an error message when fetching identity returns no identity', async () => {
+      channel = new TelepathChannelMock({ identities: [] })
+      const { getByText } = render(
+        <CogitoContract channel={channel} contracts={contracts} />
+      )
+      const increaseButton = getByText(/increase/i)
+      fireEvent.click(increaseButton)
+      const doneButton = getByText(/done/i)
+      fireEvent.click(doneButton)
+      await waitForElement(() => getByText('No identity found on the mobile device!'))
     })
   })
 })
