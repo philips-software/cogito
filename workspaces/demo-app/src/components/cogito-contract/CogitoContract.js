@@ -12,39 +12,17 @@ import { Status } from 'components/styling'
 import { Segment, Button } from 'semantic-ui-react'
 import { ContractActions } from './actions'
 import { AppEventsActions } from 'app-events'
-import { UserDataActions } from 'user-data'
 import { TelepathError } from '../telepath/TelepathError'
-import { ValueWatcher } from './ValueWatcher'
-
-class BalanceWatcher extends React.Component {
-  valueWatcher
-
-  componentDidMount () {
-    const { contracts, dispatch } = this.props
-    this.valueWatcher = new ValueWatcher({
-      contracts,
-      onValueChanged: value => dispatch(UserDataActions.setBalance(value))
-    })
-    this.valueWatcher.start()
-  }
-
-  componentWillUnmount () {
-    this.valueWatcher.stop()
-  }
-
-  render () {
-    return null
-  }
-}
+import { BalanceWatcher } from './BalanceWatcher'
 
 class CogitoContract extends React.Component {
   state = {
     action: '',
-    forceRefetchAddress: false
+    forceFetchingIdentity: false
   }
 
   onTrigger = dispatch => {
-    this.setState({ forceRefetchAddress: true })
+    this.setState({ forceFetchingIdentity: true })
     dispatch(AppEventsActions.setDialogOpen())
   }
 
@@ -84,10 +62,10 @@ class CogitoContract extends React.Component {
           deployedContract,
           channel,
           increment: 5,
-          forceRefetchAddress: this.state.forceRefetchAddress
+          forceFetchingIdentity: this.state.forceFetchingIdentity
         })
       )
-      this.setState({ forceRefetchAddress: false })
+      this.setState({ forceFetchingIdentity: false })
     }
   }
 

@@ -11,7 +11,9 @@ class SimpleStorageMock {
   }
   ValueChanged = jest.fn().mockReturnValue({
     watch: this.watchEvent,
-    stopWatching: jest.fn()
+    stopWatching: jest.fn(() => {
+      this.emitEvent = null
+    })
   })
   simulateValueChange (value) {
     this.emitEvent && this.emitEvent(null, {
