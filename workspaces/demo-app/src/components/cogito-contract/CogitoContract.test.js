@@ -93,7 +93,6 @@ describe('CogitoContract', () => {
       const { getByText, getByTestId, store: { dispatch } } = render(
         <CogitoContract channel={channel} contracts={contracts} />
       )
-      // expect(getByTestId(/current-value/i)).toHaveTextContent('0')
       setActiveTelepathChannel(dispatch)
       const increaseButton = getByText(/increase/i)
       fireEvent.click(increaseButton)
