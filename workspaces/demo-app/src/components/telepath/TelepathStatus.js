@@ -1,11 +1,6 @@
 import React from 'react'
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
-import {
-  Row,
-  Spacer
-} from '@react-frontend-developer/react-layout-helpers'
-import { Status } from 'components/styling'
-import { Segment } from 'semantic-ui-react'
+import { StatusSegmentRow } from 'components/ui/layout'
 
 const TelepathStatus = ({ children }) => {
   return (
@@ -17,13 +12,7 @@ const TelepathStatus = ({ children }) => {
         ({ telepathInProgress }) => {
           if (telepathInProgress) {
             return (
-              <Spacer margin='10px'>
-                <Row>
-                  <Segment>
-                    <Status>{children}</Status>
-                  </Segment>
-                </Row>
-              </Spacer>
+              <StatusSegmentRow>{children}</StatusSegmentRow>
             )
           } else {
             return null
