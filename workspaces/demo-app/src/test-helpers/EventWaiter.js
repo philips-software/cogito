@@ -1,28 +1,22 @@
+import { InteractivePromise } from './InteractivePromise'
+
 class EventWaiter {
-  promise
-  promiseResolve
-  promiseReject
   expectedNumberOfEvents = 1
   intermediateValues = []
+  interactivePromise
 
   constructor () {
-    this.promise = new Promise((resolve, reject) => {
-      this.promiseResolve = resolve
-      this.promiseReject = reject
-    })
+    this.interactivePromise = new InteractivePromise()
   }
 
   reset () {
-    this.promise = new Promise((resolve, reject) => {
-      this.promiseResolve = resolve
-      this.promiseReject = reject
-    })
+    this.interactivePromise = new InteractivePromise()
     this.expectedNumberOfEvents = 1
   }
 
   onValueChanged = value => {
     if (--this.expectedNumberOfEvents === 0) {
-      this.promiseResolve(value)
+      this.interactivePromise.resolve(value)
       clearTimeout(this.timeout)
     } else {
       this.intermediateValues = [ ...this.intermediateValues, value ]
@@ -35,9 +29,9 @@ class EventWaiter {
 
   wait () {
     this.timeout = setTimeout(() => {
-      this.promiseReject(new Error('timedout'))
+      this.interactivePromise.reject(new Error('timedout'))
     }, 4000)
-    return this.promise
+    return this.interactivePromise.get()
   }
 }
 
