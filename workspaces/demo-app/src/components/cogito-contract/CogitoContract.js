@@ -8,11 +8,10 @@ import {
 } from '@react-frontend-developer/react-layout-helpers'
 import { ContractActions } from './actions'
 import { AppEventsActions } from 'app-events'
-import { TelepathError } from '../telepath/TelepathError'
 import { BalanceWatcher } from './BalanceWatcher'
 import { Balance } from './Balance'
 import { IncreaseContractButton } from './IncreaseContractButton'
-import { TelepathStatus } from './TelepathStatus'
+import { TelepathError, TelepathStatus } from 'components/telepath'
 
 class CogitoContract extends React.Component {
   state = {

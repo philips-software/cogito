@@ -1,8 +1,6 @@
 import React from 'react'
-import { Spacer, Row } from '@react-frontend-developer/react-layout-helpers'
-import { Segment } from 'semantic-ui-react'
-import { Status } from 'components/styling'
 import { TimedStatus } from 'components/utils'
+import { StatusSegmentRow } from 'components/ui/layout'
 
 export const TelepathError = ({ error, onTimeout, timeout = 3000 }) => {
   if (!error) {
@@ -10,13 +8,7 @@ export const TelepathError = ({ error, onTimeout, timeout = 3000 }) => {
   }
   return (
     <TimedStatus timeout={timeout} onTimeout={onTimeout}>
-      <Spacer margin='10px'>
-        <Row>
-          <Segment>
-            <Status>{error}</Status>
-          </Segment>
-        </Row>
-      </Spacer>
+      <StatusSegmentRow>{error}</StatusSegmentRow>
     </TimedStatus>
   )
 }
