@@ -4,17 +4,15 @@ import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { CogitoConnector } from '@cogitojs/cogito-react-ui'
 import {
   Row,
-  Spacer,
   Centered
 } from '@react-frontend-developer/react-layout-helpers'
-import { Status } from 'components/styling'
-import { Segment } from 'semantic-ui-react'
 import { ContractActions } from './actions'
 import { AppEventsActions } from 'app-events'
 import { TelepathError } from '../telepath/TelepathError'
 import { BalanceWatcher } from './BalanceWatcher'
 import { Balance } from './Balance'
 import { IncreaseContractButton } from './IncreaseContractButton'
+import { TelepathStatus } from './TelepathStatus'
 
 class CogitoContract extends React.Component {
   state = {
@@ -27,19 +25,24 @@ class CogitoContract extends React.Component {
     dispatch(AppEventsActions.setDialogOpen())
   }
 
-  onClosed = async dispatch => {
+  dispatchIncrease = dispatch => {
     const {
       contracts: { simpleStorage: deployedContract },
       channel
     } = this.props
+    dispatch(
+      ContractActions.increase({
+        deployedContract,
+        channel,
+        increment: 5,
+        forceFetchingIdentity: this.state.forceFetchingIdentity
+      })
+    )
+  }
+
+  onClosed = async dispatch => {
     if (this.state.action === 'increase') {
-      dispatch(
-        ContractActions.increase({
-          deployedContract,
-          channel,
-          increment: 5
-        })
-      )
+      this.dispatchIncrease(dispatch)
     }
     dispatch(AppEventsActions.setDialogClosed())
     this.setState({
@@ -54,18 +57,7 @@ class CogitoContract extends React.Component {
         action: 'increase'
       })
     } else {
-      const {
-        contracts: { simpleStorage: deployedContract },
-        channel
-      } = this.props
-      dispatch(
-        ContractActions.increase({
-          deployedContract,
-          channel,
-          increment: 5,
-          forceFetchingIdentity: this.state.forceFetchingIdentity
-        })
-      )
+      this.dispatchIncrease(dispatch)
       this.setState({ forceFetchingIdentity: false })
     }
   }
@@ -82,7 +74,6 @@ class CogitoContract extends React.Component {
       >
         {(
           {
-            balance,
             channelReady,
             telepathInProgress,
             telepathError,
@@ -105,14 +96,7 @@ class CogitoContract extends React.Component {
                 buttonStyling={{ secondary: true, color: 'black' }}
               />
             </Row>
-            {telepathInProgress &&
-              <Spacer margin='10px'>
-                <Row>
-                  <Segment>
-                    <Status>Executing contract...</Status>
-                  </Segment>
-                </Row>
-              </Spacer>}
+            <TelepathStatus>Executing contract...</TelepathStatus>
             <TelepathError
               error={telepathError}
               onTimeout={() => dispatch(AppEventsActions.telepathErrorClear())}
