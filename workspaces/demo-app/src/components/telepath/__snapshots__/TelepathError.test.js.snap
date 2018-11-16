@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TelepathError receives proper styling when error description (child) is rendered 1`] = `
+.css-0,
+[data-css-0] {
+  font-size: 0.8em;
+  color: #fd81c2;
+}
+
+<div>
+  <div
+    style="margin: 10px; padding: 0px; box-sizing: border-box;"
+  >
+    <div
+      class="css-ca9d80"
+    >
+      <div
+        class="ui segment"
+      >
+        <p
+          class="css-0"
+        >
+          error description
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TelepathError receives proper styling when error description is rendered 1`] = `
+.css-0,
+[data-css-0] {
+  font-size: 0.8em;
+  color: #fd81c2;
+}
+
+<div>
+  <div
+    style="margin: 10px; padding: 0px; box-sizing: border-box;"
+  >
+    <div
+      class="css-ca9d80"
+    >
+      <div
+        class="ui segment"
+      >
+        <p
+          class="css-0"
+        >
+          error description
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
