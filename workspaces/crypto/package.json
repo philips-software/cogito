@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/crypto",
-  "version": "0.2.16",
+  "version": "0.2.18",
   "description": "Crypto utilities for cogito",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
