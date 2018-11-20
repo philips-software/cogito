@@ -125,6 +125,7 @@
 		5C9331981FA324460056869F /* TelepathChannelExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9331961FA324460056869F /* TelepathChannelExample.swift */; };
 		5C93319A1FA325C30056869F /* TelepathActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9331991FA325C30056869F /* TelepathActionsSpec.swift */; };
 		5CAC2D65206BD0CB00F74462 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAC2D64206BD0CB00F74462 /* Configuration.swift */; };
+		5CB28FFD21A4638E00AEA16C /* KeyStoreDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB28FFC21A4638E00AEA16C /* KeyStoreDirectory.swift */; };
 		5CC4D2C91FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2C81FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift */; };
 		5CC4D2CB1FE7F724002F2450 /* TransactionSigningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2CA1FE7F724002F2450 /* TransactionSigningService.swift */; };
 		5CC4D2CE1FE801DE002F2450 /* TransactionSigningActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC4D2CD1FE801DE002F2450 /* TransactionSigningActions.swift */; };
@@ -298,6 +299,7 @@
 		5C9331961FA324460056869F /* TelepathChannelExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelepathChannelExample.swift; sourceTree = "<group>"; };
 		5C9331991FA325C30056869F /* TelepathActionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TelepathActionsSpec.swift; sourceTree = "<group>"; };
 		5CAC2D64206BD0CB00F74462 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		5CB28FFC21A4638E00AEA16C /* KeyStoreDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreDirectory.swift; sourceTree = "<group>"; };
 		5CC4D2C81FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningServiceSpec.swift; sourceTree = "<group>"; };
 		5CC4D2CA1FE7F724002F2450 /* TransactionSigningService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningService.swift; sourceTree = "<group>"; };
 		5CC4D2CD1FE801DE002F2450 /* TransactionSigningActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigningActions.swift; sourceTree = "<group>"; };
@@ -706,6 +708,7 @@
 				029691521F7166AC00654BD0 /* KeyStoreReducer.swift */,
 				029691541F7166EE00654BD0 /* KeyStoreState.swift */,
 				C00B57766800CB3EFBE971EC /* AppPassword.swift */,
+				5CB28FFC21A4638E00AEA16C /* KeyStoreDirectory.swift */,
 			);
 			path = "Key store";
 			sourceTree = "<group>";
@@ -1181,6 +1184,7 @@
 				0295A02820863B370060400A /* KeyPairCreator.swift in Sources */,
 				0230F9471FA1E5F3006A36FC /* LaunchActions.swift in Sources */,
 				0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */,
+				5CB28FFD21A4638E00AEA16C /* KeyStoreDirectory.swift in Sources */,
 				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
 				02B9A683203C762100ADB44F /* UIWindow+CurrentViewController.swift in Sources */,
 				02D0C0D41F8B59790001223E /* SelectedFacetViewController.swift in Sources */,

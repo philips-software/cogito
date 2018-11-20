@@ -39,13 +39,13 @@ class KeyStoreSpec: QuickSpec {
 
             it("can be reset") {
                 expect {
-                    try FileManager.default.createDirectory(at: keyStore.storeUrl,
+                    try FileManager.default.createDirectory(at: keyStore.url,
                                                             withIntermediateDirectories: false,
                                                             attributes: [:])
                     }.toNot(throwError())
-                expect(FileManager.default.fileExists(atPath: keyStore.storeUrl.path)).to(beTrue())
+                expect(FileManager.default.fileExists(atPath: keyStore.path)).to(beTrue())
                 expect { try keyStore.reset() }.toNot(throwError())
-                expect(FileManager.default.fileExists(atPath: keyStore.storeUrl.path)).to(beFalse())
+                expect(FileManager.default.fileExists(atPath: keyStore.path)).to(beFalse())
             }
         }
 
@@ -62,7 +62,7 @@ class KeyStoreSpec: QuickSpec {
                                     scryptP: lightScryptP)
                 keyStore.appPassword = appPassword
                 expect {
-                    try FileManager.default.createDirectory(at: keyStore.storeUrl,
+                    try FileManager.default.createDirectory(at: keyStore.url,
                                                             withIntermediateDirectories: false,
                                                             attributes: [:])
                 }.toNot(throwError())
