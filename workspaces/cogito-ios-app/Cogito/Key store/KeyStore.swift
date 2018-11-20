@@ -5,36 +5,33 @@ class KeyStore: Codable {
     let name: String
     let scryptN: Int
     let scryptP: Int
-    lazy var wrapped: GethKeyStore? = GethKeyStore(storeUrl.path, scryptN: scryptN, scryptP: scryptP)
-    var storeUrl: URL {
-        let base = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        return base.appendingPathComponent(name)
-    }
+    lazy var wrapped: GethKeyStore? = GethKeyStore(directory.path, scryptN: scryptN, scryptP: scryptP)
+    let directory: KeyStoreDirectory
     var appPassword = AppPassword()
 
     required init(name: String, scryptN: Int, scryptP: Int) {
         self.name = name
+        self.directory = KeyStoreDirectory(name: name)
         self.scryptN = scryptN
         self.scryptP = scryptP
     }
 
-    required init(from decoder: Decoder) throws {
+    required convenience init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(type(of: self.name), forKey: .name)
-        scryptN = try container.decode(type(of: self.scryptN), forKey: .scryptN)
-        scryptP = try container.decode(type(of: self.scryptP), forKey: .scryptP)
+        let name = try container.decode(String.self, forKey: .name)
+        let scryptN = try container.decode(Int.self, forKey: .scryptN)
+        let scryptP = try container.decode(Int.self, forKey: .scryptP)
+        self.init(name: name, scryptN: scryptN, scryptP: scryptP)
     }
 
     func reset() throws {
-        if FileManager.default.fileExists(atPath: storeUrl.path) {
-            try FileManager.default.removeItem(at: storeUrl)
-        }
+        try directory.delete()
         try appPassword.reset()
         wrapped = nil
     }
 
     func newAccount(onComplete: @escaping (_ address: Address?, _ error: String?) -> Void) {
-        print("[debug] creating new account in key store at \(storeUrl)")
+        print("[debug] creating new account in key store at \(directory.url)")
         guard let gethKeyStore = wrapped else {
             onComplete(nil, "failed to open key store")
             return
@@ -139,6 +136,16 @@ class KeyStore: Codable {
         case name
         case scryptN
         case scryptP
+    }
+}
+
+extension KeyStore {
+    var url: URL {
+        return directory.url
+    }
+
+    var path: String {
+        return directory.path
     }
 }
 
