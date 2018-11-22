@@ -4,9 +4,8 @@ const prettyBytes = require('pretty-bytes')
 const gzipSize = require('gzip-size')
 
 class Builder {
-  constructor ({ umdFileName, useWebpack, skipEsModules, copyFiles }) {
+  constructor ({ umdFileName, skipEsModules, copyFiles } = {}) {
     this.umdFileName = umdFileName
-    this.useWebpack = useWebpack
     this.skipEsModules = skipEsModules
     this.copyFiles = copyFiles ? '--copy-files' : ''
   }
@@ -35,21 +34,17 @@ class Builder {
   }
 
   umd () {
-    if (this.useWebpack) {
-      this.webpack()
-    } else {
-      this.rollup()
-    }
+    this.webpack()
 
     this.reportProductionUmdBuildSize()
   }
 
   messageUmd () {
-    console.log(`\n${this.useWebpack ? '[WEBPACK]' : '[ROLLUP]'} Building ${this.umdFileName}.js UMD module ...`)
+    console.log(`\n$[WEBPACK] Building ${this.umdFileName}.js UMD module ...`)
   }
 
   messageMinUmd () {
-    console.log(`\n${this.useWebpack ? '[WEBPACK]' : '[ROLLUP]'} Building ${this.umdFileName}.min.js UMD module ...`)
+    console.log(`\n[WEBPACK] Building ${this.umdFileName}.min.js UMD module ...`)
   }
 
   webpack () {
@@ -60,22 +55,6 @@ class Builder {
     this.messageMinUmd()
 
     this.exec('webpack --mode=production -o umd/cogito-attestations.min.js')
-  }
-
-  rollup () {
-    this.messageUmd()
-
-    this.exec(`rollup -c -f umd -o umd/${this.umdFileName}.js`, {
-      BABEL_ENV: 'umd',
-      NODE_ENV: 'development'
-    })
-
-    this.messageMinUmd()
-
-    this.exec(`rollup -c -f umd -o umd/${this.umdFileName}.min.js`, {
-      BABEL_ENV: 'umd',
-      NODE_ENV: 'production'
-    })
   }
 
   reportProductionUmdBuildSize () {

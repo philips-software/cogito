@@ -1,5 +1,5 @@
 const { Builder } = require('../../../tools/build')
 
-const builder = new Builder({ umdFileName: 'cogito-react' })
+const builder = new Builder()
 
 builder.build()
