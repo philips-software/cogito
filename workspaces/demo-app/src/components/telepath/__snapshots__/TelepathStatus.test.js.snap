@@ -1,6 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TelepathStatus has correct styling when visble 1`] = `
+.emotion-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .css-0,
 [data-css-0] {
   font-size: 0.8em;
@@ -12,7 +30,7 @@ exports[`TelepathStatus has correct styling when visble 1`] = `
     style="margin: 10px; padding: 0px; box-sizing: border-box;"
   >
     <div
-      class="css-ca9d80"
+      class="emotion-1 emotion-2"
     >
       <div
         class="ui segment"
