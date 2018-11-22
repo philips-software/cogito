@@ -21,9 +21,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@cogitojs/telepath-js": "0.2.x",
     "uuid": "^3.2.1"
-  },
-  "peerDependencies": {
-    "@cogitojs/telepath-js": "0.2.x"
   }
 }

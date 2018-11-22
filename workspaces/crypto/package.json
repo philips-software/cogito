@@ -17,10 +17,10 @@
     "es",
     "source"
   ],
-  "devDependencies": {    
+  "devDependencies": {
     "nock": "^9.2.5"
   },
-  "peerDependencies": {
+  "dependencies": {
     "libsodium-wrappers": "^0.7.2"
   },
   "publishConfig": {
