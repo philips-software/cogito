@@ -1,6 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+.emotion-8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.emotion-2 {
+  border-radius: 15px;
+  border: 1px solid #ff80c3;
+  padding: 10px;
+  margin: 10px;
+  min-width: 6rem;
+  text-align: center;
+}
+
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .css-0,
 [data-css-0] {
   display: grid;
@@ -63,18 +108,8 @@ exports[`renders correctly 1`] = `
 
 .css-7,
 [data-css-7] {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
   justify-content: flex-end;
   height: 100%;
-  -webkit-flex-flow: column nowrap;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
 }
@@ -121,7 +156,7 @@ exports[`renders correctly 1`] = `
     className="css-3"
   >
     <div
-      className="css-1crpgfv"
+      className="emotion-8 emotion-9"
     >
       <div
         style={
@@ -133,13 +168,13 @@ exports[`renders correctly 1`] = `
         }
       >
         <div
-          className="css-1crpgfv"
+          className="emotion-8 emotion-9"
         >
           <p>
             Your Cogito account address is:
           </p>
           <div
-            className="css-h2wbwd"
+            className="emotion-2 emotion-3"
           >
             unknown
           </div>
@@ -156,12 +191,12 @@ exports[`renders correctly 1`] = `
             You are known as:
           </p>
           <div
-            className="css-h2wbwd"
+            className="emotion-2 emotion-3"
           >
             unknown
           </div>
           <div
-            className="css-1gzlhve"
+            className="emotion-6 emotion-7"
           >
             <button
               className="ui black secondary button"
@@ -190,7 +225,7 @@ exports[`renders correctly 1`] = `
     className="css-4"
   >
     <div
-      className="css-1crpgfv"
+      className="emotion-8 emotion-9"
     >
       <div
         aria-expanded={false}
@@ -291,7 +326,7 @@ exports[`renders correctly 1`] = `
     className="css-6"
   >
     <div
-      className="css-7"
+      className="css-7 emotion-8 emotion-9"
     >
       <p
         className="css-8"
