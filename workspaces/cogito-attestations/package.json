@@ -23,9 +23,7 @@
   },
   "dependencies": {
     "base64url": "^3.0.0",
-    "ethereumjs-util": "^5.2.0"
-  },
-  "peerDependencies": {
+    "ethereumjs-util": "^5.2.0",
     "@cogitojs/telepath-js": "0.2.x"
   }
 }

@@ -17,16 +17,13 @@
     "es",
     "source"
   ],
-  "devDependencies": {    
-    "libsodium-wrappers": "^0.7.3",
+  "devDependencies": {
     "nock": "^9.2.5"
   },
   "dependencies": {
     "@cogitojs/crypto": "^0.2.18",
     "base64url": "^2.0.0",
-    "cross-fetch": "^2.1.1"
-  },
-  "peerDependencies": {
+    "cross-fetch": "^2.1.1",
     "libsodium-wrappers": "^0.7.3"
   },
   "publishConfig": {
