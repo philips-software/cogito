@@ -17,7 +17,7 @@ module.exports = {
     'src/**.js',
     '!**/jest.config.js',
     '!**/babel.config.js',
-    '!**/rollup.config.js',
+    '!**/webpack.config.js',
     '!**/.babelrc.js',
     '!**/*.test.js',
     '!**/__mocks__/**.js',
