@@ -17,13 +17,6 @@
     "es",
     "source"
   ],
-  "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.0.0"
-  },
   "dependencies": {
     "@react-frontend-developer/react-layout-helpers": "^1.0.14",
     "qrcode.react": "^0.8.0"

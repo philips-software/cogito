@@ -7173,7 +7173,7 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-ganache-cli@^6.1.0, ganache-cli@^6.1.8:
+ganache-cli@^6.1.8:
   version "6.1.8"
   resolved "https://registry.yarnpkg.com/ganache-cli/-/ganache-cli-6.1.8.tgz#49a8a331683a9652183f82ef1378d17e1814fcd3"
   integrity sha512-yXzteu4SIgUL31mnpm9j+x6dpHUw0p/nsRVkcySKq0w+1vDxH9jMErP1QhZAJuTVE6ni4nfvGSNkaQx5cD3jfg==
@@ -17500,7 +17500,7 @@ web3@0.20.6:
     xhr2 "*"
     xmlhttprequest "*"
 
-web3@^1.0.0-beta.34, web3@^1.0.0-beta.36:
+web3@^1.0.0-beta.36:
   version "1.0.0-beta.36"
   resolved "https://registry.yarnpkg.com/web3/-/web3-1.0.0-beta.36.tgz#2954da9e431124c88396025510d840ba731c8373"
   integrity sha512-fZDunw1V0AQS27r5pUN3eOVP7u8YAvyo6vOapdgVRolAu5LgaweP7jncYyLINqIX9ZgWdS5A090bt+ymgaYHsw==
