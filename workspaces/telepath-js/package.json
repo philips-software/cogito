@@ -17,11 +17,7 @@
     "es",
     "source"
   ],
-  "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
+  "devDependencies": {    
     "libsodium-wrappers": "^0.7.3",
     "nock": "^9.2.5"
   },
