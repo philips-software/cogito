@@ -19,20 +19,28 @@ class Builder {
     })
   }
 
-  commonjs () {
-    console.log('Building CommonJS modules ...')
+  transpile ({ logMessage, babelEnv, outputDir }) {
+    console.log(logMessage)
 
-    this.exec(`babel source -d lib --delete-dir-on-start ${this.copyFiles} --source-maps`, {
-      BABEL_ENV: 'commonjs'
+    this.exec(`babel source -d ${outputDir} --delete-dir-on-start ${this.copyFiles} --source-maps`, {
+      BABEL_ENV: babelEnv
+    })
+  }
+
+  commonjs () {
+    this.transpile({
+      logMessage: '\nBuilding CommonJS modules...',
+      babelEnv: 'commonjs',
+      outputDir: 'lib'
     })
   }
 
   es () {
     if (this.esModule) {
-      console.log('\nBuilding ES modules ...')
-
-      this.exec(`babel source -d es --delete-dir-on-start ${this.copyFiles} --source-maps`, {
-        BABEL_ENV: 'es'
+      this.transpile({
+        logMessage: '\nBuilding ES modules...',
+        babelEnv: 'es',
+        outputDir: 'es'
       })
     }
   }
