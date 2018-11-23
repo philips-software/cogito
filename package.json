@@ -14,7 +14,7 @@
         "eslint": "^5.9.0",
         "gzip-size": "^5.0.0",
         "jest": "^23.6.0",
-        "lerna": "^2.11.0",
+        "lerna": "^3.4.3",
         "libsodium-wrappers": "^0.7.2",
         "pretty-bytes": "^5.1.0",
         "react": "^16.6.3",
