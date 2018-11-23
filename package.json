@@ -19,12 +19,12 @@
         "pretty-bytes": "^5.1.0",
         "react": "^16.6.3",
         "react-dom": "^16.6.3",
-        "regenerator-runtime": "^0.11.1",        
+        "regenerator-runtime": "^0.11.1",
         "standard": "^12.0.1",
         "truffle-contract": "^3.0.5",
         "web3": "^1.0.0-beta.36",
         "webpack": "^4.26.0",
-        "webpack-command": "^0.4.2"
+        "webpack-cli": "^3.1.2"
     },
     "workspaces": {
         "packages": [
