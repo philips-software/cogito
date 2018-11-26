@@ -5,22 +5,32 @@ import cors from 'cors'
 import Cache from 'lru-cache'
 import { MessageSender } from './message-sender'
 import { MessageReceiver } from './message-receiver'
+import http from 'http'
+import socketIO from 'socket.io'
+import IOSocketServer from './socket-server'
+
+let ioSocketServer
 
 function createServer () {
-  const server = express()
   let state = Cache({ maxAge: 10 * 60 * 1000 })
 
-  server.use(cors())
-  server.use(bodyParser.text({ type: '*/*' }))
+  const app = express()
+  const httpServer = http.Server(app)
+  const io = socketIO(httpServer)
+  ioSocketServer = new IOSocketServer(io)
+  ioSocketServer.start()
+
+  app.use(cors())
+  app.use(bodyParser.text({ type: '*/*' }))
 
   setInterval(() => {
     state.prune()
   }, 60 * 1000)
 
-  registerSendMessageEndpoint({ server, state })
-  registerReadMessageEndpoint({ server, state })
+  registerSendMessageEndpoint({ server: app, state })
+  registerReadMessageEndpoint({ server: app, state })
 
-  return server
+  return httpServer
 }
 
 function registerSendMessageEndpoint ({ server, state }) {
