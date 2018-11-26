@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "start": "(ganache-cli --account='0xc87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3,10000000000000000000000' -p 8545 --host 0.0.0.0) & wait",
-    "build": "node ./tools/build.js",
+    "build": "yarn compile && node ./tools/build.js",
     "compile": "yarn truffle compile",
     "migrate": "yarn truffle migrate",
     "test": "yarn lint && yarn truffle test --network testing",
