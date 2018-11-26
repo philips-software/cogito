@@ -24,7 +24,8 @@
     "@cogitojs/crypto": "^0.2.23",
     "base64url": "^2.0.0",
     "cross-fetch": "^2.1.1",
-    "libsodium-wrappers": "^0.7.3"
+    "libsodium-wrappers": "^0.7.3",
+    "socket.io-client": "^2.1.1"
   },
   "publishConfig": {
     "access": "public"
