@@ -4,6 +4,8 @@ inhibit_all_warnings!
 
 target 'Telepath' do
   pod 'base64url', '~> 1.0'
+  pod 'Socket.IO-Client-Swift', '~> 13.3'
+
   # Workaround for https://github.com/jedisct1/swift-sodium/issues/155:
   pod 'Sodium', git: 'https://github.com/jedisct1/swift-sodium.git', branch: 'master'
 
