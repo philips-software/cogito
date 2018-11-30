@@ -90,4 +90,12 @@ describe('JSON RPC Channel', () => {
     jsonrpc = new JsonRpcChannel({ channel: channel })
     expect(jsonrpc.key).toEqual(key)
   })
+
+  it('exposes the appName of the underlying secure channel', () => {
+    const appName = 'App Name'
+    channel.appName = appName
+
+    jsonrpc = new JsonRpcChannel({ channel: channel })
+    expect(jsonrpc.appName).toEqual(appName)
+  })
 })
