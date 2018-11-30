@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import {
@@ -9,11 +9,10 @@ import {
   Row
 } from '@react-frontend-developer/react-layout-helpers'
 
-import { Status } from 'components/styling'
 import { CogitoConnector } from '@cogitojs/cogito-react-ui'
 import { IdentityActions } from './actions'
 import { AppEventsActions } from 'app-events'
-import { TelepathError } from '../telepath/TelepathError'
+import { TelepathError, TelepathStatus } from 'components/telepath'
 
 class CogitoAddress extends React.PureComponent {
   onTrigger = dispatch => {
@@ -84,14 +83,7 @@ class CogitoAddress extends React.PureComponent {
                 buttonStyling={{ secondary: true, color: 'black' }}
               />
             </Row>
-            {telepathInProgress &&
-              <Spacer margin='10px'>
-                <Row>
-                  <Segment>
-                    <Status>Reading your Cogito Identity...</Status>
-                  </Segment>
-                </Row>
-              </Spacer>}
+            <TelepathStatus>Executing contract...</TelepathStatus>
             <TelepathError
               error={telepathError}
               onTimeout={() => dispatch(AppEventsActions.telepathErrorClear())}
