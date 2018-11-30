@@ -11,6 +11,10 @@ class JsonRpcChannel {
     return this.channel.key
   }
 
+  get appName () {
+    return this.channel.appName
+  }
+
   async send (request) {
     checkRequest(request)
     this.channel.send(JSON.stringify(request))
