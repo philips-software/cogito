@@ -1,9 +1,26 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Cogito } from '@cogitojs/cogito'
+import { PropValidator } from './PropValidator'
 
 export class CogitoReact extends React.Component {
   state = { web3: null, channel: null, contracts: null }
   cogito
+
+  static propTypes = {
+    channelId: PropTypes.string,
+    channelKey: function (props, propName, componentName) {
+      const prop = props[propName]
+
+      const validator = new PropValidator(prop, propName)
+
+      try {
+        validator.validate()
+      } catch (e) {
+        return e
+      }
+    }
+  }
 
   constructor ({ contracts }) {
     super()

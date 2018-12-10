@@ -25,7 +25,8 @@
   },
   "peerDependencies": {
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "prop-types": "^15.6.2"
   },
   "publishConfig": {
     "access": "public"
