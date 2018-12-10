@@ -288,4 +288,97 @@ describe('cogito-react', () => {
       await wait(() => expect(renderFunctionArgs.channel.appName).toEqual(channel.appName))
     })
   })
+
+  describe('when provided props are not well-formed', () => {
+    const badKeysError = badKeys => {
+      return `Warning: Failed prop type: Invalid prop channelKey.
+Expects:  instance of Uint8Array or an Array-like object
+Received: an object with non-numerical keys: ${badKeys}
+    in CogitoReact`
+    }
+
+    const badValuesError = badValues => {
+      return `Warning: Failed prop type: Invalid prop channelKey.
+Expects:  instance of Uint8Array or an Array-like object with numerical entries
+Received: an Array-like object with non-numerical values: ${badValues}
+    in CogitoReact`
+    }
+
+    const unexpected = prop => {
+      return `Warning: Failed prop type: Invalid prop channelKey.
+Expects:  instance of Uint8Array or an Array-like object with numerical entries
+Received: ${typeof prop}
+    in CogitoReact`
+    }
+
+    const badIdError = prop => {
+      return 'Warning: Failed prop type: Invalid prop `channelId` ' +
+             'of type `' + `${typeof prop}` + '` supplied to `CogitoReact`, expected `string`.\n' +
+             `    in CogitoReact`
+    }
+
+    beforeEach(() => {
+      console.error = jest.fn()
+    })
+
+    afterEach(() => {
+      console.error.mockRestore()
+    })
+
+    it('does not issue a warning when channel key is undefined', () => {
+      render(cogitoReact({
+        channelId: channel.id,
+        channelKey: undefined
+      }))
+      expect(console.error).not.toHaveBeenCalled()
+    })
+
+    it('does not issue a warning when channel key and channel id are well-formed', () => {
+      render(cogitoReact({
+        channelId: channel.id,
+        channelKey: channel.key
+      }))
+      expect(console.error).not.toHaveBeenCalled()
+    })
+
+    it('does not issue a warning when channel id is undefined', () => {
+      render(cogitoReact({
+        channelId: undefined,
+        channelKey: channel.key
+      }))
+      expect(console.error).not.toHaveBeenCalled()
+    })
+
+    it('issues warning when channel key is not correctly formatted', () => {
+      render(cogitoReact({
+        channelId: channel.id,
+        channelKey: { a: 1, 1: 2, 2: 3 }
+      }))
+      expect(console.error).toHaveBeenCalledWith(badKeysError('a'))
+    })
+
+    it('issues warning when channel key is not correctly formatted', () => {
+      render(cogitoReact({
+        channelId: channel.id,
+        channelKey: { 0: 1, 1: '2', 2: 3 }
+      }))
+      expect(console.error).toHaveBeenCalledWith(badValuesError('2'))
+    })
+
+    it('issues warning when channel key is not correctly formatted', () => {
+      render(cogitoReact({
+        channelId: channel.id,
+        channelKey: 'string value'
+      }))
+      expect(console.error).toHaveBeenCalledWith(unexpected('string'))
+    })
+
+    it('issues warning when channel id is not correctly formatted', () => {
+      render(cogitoReact({
+        channelId: 2,
+        channelKey: channel.key
+      }))
+      expect(console.error).toHaveBeenCalledWith(badIdError(2))
+    })
+  })
 })
