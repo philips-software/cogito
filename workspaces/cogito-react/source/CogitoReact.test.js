@@ -129,6 +129,12 @@ describe('cogito-react', () => {
       })
     })
 
+    it('provides a function that allows creating a new channel', async () => {
+      await wait(() => {
+        expect(renderFunctionArgs.newChannel).toEqual(expect.any(Function))
+      })
+    })
+
     it('creates exactly one instance of Cogito from @cogitojs/cogito', async () => {
       expect(Cogito.mock.instances.length).toBe(1)
     })
@@ -286,6 +292,67 @@ describe('cogito-react', () => {
       rerender()
 
       await wait(() => expect(renderFunctionArgs.channel.appName).toEqual(channel.appName))
+    })
+  })
+
+  describe('when calling the provided newChannel function', () => {
+    beforeEach(() => {
+      render(cogitoReact())
+      updateChannel({
+        id: 'updated telepath channel id',
+        key: new Uint8Array([124, 125, 126])
+      })
+      mockUpdate.mockResolvedValueOnce({
+        ...cogitoParams,
+        channel
+      })
+      renderFunctionArgs.newChannel()
+    })
+
+    it('calls update from @cogitojs/cogito with undefined id and key', async () => {
+      const updateParams = mockUpdate.mock.calls[1][0]
+
+      await wait(() => {
+        expect(updateParams.channelId).toBeUndefined()
+        expect(updateParams.channelKey).toBeUndefined()
+      })
+    })
+
+    it('it holds the same appName', async () => {
+      const updateParams = mockUpdate.mock.calls[1][0]
+
+      await wait(() => {
+        expect(updateParams.appName).toBe(appName)
+      })
+    })
+
+    it('calls provided onTelepathChanged again', async () => {
+      await wait(() => expect(onTelepathChanged).toHaveBeenCalledTimes(2))
+    })
+
+    it('provides new channelId, channelKey and appName to the onTelepathChanged callback', async () => {
+      await wait(() => {
+        expect(onTelepathChanged.mock.calls[1][0]).toMatchObject({
+          channelId: channel.id,
+          channelKey: channel.key,
+          appName
+        })
+      })
+    })
+
+    it('provides new channelId and channelKey to the render prop function', async () => {
+      await wait(() => {
+        expect(renderFunctionArgs.channel).toMatchObject({
+          id: channel.id,
+          key: channel.key
+        })
+      })
+    })
+
+    it('provides unchanged appName to the render prop function', async () => {
+      await wait(() => {
+        expect(renderFunctionArgs.channel.appName).toBe(appName)
+      })
     })
   })
 
