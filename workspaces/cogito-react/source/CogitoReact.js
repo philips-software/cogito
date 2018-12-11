@@ -4,7 +4,7 @@ import { Cogito } from '@cogitojs/cogito'
 import { PropValidator } from './PropValidator'
 
 export class CogitoReact extends React.Component {
-  state = { web3: null, channel: null, contracts: null }
+  state
   cogito
 
   static propTypes = {
@@ -25,6 +25,7 @@ export class CogitoReact extends React.Component {
   constructor ({ contracts }) {
     super()
     this.cogito = new Cogito(contracts)
+    this.state = { web3: null, channel: null, contracts: null, newChannel: this.newChannel }
   }
 
   normalizeKey = key => {
@@ -33,6 +34,15 @@ export class CogitoReact extends React.Component {
     } else {
       return Uint8Array.from(Object.values(key))
     }
+  }
+
+  newChannel = async () => {
+    const { appName } = this.props
+    return this.updateState({
+      channelId: undefined,
+      channelKey: undefined,
+      appName
+    })
   }
 
   updateState = async (props) => {
