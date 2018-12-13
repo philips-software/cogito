@@ -18,6 +18,7 @@ describe('cogito-react', () => {
   let channel
   let cogitoParams
   let onTelepathChanged
+  let renderingContext
 
   const setupRenderPropFunction = () => {
     renderFunctionArgs = {}
@@ -78,6 +79,16 @@ describe('cogito-react', () => {
     </CogitoReact>
   }
 
+  const rerender = () => {
+    const { rerender: rerenderRtl } = renderingContext
+    mockUpdate.mockResolvedValueOnce({
+      ...cogitoParams,
+      channel
+    })
+
+    rerenderRtl(cogitoReact())
+  }
+
   beforeEach(() => {
     setupChannel()
     setExpectedCogitoParams()
@@ -87,7 +98,7 @@ describe('cogito-react', () => {
 
   describe('when created without providing channel id and key', function () {
     beforeEach(() => {
-      render(cogitoReact({
+      renderingContext = render(cogitoReact({
         channelId: undefined,
         channelKey: undefined
       }))
@@ -169,6 +180,12 @@ describe('cogito-react', () => {
         })
       })
     })
+
+    it('does not unnecessarily re-renders when the new prop value is the same as the recorded state', async () => {
+      rerender()
+
+      expect(mockUpdate).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('when created with channel id and key', function () {
@@ -205,16 +222,8 @@ describe('cogito-react', () => {
   })
 
   describe('when channel id, key or app name change', function () {
-    let renderingContext
-
-    const rerender = () => {
-      const { rerender: rerenderRtl } = renderingContext
-      mockUpdate.mockResolvedValueOnce({
-        ...cogitoParams,
-        channel
-      })
-
-      rerenderRtl(cogitoReact())
+    const convertToArrayLikeObject = uint8Array => {
+      return uint8Array.reduce((acc, current, index) => { return { ...acc, [index]: current } }, {})
     }
 
     beforeEach(() => {
@@ -293,11 +302,21 @@ describe('cogito-react', () => {
 
       await wait(() => expect(renderFunctionArgs.channel.appName).toEqual(channel.appName))
     })
+
+    it('does not unnecessarily re-renders when the only change is the key prop format', async () => {
+      updateChannel({
+        key: convertToArrayLikeObject(exampleTelepathKey)
+      })
+
+      rerender()
+
+      expect(mockUpdate).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('when calling the provided newChannel function', () => {
     beforeEach(() => {
-      render(cogitoReact())
+      renderingContext = render(cogitoReact())
       updateChannel({
         id: 'updated telepath channel id',
         key: new Uint8Array([124, 125, 126])
@@ -353,6 +372,12 @@ describe('cogito-react', () => {
       await wait(() => {
         expect(renderFunctionArgs.channel.appName).toBe(appName)
       })
+    })
+
+    it('does not unecessariy re-renders when props change to the current state', async () => {
+      rerender()
+
+      expect(mockUpdate).toHaveBeenCalledTimes(2)
     })
   })
 

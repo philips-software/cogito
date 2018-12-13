@@ -65,16 +65,32 @@ export class CogitoReact extends React.Component {
     })
   }
 
+  normalize = data => {
+    const channelKey = this.normalizeKey(data.channelKey) || ''
+    return { ...data, channelKey }
+  }
+
+  propsChanged = (prevProps, currentProps) => {
+    return prevProps.channelId !== currentProps.channelId ||
+      prevProps.channelKey.toString() !== currentProps.channelKey.toString() ||
+      prevProps.appName !== currentProps.appName
+  }
+
+  currentPropsDifferentFromPrevState = (currentProps, prevState) => {
+    return currentProps.channelId !== prevState.channel.id ||
+      currentProps.channelKey !== prevState.channel.key ||
+      currentProps.appName !== prevState.channel.appName
+  }
+
   componentDidMount () {
     this.updateState(this.props)
   }
 
   componentDidUpdate (prevProps, prevState) {
-    const prevKey = this.normalizeKey(prevProps.channelKey) || ''
-    const currentKey = this.normalizeKey(this.props.channelKey) || ''
-    if (prevProps.channelId !== this.props.channelId ||
-      prevKey.toString() !== currentKey.toString() ||
-      prevProps.appName !== this.props.appName) {
+    const normalizedPrevProps = this.normalize(prevProps)
+    const normalizedCurrentProps = this.normalize(this.props)
+    if (this.propsChanged(normalizedPrevProps, normalizedCurrentProps) &&
+        this.currentPropsDifferentFromPrevState(normalizedCurrentProps, prevState)) {
       this.updateState(this.props)
     }
   }
