@@ -16,6 +16,8 @@ import { TelepathError, TelepathStatus } from 'components/telepath'
 
 class CogitoAddress extends React.PureComponent {
   onTrigger = dispatch => {
+    const { newChannel } = this.props
+    newChannel()
     dispatch(AppEventsActions.setDialogOpen())
   }
 
