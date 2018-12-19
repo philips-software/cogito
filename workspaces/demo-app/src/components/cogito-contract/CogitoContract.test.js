@@ -63,14 +63,16 @@ describe('CogitoContract', () => {
 
   describe('when increasing contract value', () => {
     const contractValueIncrement = 5
+    let valueWatcher
 
     afterEach(() => {
+      valueWatcher.stop()
       console.log.mockRestore && console.log.mockRestore()
     })
 
     it('shows how to use ValueChanged event mock', async () => {
       const onValueChanged = jest.fn()
-      const valueWatcher = new ValueWatcher({
+      valueWatcher = new ValueWatcher({
         contracts,
         onValueChanged
       })
