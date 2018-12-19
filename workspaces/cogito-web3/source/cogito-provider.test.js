@@ -33,4 +33,25 @@ describe('provider', () => {
     cogitoProvider.send({ method: 'unknown' })
     expect(originalProvider.send).toBeCalled()
   })
+
+  it('provides sendAsync method that is an alias of the send method', () => {
+    const sendReturnValue = 'I am good'
+    cogitoProvider.send = jest.fn().mockResolvedValueOnce(sendReturnValue)
+    const args = [
+      1,
+      '1',
+      () => {},
+      { 1: '1' },
+      [1, 2, 3]
+    ]
+    cogitoProvider.sendAsync(...args)
+    expect(cogitoProvider.send).toHaveBeenCalledTimes(1)
+    expect(cogitoProvider.send.mock.calls[0]).toEqual(args)
+  })
+
+  it('sendAsync method does not return anything', () => {
+    cogitoProvider.send = jest.fn()
+    const args = [1, 2, 3]
+    expect(cogitoProvider.sendAsync(...args)).toBeUndefined()
+  })
 })

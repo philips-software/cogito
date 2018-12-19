@@ -22,6 +22,10 @@ class CogitoProvider {
       callback(error, null)
     }
   }
+
+  sendAsync () {
+    this.send(...arguments)
+  }
 }
 
 export { CogitoProvider }
