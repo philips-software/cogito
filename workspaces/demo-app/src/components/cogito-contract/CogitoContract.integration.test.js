@@ -27,7 +27,8 @@ describe('CogitoContract Integration test', () => {
   beforeEach(async () => {
     ganacheTestNetwork = new GanacheTestNetwork()
     from = (await ganacheTestNetwork.getAccounts())[0]
-    simpleStorage = await ganacheTestNetwork.deploy(simpleStorageDef, { from })
+    const { contractInstance } = await ganacheTestNetwork.deploy(simpleStorageDef, { from })
+    simpleStorage = contractInstance
     channel = new TelepathChannelMock({
       identities: [
         {
