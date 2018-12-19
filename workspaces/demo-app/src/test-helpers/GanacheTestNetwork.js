@@ -2,16 +2,33 @@ import Web3 from 'web3'
 import ganache from 'ganache-cli'
 import initContract from 'truffle-contract'
 
+// this is caused by a ganache network - seems to be a bug
+// we keep this number as low as possible - every time
+// we have another test that uses Ganache
+// we need to increase this number. If you do not, you
+// will see a warning in the test output:
+//
+// MaxListenersExceededWarning: Possible EventEmitter memory
+// leek detected. <N> data listeners added. Use
+// emitter.setMaxListeners() to increase limit.
+//
+// We need to set that value of maxAllowedListeners to <N>.
+// Alternatively set it to some big number like 100
+const maxAllowedListeners = 20
+
 class GanacheTestNetwork {
   mnemonic = 'hair snack volcano shift tragic wrong wreck release vibrant gossip ugly debate'
   _web3
+  _networkId
 
-  constructor () {
+  constructor (networkId = Date.now()) {
     const provider = ganache.provider({
-      mnemonic: this.mnemonic
+      mnemonic: this.mnemonic,
+      network_id: networkId
     })
-    provider.setMaxListeners(12)
+    provider.setMaxListeners(maxAllowedListeners)
     this._web3 = new Web3(provider)
+    this._networkId = networkId
   }
 
   get web3 () {
@@ -23,19 +40,62 @@ class GanacheTestNetwork {
     return this.accounts
   }
 
-  deploy = async (contractDefinition, { from }) => {
-    const SimpleStorage = new this.web3.eth.Contract([contractDefinition])
-    const deployedContract = await SimpleStorage.deploy({
-      data: contractDefinition.bytecode
+  updateContractJSON = (
+    contractJSON,
+    address,
+    transactionHash) => {
+    const updatedContractJSON = {
+      ...contractJSON,
+      networks: {
+        [this._networkId]: {
+          events: {},
+          links: {},
+          address,
+          transactionHash
+        }
+      }
+    }
+    return updatedContractJSON
+  }
+
+  deployContract = async (contractJSON, { from }) => {
+    const Contract = new this.web3.eth.Contract([contractJSON])
+    let transactionHash = ''
+    const deployedContract = await Contract.deploy({
+      data: contractJSON.bytecode
     }).send({
       from,
       gas: 1000000,
       gasPrice: '10000000000000'
+    }).on('transactionHash', hash => {
+      transactionHash = hash
     })
-    const contract = initContract(contractDefinition)
+    return { deployedContract, transactionHash }
+  }
+
+  getContractInstance = contractJSON => {
+    const contract = initContract(contractJSON)
     contract.setProvider(this.web3.currentProvider)
 
-    return contract.at(deployedContract.options.address)
+    return contract.deployed()
+  }
+
+  deploy = async (contractJSON, { from }) => {
+    const { deployedContract, transactionHash } = await this.deployContract(
+      contractJSON,
+      { from }
+    )
+    const deployedJSON = this.updateContractJSON(
+      contractJSON,
+      deployedContract.options.address,
+      transactionHash
+    )
+    const contractInstance = await this.getContractInstance(deployedJSON)
+
+    return {
+      contractInstance,
+      deployedJSON
+    }
   }
 }
 
