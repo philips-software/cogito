@@ -16,10 +16,10 @@ import { NoMatch404 } from 'pages/404'
 import { SimpleStorage } from '@cogitojs/demo-app-contracts'
 
 const contractsInfo = {
-  deployedContractsInfo: [
+  deployedContractsInfo: [],
+  rawContractsInfo: [
     { contractName: 'simpleStorage', contractDefinition: SimpleStorage }
-  ],
-  rawContractsInfo: []
+  ]
 }
 
 class Main extends React.Component {
@@ -28,8 +28,14 @@ class Main extends React.Component {
   )
 
   web3IsReady = ({ web3, channel, contracts }) => {
-    return web3 && channel && contracts
+    return web3 && channel && contracts.simpleStorage
   }
+
+  cogitoProps = ({ web3, channel, contracts: { simpleStorage: simpleStorageProxy } }) => ({
+    web3,
+    channel,
+    simpleStorageProxy
+  })
 
   onTelepathChanged = ({ channelId, channelKey, appName }, dispatch) => {
     dispatch(UserDataActions.setTelepath({ channelId, channelKey, appName }))
@@ -59,13 +65,13 @@ class Main extends React.Component {
                       exact
                       path='/'
                       render={routeProps =>
-                        this.renderComponent(CogitoId, routeProps, web3Props)}
+                        this.renderComponent(CogitoId, routeProps, this.cogitoProps(web3Props))}
                     />
                     <Route
                       exact
                       path='/contracts'
                       render={routeProps =>
-                        this.renderComponent(Contracts, routeProps, web3Props)}
+                        this.renderComponent(Contracts, routeProps, this.cogitoProps(web3Props))}
                     />
                     <Route
                       exact
@@ -74,7 +80,7 @@ class Main extends React.Component {
                         this.renderComponent(
                           SimpleEncryption,
                           routeProps,
-                          web3Props
+                          this.cogitoProps(web3Props)
                         )}
                     />
                     <Route
@@ -84,7 +90,7 @@ class Main extends React.Component {
                         this.renderComponent(
                           StreamEncryption,
                           routeProps,
-                          web3Props
+                          this.cogitoProps(web3Props)
                         )}
                     />
                     <Route
@@ -94,7 +100,7 @@ class Main extends React.Component {
                         this.renderComponent(
                           Attestations,
                           routeProps,
-                          web3Props
+                          this.cogitoProps(web3Props)
                         )}
                     />
                     <Route component={NoMatch404} />

@@ -25,13 +25,10 @@ class CogitoContract extends React.Component {
   }
 
   dispatchIncrease = dispatch => {
-    const {
-      contracts: { simpleStorage: deployedContract },
-      channel
-    } = this.props
+    const { channel } = this.props
     dispatch(
       ContractActions.increase({
-        deployedContract,
+        deployedContract: this.state.simpleStorage,
         channel,
         increment: 5,
         forceFetchingIdentity: this.state.forceFetchingIdentity
@@ -61,7 +58,14 @@ class CogitoContract extends React.Component {
     }
   }
 
+  async componentDidMount () {
+    const { simpleStorageProxy } = this.props
+    const simpleStorage = await simpleStorageProxy.deployed()
+    this.setState({ simpleStorage })
+  }
+
   render () {
+    if (!this.state.simpleStorage) return null
     return (
       <WithStore
         selector={state => ({
@@ -81,7 +85,7 @@ class CogitoContract extends React.Component {
           dispatch
         ) => (
           <Centered>
-            <BalanceWatcher dispatch={dispatch} contracts={this.props.contracts} />
+            <BalanceWatcher dispatch={dispatch} simpleStorage={this.state.simpleStorage} />
             <Balance />
             <Row css={{ marginTop: '10px' }}>
               <IncreaseContractButton onClick={() => this.increase(dispatch, channelReady)} />

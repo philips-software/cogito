@@ -73,11 +73,11 @@ class GanacheTestNetwork {
     return { deployedContract, transactionHash }
   }
 
-  getContractInstance = contractJSON => {
+  getContract = contractJSON => {
     const contract = initContract(contractJSON)
     contract.setProvider(this.web3.currentProvider)
 
-    return contract.deployed()
+    return contract
   }
 
   deploy = async (contractJSON, { from }) => {
@@ -90,10 +90,10 @@ class GanacheTestNetwork {
       deployedContract.options.address,
       transactionHash
     )
-    const contractInstance = await this.getContractInstance(deployedJSON)
+    const contract = this.getContract(deployedJSON)
 
     return {
-      contractInstance,
+      contract,
       deployedJSON
     }
   }

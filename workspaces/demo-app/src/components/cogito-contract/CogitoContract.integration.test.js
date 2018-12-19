@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, wait } from 'test-helpers/render-props'
+import { render, fireEvent, wait, waitForElement } from 'test-helpers/render-props'
 import {
   TelepathChannelMock,
   GanacheTestNetwork
@@ -14,8 +14,8 @@ jest.unmock('@react-frontend-developer/react-redux-render-prop')
 
 describe('CogitoContract Integration test', () => {
   let channel
-  let contracts
   let simpleStorage
+  let simpleStorageProxy
   let from
   let ganacheTestNetwork
 
@@ -24,11 +24,18 @@ describe('CogitoContract Integration test', () => {
     dispatch(UserDataActions.connectionEstablished())
   }
 
+  const initSimpleStorageProxy = () => {
+    return {
+      deployed: jest.fn().mockResolvedValueOnce(simpleStorage)
+    }
+  }
+
   beforeEach(async () => {
     ganacheTestNetwork = new GanacheTestNetwork()
     from = (await ganacheTestNetwork.getAccounts())[0]
-    const { contractInstance } = await ganacheTestNetwork.deploy(simpleStorageDef, { from })
-    simpleStorage = contractInstance
+    const { contract } = await ganacheTestNetwork.deploy(simpleStorageDef, { from })
+    simpleStorage = await contract.deployed()
+    simpleStorageProxy = initSimpleStorageProxy()
     channel = new TelepathChannelMock({
       identities: [
         {
@@ -37,7 +44,6 @@ describe('CogitoContract Integration test', () => {
         }
       ]
     })
-    contracts = { simpleStorage }
     process.env.FAUCET_URL = 'https://faucet.url/donate'
     nock(process.env.FAUCET_URL).post(`/${from}`, '').reply(200)
   })
@@ -49,9 +55,10 @@ describe('CogitoContract Integration test', () => {
   it('can increase contract value', async () => {
     console.log = jest.fn()
     const { getByText, getByTestId, store: { dispatch } } = render(
-      <CogitoContract channel={channel} contracts={contracts} />
+      <CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />
     )
-    expect(getByTestId(/current-value/i)).toHaveTextContent('0')
+    const currentValue = await waitForElement(() => getByTestId(/current-value/i))
+    expect(currentValue).toHaveTextContent('0')
     setActiveTelepathChannel(dispatch)
     const increaseButton = getByText(/increase/i)
     fireEvent.click(increaseButton)

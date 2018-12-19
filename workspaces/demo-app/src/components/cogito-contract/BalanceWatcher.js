@@ -6,9 +6,9 @@ class BalanceWatcher extends React.Component {
   valueWatcher
 
   componentDidMount () {
-    const { contracts, dispatch } = this.props
+    const { simpleStorage, dispatch } = this.props
     this.valueWatcher = new ValueWatcher({
-      contracts,
+      simpleStorage,
       onValueChanged: value => dispatch(UserDataActions.setBalance(value))
     })
     this.valueWatcher.start()

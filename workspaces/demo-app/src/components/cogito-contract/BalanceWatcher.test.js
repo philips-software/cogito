@@ -8,27 +8,25 @@ import { BalanceWatcher } from './BalanceWatcher'
 
 describe('BalanceWatcher', () => {
   const value = 100
-  let contracts
   let store
+  let simpleStorage
 
   beforeEach(() => {
-    contracts = {
-      simpleStorage: new SimpleStorageMock()
-    }
+    simpleStorage = new SimpleStorageMock()
     store = createStore(rootReducer)
   })
 
   it('starts watching value changes after component is mounted', () => {
-    render(<BalanceWatcher dispatch={store.dispatch} contracts={contracts} />)
+    render(<BalanceWatcher dispatch={store.dispatch} simpleStorage={simpleStorage} />)
     expect(store.getState().userData.balance).toBe(0)
-    contracts.simpleStorage.simulateValueChange(value)
+    simpleStorage.simulateValueChange(value)
     expect(store.getState().userData.balance).toBe(value)
   })
 
   it('stops watching value changes after component is unmounted', () => {
-    const { unmount } = render(<BalanceWatcher dispatch={store.dispatch} contracts={contracts} />)
+    const { unmount } = render(<BalanceWatcher dispatch={store.dispatch} simpleStorage={simpleStorage} />)
     unmount()
-    contracts.simpleStorage.simulateValueChange(value)
+    simpleStorage.simulateValueChange(value)
     expect(store.getState().userData.balance).toBe(0)
   })
 })
