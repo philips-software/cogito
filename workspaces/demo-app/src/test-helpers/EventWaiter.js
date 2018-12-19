@@ -4,9 +4,11 @@ class EventWaiter {
   expectedNumberOfEvents = 1
   intermediateValues = []
   interactivePromise
+  discriminator
 
-  constructor () {
+  constructor ({ discriminator } = {}) {
     this.interactivePromise = new InteractivePromise()
+    this.discriminator = discriminator
   }
 
   reset () {
@@ -14,7 +16,11 @@ class EventWaiter {
     this.expectedNumberOfEvents = 1
   }
 
-  onValueChanged = value => {
+  onValueChanged = (value, ...args) => {
+    if (typeof this.discriminator === 'function' &&
+        this.discriminator(value, ...args)) {
+      return
+    }
     if (--this.expectedNumberOfEvents === 0) {
       this.interactivePromise.resolve(value)
       clearTimeout(this.timeout)
