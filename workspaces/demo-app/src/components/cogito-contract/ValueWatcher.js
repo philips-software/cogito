@@ -1,9 +1,9 @@
 class ValueWatcher {
   onValueChanged
-  contracts
+  simpleStorage
 
-  constructor ({ contracts, onValueChanged }) {
-    this.contracts = contracts
+  constructor ({ simpleStorage, onValueChanged }) {
+    this.simpleStorage = simpleStorage
     this.onValueChanged = onValueChanged
   }
 
@@ -19,7 +19,7 @@ class ValueWatcher {
   }
 
   watchValueChangedEvents (options) {
-    this.valueChangedEvents = this.contracts.simpleStorage.ValueChanged({}, options)
+    this.valueChangedEvents = this.simpleStorage.ValueChanged({}, options)
     this.startWatchingFor(this.valueChangedEvents)
   }
 

@@ -20,12 +20,12 @@ describe('ValueWatcher', () => {
   beforeEach(async () => {
     ganacheTestNetwork = new GanacheTestNetwork()
     from = (await ganacheTestNetwork.getAccounts())[0]
-    const { contractInstance } = await ganacheTestNetwork.deploy(simpleStorageDef, { from })
-    simpleStorage = contractInstance
+    const { contract } = await ganacheTestNetwork.deploy(simpleStorageDef, { from })
+    simpleStorage = await contract.deployed()
     hashes = {}
     eventWaiter = new EventWaiter({ discriminator })
     valueWatcher = new ValueWatcher({
-      contracts: { simpleStorage },
+      simpleStorage,
       onValueChanged: eventWaiter.onValueChanged
     })
   })
