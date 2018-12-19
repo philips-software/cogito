@@ -27,7 +27,16 @@ The `CogitoReact` component accepts the following props:
 | channelKey | a symmetric key of the Telepath channel. If omitted a new random key will be created. |
 | appName    | the name of the app. Cogito app shows the `appName` when requesting user signature. |
 | onTelepathChanged | function to be called when the telepath channel has been updated. Provides an object `{ channelId, channelKey, appName }` as an argument. |
-| render     | render prop - a function that will be called every time the component is updated. It provides `{ web3, channel, contracts }` as an argument, where `web3` is an instance of Web3 that uses [CogitoProvider], `channel` is an instance of [Telepath], and `contracts` is an object holding the references to either deployed contracts or the raw proxies (see [Working with Contracts] below). If this prop is present, it will take precedence over the `childrens`. | 
+| render     | render prop - a function that will be called every time the component is updated. It provides `{ web3, channel, contracts }` as an argument, where `web3` is an instance of Web3 that uses [CogitoProvider], `channel` is an instance of [Telepath], and `contracts` is an object holding the references to either deployed contracts or the raw proxies (see [Working with Contracts] below). If this prop is present, it will take precedence over the `childrens`. |
+
+It provides an object with the following props to either the render prop or children function:
+
+| prop name | description  |
+|-----------|--------------|
+| contracts | Contract deployed on the CogitoProvider - see [Working with Contracts] below. |
+| channel   | The telepath channel. |
+| web3      | `CogitoProvider` from `@cogitojs/cogito-web3`. |
+| newChannel | A function to change the current channel to a new one. This function will trigger calling the render prop (or child) function, which means the whole tree below it will be (re)rendered. |
 
 ## Example
 
@@ -57,7 +66,12 @@ class Main extends React.Component {
         {web3Props => {
           if (this.web3IsReady(web3Props)) {
             return (
-              <p>Ready!</p>
+              <div>
+                <p>Ready!</p>
+                <button onClick={web3Props.newChannel()}>
+                  Change channel
+                </button>
+              </div>
             )
           } else {
             return (
@@ -86,7 +100,12 @@ render () {
       render={web3Props => {
         if (this.web3IsReady(web3Props)) {
           return (
-            <p>Ready!</p>
+            <div>
+              <p>Ready!</p>
+              <button onClick={web3Props.newChannel()}>
+                Change channel
+              </button>
+            </div>
           )
         } else {
           return (
