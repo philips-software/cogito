@@ -31,6 +31,10 @@ describe('CogitoContract', () => {
     }
   }
 
+  const cogitoContract = () => (
+    <CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />
+  )
+
   beforeEach(() => {
     channel = new TelepathChannelMock()
     simpleStorage = new SimpleStorageMock()
@@ -42,25 +46,25 @@ describe('CogitoContract', () => {
 
   describe('when in initial state', async () => {
     it('shows the intial contract value of zero', async () => {
-      const { getByText, getByTestId } = render(<CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />)
+      const { getByText, getByTestId } = render(cogitoContract())
       await waitForElement(() => getByText(/current value is/i))
       expect(getByTestId(/current-value/i)).toHaveTextContent('0')
     })
 
     it('has active "Increase" button', async () => {
-      const { getByText } = render(<CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />)
+      const { getByText } = render(cogitoContract())
       const button = await waitForElement(() => getByText(/increase by 5/i))
       expect(button).not.toBeDisabled()
     })
 
     it('has active "Show QR code" button', async () => {
-      const { getByText } = render(<CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />)
+      const { getByText } = render(cogitoContract())
       const button = await waitForElement(() => getByText(/show qr code/i))
       expect(button).not.toBeDisabled()
     })
 
     it('does not show the cogito connector', async () => {
-      const { getByText, queryByText } = render(<CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />)
+      const { getByText, queryByText } = render(cogitoContract())
       await waitForElement(() => getByText(/increase/i))
       expect(queryByText(/scan the qr code/i)).toBeNull()
     })
@@ -89,7 +93,7 @@ describe('CogitoContract', () => {
       })
     })
     it('opens the "Scan QR Code" dialog if telepath channel is not yet established', async () => {
-      const { getByText } = render(<CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />)
+      const { getByText } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
       expect(getByText(/scan the qr code/i)).toBeInTheDocument()
@@ -97,9 +101,7 @@ describe('CogitoContract', () => {
 
     it('directly increases the contract value if telepath channel is already established', async () => {
       console.log = jest.fn()
-      const { getByText, getByTestId, store: { dispatch } } = render(
-        <CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />
-      )
+      const { getByText, getByTestId, store: { dispatch } } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       setActiveTelepathChannel(dispatch)
       fireEvent.click(increaseButton)
@@ -108,9 +110,7 @@ describe('CogitoContract', () => {
     })
 
     it('shows the "Scan QR Code" dialog and then inceases the contract value after confirming', async () => {
-      const { getByText, getByTestId, queryByText } = render(
-        <CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />
-      )
+      const { getByText, getByTestId, queryByText } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
       const doneButton = getByText(/done/i)
@@ -121,9 +121,7 @@ describe('CogitoContract', () => {
     })
 
     it('sets user identity and connection status in the redux store', async () => {
-      const { getByText, store } = render(
-        <CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />
-      )
+      const { getByText, store } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
       const doneButton = getByText(/done/i)
@@ -132,9 +130,7 @@ describe('CogitoContract', () => {
     })
 
     it('refetches user idenity if user explicitely requests a new QR Code', async () => {
-      const { getByText, store } = render(
-        <CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />
-      )
+      const { getByText, store } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
       const doneButton = getByText(/done/i)
@@ -156,9 +152,7 @@ describe('CogitoContract', () => {
       increasePromise = new InteractivePromise()
       simpleStorage = new SimpleStorageMock({ increase: () => increasePromise.get() })
       simpleStorageProxy = initSimpleStorageProxy()
-      renderingContext = render(
-        <CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />
-      )
+      renderingContext = render(cogitoContract())
       const { getByText, store: { dispatch } } = renderingContext
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       setActiveTelepathChannel(dispatch)
@@ -196,9 +190,7 @@ describe('CogitoContract', () => {
     })
 
     it('shows an error message when increasing contract value fails', async () => {
-      const { getByText, queryByText, store: { dispatch } } = render(
-        <CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />
-      )
+      const { getByText, queryByText, store: { dispatch } } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       setActiveTelepathChannel(dispatch)
       fireEvent.click(increaseButton)
@@ -211,9 +203,7 @@ describe('CogitoContract', () => {
 
     it('shows an error message when fetching identity info fails', async () => {
       channel = new TelepathChannelMock({ error: new Error('Error fetching identity info') })
-      const { getByText } = render(
-        <CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />
-      )
+      const { getByText } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
       const doneButton = getByText(/done/i)
@@ -223,9 +213,7 @@ describe('CogitoContract', () => {
 
     it('shows an error message when fetching identity returns no identity', async () => {
       channel = new TelepathChannelMock({ identities: [] })
-      const { getByText } = render(
-        <CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />
-      )
+      const { getByText } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
       const doneButton = getByText(/done/i)
