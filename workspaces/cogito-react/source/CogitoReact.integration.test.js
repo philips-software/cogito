@@ -1,9 +1,9 @@
 import React from 'react'
-import { GanacheTestNetwork, CogitoProviderForTesting } from 'test-helpers'
+import { ethers } from 'ethers'
+import { GanacheTestNetwork } from 'test-helpers'
 import { render, wait } from 'react-testing-library'
 import { CogitoReact } from './CogitoReact'
 import { SimpleStorage } from '@cogitojs/demo-app-contracts'
-import Web3 from 'web3'
 
 describe('cogito-react integration', () => {
   const exampleTelepathId = 'IDN3oO-6rGSyqpMFDC6EfCQC'
@@ -13,7 +13,7 @@ describe('cogito-react integration', () => {
   let channel
   let renderFunction
   let renderFunctionArgs
-  let contractsInfo
+  let contractsBlobs
 
   const setupRenderPropFunction = () => {
     renderFunctionArgs = {}
@@ -27,16 +27,8 @@ describe('cogito-react integration', () => {
     renderFunctionArgs = {}
   }
 
-  const setupContractsInfo = (contractDefinition = SimpleStorage) => {
-    contractsInfo = {
-      rawContractsInfo: [
-        {
-          contractName: 'simpleStorage',
-          contractDefinition
-        }
-      ],
-      deployedContractsInfo: []
-    }
+  const setupContractsBlobs = (contractDefinition = SimpleStorage) => {
+    contractsBlobs = [ contractDefinition ]
   }
 
   const setupChannel = () => {
@@ -60,7 +52,7 @@ describe('cogito-react integration', () => {
     }
     return <CogitoReact
       {...channelProps}
-      contracts={contractsInfo}>
+      contractsBlobs={contractsBlobs}>
       {renderFunction}
     </CogitoReact>
   }
@@ -72,7 +64,7 @@ describe('cogito-react integration', () => {
     console.log = jest.fn()
     setupChannel()
     setupRenderPropFunction()
-    setupContractsInfo()
+    setupContractsBlobs()
   })
 
   afterEach(() => {
@@ -86,12 +78,12 @@ describe('cogito-react integration', () => {
     }))
 
     await wait(() => {
-      expect(renderFunctionArgs.web3).toBeDefined()
-      expect(renderFunctionArgs.contracts.simpleStorage).toBeDefined()
-      expect(renderFunctionArgs.contracts.simpleStorage.deployed).toEqual(expect.any(Function))
-      expect(renderFunctionArgs.channel.appName).toBe(appName)
-      expect(renderFunctionArgs.channel.key).toEqual(expect.any(Uint8Array))
-      expect(renderFunctionArgs.channel.id).toEqual(expect.any(String))
+      expect(renderFunctionArgs.cogitoWeb3).toBeDefined()
+      expect(renderFunctionArgs.contractsProxies.SimpleStorage).toBeDefined()
+      expect(renderFunctionArgs.contractsProxies.SimpleStorage.deployed).toEqual(expect.any(Function))
+      expect(renderFunctionArgs.telepathChannel.appName).toBe(appName)
+      expect(renderFunctionArgs.telepathChannel.key).toEqual(expect.any(Uint8Array))
+      expect(renderFunctionArgs.telepathChannel.id).toEqual(expect.any(String))
       expect(renderFunctionArgs.newChannel).toEqual(expect.any(Function))
     })
   })
@@ -100,7 +92,7 @@ describe('cogito-react integration', () => {
     render(cogitoReact())
 
     await wait(() => {
-      expect(renderFunctionArgs.channel).toMatchObject(channel)
+      expect(renderFunctionArgs.telepathChannel).toMatchObject(channel)
     })
   })
 
@@ -110,36 +102,47 @@ describe('cogito-react integration', () => {
     }))
 
     await wait(() => {
-      expect(renderFunctionArgs.channel).toMatchObject(channel)
+      expect(renderFunctionArgs.telepathChannel).toMatchObject(channel)
     })
   })
 
   describe('when contracts are deployed', function () {
     const increment = 10
-    let from
+    const mnemonic = 'hair snack volcano shift tragic wrong wreck release vibrant gossip ugly debate'
+    let wallet
+
+    const makeTransactionEthersCompatible = transaction => {
+      let ethersTransaction = {
+        ...transaction,
+        gasLimit: transaction.gas
+      }
+      delete ethersTransaction.from
+      delete ethersTransaction.gas
+      return ethersTransaction
+    }
+
+    const mockTelepathChannel = telepathChannel => {
+      telepathChannel.send = jest.fn().mockImplementationOnce(async signRequest => {
+        const transaction = makeTransactionEthersCompatible(signRequest.params[0])
+        const signedTransaction = await wallet.sign(transaction)
+        return Promise.resolve({
+          result: signedTransaction
+        })
+      })
+    }
 
     const executeContract = async () => {
-      let simpleStorage = await renderFunctionArgs.contracts.simpleStorage.deployed()
-      await simpleStorage.increase(increment, { from })
+      let simpleStorage = await renderFunctionArgs.contractsProxies.SimpleStorage.deployed()
+      await simpleStorage.increase(increment, { from: wallet.address })
       const value = await simpleStorage.read()
       return value.toNumber()
     }
 
     beforeEach(async () => {
-      from = (await ganacheTestNetwork.getAccounts())[0]
-      const { deployedJSON } = await ganacheTestNetwork.deploy(SimpleStorage, { from })
-      setupContractsInfo(deployedJSON)
+      wallet = ethers.Wallet.fromMnemonic(mnemonic)
+      const { deployedJSON } = await ganacheTestNetwork.deploy(SimpleStorage, { from: wallet.address })
+      setupContractsBlobs(deployedJSON)
     })
-
-    const adjustCogitoProviderForTesting = () => {
-      const simpleStorage = renderFunctionArgs.contracts.simpleStorage
-      const web3 = new Web3(new CogitoProviderForTesting({
-        originalCogitoProvider: simpleStorage.web3.currentProvider,
-        redirectProvider: window.web3.currentProvider
-      }))
-
-      simpleStorage.setProvider(web3.currentProvider)
-    }
 
     it('provides contracts correctly deployed with the given provider', async () => {
       render(cogitoReact({
@@ -148,10 +151,10 @@ describe('cogito-react integration', () => {
       }))
 
       await wait(() => {
-        expect(renderFunctionArgs.web3).toBeDefined()
+        expect(renderFunctionArgs.telepathChannel).toBeDefined()
       })
 
-      adjustCogitoProviderForTesting()
+      mockTelepathChannel(renderFunctionArgs.telepathChannel)
 
       expect(await executeContract()).toBe(increment)
     })
@@ -163,7 +166,7 @@ describe('cogito-react integration', () => {
       }))
 
       await wait(() => {
-        expect(renderFunctionArgs.web3).toBeDefined()
+        expect(renderFunctionArgs.telepathChannel).toBeDefined()
       })
 
       resetRenderPropFunctionArgs()
@@ -171,10 +174,10 @@ describe('cogito-react integration', () => {
       rerender(cogitoReact())
 
       await wait(() => {
-        expect(renderFunctionArgs.web3).toBeDefined()
+        expect(renderFunctionArgs.telepathChannel).toBeDefined()
       })
 
-      adjustCogitoProviderForTesting()
+      mockTelepathChannel(renderFunctionArgs.telepathChannel)
 
       expect(await executeContract()).toBe(increment)
     })
@@ -183,7 +186,7 @@ describe('cogito-react integration', () => {
       render(cogitoReact())
 
       await wait(() => {
-        expect(renderFunctionArgs.web3).toBeDefined()
+        expect(renderFunctionArgs.telepathChannel).toBeDefined()
       })
 
       const newChannel = renderFunctionArgs.newChannel
@@ -193,10 +196,10 @@ describe('cogito-react integration', () => {
       newChannel()
 
       await wait(() => {
-        expect(renderFunctionArgs.web3).toBeDefined()
+        expect(renderFunctionArgs.telepathChannel).toBeDefined()
       })
 
-      adjustCogitoProviderForTesting()
+      mockTelepathChannel(renderFunctionArgs.telepathChannel)
 
       expect(await executeContract()).toBe(increment)
     })
