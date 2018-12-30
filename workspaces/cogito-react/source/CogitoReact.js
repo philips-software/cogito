@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Cogito } from '@cogitojs/cogito'
+import { CogitoEthereum } from '@cogitojs/cogito'
 import { PropValidator } from './PropValidator'
 
 export class CogitoReact extends React.Component {
   state
-  cogito
+  cogitoEthereum
 
   static propTypes = {
     channelId: PropTypes.string,
@@ -22,10 +22,10 @@ export class CogitoReact extends React.Component {
     }
   }
 
-  constructor ({ contracts }) {
+  constructor ({ contractsBlobs }) {
     super()
-    this.cogito = new Cogito(contracts)
-    this.state = { web3: null, channel: null, contracts: null, newChannel: this.newChannel }
+    this.cogitoEthereum = new CogitoEthereum(contractsBlobs)
+    this.state = { cogitoWeb3: null, telepathChannel: null, contractsProxies: null, newChannel: this.newChannel }
   }
 
   normalizeKey = key => {
@@ -50,18 +50,22 @@ export class CogitoReact extends React.Component {
 
     const telepathKey = this.normalizeKey(channelKey)
 
-    const { web3, channel, contracts } = await this.cogito.update({
+    const {
+      cogitoWeb3,
+      contractsProxies,
+      telepathChannel
+    } = await this.cogitoEthereum.getContext({
       channelId,
       channelKey: telepathKey,
       appName
     })
 
-    this.setState({ web3, channel, contracts })
+    this.setState({ cogitoWeb3, telepathChannel, contractsProxies })
 
     this.props.onTelepathChanged && this.props.onTelepathChanged({
-      channelId: channel.id,
-      channelKey: channel.key,
-      appName: channel.appName
+      channelId: telepathChannel.id,
+      channelKey: telepathChannel.key,
+      appName: telepathChannel.appName
     })
   }
 
@@ -77,9 +81,9 @@ export class CogitoReact extends React.Component {
   }
 
   currentPropsDifferentFromPrevState = (currentProps, prevState) => {
-    return currentProps.channelId !== prevState.channel.id ||
-      currentProps.channelKey !== prevState.channel.key ||
-      currentProps.appName !== prevState.channel.appName
+    return currentProps.channelId !== prevState.telepathChannel.id ||
+      currentProps.channelKey !== prevState.telepathChannel.key ||
+      currentProps.appName !== prevState.telepathChannel.appName
   }
 
   componentDidMount () {

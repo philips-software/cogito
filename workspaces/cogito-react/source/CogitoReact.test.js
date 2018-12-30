@@ -1,20 +1,20 @@
 import React from 'react'
 import { render, wait } from 'react-testing-library'
 import { CogitoReact } from './'
-import { Cogito } from '@cogitojs/cogito'
+import { CogitoEthereum } from '@cogitojs/cogito'
 
 jest.mock('@cogitojs/cogito')
 
 describe('cogito-react', () => {
   const exampleTelepathKey = new Uint8Array([121, 122, 123])
   const exampleTelepathId = 'IDN3oO-6rGSyqpMFDC6EfCQC'
-  // for the actual format of the contractsInfo structure
+  // for the actual format of the blobs structure
   // check the integration test or refer to the @cogitojs/cogito package
-  const contractsInfo = 'contractsInfo'
+  const blobs = 'blobs'
   let renderFunction
   let renderFunctionArgs
   let appName = 'App Name'
-  let mockUpdate
+  let mockGetContext
   let channel
   let cogitoParams
   let onTelepathChanged
@@ -28,16 +28,16 @@ describe('cogito-react', () => {
     })
   }
 
-  const setupCogitoMock = () => {
-    Cogito.mockReset()
-    mockUpdate = jest.fn()
+  const setupCogitoEthereumMock = () => {
+    CogitoEthereum.mockReset()
+    mockGetContext = jest.fn()
 
-    Cogito.mockImplementation(() => {
+    CogitoEthereum.mockImplementation(() => {
       return {
-        update: mockUpdate
+        getContext: mockGetContext
       }
     })
-    mockUpdate.mockResolvedValueOnce(cogitoParams)
+    mockGetContext.mockResolvedValueOnce(cogitoParams)
   }
 
   const setupChannel = () => {
@@ -57,9 +57,9 @@ describe('cogito-react', () => {
 
   const setExpectedCogitoParams = () => {
     cogitoParams = {
-      web3: 'web3',
-      channel,
-      contracts: 'contracts'
+      cogitoWeb3: 'cogitoWeb3',
+      telepathChannel: channel,
+      contractsProxies: 'contractsProxies'
     }
   }
 
@@ -73,7 +73,7 @@ describe('cogito-react', () => {
     }
     return <CogitoReact
       {...channelProps}
-      contracts={contractsInfo}
+      contractsBlobs={blobs}
       onTelepathChanged={onTelepathChanged}>
       {renderFunction}
     </CogitoReact>
@@ -81,9 +81,9 @@ describe('cogito-react', () => {
 
   const rerender = () => {
     const { rerender: rerenderRtl } = renderingContext
-    mockUpdate.mockResolvedValueOnce({
+    mockGetContext.mockResolvedValueOnce({
       ...cogitoParams,
-      channel
+      telepathChannel: channel
     })
 
     rerenderRtl(cogitoReact())
@@ -93,7 +93,7 @@ describe('cogito-react', () => {
     setupChannel()
     setExpectedCogitoParams()
     setupRenderPropFunction()
-    setupCogitoMock()
+    setupCogitoEthereumMock()
   })
 
   describe('when created without providing channel id and key', function () {
@@ -111,11 +111,11 @@ describe('cogito-react', () => {
     })
 
     it('accepts render props function as a prop', async () => {
-      setupCogitoMock()
+      setupCogitoEthereumMock()
       renderFunction.mockClear()
       render(<CogitoReact
         appName={channel.appName}
-        contracts={contractsInfo}
+        blobs={blobs}
         render={renderFunction} />)
       await wait(() => {
         expect(renderFunction).toHaveBeenCalledTimes(2)
@@ -124,19 +124,19 @@ describe('cogito-react', () => {
 
     it('returns an instance of web3 to the render prop function', async () => {
       await wait(() => {
-        expect(renderFunctionArgs.web3).toBe('web3')
+        expect(renderFunctionArgs.cogitoWeb3).toBe('cogitoWeb3')
       })
     })
 
     it('returns an instance of contracts to the render prop function', async () => {
       await wait(() => {
-        expect(renderFunctionArgs.contracts).toBe('contracts')
+        expect(renderFunctionArgs.contractsProxies).toBe('contractsProxies')
       })
     })
 
     it('returns an instance of channel to the render prop function', async () => {
       await wait(() => {
-        expect(renderFunctionArgs.channel).toEqual(channel)
+        expect(renderFunctionArgs.telepathChannel).toEqual(channel)
       })
     })
 
@@ -147,22 +147,22 @@ describe('cogito-react', () => {
     })
 
     it('creates exactly one instance of Cogito from @cogitojs/cogito', async () => {
-      expect(Cogito.mock.instances.length).toBe(1)
+      expect(CogitoEthereum.mock.instances.length).toBe(1)
     })
 
     it('update from cogito is called exactly once', async () => {
-      expect(mockUpdate).toHaveBeenCalledTimes(1)
+      expect(mockGetContext).toHaveBeenCalledTimes(1)
     })
 
     it('update from cogito has been called with undefined channelId and channelKey', async () => {
-      const updateParams = mockUpdate.mock.calls[0][0]
+      const updateParams = mockGetContext.mock.calls[0][0]
 
       expect(updateParams.channelId).toBeUndefined()
       expect(updateParams.channelKey).toBeUndefined()
     })
 
     it('update from cogito has been called with the provided appName prop value', async () => {
-      const updateParams = mockUpdate.mock.calls[0][0]
+      const updateParams = mockGetContext.mock.calls[0][0]
 
       expect(updateParams.appName).toBe(appName)
     })
@@ -184,7 +184,7 @@ describe('cogito-react', () => {
     it('does not unnecessarily re-renders when the new prop value is the same as the recorded state', async () => {
       rerender()
 
-      expect(mockUpdate).toHaveBeenCalledTimes(1)
+      expect(mockGetContext).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -194,27 +194,27 @@ describe('cogito-react', () => {
     })
 
     it('forwards the provided telepath id and key to Cogito from @cogitojs/cogito', () => {
-      expect(mockUpdate.mock.calls[0][0]).toMatchObject({
+      expect(mockGetContext.mock.calls[0][0]).toMatchObject({
         channelId: channel.id,
         channelKey: channel.key
       })
     })
 
     it('accepts telepath key prop to be in object format', () => {
-      mockUpdate.mockClear()
+      mockGetContext.mockClear()
 
       updateChannel({
         key: { 0: 124, 1: 125, 2: 126 }
       })
 
-      mockUpdate.mockResolvedValueOnce({
+      mockGetContext.mockResolvedValueOnce({
         ...cogitoParams,
-        channel
+        telepathChannel: channel
       })
 
       render(cogitoReact())
 
-      expect(mockUpdate.mock.calls[0][0]).toMatchObject({
+      expect(mockGetContext.mock.calls[0][0]).toMatchObject({
         channelId: channel.id,
         channelKey: Uint8Array.from(Object.values(channel.key))
       })
@@ -237,7 +237,7 @@ describe('cogito-react', () => {
 
       rerender()
 
-      expect(mockUpdate.mock.calls[1][0]).toMatchObject({
+      expect(mockGetContext.mock.calls[1][0]).toMatchObject({
         channelId: channel.id,
         channelKey: channel.key,
         appName
@@ -251,7 +251,7 @@ describe('cogito-react', () => {
 
       rerender()
 
-      expect(mockUpdate.mock.calls[1][0]).toMatchObject({
+      expect(mockGetContext.mock.calls[1][0]).toMatchObject({
         channelId: channel.id,
         channelKey: channel.key,
         appName
@@ -265,7 +265,7 @@ describe('cogito-react', () => {
 
       rerender()
 
-      expect(mockUpdate.mock.calls[1][0]).toMatchObject({
+      expect(mockGetContext.mock.calls[1][0]).toMatchObject({
         channelId: channel.id,
         channelKey: channel.key,
         appName: channel.appName
@@ -273,14 +273,14 @@ describe('cogito-react', () => {
     })
 
     it('updates the channel passed to the render props function when channel key changes', async () => {
-      await wait(() => expect(renderFunctionArgs.channel.key).toEqual(channel.key))
+      await wait(() => expect(renderFunctionArgs.telepathChannel.key).toEqual(channel.key))
       updateChannel({
         key: new Uint8Array([124, 125, 127])
       })
 
       rerender()
 
-      await wait(() => expect(renderFunctionArgs.channel.key).toEqual(channel.key))
+      await wait(() => expect(renderFunctionArgs.telepathChannel.key).toEqual(channel.key))
     })
 
     it('updates the channel passed to the render props function when channel id changes', async () => {
@@ -290,7 +290,7 @@ describe('cogito-react', () => {
 
       rerender()
 
-      await wait(() => expect(renderFunctionArgs.channel.id).toEqual(channel.id))
+      await wait(() => expect(renderFunctionArgs.telepathChannel.id).toEqual(channel.id))
     })
 
     it('updates the channel passed to the render props function when app name changes', async () => {
@@ -300,7 +300,7 @@ describe('cogito-react', () => {
 
       rerender()
 
-      await wait(() => expect(renderFunctionArgs.channel.appName).toEqual(channel.appName))
+      await wait(() => expect(renderFunctionArgs.telepathChannel.appName).toEqual(channel.appName))
     })
 
     it('does not unnecessarily re-renders when the only change is the key prop format', async () => {
@@ -310,7 +310,7 @@ describe('cogito-react', () => {
 
       rerender()
 
-      expect(mockUpdate).toHaveBeenCalledTimes(1)
+      expect(mockGetContext).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -321,15 +321,15 @@ describe('cogito-react', () => {
         id: 'updated telepath channel id',
         key: new Uint8Array([124, 125, 126])
       })
-      mockUpdate.mockResolvedValueOnce({
+      mockGetContext.mockResolvedValueOnce({
         ...cogitoParams,
-        channel
+        telepathChannel: channel
       })
       renderFunctionArgs.newChannel()
     })
 
     it('calls update from @cogitojs/cogito with undefined id and key', async () => {
-      const updateParams = mockUpdate.mock.calls[1][0]
+      const updateParams = mockGetContext.mock.calls[1][0]
 
       await wait(() => {
         expect(updateParams.channelId).toBeUndefined()
@@ -338,7 +338,7 @@ describe('cogito-react', () => {
     })
 
     it('it holds the same appName', async () => {
-      const updateParams = mockUpdate.mock.calls[1][0]
+      const updateParams = mockGetContext.mock.calls[1][0]
 
       await wait(() => {
         expect(updateParams.appName).toBe(appName)
@@ -361,7 +361,7 @@ describe('cogito-react', () => {
 
     it('provides new channelId and channelKey to the render prop function', async () => {
       await wait(() => {
-        expect(renderFunctionArgs.channel).toMatchObject({
+        expect(renderFunctionArgs.telepathChannel).toMatchObject({
           id: channel.id,
           key: channel.key
         })
@@ -370,14 +370,14 @@ describe('cogito-react', () => {
 
     it('provides unchanged appName to the render prop function', async () => {
       await wait(() => {
-        expect(renderFunctionArgs.channel.appName).toBe(appName)
+        expect(renderFunctionArgs.telepathChannel.appName).toBe(appName)
       })
     })
 
     it('does not unecessariy re-renders when props change to the current state', async () => {
       rerender()
 
-      expect(mockUpdate).toHaveBeenCalledTimes(2)
+      expect(mockGetContext).toHaveBeenCalledTimes(2)
     })
   })
 
