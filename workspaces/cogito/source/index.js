@@ -1,1 +1,1 @@
-export { Cogito } from './Cogito'
+export { CogitoEthereum } from './CogitoEthereum'
