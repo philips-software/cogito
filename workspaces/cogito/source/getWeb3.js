@@ -14,7 +14,7 @@ const useLocalWeb3Provider = () => {
 }
 
 const resolveWeb3 = (resolve) => {
-  let { web3 } = window
+  let { web3 } = window || /* istanbul ignore next: cumbersone to test as window is read-only */ {}
   const alreadyInjected = typeof web3 !== 'undefined' // i.e. Mist/Metamask
 
   if (alreadyInjected) {
@@ -32,6 +32,7 @@ const getWeb3 = () =>
   new Promise((resolve) => {
     if (process.env.REACT_APP_USE_INJECTED_WEB3 === 'YES') {
       console.log('will try to use injected web3 if possible')
+      /* istanbul ignore else  */
       if (document.readyState === 'complete') {
         resolveWeb3(resolve)
       } else {
