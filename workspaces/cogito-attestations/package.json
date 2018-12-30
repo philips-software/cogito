@@ -22,8 +22,8 @@
     "access": "public"
   },
   "dependencies": {
+    "@cogitojs/telepath-js": "0.2.x",
     "base64url": "^3.0.0",
-    "ethereumjs-util": "^5.2.0",
-    "@cogitojs/telepath-js": "0.2.x"
+    "ethereumjs-util": "^5.2.0"
   }
 }
