@@ -1,5 +1,6 @@
 import Web3 from 'web3'
 import ganache from 'ganache-cli'
+import { ethers } from 'ethers'
 import initContract from 'truffle-contract'
 
 // this is caused by a ganache network - seems to be a bug
@@ -18,6 +19,7 @@ const maxAllowedListeners = 29
 
 class GanacheTestNetwork {
   mnemonic = 'hair snack volcano shift tragic wrong wreck release vibrant gossip ugly debate'
+  wallet
   _web3
   _networkId
 
@@ -26,6 +28,7 @@ class GanacheTestNetwork {
       mnemonic: this.mnemonic,
       network_id: networkId
     })
+    this.wallet = ethers.Wallet.fromMnemonic(this.mnemonic)
     provider.setMaxListeners(maxAllowedListeners)
     this._web3 = new Web3(provider)
     this._networkId = networkId
@@ -38,6 +41,40 @@ class GanacheTestNetwork {
   getAccounts = async () => {
     this.accounts = await this.web3.eth.getAccounts()
     return this.accounts
+  }
+
+  makeTransactionEthersCompatible = transaction => {
+    let ethersTransaction = {
+      ...transaction,
+      gasLimit: transaction.gas
+    }
+    delete ethersTransaction.from
+    delete ethersTransaction.gas
+    return ethersTransaction
+  }
+
+  mockSignRequest = async request => {
+    const transaction = this.makeTransactionEthersCompatible(request.params[0])
+    const signedTransaction = await this.wallet.sign(transaction)
+    return Promise.resolve({
+      result: signedTransaction
+    })
+  }
+
+  mockAccountsRequest = () => {
+    return Promise.resolve({
+      result: [this.wallet.address]
+    })
+  }
+
+  mockTelepathChannel = telepathChannel => {
+    telepathChannel.send = jest.fn().mockImplementationOnce(request => {
+      if (request.method === 'sign') {
+        return this.mockSignRequest(request)
+      } else if (request.method === 'accounts') {
+        return this.mockAccountsRequest()
+      }
+    })
   }
 
   updateContractJSON = (
