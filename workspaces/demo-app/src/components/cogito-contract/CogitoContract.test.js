@@ -3,17 +3,11 @@ import { render, fireEvent, wait, waitForElement } from 'test-helpers/render-pro
 import { TelepathChannelMock, SimpleStorageMock, InteractivePromise } from 'test-helpers'
 import nock from 'nock'
 import { CogitoContract } from './CogitoContract'
-
 import { UserDataActions } from 'user-data'
+import { AppEventsActions } from 'app-events'
 import { ValueWatcher } from './ValueWatcher'
 
 jest.unmock('@react-frontend-developer/react-redux-render-prop')
-
-jest.mock('components/utils/TimedStatus', () => {
-  return {
-    TimedStatus: ({ children }) => children
-  }
-})
 
 describe('CogitoContract', () => {
   let channel
@@ -39,9 +33,9 @@ describe('CogitoContract', () => {
     channel = new TelepathChannelMock()
     simpleStorage = new SimpleStorageMock()
     simpleStorageProxy = initSimpleStorageProxy()
-    process.env.FAUCET_URL = 'https://faucet.url/donate'
-    nock(process.env.FAUCET_URL).post(`/${channel.identities[0].ethereumAddress}`, '').reply(200)
-    nock(process.env.FAUCET_URL).post(`/${channel.identities[1].ethereumAddress}`, '').reply(200)
+    process.env.REACT_APP_FAUCET_URL = 'https://faucet.url/donate'
+    nock(process.env.REACT_APP_FAUCET_URL).post(`/${channel.identities[0].ethereumAddress}`, '').reply(200)
+    nock(process.env.REACT_APP_FAUCET_URL).post(`/${channel.identities[1].ethereumAddress}`, '').reply(200)
   })
 
   describe('when in initial state', async () => {
@@ -219,6 +213,19 @@ describe('CogitoContract', () => {
       const doneButton = getByText(/done/i)
       fireEvent.click(doneButton)
       await waitForElement(() => getByText('No identity found on the mobile device!'))
+    })
+
+    it('hides the error message after sometime', async () => {
+      Promise.resolve().then(() => jest.useFakeTimers())
+      const reason = 'there is a special reason'
+      const { getByText, queryByText, store } = render(cogitoContract())
+      store.dispatch(AppEventsActions.telepathError({ reason }))
+      await waitForElement(() => getByText(reason))
+      Promise.resolve().then(() => jest.advanceTimersByTime(3000))
+      await wait(() => {
+        expect(queryByText(reason)).toBeNull()
+        expect(store.getState().appEvents.telepathError).toBeUndefined()
+      })
     })
   })
 })
