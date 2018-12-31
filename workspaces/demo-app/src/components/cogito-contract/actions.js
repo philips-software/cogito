@@ -4,12 +4,13 @@ import { FaucetService } from 'faucet'
 
 import { CogitoIdentity } from '@cogitojs/cogito-identity'
 
+/* istanbul ignore next */
 const getFaucetURL = () => {
   if (process.env.NODE_ENV === 'production') {
-    return process.env.FAUCET_URL_PRODUCTION
+    return process.env.REACT_APP_FAUCET_URL_PRODUCTION
   }
 
-  return process.env.FAUCET_URL || 'http://localhost:3001/donate'
+  return process.env.REACT_APP_FAUCET_URL || 'http://localhost:3001/donate'
 }
 
 const transferFunds = async (account) => {
