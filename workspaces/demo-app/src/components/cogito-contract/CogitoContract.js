@@ -37,6 +37,7 @@ class CogitoContract extends React.Component {
   }
 
   onClosed = async dispatch => {
+    /* istanbul ignore else  */
     if (this.state.action === 'increase') {
       this.dispatchIncrease(dispatch)
     }
