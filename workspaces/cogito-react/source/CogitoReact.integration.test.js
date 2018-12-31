@@ -1,19 +1,18 @@
 import React from 'react'
 import { ethers } from 'ethers'
-import { GanacheTestNetwork } from 'test-helpers'
+import { EthereumForSimpleStorage } from 'test-helpers'
 import { render, wait } from 'react-testing-library'
 import { CogitoReact } from './CogitoReact'
-import { SimpleStorage } from '@cogitojs/demo-app-contracts'
 
 describe('cogito-react integration', () => {
+  const increment = 10
   const exampleTelepathId = 'IDN3oO-6rGSyqpMFDC6EfCQC'
   const exampleTelepathKey = new Uint8Array([176, 8, 86, 89, 0, 33, 4, 124, 240, 249, 253, 251, 147, 56, 138, 54, 84, 144, 150, 125, 89, 4, 6, 6, 217, 246, 16, 163, 188, 247, 113, 134])
   const appName = 'Cogito Demo App'
-  let ganacheTestNetwork
   let channel
   let renderFunction
   let renderFunctionArgs
-  let contractsBlobs
+  let ethereum
 
   const setupRenderPropFunction = () => {
     renderFunctionArgs = {}
@@ -25,10 +24,6 @@ describe('cogito-react integration', () => {
 
   const resetRenderPropFunctionArgs = () => {
     renderFunctionArgs = {}
-  }
-
-  const setupContractsBlobs = (contractDefinition = SimpleStorage) => {
-    contractsBlobs = [ contractDefinition ]
   }
 
   const setupChannel = () => {
@@ -52,19 +47,28 @@ describe('cogito-react integration', () => {
     }
     return <CogitoReact
       {...channelProps}
-      contractsBlobs={contractsBlobs}>
+      contractsBlobs={[ethereum.simpleStorageBlob]}>
       {renderFunction}
     </CogitoReact>
   }
 
+  const setupEthereum = async () => {
+    ethereum = new EthereumForSimpleStorage({ appName })
+    await ethereum.setup()
+  } 
+
+  const executeContract = async () => {
+    let simpleStorage = await ethereum.simpleStorage
+    await simpleStorage.increase(increment, { from: ethereum.address })
+    const value = await simpleStorage.read()
+    return value.toNumber()
+  }
+
   beforeEach(async () => {
-    ganacheTestNetwork = new GanacheTestNetwork()
-    window.web3 = ganacheTestNetwork.web3
-    process.env.REACT_APP_USE_INJECTED_WEB3 = 'YES'
     console.log = jest.fn()
+    await setupEthereum()
     setupChannel()
     setupRenderPropFunction()
-    setupContractsBlobs()
   })
 
   afterEach(() => {
@@ -106,102 +110,63 @@ describe('cogito-react integration', () => {
     })
   })
 
-  describe('when contracts are deployed', function () {
-    const increment = 10
-    const mnemonic = 'hair snack volcano shift tragic wrong wreck release vibrant gossip ugly debate'
-    let wallet
+  it('provides contracts correctly deployed with the given provider', async () => {
+    render(cogitoReact({
+      channelId: undefined,
+      channelKey: undefined
+    }))
 
-    const makeTransactionEthersCompatible = transaction => {
-      let ethersTransaction = {
-        ...transaction,
-        gasLimit: transaction.gas
-      }
-      delete ethersTransaction.from
-      delete ethersTransaction.gas
-      return ethersTransaction
-    }
-
-    const mockTelepathChannel = telepathChannel => {
-      telepathChannel.send = jest.fn().mockImplementationOnce(async signRequest => {
-        const transaction = makeTransactionEthersCompatible(signRequest.params[0])
-        const signedTransaction = await wallet.sign(transaction)
-        return Promise.resolve({
-          result: signedTransaction
-        })
-      })
-    }
-
-    const executeContract = async () => {
-      let simpleStorage = await renderFunctionArgs.contractsProxies.SimpleStorage.deployed()
-      await simpleStorage.increase(increment, { from: wallet.address })
-      const value = await simpleStorage.read()
-      return value.toNumber()
-    }
-
-    beforeEach(async () => {
-      wallet = ethers.Wallet.fromMnemonic(mnemonic)
-      const { deployedJSON } = await ganacheTestNetwork.deploy(SimpleStorage, { from: wallet.address })
-      setupContractsBlobs(deployedJSON)
+    await wait(() => {
+      expect(renderFunctionArgs.telepathChannel).toBeDefined()
     })
 
-    it('provides contracts correctly deployed with the given provider', async () => {
-      render(cogitoReact({
-        channelId: undefined,
-        channelKey: undefined
-      }))
+    ethereum.useTelepathChannel(renderFunctionArgs.telepathChannel)
 
-      await wait(() => {
-        expect(renderFunctionArgs.telepathChannel).toBeDefined()
-      })
+    expect(await executeContract()).toBe(increment)
+  })
 
-      mockTelepathChannel(renderFunctionArgs.telepathChannel)
+  it('provides correctly deployed contracts when channel changes', async () => {
+    const { rerender } = render(cogitoReact({
+      channelId: undefined,
+      channelKey: undefined
+    }))
 
-      expect(await executeContract()).toBe(increment)
+    await wait(() => {
+      expect(renderFunctionArgs.telepathChannel).toBeDefined()
     })
 
-    it('provides correctly deployed contracts when channel changes', async () => {
-      const { rerender } = render(cogitoReact({
-        channelId: undefined,
-        channelKey: undefined
-      }))
+    resetRenderPropFunctionArgs()
 
-      await wait(() => {
-        expect(renderFunctionArgs.telepathChannel).toBeDefined()
-      })
+    rerender(cogitoReact())
 
-      resetRenderPropFunctionArgs()
-
-      rerender(cogitoReact())
-
-      await wait(() => {
-        expect(renderFunctionArgs.telepathChannel).toBeDefined()
-      })
-
-      mockTelepathChannel(renderFunctionArgs.telepathChannel)
-
-      expect(await executeContract()).toBe(increment)
+    await wait(() => {
+      expect(renderFunctionArgs.telepathChannel).toBeDefined()
     })
 
-    it('provides correctly deployed contracts after calling newChannel function', async () => {
-      render(cogitoReact())
+    ethereum.useTelepathChannel(renderFunctionArgs.telepathChannel)
 
-      await wait(() => {
-        expect(renderFunctionArgs.telepathChannel).toBeDefined()
-      })
+    expect(await executeContract()).toBe(increment)
+  })
 
-      const newChannel = renderFunctionArgs.newChannel
+  it('provides correctly deployed contracts after calling newChannel function', async () => {
+    render(cogitoReact())
 
-      resetRenderPropFunctionArgs()
-
-      newChannel()
-
-      await wait(() => {
-        expect(renderFunctionArgs.telepathChannel).toBeDefined()
-      })
-
-      mockTelepathChannel(renderFunctionArgs.telepathChannel)
-
-      expect(await executeContract()).toBe(increment)
+    await wait(() => {
+      expect(renderFunctionArgs.telepathChannel).toBeDefined()
     })
+
+    const newChannel = renderFunctionArgs.newChannel
+
+    resetRenderPropFunctionArgs()
+
+    newChannel()
+
+    await wait(() => {
+      expect(renderFunctionArgs.telepathChannel).toBeDefined()
+    })
+
+    ethereum.useTelepathChannel(renderFunctionArgs.telepathChannel)
+
+    expect(await executeContract()).toBe(increment)
   })
 })

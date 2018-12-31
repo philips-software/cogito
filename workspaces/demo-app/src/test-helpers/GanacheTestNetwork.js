@@ -15,7 +15,7 @@ import initContract from 'truffle-contract'
 //
 // We need to set that value of maxAllowedListeners to <N>.
 // Alternatively set it to some big number like 100
-const maxAllowedListeners = 29
+const maxAllowedListeners = 100
 
 class GanacheTestNetwork {
   mnemonic = 'hair snack volcano shift tragic wrong wreck release vibrant gossip ugly debate'
