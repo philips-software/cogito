@@ -27,26 +27,39 @@ class EthereumForSimpleStorage {
     return this.context.contractsProxies.SimpleStorage
   }
 
+  get simpleStorageBlob () {
+    return this.deployedJSON
+  }
+
+  get simpleStorage () {
+    return this.simpleStorageProxy.deployed()
+  }
+
   constructor ({ appName }) {
     this.appName = appName
     this.ganacheTestNetwork = new GanacheTestNetwork()
     this.injectWeb3()
   }
 
-  deploy = () => {
-    return this.ganacheTestNetwork.deploy(SimpleStorage, { from: this.address })
+  deploy = async () => {
+    const { deployedJSON } = await this.ganacheTestNetwork.deploy(SimpleStorage, { from: this.address })
+    this.deployedJSON = deployedJSON
   }
 
-  setupCogitoContext = async contractBlob => {
-    const cogitoEthereum = new CogitoEthereum([ contractBlob ])
+  setupCogitoContext = async () => {
+    const cogitoEthereum = new CogitoEthereum([ this.deployedJSON ])
     this.context = await cogitoEthereum.getContext({ appName: this.appName })
 
     this.ganacheTestNetwork.mockTelepathChannel(this.context.telepathChannel)
   }
 
+  useTelepathChannel = telepathChannel => {
+    this.ganacheTestNetwork.mockTelepathChannel(telepathChannel)
+  }
+
   setup = async () => {
-    const { deployedJSON } = await this.deploy()
-    await this.setupCogitoContext(deployedJSON)
+    await this.deploy()
+    await this.setupCogitoContext()
   }
 }
 
