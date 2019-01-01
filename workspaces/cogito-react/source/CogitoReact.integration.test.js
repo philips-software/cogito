@@ -1,6 +1,5 @@
 import React from 'react'
-import { ethers } from 'ethers'
-import { EthereumForSimpleStorage } from 'test-helpers'
+import { EthereumForSimpleStorage, TestingRenderProps } from 'test-helpers'
 import { render, wait } from 'react-testing-library'
 import { CogitoReact } from './CogitoReact'
 
@@ -8,29 +7,15 @@ describe('cogito-react integration', () => {
   const increment = 10
   const exampleTelepathId = 'IDN3oO-6rGSyqpMFDC6EfCQC'
   const exampleTelepathKey = new Uint8Array([176, 8, 86, 89, 0, 33, 4, 124, 240, 249, 253, 251, 147, 56, 138, 54, 84, 144, 150, 125, 89, 4, 6, 6, 217, 246, 16, 163, 188, 247, 113, 134])
-  const appName = 'Cogito Demo App'
   let channel
-  let renderFunction
-  let renderFunctionArgs
+  let renderProps
   let ethereum
-
-  const setupRenderPropFunction = () => {
-    renderFunctionArgs = {}
-    renderFunction = args => {
-      Object.assign(renderFunctionArgs, args)
-      return null
-    }
-  }
-
-  const resetRenderPropFunctionArgs = () => {
-    renderFunctionArgs = {}
-  }
 
   const setupChannel = () => {
     channel = {
       id: exampleTelepathId,
       key: exampleTelepathKey,
-      appName
+      appName: ethereum.appName
     }
   }
 
@@ -48,14 +33,9 @@ describe('cogito-react integration', () => {
     return <CogitoReact
       {...channelProps}
       contractsBlobs={[ethereum.simpleStorageBlob]}>
-      {renderFunction}
+      {renderProps.function}
     </CogitoReact>
   }
-
-  const setupEthereum = async () => {
-    ethereum = new EthereumForSimpleStorage({ appName })
-    await ethereum.setup()
-  } 
 
   const executeContract = async () => {
     let simpleStorage = await ethereum.simpleStorage
@@ -66,9 +46,9 @@ describe('cogito-react integration', () => {
 
   beforeEach(async () => {
     console.log = jest.fn()
-    await setupEthereum()
+    ethereum = await EthereumForSimpleStorage.setup()
+    renderProps = new TestingRenderProps()
     setupChannel()
-    setupRenderPropFunction()
   })
 
   afterEach(() => {
@@ -82,13 +62,13 @@ describe('cogito-react integration', () => {
     }))
 
     await wait(() => {
-      expect(renderFunctionArgs.cogitoWeb3).toBeDefined()
-      expect(renderFunctionArgs.contractsProxies.SimpleStorage).toBeDefined()
-      expect(renderFunctionArgs.contractsProxies.SimpleStorage.deployed).toEqual(expect.any(Function))
-      expect(renderFunctionArgs.telepathChannel.appName).toBe(appName)
-      expect(renderFunctionArgs.telepathChannel.key).toEqual(expect.any(Uint8Array))
-      expect(renderFunctionArgs.telepathChannel.id).toEqual(expect.any(String))
-      expect(renderFunctionArgs.newChannel).toEqual(expect.any(Function))
+      expect(renderProps.args.cogitoWeb3).toBeDefined()
+      expect(renderProps.args.contractsProxies.SimpleStorage).toBeDefined()
+      expect(renderProps.args.contractsProxies.SimpleStorage.deployed).toEqual(expect.any(Function))
+      expect(renderProps.args.telepathChannel.appName).toBe(ethereum.appName)
+      expect(renderProps.args.telepathChannel.key).toEqual(expect.any(Uint8Array))
+      expect(renderProps.args.telepathChannel.id).toEqual(expect.any(String))
+      expect(renderProps.args.newChannel).toEqual(expect.any(Function))
     })
   })
 
@@ -96,7 +76,7 @@ describe('cogito-react integration', () => {
     render(cogitoReact())
 
     await wait(() => {
-      expect(renderFunctionArgs.telepathChannel).toMatchObject(channel)
+      expect(renderProps.args.telepathChannel).toMatchObject(channel)
     })
   })
 
@@ -106,7 +86,7 @@ describe('cogito-react integration', () => {
     }))
 
     await wait(() => {
-      expect(renderFunctionArgs.telepathChannel).toMatchObject(channel)
+      expect(renderProps.args.telepathChannel).toMatchObject(channel)
     })
   })
 
@@ -117,10 +97,10 @@ describe('cogito-react integration', () => {
     }))
 
     await wait(() => {
-      expect(renderFunctionArgs.telepathChannel).toBeDefined()
+      expect(renderProps.args.telepathChannel).toBeDefined()
     })
 
-    ethereum.useTelepathChannel(renderFunctionArgs.telepathChannel)
+    ethereum.useTelepathChannel(renderProps.args.telepathChannel)
 
     expect(await executeContract()).toBe(increment)
   })
@@ -132,18 +112,18 @@ describe('cogito-react integration', () => {
     }))
 
     await wait(() => {
-      expect(renderFunctionArgs.telepathChannel).toBeDefined()
+      expect(renderProps.args.telepathChannel).toBeDefined()
     })
 
-    resetRenderPropFunctionArgs()
+    renderProps.reset()
 
     rerender(cogitoReact())
 
     await wait(() => {
-      expect(renderFunctionArgs.telepathChannel).toBeDefined()
+      expect(renderProps.args.telepathChannel).toBeDefined()
     })
 
-    ethereum.useTelepathChannel(renderFunctionArgs.telepathChannel)
+    ethereum.useTelepathChannel(renderProps.args.telepathChannel)
 
     expect(await executeContract()).toBe(increment)
   })
@@ -152,20 +132,20 @@ describe('cogito-react integration', () => {
     render(cogitoReact())
 
     await wait(() => {
-      expect(renderFunctionArgs.telepathChannel).toBeDefined()
+      expect(renderProps.args.telepathChannel).toBeDefined()
     })
 
-    const newChannel = renderFunctionArgs.newChannel
+    const newChannel = renderProps.args.newChannel
 
-    resetRenderPropFunctionArgs()
+    renderProps.reset()
 
     newChannel()
 
     await wait(() => {
-      expect(renderFunctionArgs.telepathChannel).toBeDefined()
+      expect(renderProps.args.telepathChannel).toBeDefined()
     })
 
-    ethereum.useTelepathChannel(renderFunctionArgs.telepathChannel)
+    ethereum.useTelepathChannel(renderProps.args.telepathChannel)
 
     expect(await executeContract()).toBe(increment)
   })

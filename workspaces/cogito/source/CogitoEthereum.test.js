@@ -1,18 +1,16 @@
-import { ethers } from 'ethers'
-import { GanacheTestNetwork } from 'test-helpers'
+import { EthereumForSimpleStorage } from 'test-helpers'
 import { SimpleStorage } from '@cogitojs/demo-app-contracts'
 import { CogitoEthereum } from './'
 
 describe('CogitoEthereum', () => {
   const exampleTelepathId = 'IDN3oO-6rGSyqpMFDC6EfCQC'
   const exampleTelepathKey = new Uint8Array([176, 8, 86, 89, 0, 33, 4, 124, 240, 249, 253, 251, 147, 56, 138, 54, 84, 144, 150, 125, 89, 4, 6, 6, 217, 246, 16, 163, 188, 247, 113, 134])
-  const mnemonic = 'hair snack volcano shift tragic wrong wreck release vibrant gossip ugly debate'
   const blobs = [ SimpleStorage ]
   const appName = 'Cogito Demo App'
-  let wallet
+  let ethereum
 
   beforeEach(() => {
-    wallet = ethers.Wallet.fromMnemonic(mnemonic)
+    ethereum = new EthereumForSimpleStorage({ appName })
     console.log = jest.fn()
   })
 
@@ -20,27 +18,15 @@ describe('CogitoEthereum', () => {
     console.log.mockRestore()
   })
 
-  const makeTransactionEthersCompatible = transaction => {
-    let ethersTransaction = {
-      ...transaction,
-      gasLimit: transaction.gas
-    }
-    delete ethersTransaction.from
-    delete ethersTransaction.gas
-    return ethersTransaction
-  }
-
   it('provides Web3 object with CogitoProvider', async () => {
     const cogitoEthereum = new CogitoEthereum(blobs)
 
     const { cogitoWeb3, telepathChannel } = await cogitoEthereum.getContext({ appName })
 
-    telepathChannel.send = jest.fn().mockResolvedValueOnce({
-      result: [wallet.address]
-    })
+    ethereum.useTelepathChannel(telepathChannel)
 
     expect(await cogitoWeb3.eth.getAccounts()).toEqual([
-      wallet.address
+      ethereum.address
     ])
   })
 
@@ -70,34 +56,20 @@ describe('CogitoEthereum', () => {
 
   describe('when contracts are deployed', () => {
     const increment = 5
-    let ganacheTestNetwork
     let cogitoEthereum
 
-    const mockTelepathChannel = telepathChannel => {
-      telepathChannel.send = jest.fn().mockImplementationOnce(async signRequest => {
-        const transaction = makeTransactionEthersCompatible(signRequest.params[0])
-        const signedTransaction = await wallet.sign(transaction)
-        return Promise.resolve({
-          result: signedTransaction
-        })
-      })
-    }
-
     beforeEach(async () => {
-      ganacheTestNetwork = new GanacheTestNetwork()
-      window.web3 = ganacheTestNetwork.web3
-      process.env.REACT_APP_USE_INJECTED_WEB3 = 'YES'
-      const { deployedJSON } = await ganacheTestNetwork.deploy(SimpleStorage, { from: wallet.address })
-      cogitoEthereum = new CogitoEthereum([deployedJSON])
+      ethereum = await EthereumForSimpleStorage.setup()
+      cogitoEthereum = new CogitoEthereum([ethereum.simpleStorageBlob])
     })
 
     it('can execute contract using provided proxy and cogito provider', async () => {
       const { contractsProxies, telepathChannel } = await cogitoEthereum.getContext({ appName })
 
-      mockTelepathChannel(telepathChannel)
+      ethereum.useTelepathChannel(telepathChannel)
 
       const simpleStorage = await contractsProxies.SimpleStorage.deployed()
-      await simpleStorage.increase(increment, { from: wallet.address })
+      await simpleStorage.increase(increment, { from: ethereum.address })
       const value = (await simpleStorage.read()).toNumber()
 
       expect(value).toBe(5)

@@ -32,7 +32,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "ethers": "^4.0.20",
     "react-testing-library": "^5.3.0"
   }
 }

@@ -9,7 +9,6 @@ import { UserDataActions } from 'user-data'
 jest.unmock('@react-frontend-developer/react-redux-render-prop')
 
 describe('CogitoContract Integration test', () => {
-  const appName = 'Cogito Demo App'
   let ethereum
 
   const setActiveTelepathChannel = dispatch => {
@@ -27,9 +26,8 @@ describe('CogitoContract Integration test', () => {
 
   beforeEach(async () => {
     console.log = jest.fn()
-    
-    ethereum = new EthereumForSimpleStorage({ appName })
-    await ethereum.setup()
+
+    ethereum = await EthereumForSimpleStorage.setup()
 
     mockNetwork()
   })
