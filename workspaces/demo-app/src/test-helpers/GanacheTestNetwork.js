@@ -68,7 +68,7 @@ class GanacheTestNetwork {
   }
 
   mockTelepathChannel = telepathChannel => {
-    telepathChannel.send = jest.fn().mockImplementationOnce(request => {
+    telepathChannel.send = jest.fn().mockImplementation(request => {
       if (request.method === 'sign') {
         return this.mockSignRequest(request)
       } else if (request.method === 'accounts') {

@@ -1,12 +1,12 @@
 import { SimpleStorage } from '@cogitojs/demo-app-contracts'
-import { GanacheTestNetwork } from 'test-helpers'
+import { EthereumForSimpleStorage } from 'test-helpers'
 import { proxiesFromBlobs } from './proxiesFromBlobs'
 
 describe('proxiesFromBlobs', () => {
   let blobs
   let web3
 
-  const setupContracts = () => {
+  const setupContractsBlobs = () => {
     const baseName = SimpleStorage.contractName
     blobs = [1, 2, 3].map(i => {
       return { ...SimpleStorage, contractName: `${baseName}-${i}` }
@@ -19,8 +19,8 @@ describe('proxiesFromBlobs', () => {
     }
   }
 
-  beforeEach(async () => {
-    setupContracts()
+  beforeEach(() => {
+    setupContractsBlobs()
     stubWeb3()
   })
 
@@ -45,32 +45,33 @@ describe('proxiesFromBlobs', () => {
   })
 
   describe('given deployed contracts', () => {
-    let ganacheTestNetwork
-    let deployedBlobs
-    let from
-
-    const deployContracts = async () => {
-      from = (await ganacheTestNetwork.getAccounts())[0]
-      const deployments = await Promise.all(blobs.map(blob =>
-        ganacheTestNetwork.deploy(blob, { from })
-      ))
-      deployedBlobs = deployments.map(d => d.deployedJSON)
-    }
+    let ethereum
 
     beforeEach(async () => {
-      ganacheTestNetwork = new GanacheTestNetwork()
-      setupContracts()
-      await deployContracts()
+      console.log = jest.fn()
+      ethereum = await EthereumForSimpleStorage.setup(blobs)
     })
 
-    it('takes a list with contract JSON blobs and returns object with proxies', async () => {
-      const proxies = proxiesFromBlobs(deployedBlobs, ganacheTestNetwork.web3)
+    afterEach(() => {
+      console.log.mockRestore()
+    })
 
-      const increments = await Promise.all(Object.values(proxies).map(async (proxy, index) => {
-        const contractInstance = await proxy.deployed()
-        await contractInstance.increase(index + 1, { from })
-        return (await contractInstance.read()).toNumber()
-      }))
+    const increment = async (proxy, index) => {
+      const contractInstance = await proxy.deployed()
+      await contractInstance.increase(index + 1, { from: ethereum.address })
+      return (await contractInstance.read()).toNumber()
+    }
+
+    it('takes a list with contract JSON blobs and returns object with proxies', async () => {
+      const proxies = proxiesFromBlobs(ethereum.deployedJSONs, ethereum.cogitoWeb3)
+
+      // this is a bit tricky - cogito-web3 requires that that transactions from the same address
+      // are submitted synchronously - otherwise we will get problems with nonces
+      // TODO: we should document it in the cogito-web3 documentation
+      const increments = await Object.values(proxies).reduce(async (promise, proxy, index) => {
+        const increments = await promise
+        return [ ...increments, await increment(proxy, index) ]
+      }, Promise.resolve([]))
 
       expect(increments).toEqual([1, 2, 3])
     })
