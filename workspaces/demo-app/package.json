@@ -43,6 +43,7 @@
     "@cogitojs/faucet": "^0.2.18",
     "@react-frontend-developer/jsdom-worker": "^0.1.1",
     "deep-freeze-es6": "^1.0.1",
+    "ethers": "^4.0.20",
     "jest-canvas-mock": "^1.0.2",
     "jest-dom": "^2.1.1",
     "jest-emotion": "^9.2.11",
