@@ -1,15 +1,12 @@
 import { ValueWatcher } from './ValueWatcher'
-import { EventWaiter, GanacheTestNetwork } from 'test-helpers'
-
-import { SimpleStorage as simpleStorageDef } from '@cogitojs/demo-app-contracts'
+import { EventWaiter, EthereumForSimpleStorage } from 'test-helpers'
 
 describe('ValueWatcher', () => {
   let eventWaiter
   let simpleStorage
-  let from
   let valueWatcher
-  let ganacheTestNetwork
   let hashes
+  let ethereum
 
   const discriminator = (value, { transactionHash }) => {
     const discriminate = hashes[transactionHash]
@@ -18,10 +15,9 @@ describe('ValueWatcher', () => {
   }
 
   beforeEach(async () => {
-    ganacheTestNetwork = new GanacheTestNetwork()
-    from = (await ganacheTestNetwork.getAccounts())[0]
-    const { contract } = await ganacheTestNetwork.deploy(simpleStorageDef, { from })
-    simpleStorage = await contract.deployed()
+    console.log = jest.fn()
+    ethereum = await EthereumForSimpleStorage.setup()
+    simpleStorage = await ethereum.simpleStorage
     hashes = {}
     eventWaiter = new EventWaiter({ discriminator })
     valueWatcher = new ValueWatcher({
@@ -32,11 +28,12 @@ describe('ValueWatcher', () => {
 
   afterEach(() => {
     valueWatcher.stop()
+    console.log.mockRestore()
   })
 
   it('can observe value changing', async () => {
     valueWatcher.start()
-    await simpleStorage.increase(5, { from })
+    await simpleStorage.increase(5, { from: ethereum.address })
 
     const value = await simpleStorage.read()
 
@@ -44,14 +41,14 @@ describe('ValueWatcher', () => {
   })
 
   it('does not watch before calling start', async () => {
-    await simpleStorage.increase(5, { from })
+    await simpleStorage.increase(5, { from: ethereum.address })
 
     await expect(eventWaiter.wait()).rejects.toThrow(new Error('timedout'))
   })
 
   it('observes successive value changes', async () => {
     valueWatcher.start()
-    await simpleStorage.increase(5, { from })
+    await simpleStorage.increase(5, { from: ethereum.address })
 
     let value = await simpleStorage.read()
 
@@ -59,7 +56,7 @@ describe('ValueWatcher', () => {
 
     eventWaiter.reset()
 
-    await simpleStorage.increase(5, { from })
+    await simpleStorage.increase(5, { from: ethereum.address })
 
     value = await simpleStorage.read()
 
@@ -68,7 +65,7 @@ describe('ValueWatcher', () => {
 
   it('stops watching after calling stop', async () => {
     valueWatcher.start()
-    await simpleStorage.increase(5, { from })
+    await simpleStorage.increase(5, { from: ethereum.address })
 
     const value = await simpleStorage.read()
 
@@ -77,7 +74,7 @@ describe('ValueWatcher', () => {
     valueWatcher.stop()
     eventWaiter.reset()
 
-    await simpleStorage.increase(5, { from })
+    await simpleStorage.increase(5, { from: ethereum.address })
 
     await expect(eventWaiter.wait()).rejects.toThrow(new Error('timedout'))
   })
@@ -85,9 +82,9 @@ describe('ValueWatcher', () => {
   it('receives all the events since the beginning', async () => {
     valueWatcher.start()
     eventWaiter.expect(2)
-    await simpleStorage.increase(5, { from })
+    await simpleStorage.increase(5, { from: ethereum.address })
     const value1 = await simpleStorage.read()
-    await simpleStorage.increase(5, { from })
+    await simpleStorage.increase(5, { from: ethereum.address })
     const value2 = await simpleStorage.read()
 
     expect(await eventWaiter.wait()).toBe(value2.toNumber())
