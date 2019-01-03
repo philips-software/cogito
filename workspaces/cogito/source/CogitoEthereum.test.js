@@ -5,7 +5,7 @@ import { CogitoEthereum } from './'
 describe('CogitoEthereum', () => {
   const exampleTelepathId = 'IDN3oO-6rGSyqpMFDC6EfCQC'
   const exampleTelepathKey = new Uint8Array([176, 8, 86, 89, 0, 33, 4, 124, 240, 249, 253, 251, 147, 56, 138, 54, 84, 144, 150, 125, 89, 4, 6, 6, 217, 246, 16, 163, 188, 247, 113, 134])
-  const blobs = [ SimpleStorage ]
+  const blobs = [ SimpleStorage() ]
   const appName = 'Cogito Demo App'
   let ethereum
 

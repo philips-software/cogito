@@ -7,9 +7,9 @@ describe('proxiesFromBlobs', () => {
   let web3
 
   const setupContractsBlobs = () => {
-    const baseName = SimpleStorage.contractName
+    const baseName = SimpleStorage().contractName
     blobs = [1, 2, 3].map(i => {
-      return { ...SimpleStorage, contractName: `${baseName}-${i}` }
+      return { ...SimpleStorage(), contractName: `${baseName}-${i}` }
     })
   }
 
@@ -49,7 +49,7 @@ describe('proxiesFromBlobs', () => {
 
     beforeEach(async () => {
       console.log = jest.fn()
-      ethereum = await EthereumForSimpleStorage.setup(blobs)
+      ethereum = await EthereumForSimpleStorage.setup({ contractsBlobs: blobs })
     })
 
     afterEach(() => {

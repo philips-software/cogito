@@ -1,23 +1,38 @@
-import ReactDOM from 'react-dom'
-import renderer from 'react-test-renderer'
 import { Main } from './Main'
-import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
-import { inRouter } from 'test-helpers/router'
-import { rootReducer } from 'app-state/rootReducer'
+import { inRouter, EthereumForSimpleStorage } from 'test-helpers'
+import { render, waitForElement } from 'test-helpers/render-props'
+import { SimpleStorage } from '@cogitojs/demo-app-contracts'
 
+jest.mock('@cogitojs/demo-app-contracts')
 jest.mock('../services/documentation-loader')
 
-const state = rootReducer(undefined, '')
+jest.unmock('@cogitojs/cogito-react')
+jest.unmock('@react-frontend-developer/react-redux-render-prop')
 
-WithStore.mockStore(state)
+describe('Main', function () {
+  beforeEach(async () => {
+    console.log = jest.fn()
+    const ethereum = await EthereumForSimpleStorage.setup()
+    SimpleStorage.mockImplementation(() => {
+      return ethereum.deployedJSON
+    })
+  })
 
-it('renders without crashing', async () => {
-  const div = document.createElement('div')
-  await ReactDOM.render(inRouter(Main, '/'), div)
-})
+  afterEach(() => {
+    console.log.mockRestore()
+  })
 
-it('renders correctly', async () => {
-  const app = await renderer
-    .create(inRouter(Main, '/'))
-  expect(app.toJSON()).toMatchSnapshot()
+  it('renders home page', async () => {
+    const { container, getByText } = render(inRouter(Main, '/'))
+
+    await waitForElement(() => getByText('Your Cogito account address is:'))
+    expect(container).toMatchSnapshot()
+  })
+
+  it('renders contracts page', async () => {
+    const { container, getByText } = render(inRouter(Main, '/contracts'))
+
+    await waitForElement(() => getByText('Current value is:'))
+    expect(container).toMatchSnapshot()
+  })
 })

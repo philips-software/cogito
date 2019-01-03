@@ -1,6 +1,298 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`Main renders contracts page 1`] = `
+.emotion-6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.emotion-2 {
+  border-radius: 15px;
+  border: 1px solid #ff80c3;
+  padding: 10px;
+  margin: 10px;
+  min-width: 6rem;
+  text-align: center;
+}
+
+.emotion-4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.css-0,
+[data-css-0] {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-areas: "header         header" "demo           documentation" "demoNavigation documentation" "footer         footer";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content 1fr max-content max-content;
+  box-sizing: border-box;
+  height: 100vh;
+  -ms-grid-gap: 5px;
+  -ms-grid-template-areas: "header         header" "demo           documentation" "demoNavigation documentation" "footer         footer";
+  -ms-grid-template-columns: 1fr 1fr;
+  -ms-grid-template-rows: max-content 1fr max-content max-content;
+}
+
+.css-1,
+[data-css-1] {
+  grid-area: header;
+  padding: 15px;
+  -ms-grid-area: header;
+}
+
+.css-2,
+[data-css-2] {
+  width: 100%;
+  height: 100px;
+  background-color: black;
+  padding: 10px;
+}
+
+.css-3,
+[data-css-3] {
+  grid-area: demo;
+  padding: 15px;
+  -ms-grid-area: demo;
+}
+
+.css-4,
+[data-css-4] {
+  grid-area: demoNavigation;
+  padding: 15px;
+  -ms-grid-area: demoNavigation;
+}
+
+.css-5,
+[data-css-5] {
+  grid-area: documentation;
+  padding: 15px;
+  border-left: 1px solid black;
+  overflow: auto;
+  -ms-grid-area: documentation;
+}
+
+.css-6,
+[data-css-6] {
+  grid-area: footer;
+  padding: 15px;
+  -ms-grid-area: footer;
+}
+
+.css-7,
+[data-css-7] {
+  justify-content: flex-end;
+  height: 100%;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+}
+
+.css-8,
+[data-css-8] {
+  color: #ff80c3;
+  font-size: 0.8rem;
+}
+
+<div>
+  <div
+    class="css-0"
+  >
+    <div
+      class="css-1"
+    >
+      <div
+        class="css-2"
+      >
+        <div
+          class="ui huge header"
+          style="color: white;"
+        >
+          Cogito
+        </div>
+        <div
+          class="ui medium header"
+          style="color: white; margin-top: 0px;"
+        >
+          Executing Contracts
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-3"
+    >
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <div
+          style="margin: 20px 0px 20px 0px; padding: 0px; box-sizing: border-box;"
+        >
+          <div
+            class="emotion-6 emotion-7"
+          >
+            <p>
+              Current value is:
+            </p>
+            <div
+              class="emotion-2 emotion-3"
+              data-testid="current-value"
+            >
+              0
+            </div>
+            <div
+              class="emotion-4 emotion-5"
+            >
+              <button
+                class="ui black secondary button"
+                role="button"
+              >
+                Increase by 5...
+              </button>
+              <button
+                class="ui black secondary button"
+                role="button"
+              >
+                Show QR code
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-4"
+    >
+      <div
+        class="emotion-6 emotion-7"
+      >
+        <div
+          aria-expanded="false"
+          class="ui button floating labeled upward top pointing dropdown icon"
+          role="listbox"
+          tabindex="0"
+        >
+          <div
+            aria-live="polite"
+            class="text"
+            role="alert"
+          >
+            Switch demo...
+          </div>
+          <i
+            aria-hidden="true"
+            class="exchange icon"
+          />
+          <div
+            class="menu transition"
+          >
+            <div
+              aria-checked="false"
+              class="item"
+              role="option"
+            >
+              <span
+                class="text"
+              >
+                Cogito Identity
+              </span>
+            </div>
+            <div
+              aria-checked="true"
+              class="active item"
+              role="option"
+            >
+              <span
+                class="text"
+              >
+                Executing Contracts
+              </span>
+            </div>
+            <div
+              aria-checked="false"
+              class="item"
+              role="option"
+            >
+              <span
+                class="text"
+              >
+                Cogito Attestations
+              </span>
+            </div>
+            <div
+              aria-checked="false"
+              class="item"
+              role="option"
+            >
+              <span
+                class="text"
+              >
+                Simple Encryption
+              </span>
+            </div>
+            <div
+              aria-checked="false"
+              class="item"
+              role="option"
+            >
+              <span
+                class="text"
+              >
+                Stream Encryption
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-5"
+    >
+      <div />
+    </div>
+    <div
+      class="css-6"
+    >
+      <div
+        class="css-7 emotion-6 emotion-7"
+      >
+        <p
+          class="css-8"
+        >
+          © 2019 by Cogito
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Main renders home page 1`] = `
 .emotion-8 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -120,219 +412,183 @@ exports[`renders correctly 1`] = `
   font-size: 0.8rem;
 }
 
-<div
-  className="css-0"
->
+<div>
   <div
-    className="css-1"
+    class="css-0"
   >
     <div
-      className="css-2"
+      class="css-1"
     >
       <div
-        className="ui huge header"
-        style={
-          Object {
-            "color": "white",
-          }
-        }
-      >
-        Cogito
-      </div>
-      <div
-        className="ui medium header"
-        style={
-          Object {
-            "color": "white",
-            "marginTop": 0,
-          }
-        }
-      >
-        Identity
-      </div>
-    </div>
-  </div>
-  <div
-    className="css-3"
-  >
-    <div
-      className="emotion-8 emotion-9"
-    >
-      <div
-        style={
-          Object {
-            "boxSizing": "border-box",
-            "margin": "20px 0 20px 0",
-            "padding": 0,
-          }
-        }
+        class="css-2"
       >
         <div
-          className="emotion-8 emotion-9"
+          class="ui huge header"
+          style="color: white;"
         >
-          <p>
-            Your Cogito account address is:
-          </p>
+          Cogito
+        </div>
+        <div
+          class="ui medium header"
+          style="color: white; margin-top: 0px;"
+        >
+          Identity
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-3"
+    >
+      <div
+        class="emotion-8 emotion-9"
+      >
+        <div
+          style="margin: 20px 0px 20px 0px; padding: 0px; box-sizing: border-box;"
+        >
           <div
-            className="emotion-2 emotion-3"
+            class="emotion-8 emotion-9"
           >
-            unknown
+            <p>
+              Your Cogito account address is:
+            </p>
+            <div
+              class="emotion-2 emotion-3"
+            >
+              unknown
+            </div>
+            <div
+              style="margin: 20px 0px 0px 0px; padding: 0px; box-sizing: border-box;"
+            />
+            <p>
+              You are known as:
+            </p>
+            <div
+              class="emotion-2 emotion-3"
+            >
+              unknown
+            </div>
+            <div
+              class="emotion-6 emotion-7"
+            >
+              <button
+                class="ui black secondary button"
+                role="button"
+              >
+                Read your identity...
+              </button>
+              <button
+                class="ui black secondary button"
+                role="button"
+              >
+                Show QR code
+              </button>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-4"
+    >
+      <div
+        class="emotion-8 emotion-9"
+      >
+        <div
+          aria-expanded="false"
+          class="ui button floating labeled upward top pointing dropdown icon"
+          role="listbox"
+          tabindex="0"
+        >
           <div
-            style={
-              Object {
-                "boxSizing": "border-box",
-                "margin": "20px 0 0 0",
-                "padding": 0,
-              }
-            }
+            aria-live="polite"
+            class="text"
+            role="alert"
+          >
+            Switch demo...
+          </div>
+          <i
+            aria-hidden="true"
+            class="exchange icon"
           />
-          <p>
-            You are known as:
-          </p>
           <div
-            className="emotion-2 emotion-3"
+            class="menu transition"
           >
-            unknown
-          </div>
-          <div
-            className="emotion-6 emotion-7"
-          >
-            <button
-              className="ui black secondary button"
-              onClick={[Function]}
-              role="button"
+            <div
+              aria-checked="true"
+              class="active item"
+              role="option"
             >
-              Read your identity...
-            </button>
-            <button
-              className="ui black secondary button"
-              onBlur={[Function]}
-              onClick={[Function]}
-              onFocus={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-              role="button"
+              <span
+                class="text"
+              >
+                Cogito Identity
+              </span>
+            </div>
+            <div
+              aria-checked="false"
+              class="item"
+              role="option"
             >
-              Show QR code
-            </button>
+              <span
+                class="text"
+              >
+                Executing Contracts
+              </span>
+            </div>
+            <div
+              aria-checked="false"
+              class="item"
+              role="option"
+            >
+              <span
+                class="text"
+              >
+                Cogito Attestations
+              </span>
+            </div>
+            <div
+              aria-checked="false"
+              class="item"
+              role="option"
+            >
+              <span
+                class="text"
+              >
+                Simple Encryption
+              </span>
+            </div>
+            <div
+              aria-checked="false"
+              class="item"
+              role="option"
+            >
+              <span
+                class="text"
+              >
+                Stream Encryption
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div
-    className="css-4"
-  >
     <div
-      className="emotion-8 emotion-9"
+      class="css-5"
+    >
+      <div />
+    </div>
+    <div
+      class="css-6"
     >
       <div
-        aria-expanded={false}
-        className="ui button floating labeled upward top pointing dropdown icon"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onMouseDown={[Function]}
-        role="listbox"
-        tabIndex={0}
+        class="css-7 emotion-8 emotion-9"
       >
-        <div
-          aria-live="polite"
-          className="text"
-          role="alert"
+        <p
+          class="css-8"
         >
-          Switch demo...
-        </div>
-        <i
-          aria-hidden="true"
-          className="exchange icon"
-          onClick={[Function]}
-        />
-        <div
-          className="menu transition"
-        >
-          <div
-            aria-checked={true}
-            className="active item"
-            onClick={[Function]}
-            role="option"
-          >
-            <span
-              className="text"
-            >
-              Cogito Identity
-            </span>
-          </div>
-          <div
-            aria-checked={false}
-            className="item"
-            onClick={[Function]}
-            role="option"
-          >
-            <span
-              className="text"
-            >
-              Executing Contracts
-            </span>
-          </div>
-          <div
-            aria-checked={false}
-            className="item"
-            onClick={[Function]}
-            role="option"
-          >
-            <span
-              className="text"
-            >
-              Cogito Attestations
-            </span>
-          </div>
-          <div
-            aria-checked={false}
-            className="item"
-            onClick={[Function]}
-            role="option"
-          >
-            <span
-              className="text"
-            >
-              Simple Encryption
-            </span>
-          </div>
-          <div
-            aria-checked={false}
-            className="item"
-            onClick={[Function]}
-            role="option"
-          >
-            <span
-              className="text"
-            >
-              Stream Encryption
-            </span>
-          </div>
-        </div>
+          © 2019 by Cogito
+        </p>
       </div>
-    </div>
-  </div>
-  <div
-    className="css-5"
-  >
-    <div />
-  </div>
-  <div
-    className="css-6"
-  >
-    <div
-      className="css-7 emotion-8 emotion-9"
-    >
-      <p
-        className="css-8"
-      >
-        © 2018 by Cogito
-      </p>
     </div>
   </div>
 </div>
