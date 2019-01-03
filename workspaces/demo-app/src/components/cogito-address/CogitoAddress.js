@@ -22,7 +22,7 @@ class CogitoAddress extends React.PureComponent {
   }
 
   onClosed = async dispatch => {
-    const { channel } = this.props
+    const { telepathChannel: channel } = this.props
 
     dispatch(IdentityActions.read({ channel }))
     dispatch(AppEventsActions.setDialogClosed())
@@ -32,7 +32,7 @@ class CogitoAddress extends React.PureComponent {
     if (!channelReady) {
       dispatch(AppEventsActions.setDialogOpen())
     } else {
-      const { channel } = this.props
+      const { telepathChannel: channel } = this.props
       dispatch(IdentityActions.read({ channel }))
     }
   }
@@ -78,7 +78,7 @@ class CogitoAddress extends React.PureComponent {
               <CogitoConnector
                 open={dialogOpen}
                 onTrigger={() => this.onTrigger(dispatch)}
-                connectUrl={this.props.channel.createConnectUrl(
+                connectUrl={this.props.telepathChannel.createConnectUrl(
                   'https://cogito.mobi'
                 )}
                 onClosed={() => this.onClosed(dispatch)}
