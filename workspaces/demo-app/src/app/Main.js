@@ -15,26 +15,19 @@ import { NoMatch404 } from 'pages/404'
 
 import { SimpleStorage } from '@cogitojs/demo-app-contracts'
 
-const contractsInfo = {
-  deployedContractsInfo: [],
-  rawContractsInfo: [
-    { contractName: 'simpleStorage', contractDefinition: SimpleStorage }
-  ]
-}
-
 class Main extends React.Component {
   renderComponent = (Component, routeProps, web3Props) => (
     <Component {...web3Props} {...routeProps} />
   )
 
-  web3IsReady = ({ web3, channel, contracts }) => {
-    return web3 && channel && contracts.simpleStorage
+  web3IsReady = ({ cogitoWeb3, telepathChannel, contractsProxies }) => {
+    return cogitoWeb3 && telepathChannel && contractsProxies.SimpleStorage
   }
 
-  cogitoProps = ({ web3, channel, contracts: { simpleStorage: simpleStorageProxy } }) => ({
-    web3,
-    channel,
-    simpleStorageProxy
+  cogitoProps = ({ cogitoWeb3, telepathChannel, contractsProxies: { SimpleStorage } }) => ({
+    cogitoWeb3,
+    telepathChannel,
+    SimpleStorage
   })
 
   onTelepathChanged = ({ channelId, channelKey, appName }, dispatch) => {
@@ -50,7 +43,7 @@ class Main extends React.Component {
         })}
         render={({ channelId, channelKey }, dispatch) => (
           <CogitoReact
-            contracts={contractsInfo}
+            contractsBlobs={[ SimpleStorage() ]}
             channelId={channelId}
             channelKey={channelKey}
             appName='Cogito Demo App'
