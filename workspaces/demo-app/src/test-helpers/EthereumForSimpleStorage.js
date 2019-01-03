@@ -1,6 +1,6 @@
-import { SimpleStorage } from '@cogitojs/demo-app-contracts'
 import { CogitoEthereum } from '@cogitojs/cogito'
 import { GanacheTestNetwork } from './GanacheTestNetwork'
+const { SimpleStorage } = jest.requireActual('@cogitojs/demo-app-contracts')
 
 const appName = 'Cogito Demo App'
 
@@ -37,7 +37,7 @@ class EthereumForSimpleStorage {
     return this.simpleStorageProxy.deployed()
   }
 
-  static setup = async (contractsBlobs = [ SimpleStorage ]) => {
+  static setup = async ({ contractsBlobs = [ SimpleStorage() ] } = {}) => {
     const ethereum = new EthereumForSimpleStorage({ appName })
     await ethereum.setup(contractsBlobs)
     return ethereum
@@ -69,7 +69,7 @@ class EthereumForSimpleStorage {
     this.ganacheTestNetwork.mockTelepathChannel(telepathChannel)
   }
 
-  setup = async (contractsBlobs = [ SimpleStorage ]) => {
+  setup = async (contractsBlobs = [ SimpleStorage() ]) => {
     await this.deploy(contractsBlobs)
     await this.setupCogitoContext()
   }
