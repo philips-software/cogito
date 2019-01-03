@@ -38,7 +38,7 @@ describe('CogitoContract Integration test', () => {
 
   it('can increase contract value', async () => {
     const { getByText, getByTestId, store: { dispatch } } = render(
-      <CogitoContract channel={ethereum.telepathChannel} simpleStorageProxy={ethereum.simpleStorageProxy} />
+      <CogitoContract telepathChannel={ethereum.telepathChannel} SimpleStorage={ethereum.simpleStorageProxy} />
     )
     const currentValue = await waitForElement(() => getByTestId(/current-value/i))
     expect(currentValue).toHaveTextContent('0')

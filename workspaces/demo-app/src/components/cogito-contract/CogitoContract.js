@@ -25,7 +25,7 @@ class CogitoContract extends React.Component {
   }
 
   dispatchIncrease = dispatch => {
-    const { channel } = this.props
+    const { telepathChannel: channel } = this.props
     dispatch(
       ContractActions.increase({
         deployedContract: this.state.simpleStorage,
@@ -60,8 +60,8 @@ class CogitoContract extends React.Component {
   }
 
   async componentDidMount () {
-    const { simpleStorageProxy } = this.props
-    const simpleStorage = await simpleStorageProxy.deployed()
+    const { SimpleStorage } = this.props
+    const simpleStorage = await SimpleStorage.deployed()
     this.setState({ simpleStorage })
   }
 
@@ -93,7 +93,7 @@ class CogitoContract extends React.Component {
               <CogitoConnector
                 open={dialogOpen}
                 onTrigger={() => this.onTrigger(dispatch)}
-                connectUrl={this.props.channel.createConnectUrl(
+                connectUrl={this.props.telepathChannel.createConnectUrl(
                   'https://cogito.mobi'
                 )}
                 onClosed={() => this.onClosed(dispatch)}

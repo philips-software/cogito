@@ -26,7 +26,7 @@ describe('CogitoContract', () => {
   }
 
   const cogitoContract = () => (
-    <CogitoContract channel={channel} simpleStorageProxy={simpleStorageProxy} />
+    <CogitoContract telepathChannel={channel} SimpleStorage={simpleStorageProxy} />
   )
 
   beforeEach(() => {
