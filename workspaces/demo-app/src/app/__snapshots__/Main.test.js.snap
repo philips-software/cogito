@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main renders contracts page 1`] = `
+exports[`Main when routing to contracts page renders correct page 1`] = `
 .emotion-6 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -292,7 +292,7 @@ exports[`Main renders contracts page 1`] = `
 </div>
 `;
 
-exports[`Main renders home page 1`] = `
+exports[`Main when routing to home page renders correct page 1`] = `
 .emotion-8 {
   display: -webkit-box;
   display: -webkit-flex;
