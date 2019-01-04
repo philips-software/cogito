@@ -17,6 +17,10 @@ class EthereumForSimpleStorage {
     return this.ganacheTestNetwork.wallet.address
   }
 
+  get username () {
+    return this.ganacheTestNetwork.username
+  }
+
   get telepathChannel () {
     return this.context.telepathChannel
   }
