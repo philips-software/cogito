@@ -13,8 +13,14 @@ import { CogitoConnector } from '@cogitojs/cogito-react-ui'
 import { IdentityActions } from './actions'
 import { AppEventsActions } from 'app-events'
 import { TelepathError, TelepathStatus } from 'components/telepath'
+import { PropTypes } from 'prop-types'
 
 class CogitoAddress extends React.PureComponent {
+  static propTypes = {
+    telepathChannel: PropTypes.object,
+    newChannel: PropTypes.func
+  }
+
   onTrigger = dispatch => {
     const { newChannel } = this.props
     newChannel()
@@ -23,7 +29,6 @@ class CogitoAddress extends React.PureComponent {
 
   onClosed = async dispatch => {
     const { telepathChannel: channel } = this.props
-
     dispatch(IdentityActions.read({ channel }))
     dispatch(AppEventsActions.setDialogClosed())
   }
@@ -62,10 +67,10 @@ class CogitoAddress extends React.PureComponent {
         ) => (
           <Centered>
             <p>Your Cogito account address is:</p>
-            <ValueWrapper>{address || 'unknown'}</ValueWrapper>
+            <ValueWrapper data-testid='current-address'>{address || 'unknown'}</ValueWrapper>
             <Spacer margin='20px 0 0 0' />
             <p>You are known as:</p>
-            <ValueWrapper>{username || 'unknown'}</ValueWrapper>
+            <ValueWrapper data-testid='current-username'>{username || 'unknown'}</ValueWrapper>
             <Row css={{ marginTop: '10px' }}>
               <Button
                 secondary
@@ -85,7 +90,7 @@ class CogitoAddress extends React.PureComponent {
                 buttonStyling={{ secondary: true, color: 'black' }}
               />
             </Row>
-            <TelepathStatus>Executing contract...</TelepathStatus>
+            <TelepathStatus>Reading identity...</TelepathStatus>
             <TelepathError
               error={telepathError}
               onTimeout={() => dispatch(AppEventsActions.telepathErrorClear())}
