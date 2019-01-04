@@ -24,10 +24,11 @@ class Main extends React.Component {
     return cogitoWeb3 && telepathChannel && contractsProxies.SimpleStorage
   }
 
-  cogitoProps = ({ cogitoWeb3, telepathChannel, contractsProxies: { SimpleStorage } }) => ({
+  cogitoProps = ({ cogitoWeb3, telepathChannel, contractsProxies: { SimpleStorage }, newChannel }) => ({
     cogitoWeb3,
     telepathChannel,
-    SimpleStorage
+    SimpleStorage,
+    newChannel
   })
 
   onTelepathChanged = ({ channelId, channelKey, appName }, dispatch) => {
