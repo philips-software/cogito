@@ -17,7 +17,7 @@ import { PropTypes } from 'prop-types'
 class CogitoContract extends React.Component {
   static propTypes = {
     telepathChannel: PropTypes.object,
-    SimpleStorage: PropTypes.objec,
+    SimpleStorage: PropTypes.func,
     newChannel: PropTypes.func
   }
 
