@@ -49,26 +49,48 @@ describe('Main', function () {
     }
   }
 
-  const forInitialRendering = getByTestId => {
-    return wait(() => {
-      expect(getByTestId(/current-address/i)).toHaveTextContent(defaultIdentity.ethereumAddress)
-      expect(getByTestId(/current-username/i)).toHaveTextContent(defaultIdentity.username)
-    })
-  }
-
-  const changeUserIdentity = getByText => {
-    setUserIdentity(alternateIdentity)
-    const showQRCodeButton = getByText(/show qr code/i)
-    fireEvent.click(showQRCodeButton)
-    const rerenderedDoneButton = getByText(/done/i)
-    fireEvent.click(rerenderedDoneButton)
-  }
-
   const setupStore = () => {
     store = createStore(rootReducer,
       undefined,
       applyMiddleware(thunkMiddleware)
     )
+  }
+
+  const showQRCode = async getByText => {
+    const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
+    const { channelId: initialId, channelKey: initialKey } = store.getState().userData
+    fireEvent.click(showQRCodeButton)
+    return { initialId, initialKey, getByText, store }
+  }
+
+  const expectTelepathChanged = (initialId, initialKey, store) => {
+    expect(store.getState().userData.channelId).not.toEqual(initialId)
+    expect(store.getState().userData.channelKey).not.toEqual(initialKey)
+  }
+
+  const validateCorrectPageRendered = async (url, expectedText) => {
+    const { container, getByText } = render(inRouter(Main, url))
+
+    await waitForElement(() => getByText(expectedText))
+    expect(container).toMatchSnapshot()
+  }
+
+  const validateTelepathChanged = async url => {
+    const { getByText, store } = render(inRouter(Main, url))
+    const { initialId, initialKey } = await showQRCode(getByText)
+    await wait(() => {
+      expectTelepathChanged(initialId, initialKey, store)
+      expect(store.getState().userData.channelKey).not.toEqual(initialKey)
+    })
+  }
+
+  const validatePageRerendered = async url => {
+    const { getByText, store } = render(inRouter(Main, url))
+    const { initialId, initialKey } = await showQRCode(getByText)
+    await wait(() => {
+      expectTelepathChanged(initialId, initialKey, store)
+      expect(getByText(/done/i)).toBeInTheDocument()
+    })
   }
 
   beforeEach(async () => {
@@ -85,31 +107,79 @@ describe('Main', function () {
     console.log.mockRestore()
   })
 
-  it('renders home page', async () => {
-    const { container, getByText } = render(inRouter(Main, '/'))
+  describe('when routing to home page', () => {
+    const forInitialRendering = getByTestId => {
+      return wait(() => {
+        expect(getByTestId(/current-address/i)).toHaveTextContent(defaultIdentity.ethereumAddress)
+        expect(getByTestId(/current-username/i)).toHaveTextContent(defaultIdentity.username)
+      })
+    }
 
-    await waitForElement(() => getByText('Your Cogito account address is:'))
-    expect(container).toMatchSnapshot()
+    const changeUserIdentity = getByText => {
+      setUserIdentity(alternateIdentity)
+      const showQRCodeButton = getByText(/show qr code/i)
+      fireEvent.click(showQRCodeButton)
+      const rerenderedDoneButton = getByText(/done/i)
+      fireEvent.click(rerenderedDoneButton)
+    }
+
+    it('renders correct page', async () => {
+      await validateCorrectPageRendered('/', 'Your Cogito account address is:')
+    })
+
+    it('can update identity when telepath changes', async () => {
+      store.dispatch(UserDataActions.setIdentityInfo(defaultIdentity))
+      const { getByText, getByTestId } = render(inRouter(Main, '/'), { store })
+
+      await forInitialRendering(getByTestId)
+
+      changeUserIdentity(getByText)
+
+      await wait(() => {
+        expect(getByTestId(/current-address/i)).toHaveTextContent(alternateIdentity.ethereumAddress)
+        expect(getByTestId(/current-username/i)).toHaveTextContent(alternateIdentity.username)
+      })
+    })
+
+    it('creates new telepath channel when user explicitely requests QR code', async () => {
+      await validateTelepathChanged('/')
+    })
+
+    it('keeps dialog open after the channel has changed and page rerendered', async () => {
+      await validatePageRerendered('/')
+    })
   })
 
-  it('renders contracts page', async () => {
-    const { container, getByText } = render(inRouter(Main, '/contracts'))
+  describe('when routing to contracts page', () => {
+    it('renders correct page', async () => {
+      await validateCorrectPageRendered('/contracts', 'Current value is:')
+    })
 
-    await waitForElement(() => getByText('Current value is:'))
-    expect(container).toMatchSnapshot()
-  })
+    it('creates new telepath channel when user explicitely requests QR code', async () => {
+      await validateTelepathChanged('/contracts')
+    })
 
-  it('correctly forwards newChannel prop needed to update identity info', async () => {
-    store.dispatch(UserDataActions.setIdentityInfo(defaultIdentity))
-    const { getByText, getByTestId } = render(inRouter(Main, '/'), { store })
+    it('keeps dialog open after the channel has changed and page rerendered', async () => {
+      await validatePageRerendered('/contracts')
+    })
 
-    await forInitialRendering(getByTestId)
-
-    changeUserIdentity(getByText)
-
-    await wait(() => {
-      expect(getByTestId(/current-address/i)).toHaveTextContent(alternateIdentity.ethereumAddress)
-      expect(getByTestId(/current-username/i)).toHaveTextContent(alternateIdentity.username)
+    it('rerenders the page when channel changes', async () => {
+      const { getByText, queryByText, store } = render(inRouter(Main, '/contracts'))
+      const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
+      const { channelId: initialId, channelKey: initialKey } = store.getState().userData
+      fireEvent.click(showQRCodeButton)
+      // By waiting for channel to change we can request the button *AFTER* the page
+      // has been rerendered. If we do not do that, we will get the reference
+      // to a wrong button, which will close the dialog by changing the redux state
+      // (AppEventsActions.setDialogClosed()), but react will warn that
+      // we try to update state on an unmounted component.
+      await wait(() => {
+        expect(store.getState().userData.channelId).not.toEqual(initialId)
+        expect(store.getState().userData.channelKey).not.toEqual(initialKey)
+      })
+      const doneButton = getByText(/done/i)
+      fireEvent.click(doneButton)
+      expect(queryByText(/scan the qr code/i)).toBeNull()
     })
   })
 })
