@@ -41,7 +41,6 @@ describe('CogitoAddress', () => {
 
   const newChannel = async () => {
     telepathChannel = await telepath.createChannel({ appName })
-    return telepathChannel
   }
 
   const cogitoAddress = () => (
@@ -50,7 +49,7 @@ describe('CogitoAddress', () => {
 
   beforeEach(async () => {
     telepath = new Telepath('https://telepath.cogito.mobi')
-    telepathChannel = await newChannel()
+    await newChannel()
   })
 
   describe('when in initial state', async () => {
@@ -131,6 +130,18 @@ describe('CogitoAddress', () => {
     })
 
     it('creates a new telepath channel if user explicitely requests a new QR Code', async () => {
+      const { id: initialId, key: initialKey } = telepathChannel
+      const { getByText } = render(cogitoAddress())
+      const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
+      fireEvent.click(showQRCodeButton)
+
+      await wait(() => {
+        expect(telepathChannel.id).not.toEqual(initialId)
+        expect(telepathChannel.key).not.toEqual(initialKey)
+      })
+    })
+
+    it('requests new identity if user explicitely requests a new QR Code', async () => {
       const { getByText, store } = render(cogitoAddress())
       const readButton = await waitForElement(() => getByText(/read your identity.../i))
       fireEvent.click(readButton)
