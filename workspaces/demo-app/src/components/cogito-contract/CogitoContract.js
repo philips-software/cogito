@@ -12,8 +12,15 @@ import { BalanceWatcher } from './BalanceWatcher'
 import { Balance } from './Balance'
 import { IncreaseContractButton } from './IncreaseContractButton'
 import { TelepathError, TelepathStatus } from 'components/telepath'
+import { PropTypes } from 'prop-types'
 
 class CogitoContract extends React.Component {
+  static propTypes = {
+    telepathChannel: PropTypes.object,
+    SimpleStorage: PropTypes.objec,
+    newChannel: PropTypes.func
+  }
+
   state = {
     action: '',
     forceFetchingIdentity: false
