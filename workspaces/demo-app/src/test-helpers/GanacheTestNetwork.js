@@ -19,6 +19,7 @@ const maxAllowedListeners = 100
 
 class GanacheTestNetwork {
   mnemonic = 'hair snack volcano shift tragic wrong wreck release vibrant gossip ugly debate'
+  username = 'Test Cogito User'
   wallet
   _web3
   _networkId
@@ -67,12 +68,23 @@ class GanacheTestNetwork {
     })
   }
 
+  mockIdentityInfo = () => {
+    return Promise.resolve({
+      result: {
+        ethereumAddress: this.wallet.address,
+        username: this.username
+      }
+    })
+  }
+
   mockTelepathChannel = telepathChannel => {
     telepathChannel.send = jest.fn().mockImplementation(request => {
       if (request.method === 'sign') {
         return this.mockSignRequest(request)
       } else if (request.method === 'accounts') {
         return this.mockAccountsRequest()
+      } else if (request.method === 'getIdentityInfo') {
+        return this.mockIdentityInfo()
       }
     })
   }
