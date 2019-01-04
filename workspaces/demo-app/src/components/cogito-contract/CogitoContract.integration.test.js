@@ -24,6 +24,18 @@ describe('CogitoContract Integration test', () => {
     nock(process.env.REACT_APP_FAUCET_URL).post(`/${ethereum.address}`, '').reply(200)
   }
 
+  const newChannel = async () => {
+    await ethereum.newChannel()
+  }
+
+  const cogitoContract = () => {
+    return <CogitoContract
+      telepathChannel={ethereum.telepathChannel}
+      SimpleStorage={ethereum.simpleStorageProxy}
+      newChannel={newChannel}
+    />
+  }
+
   beforeEach(async () => {
     console.log = jest.fn()
 
@@ -37,14 +49,23 @@ describe('CogitoContract Integration test', () => {
   })
 
   it('can increase contract value', async () => {
-    const { getByText, getByTestId, store: { dispatch } } = render(
-      <CogitoContract telepathChannel={ethereum.telepathChannel} SimpleStorage={ethereum.simpleStorageProxy} />
-    )
+    const { getByText, getByTestId, store: { dispatch } } = render(cogitoContract())
     const currentValue = await waitForElement(() => getByTestId(/current-value/i))
     expect(currentValue).toHaveTextContent('0')
     setActiveTelepathChannel(dispatch)
     const increaseButton = getByText(/increase/i)
     fireEvent.click(increaseButton)
     await wait(() => expect(getByTestId(/current-value/i)).toHaveTextContent(`${5}`))
+  })
+
+  it('creates new channel when explicitely requesting QR code', async () => {
+    const { id: initialId, key: initialKey } = ethereum.telepathChannel
+    const { getByText } = render(cogitoContract())
+    const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
+    fireEvent.click(showQRCodeButton)
+    await wait(() => {
+      expect(ethereum.telepathChannel.id).not.toEqual(initialId)
+      expect(ethereum.telepathChannel.key).not.toEqual(initialKey)
+    })
   })
 })

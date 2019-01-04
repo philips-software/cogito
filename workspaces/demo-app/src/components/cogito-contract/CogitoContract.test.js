@@ -13,6 +13,7 @@ describe('CogitoContract', () => {
   let channel
   let simpleStorage
   let simpleStorageProxy
+  let newChannel
 
   const setActiveTelepathChannel = dispatch => {
     dispatch(UserDataActions.setIdentityInfo(channel.identities[0]))
@@ -26,11 +27,12 @@ describe('CogitoContract', () => {
   }
 
   const cogitoContract = () => (
-    <CogitoContract telepathChannel={channel} SimpleStorage={simpleStorageProxy} />
+    <CogitoContract telepathChannel={channel} SimpleStorage={simpleStorageProxy} newChannel={newChannel} />
   )
 
   beforeEach(() => {
     channel = new TelepathChannelMock()
+    newChannel = jest.fn()
     simpleStorage = new SimpleStorageMock()
     simpleStorageProxy = initSimpleStorageProxy()
     process.env.REACT_APP_FAUCET_URL = 'https://faucet.url/donate'
@@ -123,7 +125,14 @@ describe('CogitoContract', () => {
       await wait(() => expect(store.getState().userData).toMatchObject(channel.identities[0]))
     })
 
-    it('refetches user idenity if user explicitely requests a new QR Code', async () => {
+    it('creates new telepath channel when user explicitely requests a new QR Code', async () => {
+      const { getByText } = render(cogitoContract())
+      const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
+      fireEvent.click(showQRCodeButton)
+      expect(newChannel).toHaveBeenCalledTimes(1)
+    })
+
+    it('refetches user idenity when user explicitely requests a new QR Code', async () => {
       const { getByText, store } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)

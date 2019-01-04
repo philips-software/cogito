@@ -20,6 +20,7 @@ class CogitoContract extends React.Component {
   }
 
   onTrigger = dispatch => {
+    this.props.newChannel()
     this.setState({ forceFetchingIdentity: true })
     dispatch(AppEventsActions.setDialogOpen())
   }
