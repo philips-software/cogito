@@ -6,6 +6,7 @@ const appName = 'Cogito Demo App'
 
 class EthereumForSimpleStorage {
   ganacheTestNetwork
+  cogitoEthereum
   context
 
   injectWeb3 = () => {
@@ -63,9 +64,14 @@ class EthereumForSimpleStorage {
   }
 
   setupCogitoContext = async () => {
-    const cogitoEthereum = new CogitoEthereum(this.deployedJSONs)
-    this.context = await cogitoEthereum.getContext({ appName: this.appName })
+    this.cogitoEthereum = new CogitoEthereum(this.deployedJSONs)
+    this.context = await this.cogitoEthereum.getContext({ appName: this.appName })
 
+    this.ganacheTestNetwork.mockTelepathChannel(this.context.telepathChannel)
+  }
+
+  newChannel = async () => {
+    this.context = await this.cogitoEthereum.getContext({ appName: this.appName })
     this.ganacheTestNetwork.mockTelepathChannel(this.context.telepathChannel)
   }
 
