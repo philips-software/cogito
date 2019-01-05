@@ -47,7 +47,7 @@ const Attestations = ({ attestations }) => {
   }
 }
 
-const RetrieveAttestation = ({ channel }) => (
+const RetrieveAttestation = ({ telepathChannel }) => (
   <WithStore selector={state => ({ attestations: state.attestations.retrieved })}>
     {
       ({ attestations }, dispatch) =>
@@ -58,7 +58,7 @@ const RetrieveAttestation = ({ channel }) => (
             secondary color='black'
             onClick={() => dispatch(AttestationsActions.retrieve({
               type: 'email',
-              telepathChannel: channel
+              telepathChannel
             }))}
           >
             Retrieve
