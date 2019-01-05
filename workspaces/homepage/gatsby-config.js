@@ -56,7 +56,7 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/../cogito`
+        path: `${__dirname}/../cogito-ethereum`
       }
     },
     {

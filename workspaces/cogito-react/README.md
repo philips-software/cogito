@@ -177,8 +177,8 @@ contracts.dataRequest  // raw
 contracts.dataResponse // raw
 ```
 
-[@cogitojs/cogito]: https://cogito.mobi/components/cogito
-[Cogito]: https://cogito.mobi/components/cogito
+[@cogitojs/cogito-ethereum]: https://cogito.mobi/components/cogito-ethereum
+[Cogito]: https://cogito.mobi/components/cogito-ethereum
 [CogitoProvider]: https://cogito.mobi/components/cogito-web3-provider
 [Telepath]: https://cogito.mobi/components/telepath-js
 [Working with Contracts]: #working-with-contracts

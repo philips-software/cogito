@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CogitoEthereum } from '@cogitojs/cogito'
+import { CogitoEthereum } from '@cogitojs/cogito-ethereum'
 import { PropValidator } from './PropValidator'
 
 export class CogitoReact extends React.Component {
