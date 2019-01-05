@@ -191,7 +191,7 @@ created, we load the regular Web3 that doesn't use the Telepath channel but
 directly communicates with the Truffle development environment. We will change
 that behaviour now.
 
-### Use Cogito-web3
+### Use cogito-web3-provider
 
 We now return to the `web-app/src/component/web3/Web3.js` file. Remember that we
 updated the code in `componentDidMount` to look like this:
@@ -208,16 +208,16 @@ this.setState({ web3, accounts, contract })
 ```
 
 We now want to use the Cogito web3 provider instead of the default one. We start
-by installing the cogito-web3 package:
+by installing the cogito-web3-provider package:
 
     cd web-app
-    yarn add @cogitojs/cogito-web3
+    yarn add @cogitojs/cogito-web3-provider
 
 Then we add the following imports to the top of the file:
 
 ```javascript
 import Web3 from 'web3'
-import { CogitoProvider } from '@cogitojs/cogito-web3'
+import { CogitoProvider } from '@cogitojs/cogito-web3-provider'
 ```
 
 Finally, we change the code in `componentDidMount` like this:

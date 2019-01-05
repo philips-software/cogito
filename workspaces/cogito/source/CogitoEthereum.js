@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 import { Telepath } from '@cogitojs/telepath-js'
-import { CogitoProvider } from '@cogitojs/cogito-web3'
+import { CogitoProvider } from '@cogitojs/cogito-web3-provider'
 import { proxiesFromBlobs } from './proxiesFromBlobs'
 import { getWeb3 } from './getWeb3'
 

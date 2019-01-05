@@ -65,9 +65,9 @@ describe('proxiesFromBlobs', () => {
     it('takes a list with contract JSON blobs and returns object with proxies', async () => {
       const proxies = proxiesFromBlobs(ethereum.deployedJSONs, ethereum.cogitoWeb3)
 
-      // this is a bit tricky - cogito-web3 requires that that transactions from the same address
+      // this is a bit tricky - cogito-web3-provider requires that that transactions from the same address
       // are submitted synchronously - otherwise we will get problems with nonces
-      // TODO: we should document it in the cogito-web3 documentation
+      // TODO: we should document it in the cogito-web3-provider documentation
       const increments = await Object.values(proxies).reduce(async (promise, proxy, index) => {
         const increments = await promise
         return [ ...increments, await increment(proxy, index) ]

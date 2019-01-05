@@ -35,7 +35,7 @@ It provides an object with the following props to either the render prop or chil
 |-----------|--------------|
 | contracts | Contract deployed on the CogitoProvider - see [Working with Contracts] below. |
 | channel   | The telepath channel. |
-| web3      | `CogitoProvider` from `@cogitojs/cogito-web3`. |
+| web3      | `CogitoProvider` from `@cogitojs/cogito-web3-provider`. |
 | newChannel | A function to change the current channel to a new one. This function will trigger calling the render prop (or child) function, which means the whole tree below it will be (re)rendered. |
 
 ## Example
@@ -179,6 +179,6 @@ contracts.dataResponse // raw
 
 [@cogitojs/cogito]: https://cogito.mobi/components/cogito
 [Cogito]: https://cogito.mobi/components/cogito
-[CogitoProvider]: https://cogito.mobi/components/cogito-web3
+[CogitoProvider]: https://cogito.mobi/components/cogito-web3-provider
 [Telepath]: https://cogito.mobi/components/telepath-js
 [Working with Contracts]: #working-with-contracts

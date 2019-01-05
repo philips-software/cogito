@@ -1,6 +1,6 @@
 module.exports = {
   projects: [
-    'workspaces/cogito-web3',
+    'workspaces/cogito-web3-provider',
     'workspaces/cogito',
     'workspaces/cogito-react',
     'workspaces/cogito-encryption',
