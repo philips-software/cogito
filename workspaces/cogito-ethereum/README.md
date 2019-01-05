@@ -40,7 +40,8 @@ contractProxy.setProvider(web3.currentProvider)
 actual contract JSON blob. We could also directly return a function, but that would make
 mocking with `jest.mock('@cogitojs/demo-app-contracts')` not possible. `jest.mock` can only
 mock exported functions. This is why in the snipped above we are calling `SipleStorage()` 
-instead of just using `SimpleStorage`.
+instead of just using `SimpleStorage`. In the following examples we will directly import
+JSON blobs from JSON files.
 
 To get the actual instance of the contract, you can use one of the proxy methods: `deployed()`, `at()`, or 
 `new()`. Please refer to the documentation of [truffle-contract] for more information.
@@ -102,8 +103,10 @@ const dataRequestContractInstance = await DataRequest.at(await dataStoreContract
 const dataResponseContractInstance = await DataResponse.at(await dataStoreContractInstance.getDataResponse())
 ```
 
-The names of the attributes in the contractsProxies object correspond to the name of the contracts as
+The names of the attributes in the `contractsProxies` object correspond to the name of the contracts as
 given by the `contractName` attribute of the corresponding contract JSON blob.
+
+Finally, `CogitoEthereum` accepts an optional second argument holding the queuing service url to be used with telepath. The default is `https://telepath.cogito.mobi`.
 
 [truffle-contract]: https://github.com/trufflesuite/truffle/tree/develop/packages/truffle-contract
 [Web3]: https://github.com/ethereum/web3.js
