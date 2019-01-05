@@ -30,7 +30,7 @@ class CogitoSimpleEncryption extends React.Component {
                     secondary color='black'
                     onClick={() => dispatch(
                       EncryptionActions.encrypt({
-                        telepathChannel: this.props.channel
+                        telepathChannel: this.props.telepathChannel
                       })
                     )}
                   >
@@ -42,7 +42,7 @@ class CogitoSimpleEncryption extends React.Component {
                     secondary color='black'
                     onClick={() => dispatch(
                       EncryptionActions.decrypt({
-                        telepathChannel: this.props.channel
+                        telepathChannel: this.props.telepathChannel
                       })
                     )}
                   >
