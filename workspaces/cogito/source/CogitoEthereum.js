@@ -6,10 +6,11 @@ import { getWeb3 } from './getWeb3'
 
 class CogitoEthereum {
   contractBlobs
-  telepath = new Telepath('https://telepath.cogito.mobi')
+  telepath
 
-  constructor (contractBlobs) {
+  constructor (contractBlobs, queuingServiceUrl = 'https://telepath.cogito.mobi') {
     this.contractBlobs = contractBlobs
+    this.telepath = new Telepath(queuingServiceUrl)
   }
 
   getCogitoWeb3 = async telepathChannel => {

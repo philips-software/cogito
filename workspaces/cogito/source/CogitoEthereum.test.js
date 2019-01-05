@@ -1,3 +1,6 @@
+import nock from 'nock'
+import base64url from 'base64url'
+import { encrypt, decrypt, nonceSize as getNonceSize } from '@cogitojs/crypto'
 import { EthereumForSimpleStorage } from 'test-helpers'
 import { SimpleStorage } from '@cogitojs/demo-app-contracts'
 import { CogitoEthereum } from './'
@@ -8,6 +11,54 @@ describe('CogitoEthereum', () => {
   const blobs = [ SimpleStorage() ]
   const appName = 'Cogito Demo App'
   let ethereum
+  let channelResponseCallback
+
+  const decodeChannelRequest = async (body, telepathChannel) => {
+    const nonceSize = await getNonceSize()
+    const nonceAndCypherText = new Uint8Array(base64url.toBuffer(body))
+    const nonce = nonceAndCypherText.slice(0, nonceSize)
+    const cypherText = nonceAndCypherText.slice(nonceSize)
+    const requestString = await decrypt(cypherText, nonce, telepathChannel.key, 'text')
+    return {
+      request: JSON.parse(requestString),
+      nonce
+    }
+  }
+
+  const encodeChannelResponse = async ({ request, nonce }, telepathChannel) => {
+    const response = {
+      jsonrpc: '2.0',
+      id: request.id,
+      result: [ ethereum.address ]
+    }
+    const responseString = JSON.stringify(response)
+    const plainText = new Uint8Array(Buffer.from(responseString))
+    const cypherText = await encrypt(plainText, nonce, telepathChannel.key)
+    const nonceAndCypherText = Buffer.concat([Buffer.from(nonce), Buffer.from(cypherText)])
+    return base64url.encode(Buffer.from(nonceAndCypherText))
+  }
+
+  const prepareChannelRequest = (telepathChannel, baseUrl) => {
+    return nock(baseUrl).post(`/${telepathChannel.id}.red`, async body => {
+      const request = await decodeChannelRequest(body, telepathChannel)
+      const encodedResponse = await encodeChannelResponse(request, telepathChannel)
+      expect(channelResponseCallback).toBeDefined()
+      channelResponseCallback(null, [200, encodedResponse])
+    }).reply(200)
+  }
+
+  const prepareChannelResponse = (telepathChannel, baseUrl) => {
+    nock(baseUrl)
+      .get(`/${telepathChannel.id}.blue`)
+      .reply(function (uri, requestBody, cb) {
+        channelResponseCallback = cb
+      })
+  }
+
+  const prepareChannel = (telepathChannel, baseUrl) => {
+    prepareChannelResponse(telepathChannel, baseUrl)
+    return prepareChannelRequest(telepathChannel, baseUrl)
+  }
 
   beforeEach(() => {
     ethereum = new EthereumForSimpleStorage({ appName })
@@ -16,6 +67,32 @@ describe('CogitoEthereum', () => {
 
   afterEach(() => {
     console.log.mockRestore()
+  })
+
+  it('accepts telepath queuing service url as constructor argument', async () => {
+    const baseUrl = 'https://alternative.telepath.provider'
+    const cogitoEthereum = new CogitoEthereum(blobs, baseUrl)
+
+    const { cogitoWeb3, telepathChannel } = await cogitoEthereum.getContext({ appName })
+
+    const post = prepareChannel(telepathChannel, baseUrl)
+
+    const accounts = await cogitoWeb3.eth.getAccounts()
+    expect(post.isDone()).toBeTruthy()
+    expect(accounts).toEqual([ethereum.address])
+  })
+
+  it('uses default telepath queuing service url if not provided', async () => {
+    const baseUrl = 'https://telepath.cogito.mobi'
+    const cogitoEthereum = new CogitoEthereum(blobs)
+
+    const { cogitoWeb3, telepathChannel } = await cogitoEthereum.getContext({ appName })
+
+    const post = prepareChannel(telepathChannel, baseUrl)
+
+    const accounts = await cogitoWeb3.eth.getAccounts()
+    expect(post.isDone()).toBeTruthy()
+    expect(accounts).toEqual([ethereum.address])
   })
 
   it('provides Web3 object with CogitoProvider', async () => {
