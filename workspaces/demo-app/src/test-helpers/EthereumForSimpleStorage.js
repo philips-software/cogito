@@ -1,4 +1,4 @@
-import { CogitoEthereum } from '@cogitojs/cogito'
+import { CogitoEthereum } from '@cogitojs/cogito-ethereum'
 import { GanacheTestNetwork } from './GanacheTestNetwork'
 const { SimpleStorage } = jest.requireActual('@cogitojs/demo-app-contracts')
 

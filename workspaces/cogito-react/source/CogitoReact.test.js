@@ -2,15 +2,15 @@ import React from 'react'
 import { render, wait } from 'react-testing-library'
 import { TestingRenderProps } from 'test-helpers'
 import { CogitoReact } from './'
-import { CogitoEthereum } from '@cogitojs/cogito'
+import { CogitoEthereum } from '@cogitojs/cogito-ethereum'
 
-jest.mock('@cogitojs/cogito')
+jest.mock('@cogitojs/cogito-ethereum')
 
 describe('cogito-react', () => {
   const exampleTelepathKey = new Uint8Array([121, 122, 123])
   const exampleTelepathId = 'IDN3oO-6rGSyqpMFDC6EfCQC'
   // for the actual format of the blobs structure
-  // check the integration test or refer to the @cogitojs/cogito package
+  // check the integration test or refer to the @cogitojs/cogito-ethereum package
   const blobs = 'blobs'
   let renderProps
   let appName = 'App Name'
@@ -138,7 +138,7 @@ describe('cogito-react', () => {
       })
     })
 
-    it('creates exactly one instance of Cogito from @cogitojs/cogito', async () => {
+    it('creates exactly one instance of CogitoEthereum from @cogitojs/cogito-ethereum', async () => {
       expect(CogitoEthereum.mock.instances.length).toBe(1)
     })
 
@@ -185,7 +185,7 @@ describe('cogito-react', () => {
       render(cogitoReact())
     })
 
-    it('forwards the provided telepath id and key to Cogito from @cogitojs/cogito', () => {
+    it('forwards the provided telepath id and key to CogitoEthereum from @cogitojs/cogito-ethereum', () => {
       expect(mockGetContext.mock.calls[0][0]).toMatchObject({
         channelId: channel.id,
         channelKey: channel.key
@@ -320,7 +320,7 @@ describe('cogito-react', () => {
       renderProps.args.newChannel()
     })
 
-    it('calls update from @cogitojs/cogito with undefined id and key', async () => {
+    it('calls update from @cogitojs/cogito-ethereum with undefined id and key', async () => {
       const updateParams = mockGetContext.mock.calls[1][0]
 
       await wait(() => {

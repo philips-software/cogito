@@ -35,8 +35,8 @@ by clicking `Show QR code`.
 
 You can use `@cogitojs/telepath-js` in order to interact with Telepath from your web app,
 and `@cogitojs/telepath-ios` to interact with Telepath from your iOS app. It is, however,
-far more convenient to use higher level abstraction: `Cogito` from `@cogitojs/cogito` package and
-`CogitoReact` from `@cogitojs/cogito-react` that uses `Cogito` underneath.
+far more convenient to use higher level abstractions: `CogitoEthereum` from `@cogitojs/cogito-ethereum` package and
+`CogitoReact` from `@cogitojs/cogito-react` that uses `CogitoEthereum` underneath.
 Being a React app, our demo-app does exactly this. It uses `CogitoReact` to maintain the telepath channel. In order to present you with a QR code it uses another handy helper from the Cogito
 family `CogitoConnector` from `@cogitojs/cogito-react-ui` package.
 
@@ -65,7 +65,7 @@ and the corresponding description (`info.username`).
 
 - [@cogitojs/telepath-js](https://github.com/philips-software/cogito/blob/master/workspaces/telepath-js/Readme.md)
 - [@cogitojs/telepath-ios](https://github.com/philips-software/cogito/blob/master/workspaces/telepath-ios/Readme.md)
-- [@cogitojs/cogito](https://github.com/philips-software/cogito/tree/master/workspaces/cogito)
+- [@cogitojs/cogito-ethereum](https://github.com/philips-software/cogito/tree/master/workspaces/cogito-ethereum)
 - [@cogitojs/cogito-react](https://github.com/philips-software/cogito/tree/master/workspaces/cogito-react)
 - [@cogitojs/cogito-react-ui](https://github.com/philips-software/cogito/tree/master/workspaces/cogito-react-ui)
 - [@cogitojs/cogito-identity](https://github.com/philips-software/cogito/blob/master/workspaces/cogito-identity/Readme.md)
