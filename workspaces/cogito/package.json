@@ -21,7 +21,7 @@
     "nock": "^9.2.5"
   },
   "dependencies": {
-    "@cogitojs/cogito-web3": "^0.2.18",
+    "@cogitojs/cogito-web3-provider": "^0.2.18",
     "@cogitojs/telepath-js": "^0.2.18",
     "libsodium-wrappers": "^0.7.2",
     "truffle-contract": "^3.0.5",

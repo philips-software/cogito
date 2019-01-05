@@ -1,7 +1,7 @@
 # @cogitojs/cogito
 
 `@cogitojs/cogito` is a high level convenience components that provides a more
-declarative way of working with [cogito-web3], [telepath], and [Ethereum contracts].
+declarative way of working with [cogito-web3-provider], [telepath], and [Ethereum contracts].
 
 > `Cogito` currently uses Telepath with a fixed queueing service URL `https://telepath.cogito.mobi`.
 
@@ -13,7 +13,7 @@ Add `@cogitojs/cogito` as a dependency
 $ yarn add `@cogitojs/cogito`
 ```
 
-`@cogitojs/cogito` aims at making working with [cogito-web3], [telepath], and [Ethereum contracts] easier. Using `@cogitojs/cogito` you do not have know all the details about web3 providers, cogito-web3, and telepath in order to setup a working cogito ecosystem.
+`@cogitojs/cogito` aims at making working with [cogito-web3-provider], [telepath], and [Ethereum contracts] easier. Using `@cogitojs/cogito` you do not have know all the details about web3 providers, cogito-web3-provider, and telepath in order to setup a working cogito ecosystem.
 
 Before we learn how to use `Cogito`, we need first make sure we have a good understanding how Cogito looks the Ethereum contracts.
 
@@ -120,7 +120,7 @@ const {web3, channel, contracts} = await cogito.update({
 This will reuse an existing Telepath channel.
 
 [Web3]: https://github.com/ethereum/web3.js
-[cogito-web3]: https://cogito.mobi/components/cogito-web3
+[cogito-web3-provider]: https://cogito.mobi/components/cogito-web3-provider
 [telepath]: https://cogito.mobi/components/telepath-js
 [telepath-js]: https://cogito.mobi/components/telepath-js
 [Ethereum contracts]: http://www.ethdocs.org/en/latest/contracts-and-transactions/index.html

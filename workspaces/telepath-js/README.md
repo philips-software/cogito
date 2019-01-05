@@ -132,6 +132,6 @@ Currently uses independent encryption of messages. A recipient can therefore not
 
 ## See also
 
-Telepath often comes hand in hand with [Cogito Web3].
+Telepath often comes hand in hand with [Cogito Web3 Provider].
 
-[Cogito Web3]: https://cogito.mobi/components/cogito-web3
+[Cogito Web3]: https://cogito.mobi/components/cogito-web3-provider
