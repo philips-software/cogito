@@ -1,7 +1,5 @@
-// export { default as SimpleStorage } from './contracts/SimpleStorage.json'
+import SimpleStorageJSON from './contracts/SimpleStorage.json'
 
-import SimpleStorageObject from './contracts/SimpleStorage.json'
-
-const SimpleStorage = () => SimpleStorageObject
+const SimpleStorage = () => SimpleStorageJSON
 
 export { SimpleStorage }
