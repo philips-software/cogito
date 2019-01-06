@@ -282,7 +282,7 @@ provider. This illustrates how you can use Cogito with React, and hopefully
 provides enough understanding to apply it in other web frameworks as well.
 
 If you're looking for a nicer integration with React we recommend you take a
-look at the [Cogito React](https://www.npmjs.com/package/@cogitojs/cogito-react)
+look at the [Cogito Ethereum React](https://www.npmjs.com/package/@cogitojs/cogito-ethereum-react)
 and [Cogito React UI](https://www.npmjs.com/package/@cogitojs/cogito-react-ui)
 packages.
 

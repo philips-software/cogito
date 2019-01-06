@@ -13,7 +13,7 @@ import thunkMiddleware from 'redux-thunk'
 jest.mock('@cogitojs/demo-app-contracts')
 jest.mock('../services/documentation-loader')
 
-jest.unmock('@cogitojs/cogito-react')
+jest.unmock('@cogitojs/cogito-ethereum-react')
 jest.unmock('@cogitojs/cogito-identity')
 jest.unmock('@react-frontend-developer/react-redux-render-prop')
 

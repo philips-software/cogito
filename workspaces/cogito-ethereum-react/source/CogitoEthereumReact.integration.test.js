@@ -1,9 +1,9 @@
 import React from 'react'
 import { EthereumForSimpleStorage, TestingRenderProps } from 'test-helpers'
 import { render, wait } from 'react-testing-library'
-import { CogitoReact } from './CogitoReact'
+import { CogitoEthereumReact } from './CogitoEthereumReact'
 
-describe('cogito-react integration', () => {
+describe('cogito-ethereum-react integration', () => {
   const increment = 10
   const exampleTelepathId = 'IDN3oO-6rGSyqpMFDC6EfCQC'
   const exampleTelepathKey = new Uint8Array([176, 8, 86, 89, 0, 33, 4, 124, 240, 249, 253, 251, 147, 56, 138, 54, 84, 144, 150, 125, 89, 4, 6, 6, 217, 246, 16, 163, 188, 247, 113, 134])
@@ -30,11 +30,11 @@ describe('cogito-react integration', () => {
       appName: channel.appName,
       ...channelUpdates
     }
-    return <CogitoReact
+    return <CogitoEthereumReact
       {...channelProps}
       contractsBlobs={[ethereum.simpleStorageBlob]}>
       {renderProps.function}
-    </CogitoReact>
+    </CogitoEthereumReact>
   }
 
   const executeContract = async () => {

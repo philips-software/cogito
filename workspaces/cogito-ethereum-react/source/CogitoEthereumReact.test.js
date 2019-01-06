@@ -1,17 +1,17 @@
 import React from 'react'
 import { render, wait } from 'react-testing-library'
 import { TestingRenderProps } from 'test-helpers'
-import { CogitoReact } from './'
+import { CogitoEthereumReact } from '.'
 import { CogitoEthereum } from '@cogitojs/cogito-ethereum'
 
 jest.mock('@cogitojs/cogito-ethereum')
 
-describe('cogito-react', () => {
+describe('cogito-ethereum-react', () => {
   const exampleTelepathKey = new Uint8Array([121, 122, 123])
   const exampleTelepathId = 'IDN3oO-6rGSyqpMFDC6EfCQC'
   // for the actual format of the blobs structure
   // check the integration test or refer to the @cogitojs/cogito-ethereum package
-  const blobs = 'blobs'
+  const blobs = [ { contractName: 'contract1' }, { contractName: 'contract2' } ]
   let renderProps
   let appName = 'App Name'
   let mockGetContext
@@ -63,12 +63,12 @@ describe('cogito-react', () => {
       appName: channel.appName,
       ...channelUpdates
     }
-    return <CogitoReact
+    return <CogitoEthereumReact
       {...channelProps}
       contractsBlobs={blobs}
       onTelepathChanged={onTelepathChanged}>
       {renderProps.function}
-    </CogitoReact>
+    </CogitoEthereumReact>
   }
 
   const rerender = () => {
@@ -105,9 +105,9 @@ describe('cogito-react', () => {
     it('accepts render props function as a prop', async () => {
       setupCogitoEthereumMock()
       renderProps.reset()
-      render(<CogitoReact
+      render(<CogitoEthereumReact
         appName={channel.appName}
-        blobs={blobs}
+        contractsBlobs={blobs}
         render={renderProps.function} />)
       await wait(() => {
         expect(renderProps.function).toHaveBeenCalledTimes(2)
@@ -378,27 +378,27 @@ describe('cogito-react', () => {
       return `Warning: Failed prop type: Invalid prop channelKey.
 Expects:  instance of Uint8Array or an Array-like object
 Received: an object with non-numerical keys: ${badKeys}
-    in CogitoReact`
+    in CogitoEthereumReact`
     }
 
     const badValuesError = badValues => {
       return `Warning: Failed prop type: Invalid prop channelKey.
 Expects:  instance of Uint8Array or an Array-like object with numerical entries
 Received: an Array-like object with non-numerical values: ${badValues}
-    in CogitoReact`
+    in CogitoEthereumReact`
     }
 
     const unexpected = prop => {
       return `Warning: Failed prop type: Invalid prop channelKey.
 Expects:  instance of Uint8Array or an Array-like object with numerical entries
 Received: ${typeof prop}
-    in CogitoReact`
+    in CogitoEthereumReact`
     }
 
     const badIdError = prop => {
       return 'Warning: Failed prop type: Invalid prop `channelId` ' +
-             'of type `' + `${typeof prop}` + '` supplied to `CogitoReact`, expected `string`.\n' +
-             `    in CogitoReact`
+             'of type `' + `${typeof prop}` + '` supplied to `CogitoEthereumReact`, expected `string`.\n' +
+             `    in CogitoEthereumReact`
     }
 
     beforeEach(() => {

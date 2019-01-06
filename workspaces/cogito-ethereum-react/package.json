@@ -1,7 +1,7 @@
 {
-  "name": "@cogitojs/cogito-react",
+  "name": "@cogitojs/cogito-ethereum-react",
   "version": "0.2.18",
-  "description": "Cogito React library",
+  "description": "Cogito Ethereum React library",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
   "main": "lib/index.js",
