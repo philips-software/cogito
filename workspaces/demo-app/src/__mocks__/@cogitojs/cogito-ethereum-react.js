@@ -1,6 +1,6 @@
 import React from 'react'
 
-export class CogitoReact extends React.Component {
+export class CogitoEthereumReact extends React.Component {
   state = {
     cogitoWeb3: {},
     telepathChannel: {

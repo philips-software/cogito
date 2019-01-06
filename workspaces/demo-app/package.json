@@ -9,7 +9,7 @@
     "@cogitojs/cogito-attestations": "^0.2.18",
     "@cogitojs/cogito-encryption": "^0.2.18",
     "@cogitojs/cogito-identity": "^0.2.18",
-    "@cogitojs/cogito-react": "^0.2.18",
+    "@cogitojs/cogito-ethereum-react": "^0.2.18",
     "@cogitojs/cogito-react-ui": "^0.2.18",
     "@cogitojs/demo-app-contracts": "^0.2.18",
     "@react-frontend-developer/css-grid-helper": "^1.0.14",

@@ -1,1 +1,0 @@
-export { CogitoReact } from './CogitoReact'

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { PageCentered } from '@react-frontend-developer/react-layout-helpers'
-import { CogitoReact } from '@cogitojs/cogito-react'
+import { CogitoEthereumReact } from '@cogitojs/cogito-ethereum-react'
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { Dimmer, Loader, Segment } from 'semantic-ui-react'
 import { UserDataActions } from 'user-data'
@@ -43,7 +43,7 @@ class Main extends React.Component {
           channelKey: state.userData.channelKey
         })}
         render={({ channelId, channelKey }, dispatch) => (
-          <CogitoReact
+          <CogitoEthereumReact
             contractsBlobs={[ SimpleStorage() ]}
             channelId={channelId}
             channelKey={channelKey}
@@ -114,7 +114,7 @@ class Main extends React.Component {
                 )
               }
             }}
-          </CogitoReact>
+          </CogitoEthereumReact>
         )}
       />
     )

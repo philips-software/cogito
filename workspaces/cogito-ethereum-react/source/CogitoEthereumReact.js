@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { CogitoEthereum } from '@cogitojs/cogito-ethereum'
 import { PropValidator } from './PropValidator'
 
-export class CogitoReact extends React.Component {
+export class CogitoEthereumReact extends React.Component {
   state
   cogitoEthereum
 
@@ -19,7 +19,11 @@ export class CogitoReact extends React.Component {
       } catch (e) {
         return e
       }
-    }
+    },
+    appName: PropTypes.string.isRequired,
+    contractsBlobs: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onTelepathChanged: PropTypes.func,
+    render: PropTypes.func
   }
 
   constructor ({ contractsBlobs }) {

@@ -2,7 +2,7 @@ module.exports = {
   projects: [
     'workspaces/cogito-web3-provider',
     'workspaces/cogito-ethereum',
-    'workspaces/cogito-react',
+    'workspaces/cogito-ethereum-react',
     'workspaces/cogito-encryption',
     'workspaces/cogito-identity',
     'workspaces/cogito-attestations',

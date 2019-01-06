@@ -1,0 +1,1 @@
+export { CogitoEthereumReact } from './CogitoEthereumReact'
