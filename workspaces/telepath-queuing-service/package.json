@@ -1,6 +1,6 @@
 {
   "name": "telepath-queuing-service",
-  "version": "0.2.18",
+  "version": "0.2.19",
   "description": "Telepath Queuing Service",
   "homepage": "https://cogito.mobi",
   "private": true,
@@ -15,7 +15,7 @@
     "mockdate": "^2.0.2",
     "supertest": "^3.0.0"
   },
-  "dependencies": {    
+  "dependencies": {
     "@babel/register": "^7.0.0",
     "async-middleware": "^1.2.1",
     "body-parser": "^1.18.2",

@@ -1,12 +1,12 @@
 {
   "name": "cogito-attestations-ios",
-  "version": "0.2.18",
+  "version": "0.2.19",
   "private": true,
   "devDependencies": {
     "@babel/polyfill": "^7.0.0-beta.49"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0-beta.49",
-    "@cogitojs/cogito-attestations": "^0.2.18"
+    "@cogitojs/cogito-attestations": "^0.2.19"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-react-ui",
-  "version": "0.2.18",
+  "version": "0.2.19",
   "description": "Cogito React library",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -18,10 +18,10 @@
     "source"
   ],
   "dependencies": {
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.83.0",
     "@react-frontend-developer/react-layout-helpers": "^1.0.14",
-    "qrcode.react": "^0.8.0"
+    "qrcode.react": "^0.8.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.83.0"
   },
   "peerDependencies": {
     "react": "^16.6.3",

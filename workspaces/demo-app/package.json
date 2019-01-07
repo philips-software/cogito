@@ -1,17 +1,17 @@
 {
   "name": "demo-app",
-  "version": "0.2.18",
+  "version": "0.2.19",
   "description": "A demo project for using Cogito",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@cogitojs/cogito-attestations": "^0.2.18",
-    "@cogitojs/cogito-encryption": "^0.2.18",
-    "@cogitojs/cogito-identity": "^0.2.18",
-    "@cogitojs/cogito-ethereum-react": "^0.2.18",
-    "@cogitojs/cogito-react-ui": "^0.2.18",
-    "@cogitojs/demo-app-contracts": "^0.2.18",
+    "@cogitojs/cogito-attestations": "^0.2.19",
+    "@cogitojs/cogito-encryption": "^0.2.19",
+    "@cogitojs/cogito-ethereum-react": "^0.2.19",
+    "@cogitojs/cogito-identity": "^0.2.19",
+    "@cogitojs/cogito-react-ui": "^0.2.19",
+    "@cogitojs/demo-app-contracts": "^0.2.19",
     "@react-frontend-developer/css-grid-helper": "^1.0.14",
     "@react-frontend-developer/react-layout-helpers": "^1.0.14",
     "@react-frontend-developer/react-redux-render-prop": "^1.0.14",
@@ -40,7 +40,7 @@
     "web3": "^1.0.0-beta.36"
   },
   "devDependencies": {
-    "@cogitojs/faucet": "^0.2.18",
+    "@cogitojs/faucet": "^0.2.19",
     "@react-frontend-developer/jsdom-worker": "^0.1.1",
     "deep-freeze-es6": "^1.0.1",
     "ethers": "^4.0.20",

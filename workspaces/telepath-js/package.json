@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/telepath-js",
-  "version": "0.2.18",
+  "version": "0.2.19",
   "description": "Secure communication channel between mobile app and web app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "nock": "^9.2.5"
   },
   "dependencies": {
-    "@cogitojs/crypto": "^0.2.18",
+    "@cogitojs/crypto": "^0.2.19",
     "base64url": "^2.0.0",
     "cross-fetch": "^2.1.1",
     "libsodium-wrappers": "^0.7.3"
