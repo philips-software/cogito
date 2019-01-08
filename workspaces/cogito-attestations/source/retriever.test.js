@@ -33,9 +33,10 @@ describe('attestations retriever', () => {
     })
 
     it('throws when an error is returned', async () => {
-      const error = { code: -42, message: 'some error' }
+      const message = 'some error'
+      const error = { code: -42, message }
       telepathChannel.send.mockResolvedValue({ jsonrpc: '2.0', error })
-      await expect(retriever.retrieve({ type })).rejects.toBeDefined()
+      await expect(retriever.retrieve({ type })).rejects.toThrow(new Error(message))
     })
 
     it('uses different JSON-RPC ids for subsequent requests', async () => {
