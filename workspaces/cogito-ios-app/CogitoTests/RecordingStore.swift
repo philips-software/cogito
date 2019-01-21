@@ -13,14 +13,24 @@ class RecordingStore: Store<AppState> {
     }
 
     override func dispatch(_ action: Action) {
-        actions.append(action)
+        self.record(action)
         super.dispatch(action)
+    }
+
+    func record(_ action: Action) {
+        if (action as? ThunkAction<AppState>) == nil && (action as? ReSwiftInit) == nil {
+            actions.append(action)
+        }
     }
 }
 
 extension RecordingStore {
     func firstAction <T> (ofType: T.Type) -> T? {
         return actions.compactMap { $0 as? T }.first
+    }
+
+    func lastAction <T> (ofType: T.Type) -> T? {
+        return actions.compactMap { $0 as? T }.last
     }
 }
 

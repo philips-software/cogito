@@ -8,9 +8,14 @@ class TelepathReceiverSpec: QuickSpec {
     override func spec() {
         var receiver: TelepathReceiver!
         var store: RecordingStore!
+        var telepathChannelSpy: TelepathChannelSpy!
+        let identity = Identity.example
 
         beforeEach {
             store = RecordingStore()
+            telepathChannelSpy = TelepathChannelSpy()
+            telepathChannelSpy.receiveMessage = "message"
+            store.state = appState(telepath: TelepathState(channels: [telepathChannelSpy: identity.identifier]))
             receiver = TelepathReceiver(store: store, pollInterval: 0)
         }
 
@@ -38,8 +43,7 @@ class TelepathReceiverSpec: QuickSpec {
         }
 
         it("continuously polls for new messages") {
-            let identity = Identity.example
-            receiver.newState(state: [TelepathChannelSpy(): identity.identifier])
+            receiver.newState(state: [telepathChannelSpy: identity.identifier])
             expect(store.actions.count).toEventually(beGreaterThan(5))
         }
 

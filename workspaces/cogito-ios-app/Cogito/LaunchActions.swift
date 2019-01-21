@@ -3,6 +3,8 @@ import ReSwift
 struct LaunchActions {
     enum AppLinkType: String {
         case openIdConnectRedirect = "openid-callback"
+        case attestationReceive = "receive"
+        case telepathConnect = "connect"
     }
 
     static func create(forLink link: URL) -> Action? {
@@ -17,6 +19,22 @@ struct LaunchActions {
                 return nil
             }
             return OpenIDAttestationActions.Finish(params: params)
+        case .attestationReceive:
+            guard let fragment = link.fragment,
+                let params = parse(fragment: fragment),
+                params["A"] != nil else {
+                    print("invalid URL: fragment missing or invalid")
+                    return nil
+            }
+            return URLActions.HandleIncomingURL(url: link)
+        case .telepathConnect:
+            guard let fragment = link.fragment,
+                let params = parse(fragment: fragment),
+                params["I"] != nil, params["E"] != nil, params["A"] != nil else {
+                    print("invalid URL: fragment missing or invalid")
+                    return nil
+            }
+            return URLActions.HandleIncomingURL(url: link)
         }
     }
 
