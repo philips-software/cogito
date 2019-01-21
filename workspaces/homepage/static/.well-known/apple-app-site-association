@@ -4,7 +4,7 @@
         "details": [
             {
                 "appID": "MWTEZ4CYM6.com.philips.Cogito",
-                "paths": [ "/attestations/*"]
+                "paths": [ "/attestations/receive", "/telepath/connect" ]
             }
         ]
     }
