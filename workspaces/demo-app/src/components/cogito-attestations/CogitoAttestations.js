@@ -18,14 +18,47 @@ export const CogitoAttestations = (props) => (
   </FullWidth>
 )
 
-const ShowAttestation = () => (
-  <Centered css={{ padding: '10px', marginRight: '50px', backgroundColor: 'white' }}>
-    <p>Scan to add a dummy attestation:</p>
-    <QRCode
-      value='https://cogito.mobi/attestations/receive#A=email%3Atest.user%40philips.com'
-    />
-  </Centered>
-)
+class ShowAttestation extends React.Component {
+  state = {}
+
+  constructor () {
+    super()
+    this.context = React.createRef()
+  }
+
+  componentDidMount () {
+    const canvas = document.querySelector('canvas')
+    this.setState({
+      canvas: {
+        url: canvas.toDataURL(),
+        width: canvas.width / 2,
+        height: canvas.height / 2
+      }
+    })
+  }
+
+  render () {
+    const { canvas } = this.state
+    return (
+      <Centered css={{ padding: '10px', marginRight: '50px', backgroundColor: 'white' }}>
+        <p>Scan to add a dummy attestation:</p>
+        { !canvas && <QRCode
+          value='https://cogito.mobi/attestations/receive#A=email%3Atest.user%40philips.com'
+        /> }
+        { canvas && <img alt='qr-code' src={canvas.url} width={canvas.width} height={canvas.height} /> }
+      </Centered>
+    )
+  }
+}
+
+// const ShowAttestation = () => (
+//   <Centered css={{ padding: '10px', marginRight: '50px', backgroundColor: 'white' }}>
+//     <p>Scan to add a dummy attestation:</p>
+//     <QRCode
+//       value='https://cogito.mobi/attestations/receive#A=email%3Atest.user%40philips.com'
+//     />
+//   </Centered>
+// )
 
 const AttestationsWrapper = glamorous.div({
   display: 'flex',
