@@ -14,6 +14,7 @@ class CogitoConnector extends React.Component {
   }
 
   render () {
+    const { connectUrl } = this.props
     return (
       <Modal open={this.props.open}
         trigger={
@@ -33,7 +34,7 @@ class CogitoConnector extends React.Component {
               <Spacer
                 margin='20px 0 50px 0'
                 render={() =>
-                  <CogitoQRCode value={this.props.connectUrl} />
+                  <CogitoQRCode key={connectUrl} value={connectUrl} />
                 } />
               <Button {...this.props.buttonStyling} onClick={() => this.onClick()}>Done</Button>
             </Centered>
