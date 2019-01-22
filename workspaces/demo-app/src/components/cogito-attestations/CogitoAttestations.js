@@ -1,7 +1,7 @@
 import React from 'react'
 import glamorous from 'glamorous'
 import { Button } from 'semantic-ui-react'
-import QRCode from 'qrcode.react'
+import { CogitoQRCode } from '@cogitojs/cogito-react-ui'
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { FullWidth, Centered, ValueWrapper
 } from '@react-frontend-developer/react-layout-helpers'
@@ -18,47 +18,14 @@ export const CogitoAttestations = (props) => (
   </FullWidth>
 )
 
-class ShowAttestation extends React.Component {
-  state = {}
-
-  constructor () {
-    super()
-    this.context = React.createRef()
-  }
-
-  componentDidMount () {
-    const canvas = document.querySelector('canvas')
-    this.setState({
-      canvas: {
-        url: canvas.toDataURL(),
-        width: canvas.width / 2,
-        height: canvas.height / 2
-      }
-    })
-  }
-
-  render () {
-    const { canvas } = this.state
-    return (
-      <Centered css={{ padding: '10px', marginRight: '50px', backgroundColor: 'white' }}>
-        <p>Scan to add a dummy attestation:</p>
-        { !canvas && <QRCode
-          value='https://cogito.mobi/attestations/receive#A=email%3Atest.user%40philips.com'
-        /> }
-        { canvas && <img alt='qr-code' src={canvas.url} width={canvas.width} height={canvas.height} /> }
-      </Centered>
-    )
-  }
-}
-
-// const ShowAttestation = () => (
-//   <Centered css={{ padding: '10px', marginRight: '50px', backgroundColor: 'white' }}>
-//     <p>Scan to add a dummy attestation:</p>
-//     <QRCode
-//       value='https://cogito.mobi/attestations/receive#A=email%3Atest.user%40philips.com'
-//     />
-//   </Centered>
-// )
+const ShowAttestation = () => (
+  <Centered css={{ padding: '10px', marginRight: '50px', backgroundColor: 'white' }}>
+    <p>Scan to add a dummy attestation:</p>
+    <CogitoQRCode
+      value='https://cogito.mobi/attestations/receive#A=email%3Atest.user%40philips.com'
+    />
+  </Centered>
+)
 
 const AttestationsWrapper = glamorous.div({
   display: 'flex',
