@@ -16,6 +16,7 @@ import { TelepathError, TelepathStatus } from 'components/telepath'
 import { PropTypes } from 'prop-types'
 
 class CogitoContract extends React.Component {
+  mounted = true
   static propTypes = {
     telepathChannel: PropTypes.object,
     SimpleStorage: PropTypes.func,
@@ -57,7 +58,6 @@ class CogitoContract extends React.Component {
   }
 
   onCancel = dispatch => {
-    console.log('onCancel')
     dispatch(UserDataActions.clearConnectionEstablished())
     dispatch(AppEventsActions.setDialogClosed())
   }
@@ -77,16 +77,19 @@ class CogitoContract extends React.Component {
   async componentDidMount () {
     const { SimpleStorage } = this.props
     const simpleStorage = await SimpleStorage.deployed()
-    this.setState({ simpleStorage })
+    this.mounted && this.setState({ simpleStorage })
   }
 
   async componentDidUpdate (prevProps, prevState) {
     const { SimpleStorage } = this.props
     if (prevProps.SimpleStorage !== SimpleStorage) {
-      console.log('SimpleStorage CHANGED!!!!')
       const simpleStorage = await SimpleStorage.deployed()
-      this.setState({ simpleStorage })
+      this.mounted && this.setState({ simpleStorage })
     }
+  }
+
+  componentWillUnmount () {
+    this.mounted = false
   }
 
   render () {
@@ -116,11 +119,11 @@ class CogitoContract extends React.Component {
               <IncreaseContractButton onClick={() => this.increase(dispatch, channelReady)} />
               <CogitoConnector
                 open={dialogOpen}
-                onTrigger={() => this.onTrigger(dispatch)}
                 connectUrl={this.props.telepathChannel.createConnectUrl(
                   'https://cogito.mobi'
                 )}
-                onClosed={() => this.onClosed(dispatch)}
+                onOpen={() => this.onTrigger(dispatch)}
+                onDone={() => this.onClosed(dispatch)}
                 onCancel={() => this.onCancel(dispatch)}
                 buttonStyling={{ secondary: true, color: 'black' }}
               />
