@@ -12,6 +12,7 @@ import {
 import { CogitoConnector } from '@cogitojs/cogito-react-ui'
 import { IdentityActions } from './actions'
 import { AppEventsActions } from 'app-events'
+import { UserDataActions } from 'user-data'
 import { TelepathError, TelepathStatus } from 'components/telepath'
 import { PropTypes } from 'prop-types'
 
@@ -27,9 +28,14 @@ class CogitoAddress extends React.PureComponent {
     dispatch(AppEventsActions.setDialogOpen())
   }
 
-  onClosed = async dispatch => {
+  onClosed = dispatch => {
     const { telepathChannel: channel } = this.props
     dispatch(IdentityActions.read({ channel }))
+    dispatch(AppEventsActions.setDialogClosed())
+  }
+
+  onCancel = dispatch => {
+    dispatch(UserDataActions.clearConnectionEstablished())
     dispatch(AppEventsActions.setDialogClosed())
   }
 
@@ -87,6 +93,7 @@ class CogitoAddress extends React.PureComponent {
                   'https://cogito.mobi'
                 )}
                 onClosed={() => this.onClosed(dispatch)}
+                onCancel={() => this.onCancel(dispatch)}
                 buttonStyling={{ secondary: true, color: 'black' }}
               />
             </Row>
