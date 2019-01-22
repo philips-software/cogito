@@ -22,7 +22,9 @@ describe('CogitoContract', () => {
 
   const initSimpleStorageProxy = () => {
     return class {
-      static deployed = jest.fn().mockResolvedValueOnce(simpleStorage)
+      static deployed = jest.fn()
+        .mockResolvedValueOnce(simpleStorage)
+        .mockResolvedValueOnce(simpleStorage)
     }
   }
 

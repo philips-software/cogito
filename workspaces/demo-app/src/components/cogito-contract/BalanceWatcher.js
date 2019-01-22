@@ -5,8 +5,9 @@ import { ValueWatcher } from './ValueWatcher'
 class BalanceWatcher extends React.Component {
   valueWatcher
 
-  componentDidMount () {
-    const { simpleStorage, dispatch } = this.props
+  async componentDidMount () {
+    const { contractProxy, dispatch } = this.props
+    const simpleStorage = await contractProxy.deployed()
     this.valueWatcher = new ValueWatcher({
       simpleStorage,
       onValueChanged: value => dispatch(UserDataActions.setBalance(value))

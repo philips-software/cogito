@@ -1,141 +1,46 @@
 import React from 'react'
-
-import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
-import { CogitoConnector } from '@cogitojs/cogito-react-ui'
-import {
-  Row,
-  Centered
-} from '@react-frontend-developer/react-layout-helpers'
-import { ContractActions } from './actions'
-import { AppEventsActions } from 'app-events'
-import { UserDataActions } from 'user-data'
-import { BalanceWatcher } from './BalanceWatcher'
-import { Balance } from './Balance'
-import { IncreaseContractButton } from './IncreaseContractButton'
-import { TelepathError, TelepathStatus } from 'components/telepath'
 import { PropTypes } from 'prop-types'
 
+import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
+import { Centered } from '@react-frontend-developer/react-layout-helpers'
+import { AppEventsActions } from 'app-events'
+import { TelepathError, TelepathStatus } from 'components/telepath'
+
+import { SimpleStorageBalance } from './SimpleStorageBalance'
+import { SimpleStorageControls } from './SimpleStorageControls'
+
 class CogitoContract extends React.Component {
-  mounted = true
   static propTypes = {
     telepathChannel: PropTypes.object,
     SimpleStorage: PropTypes.func,
     newChannel: PropTypes.func
   }
 
-  state = {
-    action: '',
-    forceFetchingIdentity: false
-  }
-
-  onTrigger = dispatch => {
-    this.props.newChannel()
-    this.setState({ forceFetchingIdentity: true })
-    dispatch(AppEventsActions.setDialogOpen())
-  }
-
-  dispatchIncrease = dispatch => {
-    const { telepathChannel: channel } = this.props
-    dispatch(
-      ContractActions.increase({
-        deployedContract: this.state.simpleStorage,
-        channel,
-        increment: 5,
-        forceFetchingIdentity: this.state.forceFetchingIdentity
-      })
+  renderWithStore = ({ telepathError }, dispatch) => {
+    const { SimpleStorage, telepathChannel, newChannel } = this.props
+    return (
+      <Centered>
+        <SimpleStorageBalance telepathChannel={telepathChannel} contractProxy={SimpleStorage} dispatch={dispatch} />
+        <SimpleStorageControls key={telepathChannel.id} contractProxy={SimpleStorage} telepathChannel={telepathChannel} newChannel={newChannel} />
+        <TelepathStatus>Executing contract...</TelepathStatus>
+        <TelepathError
+          error={telepathError}
+          onTimeout={() => dispatch(AppEventsActions.telepathErrorClear())}
+        />
+      </Centered>
     )
   }
 
-  onClosed = async dispatch => {
-    /* istanbul ignore else  */
-    if (this.state.action === 'increase') {
-      this.dispatchIncrease(dispatch)
-    }
-    dispatch(AppEventsActions.setDialogClosed())
-    this.setState({
-      action: ''
-    })
-  }
-
-  onCancel = dispatch => {
-    dispatch(UserDataActions.clearConnectionEstablished())
-    dispatch(AppEventsActions.setDialogClosed())
-  }
-
-  increase = async (dispatch, channelReady) => {
-    if (!channelReady) {
-      dispatch(AppEventsActions.setDialogOpen())
-      this.setState({
-        action: 'increase'
-      })
-    } else {
-      this.dispatchIncrease(dispatch)
-      this.setState({ forceFetchingIdentity: false })
-    }
-  }
-
-  async componentDidMount () {
-    const { SimpleStorage } = this.props
-    const simpleStorage = await SimpleStorage.deployed()
-    this.mounted && this.setState({ simpleStorage })
-  }
-
-  async componentDidUpdate (prevProps, prevState) {
-    const { SimpleStorage } = this.props
-    if (prevProps.SimpleStorage !== SimpleStorage) {
-      const simpleStorage = await SimpleStorage.deployed()
-      this.mounted && this.setState({ simpleStorage })
-    }
-  }
-
-  componentWillUnmount () {
-    this.mounted = false
-  }
+  select = state => ({
+    telepathError: state.appEvents.telepathError
+  })
 
   render () {
-    if (!this.state.simpleStorage) return null
     return (
       <WithStore
-        selector={state => ({
-          channelReady: state.userData.connectionEstablished,
-          telepathInProgress: state.appEvents.telepathInProgress,
-          telepathError: state.appEvents.telepathError,
-          dialogOpen: state.appEvents.dialogOpen
-        })}
-      >
-        {(
-          {
-            channelReady,
-            telepathInProgress,
-            telepathError,
-            dialogOpen
-          },
-          dispatch
-        ) => (
-          <Centered>
-            <BalanceWatcher dispatch={dispatch} simpleStorage={this.state.simpleStorage} />
-            <Balance />
-            <Row css={{ marginTop: '10px' }}>
-              <IncreaseContractButton onClick={() => this.increase(dispatch, channelReady)} />
-              <CogitoConnector
-                open={dialogOpen}
-                connectUrl={this.props.telepathChannel.createConnectUrl(
-                  'https://cogito.mobi'
-                )}
-                onOpen={() => this.onTrigger(dispatch)}
-                onDone={() => this.onClosed(dispatch)}
-                onCancel={() => this.onCancel(dispatch)}
-                buttonStyling={{ secondary: true, color: 'black' }}
-              />
-            </Row>
-            <TelepathStatus>Executing contract...</TelepathStatus>
-            <TelepathError
-              error={telepathError}
-              onTimeout={() => dispatch(AppEventsActions.telepathErrorClear())}
-            />
-          </Centered>
-        )}
-      </WithStore>
+        selector={this.select}
+        render={this.renderWithStore}
+      />
     )
   }
 }
