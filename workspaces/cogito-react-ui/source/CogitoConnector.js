@@ -1,7 +1,7 @@
 import React from 'react'
-import QRCode from 'qrcode.react'
 import { Button, Header, Modal } from 'semantic-ui-react'
 import { Centered, Spacer } from '@react-frontend-developer/react-layout-helpers'
+import { CogitoQRCode } from './CogitoQRCode'
 
 class CogitoConnector extends React.Component {
   onClick = () => {
@@ -22,7 +22,9 @@ class CogitoConnector extends React.Component {
             onClick={() => this.onTrigger()}>
             {this.props.triggerButtonText || 'Show QR code'}
           </Button>
-        }>
+        }
+        onClose={this.props.onCancel}
+        closeIcon >
         <Modal.Header>Scan QRCode</Modal.Header>
         <Modal.Content>
           <Modal.Description>
@@ -31,7 +33,7 @@ class CogitoConnector extends React.Component {
               <Spacer
                 margin='20px 0 50px 0'
                 render={() =>
-                  <QRCode value={this.props.connectUrl} />
+                  <CogitoQRCode value={this.props.connectUrl} />
                 } />
               <Button {...this.props.buttonStyling} onClick={() => this.onClick()}>Done</Button>
             </Centered>
