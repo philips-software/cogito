@@ -23,6 +23,7 @@ class CogitoContract extends React.Component {
   }
 
   state = {
+    action: '',
     forceFetchingIdentity: false
   }
 
@@ -45,11 +46,18 @@ class CogitoContract extends React.Component {
   }
 
   onClosed = async dispatch => {
-    this.dispatchIncrease(dispatch)
+    /* istanbul ignore else  */
+    if (this.state.action === 'increase') {
+      this.dispatchIncrease(dispatch)
+    }
     dispatch(AppEventsActions.setDialogClosed())
+    this.setState({
+      action: ''
+    })
   }
 
   onCancel = dispatch => {
+    console.log('onCancel')
     dispatch(UserDataActions.clearConnectionEstablished())
     dispatch(AppEventsActions.setDialogClosed())
   }
@@ -57,6 +65,9 @@ class CogitoContract extends React.Component {
   increase = async (dispatch, channelReady) => {
     if (!channelReady) {
       dispatch(AppEventsActions.setDialogOpen())
+      this.setState({
+        action: 'increase'
+      })
     } else {
       this.dispatchIncrease(dispatch)
       this.setState({ forceFetchingIdentity: false })
@@ -67,6 +78,15 @@ class CogitoContract extends React.Component {
     const { SimpleStorage } = this.props
     const simpleStorage = await SimpleStorage.deployed()
     this.setState({ simpleStorage })
+  }
+
+  async componentDidUpdate (prevProps, prevState) {
+    const { SimpleStorage } = this.props
+    if (prevProps.SimpleStorage !== SimpleStorage) {
+      console.log('SimpleStorage CHANGED!!!!')
+      const simpleStorage = await SimpleStorage.deployed()
+      this.setState({ simpleStorage })
+    }
   }
 
   render () {
