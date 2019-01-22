@@ -96,6 +96,29 @@ describe('CogitoAddress', () => {
       expect(getByText(/scan the qr code/i)).toBeInTheDocument()
     })
 
+    it('closes the "Scan QR Code" dialog when cancel button is clicked', async () => {
+      const { getByText, queryByText } = render(cogitoAddress())
+      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      fireEvent.click(readButton)
+      expect(getByText(/scan the qr code/i)).toBeInTheDocument()
+      const closeIcon = document.querySelector('i.close.icon')
+      fireEvent.click(closeIcon)
+      expect(queryByText(/scan the qr code/i)).toBeNull()
+    })
+
+    it('shows the "Scan QR Code" dialog when traying to Read after closing it', async () => {
+      const { getByText, queryByText } = render(cogitoAddress())
+      const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
+      fireEvent.click(showQRCodeButton)
+      expect(getByText(/scan the qr code/i)).toBeInTheDocument()
+      const closeIcon = document.querySelector('i.close.icon')
+      fireEvent.click(closeIcon)
+      expect(queryByText(/scan the qr code/i)).toBeNull()
+      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      fireEvent.click(readButton)
+      expect(getByText(/scan the qr code/i)).toBeInTheDocument()
+    })
+
     it('immediatelly fetches user identity if telepath channel is already established', async () => {
       const { getByText, getByTestId, store: { dispatch } } = render(cogitoAddress())
       const readButton = await waitForElement(() => getByText(/read your identity.../i))

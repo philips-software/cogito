@@ -8,6 +8,7 @@ import {
 } from '@react-frontend-developer/react-layout-helpers'
 import { ContractActions } from './actions'
 import { AppEventsActions } from 'app-events'
+import { UserDataActions } from 'user-data'
 import { BalanceWatcher } from './BalanceWatcher'
 import { Balance } from './Balance'
 import { IncreaseContractButton } from './IncreaseContractButton'
@@ -22,7 +23,6 @@ class CogitoContract extends React.Component {
   }
 
   state = {
-    action: '',
     forceFetchingIdentity: false
   }
 
@@ -45,22 +45,18 @@ class CogitoContract extends React.Component {
   }
 
   onClosed = async dispatch => {
-    /* istanbul ignore else  */
-    if (this.state.action === 'increase') {
-      this.dispatchIncrease(dispatch)
-    }
+    this.dispatchIncrease(dispatch)
     dispatch(AppEventsActions.setDialogClosed())
-    this.setState({
-      action: ''
-    })
+  }
+
+  onCancel = dispatch => {
+    dispatch(UserDataActions.clearConnectionEstablished())
+    dispatch(AppEventsActions.setDialogClosed())
   }
 
   increase = async (dispatch, channelReady) => {
     if (!channelReady) {
       dispatch(AppEventsActions.setDialogOpen())
-      this.setState({
-        action: 'increase'
-      })
     } else {
       this.dispatchIncrease(dispatch)
       this.setState({ forceFetchingIdentity: false })
@@ -105,6 +101,7 @@ class CogitoContract extends React.Component {
                   'https://cogito.mobi'
                 )}
                 onClosed={() => this.onClosed(dispatch)}
+                onCancel={() => this.onCancel(dispatch)}
                 buttonStyling={{ secondary: true, color: 'black' }}
               />
             </Row>

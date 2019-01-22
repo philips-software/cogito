@@ -116,6 +116,29 @@ describe('CogitoContract', () => {
       expect(queryByText(/scan the qr code/i)).toBeNull()
     })
 
+    it('closes the "Scan QR Code" dialog when cancel button is clicked', async () => {
+      const { getByText, queryByText } = render(cogitoContract())
+      const increaseButton = await waitForElement(() => getByText(/increase/i))
+      fireEvent.click(increaseButton)
+      expect(getByText(/scan the qr code/i)).toBeInTheDocument()
+      const closeIcon = document.querySelector('i.close.icon')
+      fireEvent.click(closeIcon)
+      expect(queryByText(/scan the qr code/i)).toBeNull()
+    })
+
+    it('shows the "Scan QR Code" dialog when traying to Increase after closing it', async () => {
+      const { getByText, queryByText } = render(cogitoContract())
+      const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
+      fireEvent.click(showQRCodeButton)
+      expect(getByText(/scan the qr code/i)).toBeInTheDocument()
+      const closeIcon = document.querySelector('i.close.icon')
+      fireEvent.click(closeIcon)
+      expect(queryByText(/scan the qr code/i)).toBeNull()
+      const increaseButton = await waitForElement(() => getByText(/increase/i))
+      fireEvent.click(increaseButton)
+      expect(getByText(/scan the qr code/i)).toBeInTheDocument()
+    })
+
     it('sets user identity and connection status in the redux store', async () => {
       const { getByText, store } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
