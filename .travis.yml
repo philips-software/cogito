@@ -8,11 +8,14 @@ env:
     # Code coverage key
     - secure: QiKA+JoGk6C7PFdphqS6k9hC6p1TO7cBBhoF3NMlGo2mlwxoVnagtUpoM5kmUW2PoG49LMGxQI/oerQMSqY/dJa0df9UlffMZTs6UIBdxbbeg7Rp/gh0DMMQQGG2mokBLM8Ivm/tFxlf8Y8CHHSWgBWjKTvnlX21nTvYgqqiCfcEmae/kJgBq9M/w9cQNXFnQJm6FsTrekESBlX4CzmyWxeLWVGEvgsXTwg6FsNVIZFuiSJPflLja5X7MzizZX73jvKRHCts49/ftO1TL6ii5DjuYBOzILg9Zlo01Y+2AgTYAX8dou+wUDbHfPsK66trB4wblDmqyB9dcWG+2oc8cMEGqyrIAFP5wEvuVqkujPHBBc7gYJNXBCFDS/Qy/Xmobj4YbSPnw9gnYK+Ba5nM89/zJOQUnozWcitlfkFnho+PMEYrciYnTOJsnT2MV/GGc1B7ccT8HrAkU8jQQgwh+i56TgzXR7KJ0g40eEKK98RLcSjrVOy35NInrnSy7WawpydseLOxRtjLZPnKLrAOtMJ2zbjx8xnAldzLxK9lwsEQGBBAcieDoJheEwUVIOEHW7gyIGOMBoqY8zLWdcpKgy/luOxLdXtI4IxvqMtHOtvkC1BbH6mAbfeBmmCAcHfDlZ9ldnR647kKr+TPvyKMHqvZX16E+UAOVEnJ9QNEiRc=
 before_install:
+  # Use bundler 2.0
+  - gem update --system
+  - gem install bundler
   # Use recent NodeJS
-  - nvm install 10
-  - nvm use 10
+  - nvm install 11
+  - nvm use 11
   # Use recent Yarn
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.12.3
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0
   - export PATH="$HOME/.yarn/bin:$PATH"
   # Install Code Climate reporter
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-darwin-amd64 > ./cc-test-reporter
