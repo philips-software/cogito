@@ -53,7 +53,7 @@ describe('CogitoContract Integration test', () => {
     const currentValue = await waitForElement(() => getByTestId(/current-value/i))
     expect(currentValue).toHaveTextContent('0')
     setActiveTelepathChannel(dispatch)
-    const increaseButton = getByText(/increase/i)
+    const increaseButton = await waitForElement(() => getByText(/increase/i))
     fireEvent.click(increaseButton)
     await wait(() => expect(getByTestId(/current-value/i)).toHaveTextContent(`${5}`))
   })

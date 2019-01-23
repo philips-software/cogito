@@ -14,17 +14,11 @@ class SimpleStorageControls extends Component {
     forceFetchingIdentity: false
   }
 
-  async componentDidMount () {
-    const { contractProxy } = this.props
-    const simpleStorage = await contractProxy.deployed()
-    this.setState({ simpleStorage })
-  }
-
   dispatchIncrease = dispatch => {
-    const { telepathChannel: channel } = this.props
+    const { telepathChannel: channel, simpleStorage } = this.props
     dispatch(
       ContractActions.increase({
-        deployedContract: this.state.simpleStorage,
+        deployedContract: simpleStorage,
         channel,
         increment: 5,
         forceFetchingIdentity: this.state.forceFetchingIdentity
@@ -68,7 +62,6 @@ class SimpleStorageControls extends Component {
 
   renderWithStore = ({ channelReady }, dispatch) => {
     const { telepathChannel, newChannel } = this.props
-    if (!this.state.simpleStorage) return null
     return (
       <Row css={{ marginTop: '10px' }}>
         <IncreaseContractButton onClick={() => this.increase(dispatch, channelReady)} />
