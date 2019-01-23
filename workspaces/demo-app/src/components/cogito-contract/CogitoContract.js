@@ -3,42 +3,66 @@ import { PropTypes } from 'prop-types'
 
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 import { Centered } from '@react-frontend-developer/react-layout-helpers'
-import { AppEventsActions } from 'app-events'
-import { TelepathError, TelepathStatus } from 'components/telepath'
 
 import { SimpleStorageBalance } from './SimpleStorageBalance'
 import { SimpleStorageControls } from './SimpleStorageControls'
+import { SimpleStorageFeedback } from './SimpleStorageFeedback'
 
 class CogitoContract extends React.Component {
+  unmounting = false
+  state = {}
+
   static propTypes = {
     telepathChannel: PropTypes.object,
     SimpleStorage: PropTypes.func,
     newChannel: PropTypes.func
   }
 
-  renderWithStore = ({ telepathError }, dispatch) => {
-    const { SimpleStorage, telepathChannel, newChannel } = this.props
-    return (
-      <Centered>
-        <SimpleStorageBalance telepathChannel={telepathChannel} contractProxy={SimpleStorage} dispatch={dispatch} />
-        <SimpleStorageControls key={telepathChannel.id} contractProxy={SimpleStorage} telepathChannel={telepathChannel} newChannel={newChannel} />
-        <TelepathStatus>Executing contract...</TelepathStatus>
-        <TelepathError
-          error={telepathError}
-          onTimeout={() => dispatch(AppEventsActions.telepathErrorClear())}
-        />
-      </Centered>
-    )
+  setContract = async () => {
+    const { SimpleStorage } = this.props
+    const simpleStorage = await SimpleStorage.deployed()
+    !this.unmounting && this.setState({ simpleStorage })
   }
 
-  select = state => ({
-    telepathError: state.appEvents.telepathError
-  })
+  componentDidMount () {
+    this.setContract()
+  }
+
+  async componentDidUpdate (prevProps) {
+    if (prevProps.SimpleStorage !== this.props.SimpleStorage) {
+      this.setContract()
+    }
+  }
+
+  componentWillUnmount () {
+    this.unmounting = true
+  }
+
+  contractReady = () => {
+    return this.state.simpleStorage
+  }
+
+  renderWithStore = (_, dispatch) => {
+    if (this.contractReady()) {
+      const { simpleStorage } = this.state
+      const { telepathChannel, newChannel } = this.props
+
+      return (
+        <Centered>
+          <SimpleStorageBalance simpleStorage={simpleStorage} dispatch={dispatch} />
+          <SimpleStorageControls simpleStorage={simpleStorage} telepathChannel={telepathChannel} newChannel={newChannel} />
+          <SimpleStorageFeedback />
+        </Centered>
+      )
+    } else {
+      return null
+    }
+  }
 
   render () {
     return (
       <WithStore
-        selector={this.select}
+        selector={() => ({})}
         render={this.renderWithStore}
       />
     )

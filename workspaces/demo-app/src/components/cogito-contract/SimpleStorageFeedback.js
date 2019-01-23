@@ -4,20 +4,20 @@ import { TelepathError, TelepathStatus } from 'components/telepath'
 
 import { AppEventsActions } from 'app-events'
 
-class IdentityFeedback extends Component {
+class SimpleStorageFeedback extends Component {
+  select = state => ({
+    telepathError: state.appEvents.telepathError
+  })
+
   renderWithStore = ({ telepathError }, dispatch) => (
     <>
-      <TelepathStatus>Reading identity...</TelepathStatus>
+      <TelepathStatus>Executing contract...</TelepathStatus>
       <TelepathError
         error={telepathError}
         onTimeout={() => dispatch(AppEventsActions.telepathErrorClear())}
       />
     </>
   )
-
-  select = state => ({
-    telepathError: state.appEvents.telepathError
-  })
 
   render () {
     return (
@@ -29,4 +29,4 @@ class IdentityFeedback extends Component {
   }
 }
 
-export { IdentityFeedback }
+export { SimpleStorageFeedback }

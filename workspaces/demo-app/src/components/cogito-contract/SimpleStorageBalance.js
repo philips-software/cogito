@@ -1,16 +1,29 @@
 import React, { Component } from 'react'
 
-import { BalanceWatcher } from './BalanceWatcher'
+import { ValueWatcher } from './ValueWatcher'
 import { Balance } from './Balance'
 
+import { UserDataActions } from 'user-data'
+
 class SimpleStorageBalance extends Component {
+  valueWatcher
+
+  componentDidMount () {
+    const { simpleStorage, dispatch } = this.props
+    this.valueWatcher = new ValueWatcher({
+      simpleStorage,
+      onValueChanged: value => dispatch(UserDataActions.setBalance(value))
+    })
+    this.valueWatcher.start()
+  }
+
+  componentWillUnmount () {
+    this.valueWatcher.stop()
+  }
+
   render () {
-    const { dispatch, contractProxy } = this.props
     return (
-      <>
-        <BalanceWatcher contractProxy={contractProxy} dispatch={dispatch} />
-        <Balance />
-      </>
+      <Balance />
     )
   }
 }
