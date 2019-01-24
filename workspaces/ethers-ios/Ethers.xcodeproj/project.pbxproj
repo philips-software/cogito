@@ -16,6 +16,7 @@
 		5C5C92E5219310E90073B981 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5C92E4219310E90073B981 /* Transaction.swift */; };
 		5CC0B2B02191EC8100D84CD8 /* Ethers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CC0B2A62191EC8100D84CD8 /* Ethers.framework */; };
 		5CC0B2B72191EC8100D84CD8 /* Ethers.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CC0B2A92191EC8100D84CD8 /* Ethers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5CC814CD21FA1453005F8C9E /* JavascriptInvokeAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC814CC21FA1452005F8C9E /* JavascriptInvokeAsync.swift */; };
 		5CEC22042194715B00CF8264 /* JavascriptSetTimeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEC22032194715B00CF8264 /* JavascriptSetTimeout.swift */; };
 		652114D3A02C37A7E6563836 /* libPods-EthersTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9285DAAA505228ADEC0F4C /* libPods-EthersTests.a */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		5CC0B2AF2191EC8100D84CD8 /* EthersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EthersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC0B2B62191EC8100D84CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CC0B2C02191ED9F00D84CD8 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		5CC814CC21FA1452005F8C9E /* JavascriptInvokeAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptInvokeAsync.swift; sourceTree = "<group>"; };
 		5CEC22032194715B00CF8264 /* JavascriptSetTimeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavascriptSetTimeout.swift; sourceTree = "<group>"; };
 		AE9285DAAA505228ADEC0F4C /* libPods-EthersTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EthersTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B8C8267D073FEFE6B59FDC /* Pods-EthersTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EthersTests.debug.xcconfig"; path = "Target Support Files/Pods-EthersTests/Pods-EthersTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				5C5C92DA2192E3450073B981 /* Javascript.swift */,
 				5C5C92DC2192E7CC0073B981 /* JavascriptEthers.swift */,
 				5CEC22032194715B00CF8264 /* JavascriptSetTimeout.swift */,
+				5CC814CC21FA1452005F8C9E /* JavascriptInvokeAsync.swift */,
 				5C5C92E4219310E90073B981 /* Transaction.swift */,
 				5C2F7D212194441E00D86737 /* DataAsHex.swift */,
 				5C5C92E12192F1210073B981 /* ethers */,
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C2F7D222194441E00D86737 /* DataAsHex.swift in Sources */,
+				5CC814CD21FA1453005F8C9E /* JavascriptInvokeAsync.swift in Sources */,
 				5C5C92DD2192E7CC0073B981 /* JavascriptEthers.swift in Sources */,
 				5C5C92DB2192E3450073B981 /* Javascript.swift in Sources */,
 				5CEC22042194715B00CF8264 /* JavascriptSetTimeout.swift in Sources */,
