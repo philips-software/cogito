@@ -105,7 +105,7 @@ GEM
     multipart-post (2.0.0)
     nanaimo (0.2.6)
     naturally (2.2.0)
-    nokogiri (1.8.4)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     os (1.0.0)
     plist (3.4.0)
@@ -168,4 +168,4 @@ DEPENDENCIES
   slather
 
 BUNDLED WITH
-   1.16.4
+   1.17.2
