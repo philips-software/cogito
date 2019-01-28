@@ -23,8 +23,21 @@ class CogitoEncryption {
     await Sodium.wait()
   }
 
+  validate ({ cipherTextPart, keyPart, noncePart }) {
+    if (!cipherTextPart || cipherTextPart.length === 0) {
+      throw new Error('Invalid encrypted content!')
+    }
+    if (!keyPart || keyPart.length === 0) {
+      throw new Error('Missing encrypted symmetric key!')
+    }
+    if (!noncePart || noncePart.length === 0) {
+      throw new Error('Missing nonce in the provided content!')
+    }
+  }
+
   extractEncryptionData (encryptionData) {
     const [cipherTextPart, keyPart, noncePart] = encryptionData.split('.')
+    this.validate({ cipherTextPart, keyPart, noncePart })
     const cipherText = base64url.toBuffer(cipherTextPart)
     const encryptedSymmetricKey = bufferToHex(base64url.toBuffer(keyPart))
     const nonce = base64url.toBuffer(noncePart)
