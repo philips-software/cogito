@@ -79,6 +79,54 @@ describe('encryption', () => {
       const decryptedText = await cogitoEncryption.decrypt({ tag, encryptionData })
       expect(decryptedText).toBe(plainText)
     })
+
+    it('throws a meaningful error when file to be decrypted is empty', async () => {
+      expect.assertions(1)
+      const error = new Error('Invalid encrypted content!')
+      encryptionData = ''
+      try {
+        await cogitoEncryption.decrypt({ tag, encryptionData })
+      } catch (e) {
+        expect(e.message).toBe(error.message)
+      }
+    })
+
+    it('throws a meaningful error when file to be decrypted misses encrypted symmetric key', async () => {
+      expect.assertions(1)
+      const error = new Error('Missing encrypted symmetric key!')
+      encryptionData = 'encrypted content'
+      try {
+        await cogitoEncryption.decrypt({ tag, encryptionData })
+      } catch (e) {
+        expect(e.message).toBe(error.message)
+      }
+    })
+
+    it('throws a meaningful error when file to be decrypted misses nonce', async () => {
+      expect.assertions(1)
+      const error = new Error('Missing nonce in the provided content!')
+      encryptionData = 'encrypted content.encrypted symmetric key'
+      try {
+        await cogitoEncryption.decrypt({ tag, encryptionData })
+      } catch (e) {
+        expect(e.message).toBe(error.message)
+      }
+    })
+
+    it('throws a meaningful error when decryption fails', async () => {
+      expect.assertions(1)
+      const error = new Error('wrong secret key for the given ciphertext')
+      nonce = await random(await nonceSize())
+      encryptionData =
+        base64url.encode(cipherText) + '.' +
+        base64url.encode(encryptedSymmetricKey) + '.' +
+        base64url.encode(nonce)
+      try {
+        await cogitoEncryption.decrypt({ tag, encryptionData })
+      } catch (e) {
+        expect(e.message).toBe(error.message)
+      }
+    })
   })
 
   describe('encrypting data', () => {
