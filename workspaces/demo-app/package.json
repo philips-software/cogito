@@ -1,6 +1,6 @@
 {
   "name": "demo-app",
-  "version": "0.2.21",
+  "version": "0.2.22",
   "description": "A demo project for using Cogito",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -8,7 +8,7 @@
   "dependencies": {
     "@cogitojs/cogito-attestations": "^0.2.20",
     "@cogitojs/cogito-encryption": "^0.2.21",
-    "@cogitojs/cogito-ethereum-react": "^0.2.19",
+    "@cogitojs/cogito-ethereum-react": "^0.2.22",
     "@cogitojs/cogito-identity": "^0.2.19",
     "@cogitojs/cogito-react-ui": "^0.2.20",
     "@cogitojs/demo-app-contracts": "^0.2.19",
