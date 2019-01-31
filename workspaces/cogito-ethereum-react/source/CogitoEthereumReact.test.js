@@ -49,7 +49,16 @@ describe('cogito-ethereum-react', () => {
 
   const setExpectedCogitoParams = () => {
     cogitoParams = {
-      cogitoWeb3: 'cogitoWeb3',
+      cogitoWeb3: {
+        currentProvider: {
+          provider: {
+            on: jest.fn(),
+            connection: {
+              close: jest.fn()
+            }
+          }
+        }
+      },
       telepathChannel: channel,
       contractsProxies: 'contractsProxies'
     }
@@ -116,7 +125,7 @@ describe('cogito-ethereum-react', () => {
 
     it('returns an instance of web3 to the render prop function', async () => {
       await wait(() => {
-        expect(renderProps.args.cogitoWeb3).toBe('cogitoWeb3')
+        expect(renderProps.args.cogitoWeb3).toEqual(cogitoParams.cogitoWeb3)
       })
     })
 

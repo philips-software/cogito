@@ -23,13 +23,19 @@ export class CogitoEthereumReact extends React.Component {
     appName: PropTypes.string.isRequired,
     contractsBlobs: PropTypes.arrayOf(PropTypes.object).isRequired,
     onTelepathChanged: PropTypes.func,
+    onConnectionStatusChanged: PropTypes.func,
     render: PropTypes.func
   }
 
   constructor ({ contractsBlobs }) {
     super()
     this.cogitoEthereum = new CogitoEthereum(contractsBlobs)
-    this.state = { cogitoWeb3: null, telepathChannel: null, contractsProxies: null, newChannel: this.newChannel }
+    this.state = {
+      cogitoWeb3: null,
+      telepathChannel: null,
+      contractsProxies: null,
+      newChannel: this.newChannel
+    }
   }
 
   normalizeKey = key => {
@@ -49,28 +55,92 @@ export class CogitoEthereumReact extends React.Component {
     })
   }
 
-  updateState = async (props) => {
-    const { channelId, channelKey, appName } = props
+  notifyConnectionLost = () => {
+    const { onConnectionStatusChanged } = this.props
+    onConnectionStatusChanged && onConnectionStatusChanged({ connected: false })
+    console.error('[WS END] Lost connection to web3')
+  }
 
-    const telepathKey = this.normalizeKey(channelKey)
+  notifyConnectionRegained = () => {
+    const { onConnectionStatusChanged } = this.props
+    onConnectionStatusChanged && onConnectionStatusChanged({ connected: true })
+    console.log('[WS CONNECT] Restored connection to web3')
+  }
 
-    const {
-      cogitoWeb3,
-      contractsProxies,
-      telepathChannel
-    } = await this.cogitoEthereum.getContext({
-      channelId,
-      channelKey: telepathKey,
-      appName
-    })
-
-    this.setState({ cogitoWeb3, telepathChannel, contractsProxies })
-
+  notifyTelepathChanged = ({ telepathChannel }) => {
     this.props.onTelepathChanged && this.props.onTelepathChanged({
       channelId: telepathChannel.id,
       channelKey: telepathChannel.key,
       appName: telepathChannel.appName
     })
+  }
+
+  disconnectFromCurrentProvider = () => {
+    if (this.provider) {
+      this.provider.on('end', () => {})
+      this.provider.connection && this.provider.connection.close()
+    }
+  }
+
+  setCurrentProvider = context => {
+    this.disconnectFromCurrentProvider()
+    this.provider = context.cogitoWeb3.currentProvider.provider
+  }
+
+  monitorProvider = context => {
+    this.setCurrentProvider(context)
+    this.watchFor('connect', context)
+  }
+
+  onConnectionLost = async e => {
+    this.notifyConnectionLost()
+    this.interval = setInterval(async () => {
+      console.log('reconnecting to web3...')
+      const context = await this.getContextFromState()
+      this.monitorProvider(context)
+    }, 2000)
+  }
+
+  watchFor = (event, context) => {
+    if (event === 'end') {
+      this.provider.on('end', this.onConnectionLost)
+    } else if (event === 'connect') {
+      this.provider.on('connect', () => {
+        this.notifyConnectionRegained()
+        this.setState(context)
+        this.provider.on('end', this.onConnectionLost)
+        clearInterval(this.interval)
+      })
+    }
+  }
+
+  getContextFromProps = props => {
+    const { channelId, channelKey, appName } = props
+
+    const telepathKey = this.normalizeKey(channelKey)
+
+    return this.cogitoEthereum.getContext({
+      channelId,
+      channelKey: telepathKey,
+      appName
+    })
+  }
+
+  getContextFromState = props => {
+    return this.cogitoEthereum.getContext({
+      channelId: this.state.telepathChannel.id,
+      channelKey: this.state.telepathChannel.key,
+      appName: this.state.telepathChannel.appName
+    })
+  }
+
+  updateState = async (props) => {
+    const context = await this.getContextFromProps(props)
+
+    this.setState(context)
+    this.setCurrentProvider(context)
+    this.watchFor('end')
+    this.notifyTelepathChanged(context)
   }
 
   normalize = data => {
@@ -101,6 +171,11 @@ export class CogitoEthereumReact extends React.Component {
         this.currentPropsDifferentFromPrevState(normalizedCurrentProps, prevState)) {
       this.updateState(this.props)
     }
+  }
+
+  componentWillUnmount () {
+    this.disconnectFromCurrentProvider()
+    this.interval && clearInterval(this.interval)
   }
 
   render () {
