@@ -55,16 +55,10 @@ export class CogitoEthereumReact extends React.Component {
     })
   }
 
-  notifyConnectionLost = () => {
+  notify = (connected, logMessage) => {
     const { onConnectionStatusChanged } = this.props
-    onConnectionStatusChanged && onConnectionStatusChanged({ connected: false })
-    console.error('[WS END] Lost connection to web3')
-  }
-
-  notifyConnectionRegained = () => {
-    const { onConnectionStatusChanged } = this.props
-    onConnectionStatusChanged && onConnectionStatusChanged({ connected: true })
-    console.log('[WS CONNECT] Restored connection to web3')
+    onConnectionStatusChanged && onConnectionStatusChanged({ connected })
+    console.log(logMessage)
   }
 
   notifyTelepathChanged = ({ telepathChannel }) => {
@@ -93,7 +87,7 @@ export class CogitoEthereumReact extends React.Component {
   }
 
   onConnectionLost = async e => {
-    this.notifyConnectionLost()
+    this.notify(false, '[WS END] Lost connection to web3')
     this.interval = setInterval(async () => {
       console.log('reconnecting to web3...')
       const context = await this.getContextFromState()
@@ -106,7 +100,7 @@ export class CogitoEthereumReact extends React.Component {
       this.provider.on('end', this.onConnectionLost)
     } else if (event === 'connect') {
       this.provider.on('connect', () => {
-        this.notifyConnectionRegained()
+        this.notify(true, '[WS CONNECT] Restored connection to web3')
         this.setState(context)
         this.provider.on('end', this.onConnectionLost)
         clearInterval(this.interval)
