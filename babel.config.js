@@ -16,14 +16,21 @@ module.exports = function (api) {
 }
 
 function setupPresets (babelEnv) {
-  let presetEnv = '@babel/preset-env'
+  let presetEnv = [
+    '@babel/preset-env',
+    {
+      exclude: ['transform-regenerator'],
+      targets: '> 0.25%, not dead'
+    }
+  ]
 
   if (babelEnv === 'es' || babelEnv === 'umd') {
     presetEnv = [
       '@babel/preset-env',
       {
         modules: false,
-        exclude: ['transform-regenerator']
+        exclude: ['transform-regenerator'],
+        targets: '> 0.25%, not dead'
       }
     ]
   }
