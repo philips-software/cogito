@@ -10,7 +10,7 @@
     "start": "COGITO_FAUCET_PRIVATE_KEY=C87509A1C067BBDE78BEB793E6FA76530B6382A4C0241E5E4A9EC0A0F44DC0D3 cogito-faucet --donation 1 0x627306090abab3a6e1400e9345bc60c78a8bef57"
   },
   "engines": {
-    "node": ">=9.0.0"
+    "node": ">=8.0.0"
   },
   "files": [
     "bin",
