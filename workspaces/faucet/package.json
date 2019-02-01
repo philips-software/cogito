@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/faucet",
-  "version": "0.2.19",
+  "version": "0.2.23",
   "description": "Simple faucet with REST API",
   "homepage": "https://cogito.mobi",
   "license": "MIT",

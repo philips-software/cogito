@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-web3-provider",
-  "version": "0.2.19",
+  "version": "0.2.23",
   "description": "An Ethereum web3 provider that signs transactions with the Cogito app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "source"
   ],
   "dependencies": {
-    "@cogitojs/telepath-js": "^0.2.19",
+    "@cogitojs/telepath-js": "^0.2.23",
     "web3": "^1.0.0-beta.36"
   },
   "devDependencies": {

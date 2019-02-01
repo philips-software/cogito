@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-ethereum",
-  "version": "0.2.19",
+  "version": "0.2.23",
   "description": "Convenience package for using Cogito with Ethereum",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -21,8 +21,8 @@
     "nock": "^9.2.5"
   },
   "dependencies": {
-    "@cogitojs/cogito-web3-provider": "^0.2.19",
-    "@cogitojs/telepath-js": "^0.2.19",
+    "@cogitojs/cogito-web3-provider": "^0.2.23",
+    "@cogitojs/telepath-js": "^0.2.23",
     "libsodium-wrappers": "^0.7.2",
     "truffle-contract": "^3.0.5",
     "web3": "^1.0.0-beta.36"

@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-ethereum-react",
-  "version": "0.2.22",
+  "version": "0.2.23",
   "description": "Cogito Ethereum React library",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "source"
   ],
   "dependencies": {
-    "@cogitojs/cogito-ethereum": "^0.2.19",
+    "@cogitojs/cogito-ethereum": "^0.2.23",
     "libsodium-wrappers": "^0.7.2",
     "truffle-contract": "^3.0.5",
     "web3": "^1.0.0-beta.36"
