@@ -43,6 +43,7 @@
 		028F4F031F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4F021F7D3B6C0015C4AF /* CreateIdentityReducer.swift */; };
 		028F4F061F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4F051F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift */; };
 		0291A3FA2208457700AFC6D6 /* AudioFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291A3F92208457700AFC6D6 /* AudioFeedback.swift */; };
+		0291A3FC220851DF00AFC6D6 /* TestSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291A3FB220851DF00AFC6D6 /* TestSetup.swift */; };
 		029245141F7AA00C00F2C0C1 /* GethActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245131F7AA00C00F2C0C1 /* GethActions.swift */; };
 		029245171F7AA13F00F2C0C1 /* GethReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245161F7AA13F00F2C0C1 /* GethReducer.swift */; };
 		0292451A1F7AA17300F2C0C1 /* GethState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029245191F7AA17300F2C0C1 /* GethState.swift */; };
@@ -224,6 +225,7 @@
 		028F4F021F7D3B6C0015C4AF /* CreateIdentityReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityReducer.swift; sourceTree = "<group>"; };
 		028F4F051F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityViewControllerSpec.swift; sourceTree = "<group>"; };
 		0291A3F92208457700AFC6D6 /* AudioFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFeedback.swift; sourceTree = "<group>"; };
+		0291A3FB220851DF00AFC6D6 /* TestSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSetup.swift; sourceTree = "<group>"; };
 		029245131F7AA00C00F2C0C1 /* GethActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethActions.swift; sourceTree = "<group>"; };
 		029245161F7AA13F00F2C0C1 /* GethReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethReducer.swift; sourceTree = "<group>"; };
 		029245191F7AA17300F2C0C1 /* GethState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GethState.swift; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 		027604021F6ACD1600788B0A /* CogitoTests */ = {
 			isa = PBXGroup;
 			children = (
+				0291A3FB220851DF00AFC6D6 /* TestSetup.swift */,
 				5C04E4481FA77CA400A70C60 /* Accounts service */,
 				028F4EF31F7CE3A10015C4AF /* Global */,
 				028F4EF11F7CE25F0015C4AF /* Geth state */,
@@ -1297,6 +1300,7 @@
 				02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */,
 				02B9A684203C7B9200ADB44F /* UIWindow+CurrentViewController.swift in Sources */,
 				02E792391F6FFE1100DC5973 /* KeyStoreActionsSpec.swift in Sources */,
+				0291A3FC220851DF00AFC6D6 /* TestSetup.swift in Sources */,
 				0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */,
 				0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */,
 				02BB61FD20C0226100F03625 /* IdentityInfoServiceSpec.swift in Sources */,
