@@ -11,6 +11,7 @@ struct TelepathActions {
                 let channel = try TelepathChannel(connectUrl: url)
                 dispatch(Invalidate())
                 dispatch(ConnectFulfilled(channel: channel, identity: identity))
+                AudioFeedback.default.playIdentitySelected()
             } catch let error {
                 dispatch(ConnectRejected(error: error, identity: identity))
             }
