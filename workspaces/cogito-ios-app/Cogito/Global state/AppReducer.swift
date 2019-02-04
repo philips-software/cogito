@@ -10,7 +10,8 @@ func appReducer(action: Action, state: AppState?) -> AppState {
             diamond: diamondReducer(action: action, state: state?.diamond),
             telepath: telepathReducer(action, state?.telepath),
             attestations: attestationsReducer(action: action, state: state?.attestations),
-            dialogPresenter: dialogPresenterReducer(action: action, state: state?.dialogPresenter)
+            dialogPresenter: dialogPresenterReducer(action: action, state: state?.dialogPresenter),
+            garbage: garbageBinReducer(action: action, state: state?.garbage)
         )
     }
 }

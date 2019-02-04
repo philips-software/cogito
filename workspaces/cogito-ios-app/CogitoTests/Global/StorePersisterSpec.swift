@@ -81,7 +81,10 @@ class StorePersisterSpec: QuickSpec {
                         "open": {},
                         "providedAttestations": {}
                     },
-                    "dialogPresenter": {}
+                    "dialogPresenter": {},
+                    "garbage": {
+                        "bin": {}
+                    }
                 }
                 """
         context("when file contains valid JSON") {
