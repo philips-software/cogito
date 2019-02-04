@@ -5,8 +5,10 @@ class AudioFeedback {
     static var `default` = AudioFeedback()
 
     var identitySelected: IdentitySelected?
+    var disabled = false
 
     func playIdentitySelected() {
+        guard !disabled else { return }
         identitySelected = IdentitySelected()
         identitySelected?.play()
     }
