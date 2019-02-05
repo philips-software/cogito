@@ -24,63 +24,27 @@ class GanacheTestNetwork {
   wallet
   _web3
   _networkId
+  secretKeys = [
+    '0x795f9d5ad876fc9c28e5923146df0ec7040cd37740408d5d4069f291c3929e53',
+    '0x37e28d130875cc704c5a622ab9a7fd83797f95a08faf62d375a7b2105b90f12c',
+    '0x5790a99ea8462b5f0d96c3cd9f6c86d4912374bd6c070b2f8c7c8eb5866bf4d2',
+    '0x5c34120d69e42a1d776c97d2a01ccaa1db0743cc1f2654bd6540be5d067e5c07',
+    '0xcdb58f3a8b9dfa5d4138b3d3d2baec9f3753867455cd89f09784c4df468ccdc6',
+    '0x7076dc9a0cba553c16514fced4bce18d499ecc0fee634c1e2230c69391f6cc9e',
+    '0xaa6e960ca7b00e9e704a51caf23867eb84e8990b470d8de0a4f2c9dcfcf06d68',
+    '0xf97a1a5a1f9152c7b9b1a4516900b2a3bc90d054ba7f370cd5872e7eb4e27e34',
+    '0x99bdeb2078f1be1a69534db2fbf9cc62eaac814e1818953bcb3fbadca4f4f662',
+    '0x65db7edd56ba5a798948b4f7c90bbf42cc455836557741de3305839fa5a7a2a6'
+  ]
 
   constructor (networkId = Date.now()) {
     const provider = ganache.provider({
       mnemonic: this.mnemonic,
       network_id: networkId,
-      accounts: [
-        {
-          balance: '0x10000000000000000000',
-          secretKey:
-            '0x795f9d5ad876fc9c28e5923146df0ec7040cd37740408d5d4069f291c3929e53'
-        },
-        {
-          balance: '0x10000000000000000000',
-          secretKey:
-            '0x37e28d130875cc704c5a622ab9a7fd83797f95a08faf62d375a7b2105b90f12c'
-        },
-        {
-          balance: '0x10000000000000000000',
-          secretKey:
-            '0x5790a99ea8462b5f0d96c3cd9f6c86d4912374bd6c070b2f8c7c8eb5866bf4d2'
-        },
-        {
-          balance: '0x10000000000000000000',
-          secretKey:
-            '0x5c34120d69e42a1d776c97d2a01ccaa1db0743cc1f2654bd6540be5d067e5c07'
-        },
-        {
-          balance: '0x10000000000000000000',
-          secretKey:
-            '0xcdb58f3a8b9dfa5d4138b3d3d2baec9f3753867455cd89f09784c4df468ccdc6'
-        },
-        {
-          balance: '0x10000000000000000000',
-          secretKey:
-            '0x7076dc9a0cba553c16514fced4bce18d499ecc0fee634c1e2230c69391f6cc9e'
-        },
-        {
-          balance: '0x10000000000000000000',
-          secretKey:
-            '0xaa6e960ca7b00e9e704a51caf23867eb84e8990b470d8de0a4f2c9dcfcf06d68'
-        },
-        {
-          balance: '0x10000000000000000000',
-          secretKey:
-            '0xf97a1a5a1f9152c7b9b1a4516900b2a3bc90d054ba7f370cd5872e7eb4e27e34'
-        },
-        {
-          balance: '0x10000000000000000000',
-          secretKey:
-            '0x99bdeb2078f1be1a69534db2fbf9cc62eaac814e1818953bcb3fbadca4f4f662'
-        },
-        {
-          balance: '0x10000000000000000000',
-          secretKey:
-            '0x65db7edd56ba5a798948b4f7c90bbf42cc455836557741de3305839fa5a7a2a6'
-        }
-      ]
+      accounts: this.secretKeys.map(secretKey => ({
+        balance: '0x10000000000000000000',
+        secretKey
+      }))
     })
     this.wallet = ethers.Wallet.fromMnemonic(this.mnemonic)
     provider.setMaxListeners(maxAllowedListeners)
