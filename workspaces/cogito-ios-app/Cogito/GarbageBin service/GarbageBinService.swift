@@ -9,6 +9,9 @@ struct GarbageBinService: TelepathService {
     }
 
     func onRequest(_ request: JsonRpcRequest, on channel: TelepathChannel) {
+        guard request.method == "addKeyValuePair" ||
+            request.method == "getValueForKey" ||
+            request.method == "deleteKey" else { return }
         if let key = request.params["key"].string {
             switch request.method {
             case "addKeyValuePair":
