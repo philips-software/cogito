@@ -50,7 +50,7 @@ describe('proxiesFromBlobs', () => {
     beforeEach(async () => {
       console.log = jest.fn()
       ethereum = await EthereumForSimpleStorage.setup({ contractsBlobs: blobs })
-    })
+    }, 10000)
 
     afterEach(() => {
       console.log.mockRestore()
@@ -74,6 +74,6 @@ describe('proxiesFromBlobs', () => {
       }, Promise.resolve([]))
 
       expect(increments).toEqual([1, 2, 3])
-    })
+    }, 10000)
   })
 })

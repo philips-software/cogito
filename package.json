@@ -32,7 +32,7 @@
     },
     "scripts": {
         "setup:dev": "yarn && (cd workspaces/demo-app-contracts && yarn compile) && yarn build",
-        "test": "yarn lint && yarn jest --runInBand",
+        "test": "yarn lint && yarn jest",
         "test:watch": "yarn jest --watch",
         "lint": "yarn standard && (cd ./workspaces/demo-app-contracts && yarn lint)",
         "lint-fix": "yarn standard --fix --verbose",
