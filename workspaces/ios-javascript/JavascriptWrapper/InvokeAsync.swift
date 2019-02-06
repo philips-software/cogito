@@ -1,7 +1,7 @@
 import JavaScriptCore
 
-extension JSValue {
-    func invokeAsync(_ name: String, withArguments arguments: [Any], callback: @escaping AsyncCallback) {
+public extension JSValue {
+    public func invokeAsync(_ name: String, withArguments arguments: [Any], callback: @escaping AsyncCallback) {
         let onSuccess: @convention(block) (JSValue?) -> Void = { result in
             callback(nil, result!)
         }
@@ -17,6 +17,7 @@ extension JSValue {
     typealias AsyncCallback = (JavascriptError?, JSValue?) -> Void
     
     struct JavascriptError {
-        let message: String
+        public let message: String
     }
 }
+
