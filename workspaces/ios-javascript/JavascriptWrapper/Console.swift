@@ -1,7 +1,7 @@
 import JavaScriptCore
 
-extension JSContext {
-    func addConsole() -> JSContext {
+public extension JSContext {
+    public func addConsole() -> JSContext {
         let console = JSValue(newObjectIn: self)!
         console.setValue(log, forProperty: "log")
         globalObject.setValue(console, forProperty: "console")
@@ -12,3 +12,4 @@ extension JSContext {
 private let log: @convention(block) (String) -> Void = { message in
     print(message)
 }
+

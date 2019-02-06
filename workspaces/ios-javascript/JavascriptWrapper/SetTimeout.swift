@@ -1,7 +1,7 @@
 import JavaScriptCore
 
-extension JSContext {
-    func addSetTimeout() -> JSContext {
+public extension JSContext {
+    public func addSetTimeout() -> JSContext {
         self.globalObject.setValue(setTimeout, forProperty: "setTimeout")
         return self
     }

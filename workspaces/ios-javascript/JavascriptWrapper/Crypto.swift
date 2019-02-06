@@ -1,12 +1,14 @@
 import JavaScriptCore
 
-extension JSContext {
-    func addCrypto() -> JSContext {
+public extension JSContext {
+    public func addCrypto() -> JSContext {
         let crypto = JSValue(newObjectIn: self)!
         crypto.setValue(randomBytes, forProperty: "randomBytes")
         globalObject.setValue(crypto, forProperty: "crypto")
-        return load(filename: "crypto")
+        return load(bundle: Bundle(for: Crypto.self), filename: "crypto")
     }
+    
+    private class Crypto {}
 }
 
 private let randomBytes: @convention(block) (Int) -> [UInt8] = { amount in

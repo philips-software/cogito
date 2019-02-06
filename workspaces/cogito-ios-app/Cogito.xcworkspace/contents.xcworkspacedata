@@ -10,4 +10,7 @@
    <FileRef
       location = "group:Pods/../../ethers-ios/Ethers.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:../ios-javascript/JavascriptWrapper.xcodeproj">
+   </FileRef>
 </Workspace>
