@@ -21,7 +21,7 @@
     "cogito-faucet": "./bin/cogito-faucet.js"
   },
   "devDependencies": {
-    "ganache-cli": "^6.1.8",
+    "ganache-cli": "^6.3.0",
     "mock-fs": "^4.7.0",
     "supertest": "^3.3.0"
   },
