@@ -131,6 +131,19 @@ class EthersSpec: QuickSpec {
                 it("throws when decryption fails") {
                     expect { try decrypt(json: "invalid", password: password) }.to(throwError())
                 }
+
+                it("reports progress") {
+                    var progress: Float = 0
+                    waitUntil { done in
+                        wallet.encrypt(
+                            password: password,
+                            options: options,
+                            onProgress: { progress = $0 },
+                            onComplete: { _, _ in done() }
+                        )
+                    }
+                    expect(progress) == 1.0
+                }
             }
         }
     }
