@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bHl-rf-6fF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bHl-rf-6fF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -104,28 +105,20 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VW-9w-gSg">
-                                <rect key="frame" x="158.5" y="313.5" width="58" height="36"/>
+                                <rect key="frame" x="158.5" y="314" width="58" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Create"/>
                                 <connections>
                                     <action selector="createTapped" destination="aui-nC-Exo" eventType="touchUpInside" id="o8N-Xs-26a"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(this will be private, only you will see this)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMn-Ao-KRC">
-                                <rect key="frame" x="69.5" y="246" width="236" height="15"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Qvy-nl-rbr" firstAttribute="leading" secondItem="N15-uF-45j" secondAttribute="leading" constant="16" id="0iK-lt-bf4"/>
-                            <constraint firstItem="0VW-9w-gSg" firstAttribute="top" secondItem="YMn-Ao-KRC" secondAttribute="bottom" constant="53" id="4Xg-El-OaH"/>
                             <constraint firstItem="0VW-9w-gSg" firstAttribute="centerX" secondItem="NOX-NN-kCf" secondAttribute="centerX" id="EST-PN-Nkk"/>
-                            <constraint firstItem="YMn-Ao-KRC" firstAttribute="centerX" secondItem="NOX-NN-kCf" secondAttribute="centerX" id="RQs-rf-KNg"/>
+                            <constraint firstItem="0VW-9w-gSg" firstAttribute="top" secondItem="Qvy-nl-rbr" secondAttribute="bottom" constant="76" id="GDX-Aw-L5q"/>
                             <constraint firstItem="CeB-9W-OFi" firstAttribute="top" secondItem="N15-uF-45j" secondAttribute="top" constant="70" id="SMY-5q-Hku"/>
-                            <constraint firstItem="YMn-Ao-KRC" firstAttribute="top" secondItem="Qvy-nl-rbr" secondAttribute="bottom" constant="8" id="exE-2X-z2x"/>
                             <constraint firstItem="Qvy-nl-rbr" firstAttribute="top" secondItem="CeB-9W-OFi" secondAttribute="bottom" constant="53" id="fag-jr-ziu"/>
                             <constraint firstItem="N15-uF-45j" firstAttribute="trailing" secondItem="Qvy-nl-rbr" secondAttribute="trailing" constant="16" id="ffG-TQ-ky4"/>
                             <constraint firstItem="CeB-9W-OFi" firstAttribute="centerX" secondItem="NOX-NN-kCf" secondAttribute="centerX" id="nWR-BM-d6R"/>

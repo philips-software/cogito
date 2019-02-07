@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Ol-B3-zM5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Ol-B3-zM5">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -88,7 +88,7 @@ Cogito allows you to choose who you are.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Describe your first &quot;you&quot;:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZV0-kh-bRm">
-                                <rect key="frame" x="92" y="134" width="192" height="21"/>
+                                <rect key="frame" x="91.5" y="134" width="192" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -104,29 +104,21 @@ Cogito allows you to choose who you are.</string>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hC8-Yl-N8c">
-                                <rect key="frame" x="158.5" y="313.5" width="58" height="36"/>
+                                <rect key="frame" x="158.5" y="314" width="58" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Create"/>
                                 <connections>
                                     <action selector="createTapped" destination="wTc-Hd-r6m" eventType="touchUpInside" id="97G-YY-LJM"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(this will be private, only you will see this)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxo-zM-d1I">
-                                <rect key="frame" x="69.5" y="246" width="236" height="15"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bxo-zM-d1I" firstAttribute="centerX" secondItem="YQZ-hK-7D4" secondAttribute="centerX" id="0p3-Of-4Hc"/>
                             <constraint firstItem="hC8-Yl-N8c" firstAttribute="centerX" secondItem="YQZ-hK-7D4" secondAttribute="centerX" id="5Q8-NV-AaB"/>
-                            <constraint firstItem="hC8-Yl-N8c" firstAttribute="top" secondItem="bxo-zM-d1I" secondAttribute="bottom" constant="53" id="7we-o0-eJe"/>
                             <constraint firstItem="ZV0-kh-bRm" firstAttribute="centerX" secondItem="YQZ-hK-7D4" secondAttribute="centerX" id="FZp-gK-eYV"/>
+                            <constraint firstItem="hC8-Yl-N8c" firstAttribute="top" secondItem="BaB-Qh-vRu" secondAttribute="bottom" constant="76" id="KKG-0O-cOg"/>
                             <constraint firstItem="BaB-Qh-vRu" firstAttribute="leading" secondItem="LKO-n4-gnX" secondAttribute="leading" constant="16" id="OZL-Ah-acc"/>
                             <constraint firstItem="ZV0-kh-bRm" firstAttribute="top" secondItem="LKO-n4-gnX" secondAttribute="top" constant="70" id="Xd4-a5-wpf"/>
-                            <constraint firstItem="bxo-zM-d1I" firstAttribute="top" secondItem="BaB-Qh-vRu" secondAttribute="bottom" constant="8" id="c3W-Gb-BuZ"/>
                             <constraint firstItem="BaB-Qh-vRu" firstAttribute="top" secondItem="ZV0-kh-bRm" secondAttribute="bottom" constant="53" id="cBn-CC-RQm"/>
                             <constraint firstItem="LKO-n4-gnX" firstAttribute="trailing" secondItem="BaB-Qh-vRu" secondAttribute="trailing" constant="16" id="eMX-w0-gY7"/>
                         </constraints>
