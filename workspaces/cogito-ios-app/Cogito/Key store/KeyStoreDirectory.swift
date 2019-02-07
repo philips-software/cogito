@@ -12,6 +12,15 @@ extension KeyStoreDirectory {
 }
 
 extension KeyStoreDirectory {
+    func create() throws {
+        if !FileManager.default.fileExists(atPath: url.path) {
+            try FileManager.default.createDirectory(
+                at: url,
+                withIntermediateDirectories: true,
+                attributes: nil
+            )
+        }
+    }
     func delete() throws {
         if FileManager.default.fileExists(atPath: url.path) {
             try FileManager.default.removeItem(at: url)
