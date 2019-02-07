@@ -1,6 +1,6 @@
 {
   "name": "Telepath",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "homepage": "https://cogito.mobi",
   "authors": "The Telepath authors",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/philips-software/cogito.git",
-    "tag": "0.1.0"
+    "tag": "0.2.0"
   },
   "source_files": "Telepath/**/*.swift",
   "dependencies": {
@@ -19,6 +19,9 @@
     ],
     "base64url": [
       "~> 1.0"
+    ],
+    "Socket.IO-Client-Swift": [
+      "~> 13.3"
     ]
   }
 }

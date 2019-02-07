@@ -27,6 +27,7 @@ class TelepathHandler {
             return false
         }
         self.channel = channel
+        channel.notify(message: "I scanned the QR code!")
         return true
     }
 
