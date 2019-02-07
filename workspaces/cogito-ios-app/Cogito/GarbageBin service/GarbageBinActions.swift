@@ -10,8 +10,4 @@ struct GarbageBinActions {
     struct Delete: Action {
         let key: String
     }
-
-    struct Get: Action {
-        let key: String
-    }
 }
