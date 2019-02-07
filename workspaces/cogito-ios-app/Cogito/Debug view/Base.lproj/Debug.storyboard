@@ -138,7 +138,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7OW-sz-nkP">
-                                <rect key="frame" x="137" y="270" width="46" height="30"/>
+                                <rect key="frame" x="137" y="234" width="46" height="30"/>
                                 <state key="normal" title="Create"/>
                                 <connections>
                                     <action selector="createTapped" destination="3az-Sw-11m" eventType="touchUpInside" id="Sam-AU-jee"/>
@@ -158,19 +158,27 @@
                                     <action selector="cancelTapped" destination="3az-Sw-11m" eventType="touchUpInside" id="PTI-30-J8b"/>
                                 </connections>
                             </button>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qYU-wa-0ps">
+                                <rect key="frame" x="85" y="274" width="150" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="Ckq-MX-aew"/>
+                                </constraints>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="7OW-sz-nkP" firstAttribute="centerX" secondItem="ecr-8f-LU9" secondAttribute="centerX" id="2tH-pe-5fN"/>
                             <constraint firstItem="y8H-LX-7mp" firstAttribute="top" secondItem="tgR-KK-H6i" secondAttribute="bottom" constant="53" id="4gu-tu-RYc"/>
                             <constraint firstItem="tgR-KK-H6i" firstAttribute="centerX" secondItem="ecr-8f-LU9" secondAttribute="centerX" id="5h8-hh-BMB"/>
-                            <constraint firstItem="7OW-sz-nkP" firstAttribute="top" secondItem="y8H-LX-7mp" secondAttribute="bottom" constant="76" id="9V6-rK-FMu"/>
+                            <constraint firstItem="7OW-sz-nkP" firstAttribute="top" secondItem="y8H-LX-7mp" secondAttribute="bottom" constant="40" id="9V6-rK-FMu"/>
                             <constraint firstItem="tgR-KK-H6i" firstAttribute="top" secondItem="gdd-5a-FBe" secondAttribute="top" constant="70" id="BzB-rH-1Jt"/>
                             <constraint firstItem="y8H-LX-7mp" firstAttribute="leading" secondItem="gdd-5a-FBe" secondAttribute="leading" constant="16" id="D6I-Ke-mET"/>
                             <constraint firstItem="Sbb-dk-kin" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ecr-8f-LU9" secondAttribute="leading" constant="20" symbolic="YES" id="Jbw-ym-Yoa"/>
                             <constraint firstItem="gdd-5a-FBe" firstAttribute="trailing" secondItem="y8H-LX-7mp" secondAttribute="trailing" constant="16" id="Lrq-xO-oLx"/>
+                            <constraint firstItem="qYU-wa-0ps" firstAttribute="top" secondItem="7OW-sz-nkP" secondAttribute="bottom" constant="10" id="Ms1-di-W7e"/>
                             <constraint firstItem="gdd-5a-FBe" firstAttribute="trailing" secondItem="Sbb-dk-kin" secondAttribute="trailing" constant="16" id="iQW-71-3cG"/>
                             <constraint firstItem="Sbb-dk-kin" firstAttribute="top" secondItem="gdd-5a-FBe" secondAttribute="top" id="tLu-b2-2QG"/>
+                            <constraint firstItem="qYU-wa-0ps" firstAttribute="centerX" secondItem="gdd-5a-FBe" secondAttribute="centerX" id="z5f-ra-2rK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gdd-5a-FBe"/>
                     </view>
@@ -181,6 +189,7 @@
                         <outlet property="closeButton" destination="Sbb-dk-kin" id="SbL-6Y-PpQ"/>
                         <outlet property="createButton" destination="7OW-sz-nkP" id="Djr-N7-Iq0"/>
                         <outlet property="descriptionField" destination="y8H-LX-7mp" id="4Kg-et-7Ax"/>
+                        <outlet property="progressView" destination="qYU-wa-0ps" id="Gtd-xB-G8z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OCd-h8-hRx" userLabel="First Responder" sceneMemberID="firstResponder"/>
