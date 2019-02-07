@@ -27,7 +27,7 @@ struct GarbageBinService: TelepathService {
 
             case "getValueForKey":
                 if let value = store.state.garbage.bin[key] {
-                    store.dispatch(GarbageBinActions.Add(key: key, value: value))
+                    store.dispatch(TelepathActions.Send(id: request.id, result: value, on: channel))
                 } else {
                     store.dispatch(TelepathActions.Send(
                         id: request.id,
@@ -37,6 +37,7 @@ struct GarbageBinService: TelepathService {
             case "deleteKey":
                 if store.state.garbage.bin[key] != nil {
                     store.dispatch(GarbageBinActions.Delete(key: key))
+                    store.dispatch(TelepathActions.Send(id: request.id, result: "success", on: channel))
                 } else {
                     store.dispatch(TelepathActions.Send(id: request.id,
                         error: GarbageBinError.noKeyInStore,
