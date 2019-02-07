@@ -1,5 +1,6 @@
 import Foundation
 import ReSwift
+import SwiftyJSON
 
 struct GarbageBinService: TelepathService {
     let store: Store<AppState>
@@ -26,13 +27,10 @@ struct GarbageBinService: TelepathService {
                 }
 
             case "getValueForKey":
-                if let value = store.state.garbage.bin[key] {
+                if let value = store.state.garbage.valueForKey(key: key) {
                     store.dispatch(TelepathActions.Send(id: request.id, result: value, on: channel))
                 } else {
-                    store.dispatch(TelepathActions.Send(
-                        id: request.id,
-                        error: GarbageBinError.noValueForKey,
-                        on: channel))
+                    store.dispatch(TelepathActions.Send(id: request.id, result: JSON.null, on: channel))
                 }
             case "deleteKey":
                 if store.state.garbage.bin[key] != nil {

@@ -1,6 +1,7 @@
 import Quick
 import Nimble
 import Geth
+import SwiftyJSON
 @testable import Cogito
 
 class GarbageBinStateSpec: QuickSpec {
@@ -39,16 +40,13 @@ class GarbageBinStateSpec: QuickSpec {
             ])
             expect(state.valueForKey(key: key)) == value
         }
-//
-//        it("cannot find a non-existing identity") {
-//            let state = DiamondState(facets: [])
-//            expect(state.findIdentity(address: identity0.address)).to(beNil())
-//        }
-//
-//        it("finding matches case insensitive") {
-//            let state = DiamondState(facets: [identity0])
-//            let address = Address(fromHex: identity0.address.value.uppercased())!
-//            expect(state.findIdentity(address: address)) == identity0
-//        }
+
+        it("simply returns null when there is no requested key in the bin") {
+            let key = UUID().uuidString
+            let value = "some value"
+            let state = GarbageBinState(bin: [key: value])
+
+            expect(state.valueForKey(key: "doesNotExist")).to(beNil())
+        }
     }
 }
