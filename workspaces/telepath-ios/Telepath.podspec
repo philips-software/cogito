@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'Telepath'
-  spec.version = '0.1.0'
+  spec.version = '0.2.0'
   spec.license = 'MIT'
   spec.homepage = 'https://cogito.mobi'
   spec.authors = 'The Telepath authors'
@@ -13,4 +13,5 @@ Pod::Spec.new do |spec|
   spec.source_files = 'Telepath/**/*.swift'
   spec.dependency 'Sodium', '~> 0.6'
   spec.dependency 'base64url', '~> 1.0'
+  spec.dependency 'Socket.IO-Client-Swift', '~> 13.3'
 end

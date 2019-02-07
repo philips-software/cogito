@@ -10,10 +10,17 @@ class SecureChannelSpec: QuickSpec {
 
         var channel: SecureChannel!
         var queuing: QueuingServiceMock!
+        var socketIOService: SocketIOServiceMock!
+        var notificationsSpy: NotificationsSpy!
 
         beforeEach {
             queuing = QueuingServiceMock()
-            channel = SecureChannel(queuing: queuing, id: channelId, key: channelKey, appName: appName)
+            socketIOService = SocketIOServiceMock()
+            notificationsSpy = NotificationsSpy()
+            channel = SecureChannel(
+                queuing: queuing, socketIOService: socketIOService,
+                onNotification: notificationsSpy.onNotification,
+                id: channelId, key: channelKey, appName: appName)
         }
 
         context("when sending a message") {
@@ -103,5 +110,31 @@ class SecureChannelSpec: QuickSpec {
                 }
             }
         }
+
+        describe("notifications") {
+            let message = "plain text message"
+
+            it("encrypts the payload") {
+                channel.notify(message: message)
+                let cypherText = socketIOService.latestSentMessage!
+                let plainText = try! channelKey.decrypt(cypherText: cypherText)
+                expect(String(data: plainText, encoding: .utf8)) == message
+            }
+
+            it("decrypts and forwards incoming notifications") {
+                let plainText = message.data(using: .utf8)!
+                let cypherText = channelKey.encrypt(plainText: plainText)
+                socketIOService.fakeIncomingNotification(data: cypherText)
+                expect(notificationsSpy.lastReceivedNotification) == message
+            }
+        }
+    }
+}
+
+class NotificationsSpy {
+    var lastReceivedNotification: String?
+
+    func onNotification(message: String) {
+        lastReceivedNotification = message
     }
 }

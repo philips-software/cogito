@@ -1,21 +1,29 @@
 import Sodium
+import SocketIO
 
 public struct SecureChannel {
     public let id: ChannelID
     public let appName: String
 
     var queuing: QueuingService
+    let socketIOService: SocketIOService
     let key: ChannelKey
     let receivingQueue: QueueID
     let sendingQueue: QueueID
+    let notificationHandler: NotificationHandler?
 
-    init(queuing: QueuingService, id: ChannelID, key: ChannelKey, appName: String) {
+    init(queuing: QueuingService, socketIOService: SocketIOService,
+         onNotification: NotificationHandler?,
+         id: ChannelID, key: ChannelKey, appName: String) {
         self.queuing = queuing
+        self.socketIOService = socketIOService
+        self.notificationHandler = onNotification
         self.key = key
         self.id = id
         self.appName = appName
         self.receivingQueue = id + ".red"
         self.sendingQueue = id + ".blue"
+        socketIOService.start(onNotification: onEncryptedNotification)
     }
 
     public mutating func invalidate() {
@@ -50,6 +58,20 @@ public struct SecureChannel {
             }
             completion(String(data: plainText, encoding: .utf8), nil)
         }
+    }
+
+    public func notify(message: String) {
+        let plainText = message.data(using: .utf8)!
+        let cypherText = key.encrypt(plainText: plainText)
+        socketIOService.notify(data: cypherText)
+    }
+
+    func onEncryptedNotification(data: Data) {
+        guard let plainText = try? self.key.decrypt(cypherText: data),
+              let message = String(data: plainText, encoding: .utf8) else {
+            return
+        }
+        notificationHandler?(message)
     }
 
     enum Failure: Error {
