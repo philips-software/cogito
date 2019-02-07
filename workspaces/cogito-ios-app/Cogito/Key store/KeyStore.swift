@@ -31,12 +31,15 @@ class KeyStore: Codable {
         wrapped = nil
     }
 
-    func newAccount(onComplete: @escaping (_ address: Address?, _ error: String?) -> Void) {
+    func newAccount(
+        onProgress: @escaping (_ progress: Float) -> Void = { _ in },
+        onComplete: @escaping (_ address: Address?, _ error: String?) -> Void
+    ) {
         appPassword.use { (maybePassword, error) in
             if let password = maybePassword {
                 let wallet = Wallet.createRandom()
                 let options = [ "scrypt": [ "N": self.scryptN, "p": self.scryptP ] ]
-                wallet.encrypt(password: password, options: options) { _, encrypted in
+                wallet.encrypt(password: password, options: options, onProgress: onProgress) { _, encrypted in
                     guard let encrypted = encrypted else {
                         onComplete(nil, "unable to encrypt wallet")
                         return

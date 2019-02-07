@@ -14,6 +14,8 @@ func createIdentityReducer(action: Action, state: CreateIdentityState?) -> Creat
         state.pending = true
         state.newAddress = nil
         state.error = nil
+    case let action as CreateIdentityActions.Progress:
+        state.progress = action.progress
     case let action as CreateIdentityActions.Fulfilled:
         state.newAddress = action.address
         state.pending = false
