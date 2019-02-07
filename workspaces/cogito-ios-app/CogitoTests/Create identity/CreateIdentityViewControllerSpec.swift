@@ -16,10 +16,12 @@ class CreateIdentityViewControllerSpec: QuickSpec {
 
         func createIdentityState(description: String = "",
                                  pending: Bool = false,
+                                 progress: Float = 0,
                                  newAddress: Address? = nil,
                                  error: String? = nil) -> CreateIdentityState {
             return CreateIdentityState(description: description,
                                        pending: pending,
+                                       progress: progress,
                                        newAddress: newAddress,
                                        error: error)
         }
@@ -37,6 +39,24 @@ class CreateIdentityViewControllerSpec: QuickSpec {
             let state = appState(createIdentity: createIdentityState(description: "me"))
             viewController.connection.newState(state: state)
             expect(viewController.descriptionField.text) == "me"
+        }
+
+        it("hides the progress when not pending") {
+            let state = appState(createIdentity: createIdentityState(pending: false))
+            viewController.connection.newState(state: state)
+            expect(viewController.progressView.isHidden) == true
+        }
+
+        it("shows the progress when pending") {
+            let state = appState(createIdentity: createIdentityState(pending: true))
+            viewController.connection.newState(state: state)
+            expect(viewController.progressView.isHidden) == false
+        }
+
+        it("shows the progress percentage") {
+            let state = appState(createIdentity: createIdentityState(progress: 0.42))
+            viewController.connection.newState(state: state)
+            expect(viewController.progressView.progress) == 0.42
         }
 
         it("triggers action when editing ends") {

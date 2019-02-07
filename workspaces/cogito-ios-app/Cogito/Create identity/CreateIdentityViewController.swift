@@ -7,6 +7,7 @@ class CreateIdentityViewController: UIViewController, Connectable {
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var closeButton: UIButton?
+    @IBOutlet weak var progressView: UIProgressView!
 
     @IBInspectable var showCloseButton: Bool = false {
         didSet {
@@ -20,6 +21,8 @@ class CreateIdentityViewController: UIViewController, Connectable {
         super.viewDidLoad()
         connection.bind(\Props.description, to: createButton.rx.isEnabled) { $0 != "" }
         connection.bind(\Props.description, to: descriptionField.rx.text)
+        connection.bind(\Props.pending, to: progressView.rx.isHidden) { !$0 }
+        connection.bind(\Props.progress, to: progressView.rx.progress)
         connection.subscribe(\Props.fulfilled) { [unowned self] fulfilled in
             if fulfilled {
                 self.onDone()
@@ -74,6 +77,7 @@ class CreateIdentityViewController: UIViewController, Connectable {
     struct Props {
         let description: String
         let pending: Bool
+        let progress: Float
         let fulfilled: Bool
         let error: String?
     }
@@ -90,6 +94,7 @@ private func mapStateToProps(state: AppState) -> CreateIdentityViewController.Pr
     return CreateIdentityViewController.Props(
         description: state.createIdentity.description,
         pending: state.createIdentity.pending,
+        progress: state.createIdentity.progress,
         fulfilled: state.createIdentity.newAddress != nil,
         error: state.createIdentity.error
     )

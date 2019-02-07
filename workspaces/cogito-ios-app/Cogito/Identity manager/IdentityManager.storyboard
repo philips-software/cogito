@@ -105,19 +105,27 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VW-9w-gSg">
-                                <rect key="frame" x="158.5" y="314" width="58" height="36"/>
+                                <rect key="frame" x="158.5" y="278" width="58" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Create"/>
                                 <connections>
                                     <action selector="createTapped" destination="aui-nC-Exo" eventType="touchUpInside" id="o8N-Xs-26a"/>
                                 </connections>
                             </button>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="H4h-qm-LRk">
+                                <rect key="frame" x="112.5" y="324" width="150" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="dIF-f2-x7k"/>
+                                </constraints>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Qvy-nl-rbr" firstAttribute="leading" secondItem="N15-uF-45j" secondAttribute="leading" constant="16" id="0iK-lt-bf4"/>
+                            <constraint firstItem="H4h-qm-LRk" firstAttribute="top" secondItem="0VW-9w-gSg" secondAttribute="bottom" constant="10" id="3ml-z7-zLg"/>
+                            <constraint firstItem="H4h-qm-LRk" firstAttribute="centerX" secondItem="N15-uF-45j" secondAttribute="centerX" id="4ZM-bz-Qd2"/>
                             <constraint firstItem="0VW-9w-gSg" firstAttribute="centerX" secondItem="NOX-NN-kCf" secondAttribute="centerX" id="EST-PN-Nkk"/>
-                            <constraint firstItem="0VW-9w-gSg" firstAttribute="top" secondItem="Qvy-nl-rbr" secondAttribute="bottom" constant="76" id="GDX-Aw-L5q"/>
+                            <constraint firstItem="0VW-9w-gSg" firstAttribute="top" secondItem="Qvy-nl-rbr" secondAttribute="bottom" constant="40" id="GDX-Aw-L5q"/>
                             <constraint firstItem="CeB-9W-OFi" firstAttribute="top" secondItem="N15-uF-45j" secondAttribute="top" constant="70" id="SMY-5q-Hku"/>
                             <constraint firstItem="Qvy-nl-rbr" firstAttribute="top" secondItem="CeB-9W-OFi" secondAttribute="bottom" constant="53" id="fag-jr-ziu"/>
                             <constraint firstItem="N15-uF-45j" firstAttribute="trailing" secondItem="Qvy-nl-rbr" secondAttribute="trailing" constant="16" id="ffG-TQ-ky4"/>
@@ -131,6 +139,7 @@
                     <connections>
                         <outlet property="createButton" destination="0VW-9w-gSg" id="N5x-Fn-dTj"/>
                         <outlet property="descriptionField" destination="Qvy-nl-rbr" id="pXk-rg-Y6R"/>
+                        <outlet property="progressView" destination="H4h-qm-LRk" id="ar0-d9-qi6"/>
                     </connections>
                 </viewController>
                 <barButtonItem systemItem="cancel" id="cCk-tu-fdh"/>

@@ -1,12 +1,14 @@
 struct CreateIdentityState: Codable {
     var description: String
     var pending: Bool
+    var progress: Float
     var newAddress: Address?
     var error: String?
 
-    init(description: String, pending: Bool, newAddress: Address?, error: String?) {
+    init(description: String, pending: Bool, progress: Float = 0, newAddress: Address?, error: String?) {
         self.description = description
         self.pending = pending
+        self.progress = progress
         self.newAddress = newAddress
         self.error = error
     }
@@ -15,6 +17,7 @@ struct CreateIdentityState: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         description = try container.decode(String.self, forKey: .description)
         pending = false
+        progress = 0
         newAddress = nil
         error = nil
     }
