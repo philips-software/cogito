@@ -1,9 +1,13 @@
 PODS:
-  - base64url (1.0.0)
+  - base64url (1.0.1)
+  - Socket.IO-Client-Swift (13.4.0):
+    - Starscream (~> 3.0.2)
   - Sodium (0.7.0)
-  - SwiftyJSON (4.1.0)
-  - Telepath (0.1.0):
+  - Starscream (3.0.6)
+  - SwiftyJSON (4.2.0)
+  - Telepath (0.2.0):
     - base64url (~> 1.0)
+    - Socket.IO-Client-Swift (~> 13.3)
     - Sodium (~> 0.6)
 
 DEPENDENCIES:
@@ -14,6 +18,8 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - base64url
+    - Socket.IO-Client-Swift
+    - Starscream
     - SwiftyJSON
 
 EXTERNAL SOURCES:
@@ -25,15 +31,17 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Sodium:
-    :commit: 8d2e6302f9589f0e9ad5c5920afa0fc0e943dd8a
+    :commit: f010f9e85065d818e84ba3680e4669107c9afb41
     :git: https://github.com/jedisct1/swift-sodium.git
 
 SPEC CHECKSUMS:
-  base64url: 5b31be020705fcbedf88ef82af8039ce5c8c25de
+  base64url: f570aaf9520657b63edb7414dcf8496c4d864326
+  Socket.IO-Client-Swift: 2b2720f14c92ff1237ced09bc2f2da2022624fee
   Sodium: c5510cc6f5e1b27858e5f260b5cac80d4a3f9379
-  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
-  Telepath: b84e1b4e4550bfc3f579be84d9302125ecbdc3b8
+  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  Telepath: fb253c156ed60cad62695b52c93f1aabb1b77138
 
 PODFILE CHECKSUM: 292d76d2e07e4233559b74d7d7f444a6c0b7b40a
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.rc.2
