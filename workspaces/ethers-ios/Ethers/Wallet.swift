@@ -50,9 +50,11 @@ public class Wallet {
     public func encrypt(
         password: String,
         options: [String: Any?] = [:],
-        onComplete: @escaping EncryptCallback
+        onProgress: @escaping ProgressCallback = { _ in },
+        onComplete: @escaping EncryptCallback = { _,_  in }
     ) {
-        javascriptValue.invokeAsync("encrypt", withArguments: [password, options]) {
+        let progress = convertProgressCallback(callback: onProgress)
+        javascriptValue.invokeAsync("encrypt", withArguments: [password, options, progress]) {
             (error, encrypted) in
             if let error = error {
                 onComplete(WalletError.EncryptError(message: error.message), nil)
@@ -62,9 +64,17 @@ public class Wallet {
         }
     }
 
+    private func convertProgressCallback(callback: @escaping ProgressCallback) -> AnyObject {
+        let jsCallback: @convention(block) (JSValue?) -> Void = {
+            callback($0!.toNumber()!.floatValue)
+        }
+        return unsafeBitCast(jsCallback, to: AnyObject.self)
+    }
+
     public typealias SignCallback = (WalletError?, SignedTransaction?) -> Void
     public typealias EncryptCallback = (WalletError?, EncryptedWallet?) -> Void
     public typealias DecryptCallback = (WalletError?, Wallet?) -> Void
+    public typealias ProgressCallback = (Float) -> Void
 }
 
 public typealias SignedTransaction = String
