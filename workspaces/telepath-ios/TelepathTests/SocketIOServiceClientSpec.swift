@@ -43,7 +43,7 @@ class SocketIOServiceClientSpec: QuickSpec {
                 expect(socket.handlers).to(haveCount(0))
             }
 
-            fit("can send notifications") {
+            it("can send notifications") {
                 let data = Data(bytes: [1, 2, 3, 4])
                 let base64EncodedData = data.base64EncodedString()
                 client.notify(data: data)
