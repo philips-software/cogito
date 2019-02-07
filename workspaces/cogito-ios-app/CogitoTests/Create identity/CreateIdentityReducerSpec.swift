@@ -35,6 +35,12 @@ class CreateIdentityReducerSpec: QuickSpec {
             expect(nextState.error).to(beNil())
         }
 
+        it("handles Progress") {
+            let action = CreateIdentityActions.Progress(progress: 0.42)
+            let state = createIdentityReducer(action: action, state: nil)
+            expect(state.progress) == 0.42
+        }
+
         it("handles Fulfilled") {
             let state = CreateIdentityState(description: "me",
                                             pending: true,

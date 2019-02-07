@@ -76,7 +76,10 @@ private class KeyStoreMock: KeyStore {
     var newAccountReturn: Address?
     var newAccountError: String?
 
-    override func newAccount(onComplete: @escaping (_ address: Address?, _ error: String?) -> Void) {
+    override func newAccount(
+        onProgress: @escaping (_ progress: Float) -> Void = { _ in },
+        onComplete: @escaping (_ address: Address?, _ error: String?) -> Void
+    ) {
         newAccountCallCount += 1
         DispatchQueue.global().async { [unowned self] in
             onComplete(self.newAccountReturn, self.newAccountError)

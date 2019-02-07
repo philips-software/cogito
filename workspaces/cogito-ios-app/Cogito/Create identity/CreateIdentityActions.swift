@@ -21,7 +21,10 @@ struct CreateIdentityActions {
                 dispatch(Rejected(message: "key store not found"))
                 return
             }
-            keyStore.newAccount { (address, error) in
+            func progressHandler(progress: Float) {
+                dispatch(Progress(progress: progress))
+            }
+            keyStore.newAccount(onProgress: progressHandler) { (address, error) in
                 guard let address = address else {
                     dispatch(Rejected(message: error ?? "failed to create account"))
                     return
@@ -41,5 +44,8 @@ struct CreateIdentityActions {
     }
     struct Fulfilled: Action {
         let address: Address
+    }
+    struct Progress: Action {
+        let progress: Float
     }
 }
