@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0291A400220C436B00AFC6D6 /* SocketIOService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291A3FF220C436B00AFC6D6 /* SocketIOService.swift */; };
+		0291A402220C43C400AFC6D6 /* SocketIOServiceClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291A401220C43C400AFC6D6 /* SocketIOServiceClientSpec.swift */; };
+		0291A404220C43CF00AFC6D6 /* SocketIOServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291A403220C43CF00AFC6D6 /* SocketIOServiceClient.swift */; };
+		0291A406220C728600AFC6D6 /* SocketIOServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291A405220C728600AFC6D6 /* SocketIOServiceMock.swift */; };
 		454975F1243813271C739FA9 /* Pods_Telepath_TelepathTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4BF1752A35E8B846AEDDF /* Pods_Telepath_TelepathTests.framework */; };
 		52EA394D90FA1BD55FD6D7D0 /* Pods_Telepath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893E0DFF64A9DA89C3F0EB6A /* Pods_Telepath.framework */; };
 		5C3C1D541F7BBFCE001E5563 /* UrlCodecSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C1D531F7BBFCE001E5563 /* UrlCodecSpec.swift */; };
@@ -40,10 +44,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0291A3FF220C436B00AFC6D6 /* SocketIOService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOService.swift; sourceTree = "<group>"; };
+		0291A401220C43C400AFC6D6 /* SocketIOServiceClientSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOServiceClientSpec.swift; sourceTree = "<group>"; };
+		0291A403220C43CF00AFC6D6 /* SocketIOServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOServiceClient.swift; sourceTree = "<group>"; };
+		0291A405220C728600AFC6D6 /* SocketIOServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOServiceMock.swift; sourceTree = "<group>"; };
 		22F4BF1752A35E8B846AEDDF /* Pods_Telepath_TelepathTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telepath_TelepathTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3282E434BDF2C5AEABE3548D /* Pods-Telepath.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath/Pods-Telepath.debug.xcconfig"; sourceTree = "<group>"; };
 		50E96DB6A72961DE52059338 /* Pods-Telepath-TelepathTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath-TelepathTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests.release.xcconfig"; sourceTree = "<group>"; };
-		5C1AA3211F94FFC400697FE8 /* Telepath.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Telepath.podspec; sourceTree = "<group>"; };
+		5C1AA3211F94FFC400697FE8 /* Telepath.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = Telepath.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5C2F83F51F7E461500C8DD31 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		5C3C1D531F7BBFCE001E5563 /* UrlCodecSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlCodecSpec.swift; sourceTree = "<group>"; };
 		5C3C1D551F7BC159001E5563 /* UrlCodec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlCodec.swift; sourceTree = "<group>"; };
@@ -143,6 +151,8 @@
 				5C4048811F7E379700B19C9D /* ChannelKey.swift */,
 				5CAA828C1F7A909E0000A9D9 /* QueuingService.swift */,
 				5CD810F01F91074400CCD769 /* QueuingServiceClient.swift */,
+				0291A3FF220C436B00AFC6D6 /* SocketIOService.swift */,
+				0291A403220C43CF00AFC6D6 /* SocketIOServiceClient.swift */,
 				5CF32CFF1F7D4DA800F887F4 /* URL */,
 				5CF521CA1F78F4780004C494 /* Telepath.h */,
 				5CF521CB1F78F4780004C494 /* Info.plist */,
@@ -156,11 +166,13 @@
 				5CF521D51F78F4780004C494 /* TelepathSpec.swift */,
 				5C4048831F7E385C00B19C9D /* SecureChannelSpec.swift */,
 				5CD810EE1F91064800CCD769 /* QueuingServiceClientSpec.swift */,
+				0291A401220C43C400AFC6D6 /* SocketIOServiceClientSpec.swift */,
 				5CF32D001F7D4DC600F887F4 /* URL */,
 				5C4048851F7E3AB100B19C9D /* QueuingServiceMock.swift */,
 				5C4048871F7E3B1E00B19C9D /* ChannelKeyExample.swift */,
 				5CF521D71F78F4780004C494 /* Info.plist */,
 				5C2F83F51F7E461500C8DD31 /* .swiftlint.yml */,
+				0291A405220C728600AFC6D6 /* SocketIOServiceMock.swift */,
 			);
 			path = TelepathTests;
 			sourceTree = "<group>";
@@ -247,7 +259,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0930;
-				ORGANIZATIONNAME = Philips;
+				ORGANIZATIONNAME = "Koninklijke Philips Nederland N.V.";
 				TargetAttributes = {
 					5CF521C61F78F4780004C494 = {
 						CreatedOnToolsVersion = 9.0;
@@ -356,7 +368,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
@@ -381,7 +393,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -393,6 +405,8 @@
 			files = (
 				5CAA828D1F7A909E0000A9D9 /* QueuingService.swift in Sources */,
 				5C3C1D561F7BC159001E5563 /* UrlCodec.swift in Sources */,
+				0291A400220C436B00AFC6D6 /* SocketIOService.swift in Sources */,
+				0291A404220C43CF00AFC6D6 /* SocketIOServiceClient.swift in Sources */,
 				5CF756811F7CF9250088C2AD /* UrlParameterParser.swift in Sources */,
 				5CD810F11F91074400CCD769 /* QueuingServiceClient.swift in Sources */,
 				5C4048801F7E375000B19C9D /* SecureChannel.swift in Sources */,
@@ -410,7 +424,9 @@
 				5CD810EF1F91064800CCD769 /* QueuingServiceClientSpec.swift in Sources */,
 				5CF7567F1F7CF9110088C2AD /* UrlParameterParserSpec.swift in Sources */,
 				5C3C1D541F7BBFCE001E5563 /* UrlCodecSpec.swift in Sources */,
+				0291A406220C728600AFC6D6 /* SocketIOServiceMock.swift in Sources */,
 				5C4048881F7E3B1E00B19C9D /* ChannelKeyExample.swift in Sources */,
+				0291A402220C43C400AFC6D6 /* SocketIOServiceClientSpec.swift in Sources */,
 				5C4048861F7E3AB100B19C9D /* QueuingServiceMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
