@@ -1,5 +1,6 @@
 import Geth
 import BigInt
+import Ethers
 
 class KeyStore: Codable {
     let name: String
@@ -31,19 +32,27 @@ class KeyStore: Codable {
     }
 
     func newAccount(onComplete: @escaping (_ address: Address?, _ error: String?) -> Void) {
-        print("[debug] creating new account in key store at \(directory.url)")
-        guard let gethKeyStore = wrapped else {
-            onComplete(nil, "failed to open key store")
-            return
-        }
         appPassword.use { (maybePassword, error) in
             if let password = maybePassword {
-                do {
-                    let gethAccount = try gethKeyStore.newAccount(password)
-                    let address = Address(fromHex: gethAccount.getAddress()!.getHex())!
-                    onComplete(address, nil)
-                } catch let error {
-                    onComplete(nil, error.localizedDescription)
+                let wallet = Wallet.createRandom()
+                let options = [ "scrypt": [ "N": self.scryptN, "p": self.scryptP ] ]
+                wallet.encrypt(password: password, options: options) { _, encrypted in
+                    guard let encrypted = encrypted else {
+                        onComplete(nil, "unable to encrypt wallet")
+                        return
+                    }
+                    do {
+                        try self.directory.create()
+                        let path = self.directory.url.appendingPathComponent(wallet.address)
+                        try encrypted.write(
+                            to: path,
+                            atomically: false,
+                            encoding: .utf8
+                        )
+                        onComplete(Address(fromHex: wallet.address)!, nil)
+                    } catch let error as NSError {
+                        onComplete(nil, error.localizedDescription)
+                    }
                 }
             } else {
                 onComplete(nil, error)
