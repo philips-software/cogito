@@ -121,7 +121,6 @@
 		5C7C23941FA35093009E9CE7 /* TelepathDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C23931FA35093009E9CE7 /* TelepathDefaults.swift */; };
 		5C7C23981FA37CF9009E9CE7 /* ExampleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C23971FA37CF9009E9CE7 /* ExampleError.swift */; };
 		5C8CFD3E2007993500D383C0 /* JsonRpcRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8CFD3D2007993500D383C0 /* JsonRpcRequest.swift */; };
-		5C90206B220C32F100C83DF5 /* Ethers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C54A85B2199B0A40078DA36 /* Ethers.framework */; };
 		5C90206C220C32F100C83DF5 /* Ethers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C54A85B2199B0A40078DA36 /* Ethers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5C90206F220C331200C83DF5 /* JavascriptWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C90206E220C331200C83DF5 /* JavascriptWrapper.framework */; };
 		5C902070220C331200C83DF5 /* JavascriptWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5C90206E220C331200C83DF5 /* JavascriptWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -374,7 +373,6 @@
 			files = (
 				5C54A85C2199B0A40078DA36 /* Ethers.framework in Frameworks */,
 				C5BA5E19747B73A161EF0D57 /* Pods_Cogito.framework in Frameworks */,
-				5C90206B220C32F100C83DF5 /* Ethers.framework in Frameworks */,
 				5C90206F220C331200C83DF5 /* JavascriptWrapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -958,7 +956,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Koninklijke Philips Nederland N.V.";
 				TargetAttributes = {
 					027603EA1F6ACD1600788B0A = {
