@@ -13,8 +13,8 @@ struct CreateIdentityActions {
         let description: String
     }
 
-    static func CreateIdentity() -> ThunkAction<AppState> {
-        return ThunkAction(action: { (dispatch, getState) in
+    static func CreateIdentity() -> Thunk<AppState> {
+        return Thunk { (dispatch, getState) in
             dispatch(Pending())
             guard let state = getState(),
                   let keyStore = state.keyStore.keyStore else {
@@ -32,7 +32,7 @@ struct CreateIdentityActions {
                 ))
                 dispatch(Fulfilled(address: address))
             }
-        })
+        }
     }
 
     struct Pending: Action {}

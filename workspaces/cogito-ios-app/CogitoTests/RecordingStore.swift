@@ -9,7 +9,7 @@ class RecordingStore: Store<AppState> {
         let reducer: Reducer<AppState> = { _, currentState in
             return currentState ?? state
         }
-        self.init(reducer: reducer, state: nil, middleware: [ThunkMiddleware()])
+        self.init(reducer: reducer, state: nil, middleware: [createThunksMiddleware()])
     }
 
     override func dispatch(_ action: Action) {
@@ -18,7 +18,7 @@ class RecordingStore: Store<AppState> {
     }
 
     func record(_ action: Action) {
-        if (action as? ThunkAction<AppState>) == nil && (action as? ReSwiftInit) == nil {
+        if (action as? Thunk<AppState>) == nil && (action as? ReSwiftInit) == nil {
             actions.append(action)
         }
     }

@@ -21,7 +21,7 @@ class AccountServiceSpec: QuickSpec {
             }
 
             it("dispatches the GetAccounts action") {
-                expect(store.actions.last as? ThunkAction<AppState>).toNot(beNil())
+                expect(store.actions.last as? Thunk<AppState>).toNot(beNil())
             }
         }
 
@@ -32,7 +32,7 @@ class AccountServiceSpec: QuickSpec {
             }
 
             it("is ignored") {
-                expect(store.actions.last as? ThunkAction<AppState>).to(beNil())
+                expect(store.actions.last as? Thunk<AppState>).to(beNil())
             }
         }
     }

@@ -1,8 +1,9 @@
 import ReSwift
+import ReSwiftThunk
 
 struct AttestationActions {
     // swiftlint:disable:next identifier_name
-    static func ReceiveAttestation(url: URL) -> Thunk {
+    static func ReceiveAttestation(url: URL) -> Thunk<AppState> {
         return Thunk { dispatch, getState in
             guard let attestationString = parseAttestationUrl(url: url),
                   let attestation = Attestation(string: attestationString) else {
@@ -18,7 +19,7 @@ struct AttestationActions {
     }
 
     // swiftlint:disable:next identifier_name
-    static func GetAttestations(type: String, requestId: JsonRpcId, channel: TelepathChannel) -> Thunk {
+    static func GetAttestations(type: String, requestId: JsonRpcId, channel: TelepathChannel) -> Thunk<AppState> {
         return Thunk { dispatch, getState in
             let attestations = getState()?.diamond.selectedFacet()?.attestations
             let selectedAttestations = attestations?.filter { $0.type == type } ?? []

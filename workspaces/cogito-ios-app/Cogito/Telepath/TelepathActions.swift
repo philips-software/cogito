@@ -5,8 +5,8 @@ import SwiftyJSON
 
 struct TelepathActions {
     // swiftlint:disable:next identifier_name
-    static func Connect(url: URL, for identity: Identity) -> ThunkAction<AppState> {
-        return ThunkAction { dispatch, _ in
+    static func Connect(url: URL, for identity: Identity) -> Thunk<AppState> {
+        return Thunk { dispatch, _ in
             do {
                 let channel = try TelepathChannel(connectUrl: url)
                 dispatch(Invalidate())
@@ -29,8 +29,8 @@ struct TelepathActions {
     }
 
     // swiftlint:disable:next identifier_name
-    static func Invalidate() -> ThunkAction<AppState> {
-        return ThunkAction { _, getState in
+    static func Invalidate() -> Thunk<AppState> {
+        return Thunk { _, getState in
             guard let channels = getState()?.telepath.channels else { return }
             for channel in channels.keys {
                 channel.invalidate()
@@ -39,8 +39,8 @@ struct TelepathActions {
     }
 
     // swiftlint:disable:next identifier_name
-    static func Receive() -> ThunkAction<AppState> {
-        return ThunkAction { dispatch, getState in
+    static func Receive() -> Thunk<AppState> {
+        return Thunk { dispatch, getState in
             guard let channels = getState()?.telepath.channels else { return }
             for channel in channels.keys {
                 channel.receive { message, error in
@@ -67,8 +67,8 @@ struct TelepathActions {
     struct ReceivedMessageHandled: Action {}
 
     // swiftlint:disable:next identifier_name
-    static func Send(message: String, on channel: TelepathChannel) -> ThunkAction<AppState> {
-        return ThunkAction { dispatch, _ in
+    static func Send(message: String, on channel: TelepathChannel) -> Thunk<AppState> {
+        return Thunk { dispatch, _ in
             dispatch(SendPending(message: message))
             channel.send(message: message) { error in
                 if let error = error {
@@ -83,8 +83,8 @@ struct TelepathActions {
     // swiftlint:disable:next identifier_name
     static func Send(id: JsonRpcId,
                      result: JSON,
-                     on channel: TelepathChannel) -> ThunkAction<AppState> {
-        return ThunkAction { dispatch, _ in
+                     on channel: TelepathChannel) -> Thunk<AppState> {
+        return Thunk { dispatch, _ in
             let response = JSON([
                 "jsonrpc": "2.0",
                 "id": id.object,
@@ -97,8 +97,8 @@ struct TelepathActions {
     // swiftlint:disable:next identifier_name
     static func Send(id: JsonRpcId,
                      result: String,
-                     on channel: TelepathChannel) -> ThunkAction<AppState> {
-        return ThunkAction { dispatch, _ in
+                     on channel: TelepathChannel) -> Thunk<AppState> {
+        return Thunk { dispatch, _ in
             let response = JSON([
                 "jsonrpc": "2.0",
                 "id": id.object,
@@ -111,8 +111,8 @@ struct TelepathActions {
     // swiftlint:disable:next identifier_name
     static func Send(id: JsonRpcId,
                      result: [String: Any],
-                     on channel: TelepathChannel) -> ThunkAction<AppState> {
-        return ThunkAction { dispatch, _ in
+                     on channel: TelepathChannel) -> Thunk<AppState> {
+        return Thunk { dispatch, _ in
             let response = JSON([
                 "jsonrpc": "2.0",
                 "id": id.object,
@@ -125,8 +125,8 @@ struct TelepathActions {
     // swiftlint:disable:next identifier_name
     static func Send(id: JsonRpcId,
                      result: [Any],
-                     on channel: TelepathChannel) -> ThunkAction<AppState> {
-        return ThunkAction { dispatch, _ in
+                     on channel: TelepathChannel) -> Thunk<AppState> {
+        return Thunk { dispatch, _ in
             let response = JSON([
                 "jsonrpc": "2.0",
                 "id": id.object,
@@ -139,8 +139,8 @@ struct TelepathActions {
     // swiftlint:disable:next identifier_name
     static func Send(id: JsonRpcId,
                      result: Data,
-                     on channel: TelepathChannel) -> ThunkAction<AppState> {
-        return ThunkAction { dispatch, _ in
+                     on channel: TelepathChannel) -> Thunk<AppState> {
+        return Thunk { dispatch, _ in
             let response = JSON([
                 "jsonrpc": "2.0",
                 "id": id.object,
@@ -153,8 +153,8 @@ struct TelepathActions {
     // swiftlint:disable:next identifier_name
     static func Send(id: JsonRpcId,
                      error: TelepathError,
-                     on channel: TelepathChannel) -> ThunkAction<AppState> {
-        return ThunkAction { dispatch, _ in
+                     on channel: TelepathChannel) -> Thunk<AppState> {
+        return Thunk { dispatch, _ in
             let response = JSON([
                 "jsonrpc": "2.0",
                 "id": id.object,

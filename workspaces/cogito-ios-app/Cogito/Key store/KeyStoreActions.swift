@@ -6,13 +6,13 @@ let standardScryptP = 1
 
 // swiftlint:disable identifier_name
 struct KeyStoreActions {
-    static func Create() -> ThunkAction<AppState> {
-        return ThunkAction(action: { (dispatch, _) in
+    static func Create() -> Thunk<AppState> {
+        return Thunk { (dispatch, _) in
             let keyStore = KeyStore(name: "main.keystore",
                                     scryptN: standardScryptN / 4,
                                     scryptP: standardScryptP)
             dispatch(Fulfilled(keyStore: keyStore))
-        })
+        }
     }
 
     struct Fulfilled: Action {

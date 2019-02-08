@@ -1,78 +1,121 @@
-# ReSwiftThunk
-A thunk middleware for [ReSwift](https://github.com/ReSwift/ReSwift).
+# ReSwift-Thunk
+
+[![Build Status](https://img.shields.io/travis/ReSwift/ReSwift-Thunk/master.svg?style=flat-square)](https://travis-ci.org/ReSwift/ReSwift-Thunk) [![Code coverage status](https://img.shields.io/codecov/c/github/ReSwift/ReSwift-Thunk.svg?style=flat-square)](http://codecov.io/github/ReSwift/ReSwift-Thunk) [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/ReSwiftThunk.svg?style=flat-square)](https://cocoapods.org/pods/ReSwiftThunk) [![Platform support](https://img.shields.io/badge/platform-ios%20%7C%20osx%20%7C%20tvos%20%7C%20watchos-lightgrey.svg?style=flat-square)](https://github.com/ReSwift/ReSwift-Thunk/blob/master/LICENSE.md) [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/ReSwift/ReSwift-Thunk/blob/master/LICENSE.md) [![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg?style=flat-square)](https://houndci.com)
+
+**Supported Swift Versions:** Swift 4.1, Swift 4.2
+
+When [ReSwift](https://github.com/ReSwift/ReSwift/) is a [Redux](https://github.com/reactjs/redux)-like implementation of the unidirectional data flow architecture in Swift, ReSwift-Thunk is like [redux-thunk](https://github.com/reduxjs/redux-thunk). 
+
+## Why Use ReSwift-Thunk?
+
+## Example
+
+```swift
+// First, you create the middleware, which needs to know the type of your `State`.
+let thunksMiddleware: Middleware<MyState> = createThunksMiddleware()
+
+// Note that it can perfectly live with other middleware in the chain.
+let store = Store<MyState>(reducer: reducer, state: nil, middleware: [thunksMiddleware])
+
+// A thunk represents an action that can perform side effects, access the current state of the store, and dispatch new actions, as if it were a ReSwift middleware.
+let thunk = Thunk<MyState> { dispatch, getState in 
+    if getState!.loading {
+        return
+    }
+    dispatch(RequestStart())
+    api.getSomething() { something in
+        if something != nil {
+            dispatch(RequestSuccess(something))
+        } else {
+            dispatch(RequestError())
+        }
+    }
+}
+
+// A thunk can also be a function if you want to pass on parameters
+func thunkWithParams(_ identifier: Int) -> Thunk<MyState> {
+    return Thunk<MyState> { dispatch, getState in
+        guard let state = getState() else { return }
+        
+        if state.loading {
+            return
+        }
+        
+        api.getSomethingWithId(identifier) { something in
+            if something != nil {
+                dispatch(RequestSuccess(something))
+            } else {
+                dispatch(RequestError())
+            }
+        }
+    }
+}
+
+// As the thunk type conforms to the `Action` protocol, you can dispatch it as usual, without having to implement an overload of the `dispatch` function inside the ReSwift library.
+store.dispatch(thunk)
+
+// You can do the same with the Thunk that requires parameters, like so
+store.dispatch(thunkWithParams(10))
+
+// Note that these actions won't reach the reducers, instead, the thunks middleware will catch it and execute its body, producing the desired side effects.
+```
 
 ## Installation
 
-### Cocoapods
+ReSwift-Thunk requires the [ReSwift](https://github.com/ReSwift/ReSwift/) base module.
 
+### CocoaPods
+
+You can install ReSwift-Thunk via CocoaPods by adding it to your `Podfile`:
 ```
-pod 'ReSwiftThunk', '~> 0.1'
+use_frameworks!
+
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+
+pod 'ReSwift'
+pod 'ReSwiftThunk'
 ```
+
+And run `pod install`.
 
 ### Carthage
 
+You can install ReSwift-Thunk via [Carthage](https://github.com/Carthage/Carthage) by adding the following line to your `Cartfile`:
+
 ```
-github "mikecole20/ReSwiftThunk" ~> 0.1
+github "ReSwift/ReSwift-Thunk"
 ```
 
-## Usage
-Include the `ThunkMiddleware` when you create your ReSwift store.
+### Swift Package Manager
+
+You can install ReSwift-Thunk via [Swift Package Manager](https://swift.org/package-manager/) by adding the following line to your `Package.swift`:
 
 ```swift
-let mainStore = Store<AppState>(
-    reducer: AppReducer(),
-    state: nil,
-    middleware: [ThunkMiddleware()]
+import PackageDescription
+
+let package = Package(
+    [...]
+    dependencies: [
+        .Package(url: "https://github.com/ReSwift/ReSwift-Thunk.git", majorVersion: XYZ)
+    ]
 )
 ```
 
-Extend `ThunkAction` to define your asynchronous actions. Usually, they will dispatch regular `Action`s inside. I like to use functions to create the `ThunkAction`.
+## Checking out Source Code
 
-```swift
-struct ActionRestPassword: Action {
-}
+After checking out the project run `pod install` to get the latest supported version of [SwiftLint](https://github.com/realm/SwiftLint), which we use to ensure a consistent style in the codebase.
 
-struct ActionResetPasswordSuccess: Action {
-}
+## Example Projects
 
-struct ActionResetPasswordFailure: Action {
-    var error: Error
-}
+- [ReduxMovieDB](https://github.com/cardoso/ReduxMovieDB): A simple App that queries the tmdb.org API to display the latest movies. Allows searching and viewing details. [Relevant file](https://github.com/cardoso/ReduxMovieDB/blob/master/ReduxMovieDB/Thunks.swift).
 
-public func resetPassword(email: String) -> ThunkAction {
-    return ThunkAction(
-        action: { (dispatch, getState) in
-            _ = dispatch(ActionRestPassword())
+## Contributing
 
-            let result = self.bellhopsSessionManager.request(Router.resetPassword(email: email)).validate().responseJSON()
+You can find all the details on how to get started in the [Contributing Guide](/CONTRIBUTING.md).
 
-            return result.then { resp -> Any in
-                _ = dispatch(ActionResetPasswordSuccess())
-                return resp
-            }.recover { error -> Any in
-                _ = dispatch(ActionResetPasswordFailure(error: error))
-                throw error
-            }
-        }
-    )
-}
-```
+## Credits
 
-> Note that in this example, I am using [PromiseKit](https://github.com/mxcl/PromiseKit) so that the action returns a promise. This makes side effects in your views easy.
+## License
 
-Then dispatch the `ThunkAction`.
-
-```
-let action = resetPassword(email: "email@gmail.com")
-let result = mainStore.dispatch(action)
-if let promise = result as? Promise<Any> {
-    promise.then { resp -> Void in
-        print("success")
-    }.catch { error in
-        print("failure")
-    }
-}
-mainStore.dispatch
-```
-
-> Once again, this example is using promises. You can return anything you want though, because ReSwift only requires a return of `Any`.
+ReSwift-Thunk Copyright (c) 2018 ReSwift Contributors. Distributed under the MIT License (MIT). See [LICENSE.md](/CONTRIBUTING.md).

@@ -1,7 +1,7 @@
 import Quick
 import Nimble
 import ReSwift
-import ReSwiftThunk
+@testable import ReSwiftThunk
 @testable import Cogito
 
 class KeyStoreActionsSpec: QuickSpec {
@@ -15,7 +15,7 @@ class KeyStoreActionsSpec: QuickSpec {
                     dispatchedAction = action
                 }
                 let action = KeyStoreActions.Create()
-                action.action(dispatch, { return nil })
+                action.body(dispatch, { return nil })
                 fulfilled = dispatchedAction as? KeyStoreActions.Fulfilled
             }
 
