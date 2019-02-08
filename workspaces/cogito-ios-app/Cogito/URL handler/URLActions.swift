@@ -1,7 +1,8 @@
 import Foundation
+import ReSwiftThunk
 
 struct URLActions {
-    static func HandleIncomingURL(url: URL) -> Thunk { // swiftlint:disable:this identifier_name
+    static func HandleIncomingURL(url: URL) -> Thunk<AppState> { // swiftlint:disable:this identifier_name
         return Thunk { dispatch, getState in
             guard let identity = getState()?.diamond.selectedFacet() else {
                 return

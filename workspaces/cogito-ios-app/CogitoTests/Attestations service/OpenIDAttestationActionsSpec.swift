@@ -1,6 +1,6 @@
 import Quick
 import Nimble
-import ReSwiftThunk
+@testable import ReSwiftThunk
 import Telepath
 import SwiftyJSON
 @testable import Cogito
@@ -13,21 +13,21 @@ class OpenIDAttestationActionsSpec: QuickSpec {
             it("dispatches FinishRejected when no token present") {
                 let finishAction = OpenIDAttestationActions.Finish(params: [:])
                 let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.FinishRejected>()
-                finishAction.action(dispatchRecorder.dispatch, { return nil })
+                finishAction.body(dispatchRecorder.dispatch, { return nil })
                 expect(dispatchRecorder.count) == 1
             }
 
             it("dispatches FinishRejected when token is invalid") {
                 let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": "invalid token"])
                 let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.FinishRejected>()
-                finishAction.action(dispatchRecorder.dispatch, { return nil })
+                finishAction.body(dispatchRecorder.dispatch, { return nil })
                 expect(dispatchRecorder.count) == 1
             }
 
             it("dispatches FinishRejected when token has incorrect nonce") {
                 let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
                 let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.FinishRejected>()
-                finishAction.action(dispatchRecorder.dispatch, { return nil })
+                finishAction.body(dispatchRecorder.dispatch, { return nil })
                 expect(dispatchRecorder.count) == 1
             }
 
@@ -35,7 +35,7 @@ class OpenIDAttestationActionsSpec: QuickSpec {
                 let identity = Identity.example
                 let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
                 let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.FinishRejected>()
-                finishAction.action(dispatchRecorder.dispatch, {
+                finishAction.body(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
                         open: [
                             OpenIdExampleValues.validNonce: AttestationInProgress(
@@ -59,7 +59,7 @@ class OpenIDAttestationActionsSpec: QuickSpec {
                 let identity = Identity.example
                 let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
                 let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.Fulfilled>()
-                finishAction.action(dispatchRecorder.dispatch, {
+                finishAction.body(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
                         open: [
                             OpenIdExampleValues.validNonce: AttestationInProgress(
@@ -83,7 +83,7 @@ class OpenIDAttestationActionsSpec: QuickSpec {
                 let identity = Identity.example
                 let finishAction = OpenIDAttestationActions.Finish(params: ["id_token": OpenIdExampleValues.validToken])
                 let dispatchRecorder = DispatchRecorder<DiamondActions.StoreOpenIDAttestation>()
-                finishAction.action(dispatchRecorder.dispatch, {
+                finishAction.body(dispatchRecorder.dispatch, {
                     return appState(attestations: AttestationsState(
                         open: [
                             OpenIdExampleValues.validNonce: AttestationInProgress(
@@ -114,7 +114,7 @@ class OpenIDAttestationActionsSpec: QuickSpec {
             var identityWithoutAttestation: Identity!
             var channel: TelepathChannelSpy!
             var telepathState: TelepathState!
-            var getAttestationsAction: ThunkAction<AppState>!
+            var getAttestationsAction: Thunk<AppState>!
 
             func sendPendingAction() -> TelepathActions.SendPending? {
                 return store.firstAction(ofType: TelepathActions.SendPending.self)

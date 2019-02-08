@@ -107,7 +107,6 @@
 		5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */; };
 		5C4993C2219ACCE000BE9C4D /* AddressExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4993C1219ACCE000BE9C4D /* AddressExample.swift */; };
 		5C4D7F5020AD72340008107C /* URLActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F4F20AD72340008107C /* URLActions.swift */; };
-		5C4D7F5220AD72940008107C /* Thunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5120AD72940008107C /* Thunk.swift */; };
 		5C4D7F5520AD7D640008107C /* URLActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5420AD7D640008107C /* URLActionsSpec.swift */; };
 		5C4D7F5720AD84460008107C /* AttestationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5620AD84460008107C /* AttestationActions.swift */; };
 		5C4D7F5920AD869F0008107C /* AttestationActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4D7F5820AD869F0008107C /* AttestationActionsSpec.swift */; };
@@ -307,7 +306,6 @@
 		5C48E2411FA1F98200B8BF6E /* TelepathReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathReducerSpec.swift; sourceTree = "<group>"; };
 		5C4993C1219ACCE000BE9C4D /* AddressExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressExample.swift; sourceTree = "<group>"; };
 		5C4D7F4F20AD72340008107C /* URLActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLActions.swift; sourceTree = "<group>"; };
-		5C4D7F5120AD72940008107C /* Thunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thunk.swift; sourceTree = "<group>"; };
 		5C4D7F5420AD7D640008107C /* URLActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLActionsSpec.swift; sourceTree = "<group>"; };
 		5C4D7F5620AD84460008107C /* AttestationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActions.swift; sourceTree = "<group>"; };
 		5C4D7F5820AD869F0008107C /* AttestationActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationActionsSpec.swift; sourceTree = "<group>"; };
@@ -560,7 +558,6 @@
 				02CD30A31F73F251006BA756 /* StorePersister.swift */,
 				02CD80571F7E30D100AA5C3A /* ActionLogger.swift */,
 				02021D181F8BC5FF0092DD89 /* AppActions.swift */,
-				5C4D7F5120AD72940008107C /* Thunk.swift */,
 			);
 			path = "Global state";
 			sourceTree = "<group>";
@@ -1066,7 +1063,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Cogito/Pods-Cogito-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Cogito/Pods-Cogito-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/FontAwesome.swift/FontAwesome_swift.framework",
@@ -1077,11 +1074,14 @@
 				"${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ReSwiftThunk/ReSwiftThunk.framework",
 				"${BUILT_PRODUCTS_DIR}/RichString/RichString.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
+				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Telepath/Telepath.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
@@ -1099,11 +1099,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwiftThunk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RichString.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Telepath.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
@@ -1111,7 +1114,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cogito/Pods-Cogito-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cogito/Pods-Cogito-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		83250509529CE2DF74DB4EAE /* [CP] Embed Pods Frameworks */ = {
@@ -1120,7 +1123,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Cogito-CogitoTests/Pods-Cogito-CogitoTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Cogito-CogitoTests/Pods-Cogito-CogitoTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/FontAwesome.swift/FontAwesome_swift.framework",
@@ -1131,11 +1134,14 @@
 				"${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ReSwiftThunk/ReSwiftThunk.framework",
 				"${BUILT_PRODUCTS_DIR}/RichString/RichString.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
+				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Telepath/Telepath.framework",
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
@@ -1157,11 +1163,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReSwiftThunk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RichString.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Telepath.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
@@ -1173,7 +1182,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cogito-CogitoTests/Pods-Cogito-CogitoTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cogito-CogitoTests/Pods-Cogito-CogitoTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C78BF98DF663A3C00BA78BB2 /* [CP] Check Pods Manifest.lock */ = {
@@ -1201,7 +1210,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C4D7F5220AD72940008107C /* Thunk.swift in Sources */,
 				0291A3FA2208457700AFC6D6 /* AudioFeedback.swift in Sources */,
 				029691531F7166AC00654BD0 /* KeyStoreReducer.swift in Sources */,
 				5CC4D2CE1FE801DE002F2450 /* TransactionSigningActions.swift in Sources */,

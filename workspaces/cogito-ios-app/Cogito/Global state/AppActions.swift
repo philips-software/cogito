@@ -2,8 +2,8 @@ import ReSwift
 import ReSwiftThunk
 
 // swiftlint:disable identifier_name
-func ResetApp() -> ThunkAction<AppState> {
-    return ThunkAction(action: { (dispatch, getState) in
+func ResetApp() -> Thunk<AppState> {
+    return Thunk { (dispatch, getState) in
         do {
             try getState()?.keyStore.keyStore?.reset()
         } catch let e {
@@ -12,7 +12,7 @@ func ResetApp() -> ThunkAction<AppState> {
         }
         dispatch(ResetAppState())
         dispatch(KeyStoreActions.Create())
-    })
+    }
 }
 
 struct ResetAppState: Action {}

@@ -28,7 +28,7 @@ class AttestationServiceSpec: QuickSpec {
             }
 
             it("dispatches the OpenID GetAttestations action") {
-                expect(store.actions.last as? Thunk).toNot(beNil())
+                expect(store.actions.last as? Thunk<AppState>).toNot(beNil())
             }
         }
 
@@ -43,7 +43,7 @@ class AttestationServiceSpec: QuickSpec {
             }
 
             it("dispatches the GetAttestations action") {
-                expect(store.actions.last as? Thunk).toNot(beNil())
+                expect(store.actions.last as? Thunk<AppState>).toNot(beNil())
             }
 
         }
@@ -55,7 +55,7 @@ class AttestationServiceSpec: QuickSpec {
             }
 
             it("is ignored") {
-                expect(store.actions.last as? Thunk).to(beNil())
+                expect(store.actions.last as? Thunk<AppState>).to(beNil())
             }
         }
     }

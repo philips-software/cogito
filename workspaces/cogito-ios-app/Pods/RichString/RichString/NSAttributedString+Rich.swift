@@ -15,19 +15,19 @@ import Foundation
  */
 extension NSAttributedString: RichString {
     public func color(_ color: Color) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.foregroundColor.rawValue, value: color)
+        return addingAttribute(.foregroundColor, value: color)
     }
 
     public func backgroundColor(_ color: Color) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.backgroundColor.rawValue, value: color)
+        return addingAttribute(.backgroundColor, value: color)
     }
 
     public func font(_ font: Font) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.font.rawValue, value: font)
+        return addingAttribute(.font, value: font)
     }
 
     public func paragraphStyle(_ paragraphStyle: NSParagraphStyle) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.paragraphStyle.rawValue, value: paragraphStyle)
+        return addingAttribute(.paragraphStyle, value: paragraphStyle)
     }
 
     public func paragraphStyle(configure: (NSMutableParagraphStyle) -> Void)
@@ -40,24 +40,23 @@ extension NSAttributedString: RichString {
             style = NSMutableParagraphStyle()
         }
         configure(style)
-        return addingAttribute(NSAttributedStringKey.paragraphStyle.rawValue, value: style)
+        return addingAttribute(.paragraphStyle, value: style)
     }
 
     public func ligature(_ ligature: Bool) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.ligature.rawValue, value: ligature ? 1 : 0)
+        return addingAttribute(.ligature, value: ligature ? 1 : 0)
     }
 
     public func kern(_ kern: Float) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.kern.rawValue, value: kern)
+        return addingAttribute(.kern, value: kern)
     }
 
     public func strikeThrough(style: NSUnderlineStyle) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.strikethroughStyle.rawValue,
-                               value: style.rawValue)
+        return addingAttribute(.strikethroughStyle, value: style.rawValue)
     }
 
     public func strikeThrough(color: Color) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.strikethroughColor.rawValue, value: color)
+        return addingAttribute(.strikethroughColor, value: color)
     }
 
     public func strikeThrough(color: Color, style: NSUnderlineStyle) -> NSAttributedString {
@@ -65,12 +64,11 @@ extension NSAttributedString: RichString {
     }
 
     public func underline(style: NSUnderlineStyle) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.underlineStyle.rawValue,
-                               value: style.rawValue)
+        return addingAttribute(.underlineStyle, value: style.rawValue)
     }
 
     public func underline(color: Color) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.underlineColor.rawValue, value: color)
+        return addingAttribute(.underlineColor, value: color)
     }
 
     public func underline(color: Color, style: NSUnderlineStyle)
@@ -79,22 +77,20 @@ extension NSAttributedString: RichString {
     }
 
     public func stroke(width: Float, color: Color) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.strokeColor.rawValue,
-                               value: color)
-            .addingAttribute(NSAttributedStringKey.strokeWidth.rawValue,
-                             value: width)
+        return addingAttribute(.strokeColor, value: color)
+            .addingAttribute(.strokeWidth, value: width)
     }
 
     #if !os(watchOS)
 
         public func shadow(_ shadow: NSShadow) -> NSAttributedString {
-            return addingAttribute(NSAttributedStringKey.shadow.rawValue, value: shadow)
+            return addingAttribute(.shadow, value: shadow)
         }
 
         public func shadow(configure: (NSShadow) -> Void) -> NSAttributedString {
             let shadow: NSShadow
-            if let s = self.shadow {
-                shadow = s
+            if let myShadow = self.shadow {
+                shadow = myShadow
             } else {
                 shadow = NSShadow()
             }
@@ -106,45 +102,43 @@ extension NSAttributedString: RichString {
             -> NSAttributedString {
                 let attachment = NSTextAttachment()
                 configure(attachment)
-                return addingAttribute(NSAttributedStringKey.attachment.rawValue, value: attachment)
+                return addingAttribute(.attachment, value: attachment)
         }
 
     #endif
 
     public func letterPressed() -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.textEffect.rawValue,
-                               value: NSAttributedString.TextEffectStyle.letterpressStyle)
+        return addingAttribute(.textEffect, value: NSAttributedString.TextEffectStyle.letterpressStyle)
     }
 
     public func link(url: NSURL) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.link.rawValue, value: url)
+        return addingAttribute(.link, value: url)
     }
 
     public func link(string: String) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.link.rawValue, value: string)
+        return addingAttribute(.link, value: string)
     }
 
     public func baselineOffset(_ offset: Float) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.baselineOffset.rawValue, value: offset)
+        return addingAttribute(.baselineOffset, value: offset)
     }
 
     public func obliqueness(_ obliqueness: Float) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.obliqueness.rawValue, value: obliqueness)
+        return addingAttribute(.obliqueness, value: obliqueness)
     }
 
     public func expansion(_ expansion: Float) -> NSAttributedString {
-        return addingAttribute(NSAttributedStringKey.expansion.rawValue, value: expansion)
+        return addingAttribute(.expansion, value: expansion)
     }
 }
 
 // MARK: - Private helpers
 extension NSAttributedString {
-    func addingAttribute(_ name: String, value: Any)
-            -> NSAttributedString {
-        let m = makeMutable()
-        let r = entireString()
-        m.addAttribute(NSAttributedStringKey(rawValue: name), value: value, range: r)
-        return NSAttributedString(attributedString: m)
+    func addingAttribute(_ key: NSAttributedString.Key, value: Any) -> NSAttributedString {
+        let mutableMe = makeMutable()
+        let range = entireString()
+        mutableMe.addAttribute(key, value: value, range: range)
+        return NSAttributedString(attributedString: mutableMe)
     }
 
     func makeMutable() -> NSMutableAttributedString {
@@ -162,7 +156,7 @@ extension NSAttributedString {
  * Extension to add attribute getters to `NSAttributedString`.
  */
 extension NSAttributedString {
-    var attrs: [NSAttributedStringKey: Any] {
+    var attrs: [NSAttributedString.Key: Any] {
         guard self.length > 0 else {
             return [:]
         }
@@ -177,7 +171,7 @@ extension NSAttributedString {
      * - See: `RichString.color(_:)`
      */
     public var color: Color? {
-        return attrs[NSAttributedStringKey.foregroundColor] as? Color
+        return attrs[.foregroundColor] as? Color
     }
 
     /**
@@ -185,7 +179,7 @@ extension NSAttributedString {
      * - See: `RichString.backgroundColor(_:)`
      */
     public var backgroundColor: Color? {
-        return attrs[NSAttributedStringKey.backgroundColor] as? Color
+        return attrs[.backgroundColor] as? Color
     }
 
     /**
@@ -193,7 +187,7 @@ extension NSAttributedString {
      * - See: `RichString.fontSize(_:)`
      */
     public var fontSize: CGFloat? {
-        return (attrs[NSAttributedStringKey.font] as? Font)?.pointSize
+        return (attrs[.font] as? Font)?.pointSize
     }
 
     /**
@@ -202,7 +196,7 @@ extension NSAttributedString {
      * - See: `RichString.paragraphStyle(configure:)`
      */
     public var paragraphStyle: NSParagraphStyle? {
-        return attrs[NSAttributedStringKey.paragraphStyle] as? NSParagraphStyle
+        return attrs[.paragraphStyle] as? NSParagraphStyle
     }
 
     /**
@@ -210,7 +204,7 @@ extension NSAttributedString {
      * - See: `RichString.ligature(_:)`
      */
     public var ligature: Bool? {
-        guard let ligatureNumber = attrs[NSAttributedStringKey.ligature] as? Int else {
+        guard let ligatureNumber = attrs[.ligature] as? Int else {
             return nil
         }
         return ligatureNumber == 1
@@ -221,7 +215,7 @@ extension NSAttributedString {
      * - See: `RichString.kern(_:)`
      */
     public var kern: Float? {
-        return attrs[NSAttributedStringKey.kern] as? Float
+        return attrs[.kern] as? Float
     }
 
     /**
@@ -230,7 +224,7 @@ extension NSAttributedString {
      * - See: `RichString.strikeThrough(color:,style:)`
      */
     public var strikeThroughStyle: NSUnderlineStyle? {
-        guard let rawValue = attrs[NSAttributedStringKey.strikethroughStyle] as? Int else {
+        guard let rawValue = attrs[.strikethroughStyle] as? Int else {
             return nil
         }
         return NSUnderlineStyle(rawValue: rawValue)
@@ -242,7 +236,7 @@ extension NSAttributedString {
      * - See: `RichString.strikeThrough(color:,style:)`
      */
     public var strikeThroughColor: Color? {
-        return attrs[NSAttributedStringKey.strikethroughColor] as? Color
+        return attrs[.strikethroughColor] as? Color
     }
 
     /**
@@ -251,7 +245,7 @@ extension NSAttributedString {
      * - See: `RichString.underline(color:,style:)`
      */
     public var underlineStyle: NSUnderlineStyle? {
-        guard let rawValue = attrs[NSAttributedStringKey.underlineStyle] as? Int else {
+        guard let rawValue = attrs[.underlineStyle] as? Int else {
             return nil
         }
         return NSUnderlineStyle(rawValue: rawValue)
@@ -263,7 +257,7 @@ extension NSAttributedString {
      * - See: `RichString.underline(color:,style:)`
      */
     public var underlineColor: Color? {
-        return attrs[NSAttributedStringKey.underlineColor] as? Color
+        return attrs[.underlineColor] as? Color
     }
 
     /**
@@ -271,7 +265,7 @@ extension NSAttributedString {
      * - See: `RichString.stoke(width:,color:)`
      */
     public var strokeWidth: Float? {
-        return attrs[NSAttributedStringKey.strokeWidth] as? Float
+        return attrs[.strokeWidth] as? Float
     }
 
     /**
@@ -279,7 +273,7 @@ extension NSAttributedString {
      * - See: `RichString.stroke(width:,color:)`
      */
     public var strokeColor: Color? {
-        return attrs[NSAttributedStringKey.strokeColor] as? Color
+        return attrs[.strokeColor] as? Color
     }
 
     #if !os(watchOS)
@@ -290,7 +284,7 @@ extension NSAttributedString {
          * - See: `RichString.shadow(configure:)`
          */
         public var shadow: NSShadow? {
-            return attrs[NSAttributedStringKey.shadow] as? NSShadow
+            return attrs[.shadow] as? NSShadow
         }
 
         /**
@@ -298,7 +292,7 @@ extension NSAttributedString {
          * - See: `RichString.attachment(configure:)`
          */
         public var attachment: NSTextAttachment? {
-            return attrs[NSAttributedStringKey.attachment] as? NSTextAttachment
+            return attrs[.attachment] as? NSTextAttachment
         }
 
     #endif
@@ -308,7 +302,7 @@ extension NSAttributedString {
      * - See: `RichString.letterPressed()`
      */
     public var isLetterPressed: Bool? {
-        guard let textEffect = attrs[NSAttributedStringKey.textEffect] as? NSAttributedString.TextEffectStyle else {
+        guard let textEffect = attrs[.textEffect] as? NSAttributedString.TextEffectStyle else {
             return nil
         }
         return textEffect == NSAttributedString.TextEffectStyle.letterpressStyle
@@ -320,10 +314,10 @@ extension NSAttributedString {
      * - See: `RichString.link(url:)`
      */
     public var link: NSURL? {
-        if let string = attrs[NSAttributedStringKey.link] as? String {
+        if let string = attrs[.link] as? String {
             return NSURL(string: string)
         } else {
-            return attrs[NSAttributedStringKey.link] as? NSURL
+            return attrs[.link] as? NSURL
         }
     }
 
@@ -332,7 +326,7 @@ extension NSAttributedString {
      * - See: `RichString.baselineOffset(_:)`
      */
     public var baselineOffset: Float? {
-        return attrs[NSAttributedStringKey.baselineOffset] as? Float
+        return attrs[.baselineOffset] as? Float
     }
 
     /**
@@ -340,7 +334,7 @@ extension NSAttributedString {
      * - See: `RichString.obliqueness(_:)`
      */
     public var obliqueness: Float? {
-        return attrs[NSAttributedStringKey.obliqueness] as? Float
+        return attrs[.obliqueness] as? Float
     }
 
     /**
@@ -348,6 +342,6 @@ extension NSAttributedString {
      * - See: `RichString.expansion(_:)`
      */
     public var expansion: Float? {
-        return attrs[NSAttributedStringKey.expansion] as? Float
+        return attrs[.expansion] as? Float
     }
 }

@@ -17,10 +17,10 @@ class HomeViewControllerSpec: QuickSpec {
         }
 
         describe("connecting to a telepath url") {
-            var recorder: DispatchRecorder<ThunkAction<AppState>>!
+            var recorder: DispatchRecorder<Thunk<AppState>>!
 
             beforeEach {
-                recorder = DispatchRecorder<ThunkAction<AppState>>()
+                recorder = DispatchRecorder<Thunk<AppState>>()
                 store.dispatchFunction = recorder.dispatch
             }
 

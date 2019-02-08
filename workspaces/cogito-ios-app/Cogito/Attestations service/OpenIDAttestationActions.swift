@@ -12,8 +12,8 @@ struct OpenIDAttestationActions {
         requestId: JsonRpcId,
         oidcRealmUrl: URL,
         subject: String?,
-        requestedOnChannel channelId: ChannelID? = nil) -> ThunkAction<AppState> {
-        return ThunkAction { dispatch, _ in
+        requestedOnChannel channelId: ChannelID? = nil) -> Thunk<AppState> {
+        return Thunk { dispatch, _ in
             let handler = OpenIDAttestationStarter(
                 oidcRealmUrl: oidcRealmUrl,
                 onSuccess: { nonce in dispatch(Started(nonce: nonce)) },
@@ -29,8 +29,8 @@ struct OpenIDAttestationActions {
         }
     }
 
-    static func Finish(params: [String: String]) -> ThunkAction<AppState> {
-        return ThunkAction { dispatch, getState in
+    static func Finish(params: [String: String]) -> Thunk<AppState> {
+        return Thunk { dispatch, getState in
             guard let idToken = params["id_token"] else {
                 dispatch(FinishRejected(nonce: nil, error: "id token missing"))
                 return
@@ -103,8 +103,8 @@ struct OpenIDAttestationActions {
                                 applicationName: String,
                                 oidcRealmUrl: String,
                                 subject: String?,
-                                channel: TelepathChannel) -> ThunkAction<AppState> {
-        return ThunkAction(action: { dispatch, getState in
+                                channel: TelepathChannel) -> Thunk<AppState> {
+        return Thunk { dispatch, getState in
             let builder = GetAttestationsBuilder(
                 requestId: requestId,
                 oidcRealmUrlString: oidcRealmUrl,
@@ -115,6 +115,6 @@ struct OpenIDAttestationActions {
                 channel: channel
             )
             builder.build().execute()
-        })
+        }
     }
 }

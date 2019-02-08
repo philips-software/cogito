@@ -1,5 +1,5 @@
 # ReRxSwift
-![Swift Version 4](https://img.shields.io/badge/Swift-v4-yellow.svg)
+![Swift Version 4.1](https://img.shields.io/badge/Swift-v4.1-yellow.svg)
 [![Build Status](https://travis-ci.org/svdo/ReRxSwift.svg?branch=master)](https://travis-ci.org/svdo/ReRxSwift)
 [![API Documentation](https://svdo.github.io/ReRxSwift/badge.svg)](https://svdo.github.io/ReRxSwift)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
@@ -64,13 +64,13 @@ of directly dispatching ReSwift actions). This has some nice advantages:
 The easiest way to use this library is through [Cocoapods][15] or [Carthage][16]. For CocoaPods, add this to your `Podfile`:
 
 ```ruby
-pod 'ReRxSwift', '~> 1.0'
+pod 'ReRxSwift', '~> 2.0'
 ```
 
 For Carthage, add this to your `Cartfile`:
 
 ```
-github "svdo/ReRxSwift" ~> 1.0
+github "svdo/ReRxSwift" ~> 2.0
 ```
 
 ## Usage

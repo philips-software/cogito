@@ -7,7 +7,7 @@
 
     public typealias Font = UIFont
 
-    let fontBoldTrait = UIFontDescriptorSymbolicTraits.traitBold
+    let fontBoldTrait = UIFontDescriptor.SymbolicTraits.traitBold
 
     extension UIFontDescriptor {
         var hasBoldTrait: Bool {
@@ -19,12 +19,12 @@
         public func fontSize(_ size: CGFloat) -> NSAttributedString {
             let attrs = self.attributes(at: 0, effectiveRange: nil)
             let fontAttrs = attrs.filter {
-                $0.0 == NSAttributedStringKey.font
+                $0.0 == .font
             }
 
             let font: Font
-            if fontAttrs.count > 0, let f = fontAttrs.first?.1 as? Font {
-                font = f
+            if fontAttrs.count > 0, let fst = fontAttrs.first?.1 as? Font {
+                font = fst
             } else {
                 font = Font.systemFont(ofSize: size)
             }
@@ -59,12 +59,12 @@
         public func fontSize(_ size: CGFloat) -> NSAttributedString? {
             let attrs = self.attributes(at: 0, effectiveRange: nil)
             let fontAttrs = attrs.filter {
-                $0.0 == NSAttributedStringKey.font
+                $0.0 == .font
             }
 
             let font: Font
-            if fontAttrs.count > 0, let f = fontAttrs.first?.1 as? Font {
-                font = f
+            if fontAttrs.count > 0, let fst = fontAttrs.first?.1 as? Font {
+                font = fst
             } else {
                 font = Font.systemFont(ofSize: 0)
             }

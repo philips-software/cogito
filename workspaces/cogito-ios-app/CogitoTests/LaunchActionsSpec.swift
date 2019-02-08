@@ -1,7 +1,7 @@
 import Quick
 import Nimble
 import Foundation
-import ReSwiftThunk
+@testable import ReSwiftThunk
 @testable import Cogito
 
 class LaunchActionsSpec: QuickSpec {
@@ -21,9 +21,9 @@ class LaunchActionsSpec: QuickSpec {
         it("dispatches Open Id AttestationActions action") {
             let linkString = "https://cogito.mobi/applinks/openid-callback#id_token=whatever&not-before-policy=0"
             // swiftlint:disable:next force_cast
-            let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! ThunkAction<AppState>
+            let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! Thunk<AppState>
             let dispatchRecorder = DispatchRecorder<OpenIDAttestationActions.FinishRejected>()
-            startAction.action(dispatchRecorder.dispatch, { return nil })
+            startAction.body(dispatchRecorder.dispatch, { return nil })
             expect(dispatchRecorder.count) == 1
         }
 
@@ -39,7 +39,7 @@ class LaunchActionsSpec: QuickSpec {
             it("can process email attestation") {
                 let linkString = "https://cogito.mobi/attestations/receive#A=email:user@example.com"
                 // swiftlint:disable:next force_cast
-                let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! ThunkAction<AppState>
+                let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! Thunk<AppState>
                 store.dispatch(startAction)
 
                 let action = store.lastAction(ofType: DiamondActions.StoreAttestation.self)
@@ -52,7 +52,7 @@ class LaunchActionsSpec: QuickSpec {
                     "E=RsJzOXIOp5wufr406_bgMFX0krFC17T8j19RK2Eeawg&" +
                     "A=RXhhbXBsZUFwcA"
                 // swiftlint:disable:next force_cast
-                let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! ThunkAction<AppState>
+                let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! Thunk<AppState>
                 store.dispatch(startAction)
 
                 let action = store.lastAction(ofType: TelepathActions.ConnectFulfilled.self)
@@ -62,7 +62,7 @@ class LaunchActionsSpec: QuickSpec {
             it("does nothing when the attestation link is corrupted") {
                 let linkString = "https://cogito.mobi/attestations/receive#A=email"
                 // swiftlint:disable:next force_cast
-                let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! ThunkAction<AppState>
+                let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! Thunk<AppState>
                 store.dispatch(startAction)
 
                 expect(store.actions.count) == 0
@@ -74,7 +74,7 @@ class LaunchActionsSpec: QuickSpec {
                     "E=1234&" +
                     "A=aaa"
                 // swiftlint:disable:next force_cast
-                let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! ThunkAction<AppState>
+                let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! Thunk<AppState>
                 store.dispatch(startAction)
 
                 expect(store.actions.count) == 1
@@ -85,7 +85,7 @@ class LaunchActionsSpec: QuickSpec {
             it("does nothing when telepath link is incomplete") {
                 let linkString = "https://cogito.mobi/telepath/connect#" +
                     "I=imj6m8JJrjbpkHUof00dW86R&"
-                let startAction = LaunchActions.create(forLink: URL(string: linkString)!) as? ThunkAction<AppState>
+                let startAction = LaunchActions.create(forLink: URL(string: linkString)!) as? Thunk<AppState>
                 expect(startAction).to(beNil())
             }
         }
@@ -99,7 +99,7 @@ class LaunchActionsSpec: QuickSpec {
             it("does nothing when receiving attestation link") {
                 let linkString = "https://cogito.mobi/attestations/receive#A=email:user@example.com"
                 // swiftlint:disable:next force_cast
-                let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! ThunkAction<AppState>
+                let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! Thunk<AppState>
                 store.dispatch(startAction)
 
                 expect(store.actions.count) == 0
@@ -111,7 +111,7 @@ class LaunchActionsSpec: QuickSpec {
                     "E=RsJzOXIOp5wufr406_bgMFX0krFC17T8j19RK2Eeawg&" +
                 "A=RXhhbXBsZUFwcA"
                 // swiftlint:disable:next force_cast
-                let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! ThunkAction<AppState>
+                let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! Thunk<AppState>
                 store.dispatch(startAction)
 
                 expect(store.actions.count) == 0

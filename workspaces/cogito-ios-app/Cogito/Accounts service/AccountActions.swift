@@ -4,8 +4,8 @@ import SwiftyJSON
 struct AccountActions {
     // swiftlint:disable identifier_name
     static func GetAccounts(requestId: JsonRpcId,
-                            channel: TelepathChannel) -> ThunkAction<AppState> {
-        return ThunkAction(action: { dispatch, getState in
+                            channel: TelepathChannel) -> Thunk<AppState> {
+        return Thunk { dispatch, getState in
             var accounts: [String] = []
             if
                 let state = getState(),
@@ -17,6 +17,6 @@ struct AccountActions {
             dispatch(TelepathActions.Send(id: requestId,
                                           result: accounts,
                                           on: channel))
-        })
+        }
     }
 }
