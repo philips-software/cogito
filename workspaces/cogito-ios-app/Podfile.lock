@@ -62,7 +62,7 @@ DEPENDENCIES:
   - ReRxSwift (~> 2.0)
   - ReSwift (~> 4.0)
   - ReSwiftThunk (~> 1.0)
-  - RichString (from `https://github.com/svdo/swift-RichString`, branch `master`)
+  - RichString (~> 2.2)
   - RxCocoa (~> 4.0)
   - RxDataSources (~> 3.0)
   - RxSwift (~> 4.0)
@@ -89,6 +89,7 @@ SPEC REPOS:
     - ReRxSwift
     - ReSwift
     - ReSwiftThunk
+    - RichString
     - RxAtomic
     - RxCocoa
     - RxDataSources
@@ -102,9 +103,6 @@ SPEC REPOS:
     - URITemplate
 
 EXTERNAL SOURCES:
-  RichString:
-    :branch: master
-    :git: https://github.com/svdo/swift-RichString
   Sodium:
     :branch: master
     :git: https://github.com/jedisct1/swift-sodium.git
@@ -112,9 +110,6 @@ EXTERNAL SOURCES:
     :path: "../telepath-ios"
 
 CHECKOUT OPTIONS:
-  RichString:
-    :commit: beda8e5d834066527a56a1988d9c8fa68f77870a
-    :git: https://github.com/svdo/swift-RichString
   Sodium:
     :commit: f010f9e85065d818e84ba3680e4669107c9afb41
     :git: https://github.com/jedisct1/swift-sodium.git
@@ -149,6 +144,6 @@ SPEC CHECKSUMS:
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
   URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: 336220877e8092794116e9b57c28fcabbbd9faa3
+PODFILE CHECKSUM: b014626cb053cbe3abbb636a6a9dea002f0e9200
 
 COCOAPODS: 1.6.0
