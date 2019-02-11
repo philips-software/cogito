@@ -18,10 +18,6 @@ class SocketIOServiceClientSpec: QuickSpec {
             client = SocketIOServiceClient(socket: socket)
         }
 
-        it("can be constructed") {
-            expect(client.socket) == socket
-        }
-
         it("ignores notify because it is not started") {
             client.notify(data: Data(bytes: [1, 2, 3, 4]))
             expect(socket.lastEmittedEventName).to(beNil())
