@@ -56,7 +56,10 @@ class KeyStoreSpec: QuickSpec {
 
             beforeEach {
                 keychainMock = KeychainMock()
-                appPassword = AppPassword(keychain: keychainMock)
+                appPassword = AppPassword(
+                    keychain: keychainMock,
+                    passwordLength: 16
+                )
                 keyStore = KeyStore(name: "testStore.keyStore",
                                     scryptN: lightScryptN,
                                     scryptP: lightScryptP)
