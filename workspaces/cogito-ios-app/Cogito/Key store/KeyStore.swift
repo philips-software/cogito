@@ -3,13 +3,14 @@ import Ethers
 
 let standardScryptN = 1 << 18
 let standardScryptP = 1
+let passwordLength = 16
 
 class KeyStore: Codable {
     let name: String
     let scryptN: Int
     let scryptP: Int
     let directory: KeyStoreDirectory
-    var appPassword = AppPassword()
+    var appPassword = AppPassword(passwordLength: passwordLength)
 
     required init(
         name: String,

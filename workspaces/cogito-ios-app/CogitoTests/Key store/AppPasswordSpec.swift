@@ -10,7 +10,10 @@ class AppPasswordSpec: QuickSpec {
 
         beforeEach {
             keychainMock = KeychainMock()
-            appPassword = AppPassword(keychain: keychainMock)
+            appPassword = AppPassword(
+                keychain: keychainMock,
+                passwordLength: 16
+            )
         }
 
         it("provides a password and stores it") {
@@ -89,7 +92,7 @@ class KeychainMock: KeychainType {
         data.removeValue(forKey: key)
     }
 
-    func generatePassword() -> String {
+    func generatePassword(lengthInBytes: Int) -> String {
         generatePasswordCount += 1
         return "test pass"
     }

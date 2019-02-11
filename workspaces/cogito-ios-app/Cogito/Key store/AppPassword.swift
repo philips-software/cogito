@@ -2,16 +2,18 @@ import KeychainAccess
 import Security
 
 private let appPasswordKey = "appPassword"
-private let passwordLength = 16
 
 class AppPassword {
     let keychain: KeychainType
+    let passwordLength: Int
 
-    init(keychain: KeychainType = Keychain()) {
+    init(keychain: KeychainType = Keychain(), passwordLength: Int) {
         self.keychain = keychain
+        self.passwordLength = passwordLength
     }
 
     func use(_ withPassword: @escaping (_ password: String?, _ error: String?) -> Void) {
+        let passwordLength = self.passwordLength
         let callback = { (password, error) in
             DispatchQueue.main.async {
                 withPassword(password, error)
@@ -26,7 +28,9 @@ class AppPassword {
             var password = this.loadPassword()
             if password == nil {
                 do {
-                    password = try this.keychain.generatePassword()
+                    password = try this.keychain.generatePassword(
+                        lengthInBytes: passwordLength
+                    )
                 } catch let error {
                     callback(nil, error.localizedDescription)
                     return
@@ -74,7 +78,7 @@ protocol KeychainType {
                            authenticationPolicy: AuthenticationPolicy) -> KeychainType
     func get(_ key: String) throws -> String?
     func set(_ value: String, key: String) throws
-    func generatePassword() throws -> String
+    func generatePassword(lengthInBytes: Int) throws -> String
     func remove(_ key: String) throws
 }
 
@@ -89,9 +93,9 @@ extension Keychain: KeychainType {
                                   authenticationPolicy: authenticationPolicy)
     }
 
-    func generatePassword() throws -> String {
-        var bytes = [UInt8](repeating: 0, count: passwordLength)
-        let result = SecRandomCopyBytes(kSecRandomDefault, passwordLength, &bytes)
+    func generatePassword(lengthInBytes: Int) throws -> String {
+        var bytes = [UInt8](repeating: 0, count: lengthInBytes)
+        let result = SecRandomCopyBytes(kSecRandomDefault, lengthInBytes, &bytes)
         guard result == errSecSuccess else {
             throw GeneratePasswordError(resultCode: result)
         }
