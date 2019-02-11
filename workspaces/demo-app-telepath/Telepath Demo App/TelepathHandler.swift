@@ -8,7 +8,7 @@ let telepathServerUrl = URL(string: "https://telepath.cogito.mobi")!
 
 class TelepathHandler {
     static let shared = TelepathHandler()
-    let telepath = Telepath(queuingServiceUrl: telepathServerUrl)
+    let telepath = Telepath(serviceUrl: telepathServerUrl)
     var channel: SecureChannel?
 
     func handle(url: URL) -> Bool {
@@ -30,7 +30,7 @@ class TelepathHandler {
             return false
         }
         self.channel = channel
-        channel.notify(message: "I scanned the QR code!")
+        notify()
         return true
     }
 
@@ -53,5 +53,14 @@ class TelepathHandler {
                 print("Message sent; error: ", error ?? "-")
             }
         }
+    }
+
+    func notify() {
+        guard let channel = channel else { return }
+        let response = [
+            "jsonrpc": "2.0",
+            "method": "didScanQRCode"
+        ]
+        channel.notify(message: JSON(response).rawString()!)
     }
 }

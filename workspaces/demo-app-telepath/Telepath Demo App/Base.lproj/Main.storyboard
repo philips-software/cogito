@@ -18,16 +18,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vc-Zn-FBZ">
-                                <rect key="frame" x="160" y="318" width="54" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2vc-Zn-FBZ">
+                                <rect key="frame" x="160.5" y="318.5" width="54" height="30"/>
                                 <state key="normal" title="Receive"/>
                                 <connections>
                                     <action selector="receive:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A44-Lk-ghx"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xye-Hd-9bd">
+                                <rect key="frame" x="166.5" y="356.5" width="42" height="30"/>
+                                <state key="normal" title="Notify"/>
+                                <connections>
+                                    <action selector="notify:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7pb-SK-bTc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="2vc-Zn-FBZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="78A-1S-33Y"/>
+                            <constraint firstItem="Xye-Hd-9bd" firstAttribute="top" secondItem="2vc-Zn-FBZ" secondAttribute="bottom" constant="8" id="B3Y-1o-ahn"/>
+                            <constraint firstItem="Xye-Hd-9bd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jZz-oo-hzY"/>
+                            <constraint firstItem="2vc-Zn-FBZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wfK-dG-FWU"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
