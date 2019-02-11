@@ -1,7 +1,7 @@
 import {
   SocketServer,
   maximumQueueSize,
-  maximumMessageLength
+  maximumNotificationLength
 } from './socket-server'
 import FakeClientSocket from './fake-client'
 import MockDate from 'mockdate'
@@ -17,7 +17,7 @@ describe('socket server', () => {
 
   describe('when sender is connected', () => {
     const queue = 'queue'
-    const message = 'some message'
+    const notification = 'some notification'
     let sender
 
     beforeEach(() => {
@@ -41,9 +41,9 @@ describe('socket server', () => {
         receiver.receiveIncoming('identify', queue)
       })
 
-      it('receives message that has been sent', () => {
-        sender.receiveIncoming('message', message)
-        expect(receiver.outgoing[0].payload).toBe(message)
+      it('receives notification that has been sent', () => {
+        sender.receiveIncoming('notification', notification)
+        expect(receiver.outgoing[0].payload).toBe(notification)
       })
 
       it('allows max 2 parties per queue id', () => {
@@ -71,44 +71,44 @@ describe('socket server', () => {
       })
 
       it('receives nothing', () => {
-        sender.receiveIncoming('message', message)
+        sender.receiveIncoming('notification', notification)
         expect(receiver.outgoing.length).toBe(0)
       })
     })
 
     describe('when receiver connects after sending', () => {
       let receiver
-      const message2 = 'some second message'
+      const notification2 = 'some second notification'
 
       beforeEach(() => {
-        sender.receiveIncoming('message', message)
-        sender.receiveIncoming('message', message2)
+        sender.receiveIncoming('notification', notification)
+        sender.receiveIncoming('notification', notification2)
       })
 
       it('receives after connecting', () => {
         receiver = new FakeClientSocket()
         receiver.connect(socketServer)
         receiver.receiveIncoming('identify', queue)
-        expect(receiver.outgoing[0].payload).toBe(message)
-        expect(receiver.outgoing[1].payload).toBe(message2)
+        expect(receiver.outgoing[0].payload).toBe(notification)
+        expect(receiver.outgoing[1].payload).toBe(notification2)
       })
     })
 
-    it(`allows a maximum of ${maximumQueueSize} messages in a queue`, () => {
+    it(`allows a maximum of ${maximumQueueSize} notifications in a queue`, () => {
       for (let i = 0; i < maximumQueueSize; i++) {
-        sender.receiveIncoming('message', message)
+        sender.receiveIncoming('notification', notification)
       }
       expect(sender.outgoing.length).toBe(0)
-      sender.receiveIncoming('message', message)
+      sender.receiveIncoming('notification', notification)
       expect(sender.outgoing[0].event).toBe('error')
     })
 
-    it(`allows a maximum size of ${maximumMessageLength} per message`, () => {
-      const notTooBig = Array(maximumMessageLength + 1).join('a')
+    it(`allows a maximum size of ${maximumNotificationLength} per notification`, () => {
+      const notTooBig = Array(maximumNotificationLength + 1).join('a')
       const tooBig = notTooBig + 'a'
-      sender.receiveIncoming('message', notTooBig)
+      sender.receiveIncoming('notification', notTooBig)
       expect(sender.outgoing.length).toBe(0)
-      sender.receiveIncoming('message', tooBig)
+      sender.receiveIncoming('notification', tooBig)
       expect(sender.outgoing[0].event).toBe('error')
     })
 
@@ -118,7 +118,7 @@ describe('socket server', () => {
 
       beforeEach(() => {
         MockDate.set(startTime)
-        sender.receiveIncoming('message', message)
+        sender.receiveIncoming('notification', notification)
       })
 
       afterEach(() => {
@@ -135,7 +135,7 @@ describe('socket server', () => {
         let receiver = new FakeClientSocket()
         receiver.connect(socketServer)
         receiver.receiveIncoming('identify', queue)
-        expect(receiver.outgoing[0].payload).toBe(message)
+        expect(receiver.outgoing[0].payload).toBe(notification)
       })
 
       it('purges queues after 10 minutes', () => {
@@ -147,14 +147,14 @@ describe('socket server', () => {
       })
 
       it('retains queues that have been read recently', () => {
-        sender.receiveIncoming('message', 'some other message')
+        sender.receiveIncoming('notification', 'some other notification')
         forwardTime(startTime + tenMinutes)
         let receiver = new FakeClientSocket()
         receiver.connect(socketServer)
         receiver.receiveIncoming('identify', queue)
-        expect(receiver.outgoing[0].payload).toBe(message)
+        expect(receiver.outgoing[0].payload).toBe(notification)
         forwardTime(startTime + tenMinutes + 1)
-        expect(receiver.outgoing[0].payload).toBe(message)
+        expect(receiver.outgoing[0].payload).toBe(notification)
       })
     })
   })
