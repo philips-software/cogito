@@ -22,7 +22,10 @@ class TelepathHandler {
     }
 
     func connect(url: URL) -> Bool {
-        guard let channel = try? telepath.connect(url: url) else {
+        let aChannel = try? telepath.connect(url: url) { notification in
+            print("received notification: ", notification)
+        }
+        guard let channel = aChannel else {
             print("Invalid URL: ", url)
             return false
         }
