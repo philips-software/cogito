@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Z3A-AE-fsA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Z3A-AE-fsA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="SnellRoundhand.ttc">
-            <string>SnellRoundhand</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="WK3-It-cZ8">
@@ -68,7 +63,7 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Application:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbl-X1-gNg">
-                                <rect key="frame" x="16" y="79.5" width="90.5" height="38"/>
+                                <rect key="frame" x="16" y="80" width="90.5" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -98,17 +93,32 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="with:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Qg-bw-NrC">
-                                <rect key="frame" x="16" y="184.5" width="37" height="20.5"/>
+                                <rect key="frame" x="16" y="184" width="37" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="CKB-Jv-mPx">
+                                <rect key="frame" x="143.5" y="589" width="88.5" height="20"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Signing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fX5-5r-GgA">
+                                        <rect key="frame" x="0.0" y="0.0" width="57.5" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cZ0-Sa-3Jd">
+                                        <rect key="frame" x="68.5" y="0.0" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="d6B-Fa-2XX" firstAttribute="trailing" secondItem="cc9-Cr-5du" secondAttribute="trailing" id="0XX-n0-2NW"/>
                             <constraint firstItem="dTd-mD-0CU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fbl-X1-gNg" secondAttribute="trailing" constant="8" id="1VM-f5-y0Q"/>
                             <constraint firstItem="dTd-mD-0CU" firstAttribute="baseline" secondItem="fbl-X1-gNg" secondAttribute="baseline" id="3hx-1D-MyW"/>
+                            <constraint firstItem="d6B-Fa-2XX" firstAttribute="bottom" secondItem="fX5-5r-GgA" secondAttribute="bottom" constant="58" id="6wD-NS-YrS"/>
                             <constraint firstAttribute="trailing" secondItem="Wze-cb-C7g" secondAttribute="trailing" constant="8" id="6xI-49-fVC"/>
                             <constraint firstItem="fbl-X1-gNg" firstAttribute="leading" secondItem="Ndi-vO-tCJ" secondAttribute="leadingMargin" id="8rX-rS-a2U"/>
                             <constraint firstItem="n25-wv-whe" firstAttribute="leading" secondItem="Ndi-vO-tCJ" secondAttribute="leadingMargin" id="Bcy-cL-LsI"/>
@@ -117,6 +127,7 @@
                             <constraint firstAttribute="trailing" secondItem="dTd-mD-0CU" secondAttribute="trailing" constant="8" id="GbD-h8-Ytk"/>
                             <constraint firstItem="Wze-cb-C7g" firstAttribute="height" secondItem="dTd-mD-0CU" secondAttribute="height" id="JD9-dX-IgH"/>
                             <constraint firstItem="cc9-Cr-5du" firstAttribute="leading" secondItem="d6B-Fa-2XX" secondAttribute="leading" id="JWy-om-x3o"/>
+                            <constraint firstItem="CKB-Jv-mPx" firstAttribute="centerX" secondItem="d6B-Fa-2XX" secondAttribute="centerX" id="QD2-cG-p42"/>
                             <constraint firstItem="bBC-pw-SBc" firstAttribute="top" secondItem="Wze-cb-C7g" secondAttribute="bottom" constant="8" id="SGV-Pl-PbO"/>
                             <constraint firstItem="bBC-pw-SBc" firstAttribute="leading" secondItem="Wze-cb-C7g" secondAttribute="leading" id="TZs-iD-Y5H"/>
                             <constraint firstItem="bBC-pw-SBc" firstAttribute="trailing" secondItem="Ndi-vO-tCJ" secondAttribute="trailingMargin" id="Tjj-xk-fO1"/>
@@ -136,6 +147,7 @@
                     <navigationItem key="navigationItem" title="Signature requested" id="4QQ-ag-00q"/>
                     <connections>
                         <outlet property="actionLabel" destination="Wze-cb-C7g" id="8G0-zw-hCS"/>
+                        <outlet property="activityView" destination="CKB-Jv-mPx" id="x80-be-uno"/>
                         <outlet property="applicationLabel" destination="dTd-mD-0CU" id="9X2-Vp-Bl9"/>
                         <outlet property="identityLabel" destination="bBC-pw-SBc" id="wF5-bD-ebQ"/>
                         <outlet property="rejectButton" destination="6RG-5o-HXO" id="uJP-qj-imU"/>

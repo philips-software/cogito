@@ -7,6 +7,7 @@ class ExplanationViewController: UIViewController {
     @IBOutlet weak var identityLabel: UILabel!
     @IBOutlet weak var signButton: UIButton!
     @IBOutlet weak var rejectButton: UIButton!
+    @IBOutlet weak var activityView: UIStackView!
 
     var appName: String = ""
     var actionDescription: String = ""
@@ -32,6 +33,9 @@ class ExplanationViewController: UIViewController {
     }
 
     @IBAction func sign() {
+        signButton.isHidden = true
+        rejectButton.isHidden = true
+        activityView.isHidden = false
         onSign()
     }
 
