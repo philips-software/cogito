@@ -23,7 +23,7 @@ public struct SecureChannel {
         self.appName = appName
         self.receivingQueue = id + ".red"
         self.sendingQueue = id + ".blue"
-        socketIOService.start(onNotification: onEncryptedNotification)
+        socketIOService.start(channelID: id, onNotification: onEncryptedNotification)
     }
 
     public mutating func invalidate() {

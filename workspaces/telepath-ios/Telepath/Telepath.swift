@@ -6,10 +6,11 @@ public typealias NotificationHandler = (String) -> Void
 public struct Telepath {
     let queuing: QueuingService
     let socketIOService: SocketIOService
+    let socketManager: SocketManager
 
-    public init(queuingServiceUrl: URL) {
-        queuing = QueuingServiceClient(url: queuingServiceUrl)
-        let socketManager = SocketManager(socketURL: queuingServiceUrl)
+    public init(serviceUrl: URL) {
+        queuing = QueuingServiceClient(url: serviceUrl)
+        socketManager = SocketManager(socketURL: serviceUrl, config: [.log(true)])
         let socket = socketManager.defaultSocket
         socketIOService = SocketIOServiceClient(socket: socket)
     }
