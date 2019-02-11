@@ -21,6 +21,7 @@ class CreateIdentityViewController: UIViewController, Connectable {
         super.viewDidLoad()
         connection.bind(\Props.description, to: descriptionField.rx.text)
         connection.bind(\Props.createButtonEnabled, to: createButton.rx.isEnabled)
+        connection.bind(\Props.pending, to: descriptionField.rx.isEnabled) { !$0 }
         connection.bind(\Props.pending, to: progressView.rx.isHidden) { !$0 }
         connection.bind(\Props.pending, to: createButton.rx.title()) {
             $0 ? "Creating" : "Create"
