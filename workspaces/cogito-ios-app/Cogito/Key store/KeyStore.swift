@@ -1,9 +1,10 @@
 import BigInt
 import Ethers
 
-let standardScryptN = 1 << 18
-let standardScryptP = 1
-let passwordLength = 16
+// we ensure that the passwords contain enough entropy to bypass Scrypt
+let passwordLength = 32
+let unsafeScryptN = 1
+let unsafeScryptP = 1
 
 class KeyStore: Codable {
     let name: String
@@ -14,8 +15,8 @@ class KeyStore: Codable {
 
     required init(
         name: String,
-        scryptN: Int = standardScryptN / 4,
-        scryptP: Int = standardScryptP
+        scryptN: Int = unsafeScryptN,
+        scryptP: Int = unsafeScryptP
     ) {
         self.name = name
         self.directory = KeyStoreDirectory(name: name)
