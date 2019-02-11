@@ -59,6 +59,16 @@ class CreateIdentityViewControllerSpec: QuickSpec {
             expect(viewController.progressView.progress) == 0.42
         }
 
+        it("disables the create button when pending") {
+            let state = appState(createIdentity: createIdentityState(
+                description: "me",
+                pending: true
+            ))
+            viewController.connection.newState(state: state)
+            expect(viewController.createButton.isEnabled) == false
+            expect(viewController.createButton.titleLabel?.text) == "Creating"
+        }
+
         it("triggers action when editing ends") {
             var descriptionSet: String?
             viewController.connection.actions = CreateIdentityViewController.Actions(

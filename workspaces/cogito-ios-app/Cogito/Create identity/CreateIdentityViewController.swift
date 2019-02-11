@@ -19,9 +19,12 @@ class CreateIdentityViewController: UIViewController, Connectable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        connection.bind(\Props.description, to: createButton.rx.isEnabled) { $0 != "" }
         connection.bind(\Props.description, to: descriptionField.rx.text)
+        connection.bind(\Props.createButtonEnabled, to: createButton.rx.isEnabled)
         connection.bind(\Props.pending, to: progressView.rx.isHidden) { !$0 }
+        connection.bind(\Props.pending, to: createButton.rx.title()) {
+            $0 ? "Creating" : "Create"
+        }
         connection.bind(\Props.progress, to: progressView.rx.progress)
         connection.subscribe(\Props.fulfilled) { [unowned self] fulfilled in
             if fulfilled {
@@ -80,6 +83,7 @@ class CreateIdentityViewController: UIViewController, Connectable {
         let progress: Float
         let fulfilled: Bool
         let error: String?
+        let createButtonEnabled: Bool
     }
     struct Actions {
         let setDescription: (String) -> Void
@@ -96,7 +100,10 @@ private func mapStateToProps(state: AppState) -> CreateIdentityViewController.Pr
         pending: state.createIdentity.pending,
         progress: state.createIdentity.progress,
         fulfilled: state.createIdentity.newAddress != nil,
-        error: state.createIdentity.error
+        error: state.createIdentity.error,
+        createButtonEnabled:
+            state.createIdentity.description != "" &&
+            !state.createIdentity.pending
     )
 }
 
