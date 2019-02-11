@@ -6,19 +6,23 @@ describe('JSON RPC Channel', () => {
 
   let jsonrpc
   let channel
+  let notificationHandler
 
   beforeEach(() => {
     channel = {
       send: jest.fn(),
       receive: jest.fn(),
-      createConnectUrl: jest.fn()
+      notify: jest.fn(),
+      createConnectUrl: jest.fn(),
+      setNotificationHandler: jest.fn()
     }
-    jsonrpc = new JsonRpcChannel({ channel: channel })
+    notificationHandler = jest.fn()
+    jsonrpc = new JsonRpcChannel({ channel, notificationHandler })
   })
 
   describe('when a valid response is available', () => {
     beforeEach(() => {
-      channel.send.mockImplementation((sentRequest) => {
+      channel.send.mockImplementation(sentRequest => {
         if (sentRequest === JSON.stringify(request)) {
           channel.receive.mockResolvedValue(JSON.stringify(response))
         }
@@ -54,7 +58,9 @@ describe('JSON RPC Channel', () => {
 
   it('ignores responses with the wrong id', async () => {
     channel.receive
-      .mockResolvedValueOnce(JSON.stringify({ jsonrpc: '2.0', id: 0, result: null }))
+      .mockResolvedValueOnce(
+        JSON.stringify({ jsonrpc: '2.0', id: 0, result: null })
+      )
       .mockResolvedValue(JSON.stringify(response))
     expect(await jsonrpc.send(request)).toEqual(response)
   })
@@ -97,5 +103,62 @@ describe('JSON RPC Channel', () => {
 
     jsonrpc = new JsonRpcChannel({ channel: channel })
     expect(jsonrpc.appName).toEqual(appName)
+  })
+
+  describe('notifications', () => {
+    const notification = { jsonrpc: '2.0', method: 'test' }
+    const invalidVersionNotification = { jsonrpc: '0.42', method: 'test' }
+    const notificationWithId = { jsonrpc: '2.0', id: 1, method: 'test' }
+    const notificationWithoutMethod = { jsonrpc: '2.0' }
+
+    describe('outgoing', () => {
+      it('hands valid notification over to secure channel', async () => {
+        await jsonrpc.notify(notification)
+        expect(channel.notify.mock.calls[0][0]).toEqual(
+          JSON.stringify(notification)
+        )
+      })
+
+      it('throws when notification is not a json rpc 2.0 structure', async () => {
+        await expect(
+          jsonrpc.notify(invalidVersionNotification)
+        ).rejects.toThrow()
+      })
+
+      it('throws when notification has an id', async () => {
+        await expect(jsonrpc.notify(notificationWithId)).rejects.toThrow()
+      })
+
+      it('throws when notification does not specify a method', async () => {
+        await expect(
+          jsonrpc.notify(notificationWithoutMethod)
+        ).rejects.toThrow()
+      })
+    })
+
+    describe('incoming', () => {
+      it('passes incoming notifications on', () => {
+        jsonrpc.onJsonRpcNotification(JSON.stringify(notification))
+        expect(notificationHandler.mock.calls[0][0]).toEqual(notification)
+      })
+
+      it('ignores notification that is not a json rpc 2.0 structure', () => {
+        const wrongMessage = JSON.stringify(invalidVersionNotification)
+        jsonrpc.onJsonRpcNotification(wrongMessage)
+        expect(notificationHandler.mock.calls.length).toBe(0)
+      })
+
+      it('ignores notification that has an id', () => {
+        const wrongMessage = JSON.stringify(notificationWithId)
+        jsonrpc.onJsonRpcNotification(wrongMessage)
+        expect(notificationHandler.mock.calls.length).toBe(0)
+      })
+
+      it('ignores notification without method', () => {
+        const wrongMessage = JSON.stringify(notificationWithoutMethod)
+        jsonrpc.onJsonRpcNotification(wrongMessage)
+        expect(notificationHandler.mock.calls.length).toBe(0)
+      })
+    })
   })
 })
