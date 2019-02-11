@@ -11,7 +11,7 @@ class TelepathSpec: QuickSpec {
         var telepath: Telepath!
 
         beforeEach {
-            telepath = Telepath(queuingServiceUrl: queuingServiceUrl)
+            telepath = Telepath(serviceUrl: queuingServiceUrl)
         }
 
         it("connects to the correct queuing service") {

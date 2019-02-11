@@ -3,6 +3,6 @@
 public typealias EncryptedNotificationHandler = (Data) -> Void
 
 public protocol SocketIOService {
-    func start(onNotification: @escaping EncryptedNotificationHandler)
+    func start(channelID: ChannelID, onNotification: @escaping EncryptedNotificationHandler)
     func notify(data: Data)
 }

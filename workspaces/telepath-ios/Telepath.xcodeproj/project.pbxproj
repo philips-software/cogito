@@ -11,6 +11,7 @@
 		0291A402220C43C400AFC6D6 /* SocketIOServiceClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291A401220C43C400AFC6D6 /* SocketIOServiceClientSpec.swift */; };
 		0291A404220C43CF00AFC6D6 /* SocketIOServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291A403220C43CF00AFC6D6 /* SocketIOServiceClient.swift */; };
 		0291A406220C728600AFC6D6 /* SocketIOServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0291A405220C728600AFC6D6 /* SocketIOServiceMock.swift */; };
+		02C7B91C2211B7210006ED43 /* SocketMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C7B91B2211B7210006ED43 /* SocketMock.swift */; };
 		454975F1243813271C739FA9 /* Pods_Telepath_TelepathTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F4BF1752A35E8B846AEDDF /* Pods_Telepath_TelepathTests.framework */; };
 		52EA394D90FA1BD55FD6D7D0 /* Pods_Telepath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893E0DFF64A9DA89C3F0EB6A /* Pods_Telepath.framework */; };
 		5C3C1D541F7BBFCE001E5563 /* UrlCodecSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3C1D531F7BBFCE001E5563 /* UrlCodecSpec.swift */; };
@@ -48,6 +49,7 @@
 		0291A401220C43C400AFC6D6 /* SocketIOServiceClientSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOServiceClientSpec.swift; sourceTree = "<group>"; };
 		0291A403220C43CF00AFC6D6 /* SocketIOServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOServiceClient.swift; sourceTree = "<group>"; };
 		0291A405220C728600AFC6D6 /* SocketIOServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOServiceMock.swift; sourceTree = "<group>"; };
+		02C7B91B2211B7210006ED43 /* SocketMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketMock.swift; sourceTree = "<group>"; };
 		22F4BF1752A35E8B846AEDDF /* Pods_Telepath_TelepathTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Telepath_TelepathTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3282E434BDF2C5AEABE3548D /* Pods-Telepath.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath/Pods-Telepath.debug.xcconfig"; sourceTree = "<group>"; };
 		50E96DB6A72961DE52059338 /* Pods-Telepath-TelepathTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Telepath-TelepathTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Telepath-TelepathTests/Pods-Telepath-TelepathTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				5CF521D71F78F4780004C494 /* Info.plist */,
 				5C2F83F51F7E461500C8DD31 /* .swiftlint.yml */,
 				0291A405220C728600AFC6D6 /* SocketIOServiceMock.swift */,
+				02C7B91B2211B7210006ED43 /* SocketMock.swift */,
 			);
 			path = TelepathTests;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02C7B91C2211B7210006ED43 /* SocketMock.swift in Sources */,
 				5CF521D61F78F4780004C494 /* TelepathSpec.swift in Sources */,
 				5C4048841F7E385C00B19C9D /* SecureChannelSpec.swift in Sources */,
 				5CD810EF1F91064800CCD769 /* QueuingServiceClientSpec.swift in Sources */,
