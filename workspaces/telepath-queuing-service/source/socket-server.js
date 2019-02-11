@@ -1,26 +1,29 @@
 import Cache from 'lru-cache'
 
 export const maximumQueueSize = 10
-export const maximumMessageLength = 100000
+export const maximumNotificationLength = 100000
 
 export class SocketServer {
   constructor () {
     this.clients = []
-    this.pendingMessages = Cache({ maxAge: 10 * 60 * 1000 })
+    this.pendingNotifications = Cache({ maxAge: 10 * 60 * 1000 })
     setInterval(() => {
-      this.pendingMessages.prune()
+      this.pendingNotifications.prune()
     }, 60 * 1000)
   }
 
   onConnection (clientSocket) {
     // console.debug('connected')
-    clientSocket.on('identify', queueId => {
+    clientSocket.on('identify', (queueId, ack) => {
       // console.debug('identify: ', queueId)
       this.onIdentify(clientSocket, queueId)
+      if (ack) {
+        ack()
+      }
     })
-    clientSocket.on('message', message => {
-      // console.debug('message: ', message)
-      this.onMessage(clientSocket, message)
+    clientSocket.on('notification', notification => {
+      // console.debug('notification: ', notification)
+      this.onNotification(clientSocket, notification)
     })
     clientSocket.on('disconnect', reason => {
       // console.debug('disconnect: ', clientSocket.queueId)
@@ -38,38 +41,38 @@ export class SocketServer {
     clientsForQueue.push(clientSocket)
     this.clients[queueId] = clientsForQueue
     clientSocket.queueId = queueId
-    this.deliverPendingMessages(clientSocket)
+    this.deliverPendingNotifications(clientSocket)
   }
 
-  deliverPendingMessages (clientSocket) {
+  deliverPendingNotifications (clientSocket) {
     const queueId = clientSocket.queueId
-    const pending = this.pendingMessages.get(queueId)
+    const pending = this.pendingNotifications.get(queueId)
     if (pending) {
-      pending.map(message => {
-        // console.debug('deliver pending message')
-        clientSocket.send(message)
+      pending.map(notification => {
+        // console.debug('deliver pending notifications')
+        clientSocket.emit('notification', notification)
       })
-      this.pendingMessages.del(queueId)
+      this.pendingNotifications.del(queueId)
     }
   }
 
-  onMessage (source, message) {
-    if (!this.verifyMessage(message)) {
-      source.emit('error', 'message too long')
+  onNotification (source, notification) {
+    if (!this.verifyNotification(notification)) {
+      source.emit('error', 'notification too long')
       return
     }
 
     const receiver = this.findReceiver(source)
     if (receiver) {
-      // console.debug('deliver message')
-      receiver.send(message)
+      // console.debug('deliver notification')
+      receiver.emit('notification', notification)
     } else {
-      this.addPendingMessage(source, message)
+      this.addPendingNotification(source, notification)
     }
   }
 
-  verifyMessage (message) {
-    return message.length <= maximumMessageLength
+  verifyNotification (notification) {
+    return notification.length <= maximumNotificationLength
   }
 
   onDisconnect (clientSocket) {
@@ -94,16 +97,16 @@ export class SocketServer {
     return receivers.length === 1 ? receivers[0] : undefined
   }
 
-  addPendingMessage (source, message) {
+  addPendingNotification (source, notification) {
     let queueId = source.queueId
-    let pendingMessages = this.pendingMessages.get(queueId) || []
-    if (pendingMessages.length === maximumQueueSize) {
-      source.emit('error', 'too many pending messages')
+    let pendingNotifications = this.pendingNotifications.get(queueId) || []
+    if (pendingNotifications.length === maximumQueueSize) {
+      source.emit('error', 'too many pending notifications')
       return
     }
 
-    pendingMessages.push(message)
-    this.pendingMessages.set(queueId, pendingMessages)
+    pendingNotifications.push(notification)
+    this.pendingNotifications.set(queueId, pendingNotifications)
   }
 }
 
