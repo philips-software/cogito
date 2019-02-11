@@ -12,7 +12,10 @@ class App extends Component {
   async componentDidMount () {
     const telepath = new Telepath('https://telepath.cogito.mobi')
     this.channel = await telepath.createChannel({
-      appName: 'Telepath Demo App'
+      appName: 'Telepath Demo App',
+      notificationHandler: notification => {
+        console.debug('incoming notification: ', notification)
+      }
     })
     const connectUrl = this.channel.createConnectUrl('telepath-demo-app://')
     this.setState({ connectUrl })
