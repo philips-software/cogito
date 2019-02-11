@@ -29,11 +29,15 @@ class SocketIOServiceClient: SocketIOService {
     }
 
     func onConnect() {
-        socket.emitWithAck("identify", channelID).timingOut(after: 30) { [weak self] items in
-            if items.count > 0 && items[0] as? String == SocketAckStatus.noAck.rawValue {
-                // todo handle timeout
-            } else {
-                self?.sendPendingNotifications()
+        DispatchQueue.main.async { [unowned self] in
+            self.socket
+                .emitWithAck("identify", self.channelID)
+                .timingOut(after: 30) { [weak self] items in
+                    if items.count > 0 && items[0] as? String == SocketAckStatus.noAck.rawValue {
+                        // todo handle timeout
+                    } else {
+                        self?.sendPendingNotifications()
+                    }
             }
         }
     }
@@ -47,11 +51,14 @@ class SocketIOServiceClient: SocketIOService {
     }
 
     func sendPendingNotifications() {
-        for message in pendingNotifications {
-            socket.emit("notification", message)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            for message in self.pendingNotifications {
+                self.socket.emit("notification", message)
+            }
+            self.pendingNotifications = []
+            self.setupComplete = true
         }
-        pendingNotifications = []
-        setupComplete = true
     }
 
     func notify(data: Data) {
