@@ -7,7 +7,7 @@ class CreateIdentityViewController: UIViewController, Connectable {
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var closeButton: UIButton?
-    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var activityView: UIActivityIndicatorView!
 
     @IBInspectable var showCloseButton: Bool = false {
         didSet {
@@ -22,11 +22,10 @@ class CreateIdentityViewController: UIViewController, Connectable {
         connection.bind(\Props.description, to: descriptionField.rx.text)
         connection.bind(\Props.createButtonEnabled, to: createButton.rx.isEnabled)
         connection.bind(\Props.pending, to: descriptionField.rx.isEnabled) { !$0 }
-        connection.bind(\Props.pending, to: progressView.rx.isHidden) { !$0 }
+        connection.bind(\Props.pending, to: activityView.rx.isHidden) { !$0 }
         connection.bind(\Props.pending, to: createButton.rx.title()) {
             $0 ? "Creating" : "Create"
         }
-        connection.bind(\Props.progress, to: progressView.rx.progress)
         connection.subscribe(\Props.fulfilled) { [unowned self] fulfilled in
             if fulfilled {
                 self.onDone()
@@ -81,7 +80,6 @@ class CreateIdentityViewController: UIViewController, Connectable {
     struct Props {
         let description: String
         let pending: Bool
-        let progress: Float
         let fulfilled: Bool
         let error: String?
         let createButtonEnabled: Bool
@@ -99,7 +97,6 @@ private func mapStateToProps(state: AppState) -> CreateIdentityViewController.Pr
     return CreateIdentityViewController.Props(
         description: state.createIdentity.description,
         pending: state.createIdentity.pending,
-        progress: state.createIdentity.progress,
         fulfilled: state.createIdentity.newAddress != nil,
         error: state.createIdentity.error,
         createButtonEnabled:

@@ -111,24 +111,21 @@ Cogito allows you to choose who you are.</string>
                                     <action selector="createTapped" destination="wTc-Hd-r6m" eventType="touchUpInside" id="97G-YY-LJM"/>
                                 </connections>
                             </button>
-                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fKZ-Iw-Ki6">
-                                <rect key="frame" x="112.5" y="324" width="150" height="2"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="odv-dA-Wrb"/>
-                                </constraints>
-                            </progressView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Srs-9I-UL2">
+                                <rect key="frame" x="224.5" y="286" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Srs-9I-UL2" firstAttribute="leading" secondItem="hC8-Yl-N8c" secondAttribute="trailing" constant="8" id="3tz-4j-jBm"/>
                             <constraint firstItem="hC8-Yl-N8c" firstAttribute="centerX" secondItem="YQZ-hK-7D4" secondAttribute="centerX" id="5Q8-NV-AaB"/>
                             <constraint firstItem="ZV0-kh-bRm" firstAttribute="centerX" secondItem="YQZ-hK-7D4" secondAttribute="centerX" id="FZp-gK-eYV"/>
                             <constraint firstItem="hC8-Yl-N8c" firstAttribute="top" secondItem="BaB-Qh-vRu" secondAttribute="bottom" constant="40" id="KKG-0O-cOg"/>
                             <constraint firstItem="BaB-Qh-vRu" firstAttribute="leading" secondItem="LKO-n4-gnX" secondAttribute="leading" constant="16" id="OZL-Ah-acc"/>
+                            <constraint firstItem="Srs-9I-UL2" firstAttribute="centerY" secondItem="hC8-Yl-N8c" secondAttribute="centerY" id="RRC-8w-mJc"/>
                             <constraint firstItem="ZV0-kh-bRm" firstAttribute="top" secondItem="LKO-n4-gnX" secondAttribute="top" constant="70" id="Xd4-a5-wpf"/>
-                            <constraint firstItem="fKZ-Iw-Ki6" firstAttribute="top" secondItem="hC8-Yl-N8c" secondAttribute="bottom" constant="10" id="YnH-bT-J3i"/>
                             <constraint firstItem="BaB-Qh-vRu" firstAttribute="top" secondItem="ZV0-kh-bRm" secondAttribute="bottom" constant="53" id="cBn-CC-RQm"/>
                             <constraint firstItem="LKO-n4-gnX" firstAttribute="trailing" secondItem="BaB-Qh-vRu" secondAttribute="trailing" constant="16" id="eMX-w0-gY7"/>
-                            <constraint firstItem="fKZ-Iw-Ki6" firstAttribute="centerX" secondItem="LKO-n4-gnX" secondAttribute="centerX" id="fDn-um-ANW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LKO-n4-gnX"/>
                     </view>
@@ -136,9 +133,9 @@ Cogito allows you to choose who you are.</string>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="showCloseButton" value="NO"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="activityView" destination="Srs-9I-UL2" id="fsq-Ph-Tdy"/>
                         <outlet property="createButton" destination="hC8-Yl-N8c" id="MvL-Sc-ae8"/>
                         <outlet property="descriptionField" destination="BaB-Qh-vRu" id="fO4-av-ZO8"/>
-                        <outlet property="progressView" destination="fKZ-Iw-Ki6" id="jtT-Vt-Rsf"/>
                     </connections>
                 </viewController>
                 <barButtonItem systemItem="cancel" id="TPz-Jx-N2l"/>

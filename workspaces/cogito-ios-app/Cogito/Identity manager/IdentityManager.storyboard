@@ -112,21 +112,18 @@
                                     <action selector="createTapped" destination="aui-nC-Exo" eventType="touchUpInside" id="o8N-Xs-26a"/>
                                 </connections>
                             </button>
-                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="H4h-qm-LRk">
-                                <rect key="frame" x="112.5" y="324" width="150" height="2"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="dIF-f2-x7k"/>
-                                </constraints>
-                            </progressView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="KhW-gx-Efj">
+                                <rect key="frame" x="224.5" y="286" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Qvy-nl-rbr" firstAttribute="leading" secondItem="N15-uF-45j" secondAttribute="leading" constant="16" id="0iK-lt-bf4"/>
-                            <constraint firstItem="H4h-qm-LRk" firstAttribute="top" secondItem="0VW-9w-gSg" secondAttribute="bottom" constant="10" id="3ml-z7-zLg"/>
-                            <constraint firstItem="H4h-qm-LRk" firstAttribute="centerX" secondItem="N15-uF-45j" secondAttribute="centerX" id="4ZM-bz-Qd2"/>
+                            <constraint firstItem="KhW-gx-Efj" firstAttribute="leading" secondItem="0VW-9w-gSg" secondAttribute="trailing" constant="8" id="CV6-BR-ZXg"/>
                             <constraint firstItem="0VW-9w-gSg" firstAttribute="centerX" secondItem="NOX-NN-kCf" secondAttribute="centerX" id="EST-PN-Nkk"/>
                             <constraint firstItem="0VW-9w-gSg" firstAttribute="top" secondItem="Qvy-nl-rbr" secondAttribute="bottom" constant="40" id="GDX-Aw-L5q"/>
                             <constraint firstItem="CeB-9W-OFi" firstAttribute="top" secondItem="N15-uF-45j" secondAttribute="top" constant="70" id="SMY-5q-Hku"/>
+                            <constraint firstItem="KhW-gx-Efj" firstAttribute="centerY" secondItem="0VW-9w-gSg" secondAttribute="centerY" id="eoE-ZY-7US"/>
                             <constraint firstItem="Qvy-nl-rbr" firstAttribute="top" secondItem="CeB-9W-OFi" secondAttribute="bottom" constant="53" id="fag-jr-ziu"/>
                             <constraint firstItem="N15-uF-45j" firstAttribute="trailing" secondItem="Qvy-nl-rbr" secondAttribute="trailing" constant="16" id="ffG-TQ-ky4"/>
                             <constraint firstItem="CeB-9W-OFi" firstAttribute="centerX" secondItem="NOX-NN-kCf" secondAttribute="centerX" id="nWR-BM-d6R"/>
@@ -137,9 +134,9 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="showCloseButton" value="NO"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="activityView" destination="KhW-gx-Efj" id="VZR-zj-O6I"/>
                         <outlet property="createButton" destination="0VW-9w-gSg" id="N5x-Fn-dTj"/>
                         <outlet property="descriptionField" destination="Qvy-nl-rbr" id="pXk-rg-Y6R"/>
-                        <outlet property="progressView" destination="H4h-qm-LRk" id="ar0-d9-qi6"/>
                     </connections>
                 </viewController>
                 <barButtonItem systemItem="cancel" id="cCk-tu-fdh"/>
