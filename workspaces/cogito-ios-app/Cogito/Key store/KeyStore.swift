@@ -1,4 +1,3 @@
-import Geth
 import BigInt
 import Ethers
 
@@ -6,7 +5,6 @@ class KeyStore: Codable {
     let name: String
     let scryptN: Int
     let scryptP: Int
-    lazy var wrapped: GethKeyStore? = GethKeyStore(directory.path, scryptN: scryptN, scryptP: scryptP)
     let directory: KeyStoreDirectory
     var appPassword = AppPassword()
 
@@ -28,7 +26,6 @@ class KeyStore: Codable {
     func reset() throws {
         try directory.delete()
         try appPassword.reset()
-        wrapped = nil
     }
 
     func newAccount(
@@ -63,75 +60,58 @@ class KeyStore: Codable {
         }
     }
 
-    func findAccount(identity: Identity) -> GethAccount? {
-        guard let gethKeyStore = wrapped else { return nil }
-
-        let accounts = gethKeyStore.getAccounts()!
-        for index in 0..<accounts.size() {
-            do {
-                let account = try accounts.get(index)
-                if account.getAddress().getHex() == identity.address.value {
-                    return account
-                }
-            } catch {}
+    func findAccount(identity: Identity) -> URL? {
+        let address = identity.address.value
+        let path = self.directory.url.appendingPathComponent(address)
+        if FileManager.default.fileExists(atPath: path.path) {
+            return path
+        } else {
+            return nil
         }
-        return nil
     }
 
     func sign(
-        transaction: UnsignedTransaction,
+        transaction unsigned: UnsignedTransaction,
         identity: Identity,
         onComplete: @escaping (_ transaction: Data?, _ error: String?) -> Void
     ) {
-        guard let gethKeyStore = wrapped else {
-            onComplete(nil, "failed to open key store")
+        guard let walletUrl = findAccount(identity: identity) else {
+            onComplete(nil, "couldn't find wallet")
             return
         }
 
-        guard let from = findAccount(identity: identity) else {
-            onComplete(nil, "couldn't find geth account")
-            return
-        }
-
-        let value = GethBigInt(0)!
-        value.setString(transaction.value.description, base: 10)
-        assert(value.string() == transaction.value.description, "value")
-
-        let gasLimit = GethBigInt(0)!
-        gasLimit.setString(transaction.gasLimit.description, base: 10)
-        assert(gasLimit.string() == transaction.gasLimit.description, "gasLimit")
-
-        let gasPrice = GethBigInt(0)!
-        gasPrice.setString(transaction.gasPrice.description, base: 10)
-        assert(gasPrice.string() == transaction.gasPrice.description, "gasPrice")
-
-        let gethChainId = GethBigInt(0)!
-        gethChainId.setString(transaction.chainId.description, base: 10)
-        assert(gethChainId.string() == transaction.chainId.description, "chainId")
-
-        let gethTx = GethTransaction(Int64(transaction.nonce),
-                                     to: GethAddress(fromHex: transaction.to.value),
-                                     amount: value,
-                                     gasLimit: gasLimit,
-                                     gasPrice: gasPrice,
-                                     data: transaction.data)
+        let transaction = Transaction(
+            to: unsigned.to.value,
+            gasLimit: unsigned.gasLimit.hex,
+            gasPrice: unsigned.gasPrice.hex,
+            nonce: unsigned.nonce.hex,
+            data: unsigned.data,
+            value: unsigned.value.hex,
+            chainId: unsigned.chainId.hex
+        )
 
         appPassword.use { (password, error) in
             guard let password = password else {
-                print("[debug] could not obtain password: \(error ?? "unknown error")")
                 onComplete(nil, "could not obtain password")
                 return
             }
             do {
-                let signedTx = try gethKeyStore.signTxPassphrase(from,
-                                                                 passphrase: password,
-                                                                 tx: gethTx,
-                                                                 chainID: gethChainId)
-                let signedTxRLP = try signedTx.encodeRLP()
-                onComplete(signedTxRLP, nil)
-            } catch let error {
-                print("[error] failed to sign transaction: \(error)")
-                onComplete(nil, "failed to sign transaction")
+                let json = try String(contentsOf: walletUrl)
+                Wallet.fromEncryptedJson(json: json, password: password) { error, wallet in
+                    guard let wallet = wallet else {
+                        onComplete(nil, error?.localizedDescription)
+                        return
+                    }
+                    wallet.sign(transaction) { error, signed in
+                        guard let signed = signed else {
+                            onComplete(nil, error?.localizedDescription)
+                            return
+                        }
+                        onComplete(Data(fromHex: signed), nil)
+                    }
+                }
+            } catch {
+                onComplete(nil, "could not open wallet")
                 return
             }
         }
@@ -164,5 +144,11 @@ extension KeyStore {
 extension KeyStore: Equatable {
     static func == (lhs: KeyStore, rhs: KeyStore) -> Bool {
         return lhs.name == rhs.name && lhs.scryptN == rhs.scryptN && lhs.scryptP == rhs.scryptP
+    }
+}
+
+private extension BigInt {
+    var hex: String {
+        return "0x\(String(self, radix: 16))"
     }
 }
