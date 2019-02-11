@@ -1788,7 +1788,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1010;
 				TargetAttributes = {
 					C24CE9D9FA5C1C4BAAB01AA4E0DFEFFA = {
 						LastSwiftMigration = 1010;
@@ -2250,7 +2250,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FCE32D031720E1A6C638F212AC368719 /* URITemplate.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2283,7 +2282,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57723E58F0A3657B85858215B01A6358 /* SwiftLint.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2297,7 +2295,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FCE32D031720E1A6C638F212AC368719 /* URITemplate.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2329,7 +2326,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 492322B2D510BE2A8B273DD35B8FAE4D /* base64url.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2364,7 +2360,6 @@
 			baseConfigurationReference = 360DC74338A3212BD259A41A1B40B2A1 /* Pods-Telepath-TelepathTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2457,7 +2452,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6B5351014DBFFC9C6E75F81478E2FC71 /* Nimble.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2489,7 +2483,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B20E734F33BC2FC2BDF00F3E68F0BCE4 /* Quick.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2521,7 +2514,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57723E58F0A3657B85858215B01A6358 /* SwiftLint.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2536,7 +2528,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 920BBB61599F85ADB6579FF7D30945D3 /* STRegex.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2633,7 +2624,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5A3D38488E1823E3397CF906D6A9AA6C /* Mockingjay.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2667,7 +2657,6 @@
 			baseConfigurationReference = 196B9FBB6116CD541FB2DA6F65721F1B /* Pods-Telepath-TelepathTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2702,7 +2691,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 02304B121E6448448BBD73368B10AA3F /* Starscream.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2734,7 +2722,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5A3D38488E1823E3397CF906D6A9AA6C /* Mockingjay.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2766,7 +2753,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 54D87893FAD33593C0D90D1FD803EDF9 /* Sodium.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2799,7 +2785,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 02304B121E6448448BBD73368B10AA3F /* Starscream.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2832,7 +2817,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 54D87893FAD33593C0D90D1FD803EDF9 /* Sodium.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2865,7 +2849,6 @@
 			baseConfigurationReference = 15454E2360897CEF10858D52B1D5EAF5 /* Pods-Telepath.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2900,7 +2883,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 06B95E01AB1AB0AA32B022A6318D9593 /* Socket.IO-Client-Swift.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2933,7 +2915,6 @@
 			baseConfigurationReference = EDA1D0187507CBF8D32B401F60D6FA49 /* Pods-Telepath.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2967,7 +2948,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 920BBB61599F85ADB6579FF7D30945D3 /* STRegex.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2999,7 +2979,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B20E734F33BC2FC2BDF00F3E68F0BCE4 /* Quick.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3032,7 +3011,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 492322B2D510BE2A8B273DD35B8FAE4D /* base64url.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -3065,7 +3043,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6B5351014DBFFC9C6E75F81478E2FC71 /* Nimble.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -3098,7 +3075,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 06B95E01AB1AB0AA32B022A6318D9593 /* Socket.IO-Client-Swift.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
