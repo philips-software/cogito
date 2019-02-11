@@ -158,12 +158,9 @@
                                     <action selector="cancelTapped" destination="3az-Sw-11m" eventType="touchUpInside" id="PTI-30-J8b"/>
                                 </connections>
                             </button>
-                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qYU-wa-0ps">
-                                <rect key="frame" x="85" y="274" width="150" height="2"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="Ckq-MX-aew"/>
-                                </constraints>
-                            </progressView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="yr5-dF-DLN">
+                                <rect key="frame" x="191" y="239" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -175,10 +172,10 @@
                             <constraint firstItem="y8H-LX-7mp" firstAttribute="leading" secondItem="gdd-5a-FBe" secondAttribute="leading" constant="16" id="D6I-Ke-mET"/>
                             <constraint firstItem="Sbb-dk-kin" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ecr-8f-LU9" secondAttribute="leading" constant="20" symbolic="YES" id="Jbw-ym-Yoa"/>
                             <constraint firstItem="gdd-5a-FBe" firstAttribute="trailing" secondItem="y8H-LX-7mp" secondAttribute="trailing" constant="16" id="Lrq-xO-oLx"/>
-                            <constraint firstItem="qYU-wa-0ps" firstAttribute="top" secondItem="7OW-sz-nkP" secondAttribute="bottom" constant="10" id="Ms1-di-W7e"/>
                             <constraint firstItem="gdd-5a-FBe" firstAttribute="trailing" secondItem="Sbb-dk-kin" secondAttribute="trailing" constant="16" id="iQW-71-3cG"/>
+                            <constraint firstItem="yr5-dF-DLN" firstAttribute="centerY" secondItem="7OW-sz-nkP" secondAttribute="centerY" id="p1u-D7-VEn"/>
                             <constraint firstItem="Sbb-dk-kin" firstAttribute="top" secondItem="gdd-5a-FBe" secondAttribute="top" id="tLu-b2-2QG"/>
-                            <constraint firstItem="qYU-wa-0ps" firstAttribute="centerX" secondItem="gdd-5a-FBe" secondAttribute="centerX" id="z5f-ra-2rK"/>
+                            <constraint firstItem="yr5-dF-DLN" firstAttribute="leading" secondItem="7OW-sz-nkP" secondAttribute="trailing" constant="8" id="xEZ-ed-hZa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gdd-5a-FBe"/>
                     </view>
@@ -186,10 +183,10 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="showCloseButton" value="YES"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
+                        <outlet property="activityView" destination="yr5-dF-DLN" id="cwQ-Ac-YN5"/>
                         <outlet property="closeButton" destination="Sbb-dk-kin" id="SbL-6Y-PpQ"/>
                         <outlet property="createButton" destination="7OW-sz-nkP" id="Djr-N7-Iq0"/>
                         <outlet property="descriptionField" destination="y8H-LX-7mp" id="4Kg-et-7Ax"/>
-                        <outlet property="progressView" destination="qYU-wa-0ps" id="Gtd-xB-G8z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OCd-h8-hRx" userLabel="First Responder" sceneMemberID="firstResponder"/>
