@@ -131,7 +131,7 @@ class SecureChannelSpec: QuickSpec {
     }
 }
 
-class NotificationsSpy {
+private class NotificationsSpy {
     var lastReceivedNotification: String?
 
     func onNotification(message: String) {
