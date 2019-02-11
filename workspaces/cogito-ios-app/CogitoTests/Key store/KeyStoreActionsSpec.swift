@@ -25,11 +25,6 @@ class KeyStoreActionsSpec: QuickSpec {
                                                                             true)[0]
                 expect(fulfilled.keyStore.path) == documentDirectory + "/main.keystore"
             }
-
-            it("uses the standard key derivation parameters") {
-                expect(fulfilled.keyStore.scryptN) == 65536
-                expect(fulfilled.keyStore.scryptP) == 1
-            }
         }
     }
 }
