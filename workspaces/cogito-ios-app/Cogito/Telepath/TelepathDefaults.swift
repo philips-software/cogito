@@ -2,6 +2,6 @@ import Telepath
 
 extension Telepath {
     init() {
-        self.init(queuingServiceUrl: URL(string: "https://telepath.cogito.mobi")!)
+        self.init(serviceUrl: URL(string: "https://telepath.cogito.mobi")!)
     }
 }
