@@ -69,6 +69,15 @@ class CreateIdentityViewControllerSpec: QuickSpec {
             expect(viewController.createButton.titleLabel?.text) == "Creating"
         }
 
+        it("disables the description field when pending") {
+            let state = appState(createIdentity: createIdentityState(
+                description: "me",
+                pending: true
+            ))
+            viewController.connection.newState(state: state)
+            expect(viewController.descriptionField.isEnabled) == false
+        }
+
         it("triggers action when editing ends") {
             var descriptionSet: String?
             viewController.connection.actions = CreateIdentityViewController.Actions(
