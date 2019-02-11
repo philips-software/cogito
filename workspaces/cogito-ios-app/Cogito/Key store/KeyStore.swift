@@ -1,6 +1,9 @@
 import BigInt
 import Ethers
 
+let standardScryptN = 1 << 18
+let standardScryptP = 1
+
 class KeyStore: Codable {
     let name: String
     let scryptN: Int
@@ -8,7 +11,11 @@ class KeyStore: Codable {
     let directory: KeyStoreDirectory
     var appPassword = AppPassword()
 
-    required init(name: String, scryptN: Int, scryptP: Int) {
+    required init(
+        name: String,
+        scryptN: Int = standardScryptN / 4,
+        scryptP: Int = standardScryptP
+    ) {
         self.name = name
         self.directory = KeyStoreDirectory(name: name)
         self.scryptN = scryptN
