@@ -7,11 +7,14 @@ describe('Telepath', () => {
   const appName = 'some app name'
   let telepath
   let queuing
+  let socketIOService
 
   beforeEach(() => {
     telepath = new Telepath('https://queuing.example.com')
     queuing = {}
     telepath.queuing = queuing
+    socketIOService = { start: jest.fn() }
+    telepath.socketIOService = socketIOService
   })
 
   describe('when creating a new channel', () => {
@@ -21,7 +24,7 @@ describe('Telepath', () => {
     let channel
 
     beforeEach(async () => {
-      random.mockImplementation(async (size) => {
+      random.mockImplementation(async size => {
         if (size === fakeRandomId.length) {
           return fakeRandomId
         } else if (size === fakeRandomKey.length) {
@@ -29,7 +32,10 @@ describe('Telepath', () => {
         }
       })
       keySize.mockResolvedValue(fakeRandomKey.length)
-      channel = await telepath.createChannel({ appName })
+      channel = await telepath.createChannel({
+        appName,
+        notificationHandler: jest.fn()
+      })
     })
 
     it('returns a JSON-RPC channel', () => {
@@ -38,6 +44,10 @@ describe('Telepath', () => {
 
     it('uses the queuing service', () => {
       expect(channel.channel.queuing).toEqual(queuing)
+    })
+
+    it('uses the socket io service', () => {
+      expect(channel.channel.socketIOService).toEqual(socketIOService)
     })
 
     it('has a random id', () => {

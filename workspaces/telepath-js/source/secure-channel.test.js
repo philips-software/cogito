@@ -13,6 +13,7 @@ describe('Secure Channel', () => {
 
   let channel
   let queuing
+  let socketIOService
   let key
 
   beforeEach(async () => {
@@ -21,7 +22,17 @@ describe('Secure Channel', () => {
       send: jest.fn(),
       receive: jest.fn()
     }
-    channel = new SecureChannel({ queuing, id: channelId, key, appName })
+    socketIOService = {
+      start: jest.fn(),
+      notify: jest.fn()
+    }
+    channel = new SecureChannel({
+      queuing,
+      id: channelId,
+      key,
+      appName,
+      socketIOService
+    })
     channel.poller.interval = 0
     channel.poller.retries = 10
   })
@@ -43,14 +54,14 @@ describe('Secure Channel', () => {
     })
   })
 
-  describe('when receiving a message', () => {
-    async function enc (message) {
-      const nonce = await random(await nonceSize())
-      const plainText = new Uint8Array(Buffer.from(message))
-      const cypherText = await encrypt(plainText, nonce, key)
-      return Buffer.concat([nonce, cypherText])
-    }
+  async function enc (message) {
+    const nonce = await random(await nonceSize())
+    const plainText = new Uint8Array(Buffer.from(message))
+    const cypherText = await encrypt(plainText, nonce, key)
+    return Buffer.concat([nonce, cypherText])
+  }
 
+  describe('when receiving a message', () => {
     it('uses the blue queue', async () => {
       await channel.receive()
       expect(queuing.receive.mock.calls[0][0]).toEqual(blueQueue)
@@ -93,7 +104,7 @@ describe('Secure Channel', () => {
   })
 
   it('has sensible polling parameters', () => {
-    const channel = new SecureChannel({})
+    const channel = new SecureChannel({ socketIOService })
     expect(channel.poller.interval).toEqual(1000) // 1000 ms
     expect(channel.poller.retries).toEqual(600) // at least 10 minutes
   })
@@ -104,5 +115,32 @@ describe('Secure Channel', () => {
     const encodedAppName = base64url.encode(appName)
     const url = `${baseUrl}/telepath/connect#I=${channelId}&E=${encodedKey}&A=${encodedAppName}`
     expect(channel.createConnectUrl(baseUrl)).toEqual(url)
+  })
+
+  describe('notifications', () => {
+    const message = 'plain text message'
+
+    it('encrypts the payload', async () => {
+      await channel.notify(message)
+      const nonceAndCypherText = new Uint8Array(
+        socketIOService.notify.mock.calls[0][0]
+      )
+      const nonce = nonceAndCypherText.slice(0, await nonceSize())
+      const cypherText = nonceAndCypherText.slice(await nonceSize())
+
+      expect(await decrypt(cypherText, nonce, key, 'text')).toBe(message)
+    })
+
+    it('decrypts and forwards incoming notifications', async () => {
+      const notificationSpy = jest.fn()
+      channel.setNotificationHandler(notificationSpy)
+      const data = await enc(message)
+      await channel.onEncryptedNotification(data)
+      expect(notificationSpy.mock.calls[0][0]).toBe(message)
+    })
+
+    it('throws when notification handler is not set', async () => {
+      await expect(channel.onEncryptedNotification()).rejects.toThrow()
+    })
   })
 })
