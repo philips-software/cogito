@@ -22,7 +22,8 @@ class SocketIOServiceClient: SocketIOService {
         self.notificationHandler = onNotification
         socket.on(clientEvent: .connect) { [weak self] _, _ in self?.onConnect() }
         socket.on("notification") { [weak self] data, _ in self?.onNotification(data) }
-//        socket.on(clientEvent: .error) { error, _ in print("error: ", error) }
+        // TODO handle errors
+        // socket.on(clientEvent: .error) { error, _ in print("error: ", error) }
         socket.connect()
     }
 
@@ -32,7 +33,7 @@ class SocketIOServiceClient: SocketIOService {
                 .emitWithAck("identify", self.channelID)
                 .timingOut(after: 30) { [weak self] items in
                     if items.count > 0 && items[0] as? String == SocketAckStatus.noAck.rawValue {
-                        // todo handle timeout
+                        // TODO handle timeout
                     } else {
                         self?.sendPendingNotifications()
                     }
