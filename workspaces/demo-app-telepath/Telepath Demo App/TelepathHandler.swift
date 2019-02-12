@@ -4,7 +4,7 @@ import Foundation
 import Telepath
 import SwiftyJSON
 
-let telepathServerUrl = URL(string: "https://telepath.cogito.mobi")!
+let telepathServerUrl = URL(string: "http://10.0.42.47:3000")!
 
 class TelepathHandler {
     static let shared = TelepathHandler()
@@ -36,7 +36,7 @@ class TelepathHandler {
 
     func receive() {
         guard let channel = channel else { return }
-        
+
         channel.receive { (message, error) in
             guard let message = message else {
                 print("No message received; error: ", error ?? "-")

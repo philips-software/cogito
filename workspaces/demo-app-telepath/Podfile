@@ -8,4 +8,5 @@ target 'Telepath Demo App' do
 
     # Workaround for https://github.com/jedisct1/swift-sodium/issues/155:
     pod 'Sodium', git: 'https://github.com/jedisct1/swift-sodium.git', branch: 'master'
+    pod 'SwiftLint'
 end

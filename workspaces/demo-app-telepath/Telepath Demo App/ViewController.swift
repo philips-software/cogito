@@ -16,6 +16,4 @@ class ViewController: UIViewController {
     @IBAction func notify(_ sender: Any) {
         TelepathHandler.shared.notify()
     }
-    
 }
-
