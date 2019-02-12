@@ -70,7 +70,7 @@ export class SocketServer {
   }
 
   onDisconnect (clientSocket) {
-    // todo this.clients[clientSocket.queueId] may be undefined
+    // TODO this.clients[clientSocket.queueId] may be undefined
     if (!clientSocket.queueId) {
       return /* investigate! */
     }
