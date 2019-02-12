@@ -13,10 +13,6 @@ export default class FakeClientSocket {
     this.eventHandlers[event](message, ...args)
   }
 
-  send (message) {
-    this.outgoing.push({ event: 'message', payload: message })
-  }
-
   emit (event, payload) {
     this.outgoing.push({ event, payload })
   }
