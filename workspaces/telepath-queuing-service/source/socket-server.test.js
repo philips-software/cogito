@@ -1,4 +1,4 @@
-import {
+import IOSocketServer, {
   SocketServer,
   maximumQueueSize,
   maximumNotificationLength
@@ -163,5 +163,30 @@ describe('socket server', () => {
         expect(receiver.outgoing[0].payload).toBe(notification)
       })
     })
+  })
+})
+
+describe('IO Socket Server', () => {
+  let io
+  let server
+
+  beforeEach(() => {
+    io = { on: jest.fn() }
+    server = new IOSocketServer(io)
+  })
+
+  it('registers a connection handler', () => {
+    server.start()
+    const event = io.on.mock.calls[0][0]
+    expect(event).toBe('connection')
+  })
+
+  it('forwards connection events to the Socket Server', () => {
+    server.socketServer = { onConnection: jest.fn() }
+    server.start()
+    const callback = io.on.mock.calls[0][1]
+    const socket = 'some socket'
+    callback(socket)
+    expect(server.socketServer.onConnection).toBeCalledWith(socket)
   })
 })
