@@ -1,4 +1,4 @@
-import Cache from 'lru-cache'
+import { createCache } from './auto-pruning-cache'
 
 export const maximumQueueSize = 10
 export const maximumNotificationLength = 100000
@@ -6,10 +6,7 @@ export const maximumNotificationLength = 100000
 export class SocketServer {
   constructor () {
     this.clients = []
-    this.pendingNotifications = Cache({ maxAge: 10 * 60 * 1000 })
-    setInterval(() => {
-      this.pendingNotifications.prune()
-    }, 60 * 1000)
+    this.pendingNotifications = createCache()
   }
 
   onConnection (clientSocket) {
