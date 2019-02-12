@@ -1,5 +1,3 @@
-//  Copyright © 2019 Koninklijke Philips Nederland N.V. All rights reserved.
-
 @testable import SocketIO
 
 class SocketMock: SocketIOClient {
