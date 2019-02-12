@@ -13,20 +13,16 @@ export class SocketServer {
   }
 
   onConnection (clientSocket) {
-    // console.debug('connected')
     clientSocket.on('identify', (queueId, ack) => {
-      // console.debug('identify: ', queueId)
       this.onIdentify(clientSocket, queueId)
       if (ack) {
         ack()
       }
     })
     clientSocket.on('notification', notification => {
-      // console.debug('notification: ', notification)
       this.onNotification(clientSocket, notification)
     })
     clientSocket.on('disconnect', reason => {
-      // console.debug('disconnect: ', clientSocket.queueId)
       this.onDisconnect(clientSocket)
     })
   }
@@ -49,7 +45,6 @@ export class SocketServer {
     const pending = this.pendingNotifications.get(queueId)
     if (pending) {
       pending.map(notification => {
-        // console.debug('deliver pending notifications')
         clientSocket.emit('notification', notification)
       })
       this.pendingNotifications.del(queueId)
@@ -64,7 +59,6 @@ export class SocketServer {
 
     const receiver = this.findReceiver(source)
     if (receiver) {
-      // console.debug('deliver notification')
       receiver.emit('notification', notification)
     } else {
       this.addPendingNotification(source, notification)
