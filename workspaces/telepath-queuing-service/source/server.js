@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import { wrap } from 'async-middleware'
 import cors from 'cors'
-import Cache from 'lru-cache'
+import { createCache } from './auto-pruning-cache'
 import { MessageSender } from './message-sender'
 import { MessageReceiver } from './message-receiver'
 import http from 'http'
@@ -12,7 +12,7 @@ import IOSocketServer from './socket-server'
 let ioSocketServer
 
 function createServer () {
-  let state = Cache({ maxAge: 10 * 60 * 1000 })
+  let state = createCache()
 
   const app = express()
   const httpServer = http.Server(app)
@@ -22,10 +22,6 @@ function createServer () {
 
   app.use(cors())
   app.use(bodyParser.text({ type: '*/*' }))
-
-  setInterval(() => {
-    state.prune()
-  }, 60 * 1000)
 
   registerSendMessageEndpoint({ server: app, state })
   registerReadMessageEndpoint({ server: app, state })
