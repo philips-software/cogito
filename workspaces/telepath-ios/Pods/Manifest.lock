@@ -14,7 +14,7 @@ PODS:
   - Sodium (0.7.0)
   - Starscream (3.0.6)
   - STRegex (1.1.0)
-  - SwiftLint (0.27.0)
+  - SwiftLint (0.30.1)
   - URITemplate (2.0.3)
 
 DEPENDENCIES:
@@ -25,7 +25,7 @@ DEPENDENCIES:
   - Socket.IO-Client-Swift (~> 13.3)
   - Sodium (from `https://github.com/jedisct1/swift-sodium.git`, branch `master`)
   - STRegex (~> 1.1)
-  - SwiftLint (= 0.27.0)
+  - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -63,9 +63,9 @@ SPEC CHECKSUMS:
   Sodium: c5510cc6f5e1b27858e5f260b5cac80d4a3f9379
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   STRegex: eb1f4c2fe9e2f0265b8df8634774cd8cd8914018
-  SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
+  SwiftLint: a54bf1fe12b55c68560eb2a7689dfc81458508f7
   URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: bca0e167e6c924f34727e7472d4a3c67d074b9db
+PODFILE CHECKSUM: 677106fb1a0cef03d4804b66d5ecbe42526c4e6a
 
 COCOAPODS: 1.6.0
