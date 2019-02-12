@@ -41,7 +41,7 @@ class JsonRpcChannel {
       checkJsonRpcStructure(notification, true)
       this.notificationHandler(notification)
     } catch {
-      console.debug('ditching invalid JSON-RPC notification', notification)
+      // ditching invalid JSON-RPC notification
     }
   }
 
