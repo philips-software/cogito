@@ -46,6 +46,12 @@ describe('socket server', () => {
         expect(receiver.outgoing[0].payload).toBe(notification)
       })
 
+      it('acknowledges the identify message', () => {
+        const ack = jest.fn()
+        sender.receiveIncoming('identify', queue, ack)
+        expect(ack).toBeCalled()
+      })
+
       it('allows max 2 parties per queue id', () => {
         let receiver2 = new FakeClientSocket()
         receiver2.connect(socketServer)

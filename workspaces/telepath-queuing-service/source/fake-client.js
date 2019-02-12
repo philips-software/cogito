@@ -6,11 +6,11 @@ export default class FakeClientSocket {
     socketServer.onConnection(this)
   }
 
-  receiveIncoming (event, message) {
+  receiveIncoming (event, message, ...args) {
     if (event === 'identify') {
       this.queueId = message
     }
-    this.eventHandlers[event](message)
+    this.eventHandlers[event](message, ...args)
   }
 
   send (message) {
