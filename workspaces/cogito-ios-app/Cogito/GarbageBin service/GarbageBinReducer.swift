@@ -1,5 +1,4 @@
 import ReSwift
-import Geth
 
 func garbageBinReducer(action: Action, state: GarbageBinState?) -> GarbageBinState {
     var state = state ?? initialGarbageBinState
