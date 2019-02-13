@@ -6,7 +6,6 @@ describe('JSON RPC Channel', () => {
 
   let jsonrpc
   let channel
-  let notificationHandler
 
   beforeEach(() => {
     channel = {
@@ -16,8 +15,7 @@ describe('JSON RPC Channel', () => {
       createConnectUrl: jest.fn(),
       setNotificationHandler: jest.fn()
     }
-    notificationHandler = jest.fn()
-    jsonrpc = new JsonRpcChannel({ channel, notificationHandler })
+    jsonrpc = new JsonRpcChannel({ channel })
   })
 
   describe('when a valid response is available', () => {
@@ -137,26 +135,35 @@ describe('JSON RPC Channel', () => {
     })
 
     describe('incoming', () => {
+      let notificationHandler
+      let channelNotificationHandler
+
+      beforeEach(() => {
+        notificationHandler = jest.fn()
+        jsonrpc.receiveNotifications(notificationHandler)
+        channelNotificationHandler = channel.setNotificationHandler.mock.calls[0][0]
+      })
+
       it('passes incoming notifications on', () => {
-        jsonrpc.onJsonRpcNotification(JSON.stringify(notification))
+        channelNotificationHandler(JSON.stringify(notification))
         expect(notificationHandler.mock.calls[0][0]).toEqual(notification)
       })
 
       it('ignores notification that is not a json rpc 2.0 structure', () => {
         const wrongMessage = JSON.stringify(invalidVersionNotification)
-        jsonrpc.onJsonRpcNotification(wrongMessage)
+        channelNotificationHandler(wrongMessage)
         expect(notificationHandler.mock.calls.length).toBe(0)
       })
 
       it('ignores notification that has an id', () => {
         const wrongMessage = JSON.stringify(notificationWithId)
-        jsonrpc.onJsonRpcNotification(wrongMessage)
+        channelNotificationHandler(wrongMessage)
         expect(notificationHandler.mock.calls.length).toBe(0)
       })
 
       it('ignores notification without method', () => {
         const wrongMessage = JSON.stringify(notificationWithoutMethod)
-        jsonrpc.onJsonRpcNotification(wrongMessage)
+        channelNotificationHandler(wrongMessage)
         expect(notificationHandler.mock.calls.length).toBe(0)
       })
     })
