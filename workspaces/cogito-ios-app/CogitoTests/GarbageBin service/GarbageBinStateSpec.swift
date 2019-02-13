@@ -1,6 +1,5 @@
 import Quick
 import Nimble
-import Geth
 import SwiftyJSON
 @testable import Cogito
 

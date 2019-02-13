@@ -1,5 +1,4 @@
 import ReSwift
-import Geth
 
 struct GarbageBinActions {
     struct Add: Action {
