@@ -4,7 +4,6 @@ PODS:
     - SipHash (~> 1.2)
   - Differentiator (3.1.0)
   - FontAwesome.swift (1.5.0)
-  - Geth (1.7.3)
   - JWTDecode (2.2.0)
   - KeychainAccess (3.1.2)
   - Mockingjay (2.0.1):
@@ -52,7 +51,6 @@ DEPENDENCIES:
   - base64url (~> 1.0)
   - BigInt (~> 3.0)
   - FontAwesome.swift (~> 1.3)
-  - Geth (~> 1.7.1)
   - JWTDecode (~> 2.1)
   - KeychainAccess (~> 3.1)
   - Mockingjay (~> 2.0)
@@ -79,7 +77,6 @@ SPEC REPOS:
     - BigInt
     - Differentiator
     - FontAwesome.swift
-    - Geth
     - JWTDecode
     - KeychainAccess
     - Mockingjay
@@ -119,7 +116,6 @@ SPEC CHECKSUMS:
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   FontAwesome.swift: 55291c7a334ffacf9b62793d27c14014ec09a11b
-  Geth: 45a08eeef7a20e58dfc09a455563ffe210941a96
   JWTDecode: 85a405ab16d5473e99bd89ded1d535090ebd6a0e
   KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
   Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
@@ -144,6 +140,6 @@ SPEC CHECKSUMS:
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
   URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: b014626cb053cbe3abbb636a6a9dea002f0e9200
+PODFILE CHECKSUM: abdcf02d8044d03a3811234e463cbaec011ecdca
 
 COCOAPODS: 1.6.0

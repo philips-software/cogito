@@ -9,7 +9,6 @@ target 'Cogito' do
 
   pod 'ReSwift', '~> 4.0'
   pod 'ReSwiftThunk', '~> 1.0'
-  pod 'Geth', '~> 1.7.1'
   pod 'BigInt', '~> 3.0'
   pod 'SwiftLint', '0.27.0'
   pod 'ReRxSwift', '~> 2.0'
