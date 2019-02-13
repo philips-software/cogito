@@ -2,7 +2,6 @@ class JsonRpcChannel {
   constructor ({ channel, notificationHandler }) {
     this.channel = channel
     this.notificationHandler = notificationHandler
-    channel.setNotificationHandler(this.onJsonRpcNotification.bind(this))
   }
 
   get id () {
@@ -30,19 +29,21 @@ class JsonRpcChannel {
     return response
   }
 
+  receiveNotifications (notificationHandler) {
+    this.channel.setNotificationHandler(message => {
+      const notification = parseResponse(message)
+      try {
+        checkJsonRpcStructure(notification, true)
+        notificationHandler(notification)
+      } catch {
+        // ditching invalid JSON-RPC notification
+      }
+    })
+  }
+
   async notify (notification) {
     checkJsonRpcStructure(notification, true)
     this.channel.notify(JSON.stringify(notification))
-  }
-
-  onJsonRpcNotification (message) {
-    const notification = parseResponse(message)
-    try {
-      checkJsonRpcStructure(notification, true)
-      this.notificationHandler(notification)
-    } catch {
-      // ditching invalid JSON-RPC notification
-    }
   }
 
   createConnectUrl (baseUrl) {
