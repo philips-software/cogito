@@ -74,7 +74,7 @@ class KeyStoreSpec: QuickSpec {
                 var identity: Identity!
 
                 beforeEach {
-                    waitUntil { done in
+                    waitUntil(timeout: 5) { done in
                         keyStore.newAccount { address, error in
                             expect(error).to(beNil())
                             expect(address).toNot(beNil())
