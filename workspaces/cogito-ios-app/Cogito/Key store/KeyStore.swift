@@ -41,34 +41,66 @@ class KeyStore: Codable {
         onProgress: @escaping (_ progress: Float) -> Void = { _ in },
         onComplete: @escaping (_ address: Address?, _ error: String?) -> Void
     ) {
+        newAccountInBackground(
+            workQueue: .global(),
+            callbackQueue: .main,
+            onProgress: onProgress,
+            onComplete: onComplete
+        )
+    }
+
+    private func newAccountInBackground(
+        workQueue: DispatchQueue,
+        callbackQueue: DispatchQueue,
+        onProgress: @escaping (_ progress: Float) -> Void = { _ in },
+        onComplete: @escaping (_ address: Address?, _ error: String?) -> Void
+    ) {
+        let completed = { address, error in callbackQueue.async { onComplete(address, error) } }
+        let progress = { progress in callbackQueue.async { onProgress(progress) } }
         appPassword.use { (maybePassword, error) in
-            DispatchQueue.global().async {
+            workQueue.async {
                 if let password = maybePassword {
-                    let wallet = Wallet.createRandom()
-                    let options = [ "scrypt": [ "N": self.scryptN, "p": self.scryptP ] ]
-                    wallet.encrypt(password: password, options: options, onProgress: onProgress) { _, encrypted in
-                        guard let encrypted = encrypted else {
-                            DispatchQueue.main.async { onComplete(nil, "unable to encrypt wallet") }
-                            return
-                        }
-                        do {
-                            try self.directory.create()
-                            let path = self.directory.url.appendingPathComponent(wallet.address)
-                            try encrypted.write(
-                                to: path,
-                                atomically: false,
-                                encoding: .utf8
-                            )
-                            DispatchQueue.main.async { onComplete(Address(fromHex: wallet.address)!, nil) }
-                        } catch let error as NSError {
-                            DispatchQueue.main.async { onComplete(nil, error.localizedDescription) }
-                        }
-                    }
+                    self.newAccountWithPassword(
+                        password: password,
+                        onProgress: progress,
+                        onComplete: completed
+                    )
                 } else {
-                    DispatchQueue.main.async { onComplete(nil, error) }
+                    completed(nil, error)
                 }
             }
         }
+    }
+
+    private func newAccountWithPassword(
+        password: String,
+        onProgress: @escaping (_ progress: Float) -> Void = { _ in },
+        onComplete: @escaping (_ address: Address?, _ error: String?) -> Void
+    ) {
+        let wallet = Wallet.createRandom()
+        let options = [ "scrypt": [ "N": self.scryptN, "p": self.scryptP ] ]
+        wallet.encrypt(password: password, options: options, onProgress: onProgress) { _, encrypted in
+            guard let encrypted = encrypted else {
+                onComplete(nil, "unable to encrypt wallet")
+                return
+            }
+            do {
+                try self.writeEncryptedWallet(wallet: encrypted, filename: wallet.address)
+                onComplete(Address(fromHex: wallet.address)!, nil)
+            } catch let error as NSError {
+                onComplete(nil, error.localizedDescription)
+            }
+        }
+    }
+
+    private func writeEncryptedWallet(wallet: EncryptedWallet, filename: String) throws {
+        try self.directory.create()
+        let path = self.directory.url.appendingPathComponent(filename)
+        try wallet.write(
+            to: path,
+            atomically: false,
+            encoding: .utf8
+        )
     }
 
     func findAccount(identity: Identity) -> URL? {
