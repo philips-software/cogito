@@ -133,30 +133,64 @@ class KeyStore: Codable {
             chainId: unsigned.chainId.hex
         )
 
+        sign(transaction: transaction, walletUrl: walletUrl, onComplete: onComplete)
+    }
+
+    private func sign(
+        transaction: Transaction,
+        walletUrl: URL,
+        onComplete: @escaping (_ transaction: Data?, _ error: String?) -> Void
+    ) {
         appPassword.use { (password, error) in
             guard let password = password else {
-                onComplete(nil, "could not obtain password")
+                onComplete(nil, error)
                 return
             }
-            do {
-                let json = try String(contentsOf: walletUrl)
-                Wallet.fromEncryptedJson(json: json, password: password) { error, wallet in
-                    guard let wallet = wallet else {
-                        onComplete(nil, error?.localizedDescription)
-                        return
-                    }
-                    wallet.sign(transaction) { error, signed in
-                        guard let signed = signed else {
-                            onComplete(nil, error?.localizedDescription)
-                            return
-                        }
-                        onComplete(Data(fromHex: signed), nil)
-                    }
+            self.signWithPassword(
+                password: password,
+                transaction: transaction,
+                walletUrl: walletUrl,
+                onComplete: onComplete
+            )
+        }
+    }
+
+    private func signWithPassword(
+        password: String,
+        transaction: Transaction,
+        walletUrl: URL,
+        onComplete: @escaping (_ transaction: Data?, _ error: String?) -> Void
+    ) {
+        do {
+            let json = try String(contentsOf: walletUrl)
+            Wallet.fromEncryptedJson(json: json, password: password) { error, wallet in
+                guard let wallet = wallet else {
+                    onComplete(nil, error?.localizedDescription)
+                    return
                 }
-            } catch {
-                onComplete(nil, "could not open wallet")
+                self.signWithWallet(
+                    wallet: wallet,
+                    transaction: transaction,
+                    onComplete: onComplete
+                )
+            }
+        } catch {
+            onComplete(nil, "could not open wallet")
+            return
+        }
+    }
+
+    private func signWithWallet(
+        wallet: Wallet,
+        transaction: Transaction,
+        onComplete: @escaping (_ transaction: Data?, _ error: String?) -> Void
+    ) {
+        wallet.sign(transaction) { error, signed in
+            guard let signed = signed else {
+                onComplete(nil, error?.localizedDescription)
                 return
             }
+            onComplete(Data(fromHex: signed), nil)
         }
     }
 
