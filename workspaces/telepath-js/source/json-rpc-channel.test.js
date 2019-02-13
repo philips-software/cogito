@@ -146,25 +146,25 @@ describe('JSON RPC Channel', () => {
 
       it('passes incoming notifications on', () => {
         channelNotificationHandler(JSON.stringify(notification))
-        expect(notificationHandler.mock.calls[0][0]).toEqual(notification)
+        expect(notificationHandler).toBeCalledWith(notification)
       })
 
       it('ignores notification that is not a json rpc 2.0 structure', () => {
         const wrongMessage = JSON.stringify(invalidVersionNotification)
         channelNotificationHandler(wrongMessage)
-        expect(notificationHandler.mock.calls.length).toBe(0)
+        expect(notificationHandler).not.toBeCalled()
       })
 
       it('ignores notification that has an id', () => {
         const wrongMessage = JSON.stringify(notificationWithId)
         channelNotificationHandler(wrongMessage)
-        expect(notificationHandler.mock.calls.length).toBe(0)
+        expect(notificationHandler).not.toBeCalled()
       })
 
       it('ignores notification without method', () => {
         const wrongMessage = JSON.stringify(notificationWithoutMethod)
         channelNotificationHandler(wrongMessage)
-        expect(notificationHandler.mock.calls.length).toBe(0)
+        expect(notificationHandler).not.toBeCalled()
       })
     })
   })
