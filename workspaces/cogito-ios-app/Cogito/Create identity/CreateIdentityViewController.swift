@@ -31,6 +31,10 @@ class CreateIdentityViewController: UIViewController, Connectable {
                 self.onDone()
             }
         }
+        handleErrors()
+    }
+
+    private func handleErrors() {
         connection.subscribe(\Props.error) { [unowned self] maybeError in
             if let error = maybeError {
                 print("[error] createIdentity error: \(error)")
