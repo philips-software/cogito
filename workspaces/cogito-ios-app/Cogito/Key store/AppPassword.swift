@@ -12,8 +12,7 @@ class AppPassword {
         self.passwordLength = passwordLength
     }
 
-    func use(_ withPassword: @escaping (_ password: String?, _ error: String?) -> Void) {
-        let passwordLength = self.passwordLength
+    func use(_ withPassword: @escaping PasswordCallback) {
         let callback = { (password, error) in
             DispatchQueue.main.async {
                 withPassword(password, error)
@@ -25,23 +24,28 @@ class AppPassword {
                 callback(nil, nil)
                 return
             }
-            var password = this.loadPassword()
-            if password == nil {
-                do {
-                    password = try this.keychain.generatePassword(
-                        lengthInBytes: passwordLength
-                    )
-                } catch let error {
-                    callback(nil, error.localizedDescription)
-                    return
-                }
-                if let error = this.store(password: password!) {
-                    callback(nil, error)
-                    return
-                }
+
+            if let password = this.loadPassword() {
+                callback(password, nil)
+            } else {
+                this.generatePassword(onComplete: callback)
             }
-            callback(password!, nil)
         }
+    }
+
+    private func generatePassword(onComplete callback: PasswordCallback) {
+        var password: String?
+        do {
+            password = try keychain.generatePassword(lengthInBytes: passwordLength)
+        } catch let error {
+            callback(nil, error.localizedDescription)
+            return
+        }
+        if let error = store(password: password!) {
+            callback(nil, error)
+            return
+        }
+        callback(password!, nil)
     }
 
     private func loadPassword() -> String? {
@@ -70,6 +74,8 @@ class AppPassword {
     func reset() throws {
         try keychain.remove(appPasswordKey)
     }
+
+    typealias PasswordCallback = (_ password: String?, _ error: String?) -> Void
 }
 
 protocol KeychainType {
