@@ -38,8 +38,8 @@ class KeyStore: Codable {
     }
 
     func newAccount(
-        onProgress: @escaping (_ progress: Float) -> Void = { _ in },
-        onComplete: @escaping (_ address: Address?, _ error: String?) -> Void
+        onProgress: @escaping ProgressCallback = { _ in },
+        onComplete: @escaping NewAccountCallback
     ) {
         newAccountInBackground(
             workQueue: .global(),
@@ -52,8 +52,8 @@ class KeyStore: Codable {
     private func newAccountInBackground(
         workQueue: DispatchQueue,
         callbackQueue: DispatchQueue,
-        onProgress: @escaping (_ progress: Float) -> Void = { _ in },
-        onComplete: @escaping (_ address: Address?, _ error: String?) -> Void
+        onProgress: @escaping ProgressCallback,
+        onComplete: @escaping NewAccountCallback
     ) {
         let completed = { address, error in callbackQueue.async { onComplete(address, error) } }
         let progress = { progress in callbackQueue.async { onProgress(progress) } }
@@ -74,8 +74,8 @@ class KeyStore: Codable {
 
     private func newAccountWithPassword(
         password: String,
-        onProgress: @escaping (_ progress: Float) -> Void = { _ in },
-        onComplete: @escaping (_ address: Address?, _ error: String?) -> Void
+        onProgress: @escaping ProgressCallback,
+        onComplete: @escaping NewAccountCallback
     ) {
         let wallet = Wallet.createRandom()
         let options = [ "scrypt": [ "N": self.scryptN, "p": self.scryptP ] ]
@@ -116,7 +116,7 @@ class KeyStore: Codable {
     func sign(
         transaction unsigned: UnsignedTransaction,
         identity: Identity,
-        onComplete: @escaping (_ transaction: Data?, _ error: String?) -> Void
+        onComplete: @escaping SignCallback
     ) {
         guard let walletUrl = findAccount(identity: identity) else {
             onComplete(nil, "couldn't find wallet")
@@ -139,7 +139,7 @@ class KeyStore: Codable {
     private func sign(
         transaction: Transaction,
         walletUrl: URL,
-        onComplete: @escaping (_ transaction: Data?, _ error: String?) -> Void
+        onComplete: @escaping SignCallback
     ) {
         appPassword.use { (password, error) in
             guard let password = password else {
@@ -159,7 +159,7 @@ class KeyStore: Codable {
         password: String,
         transaction: Transaction,
         walletUrl: URL,
-        onComplete: @escaping (_ transaction: Data?, _ error: String?) -> Void
+        onComplete: @escaping SignCallback
     ) {
         do {
             let json = try String(contentsOf: walletUrl)
@@ -183,7 +183,7 @@ class KeyStore: Codable {
     private func signWithWallet(
         wallet: Wallet,
         transaction: Transaction,
-        onComplete: @escaping (_ transaction: Data?, _ error: String?) -> Void
+        onComplete: @escaping SignCallback
     ) {
         wallet.sign(transaction) { error, signed in
             guard let signed = signed else {
@@ -193,6 +193,10 @@ class KeyStore: Codable {
             onComplete(Data(fromHex: signed), nil)
         }
     }
+
+    typealias NewAccountCallback = (_ address: Address?, _ error: String?) -> Void
+    typealias SignCallback = (_ transaction: Data?, _ error: String?) -> Void
+    typealias ProgressCallback = (_ progress: Float) -> Void
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
