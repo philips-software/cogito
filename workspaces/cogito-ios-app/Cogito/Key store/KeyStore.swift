@@ -42,29 +42,31 @@ class KeyStore: Codable {
         onComplete: @escaping (_ address: Address?, _ error: String?) -> Void
     ) {
         appPassword.use { (maybePassword, error) in
-            if let password = maybePassword {
-                let wallet = Wallet.createRandom()
-                let options = [ "scrypt": [ "N": self.scryptN, "p": self.scryptP ] ]
-                wallet.encrypt(password: password, options: options, onProgress: onProgress) { _, encrypted in
-                    guard let encrypted = encrypted else {
-                        onComplete(nil, "unable to encrypt wallet")
-                        return
+            DispatchQueue.global().async {
+                if let password = maybePassword {
+                    let wallet = Wallet.createRandom()
+                    let options = [ "scrypt": [ "N": self.scryptN, "p": self.scryptP ] ]
+                    wallet.encrypt(password: password, options: options, onProgress: onProgress) { _, encrypted in
+                        guard let encrypted = encrypted else {
+                            DispatchQueue.main.async { onComplete(nil, "unable to encrypt wallet") }
+                            return
+                        }
+                        do {
+                            try self.directory.create()
+                            let path = self.directory.url.appendingPathComponent(wallet.address)
+                            try encrypted.write(
+                                to: path,
+                                atomically: false,
+                                encoding: .utf8
+                            )
+                            DispatchQueue.main.async { onComplete(Address(fromHex: wallet.address)!, nil) }
+                        } catch let error as NSError {
+                            DispatchQueue.main.async { onComplete(nil, error.localizedDescription) }
+                        }
                     }
-                    do {
-                        try self.directory.create()
-                        let path = self.directory.url.appendingPathComponent(wallet.address)
-                        try encrypted.write(
-                            to: path,
-                            atomically: false,
-                            encoding: .utf8
-                        )
-                        onComplete(Address(fromHex: wallet.address)!, nil)
-                    } catch let error as NSError {
-                        onComplete(nil, error.localizedDescription)
-                    }
+                } else {
+                    DispatchQueue.main.async { onComplete(nil, error) }
                 }
-            } else {
-                onComplete(nil, error)
             }
         }
     }
