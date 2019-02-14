@@ -19,7 +19,7 @@ class Home extends React.Component {
 
   openIdentityManager () {
     const { navigator } = this.props
-    navigator.push({ component: IdentityManager, title: 'Me, Myself and I' })
+    navigator.push({ component: IdentityManager, title: 'Me, Myself and I', rightButtonSystemIcon: 'add' })
   }
 }
 
