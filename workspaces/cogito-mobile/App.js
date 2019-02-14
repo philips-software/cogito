@@ -3,7 +3,7 @@ import { NavigatorIOS, StyleSheet, Text, View } from 'react-native'
 
 const App = () => (
   <NavigatorIOS
-    initialRoute={{ component: Home, title: 'Home' }}
+    initialRoute={{ component: Home, title: 'Home', navigationBarHidden: true }}
     style={{ flex: 1 }}
   />
 )
