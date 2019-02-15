@@ -6,6 +6,7 @@ import base64url
 
 class SocketIOServiceClientSpec: QuickSpec {
     override func spec() {
+        let channelID = "testChannel"
         var manager: SocketManager!
         var socket: SocketMock!
         var client: SocketIOServiceClient!
@@ -22,13 +23,31 @@ class SocketIOServiceClientSpec: QuickSpec {
             expect(socket.lastEmittedEventItems).to(beNil())
         }
 
+        it("completes with error when start times out") {
+            let notificationSpy = NotificationsSpy()
+            let completionSpy = CompletionSpy()
+            socket.emitWithAckShouldTimeout = true
+            client.start(channelID: channelID,
+                         onNotification: notificationSpy.onNotification,
+                         onError: nil,
+                         completion: completionSpy.completion)
+            expect(completionSpy.completionCalled).toEventually(beTrue())
+            expect(completionSpy.lastRaisedError).toNot(beNil())
+        }
+
         context("when started") {
-            let channelID = "testChannel"
             var notificationSpy: NotificationsSpy!
+            var errorSpy: ErrorSpy!
+            var completionSpy: CompletionSpy!
 
             beforeEach {
                 notificationSpy = NotificationsSpy()
-                client.start(channelID: channelID, onNotification: notificationSpy.onNotification)
+                errorSpy = ErrorSpy()
+                completionSpy = CompletionSpy()
+                client.start(channelID: channelID,
+                             onNotification: notificationSpy.onNotification,
+                             onError: errorSpy.onError,
+                             completion: completionSpy.completion)
             }
 
             context("when connection is not yet complete") {
@@ -56,11 +75,13 @@ class SocketIOServiceClientSpec: QuickSpec {
             context("after connection is complete") {
                 beforeEach {
                     expect(client.setupComplete).toEventually(beTrue())
+                    expect(completionSpy.completionCalled).toEventually(beTrue())
+                    expect(completionSpy.lastRaisedError).to(beNil())
                 }
 
                 it("is configured properly") {
                     expect(socket.connected).to(beTrue())
-                    expect(socket.handlers).to(haveCount(2))
+                    expect(socket.handlers).to(haveCount(3))
                 }
 
                 it("cleans up when deinited") {
@@ -89,6 +110,12 @@ class SocketIOServiceClientSpec: QuickSpec {
                     socket.fakeIncomingNotification(data: encodedMessage)
                     expect(notificationSpy.lastReceivedNotification) == message
                 }
+
+                it("passes errors on") {
+                    socket.fakeError(TestError.someError)
+                    expect(errorSpy.lastRaisedError as? TestError?)
+                        .toEventually(equal(TestError.someError))
+                }
             }
         }
     }
@@ -100,4 +127,26 @@ private class NotificationsSpy {
     func onNotification(message: Data) {
         lastReceivedNotification = message
     }
+}
+
+private class CompletionSpy {
+    var completionCalled = false
+    var lastRaisedError: Error?
+
+    func completion(error: Error?) {
+        completionCalled = true
+        lastRaisedError = error
+    }
+}
+
+private class ErrorSpy {
+    var lastRaisedError: Error?
+
+    func onError(error: Error) {
+        lastRaisedError = error
+    }
+}
+
+private enum TestError: Error, Equatable {
+    case someError
 }

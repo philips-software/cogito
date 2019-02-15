@@ -7,6 +7,7 @@ class SocketIOServiceClient: SocketIOService {
     var setupComplete = false
     var channelID: ChannelID!
     var notificationHandler: EncryptedNotificationHandler!
+    var completion: ((Error?) -> Void)?
 
     init(socket: SocketIOClient) {
         self.socket = socket
@@ -17,13 +18,22 @@ class SocketIOServiceClient: SocketIOService {
         self.socket.disconnect()
     }
 
-    func start(channelID: ChannelID, onNotification: @escaping EncryptedNotificationHandler) {
+    func start(channelID: ChannelID,
+               onNotification: @escaping EncryptedNotificationHandler,
+               onError: ErrorHandler?,
+               completion: ((Error?) -> Void)?) {
         self.channelID = channelID
         self.notificationHandler = onNotification
+        self.completion = completion
         socket.on(clientEvent: .connect) { [weak self] _, _ in self?.onConnect() }
         socket.on("notification") { [weak self] data, _ in self?.onNotification(data) }
-        // TODO handle errors
-        // socket.on(clientEvent: .error) { error, _ in print("error: ", error) }
+        socket.on(clientEvent: .error) { data, _ in
+            if let error = data[0] as? Error {
+                onError?(error)
+            } else {
+                onError?(NotificationError.unknown(data: data))
+            }
+        }
         socket.connect()
     }
 
@@ -33,9 +43,10 @@ class SocketIOServiceClient: SocketIOService {
                 .emitWithAck("identify", self.channelID)
                 .timingOut(after: 30) { [weak self] items in
                     if items.count > 0 && items[0] as? String == SocketAckStatus.noAck.rawValue {
-                        // TODO handle timeout
+                        self?.completion?(NotificationError.setupFailed)
                     } else {
                         self?.sendPendingNotifications()
+                        self?.completion?(nil)
                     }
             }
         }

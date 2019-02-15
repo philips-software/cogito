@@ -5,6 +5,7 @@ class SocketMock: SocketIOClient {
     var lastEmittedEventName: String?
     var lastEmittedEventItems: [Any]?
     var ackNumber = 0
+    var emitWithAckShouldTimeout = false
 
     func resetMock() {
         connected = false
@@ -32,10 +33,24 @@ class SocketMock: SocketIOClient {
         lastEmittedEventName = event
         lastEmittedEventItems = items
         ackNumber += 1
-        let onAck = OnAckCallback(ackNumber: ackNumber, items: [event] + items, socket: self, binary: false)
+        let onAck: OnAckCallback
+        let items: [Any]
+        if emitWithAckShouldTimeout {
+            items = [SocketAckStatus.noAck.rawValue]
+            onAck = OnAckCallback(ackNumber: ackNumber,
+                                  items: items,
+                                  socket: self,
+                                  binary: false)
+        } else {
+            items = [event]
+            onAck = OnAckCallback(ackNumber: ackNumber,
+                                  items: items,
+                                  socket: self,
+                                  binary: false)
+        }
         DispatchQueue.main.async { [weak self] in
             if let this = self {
-                this.handleAck(this.ackNumber, data: [])
+                this.handleAck(this.ackNumber, data: items)
             }
         }
         return onAck
@@ -45,5 +60,13 @@ class SocketMock: SocketIOClient {
         handlers
             .first(where: { $0.event == "notification" })?
             .executeCallback(with: [data], withAck: 0, withSocket: self)
+    }
+
+    func fakeError(_ error: Error) {
+        DispatchQueue.main.async {
+            self.handlers
+                .first(where: { $0.event == "error" })?
+                .executeCallback(with: [error], withAck: 0, withSocket: self)
+        }
     }
 }
