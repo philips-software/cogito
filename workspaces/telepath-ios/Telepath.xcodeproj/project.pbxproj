@@ -166,16 +166,16 @@
 			isa = PBXGroup;
 			children = (
 				5CF521D51F78F4780004C494 /* TelepathSpec.swift */,
-				5C4048831F7E385C00B19C9D /* SecureChannelSpec.swift */,
-				5CD810EE1F91064800CCD769 /* QueuingServiceClientSpec.swift */,
-				0291A401220C43C400AFC6D6 /* SocketIOServiceClientSpec.swift */,
-				5CF32D001F7D4DC600F887F4 /* URL */,
-				5C4048851F7E3AB100B19C9D /* QueuingServiceMock.swift */,
 				5C4048871F7E3B1E00B19C9D /* ChannelKeyExample.swift */,
 				5CF521D71F78F4780004C494 /* Info.plist */,
-				5C2F83F51F7E461500C8DD31 /* .swiftlint.yml */,
+				5CD810EE1F91064800CCD769 /* QueuingServiceClientSpec.swift */,
+				5C4048851F7E3AB100B19C9D /* QueuingServiceMock.swift */,
+				5C4048831F7E385C00B19C9D /* SecureChannelSpec.swift */,
+				0291A401220C43C400AFC6D6 /* SocketIOServiceClientSpec.swift */,
 				0291A405220C728600AFC6D6 /* SocketIOServiceMock.swift */,
 				02C7B91B2211B7210006ED43 /* SocketMock.swift */,
+				5CF32D001F7D4DC600F887F4 /* URL */,
+				5C2F83F51F7E461500C8DD31 /* .swiftlint.yml */,
 			);
 			path = TelepathTests;
 			sourceTree = "<group>";
