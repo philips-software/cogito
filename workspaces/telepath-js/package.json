@@ -25,7 +25,8 @@
     "base64url": "^2.0.0",
     "cross-fetch": "^2.1.1",
     "libsodium-wrappers": "^0.7.3",
-    "socket.io-client": "^2.1.1"
+    "socket.io-client": "^2.1.1",
+    "timeout-callback": "^2.0.2"
   },
   "publishConfig": {
     "access": "public"

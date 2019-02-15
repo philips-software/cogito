@@ -1,4 +1,5 @@
 import base64url from 'base64url'
+import timeoutCallback from 'timeout-callback'
 
 export class SocketIOService {
   constructor (socketIOClient) {
@@ -7,18 +8,26 @@ export class SocketIOService {
     this.setupDone = false
   }
 
-  start (channelID, onNotificationCallback) {
+  start (channelID, onNotificationCallback, timeout = 30000) {
     return new Promise((resolve, reject) => {
       this.socket = this.socketIOClient.connect()
       this.socket.on('connect', () => {
-        this.socket.emit('identify', channelID, () => {
-          this.sendPendingNotifications()
-        })
+        this.socket.emit(
+          'identify',
+          channelID,
+          timeoutCallback(timeout, e => {
+            if (e instanceof Error) {
+              reject(e)
+            } else {
+              this.sendPendingNotifications()
+              resolve()
+            }
+          })
+        )
       })
       this.socket.on('notification', message => {
         onNotificationCallback(base64url.toBuffer(message))
       })
-      resolve()
     })
   }
 
