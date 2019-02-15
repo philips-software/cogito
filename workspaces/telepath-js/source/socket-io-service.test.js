@@ -53,7 +53,7 @@ describe('SocketIOService', () => {
 
   it('throws when identify times out', async () => {
     identifyTimesOut = true
-    await expect(service.start('', () => {}, 100)).rejects.toThrow()
+    await expect(service.start('', () => {}, () => {}, 100)).rejects.toThrow()
   })
 
   it('sends pending notifications after connection is complete', async () => {
@@ -66,10 +66,12 @@ describe('SocketIOService', () => {
   describe('when started', () => {
     const channelID = 'channelID'
     let notificationSpy
+    let errorSpy
 
     beforeEach(async () => {
       notificationSpy = jest.fn()
-      await service.start(channelID, notificationSpy)
+      errorSpy = jest.fn()
+      await service.start(channelID, notificationSpy, errorSpy)
     })
 
     it('is correctly configured', () => {
@@ -108,6 +110,12 @@ describe('SocketIOService', () => {
         const encodedMessage = base64url.encode(message)
         registeredNotificationHandler(encodedMessage)
         expect(notificationSpy.mock.calls[0][0]).toEqual(message)
+      })
+
+      it('passes errors on', () => {
+        const error = 'some error'
+        handlers['error'](error)
+        expect(errorSpy.mock.calls[0][0]).toBe(error)
       })
     })
   })

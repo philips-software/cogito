@@ -12,12 +12,12 @@ Because both the browser and phone are likely to be behind distinct [NAT], we us
 
 Setting up a secure channel is done using these steps:
 
-1.  The web app requests a secure connection to the mobile app by invoking the `createChannel` function on the javascript library.
-2.  The `createChannel` function generates a random channel id `I` and a symmetric encryption key `E`.
-3.  The web app displays a QR code containing the channel id `I` and key `E`.
-4.  The owner of the phone opens the app, points the camera to the QR code.
-5.  The phone app extracts the channel id and the key from the QR code.
-6.  Both phone and web app can now communicate on channel `I`. They encrypt/decrypt their messages using key `E`.
+1. The web app requests a secure connection to the identity app by invoking the `createChannel` function on the javascript library.
+2. The `createChannel` function generates a random channel id `I` and a symmetric encryption key `E`.
+3. The web app displays a QR code containing the channel id `I` and key `E`.
+4. The owner of the phone opens the app, points the camera to the QR code.
+5. The phone app extracts the channel id and the key from the QR code.
+6. Both phone and web app can now communicate on channel `I`. They encrypt/decrypt their messages using key `E`.
 
 ![Telepath Connection Sequence](images/telepath-connect.png)
 
@@ -47,6 +47,7 @@ The URL is made up of the following components:
 ```bash
 <base url>telepath/connect#I=<channel id>&E=<encryption key>
 ```
+
 where:
 
 * `<base url>` is the url that is registered to open the mobile app in [iOS](https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html) or [Android](https://developer.android.com/training/app-links/deep-linking.html)
@@ -58,7 +59,7 @@ where:
 Add `@cogitojs/telepath-js` as a dependency:
 
 ```bash
-$ yarn add @cogitojs/telepath-js
+yarn add @cogitojs/telepath-js
 ```
 
 Then import `Telepath` in your own module:
@@ -127,6 +128,36 @@ will return `null`.
 
 [qrcode]: https://www.npmjs.com/package/qrcode.react
 [json-rpc]: http://www.jsonrpc.org/specification
+
+### Notifications
+
+Telepath also supports "fire and forget"-style *notifications*. So
+instead of a request-response loop, you can send a message and forget
+about it, or you can register a notification handler to receive
+incoming notifications.
+
+If you want to be able to receive notifications, after creating the
+Telepath channel you need to call `startNotifications`:
+
+```javascript
+await channel.startNotifications(message => {
+  console.log('received notification: ' + message)
+}, error => {
+  console.log('notification error: ' + error)
+})
+```
+
+Sending notifications work like this (please remember that
+notifications must be valid JSON-RPC 2.0 message):
+
+```javascript
+const notification = { jsonrpc: '2.0', method:'test' }
+await channel.notify(notification)
+```
+
+Please note that the `channel.notify` promise being resolve only means
+that the notification was sent, not that it was received by the other
+party.
 
 ## Known Limitations
 

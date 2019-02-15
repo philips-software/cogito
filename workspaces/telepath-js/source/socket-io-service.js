@@ -8,7 +8,7 @@ export class SocketIOService {
     this.setupDone = false
   }
 
-  start (channelID, onNotificationCallback, timeout = 30000) {
+  start (channelID, onNotificationCallback, onErrorCallback, timeout = 30000) {
     return new Promise((resolve, reject) => {
       this.socket = this.socketIOClient.connect()
       this.socket.on('connect', () => {
@@ -28,6 +28,9 @@ export class SocketIOService {
       this.socket.on('notification', message => {
         onNotificationCallback(base64url.toBuffer(message))
       })
+      if (onErrorCallback) {
+        this.socket.on('error', onErrorCallback)
+      }
     })
   }
 
