@@ -28,7 +28,7 @@ class JsonRpcChannel {
     return response
   }
 
-  async startNotifications (notificationHandler) {
+  async startNotifications (notificationHandler, errorHandler) {
     await this.channel.startNotifications(message => {
       const notification = parseResponse(message)
       try {
@@ -37,7 +37,7 @@ class JsonRpcChannel {
       } catch {
         // ditching invalid JSON-RPC notification
       }
-    })
+    }, errorHandler)
   }
 
   async notify (notification) {

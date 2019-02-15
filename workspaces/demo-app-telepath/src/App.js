@@ -14,9 +14,14 @@ class App extends Component {
     this.channel = await telepath.createChannel({
       appName: 'Telepath Demo App'
     })
-    await this.channel.startNotifications(notification => {
-      console.debug('incoming notification: ', notification)
-    })
+    await this.channel.startNotifications(
+      notification => {
+        console.debug('incoming notification: ', notification)
+      },
+      error => {
+        console.debug('notification error', error)
+      }
+    )
     const connectUrl = this.channel.createConnectUrl('telepath-demo-app://')
     this.setState({ connectUrl })
   }
