@@ -13,13 +13,12 @@ public struct SecureChannel {
     let notificationHandler: NotificationHandler?
 
     init(queuing: QueuingService, socketIOService: SocketIOService,
-         onNotification: NotificationHandler?,
-         onNotificationError: ErrorHandler?,
+         notificationHandler: NotificationHandler?,
          id: ChannelID, key: ChannelKey, appName: String,
          completion: CompletionHandler?) {
         self.queuing = queuing
         self.socketIOService = socketIOService
-        self.notificationHandler = onNotification
+        self.notificationHandler = notificationHandler
         self.key = key
         self.id = id
         self.appName = appName
@@ -27,7 +26,7 @@ public struct SecureChannel {
         self.sendingQueue = id + ".blue"
         socketIOService.start(channelID: id,
                               onNotification: onEncryptedNotification,
-                              onError: onNotificationError,
+                              onError: notificationHandler?.on(error:),
                               completion: completion)
     }
 
@@ -76,7 +75,7 @@ public struct SecureChannel {
               let message = String(data: plainText, encoding: .utf8) else {
             return
         }
-        notificationHandler?(message)
+        notificationHandler?.on(notification: message)
     }
 
     enum Failure: Error {

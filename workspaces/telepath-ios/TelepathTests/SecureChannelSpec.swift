@@ -11,16 +11,15 @@ class SecureChannelSpec: QuickSpec {
         var channel: SecureChannel!
         var queuing: QueuingServiceMock!
         var socketIOService: SocketIOServiceMock!
-        var notificationsSpy: NotificationsSpy!
+        var notificationsSpy: NotificationHandlerSpy!
 
         beforeEach {
             queuing = QueuingServiceMock()
             socketIOService = SocketIOServiceMock()
-            notificationsSpy = NotificationsSpy()
+            notificationsSpy = NotificationHandlerSpy()
             channel = SecureChannel(
                 queuing: queuing, socketIOService: socketIOService,
-                onNotification: notificationsSpy.onNotification,
-                onNotificationError: nil,
+                notificationHandler: notificationsSpy,
                 id: channelId, key: channelKey, appName: appName,
                 completion: nil)
         }
@@ -133,10 +132,15 @@ class SecureChannelSpec: QuickSpec {
     }
 }
 
-private class NotificationsSpy {
+private class NotificationHandlerSpy: NotificationHandler {
     var lastReceivedNotification: String?
+    var lastReceivedError: Error?
 
-    func onNotification(message: String) {
-        lastReceivedNotification = message
+    func on(notification: String) {
+        lastReceivedNotification = notification
+    }
+
+    func on(error: Error) {
+        lastReceivedError = error
     }
 }
