@@ -5,7 +5,8 @@ class SocketMock: SocketIOClient {
     var lastEmittedEventName: String?
     var lastEmittedEventItems: [Any]?
     var ackNumber = 0
-    var emitWithAckShouldTimeout = false
+    var emitWithAckShouldTimeout = false // TODO rename
+    var connectTriggersError: Error?
 
     func resetMock() {
         connected = false
@@ -15,8 +16,13 @@ class SocketMock: SocketIOClient {
 
     override func connect() {
         DispatchQueue.main.async { [weak self] in
-            self?.connected = true
-            self?.didConnect(toNamespace: "/")
+            guard let self = self else { return }
+            if let error = self.connectTriggersError {
+                self.fakeError(error)
+            } else {
+                self.connected = true
+                self.didConnect(toNamespace: "/")
+            }
         }
     }
 
