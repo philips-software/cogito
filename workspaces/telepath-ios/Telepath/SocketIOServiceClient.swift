@@ -8,7 +8,7 @@ class SocketIOServiceClient: SocketIOService {
     var channelID: ChannelID!
     var notificationHandler: EncryptedNotificationHandler!
     var errorHandler: ErrorHandler?
-    var completion: ((Error?) -> Void)?
+    var completion: CompletionHandler?
 
     init(socket: SocketIOClient) {
         self.socket = socket
@@ -22,7 +22,7 @@ class SocketIOServiceClient: SocketIOService {
     func start(channelID: ChannelID,
                onNotification: @escaping EncryptedNotificationHandler,
                onError: ErrorHandler?,
-               completion: ((Error?) -> Void)?) {
+               completion: CompletionHandler?) {
         self.channelID = channelID
         self.notificationHandler = onNotification
         self.errorHandler = onError
@@ -59,11 +59,7 @@ class SocketIOServiceClient: SocketIOService {
 
     func onError(_ data: [Any]) {
         let error = data[0] as? Error ?? NotificationError.unknown(data: data)
-        if setupComplete {
-            errorHandler?(error)
-        } else {
-            completion?(error)
-        }
+        errorHandler?(error)
     }
 
     func sendPendingNotifications() {

@@ -5,7 +5,7 @@ class SocketMock: SocketIOClient {
     var lastEmittedEventName: String?
     var lastEmittedEventItems: [Any]?
     var ackNumber = 0
-    var emitWithAckShouldTimeout = false // TODO rename
+    var emitWithAckTimesOut = false
     var connectTriggersError: Error?
 
     func resetMock() {
@@ -41,7 +41,7 @@ class SocketMock: SocketIOClient {
         ackNumber += 1
         let onAck: OnAckCallback
         let items: [Any]
-        if emitWithAckShouldTimeout {
+        if emitWithAckTimesOut {
             items = [SocketAckStatus.noAck.rawValue]
             onAck = OnAckCallback(ackNumber: ackNumber,
                                   items: items,

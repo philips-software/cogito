@@ -23,28 +23,37 @@ class SocketIOServiceClientSpec: QuickSpec {
             expect(socket.lastEmittedEventItems).to(beNil())
         }
 
-        it("completes with error when connect fails") {
-            let notificationSpy = NotificationsSpy()
-            let completionSpy = CompletionSpy()
-            socket.connectTriggersError = TestError.someError
-            client.start(channelID: channelID,
-                         onNotification: notificationSpy.onNotification,
-                         onError: nil,
-                         completion: completionSpy.completion)
-            expect(completionSpy.completionCalled).toEventually(beTrue())
-            expect(completionSpy.lastRaisedError).toNot(beNil())
-        }
+        describe("error handling") {
+            var notificationSpy: NotificationsSpy!
+            var errorSpy: ErrorSpy!
+            var completionSpy: CompletionSpy!
 
-        it("completes with error when identify times out") {
-            let notificationSpy = NotificationsSpy()
-            let completionSpy = CompletionSpy()
-            socket.emitWithAckShouldTimeout = true
-            client.start(channelID: channelID,
-                         onNotification: notificationSpy.onNotification,
-                         onError: nil,
-                         completion: completionSpy.completion)
-            expect(completionSpy.completionCalled).toEventually(beTrue())
-            expect(completionSpy.lastRaisedError).toNot(beNil())
+            beforeEach {
+                notificationSpy = NotificationsSpy()
+                errorSpy = ErrorSpy()
+                completionSpy = CompletionSpy()
+            }
+            it("raises an error as long as connect fails") {
+                socket.connectTriggersError = TestError.someError
+                client.start(channelID: channelID,
+                             onNotification: notificationSpy.onNotification,
+                             onError: errorSpy.onError,
+                             completion: completionSpy.completion)
+                expect(errorSpy.lastRaisedError as? TestError)
+                    .toEventually(equal(TestError.someError))
+                expect(completionSpy.completionCalled).to(beFalse())
+            }
+
+            it("completes with error when identify times out") {
+                socket.emitWithAckTimesOut = true
+                client.start(channelID: channelID,
+                             onNotification: notificationSpy.onNotification,
+                             onError: errorSpy.onError,
+                             completion: completionSpy.completion)
+                expect(completionSpy.completionCalled).toEventually(beTrue())
+                expect(completionSpy.lastRaisedError).toNot(beNil())
+                expect(errorSpy.lastRaisedError).to(beNil())
+            }
         }
 
         context("when started") {
