@@ -1,12 +1,14 @@
 import Foundation
 import SocketIO
 
-public typealias NotificationHandler = (String) -> Void
-enum NotificationError: Error {
+public protocol NotificationHandler {
+    func on(notification: String)
+    func on(error: Error)
+}
+public enum NotificationError: Error {
     case setupFailed
     case unknown(data: [Any])
 }
-public typealias ErrorHandler = (Error) -> Void
 public typealias CompletionHandler = (Error?) -> Void
 
 public struct Telepath {
@@ -22,25 +24,21 @@ public struct Telepath {
     }
 
     public func connect(channel: ChannelID, key: ChannelKey, appName: String,
-                        onNotification: NotificationHandler? = nil,
-                        onNotificationError: ErrorHandler? = nil,
+                        notificationHandler: NotificationHandler? = nil,
                         completion: CompletionHandler? = nil) -> SecureChannel {
         return SecureChannel(
             queuing: queuing, socketIOService: socketIOService,
-            onNotification: onNotification,
-            onNotificationError: onNotificationError,
+            notificationHandler: notificationHandler,
             id: channel, key: key, appName: appName,
             completion: completion)
     }
 
     public func connect(url: URL,
-                        onNotification: NotificationHandler? = nil,
-                        onNotificationError: ErrorHandler? = nil,
+                        notificationHandler: NotificationHandler? = nil,
                         completion: CompletionHandler? = nil) throws -> SecureChannel {
         let (id, key, appName) = try UrlCodec().decode(url: url)
         return connect(channel: id, key: key, appName: appName,
-                       onNotification: onNotification,
-                       onNotificationError: onNotificationError,
+                       notificationHandler: notificationHandler,
                        completion: completion)
     }
 }

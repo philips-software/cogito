@@ -1,6 +1,8 @@
 public typealias EncryptedNotificationHandler = (Data) -> Void
 
-public protocol SocketIOService {
+typealias ErrorHandler = (Error) -> Void
+
+protocol SocketIOService {
     func start(channelID: ChannelID,
                onNotification: @escaping EncryptedNotificationHandler,
                onError: ErrorHandler?,
