@@ -28,8 +28,8 @@ class JsonRpcChannel {
     return response
   }
 
-  receiveNotifications (notificationHandler) {
-    this.channel.setNotificationHandler(message => {
+  async startNotifications (notificationHandler) {
+    await this.channel.startNotifications(message => {
       const notification = parseResponse(message)
       try {
         checkJsonRpcStructure(notification, true)

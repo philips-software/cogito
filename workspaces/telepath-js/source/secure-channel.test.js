@@ -133,7 +133,7 @@ describe('Secure Channel', () => {
 
     it('decrypts and forwards incoming notifications', async () => {
       const notificationSpy = jest.fn()
-      channel.setNotificationHandler(notificationSpy)
+      await channel.startNotifications(notificationSpy)
       const data = await enc(message)
       await channel.onEncryptedNotification(data)
       expect(notificationSpy.mock.calls[0][0]).toBe(message)

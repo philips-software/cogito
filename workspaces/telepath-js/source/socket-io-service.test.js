@@ -30,12 +30,12 @@ describe('SocketIOService', () => {
     const channelID = 'channelID'
     let notificationSpy
 
-    beforeEach(() => {
+    beforeEach(async () => {
       notificationSpy = jest.fn()
-      service.start(channelID, notificationSpy)
+      await service.start(channelID, notificationSpy)
     })
 
-    it('can be started', () => {
+    it('is correctly configured', () => {
       expect(socketIOClient.connect.mock.calls.length).toBe(1)
       expect(service.socket).toBe(socketStub)
       expect(socketStub.on.mock.calls[1][0]).toBe('notification')

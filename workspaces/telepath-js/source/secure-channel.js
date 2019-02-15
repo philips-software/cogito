@@ -16,9 +16,12 @@ class SecureChannel {
     })
   }
 
-  setNotificationHandler (notificationHandler) {
+  async startNotifications (notificationHandler) {
     this.notificationHandler = notificationHandler
-    this.socketIOService.start(this.id, this.onEncryptedNotification.bind(this))
+    await this.socketIOService.start(
+      this.id,
+      this.onEncryptedNotification.bind(this)
+    )
   }
 
   async send (message) {

@@ -8,14 +8,17 @@ export class SocketIOService {
   }
 
   start (channelID, onNotificationCallback) {
-    this.socket = this.socketIOClient.connect()
-    this.socket.on('connect', () => {
-      this.socket.emit('identify', channelID, () => {
-        this.sendPendingNotifications()
+    return new Promise((resolve, reject) => {
+      this.socket = this.socketIOClient.connect()
+      this.socket.on('connect', () => {
+        this.socket.emit('identify', channelID, () => {
+          this.sendPendingNotifications()
+        })
       })
-    })
-    this.socket.on('notification', message => {
-      onNotificationCallback(base64url.toBuffer(message))
+      this.socket.on('notification', message => {
+        onNotificationCallback(base64url.toBuffer(message))
+      })
+      resolve()
     })
   }
 
