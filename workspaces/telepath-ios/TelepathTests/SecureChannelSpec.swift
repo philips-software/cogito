@@ -20,7 +20,9 @@ class SecureChannelSpec: QuickSpec {
             channel = SecureChannel(
                 queuing: queuing, socketIOService: socketIOService,
                 onNotification: notificationsSpy.onNotification,
-                id: channelId, key: channelKey, appName: appName)
+                onNotificationError: nil,
+                id: channelId, key: channelKey, appName: appName,
+                completion: nil)
         }
 
         context("when sending a message") {

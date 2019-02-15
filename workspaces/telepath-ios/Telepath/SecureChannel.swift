@@ -14,7 +14,9 @@ public struct SecureChannel {
 
     init(queuing: QueuingService, socketIOService: SocketIOService,
          onNotification: NotificationHandler?,
-         id: ChannelID, key: ChannelKey, appName: String) {
+         onNotificationError: ErrorHandler?,
+         id: ChannelID, key: ChannelKey, appName: String,
+         completion: CompletionHandler?) {
         self.queuing = queuing
         self.socketIOService = socketIOService
         self.notificationHandler = onNotification
@@ -23,7 +25,10 @@ public struct SecureChannel {
         self.appName = appName
         self.receivingQueue = id + ".red"
         self.sendingQueue = id + ".blue"
-        socketIOService.start(channelID: id, onNotification: onEncryptedNotification)
+        socketIOService.start(channelID: id,
+                              onNotification: onEncryptedNotification,
+                              onError: onNotificationError,
+                              completion: completion)
     }
 
     public mutating func invalidate() {
