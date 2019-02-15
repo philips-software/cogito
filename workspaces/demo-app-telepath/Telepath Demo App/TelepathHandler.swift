@@ -4,9 +4,10 @@ import Foundation
 import Telepath
 import SwiftyJSON
 
+//let telepathServerUrl = URL(string: "https://telepath.cogito.mobi")!
 let telepathServerUrl = URL(string: "http://10.0.42.47:3000")!
 
-class TelepathHandler {
+class TelepathHandler: NotificationHandler {
     static let shared = TelepathHandler()
     let telepath = Telepath(serviceUrl: telepathServerUrl)
     var channel: SecureChannel?
@@ -22,15 +23,20 @@ class TelepathHandler {
     }
 
     func connect(url: URL) -> Bool {
-        let aChannel = try? telepath.connect(url: url) { notification in
-            print("received notification: ", notification)
+        let aChannel = try? telepath.connect(
+            url: url,
+            notificationHandler: self) { [weak self] error in
+                if let error = error {
+                    print("telepath connect failure: ", error)
+                } else {
+                    self?.sendDidConnectNotification()
+                }
         }
         guard let channel = aChannel else {
             print("Invalid URL: ", url)
             return false
         }
         self.channel = channel
-        notify()
         return true
     }
 
@@ -55,12 +61,20 @@ class TelepathHandler {
         }
     }
 
-    func notify() {
+    func sendDidConnectNotification() {
         guard let channel = channel else { return }
         let response = [
             "jsonrpc": "2.0",
             "method": "didScanQRCode"
         ]
         channel.notify(message: JSON(response).rawString()!)
+    }
+
+    func on(notification: String) {
+        print("received notification: ", notification)
+    }
+
+    func on(error: Error) {
+        print("received error: ", error)
     }
 }
