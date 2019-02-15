@@ -1,7 +1,6 @@
 class JsonRpcChannel {
-  constructor ({ channel, notificationHandler }) {
+  constructor ({ channel }) {
     this.channel = channel
-    this.notificationHandler = notificationHandler
   }
 
   get id () {

@@ -13,7 +13,7 @@ class Telepath {
     this.socketIOService = new SocketIOService(socket)
   }
 
-  async createChannel ({ id, key, appName, notificationHandler }) {
+  async createChannel ({ id, key, appName }) {
     if (!appName) {
       throw new Error('appName is a required parameter')
     }
@@ -26,7 +26,7 @@ class Telepath {
       queuing: this.queuing,
       socketIOService: this.socketIOService
     })
-    return new JsonRpcChannel({ channel, notificationHandler })
+    return new JsonRpcChannel({ channel })
   }
 }
 

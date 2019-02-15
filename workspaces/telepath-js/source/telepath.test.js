@@ -32,10 +32,7 @@ describe('Telepath', () => {
         }
       })
       keySize.mockResolvedValue(fakeRandomKey.length)
-      channel = await telepath.createChannel({
-        appName,
-        notificationHandler: jest.fn()
-      })
+      channel = await telepath.createChannel({ appName })
     })
 
     it('returns a JSON-RPC channel', () => {
