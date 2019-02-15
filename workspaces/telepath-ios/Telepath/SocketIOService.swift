@@ -6,6 +6,6 @@ protocol SocketIOService {
     func start(channelID: ChannelID,
                onNotification: @escaping EncryptedNotificationHandler,
                onError: ErrorHandler?,
-               completion: ((Error?) -> Void)?)
+               completion: CompletionHandler?)
     func notify(data: Data)
 }

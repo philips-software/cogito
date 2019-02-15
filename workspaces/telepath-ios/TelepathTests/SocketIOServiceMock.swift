@@ -7,7 +7,7 @@ class SocketIOServiceMock: SocketIOService {
     func start(channelID: ChannelID,
                onNotification: @escaping EncryptedNotificationHandler,
                onError: ErrorHandler?,
-               completion: ((Error?) -> Void)?) {
+               completion: CompletionHandler?) {
         notificationHandler = onNotification
     }
     func notify(data: Data) {
