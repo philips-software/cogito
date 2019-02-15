@@ -7,6 +7,7 @@ class SocketIOServiceClient: SocketIOService {
     var setupComplete = false
     var channelID: ChannelID!
     var notificationHandler: EncryptedNotificationHandler!
+    var errorHandler: ErrorHandler?
     var completion: ((Error?) -> Void)?
 
     init(socket: SocketIOClient) {
@@ -24,16 +25,12 @@ class SocketIOServiceClient: SocketIOService {
                completion: ((Error?) -> Void)?) {
         self.channelID = channelID
         self.notificationHandler = onNotification
+        self.errorHandler = onError
         self.completion = completion
         socket.on(clientEvent: .connect) { [weak self] _, _ in self?.onConnect() }
         socket.on("notification") { [weak self] data, _ in self?.onNotification(data) }
-        socket.on(clientEvent: .error) { data, _ in
-            if let error = data[0] as? Error {
-                onError?(error)
-            } else {
-                onError?(NotificationError.unknown(data: data))
-            }
-        }
+        socket.on(clientEvent: .error) { [weak self] data, _ in
+            self?.onError(data) }
         socket.connect()
     }
 
@@ -57,6 +54,15 @@ class SocketIOServiceClient: SocketIOService {
             let base64 = String(data: encoded, encoding: .utf8),
             let message = Data(base64urlEncoded: base64) {
             self.notificationHandler(message)
+        }
+    }
+
+    func onError(_ data: [Any]) {
+        let error = data[0] as? Error ?? NotificationError.unknown(data: data)
+        if setupComplete {
+            errorHandler?(error)
+        } else {
+            completion?(error)
         }
     }
 

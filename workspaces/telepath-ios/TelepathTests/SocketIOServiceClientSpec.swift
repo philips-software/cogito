@@ -23,7 +23,19 @@ class SocketIOServiceClientSpec: QuickSpec {
             expect(socket.lastEmittedEventItems).to(beNil())
         }
 
-        it("completes with error when start times out") {
+        it("completes with error when connect fails") {
+            let notificationSpy = NotificationsSpy()
+            let completionSpy = CompletionSpy()
+            socket.connectTriggersError = TestError.someError
+            client.start(channelID: channelID,
+                         onNotification: notificationSpy.onNotification,
+                         onError: nil,
+                         completion: completionSpy.completion)
+            expect(completionSpy.completionCalled).toEventually(beTrue())
+            expect(completionSpy.lastRaisedError).toNot(beNil())
+        }
+
+        it("completes with error when identify times out") {
             let notificationSpy = NotificationsSpy()
             let completionSpy = CompletionSpy()
             socket.emitWithAckShouldTimeout = true
