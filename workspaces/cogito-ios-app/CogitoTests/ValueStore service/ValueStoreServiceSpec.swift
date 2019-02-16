@@ -93,5 +93,35 @@ class ValueStoreServiceSpec: QuickSpec {
             sendPendingAction = getLastSendPendingAction()
             expect(sendPendingAction?.message).to(contain("null"))
         }
+
+        it("responds with error if no key is present in the request") {
+            sendRequest(
+                method: "getValueForKey",
+                paramsString: "{}"
+            )
+
+            let sendPendingAction = getFirstSendPendingAction()
+            expect(sendPendingAction?.message).to(contain("no key param found in the request"))
+        }
+
+        it("responds with error if no value is present in the request when adding new key-value pair") {
+            sendRequest(
+                method: "addKeyValuePair",
+                paramsString: "{\"key\":\"newKey\"}"
+            )
+
+            let sendPendingAction = getFirstSendPendingAction()
+            expect(sendPendingAction?.message).to(contain("no value param found in the request"))
+        }
+
+        it("responds with error if trying to delete non-existing key") {
+            sendRequest(
+                method: "deleteKey",
+                paramsString: "{\"key\":\"nonExistingKey\"}"
+            )
+
+            let sendPendingAction = getFirstSendPendingAction()
+            expect(sendPendingAction?.message).to(contain("key not found in the value store"))
+        }
     }
 }
