@@ -2,7 +2,7 @@ import Foundation
 import ReSwift
 import SwiftyJSON
 
-struct GarbageBinService: TelepathService {
+struct ValueStoreService: TelepathService {
     let store: Store<AppState>
 
     init(store: Store<AppState>) {
@@ -17,35 +17,35 @@ struct GarbageBinService: TelepathService {
             switch request.method {
             case "addKeyValuePair":
                 if let value = request.params["value"].string {
-                    store.dispatch(GarbageBinActions.Add(key: key, value: value))
+                    store.dispatch(ValueStoreActions.Add(key: key, value: value))
                     store.dispatch(TelepathActions.Send(id: request.id, result: "success", on: channel))
                 } else {
                     store.dispatch(TelepathActions.Send(
                         id: request.id,
-                        error: GarbageBinError.valueNotFound,
+                        error: ValueStoreError.valueNotFound,
                         on: channel))
                 }
 
             case "getValueForKey":
-                if let value = store.state.garbage.valueForKey(key: key) {
+                if let value = store.state.valueStore.valueForKey(key: key) {
                     store.dispatch(TelepathActions.Send(id: request.id, result: value, on: channel))
                 } else {
                     store.dispatch(TelepathActions.Send(id: request.id, result: JSON.null, on: channel))
                 }
             case "deleteKey":
-                if store.state.garbage.bin[key] != nil {
-                    store.dispatch(GarbageBinActions.Delete(key: key))
+                if store.state.valueStore.store[key] != nil {
+                    store.dispatch(ValueStoreActions.Delete(key: key))
                     store.dispatch(TelepathActions.Send(id: request.id, result: "success", on: channel))
                 } else {
                     store.dispatch(TelepathActions.Send(id: request.id,
-                        error: GarbageBinError.noKeyInStore,
+                        error: ValueStoreError.noKeyInStore,
                         on: channel))
                 }
             default:
                 break
             }
         } else {
-            store.dispatch(TelepathActions.Send(id: request.id, error: GarbageBinError.keyNotFound, on: channel))
+            store.dispatch(TelepathActions.Send(id: request.id, error: ValueStoreError.keyNotFound, on: channel))
         }
 
     }

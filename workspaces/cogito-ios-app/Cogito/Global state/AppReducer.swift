@@ -11,7 +11,7 @@ func appReducer(action: Action, state: AppState?) -> AppState {
             telepath: telepathReducer(action, state?.telepath),
             attestations: attestationsReducer(action: action, state: state?.attestations),
             dialogPresenter: dialogPresenterReducer(action: action, state: state?.dialogPresenter),
-            garbage: garbageBinReducer(action: action, state: state?.garbage)
+            valueStore: valueStoreReducer(action: action, state: state?.valueStore)
         )
     }
 }

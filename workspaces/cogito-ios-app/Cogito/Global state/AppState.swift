@@ -7,7 +7,7 @@ struct AppState: StateType, Codable {
     let telepath: TelepathState
     let attestations: AttestationsState
     let dialogPresenter: DialogPresenterState
-    let garbage: GarbageBinState
+    let valueStore: ValueStoreState
 }
 
 extension AppState: Equatable {
@@ -17,7 +17,7 @@ extension AppState: Equatable {
                lhs.diamond == rhs.diamond &&
                lhs.telepath == rhs.telepath &&
                lhs.attestations == rhs.attestations &&
-               lhs.garbage == rhs.garbage
+               lhs.valueStore == rhs.valueStore
     }
 }
 
@@ -28,5 +28,5 @@ let initialAppState = AppState(
     telepath: initialTelepathState,
     attestations: initialAttestationsState,
     dialogPresenter: initialDialogPresenterState,
-    garbage: initialGarbageBinState
+    valueStore: initialValueStoreState
 )
