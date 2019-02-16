@@ -12,6 +12,10 @@ class RecordingStore: Store<AppState> {
         self.init(reducer: reducer, state: nil, middleware: [createThunksMiddleware()])
     }
 
+    convenience init(reducer: @escaping Reducer<AppState>, state: AppState = initialAppState) {
+        self.init(reducer: reducer, state: state, middleware: [createThunksMiddleware()])
+    }
+
     override func dispatch(_ action: Action) {
         self.record(action)
         super.dispatch(action)
