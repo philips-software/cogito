@@ -82,8 +82,8 @@ class StorePersisterSpec: QuickSpec {
                         "providedAttestations": {}
                     },
                     "dialogPresenter": {},
-                    "garbage": {
-                        "bin": {}
+                    "valueStore": {
+                        "store": {}
                     }
                 }
                 """

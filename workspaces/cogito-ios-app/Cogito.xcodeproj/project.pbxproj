@@ -135,13 +135,14 @@
 		5CC9C7AD2091A16D008DB49C /* OpenIdExampleValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC9C7AC2091A16D008DB49C /* OpenIdExampleValues.swift */; };
 		5CDB58DC203589CC00A28D60 /* TelepathSubscriberSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB58DB203589CC00A28D60 /* TelepathSubscriberSpec.swift */; };
 		5CDB58DE20358B4100A28D60 /* TelepathSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDB58DD20358B4100A28D60 /* TelepathSubscriber.swift */; };
-		6D1A404D2208D5B5009F3557 /* GarbageBinState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A404C2208D5B5009F3557 /* GarbageBinState.swift */; };
-		6D1A40502208D92E009F3557 /* GarbageBinStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A404F2208D92E009F3557 /* GarbageBinStateSpec.swift */; };
-		6D1A40522208DC83009F3557 /* GarbageBinReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A40512208DC83009F3557 /* GarbageBinReducer.swift */; };
-		6D1A40542208DF37009F3557 /* GarbageBinActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A40532208DF37009F3557 /* GarbageBinActions.swift */; };
-		6D1A40562208E1F7009F3557 /* GarbageBinReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A40552208E1F7009F3557 /* GarbageBinReducerSpec.swift */; };
-		6D1A40582208E57E009F3557 /* GarbageBinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A40572208E57E009F3557 /* GarbageBinService.swift */; };
-		6D1A405A2208E774009F3557 /* GarbageBinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A40592208E774009F3557 /* GarbageBinError.swift */; };
+		6D1A404D2208D5B5009F3557 /* ValueStoreState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A404C2208D5B5009F3557 /* ValueStoreState.swift */; };
+		6D1A40502208D92E009F3557 /* ValueStoreStateSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A404F2208D92E009F3557 /* ValueStoreStateSpec.swift */; };
+		6D1A40522208DC83009F3557 /* ValueStoreReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A40512208DC83009F3557 /* ValueStoreReducer.swift */; };
+		6D1A40542208DF37009F3557 /* ValueStoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A40532208DF37009F3557 /* ValueStoreActions.swift */; };
+		6D1A40562208E1F7009F3557 /* ValueStoreReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A40552208E1F7009F3557 /* ValueStoreReducerSpec.swift */; };
+		6D1A40582208E57E009F3557 /* ValueStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A40572208E57E009F3557 /* ValueStoreService.swift */; };
+		6D1A405A2208E774009F3557 /* ValueStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1A40592208E774009F3557 /* ValueStoreError.swift */; };
+		6D423B772215C4C0002BF95A /* ValueStoreServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D423B762215C4C0002BF95A /* ValueStoreServiceSpec.swift */; };
 		C00B505E972138AEEFC08864 /* AttestationsReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B52CFF4AED34BD3C131C6 /* AttestationsReducerSpec.swift */; };
 		C00B508230BD0E832BF07B30 /* AppPasswordSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B541076B2DDFA58DFDD38 /* AppPasswordSpec.swift */; };
 		C00B5164F17E8581AB40BA9E /* RequestedAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00B5BCC0EDADAE701077CA0 /* RequestedAlert.swift */; };
@@ -331,13 +332,14 @@
 		5CC9C7AC2091A16D008DB49C /* OpenIdExampleValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenIdExampleValues.swift; sourceTree = "<group>"; };
 		5CDB58DB203589CC00A28D60 /* TelepathSubscriberSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathSubscriberSpec.swift; sourceTree = "<group>"; };
 		5CDB58DD20358B4100A28D60 /* TelepathSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathSubscriber.swift; sourceTree = "<group>"; };
-		6D1A404C2208D5B5009F3557 /* GarbageBinState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageBinState.swift; sourceTree = "<group>"; };
-		6D1A404F2208D92E009F3557 /* GarbageBinStateSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageBinStateSpec.swift; sourceTree = "<group>"; };
-		6D1A40512208DC83009F3557 /* GarbageBinReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageBinReducer.swift; sourceTree = "<group>"; };
-		6D1A40532208DF37009F3557 /* GarbageBinActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageBinActions.swift; sourceTree = "<group>"; };
-		6D1A40552208E1F7009F3557 /* GarbageBinReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageBinReducerSpec.swift; sourceTree = "<group>"; };
-		6D1A40572208E57E009F3557 /* GarbageBinService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageBinService.swift; sourceTree = "<group>"; };
-		6D1A40592208E774009F3557 /* GarbageBinError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarbageBinError.swift; sourceTree = "<group>"; };
+		6D1A404C2208D5B5009F3557 /* ValueStoreState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStoreState.swift; sourceTree = "<group>"; };
+		6D1A404F2208D92E009F3557 /* ValueStoreStateSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStoreStateSpec.swift; sourceTree = "<group>"; };
+		6D1A40512208DC83009F3557 /* ValueStoreReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStoreReducer.swift; sourceTree = "<group>"; };
+		6D1A40532208DF37009F3557 /* ValueStoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStoreActions.swift; sourceTree = "<group>"; };
+		6D1A40552208E1F7009F3557 /* ValueStoreReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStoreReducerSpec.swift; sourceTree = "<group>"; };
+		6D1A40572208E57E009F3557 /* ValueStoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStoreService.swift; sourceTree = "<group>"; };
+		6D1A40592208E774009F3557 /* ValueStoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStoreError.swift; sourceTree = "<group>"; };
+		6D423B762215C4C0002BF95A /* ValueStoreServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueStoreServiceSpec.swift; sourceTree = "<group>"; };
 		8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cogito.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A51C652F88A1C505BE309FCA /* Pods-Cogito-CogitoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito-CogitoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito-CogitoTests/Pods-Cogito-CogitoTests.release.xcconfig"; sourceTree = "<group>"; };
 		C00B5147CAE92346F14EF19F /* Data+hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+hex.swift"; sourceTree = "<group>"; };
@@ -480,7 +482,7 @@
 		027603ED1F6ACD1600788B0A /* Cogito */ = {
 			isa = PBXGroup;
 			children = (
-				6D1A404B2208D4D6009F3557 /* GarbageBin service */,
+				6D1A404B2208D4D6009F3557 /* ValueStore service */,
 				5C04E44B1FA77D0400A70C60 /* Accounts service */,
 				028F4EF21F7CE37E0015C4AF /* Global state */,
 				0298D4331F7A45040070998D /* Geth */,
@@ -517,7 +519,7 @@
 		027604021F6ACD1600788B0A /* CogitoTests */ = {
 			isa = PBXGroup;
 			children = (
-				6D1A404E2208D8EA009F3557 /* GarbageBin service */,
+				6D1A404E2208D8EA009F3557 /* ValueStore service */,
 				0291A3FB220851DF00AFC6D6 /* TestSetup.swift */,
 				5C04E4481FA77CA400A70C60 /* Accounts service */,
 				028F4EF31F7CE3A10015C4AF /* Global */,
@@ -847,25 +849,26 @@
 			path = "URL handler";
 			sourceTree = "<group>";
 		};
-		6D1A404B2208D4D6009F3557 /* GarbageBin service */ = {
+		6D1A404B2208D4D6009F3557 /* ValueStore service */ = {
 			isa = PBXGroup;
 			children = (
-				6D1A404C2208D5B5009F3557 /* GarbageBinState.swift */,
-				6D1A40512208DC83009F3557 /* GarbageBinReducer.swift */,
-				6D1A40532208DF37009F3557 /* GarbageBinActions.swift */,
-				6D1A40572208E57E009F3557 /* GarbageBinService.swift */,
-				6D1A40592208E774009F3557 /* GarbageBinError.swift */,
+				6D1A404C2208D5B5009F3557 /* ValueStoreState.swift */,
+				6D1A40512208DC83009F3557 /* ValueStoreReducer.swift */,
+				6D1A40532208DF37009F3557 /* ValueStoreActions.swift */,
+				6D1A40572208E57E009F3557 /* ValueStoreService.swift */,
+				6D1A40592208E774009F3557 /* ValueStoreError.swift */,
 			);
-			path = "GarbageBin service";
+			path = "ValueStore service";
 			sourceTree = "<group>";
 		};
-		6D1A404E2208D8EA009F3557 /* GarbageBin service */ = {
+		6D1A404E2208D8EA009F3557 /* ValueStore service */ = {
 			isa = PBXGroup;
 			children = (
-				6D1A404F2208D92E009F3557 /* GarbageBinStateSpec.swift */,
-				6D1A40552208E1F7009F3557 /* GarbageBinReducerSpec.swift */,
+				6D1A404F2208D92E009F3557 /* ValueStoreStateSpec.swift */,
+				6D1A40552208E1F7009F3557 /* ValueStoreReducerSpec.swift */,
+				6D423B762215C4C0002BF95A /* ValueStoreServiceSpec.swift */,
 			);
-			path = "GarbageBin service";
+			path = "ValueStore service";
 			sourceTree = "<group>";
 		};
 		889FB079C347A157FEFC695F /* Pods */ = {
@@ -1225,7 +1228,7 @@
 				0226212B1FAB1E6800692126 /* IdentityManagerViewController.swift in Sources */,
 				023C34F2217DD324000953FB /* Attestation.swift in Sources */,
 				02E792311F6FFBAD00DC5973 /* AppState.swift in Sources */,
-				6D1A405A2208E774009F3557 /* GarbageBinError.swift in Sources */,
+				6D1A405A2208E774009F3557 /* ValueStoreError.swift in Sources */,
 				02021D191F8BC5FF0092DD89 /* AppActions.swift in Sources */,
 				02BB61FF20C0227A00F03625 /* IdentityInfoService.swift in Sources */,
 				5C3C8F2A2087337C0042AC2F /* Decrypter.swift in Sources */,
@@ -1240,8 +1243,7 @@
 				02A15AEF1F864F0900A94163 /* HomeViewController.swift in Sources */,
 				5C8CFD3E2007993500D383C0 /* JsonRpcRequest.swift in Sources */,
 				02E90F4C1FDEC1C4008D81F9 /* AttestationService.swift in Sources */,
-				6D1A40522208DC83009F3557 /* GarbageBinReducer.swift in Sources */,
-				0292451A1F7AA17300F2C0C1 /* GethState.swift in Sources */,
+				6D1A40522208DC83009F3557 /* ValueStoreReducer.swift in Sources */,
 				02E792351F6FFC0000DC5973 /* AppStore.swift in Sources */,
 				02E90F521FE03348008D81F9 /* DialogPresenter.swift in Sources */,
 				5C48E2401FA1F8BB00B8BF6E /* TelepathActions.swift in Sources */,
@@ -1271,15 +1273,14 @@
 				028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */,
 				5C20A1031FA224C000B443C9 /* TelepathChannel.swift in Sources */,
 				5C7C23911FA3502C009E9CE7 /* TelepathReceiver.swift in Sources */,
-				6D1A40582208E57E009F3557 /* GarbageBinService.swift in Sources */,
-				028F4EEE1F7CE12A0015C4AF /* SyncProgress.swift in Sources */,
-				6D1A404D2208D5B5009F3557 /* GarbageBinState.swift in Sources */,
+				6D1A40582208E57E009F3557 /* ValueStoreService.swift in Sources */,
+				6D1A404D2208D5B5009F3557 /* ValueStoreState.swift in Sources */,
 				C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */,
 				5C04E44D1FA77D1C00A70C60 /* AccountService.swift in Sources */,
 				02A15AFE1F8671D200A94163 /* Identity.swift in Sources */,
 				C00B5D39FC0D970348A5E0C6 /* DiamondActions.swift in Sources */,
 				C00B5AF3F2ECB1BD9415E765 /* Address.swift in Sources */,
-				6D1A40542208DF37009F3557 /* GarbageBinActions.swift in Sources */,
+				6D1A40542208DF37009F3557 /* ValueStoreActions.swift in Sources */,
 				0295A01F2085E6CD0060400A /* EncryptionService.swift in Sources */,
 				C00B5ACC20A8568692E88D7A /* DialogPresenterState.swift in Sources */,
 				C00B5164F17E8581AB40BA9E /* RequestedAlert.swift in Sources */,
@@ -1297,6 +1298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D423B772215C4C0002BF95A /* ValueStoreServiceSpec.swift in Sources */,
 				5C3C8F28208732C50042AC2F /* DecrypterSpy.swift in Sources */,
 				5CDB58DC203589CC00A28D60 /* TelepathSubscriberSpec.swift in Sources */,
 				028F4EF51F7CF7EB0015C4AF /* DebugViewControllerSpec.swift in Sources */,
@@ -1357,9 +1359,9 @@
 				C00B5559989C9FF92C6C70FA /* IdentitySpec.swift in Sources */,
 				0295A0212085E6DD0060400A /* EncryptionServiceSpec.swift in Sources */,
 				C00B5370FDA0454E818FE2EB /* DialogPresenterReducerSpec.swift in Sources */,
-				6D1A40502208D92E009F3557 /* GarbageBinStateSpec.swift in Sources */,
+				6D1A40502208D92E009F3557 /* ValueStoreStateSpec.swift in Sources */,
 				C00B5F2F98B19D0B3884414E /* Data+hex.swift in Sources */,
-				6D1A40562208E1F7009F3557 /* GarbageBinReducerSpec.swift in Sources */,
+				6D1A40562208E1F7009F3557 /* ValueStoreReducerSpec.swift in Sources */,
 				C00B57F400C10AB0C6F066D8 /* Data+hexSpec.swift in Sources */,
 				5C4D7F5520AD7D640008107C /* URLActionsSpec.swift in Sources */,
 				C00B54321DC6AA59BE55E8C1 /* UnsignedTransactionSpec.swift in Sources */,

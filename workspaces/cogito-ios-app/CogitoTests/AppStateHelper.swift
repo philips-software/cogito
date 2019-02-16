@@ -7,7 +7,7 @@ func appState(keyStore: KeyStoreState = initialKeyStoreState,
               telepath: TelepathState = initialTelepathState,
               attestations: AttestationsState = initialAttestationsState,
               dialogPresenter: DialogPresenterState = initialDialogPresenterState,
-              garbage: GarbageBinState = initialGarbageBinState
+              valueStore: ValueStoreState = initialValueStoreState
               ) -> AppState {
     return AppState(keyStore: keyStore,
                     createIdentity: createIdentity,
@@ -15,5 +15,5 @@ func appState(keyStore: KeyStoreState = initialKeyStoreState,
                     telepath: telepath,
                     attestations: attestations,
                     dialogPresenter: dialogPresenter,
-                    garbage: garbage)
+                    valueStore: valueStore)
 }

@@ -1,6 +1,6 @@
 import ReSwift
 
-struct GarbageBinActions {
+struct ValueStoreActions {
     struct Add: Action {
         let key: String
         let value: String
