@@ -8342,6 +8342,13 @@ expo@^32.0.0:
     uuid-js "^0.7.5"
     whatwg-fetch "^2.0.4"
 
+expokit@32.0.7:
+  version "32.0.7"
+  resolved "https://registry.yarnpkg.com/expokit/-/expokit-32.0.7.tgz#8395bae17c53c469d5f749fd567efe2d88907cf7"
+  integrity sha512-nYLpffUxCj8pk11p+rdO0VZlR98mP6M3nzaGSr1dbrUgVtxtzOmAYPqEwFMNYp4vPviaVgCQ7LUTT5G6lJPPSw==
+  dependencies:
+    jsc-android "^224109.1.0"
+
 express-graphql@^0.6.12:
   version "0.6.12"
   resolved "http://registry.npmjs.org/express-graphql/-/express-graphql-0.6.12.tgz#dfcb2058ca72ed5190b140830ad8cdbf76a9128a"
@@ -12245,6 +12252,11 @@ jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha1-peZUwuWi3rXyAdls77yoDA7y9RM=
+
+jsc-android@^224109.1.0:
+  version "224109.1.0"
+  resolved "https://registry.yarnpkg.com/jsc-android/-/jsc-android-224109.1.0.tgz#9749ec92f1e284b3c09befe7c47cc6e60b1f0cdf"
+  integrity sha512-mhALFynePc/wJsUt9BJuH13mSK/dGWtBO/pcYwVV1I0A7iduyqy3fSoAt1b0yI+/B3TzlGyue/gqjPxsqG1HRQ==
 
 jsdom@^11.5.1:
   version "11.12.0"
