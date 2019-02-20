@@ -1,12 +1,9 @@
-import React from 'react'
-import { NavigatorIOS } from 'react-native'
+import { createStackNavigator, createAppContainer } from 'react-navigation'
 import { Home } from './Home'
+import { IdentityManager } from './IdentityManager'
 
-const App = () => (
-  <NavigatorIOS
-    initialRoute={Home.route}
-    style={{ flex: 1 }}
-  />
-)
-
-export default App
+const AppNavigator = createStackNavigator({ Home, IdentityManager }, {
+  headerMode: 'float',
+  headerTransitionPreset: 'uikit'
+})
+export default createAppContainer(AppNavigator)

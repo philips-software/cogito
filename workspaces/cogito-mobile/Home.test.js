@@ -1,11 +1,10 @@
 import React from 'react'
 import { render, fireEvent } from 'react-native-testing-library'
 import { Home } from './Home'
-import { IdentityManager } from './IdentityManager'
 
 it('navigates to the identity manager', () => {
-  const navigator = { push: jest.fn() }
-  const { getByText } = render(<Home navigator={navigator} />)
+  const navigation = { navigate: jest.fn() }
+  const { getByText } = render(<Home navigation={navigation} />)
   fireEvent.press(getByText('I am.'))
-  expect(navigator.push).toBeCalledWith(IdentityManager.route)
+  expect(navigation.navigate).toBeCalledWith('IdentityManager')
 })
