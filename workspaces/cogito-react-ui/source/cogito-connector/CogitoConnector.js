@@ -41,7 +41,7 @@ CogitoConnector.propTypes = {
   buttonStyling: PropTypes.object,
   buttonDisabled: PropTypes.bool,
   buttonText: PropTypes.string,
-  isOpen: PropTypes.bool,
+  open: PropTypes.bool,
   onOpen: PropTypes.func,
   onDone: PropTypes.func,
   onCancel: PropTypes.func
