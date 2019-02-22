@@ -14,6 +14,7 @@ class CogitoConnectorButton extends Component {
     const { onOpen, onDone, onCancel } = this.props
     return (
       <CogitoConnector
+        telepathChannel={this.props.telepathChannel}
         buttonStyling={{ secondary: true, color: 'black' }}
         connectUrl={this.connectUrl()}
         open={dialogOpen}
