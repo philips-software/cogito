@@ -14,7 +14,8 @@ class App extends Component {
     this.channel = await telepath.createChannel({
       appName: 'Telepath Demo App'
     })
-    await this.channel.startNotifications(
+    await this.channel.startNotifications()
+    this.channel.subscribeForNotifications(
       notification => {
         console.debug('incoming notification: ', notification)
       },
@@ -42,9 +43,11 @@ class App extends Component {
     return (
       <div className='App'>
         <header className='App-header'>
-          {this.state.response
-            ? <p>{this.state.response}</p>
-            : this.renderQRCode()}
+          {this.state.response ? (
+            <p>{this.state.response}</p>
+          ) : (
+            this.renderQRCode()
+          )}
         </header>
       </div>
     )
@@ -54,10 +57,12 @@ class App extends Component {
     return (
       <div>
         <p>
-          Scan this code using the iOS camera and use it to open
-          the demo app on iOS:
+          Scan this code using the iOS camera and use it to open the demo app on
+          iOS:
         </p>
-        <QRCode value={this.state.connectUrl} /><br /><br />
+        <QRCode value={this.state.connectUrl} />
+        <br />
+        <br />
         <button onClick={() => this.sendMessage()}>
           I scanned the code; say hi!
         </button>
