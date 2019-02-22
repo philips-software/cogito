@@ -137,14 +137,18 @@ about it, or you can register a notification handler to receive
 incoming notifications.
 
 If you want to be able to receive notifications, after creating the
-Telepath channel you need to call `startNotifications`:
+Telepath channel you need to call `startNotifications` and subscribe
+for notifications:
 
 ```javascript
-await channel.startNotifications(message => {
+await channel.startNotifications()
+const subscription = channel.subscribeForNotifications(message => {
   console.log('received notification: ' + message)
 }, error => {
   console.log('notification error: ' + error)
 })
+// later...
+channel.unsubscribeForNotifications(subscription)
 ```
 
 Sending notifications work like this (please remember that
