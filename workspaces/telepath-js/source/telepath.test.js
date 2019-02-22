@@ -71,5 +71,41 @@ describe('Telepath', () => {
       expect.assertions(1)
       await expect(telepath.createChannel({ id, key })).rejects.toBeDefined()
     })
+
+    describe('notifications', () => {
+      const notification = { jsonrpc: '2.0', method: 'test' }
+      const error = new Error('some error')
+      let onNotification
+      let onError
+      let subscription
+
+      beforeEach(() => {
+        onNotification = jest.fn()
+        onError = jest.fn()
+        channel.startNotifications()
+        subscription = channel.subscribeForNotifications(
+          onNotification,
+          onError
+        )
+      })
+
+      it('can subscribe for notifications', () => {
+        channel.channel.notificationHandler(JSON.stringify(notification))
+        expect(onNotification).toHaveBeenCalledWith(notification)
+      })
+
+      it('can also receives errors', () => {
+        channel.channel.notificationErrorHandler(error)
+        expect(onError).toHaveBeenCalledWith(error)
+      })
+
+      it('can unsubscribe', () => {
+        channel.unsubscribeForNotifications(subscription)
+        channel.channel.notificationHandler(JSON.stringify(notification))
+        expect(onNotification).not.toHaveBeenCalled()
+        channel.channel.notificationErrorHandler(error)
+        expect(onError).not.toHaveBeenCalled()
+      })
+    })
   })
 })

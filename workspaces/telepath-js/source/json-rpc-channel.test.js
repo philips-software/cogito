@@ -140,7 +140,8 @@ describe('JSON RPC Channel', () => {
 
       beforeEach(async () => {
         notificationHandler = jest.fn()
-        await jsonrpc.startNotifications(notificationHandler)
+        await jsonrpc.startNotifications()
+        jsonrpc.subscribeForNotifications(notificationHandler)
         channelNotificationHandler = channel.startNotifications.mock.calls[0][0]
       })
 

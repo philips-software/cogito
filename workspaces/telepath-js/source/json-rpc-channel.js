@@ -1,3 +1,5 @@
+import { NotificationsDispatcher } from './notifications-dispatcher'
+
 class JsonRpcChannel {
   constructor ({ channel }) {
     this.channel = channel
@@ -28,21 +30,42 @@ class JsonRpcChannel {
     return response
   }
 
-  async startNotifications (notificationHandler, errorHandler) {
+  async startNotifications () {
+    this.notificationsDispatcher = new NotificationsDispatcher()
+    await this.startNotificationsWithCallbacks(message => {
+      this.onNotification(message, notification =>
+        this.notificationsDispatcher.onNotification(notification)
+      )
+    }, this.notificationsDispatcher.onError.bind(this.notificationsDispatcher))
+  }
+
+  async startNotificationsWithCallbacks (notificationHandler, errorHandler) {
     await this.channel.startNotifications(message => {
-      const notification = parseResponse(message)
-      try {
-        checkJsonRpcStructure(notification, true)
-        notificationHandler(notification)
-      } catch {
-        // ditching invalid JSON-RPC notification
-      }
+      this.onNotification(message, notificationHandler)
     }, errorHandler)
+  }
+
+  subscribeForNotifications (onNotification, onError) {
+    return this.notificationsDispatcher.addSubscription(onNotification, onError)
+  }
+
+  unsubscribeForNotifications (subscription) {
+    this.notificationsDispatcher.removeSubscription(subscription)
   }
 
   async notify (notification) {
     checkJsonRpcStructure(notification, true)
     this.channel.notify(JSON.stringify(notification))
+  }
+
+  onNotification (message, notificationHandler) {
+    const notification = parseResponse(message)
+    try {
+      checkJsonRpcStructure(notification, true)
+      notificationHandler(notification)
+    } catch {
+      // ditching invalid JSON-RPC notification
+    }
   }
 
   createConnectUrl (baseUrl) {
