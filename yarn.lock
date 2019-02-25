@@ -16176,7 +16176,14 @@ react-native-navigation@^2.12.0:
     react-lifecycles-compat "2.0.0"
     tslib "1.9.3"
 
-react-native@0.58.5:
+react-native-testing-library@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-testing-library/-/react-native-testing-library-1.5.0.tgz#02762bf8cb5c1295a220d5e5d40ffc2ebecf31da"
+  integrity sha512-ivS0K0uu8PnAU1DPi2LobZMDcWqQFZUFFP2NiGA1wFKgsGuv2zIGuiBY8mJVAtU2FnPMyVDfg5rL6XoyyCj+jg==
+  dependencies:
+    pretty-format "^23.6.0"
+
+react-native@^0.58.5:
   version "0.58.5"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.58.5.tgz#672709bafd845e35ab4dd32b8ccccae32d54d552"
   integrity sha512-wCWjUAtvRK7A1YxnCANAW8/3+x3gh2WUifYqdvKSAJ6wGsftLgvj1JxIaUMQ3mKi0aUeAlHnz0cO21ZPCLgd+g==
