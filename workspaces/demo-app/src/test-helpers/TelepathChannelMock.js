@@ -11,7 +11,8 @@ class TelepathChannelMock {
       username: 'Another Test User'
     }
   ]
-  createConnectUrl = jest.fn(() => this.defaultChannelUrl)
+  createConnectUrl = jest
+    .fn(() => this.defaultChannelUrl)
     .mockReturnValueOnce(this.firstChannelUrl)
   mockIdentityInfo = jest.fn()
   constructor ({ identities, createConnectUrl, error } = {}) {
@@ -28,6 +29,8 @@ class TelepathChannelMock {
       this.mockIdentityInfo.mockReturnValueOnce(identity)
     })
   }
+  subscribeForNotifications = jest.fn()
+  unsubscribeForNotifications = jest.fn()
 }
 
 export { TelepathChannelMock }
