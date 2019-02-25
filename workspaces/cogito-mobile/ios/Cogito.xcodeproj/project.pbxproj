@@ -41,7 +41,6 @@
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 		F55A8383A06A456EAD912E4F /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66641A3236FA4913B9750097 /* libReactNativeNavigation.a */; };
-		F7954F9D56734EB2BA81E9DA /* ReactNativeNavigationTests.xctest in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D85FD1B492461E8F75911F /* ReactNativeNavigationTests.xctest */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -395,7 +394,6 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				F55A8383A06A456EAD912E4F /* libReactNativeNavigation.a in Frameworks */,
-				F7954F9D56734EB2BA81E9DA /* ReactNativeNavigationTests.xctest in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
