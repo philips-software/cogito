@@ -20,5 +20,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "workspaces": {
+    "nohoist": [
+      "**"
+    ]
   }
 }
