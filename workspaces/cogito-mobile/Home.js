@@ -4,7 +4,7 @@ import { Navigation } from 'react-native-navigation'
 import styles from './Styles'
 
 export class Home extends React.Component {
-  static options() {
+  static options () {
     return { topBar: { visible: false } }
   }
 
@@ -21,5 +21,5 @@ export class Home extends React.Component {
   openIdentityManager () {
     const { componentId } = this.props
     Navigation.push(componentId, { component: { name: 'IdentityManager' } })
-  }  
+  }
 }
