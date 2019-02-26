@@ -3,14 +3,23 @@ import { Text, View } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import styles from './Styles'
 
-export const Home = ({ componentId }) => (
-  <View style={styles.container}>
-    <Text onPress={() => openIdentityManager({ componentId })}>
-      I am.
-    </Text>
-  </View>
-)
+export class Home extends React.Component {
+  static options() {
+    return { topBar: { visible: false } }
+  }
 
-const openIdentityManager = ({ componentId }) => {
-  Navigation.push(componentId, { component: { name: 'IdentityManager' } })
+  render () {
+    return (
+      <View style={styles.container}>
+        <Text onPress={() => this.openIdentityManager()}>
+          I am.
+        </Text>
+      </View>
+    )
+  }
+
+  openIdentityManager () {
+    const { componentId } = this.props
+    Navigation.push(componentId, { component: { name: 'IdentityManager' } })
+  }  
 }
