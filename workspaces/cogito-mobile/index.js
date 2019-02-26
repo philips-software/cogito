@@ -1,14 +1,14 @@
 import { Navigation } from 'react-native-navigation'
-import App from './App'
+import { Home } from './Home'
 import { IdentityManager } from './IdentityManager'
 
-Navigation.registerComponent('App', () => App)
+Navigation.registerComponent('Home', () => Home)
 Navigation.registerComponent('IdentityManager', () => IdentityManager)
 
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
     root: { stack: { children: [
-      { component: { name: 'App' } }
+      { component: { name: 'Home' } }
     ] } }
   })
 })
