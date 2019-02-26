@@ -13,9 +13,11 @@ export const Home = ({ componentId }) => (
 
 const openIdentityManager = ({ componentId }) => {
   Navigation.push(componentId, {
-    component: { name: 'IdentityManager' },
-    options: {
+    component: { 
+      name: 'IdentityManager',
+      options: {
         topBar: { title: { text: 'Me, Myself and I' } }
+      }
     }
   })
 }
