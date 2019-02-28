@@ -46,10 +46,19 @@ class JsonRpcChannel {
   }
 
   subscribeForNotifications (onNotification, onError) {
+    if (!this.notificationsDispatcher) {
+      if (onError) {
+        onError(new Error('Call `startNotifications` before subscribing'))
+      }
+      return
+    }
     return this.notificationsDispatcher.addSubscription(onNotification, onError)
   }
 
   unsubscribeForNotifications (subscription) {
+    if (!this.notificationsDispatcher) {
+      return
+    }
     this.notificationsDispatcher.removeSubscription(subscription)
   }
 
