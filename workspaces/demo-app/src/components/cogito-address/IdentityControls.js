@@ -9,9 +9,9 @@ import { AppEventsActions } from 'app-events'
 import { UserDataActions } from 'user-data'
 
 class IdentityControls extends React.Component {
-  onOpen = dispatch => {
+  onOpen = async dispatch => {
     const { newChannel } = this.props
-    newChannel()
+    await newChannel()
     dispatch(AppEventsActions.setDialogOpen())
   }
 

@@ -174,7 +174,7 @@ describe('CogitoAddress', () => {
       setUserIdentity(alternateIdentity)
       const showQRCodeButton = getByText(/show qr code/i)
       fireEvent.click(showQRCodeButton)
-      const rerenderedDoneButton = getByText(/done/i)
+      const rerenderedDoneButton = await waitForElement(() => getByText(/done/i))
       fireEvent.click(rerenderedDoneButton)
       await wait(() => expect(store.getState().userData).toMatchObject(alternateIdentity))
     })
@@ -192,7 +192,7 @@ describe('CogitoAddress', () => {
       setUserIdentity(alternateIdentity)
       const showQRCodeButton = getByText(/show qr code/i)
       fireEvent.click(showQRCodeButton)
-      const rerenderedDoneButton = getByText(/done/i)
+      const rerenderedDoneButton = await waitForElement(() => getByText(/done/i))
       fireEvent.click(rerenderedDoneButton)
       await wait(() => {
         expect(getByTestId(/current-address/i)).toHaveTextContent(alternateIdentity.ethereumAddress)
