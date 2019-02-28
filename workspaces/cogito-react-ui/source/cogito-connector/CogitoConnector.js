@@ -17,7 +17,11 @@ const CogitoConnector = ({
   <Modal
     open={open}
     trigger={
-      <Button {...buttonStyling} disabled={buttonDisabled} onClick={onOpen}>
+      <Button
+        {...buttonStyling}
+        disabled={buttonDisabled}
+        onClick={async () => { await onOpen() }}
+      >
         {buttonText || 'Show QR code'}
       </Button>
     }
