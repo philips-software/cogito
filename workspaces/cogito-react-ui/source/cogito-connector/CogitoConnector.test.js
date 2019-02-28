@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from 'react-testing-library'
+import { render, fireEvent, waitForElement } from 'react-testing-library'
 import { CogitoConnector } from './CogitoConnector'
 
 describe('Cogito Connector', () => {
@@ -16,12 +16,13 @@ describe('Cogito Connector', () => {
     let queryByText
 
     beforeEach(() => {
-      queryByText = render(
+      const renderUtils = render(
         <CogitoConnector
           connectUrl='connectUrl'
           telepathChannel={telepathChannel}
         />
-      ).queryByText
+      )
+      queryByText = renderUtils.queryByText
     })
 
     it('does not show the dialog', () => {
@@ -35,23 +36,25 @@ describe('Cogito Connector', () => {
 
   describe('when open', () => {
     let queryByText
-    let getAllByText
-    let unmount
+    let getByText
+    let container
     let onDone
 
-    beforeEach(() => {
+    beforeEach(async () => {
       onDone = jest.fn()
       const renderUtils = render(
         <CogitoConnector
-          open
           connectUrl='connectUrl'
           telepathChannel={telepathChannel}
           onDone={onDone}
         />
       )
       queryByText = renderUtils.queryByText
-      getAllByText = renderUtils.getAllByText
-      unmount = renderUtils.unmount
+      getByText = renderUtils.getByText
+      container = renderUtils.container
+
+      fireEvent.click(getByText(/show qr code/i))
+      await waitForElement(() => getByText(/done/i))
     })
 
     it('does show the dialog when opened', () => {
@@ -59,30 +62,35 @@ describe('Cogito Connector', () => {
     })
 
     it('fires onDone when close button is pressed', async () => {
-      const buttons = getAllByText(/done/i)
-      expect(buttons.length).toBe(2)
-      // TODO: why are there TWO 'done' buttons? How do I select the right one?
-      buttons.forEach(b => {
-        fireEvent.click(b)
-      })
+      const button = getByText(/done/i)
+      fireEvent.click(button)
       expect(onDone).toHaveBeenCalled()
     })
 
-    it('subscribes for notifications', () => {
+    it('subscribes for notifications', async () => {
       expect(telepathChannel.subscribeForNotifications).toHaveBeenCalled()
     })
 
-    it('unsubscribes un unmount', () => {
-      unmount()
+    it('unsubscribes on unmount', () => {
+      fireEvent.keyDown(container, { key: 'Escape', code: 27 })
       expect(telepathChannel.unsubscribeForNotifications).toHaveBeenCalled()
     })
 
-    it('fires onDone when telepath notification is received', () => {
-      const notification = { jsonrpc: '2.0', method: 'didScanQRCode' }
-      const onNotification =
-        telepathChannel.subscribeForNotifications.mock.calls[0][0]
-      onNotification(notification)
-      expect(onDone).toHaveBeenCalled()
+    describe('when telepath notification is received', () => {
+      beforeEach(() => {
+        const notification = { jsonrpc: '2.0', method: 'didScanQRCode' }
+        const onNotification =
+          telepathChannel.subscribeForNotifications.mock.calls[0][0]
+        onNotification(notification)
+      })
+
+      it('fires onDone when telepath notification is received', () => {
+        expect(onDone).toHaveBeenCalled()
+      })
+
+      it('unsubscribes from notifications', () => {
+        expect(telepathChannel.unsubscribeForNotifications).toHaveBeenCalled()
+      })
     })
   })
 })
