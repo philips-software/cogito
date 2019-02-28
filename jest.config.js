@@ -1,17 +1,18 @@
 module.exports = {
   projects: [
-    'workspaces/cogito-web3-provider',
-    'workspaces/cogito-ethereum',
-    'workspaces/cogito-ethereum-react',
-    'workspaces/cogito-encryption',
-    'workspaces/cogito-identity',
     'workspaces/cogito-attestations',
-    'workspaces/telepath-js',
-    'workspaces/telepath-queuing-service',
-    'workspaces/demo-app',
+    'workspaces/cogito-encryption',
+    'workspaces/cogito-ethereum-react',
+    'workspaces/cogito-ethereum',
+    'workspaces/cogito-identity',
+    'workspaces/cogito-ios-app-distribution',
+    'workspaces/cogito-react-ui',
+    'workspaces/cogito-web3-provider',
     'workspaces/crypto',
+    'workspaces/demo-app',
     'workspaces/faucet',
-    'workspaces/cogito-ios-app-distribution'
+    'workspaces/telepath-js',
+    'workspaces/telepath-queuing-service'
   ],
   collectCoverage: true,
   collectCoverageFrom: [
