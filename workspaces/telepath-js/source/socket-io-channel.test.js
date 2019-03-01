@@ -28,11 +28,7 @@ describe('SocketIOChannel', () => {
       })
     }
     socketStub.connected = false
-    service = new SocketIOChannel(socketStub)
-  })
-
-  it('can be constructed', () => {
-    expect(service.socket).toBe(socketStub)
+    service = new SocketIOChannel(() => socketStub)
   })
 
   it('ignores notify because it is not started', () => {
@@ -76,6 +72,7 @@ describe('SocketIOChannel', () => {
     })
 
     it('is correctly configured', () => {
+      expect(service.socket).toBe(socketStub)
       expect(socketStub.connect.mock.calls.length).toBe(1)
       expect(socketStub.on.mock.calls[1][0]).toBe('notification')
     })
