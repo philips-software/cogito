@@ -20,12 +20,14 @@ describe('SocketIOService', () => {
       on: jest.fn().mockImplementation((event, cb) => {
         handlers[event] = cb
       }),
+      off: jest.fn(),
       emit: jest.fn().mockImplementation((event, payload, cb) => {
         if (cb && !identifyTimesOut) {
           setTimeout(() => cb(), 1)
         }
       })
     }
+    socketStub.connected = false
     service = new SocketIOService(socketStub)
   })
 
@@ -62,7 +64,7 @@ describe('SocketIOService', () => {
     expect(socketStub.emit.mock.calls[1][0]).toBe('notification')
   })
 
-  describe('when started', () => {
+  describe('when started with an unconnected socket', () => {
     const channelID = 'channelID'
     let notificationSpy
     let errorSpy
@@ -78,7 +80,7 @@ describe('SocketIOService', () => {
       expect(socketStub.on.mock.calls[1][0]).toBe('notification')
     })
 
-    it('it identifies itself when socket is connected', () => {
+    it('it identifies itself when socket connects', () => {
       const onConnectCallback = socketStub.on.mock.calls[0][1]
       onConnectCallback()
       expect(socketStub.emit.mock.calls[0][0]).toBe('identify')
@@ -115,6 +117,28 @@ describe('SocketIOService', () => {
         handlers['error'](error)
         expect(errorSpy.mock.calls[0][0]).toBe(error)
       })
+    })
+  })
+
+  describe('when started with a connected socket', () => {
+    const channelID = 'channelID'
+    let notificationSpy
+    let errorSpy
+
+    beforeEach(async () => {
+      notificationSpy = jest.fn()
+      errorSpy = jest.fn()
+      socketStub.connected = true
+      await service.start(channelID, notificationSpy, errorSpy)
+    })
+
+    it('does not try to connect again', () => {
+      expect(socketStub.connect.mock.calls.length).toBe(0)
+    })
+
+    it('identifies itself', () => {
+      expect(socketStub.emit.mock.calls[0][0]).toBe('identify')
+      expect(socketStub.emit.mock.calls[0][1]).toBe(channelID)
     })
   })
 })
