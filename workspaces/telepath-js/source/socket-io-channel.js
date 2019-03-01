@@ -52,6 +52,7 @@ export class SocketIOChannel {
     })
     if (onError) {
       this.socket.on('error', onError)
+      this.socket.on('server error', onError)
     }
   }
 
