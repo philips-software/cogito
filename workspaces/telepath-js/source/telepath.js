@@ -5,7 +5,6 @@ import { JsonRpcChannel } from './json-rpc-channel'
 import { QueuingService } from './queuing-service'
 import { SocketIOService } from './socket-io-service'
 import { Manager } from 'socket.io-client'
-
 class Telepath {
   constructor (serviceUrl) {
     this.queuing = new QueuingService(serviceUrl)
@@ -25,7 +24,7 @@ class Telepath {
       key: channelKey,
       appName: appName,
       queuing: this.queuing,
-      socketIOService: this.socketIOService
+      socketIOService
     })
     return new JsonRpcChannel({ channel })
   }
