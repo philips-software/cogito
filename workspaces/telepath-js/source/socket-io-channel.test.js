@@ -117,6 +117,12 @@ describe('SocketIOChannel', () => {
         handlers['error'](error)
         expect(errorSpy.mock.calls[0][0]).toBe(error)
       })
+
+      it('reports incoming server errors through error handler', () => {
+        const error = 'some server error'
+        handlers['server error'](error)
+        expect(errorSpy.mock.calls[0][0]).toBe(error)
+      })
     })
   })
 
