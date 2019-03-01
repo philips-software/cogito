@@ -4,13 +4,12 @@ import { SecureChannel } from './secure-channel'
 import { JsonRpcChannel } from './json-rpc-channel'
 import { QueuingService } from './queuing-service'
 import { SocketIOService } from './socket-io-service'
-import io from 'socket.io-client'
+import { Manager } from 'socket.io-client'
 
 class Telepath {
   constructor (serviceUrl) {
     this.queuing = new QueuingService(serviceUrl)
-    const socket = io(serviceUrl, { autoConnect: false })
-    this.socketIOService = new SocketIOService(socket)
+    this.socketManager = new Manager(serviceUrl)
   }
 
   async createChannel ({ id, key, appName }) {
@@ -19,6 +18,8 @@ class Telepath {
     }
     const channelId = id || (await createRandomId())
     const channelKey = key || (await createRandomKey())
+    const socket = this.socketManager.socket('/')
+    const socketIOService = new SocketIOService(socket)
     const channel = new SecureChannel({
       id: channelId,
       key: channelKey,

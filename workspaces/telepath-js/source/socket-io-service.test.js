@@ -3,7 +3,6 @@ import base64url from 'base64url'
 
 describe('SocketIOService', () => {
   let socketStub
-  let socketIOClient
   let service
   let handlers
   let identifyTimesOut
@@ -12,6 +11,12 @@ describe('SocketIOService', () => {
     identifyTimesOut = false
     handlers = []
     socketStub = {
+      connect: jest.fn().mockImplementation(() => {
+        onConnect = handlers['connect']
+        if (onConnect) {
+          setTimeout(() => onConnect(), 1)
+        }
+      }),
       on: jest.fn().mockImplementation((event, cb) => {
         handlers[event] = cb
       }),
@@ -21,17 +26,11 @@ describe('SocketIOService', () => {
         }
       })
     }
-    socketIOClient = {
-      connect: jest.fn().mockImplementationOnce(() => {
-        setTimeout(() => handlers['connect'](), 1)
-        return socketStub
-      })
-    }
-    service = new SocketIOService(socketIOClient)
+    service = new SocketIOService(socketStub)
   })
 
   it('can be constructed', () => {
-    expect(service.socketIOClient).toBe(socketIOClient)
+    expect(service.socket).toBe(socketStub)
   })
 
   it('ignores notify because it is not started', () => {
@@ -75,8 +74,7 @@ describe('SocketIOService', () => {
     })
 
     it('is correctly configured', () => {
-      expect(socketIOClient.connect.mock.calls.length).toBe(1)
-      expect(service.socket).toBe(socketStub)
+      expect(socketStub.connect.mock.calls.length).toBe(1)
       expect(socketStub.on.mock.calls[1][0]).toBe('notification')
     })
 
