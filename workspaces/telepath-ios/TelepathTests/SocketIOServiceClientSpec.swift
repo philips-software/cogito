@@ -102,7 +102,7 @@ class SocketIOServiceClientSpec: QuickSpec {
 
                 it("is configured properly") {
                     expect(socket.connected).to(beTrue())
-                    expect(socket.handlers).to(haveCount(3))
+                    expect(socket.handlers).to(haveCount(4))
                 }
 
                 it("cleans up when deinited") {
@@ -136,6 +136,16 @@ class SocketIOServiceClientSpec: QuickSpec {
                     socket.fakeError(TestError.someError)
                     expect(errorSpy.lastRaisedError as? TestError?)
                         .toEventually(equal(TestError.someError))
+                }
+
+                it("reports server errors through error handler") {
+                    socket.fakeServerError(message: "some server error")
+                    expect(errorSpy.lastRaisedError as? NotificationError).toEventuallyNot(beNil())
+                    if case let NotificationError.serverError(message) = errorSpy.lastRaisedError! {
+                        expect(message).toEventually(equal("some server error"))
+                    } else {
+                        fail()
+                    }
                 }
             }
         }

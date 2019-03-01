@@ -1,4 +1,5 @@
 @testable import SocketIO
+@testable import Telepath
 
 class SocketMock: SocketIOClient {
     var connected = false
@@ -73,6 +74,16 @@ class SocketMock: SocketIOClient {
             self.handlers
                 .first(where: { $0.event == "error" })?
                 .executeCallback(with: [error], withAck: 0, withSocket: self)
+        }
+    }
+
+    func fakeServerError(message: String) {
+        DispatchQueue.main.async {
+            self.handlers
+                .first(where: { $0.event == "server error" })?
+                .executeCallback(with: [message],
+                                 withAck: 0,
+                                 withSocket: self)
         }
     }
 }
