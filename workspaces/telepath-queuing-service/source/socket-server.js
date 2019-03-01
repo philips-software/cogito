@@ -27,7 +27,7 @@ export class SocketServer {
   onIdentify (clientSocket, queueId) {
     let clientsForQueue = this.clients[queueId] || []
     if (clientsForQueue.length > 1) {
-      clientSocket.emit('error', 'too many clients for queue')
+      clientSocket.emit('server error', 'too many clients for queue')
       return
     }
 
@@ -50,7 +50,7 @@ export class SocketServer {
 
   onNotification (source, notification) {
     if (!this.verifyNotification(notification)) {
-      source.emit('error', 'notification too long')
+      source.emit('server error', 'notification too long')
       return
     }
 
@@ -92,7 +92,7 @@ export class SocketServer {
     let queueId = source.queueId
     let pendingNotifications = this.pendingNotifications.get(queueId) || []
     if (pendingNotifications.length === maximumQueueSize) {
-      source.emit('error', 'too many pending notifications')
+      source.emit('server error', 'too many pending notifications')
       return
     }
 
