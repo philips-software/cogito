@@ -12,7 +12,7 @@ describe('SocketIOService', () => {
     handlers = []
     socketStub = {
       connect: jest.fn().mockImplementation(() => {
-        onConnect = handlers['connect']
+        const onConnect = handlers['connect']
         if (onConnect) {
           setTimeout(() => onConnect(), 1)
         }
