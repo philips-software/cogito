@@ -17,6 +17,7 @@ export class SocketIOChannel {
   waitUntilConnected () {
     return new Promise((resolve, reject) => {
       if (this.socket.connected) {
+        this.socket.off()
         resolve()
       } else {
         this.socket.on('connect', () => {

@@ -136,6 +136,10 @@ describe('SocketIOChannel', () => {
       expect(socketStub.connect.mock.calls.length).toBe(0)
     })
 
+    it('removes old event handlers', () => {
+      expect(socketStub.off.mock.calls.length).toBe(1)
+    })
+
     it('identifies itself', () => {
       expect(socketStub.emit.mock.calls[0][0]).toBe('identify')
       expect(socketStub.emit.mock.calls[0][1]).toBe(channelID)
