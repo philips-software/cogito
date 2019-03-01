@@ -56,7 +56,7 @@ describe('socket server', () => {
         let receiver2 = new FakeClientSocket()
         receiver2.connect(socketServer)
         receiver2.receiveIncoming('identify', queue)
-        expect(receiver2.outgoing[0].event).toBe('error')
+        expect(receiver2.outgoing[0].event).toBe('server error')
       })
 
       it('is removed from registry when it disconnects', () => {
@@ -106,7 +106,7 @@ describe('socket server', () => {
       }
       expect(sender.outgoing.length).toBe(0)
       sender.receiveIncoming('notification', notification)
-      expect(sender.outgoing[0].event).toBe('error')
+      expect(sender.outgoing[0].event).toBe('server error')
     })
 
     it(`allows a maximum size of ${maximumNotificationLength} per notification`, () => {
@@ -115,7 +115,7 @@ describe('socket server', () => {
       sender.receiveIncoming('notification', notTooBig)
       expect(sender.outgoing.length).toBe(0)
       sender.receiveIncoming('notification', tooBig)
-      expect(sender.outgoing[0].event).toBe('error')
+      expect(sender.outgoing[0].event).toBe('server error')
     })
 
     describe('time to live', async () => {
