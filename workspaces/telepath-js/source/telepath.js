@@ -18,8 +18,9 @@ class Telepath {
     }
     const channelId = id || (await createRandomId())
     const channelKey = key || (await createRandomKey())
-    const socket = this.socketManager.socket('/')
-    const socketIOChannel = new SocketIOChannel(socket)
+    const socketIOChannel = new SocketIOChannel(() =>
+      this.socketManager.socket('/')
+    )
     const channel = new SecureChannel({
       id: channelId,
       key: channelKey,

@@ -2,13 +2,14 @@ import base64url from 'base64url'
 import timeoutCallback from 'timeout-callback'
 
 export class SocketIOChannel {
-  constructor (socket) {
-    this.socket = socket
+  constructor (socketFactoryMethod) {
+    this.socketFactoryMethod = socketFactoryMethod
     this.pendingNotifications = []
     this.setupDone = false
   }
 
   async start (channelID, onNotification, onError, timeout = 30000) {
+    this.socket = this.socketFactoryMethod()
     await this.waitUntilConnected()
     await this.identify(channelID, timeout)
     this.installEventHandlers(onNotification, onError)
