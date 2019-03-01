@@ -8,29 +8,46 @@ export class SocketIOService {
     this.setupDone = false
   }
 
-  start (channelID, onNotificationCallback, onErrorCallback, timeout = 30000) {
+  async start (
+    channelID,
+    onNotificationCallback,
+    onErrorCallback,
+    timeout = 30000
+  ) {
+    await this.waitUntilConnected()
     return new Promise((resolve, reject) => {
-      this.socket.on('connect', () => {
-        this.socket.emit(
-          'identify',
-          channelID,
-          timeoutCallback(timeout, e => {
-            if (e instanceof Error) {
-              reject(e)
-            } else {
-              this.sendPendingNotifications()
-              resolve()
-            }
-          })
-        )
-      })
+      this.socket.emit(
+        'identify',
+        channelID,
+        timeoutCallback(timeout, e => {
+          if (e instanceof Error) {
+            reject(e)
+          } else {
+            this.sendPendingNotifications()
+            resolve()
+          }
+        })
+      )
       this.socket.on('notification', message => {
         onNotificationCallback(base64url.toBuffer(message))
       })
       if (onErrorCallback) {
         this.socket.on('error', onErrorCallback)
       }
-      this.socket.connect()
+    })
+  }
+
+  waitUntilConnected () {
+    return new Promise((resolve, reject) => {
+      if (this.socket.connected) {
+        resolve()
+      } else {
+        this.socket.on('connect', () => {
+          this.socket.off('connect')
+          resolve()
+        })
+        this.socket.connect()
+      }
     })
   }
 
