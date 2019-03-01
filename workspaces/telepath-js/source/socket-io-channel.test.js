@@ -1,7 +1,7 @@
-import { SocketIOService } from './socket-io-service'
+import { SocketIOChannel } from './socket-io-channel'
 import base64url from 'base64url'
 
-describe('SocketIOService', () => {
+describe('SocketIOChannel', () => {
   let socketStub
   let service
   let handlers
@@ -28,7 +28,7 @@ describe('SocketIOService', () => {
       })
     }
     socketStub.connected = false
-    service = new SocketIOService(socketStub)
+    service = new SocketIOChannel(socketStub)
   })
 
   it('can be constructed', () => {

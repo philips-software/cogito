@@ -1,7 +1,7 @@
 import base64url from 'base64url'
 import timeoutCallback from 'timeout-callback'
 
-export class SocketIOService {
+export class SocketIOChannel {
   constructor (socket) {
     this.socket = socket
     this.pendingNotifications = []
