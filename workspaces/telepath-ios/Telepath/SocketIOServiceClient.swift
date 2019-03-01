@@ -30,7 +30,14 @@ class SocketIOServiceClient: SocketIOService {
         socket.on(clientEvent: .connect) { [weak self] _, _ in self?.onConnect() }
         socket.on("notification") { [weak self] data, _ in self?.onNotification(data) }
         socket.on(clientEvent: .error) { [weak self] data, _ in
-            self?.onError(data) }
+            let error = data[0] as? Error ?? NotificationError.unknown(data: data)
+            self?.errorHandler?(error)
+        }
+        socket.on("server error") { [weak self] data, _ in
+            let message = data[0] as? String ?? "unknown server error"
+            let error = NotificationError.serverError(message: message)
+            self?.errorHandler?(error)
+        }
         socket.connect()
     }
 
@@ -55,11 +62,6 @@ class SocketIOServiceClient: SocketIOService {
             let message = Data(base64urlEncoded: base64) {
             self.notificationHandler(message)
         }
-    }
-
-    func onError(_ data: [Any]) {
-        let error = data[0] as? Error ?? NotificationError.unknown(data: data)
-        errorHandler?(error)
     }
 
     func sendPendingNotifications() {

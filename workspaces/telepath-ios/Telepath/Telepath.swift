@@ -5,10 +5,21 @@ public protocol NotificationHandler {
     func on(notification: String)
     func on(error: Error)
 }
-public enum NotificationError: Error {
+
+public enum NotificationError: Error, Equatable {
     case setupFailed
     case unknown(data: [Any])
+    case serverError(message: String)
+
+    public static func == (lhs: NotificationError, rhs: NotificationError) -> Bool {
+        switch (lhs, rhs) {
+        case (.setupFailed, .setupFailed): return true
+        case (.serverError(let lhsMessage), .serverError(let rhsMessage)): return lhsMessage == rhsMessage
+        default: return false
+        }
+    }
 }
+
 public typealias CompletionHandler = (Error?) -> Void
 
 public struct Telepath {
