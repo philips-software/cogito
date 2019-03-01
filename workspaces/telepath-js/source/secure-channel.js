@@ -3,9 +3,9 @@ import { random, encrypt, decrypt, nonceSize } from '@cogitojs/crypto'
 import { Poller } from './poller'
 
 class SecureChannel {
-  constructor ({ queuing, id, key, appName, socketIOService }) {
+  constructor ({ queuing, id, key, appName, socketIOChannel }) {
     this.queuing = queuing
-    this.socketIOService = socketIOService
+    this.socketIOChannel = socketIOChannel
     this.id = id
     this.key = key
     this.appName = appName
@@ -19,7 +19,7 @@ class SecureChannel {
   async startNotifications (notificationHandler, errorHandler) {
     this.notificationHandler = notificationHandler
     this.notificationErrorHandler = errorHandler
-    await this.socketIOService.start(
+    await this.socketIOChannel.start(
       this.id,
       this.onEncryptedNotification.bind(this),
       errorHandler
@@ -42,7 +42,7 @@ class SecureChannel {
 
   async notify (message) {
     const nonceAndCypherText = await this.encrypt(message)
-    this.socketIOService.notify(nonceAndCypherText)
+    this.socketIOChannel.notify(nonceAndCypherText)
   }
 
   async onEncryptedNotification (data) {

@@ -13,7 +13,7 @@ describe('Secure Channel', () => {
 
   let channel
   let queuing
-  let socketIOService
+  let socketIOChannel
   let key
 
   beforeEach(async () => {
@@ -22,7 +22,7 @@ describe('Secure Channel', () => {
       send: jest.fn(),
       receive: jest.fn()
     }
-    socketIOService = {
+    socketIOChannel = {
       start: jest.fn(),
       notify: jest.fn()
     }
@@ -31,7 +31,7 @@ describe('Secure Channel', () => {
       id: channelId,
       key,
       appName,
-      socketIOService
+      socketIOChannel
     })
     channel.poller.interval = 0
     channel.poller.retries = 10
@@ -104,7 +104,7 @@ describe('Secure Channel', () => {
   })
 
   it('has sensible polling parameters', () => {
-    const channel = new SecureChannel({ socketIOService })
+    const channel = new SecureChannel({ socketIOChannel })
     expect(channel.poller.interval).toEqual(1000) // 1000 ms
     expect(channel.poller.retries).toEqual(600) // at least 10 minutes
   })
@@ -123,7 +123,7 @@ describe('Secure Channel', () => {
     it('encrypts the payload', async () => {
       await channel.notify(message)
       const nonceAndCypherText = new Uint8Array(
-        socketIOService.notify.mock.calls[0][0]
+        socketIOChannel.notify.mock.calls[0][0]
       )
       const nonce = nonceAndCypherText.slice(0, await nonceSize())
       const cypherText = nonceAndCypherText.slice(await nonceSize())

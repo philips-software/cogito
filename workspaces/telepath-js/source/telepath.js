@@ -3,8 +3,9 @@ import { random, keySize } from '@cogitojs/crypto'
 import { SecureChannel } from './secure-channel'
 import { JsonRpcChannel } from './json-rpc-channel'
 import { QueuingService } from './queuing-service'
-import { SocketIOService } from './socket-io-service'
+import { SocketIOChannel } from './socket-io-channel'
 import { Manager } from 'socket.io-client'
+
 class Telepath {
   constructor (serviceUrl) {
     this.queuing = new QueuingService(serviceUrl)
@@ -18,13 +19,13 @@ class Telepath {
     const channelId = id || (await createRandomId())
     const channelKey = key || (await createRandomKey())
     const socket = this.socketManager.socket('/')
-    const socketIOService = new SocketIOService(socket)
+    const socketIOChannel = new SocketIOChannel(socket)
     const channel = new SecureChannel({
       id: channelId,
       key: channelKey,
       appName: appName,
       queuing: this.queuing,
-      socketIOService
+      socketIOChannel
     })
     return new JsonRpcChannel({ channel })
   }

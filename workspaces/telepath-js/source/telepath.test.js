@@ -2,25 +2,25 @@ import base64url from 'base64url'
 import { JsonRpcChannel } from './json-rpc-channel'
 import { Telepath } from './telepath'
 import { random, keySize } from '@cogitojs/crypto'
-import { SocketIOService } from './socket-io-service'
+import { SocketIOChannel } from './socket-io-channel'
 
-jest.mock('./socket-io-service')
+jest.mock('./socket-io-channel')
 
 describe('Telepath', () => {
   const appName = 'some app name'
   let telepath
   let queuing
   let socketManager
-  let socketIOService
+  let socketIOChannel
 
   beforeEach(() => {
-    SocketIOService.mockClear()
+    SocketIOChannel.mockClear()
     telepath = new Telepath('https://queuing.example.com')
     queuing = {}
     telepath.queuing = queuing
-    socketIOService = { start: jest.fn() }
-    SocketIOService.mockImplementation(socket => {
-      return socketIOService
+    socketIOChannel = { start: jest.fn() }
+    SocketIOChannel.mockImplementation(socket => {
+      return socketIOChannel
     })
     socketManager = { socket: () => {} }
     telepath.socketManager = socketManager
@@ -53,8 +53,8 @@ describe('Telepath', () => {
     })
 
     it('uses the socket from the socket manager', () => {
-      expect(SocketIOService).toHaveBeenCalledTimes(1)
-      expect(channel.channel.socketIOService).toEqual(socketIOService)
+      expect(SocketIOChannel).toHaveBeenCalledTimes(1)
+      expect(channel.channel.socketIOChannel).toEqual(socketIOChannel)
     })
 
     it('has a random id', () => {
