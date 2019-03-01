@@ -8,33 +8,10 @@ export class SocketIOService {
     this.setupDone = false
   }
 
-  async start (
-    channelID,
-    onNotificationCallback,
-    onErrorCallback,
-    timeout = 30000
-  ) {
+  async start (channelID, onNotification, onError, timeout = 30000) {
     await this.waitUntilConnected()
-    return new Promise((resolve, reject) => {
-      this.socket.emit(
-        'identify',
-        channelID,
-        timeoutCallback(timeout, e => {
-          if (e instanceof Error) {
-            reject(e)
-          } else {
-            this.sendPendingNotifications()
-            resolve()
-          }
-        })
-      )
-      this.socket.on('notification', message => {
-        onNotificationCallback(base64url.toBuffer(message))
-      })
-      if (onErrorCallback) {
-        this.socket.on('error', onErrorCallback)
-      }
-    })
+    await this.identify(channelID, timeout)
+    this.installEventHandlers(onNotification, onError)
   }
 
   waitUntilConnected () {
@@ -49,6 +26,32 @@ export class SocketIOService {
         this.socket.connect()
       }
     })
+  }
+
+  identify (channelID, timeout) {
+    return new Promise((resolve, reject) => {
+      this.socket.emit(
+        'identify',
+        channelID,
+        timeoutCallback(timeout, e => {
+          if (e instanceof Error) {
+            reject(e)
+          } else {
+            this.sendPendingNotifications()
+            resolve()
+          }
+        })
+      )
+    })
+  }
+
+  installEventHandlers (onNotification, onError) {
+    this.socket.on('notification', message => {
+      onNotification(base64url.toBuffer(message))
+    })
+    if (onError) {
+      this.socket.on('error', onError)
+    }
   }
 
   notify (data) {
