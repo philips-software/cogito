@@ -1,9 +1,9 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import { Navigation } from 'react-native-navigation'
-import styles from './Styles'
-import { toolbarButton } from './ToolbarButton'
-import { CreateIdentity } from './CreateIdentity'
+import styles from '../Styles'
+import { toolbarButton } from '../navigation/ToolbarButton'
+import { CreateIdentity } from './create/CreateIdentity'
 
 export class IdentityManager extends React.Component {
   static options () {

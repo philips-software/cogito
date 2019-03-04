@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from 'react-native'
 import { Navigation } from 'react-native-navigation'
-import { layout } from './CreateIdentityLayout'
+import { layout } from './Layout'
 
 export class CreateIdentity extends React.Component {
   static modalPresentationLayout = {
