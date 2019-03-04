@@ -5,7 +5,7 @@ import styles from './Styles'
 
 export class Home extends React.Component {
   static options () {
-    return { topBar: { visible: false } }
+    return { topBar: { visible: false, drawBehind: true } }
   }
 
   render () {
