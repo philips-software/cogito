@@ -8,7 +8,7 @@ export const Navigation = {
 const bindComponent = jest.fn()
 const events = {
   bindComponent,
-  get boundComponents() {
+  get boundComponents () {
     return bindComponent.mock.calls.map(call => call[0])
   }
 }
