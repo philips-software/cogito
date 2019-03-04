@@ -7,7 +7,7 @@ it('can add an identity', () => {
   render(<IdentityManager />)
 
   const identityManager = Navigation.events().boundComponents[0]
-  identityManager.navigationButtonPressed({ buttonId: 'addIdentity' })
+  identityManager.navigationButtonPressed({ buttonId: 'add' })
 
   const layout = Navigation.showModal.mock.calls[0][0]
   expect(layout.component.name).toEqual('CreateIdentity')
