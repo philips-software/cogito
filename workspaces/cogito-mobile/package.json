@@ -6,6 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "ios": "react-native run-ios",
     "log-ios": "react-native-log-ios Cogito",
+    "android": "react-native run-android",
     "test": "jest"
   },
   "dependencies": {
