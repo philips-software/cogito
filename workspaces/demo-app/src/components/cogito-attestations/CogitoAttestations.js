@@ -22,7 +22,7 @@ const ShowAttestation = () => (
   <Centered css={{ padding: '10px', marginRight: '50px', backgroundColor: 'white' }}>
     <p>Scan to add a dummy attestation:</p>
     <CogitoQRCode
-      value='https://cogito.mobi/attestations/receive#A=email%3Atest.user%40philips.com'
+      url='https://cogito.mobi/attestations/receive#A=email%3Atest.user%40philips.com'
     />
   </Centered>
 )

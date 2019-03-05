@@ -9,7 +9,7 @@ const ConnectorBody = ({ connectUrl, buttonStyling, onDone }) => (
     <Spacer
       margin='20px 0 50px 0'
       render={() =>
-        <CogitoQRCode key={connectUrl} value={connectUrl} />
+        <CogitoQRCode key={connectUrl} url={connectUrl} />
       } />
     <Button {...buttonStyling} onClick={onDone}>Done</Button>
   </Centered>
