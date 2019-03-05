@@ -20,12 +20,12 @@ class CogitoQRCode extends React.Component {
   render () {
     const { canvas } = this.state
     return (
-      <div>
+      <a href={this.props.value} title={this.props.title}>
         { !canvas && <QRCode
           value={this.props.value}
         /> }
         { canvas && <img alt='qr-code' src={canvas.url} width={canvas.width} height={canvas.height} /> }
-      </div>
+      </a>
     )
   }
 }

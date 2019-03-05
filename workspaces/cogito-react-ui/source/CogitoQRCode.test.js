@@ -9,4 +9,12 @@ describe('CogitoQRCode', () => {
 
     expect(queryByText(value)).not.toBeNull()
   })
+
+  it('links to the URL', () => {
+    const title = 'Link in QR Code'
+    const url = 'https://url-in-qr.code/'
+    const { getByTitle } = render(<CogitoQRCode title={title} value={url} />)
+
+    expect(getByTitle(title).href).toEqual(url)
+  })
 })
