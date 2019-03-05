@@ -1,0 +1,27 @@
+{
+  "name": "Cogito",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "run-ios": "node node_modules/react-native/local-cli/cli.js run-ios",
+    "run-android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "bundle-ios": "lein prod-build && node --expose-gc --max_old_space_size=8192 './node_modules/react-native/local-cli/cli.js' bundle --sourcemap-output main.jsbundle.map --bundle-output ios/main.jsbundle --entry-file index.ios.js --platform ios --assets-dest ios",
+    "bundle-android": "lein prod-build && node --expose-gc --max_old_space_size=8192 './node_modules/react-native/local-cli/cli.js' bundle --sourcemap-output main.jsbundle.map --bundle-output android/main.jsbundle --entry-file index.android.js --platform android --assets-dest android",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@babel/plugin-external-helpers": "^7.0.0",
+    "react": "16.6.1",
+    "react-native": "0.57.7"
+  },
+  "devDependencies": {
+    "babel-jest": "24.1.0",
+    "jest": "24.1.0",
+    "metro-react-native-babel-preset": "0.45.4",
+    "react-test-renderer": "16.6.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}

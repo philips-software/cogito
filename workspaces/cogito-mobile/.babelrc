@@ -1,0 +1,9 @@
+{
+  "presets": [
+    "module:metro-react-native-babel-preset"
+  ],
+  "ignore": [
+    "./index.ios.js",
+    "./index.android.js"
+  ]
+}
