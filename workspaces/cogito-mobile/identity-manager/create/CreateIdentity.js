@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import { layout } from './Layout'
+import styles from '../../Styles'
 
 export class CreateIdentity extends React.Component {
   static modalPresentationLayout = {
@@ -22,7 +23,11 @@ export class CreateIdentity extends React.Component {
   }
 
   render () {
-    return <Text>Create</Text>
+    return (
+      <View style={styles.container}>
+        <Text>Create</Text>
+      </View>
+    )
   }
 
   navigationButtonPressed () {
