@@ -3,13 +3,15 @@ import { render } from 'react-testing-library'
 import { CogitoQRCode } from './CogitoQRCode'
 
 describe('CogitoQRCode', () => {
+  const defaultTitle = 'Cogito QR Code'
   const title = 'Link in QR Code'
   const connectUrl = 'https://url-in-qr.code/'
 
-  it('shows QR code', () => {
-    const { queryByText } = render(<CogitoQRCode connectUrl={connectUrl} />)
+  it('shows QR code with default title', () => {
+    const { queryByText, queryByTitle } = render(<CogitoQRCode connectUrl={connectUrl} />)
 
     expect(queryByText(connectUrl)).not.toBeNull()
+    expect(queryByTitle(defaultTitle).href).not.toBeNull()
   })
 
   it('links to the URL', () => {
