@@ -4,17 +4,17 @@ import { CogitoQRCode } from './CogitoQRCode'
 
 describe('CogitoQRCode', () => {
   const title = 'Link in QR Code'
-  const url = 'https://url-in-qr.code/'
+  const connectUrl = 'https://url-in-qr.code/'
 
   it('shows QR code', () => {
-    const { queryByText } = render(<CogitoQRCode url={url} />)
+    const { queryByText } = render(<CogitoQRCode connectUrl={connectUrl} />)
 
-    expect(queryByText(url)).not.toBeNull()
+    expect(queryByText(connectUrl)).not.toBeNull()
   })
 
   it('links to the URL', () => {
-    const { getByTitle } = render(<CogitoQRCode title={title} url={url} />)
+    const { getByTitle } = render(<CogitoQRCode title={title} connectUrl={connectUrl} />)
 
-    expect(getByTitle(title).href).toEqual(url)
+    expect(getByTitle(title).href).toEqual(connectUrl)
   })
 })
