@@ -10,9 +10,9 @@
  {:cogito
   {:target :react-native
    :init-fn cogito.app/init
-   :output-dir "app"}
+   :output-dir "build"}
   :test
   {:target :node-test
-   :output-to "app/node-tests.js"
+   :output-to "build/node-tests.js"
    :ns-regexp "-test$"
    :autorun true}}}
