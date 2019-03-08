@@ -10,4 +10,5 @@
    [text {:style {:font-size 30 :font-weight "100" :margin-bottom 20 :text-align "center"}} "Identities"]])
 
 (def push-options #js {:topBar #js {:visible "true"
-                                    :title #js {:text "Me, myself and I"}}})
+                                    :title #js {:text "Me, myself and I"}
+                                    :rightButtons #js [#js {:id "add" :systemItem "add"}]}})
