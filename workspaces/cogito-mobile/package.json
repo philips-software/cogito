@@ -3,9 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "react-native start",
+    "start:reset": "react-native start --reset-cache",
+    "build": "shadow-cljs release cogito",
+    "build:dev": "shadow-cljs watch cogito",
     "ios": "react-native run-ios",
-    "test": "jest"
+    "test": "shadow-cljs compile test"
   },
   "dependencies": {
     "react": "16.6.3",
