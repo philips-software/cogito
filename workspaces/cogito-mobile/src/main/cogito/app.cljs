@@ -7,7 +7,6 @@
 (def navigation (.-Navigation ReactNativeNavigation))
 
 (defn init []
-  (println "hello shadow")
   (.registerComponent navigation "Home" #(r/reactify-component home/screen))
   (.registerComponent navigation "IdentityManager" #(r/reactify-component identity-manager/screen))
   (let [events (.events navigation)]
