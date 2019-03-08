@@ -8,10 +8,15 @@
 (def navigation (.-Navigation ReactNativeNavigation))
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
+(def button (r/adapt-react-class (.-Button ReactNative)))
+
+(defn alert [title]
+  (.alert (.-Alert ReactNative) title))
 
 (defn app-root []
   [view {:style {:flex-direction "column" :margin 40 :align-items "center" :background-color "white"}}
-   [text {:style {:font-size 30 :font-weight "100" :margin-bottom 20 :text-align "center"}} "Hi Shadow!"]])
+   [text {:style {:font-size 30 :font-weight "100" :margin-bottom 20 :text-align "center"}} "Hi Shadow CLJS!"]
+   [button {:title "Press me" :on-press #(alert "Hello!")}]])
 
 (defn init []
   (println "hello shadow")
