@@ -1,3 +1,7 @@
+app
+.nrepl-port
+.shadow-cljs
+
 # OSX
 #
 .DS_Store

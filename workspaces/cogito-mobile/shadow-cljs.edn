@@ -1,0 +1,13 @@
+;; shadow-cljs configuration
+{:source-paths
+ ["src/main"
+  "src/test"]
+
+ :dependencies
+ [[reagent "0.8.1"]]
+
+ :builds
+ {:cogito
+  {:target :react-native
+   :init-fn cogito.app/init
+   :output-dir "app"}}}
