@@ -1,5 +1,7 @@
 (ns cogito.app
-  (:require [reagent.core :as r :refer [atom]]))
+  (:require [reagent.core :as r :refer [atom]]
+            [cogito.identity-manager :as identity-manager]))
+
 
 (def ReactNative (js/require "react-native"))
 (def ReactNativeNavigation (js/require "react-native-navigation"))
@@ -10,27 +12,22 @@
 (def view (r/adapt-react-class (.-View ReactNative)))
 (def button (r/adapt-react-class (.-Button ReactNative)))
 
-(defn identity-manager []
-  [view {:style {:flex-direction "column" :margin 40 :align-items "center" :background-color "white"}}
-   [text {:style {:font-size 30 :font-weight "100" :margin-bottom 20 :text-align "center"}} "Hi Shadow CLJS!"]])
-
-(defn push [componentId]
+(defn show-identity-manager [componentId]
   (.push
    navigation
    componentId
    #js {:component #js {:name "IdentityManager"
-                        :options #js {:topBar #js {:visible "true"
-                                                   :title #js {:text "Me, myself and I"}}}}}))
+                        :options identity-manager/push-options}}))
 
 (defn app-root [props]
   [view {:style {:flex-direction "column" :margin 40 :align-items "center" :background-color "white"}}
    [text {:style {:font-size 30 :font-weight "100" :margin-bottom 20 :text-align "center"}} "Hi Shadow CLJS!"]
-   [button {:title "Press me" :on-press #(push (:componentId props))}]])
+   [button {:title "Press me" :on-press #(show-identity-manager (:componentId props))}]])
 
 (defn init []
   (println "hello shadow")
   (.registerComponent navigation "Cogito" #(r/reactify-component app-root))
-  (.registerComponent navigation "IdentityManager" #(r/reactify-component identity-manager))
+  (.registerComponent navigation "IdentityManager" #(r/reactify-component identity-manager/screen))
   (let [events (.events navigation)]
     (.registerAppLaunchedListener
      events
