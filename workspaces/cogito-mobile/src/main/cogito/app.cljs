@@ -6,7 +6,7 @@
             [cogito.identity-manager :as identity-manager]
             [cogito.create-identity :as create-identity]))
 
-(defn init []
+(defn init {:dev/after-load true} []
   (.registerComponent Navigation "Home" #(r/reactify-component home/screen))
   (.registerComponent Navigation "IdentityManager" identity-manager/screen)
   (.registerComponent Navigation "CreateIdentity" create-identity/screen)

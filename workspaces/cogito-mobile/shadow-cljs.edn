@@ -10,7 +10,8 @@
  {:cogito
   {:target :react-native
    :init-fn cogito.app/init
-   :output-dir "build"}
+   :output-dir "build"
+   :devtools {:autoload true}}
   :test
   {:target :node-test
    :output-to "build/node-tests.js"
