@@ -1,12 +1,8 @@
 (ns cogito.home
   (:require [reagent.core :as r :refer [atom]]
-            ["react-native" :as ReactNative]
+            ["react-native" :as rn]
             ["react-native-navigation" :as ReactNativeNavigation :refer (Navigation)]
             [cogito.identity-manager :as identity-manager]))
-
-(def text (r/adapt-react-class (.-Text ReactNative)))
-(def view (r/adapt-react-class (.-View ReactNative)))
-(def button (r/adapt-react-class (.-Button ReactNative)))
 
 (defn show-identity-manager [componentId]
   (.push
@@ -16,15 +12,15 @@
                         :options identity-manager/push-options}}))
 
 (defn screen [props]
-  [view {:style {:flex-direction "column"
-                 :margin 40
-                 :align-items "center"}}
+  [:> rn/View {:style {:flex-direction "column"
+                       :margin 40
+                       :align-items "center"}}
 
-   [text {:style {:font-size 30
-                  :font-weight "100"
-                  :margin-bottom 20
-                  :text-align "center"}}
+   [:> rn/Text {:style {:font-size 30
+                        :font-weight "100"
+                        :margin-bottom 20
+                        :text-align "center"}}
     "Hi Shadow CLJS!"]
 
-   [button {:title "Press me"
-            :on-press #(show-identity-manager (:componentId props))}]])
+   [:> rn/Button {:title "Press me"
+                  :on-press #(show-identity-manager (:componentId props))}]])

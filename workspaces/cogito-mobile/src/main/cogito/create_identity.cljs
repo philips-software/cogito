@@ -1,24 +1,21 @@
 (ns cogito.create-identity
   (:require
    [reagent.core :as r :refer [atom]]
-   ["react-native" :as ReactNative]
+   ["react-native" :as rn]
    ["react-native-navigation" :as ReactNativeNavigation :refer (Navigation)]
    [cogito.toolbar-button :as btn :refer [toolbar-button]]))
 
-(def platform (.-Platform ReactNative))
-
-(def view (r/adapt-react-class (.-View ReactNative)))
-(def text (r/adapt-react-class (.-Text ReactNative)))
+(def platform (.-Platform rn))
 
 (defn screen-layout []
-  [view {:style {:flex-direction "column"
-                 :margin 40
-                 :align-items "center"}}
+  [:> rn/View {:style {:flex-direction "column"
+                       :margin 40
+                       :align-items "center"}}
 
-   [text {:style {:font-size 30
-                  :font-weight "100"
-                  :margin-bottom 20
-                  :text-align "center"}}
+   [:> rn/Text {:style {:font-size 30
+                        :font-weight "100"
+                        :margin-bottom 20
+                        :text-align "center"}}
     "Create Identity"]])
 
 (defn screen []
