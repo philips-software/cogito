@@ -7,6 +7,7 @@
     "start:reset": "react-native start --reset-cache",
     "build": "shadow-cljs release cogito",
     "build:dev": "shadow-cljs watch cogito",
+    "android": "react-native run-android",
     "ios": "react-native run-ios",
     "test": "shadow-cljs compile test"
   },
