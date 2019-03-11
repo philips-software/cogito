@@ -10,7 +10,7 @@
 (defn init []
   (.registerComponent navigation "Home" #(r/reactify-component home/screen))
   (.registerComponent navigation "IdentityManager" identity-manager/screen)
-  (.registerComponent navigation "CreateIdentity" #(r/reactify-component create-identity/screen))
+  (.registerComponent navigation "CreateIdentity" create-identity/screen)
 
   (let [events (.events navigation)]
     (.registerAppLaunchedListener
