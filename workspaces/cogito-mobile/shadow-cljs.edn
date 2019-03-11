@@ -4,7 +4,8 @@
   "src/test"]
 
  :dependencies
- [[reagent "0.8.1"]]
+ [[reagent "0.8.1"]
+  [cider/cider-nrepl "0.21.1"]]
 
  :builds
  {:cogito
