@@ -1,13 +1,11 @@
 (ns cogito.identity-manager
   (:require [reagent.core :as r :refer [atom]]
+            ["react-native" :as ReactNative]
+            ["react-native-navigation" :as ReactNativeNavigation :refer (Navigation)]
             [cogito.create-identity :as create-identity]))
 
-(def ReactNative (js/require "react-native"))
 (def view (r/adapt-react-class (.-View ReactNative)))
 (def text (r/adapt-react-class (.-Text ReactNative)))
-
-(def ReactNativeNavigation (js/require "react-native-navigation"))
-(def navigation (.-Navigation ReactNativeNavigation))
 
 (defn screen-layout []
   [view {:style {:flex-direction "column"
@@ -28,13 +26,13 @@
     :get-initial-state
     (fn [this]
       (println "get initial state")
-      (let [events (.events navigation)]
+      (let [events (.events Navigation)]
         (.bindComponent events this)))
 
     :reagent-render screen-layout
 
     :navigation-button-pressed
-    #(.showModal navigation create-identity/modal-presentation-layout)}))
+    #(.showModal Navigation create-identity/modal-presentation-layout)}))
 
 (def push-options
   (clj->js {:topBar {:visible "true"

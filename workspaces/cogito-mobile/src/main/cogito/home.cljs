@@ -1,10 +1,8 @@
 (ns cogito.home
   (:require [reagent.core :as r :refer [atom]]
+            ["react-native" :as ReactNative]
+            ["react-native-navigation" :as ReactNativeNavigation :refer (Navigation)]
             [cogito.identity-manager :as identity-manager]))
-
-(def ReactNative (js/require "react-native"))
-(def ReactNativeNavigation (js/require "react-native-navigation"))
-(def navigation (.-Navigation ReactNativeNavigation))
 
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
@@ -12,7 +10,7 @@
 
 (defn show-identity-manager [componentId]
   (.push
-   navigation
+   Navigation
    componentId
    #js {:component #js {:name "IdentityManager"
                         :options identity-manager/push-options}}))
