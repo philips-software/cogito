@@ -1,11 +1,12 @@
 (ns cogito.create-identity
-  (:require [reagent.core :as r :refer [atom]]
-            ["react-native" :as ReactNative]
-            ["react-native-navigation" :as ReactNativeNavigation :refer (Navigation)]))
+  (:require
+   [reagent.core :as r :refer [atom]]
+   ["react-native" :as ReactNative]
+   ["react-native-navigation" :as ReactNativeNavigation :refer (Navigation)]
+   [cogito.toolbar-button :as btn :refer [toolbar-button]]))
 
 (def view (r/adapt-react-class (.-View ReactNative)))
 (def text (r/adapt-react-class (.-Text ReactNative)))
-(def platform (.-Platform ReactNative))
 
 (defn screen-layout []
   [view {:style {:flex-direction "column"
@@ -32,10 +33,7 @@
 
     :navigation-button-pressed
     (fn [props]
-      (println (.-OS platform))
       (.dismissModal Navigation (.-componentId props)))}))
-
-(defn toolbar-button [id] {:id id :systemItem id})
 
 (def modal-presentation-layout
   (clj->js {:stack {:children

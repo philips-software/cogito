@@ -1,8 +1,10 @@
 (ns cogito.identity-manager
-  (:require [reagent.core :as r :refer [atom]]
-            ["react-native" :as ReactNative]
-            ["react-native-navigation" :as ReactNativeNavigation :refer (Navigation)]
-            [cogito.create-identity :as create-identity]))
+  (:require
+   [reagent.core :as r :refer [atom]]
+   ["react-native" :as ReactNative]
+   ["react-native-navigation" :as ReactNativeNavigation :refer (Navigation)]
+   [cogito.create-identity :as create-identity]
+   [cogito.toolbar-button :as btn :refer [toolbar-button]]))
 
 (def view (r/adapt-react-class (.-View ReactNative)))
 (def text (r/adapt-react-class (.-Text ReactNative)))
@@ -37,4 +39,4 @@
 (def push-options
   (clj->js {:topBar {:visible "true"
                      :title {:text "Me, myself and I"}
-                     :rightButtons [{:id "add" :systemItem "add"}]}}))
+                     :rightButtons [(toolbar-button "add")]}}))
