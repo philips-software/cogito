@@ -26,6 +26,13 @@
     :navigation-button-pressed
     (fn [props] (.dismissModal navigation (.-componentId props)))}))
 
+(defn toolbar-button [id] {:id id :systemItem id})
+
 (def modal-presentation-layout
-  #js {:stack #js {:children #js [#js{:component #js {:name "CreateIdentity"
-                                                      :options #js {:topBar #js {:leftButtons #js [#js {:id "cancel" :systemItem "cancel"}]}}}}]}})
+  (clj->js {:stack {:children
+                    [{:component {:name
+                                  "CreateIdentity"
+
+                                  :options
+                                  {:topBar {:leftButtons
+                                            [(toolbar-button "cancel")]}}}}]}}))
