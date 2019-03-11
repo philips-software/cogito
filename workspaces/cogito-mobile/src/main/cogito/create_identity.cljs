@@ -13,8 +13,7 @@
 (defn screen-layout []
   [view {:style {:flex-direction "column"
                  :margin 40
-                 :align-items "center"
-                 :background-color "white"}}
+                 :align-items "center"}}
 
    [text {:style {:font-size 30
                   :font-weight "100"
