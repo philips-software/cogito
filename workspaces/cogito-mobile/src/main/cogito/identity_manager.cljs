@@ -36,6 +36,7 @@
     :navigation-button-pressed
     #(.showModal navigation create-identity/modal-presentation-layout)}))
 
-(def push-options #js {:topBar #js {:visible "true"
-                                    :title #js {:text "Me, myself and I"}
-                                    :rightButtons #js [#js {:id "add" :systemItem "add"}]}})
+(def push-options
+  (clj->js {:topBar {:visible "true"
+                     :title {:text "Me, myself and I"}
+                     :rightButtons [{:id "add" :systemItem "add"}]}}))
