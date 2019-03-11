@@ -5,6 +5,8 @@
    ["react-native-navigation" :as ReactNativeNavigation :refer (Navigation)]
    [cogito.toolbar-button :as btn :refer [toolbar-button]]))
 
+(def platform (.-Platform ReactNative))
+
 (def view (r/adapt-react-class (.-View ReactNative)))
 (def text (r/adapt-react-class (.-Text ReactNative)))
 
@@ -35,11 +37,17 @@
     (fn [props]
       (.dismissModal Navigation (.-componentId props)))}))
 
+(defn presentation-options []
+  (if (= "ios" (.-OS platform))
+    {:topBar {:leftButtons
+              [(toolbar-button "cancel")]}}
+    {:topBar {:visible false
+              :drawBehind true}}))
+
 (def modal-presentation-layout
   (clj->js {:stack {:children
                     [{:component {:name
                                   "CreateIdentity"
 
                                   :options
-                                  {:topBar {:leftButtons
-                                            [(toolbar-button "cancel")]}}}}]}}))
+                                  (presentation-options)}}]}}))
