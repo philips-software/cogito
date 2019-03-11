@@ -10,8 +10,16 @@
 (def navigation (.-Navigation ReactNativeNavigation))
 
 (defn screen-layout []
-  [view {:style {:flex-direction "column" :margin 40 :align-items "center" :background-color "white"}}
-   [text {:style {:font-size 30 :font-weight "100" :margin-bottom 20 :text-align "center"}} "Identities"]])
+  [view {:style {:flex-direction "column"
+                 :margin 40
+                 :align-items "center"
+                 :background-color "white"}}
+
+   [text {:style {:font-size 30
+                  :font-weight "100"
+                  :margin-bottom 20
+                  :text-align "center"}}
+    "Identities"]])
 
 (defn screen []
   (r/create-class
