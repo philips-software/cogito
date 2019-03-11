@@ -1,8 +1,9 @@
 (ns cogito.home
-  (:require [reagent.core :as r :refer [atom]]
-            ["react-native" :as rn]
-            ["react-native-navigation" :as ReactNativeNavigation :refer (Navigation)]
-            [cogito.identity-manager :as identity-manager]))
+  (:require
+   [reagent.core :as r :refer [atom]]
+   ["react-native" :as rn]
+   ["react-native-navigation" :as ReactNativeNavigation :refer (Navigation)]
+   [cogito.identity-manager :as identity-manager]))
 
 (defn show-identity-manager [componentId]
   (.push
