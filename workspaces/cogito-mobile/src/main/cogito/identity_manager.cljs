@@ -24,7 +24,8 @@
 
     :reagent-render screen-layout
 
-    :navigation-button-pressed #(print "ADD!")}))
+    :navigation-button-pressed
+    #(.showModal navigation #js {:component #js {:name "CreateIdentity"}})}))
 
 (def push-options #js {:topBar #js {:visible "true"
                                     :title #js {:text "Me, myself and I"}
