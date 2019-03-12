@@ -12,30 +12,38 @@
 (defonce reload-wrapper-ref (atom nil))
 
 (defn reload-wrapper [component-name root]
-  (println "reload wrapper ref" @reload-wrapper-ref)
-  (reset! root-ref home/screen)
-  (if (nil? @reload-wrapper-ref)
-    (let [wrapper (r/create-class
-                   {:display-name "reload-wrapper"
+  (let [first-call? (nil? @root-ref)]
+    (println "reload wrapper ref" @reload-wrapper-ref)
+    (reset! root-ref root)
+    (if-not first-call?
+      (when-let [wrapper @reload-wrapper-ref]
+        (println "!!! force update !!!")
+        (.forceUpdate wrapper))
+      (let [wrapper (r/create-class
+                     {:display-name "reload-wrapper"
 
-                    :get-initial-state
-                    (fn [] (print "new wrapper"))
+                      :get-initial-state
+                      (fn [] (print "new wrapper"))
 
-                    :component-did-mount
-                    (fn [this] (reset! reload-wrapper-ref this))
+                      :component-did-mount
+                      (fn [this] (reset! reload-wrapper-ref this))
 
-                    :reagent-render
-                    (fn []
-                      @root-ref)})]
-      (.registerComponent Navigation
-                          component-name
-                          (fn [] wrapper)
-                          #(r/reactify-component root)))))
+                      :component-will-unmount
+                      (fn [] (reset! reload-wrapper-ref nil))
+
+                      :reagent-render
+                      (fn []
+                        (let [body @root-ref]
+                          body))})]
+        (.registerComponent Navigation
+                            component-name
+                            (fn [] wrapper)
+                            #(r/reactify-component root))
+        (.registerComponent Navigation "IdentityManager" identity-manager/screen)
+        (.registerComponent Navigation "CreateIdentity" create-identity/screen)))))
 
 (defn init {:dev/after-load true} []
   (reload-wrapper "Home" home/screen)
-  (.registerComponent Navigation "IdentityManager" identity-manager/screen)
-  (.registerComponent Navigation "CreateIdentity" create-identity/screen)
 
   (let [events (.events Navigation)]
     (.registerAppLaunchedListener
