@@ -8,24 +8,29 @@
    [cogito.identity-manager :as identity-manager]
    [cogito.create-identity :as create-identity]))
 
-(defonce root-component-ref (atom nil))
+(defonce root-ref (atom nil))
+(defonce reload-wrapper-ref (atom nil))
 
 (defn reload-wrapper [component-name root]
-  (println "root component ref" @root-component-ref)
-  (let [wrapper (r/create-class
-                 {:display-name "reload-wrapper"
+  (println "reload wrapper ref" @reload-wrapper-ref)
+  (reset! root-ref home/screen)
+  (if (nil? @reload-wrapper-ref)
+    (let [wrapper (r/create-class
+                   {:display-name "reload-wrapper"
 
-                  :get-initial-state
-                  (fn [] (print "new wrapper"))
+                    :get-initial-state
+                    (fn [] (print "new wrapper"))
 
-                  :component-did-mount
-                  (fn [this] (reset! root-component-ref this))
+                    :component-did-mount
+                    (fn [this] (reset! reload-wrapper-ref this))
 
-                  :reagent-render root})]
-    (.registerComponent Navigation
-                        component-name
-                        (fn [] wrapper)
-                        #(r/reactify-component root))))
+                    :reagent-render
+                    (fn []
+                      @root-ref)})]
+      (.registerComponent Navigation
+                          component-name
+                          (fn [] wrapper)
+                          #(r/reactify-component root)))))
 
 (defn init {:dev/after-load true} []
   (reload-wrapper "Home" home/screen)
