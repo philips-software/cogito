@@ -8,12 +8,18 @@
    [cogito.identity-manager :as identity-manager]
    [cogito.create-identity :as create-identity]))
 
+(defonce root-component-ref (atom nil))
+
 (defn reload-wrapper [component-name root]
+  (println "root component ref" @root-component-ref)
   (let [wrapper (r/create-class
                  {:display-name "reload-wrapper"
 
                   :get-initial-state
                   (fn [] (print "new wrapper"))
+
+                  :component-did-mount
+                  (fn [this] (reset! root-component-ref this))
 
                   :reagent-render root})]
     (.registerComponent Navigation
