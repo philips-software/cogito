@@ -10,21 +10,23 @@ Telepath consists of a javascript library that can be used in web apps, and an i
 
 Because both the browser and phone are likely to be behind distinct [NAT], we use a service with a public ip address to facilitate peer-to-peer communication between them. This is a fairly simple service that only holds end-to-end encrypted messages in queues.
 
-The channel supports bi-directional communication; both from the web app to the mobile app, and vice-versa. A channel therefore consists of two queues, which we’ve named ‘blue’ and ‘red’. The red queue is used to send messages from the web app to the mobile app, and the blue queue is used for the reverse route.
-
-    -------------                             ------------
-    |    web    |  ---------- red ----------> |  mobile  |
-    |    app    |  <--------- blue ---------- |    app   |
-    -------------                             ------------
-
 Setting up a secure channel is done using these steps:
 
-1.  The web app requests a secure connection to the identity app by invoking the `createChannel` function on the javascript library.
+1.  The web app requests a secure connection to the mobile app by invoking the `createChannel` function on the javascript library.
 2.  The `createChannel` function generates a random channel id `I` and a symmetric encryption key `E`.
 3.  The web app displays a QR code containing the channel id `I` and key `E`.
 4.  The owner of the phone opens the app, points the camera to the QR code.
 5.  The phone app extracts the channel id and the key from the QR code.
 6.  Both phone and web app can now communicate on channel `I`. They encrypt/decrypt their messages using key `E`.
+
+![Telepath Connection Sequence](images/telepath-connect.png)
+
+Telepath channels supports bi-directional communication; both from the web app to the mobile app, and vice-versa. A channel therefore consists of two queues, which we’ve named ‘blue’ and ‘red’. The red queue is used to send messages from the web app to the mobile app, and the blue queue is used for the reverse route.
+
+    -------------                             ------------
+    |    web    |  ---------- red ----------> |  mobile  |
+    |    app    |  <--------- blue ---------- |    app   |
+    -------------                             ------------
 
 [NAT]: https://en.wikipedia.org/wiki/Network_address_translation
 
@@ -129,9 +131,3 @@ will return `null`.
 ## Known Limitations
 
 Currently uses independent encryption of messages. A recipient can therefore not detect if some messages have been duplicated, deleted or reordered.
-
-## See also
-
-Telepath often comes hand in hand with [Cogito Web3 Provider].
-
-[Cogito Web3]: https://cogito.mobi/components/cogito-web3-provider
