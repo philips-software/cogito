@@ -3,6 +3,8 @@
 `@cogitojs/cogito-web3-provider` provides a means to intercept some of the standard
 [Web3] requests and redirect them to the Cogito mobile app using the [telepath] channel.
 
+![Transaction Signing Sequence](images/sign-transaction.png)
+
 ## Usage
 
 Add `@cogitojs/cogito-web3-provider` as your dependency:
@@ -11,7 +13,7 @@ Add `@cogitojs/cogito-web3-provider` as your dependency:
 $ yarn add @cogitojs/cogito-web3-provider
 ```
 
-[Web3] delegates the actual sending of the requests to the so called providers. 
+[Web3] delegates the actual sending of the requests to the so called providers.
 A valid web3 provider is required to provide one function: `send(payload, callback)`.
 It often provides other functions (e.g. allowing web3 to poll for the connection status)
 but in principle, the `send` function is the one that is strictly required.
