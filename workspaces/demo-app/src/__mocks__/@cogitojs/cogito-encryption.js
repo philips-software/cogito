@@ -10,7 +10,7 @@ export class CogitoKeyProvider {
 
 export class CogitoEncryption {
   async encrypt ({ jsonWebKey, plainText }) {
-    encryptMock({ jsonWebKey, plainText })
+    return encryptMock({ jsonWebKey, plainText })
   }
 }
 
