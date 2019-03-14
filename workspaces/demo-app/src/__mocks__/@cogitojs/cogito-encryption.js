@@ -3,15 +3,17 @@ export class CogitoKeyProvider {
     return createNewKeyPairMock()
   }
 
-  getPublicKey ({ tag }) {
-    getPublicKeyMock({ tag })
+  async getPublicKey ({ tag }) {
+    return getPublicKeyMock({ tag })
   }
 }
 
 export class CogitoEncryption {
-  encrypt ({ jsonWebKey, plainText }) {
+  async encrypt ({ jsonWebKey, plainText }) {
+    encryptMock({ jsonWebKey, plainText })
   }
 }
 
 export const createNewKeyPairMock = jest.fn()
 export const getPublicKeyMock = jest.fn()
+export const encryptMock = jest.fn()
