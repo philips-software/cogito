@@ -9,7 +9,7 @@ describe('encrypt action', () => {
   let dispatch, getState, action
 
   beforeEach(() => {
-    dispatch = () => {}
+    dispatch = jest.fn()
     getState = () => ({ encryption: { plainText } })
     action = EncryptionActions.encrypt({ telepathChannel: null })
   })
@@ -35,5 +35,17 @@ describe('encrypt action', () => {
     await action(dispatch, getState)
 
     expect(encryptMock).toBeCalledWith({ jsonWebKey, plainText })
+  })
+
+  it('remembers the generated key tag', async () => {
+    await action(dispatch, getState)
+
+    expect(dispatch).toBeCalledWith(EncryptionActions.setKeyTag(tag))
+  })
+
+  it('clears the plain text', async () => {
+    await action(dispatch, getState)
+
+    expect(dispatch).toBeCalledWith(EncryptionActions.setPlainText(''))
   })
 })
