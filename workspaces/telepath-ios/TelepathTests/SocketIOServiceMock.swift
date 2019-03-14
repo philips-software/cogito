@@ -3,6 +3,7 @@
 class SocketIOServiceMock: SocketIOService {
     var latestSentMessage: Data?
     var notificationHandler: EncryptedNotificationHandler?
+    var started: Bool { return notificationHandler != nil }
 
     func start(channelID: ChannelID,
                onNotification: @escaping EncryptedNotificationHandler,
@@ -10,6 +11,7 @@ class SocketIOServiceMock: SocketIOService {
                completion: CompletionHandler?) {
         notificationHandler = onNotification
     }
+
     func notify(data: Data) {
         latestSentMessage = data
     }

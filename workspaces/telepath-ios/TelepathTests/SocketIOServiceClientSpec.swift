@@ -14,7 +14,9 @@ class SocketIOServiceClientSpec: QuickSpec {
         beforeEach {
             manager = SocketManager(socketURL: URL(string: "http://example.com/")!, config: [.log(false)])
             socket = SocketMock(manager: manager, nsp: "/")
-            client = SocketIOServiceClient(socket: socket)
+            client = SocketIOServiceClient {
+                return socket
+            }
         }
 
         it("ignores notify because it is not started") {
@@ -33,6 +35,7 @@ class SocketIOServiceClientSpec: QuickSpec {
                 errorSpy = ErrorSpy()
                 completionSpy = CompletionSpy()
             }
+
             it("raises an error as long as connect fails") {
                 socket.connectTriggersError = TestError.someError
                 client.start(channelID: channelID,

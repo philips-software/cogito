@@ -11,11 +11,11 @@ public struct SecureChannel {
     let receivingQueue: QueueID
     let sendingQueue: QueueID
     let notificationHandler: NotificationHandler?
+    var notificationsStarted: Bool { return socketIOService.started }
 
     init(queuing: QueuingService, socketIOService: SocketIOService,
          notificationHandler: NotificationHandler?,
-         id: ChannelID, key: ChannelKey, appName: String,
-         completion: CompletionHandler?) {
+         id: ChannelID, key: ChannelKey, appName: String) {
         self.queuing = queuing
         self.socketIOService = socketIOService
         self.notificationHandler = notificationHandler
@@ -24,10 +24,6 @@ public struct SecureChannel {
         self.appName = appName
         self.receivingQueue = id + ".red"
         self.sendingQueue = id + ".blue"
-        socketIOService.start(channelID: id,
-                              onNotification: onEncryptedNotification,
-                              onError: notificationHandler?.on(error:),
-                              completion: completion)
     }
 
     public mutating func invalidate() {
@@ -64,7 +60,15 @@ public struct SecureChannel {
         }
     }
 
+    public func startNotifications(completion: CompletionHandler?) {
+        socketIOService.start(channelID: id,
+                              onNotification: onEncryptedNotification,
+                              onError: notificationHandler?.on(error:),
+                              completion: completion)
+    }
+
     public func notify(message: String) {
+        guard notificationsStarted else { return }
         let plainText = message.data(using: .utf8)!
         let cypherText = key.encrypt(plainText: plainText)
         socketIOService.notify(data: cypherText)

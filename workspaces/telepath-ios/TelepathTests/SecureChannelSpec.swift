@@ -20,8 +20,7 @@ class SecureChannelSpec: QuickSpec {
             channel = SecureChannel(
                 queuing: queuing, socketIOService: socketIOService,
                 notificationHandler: notificationsSpy,
-                id: channelId, key: channelKey, appName: appName,
-                completion: nil)
+                id: channelId, key: channelKey, appName: appName)
         }
 
         context("when sending a message") {
@@ -114,6 +113,10 @@ class SecureChannelSpec: QuickSpec {
 
         describe("notifications") {
             let message = "plain text message"
+
+            beforeEach {
+                channel.startNotifications(completion: nil)
+            }
 
             it("encrypts the payload") {
                 channel.notify(message: message)

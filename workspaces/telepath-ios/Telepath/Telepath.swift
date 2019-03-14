@@ -25,32 +25,28 @@ public typealias CompletionHandler = (Error?) -> Void
 public struct Telepath {
     let queuing: QueuingService
     let socketIOService: SocketIOService
-    let socketManager: SocketManager
 
     public init(serviceUrl: URL) {
         queuing = QueuingServiceClient(url: serviceUrl)
-        socketManager = SocketManager(socketURL: serviceUrl, config: [.log(true)])
-        let socket = socketManager.defaultSocket
-        socketIOService = SocketIOServiceClient(socket: socket)
+        socketIOService = SocketIOServiceClient {
+            let socketManager = SocketManager(socketURL: serviceUrl, config: [.log(true)])
+            return socketManager.defaultSocket
+        }
     }
 
     public func connect(channel: ChannelID, key: ChannelKey, appName: String,
-                        notificationHandler: NotificationHandler? = nil,
-                        completion: CompletionHandler? = nil) -> SecureChannel {
+                        notificationHandler: NotificationHandler? = nil) -> SecureChannel {
         return SecureChannel(
             queuing: queuing, socketIOService: socketIOService,
             notificationHandler: notificationHandler,
-            id: channel, key: key, appName: appName,
-            completion: completion)
+            id: channel, key: key, appName: appName)
     }
 
     public func connect(url: URL,
-                        notificationHandler: NotificationHandler? = nil,
-                        completion: CompletionHandler? = nil) throws -> SecureChannel {
+                        notificationHandler: NotificationHandler? = nil) throws -> SecureChannel {
         let (id, key, appName) = try UrlCodec().decode(url: url)
         return connect(channel: id, key: key, appName: appName,
-                       notificationHandler: notificationHandler,
-                       completion: completion)
+                       notificationHandler: notificationHandler)
     }
 }
 
