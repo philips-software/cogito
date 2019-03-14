@@ -1,0 +1,30 @@
+@startuml sign-transaction
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam dpi 300
+skinparam ParticipantPadding 50
+hide footbox
+
+participant Web3 as "cogito\nweb3 provider"
+participant Eth as "ethereum\nnode"
+participant Cogito as "cogito\nmobile app"
+actor User as " "
+
+--> Web3 : transaction
+activate Web3
+Web3 -> Eth -- : request transaction defaults
+activate Eth
+Eth -> Web3 -- : transaction defaults
+activate Web3
+Web3 -> Web3 : construct transaction object\nfor signing
+Web3 -> Cogito -- : request signature
+activate Cogito
+Cogito -> User -- : request permission to sign
+User -> Cogito ++ : grant permission
+Cogito -> Cogito : sign
+Cogito -> Web3 -- : signature
+activate Web3
+Web3 -> Eth -- : signed transaction
+
+@enduml
