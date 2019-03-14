@@ -7,6 +7,7 @@ protocol TelepathChannelType {
 
 class TelepathChannel: TelepathChannelType, Codable {
     let connectUrl: URL
+    let telepath: Telepath = Telepath()
     var channel: SecureChannel!
 
     init(connectUrl: URL) throws {
@@ -25,7 +26,12 @@ class TelepathChannel: TelepathChannelType, Codable {
     }
 
     private func connect() throws {
-        self.channel = try Telepath().connect(url: connectUrl)
+        self.channel = try telepath.connect(url: connectUrl)
+        self.channel.startNotifications { error in
+            if let error = error {
+                print("Internal error: notifications are not working", error) // TODO how to handle this?
+            }
+        }
     }
 
     func receive(completion: @escaping (String?, Error?) -> Void) {
@@ -34,6 +40,10 @@ class TelepathChannel: TelepathChannelType, Codable {
 
     func send(message: String, completion: @escaping (Error?) -> Void) {
         self.channel.send(message: message, completion: completion)
+    }
+
+    func notify(message: String) {
+        self.channel.notify(message: message)
     }
 
     var id: ChannelID { return channel.id }
