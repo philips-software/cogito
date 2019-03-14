@@ -14,27 +14,29 @@
 (defn reload-wrapper [component-name root]
   (let [first-call? (nil? @root-ref)]
     (println "reload wrapper ref" @reload-wrapper-ref)
-    (reset! root-ref root)
+    (reset! root-ref (r/as-element [root]))
     (if-not first-call?
       (when-let [wrapper @reload-wrapper-ref]
         (println "!!! force update !!!")
         (.forceUpdate wrapper))
-      (let [wrapper (r/create-class
-                     {:display-name "reload-wrapper"
+      (let [wrapper (crc #js
+                          {:displayName "ReloadWrapper"
 
-                      :get-initial-state
-                      (fn [] (print "new wrapper"))
+                           :componentDidMount
+                           (fn []
+                             (println "wrapper did mount")
+                             (this-as this (reset! reload-wrapper-ref this)))
 
-                      :component-did-mount
-                      (fn [this] (reset! reload-wrapper-ref this))
+                           :componentWillUnmount
+                           (fn [] (reset! reload-wrapper-ref nil))
 
-                      :component-will-unmount
-                      (fn [] (reset! reload-wrapper-ref nil))
+                           :render
+                           (fn []
+                             (this-as this
+                                      (js/console.log (.-props this) @root-ref)
+                                      (let [body @root-ref]
+                                        body)))})] ;; todo pass props to body somehow
 
-                      :reagent-render
-                      (fn []
-                        (let [body @root-ref]
-                          body))})]
         (.registerComponent Navigation
                             component-name
                             (fn [] wrapper)
