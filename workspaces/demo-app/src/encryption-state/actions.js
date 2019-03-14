@@ -22,9 +22,12 @@ class EncryptionActions {
     return async (dispatch, getState) => {
       const plainText = getState().encryption.plainText
       const tag = await cogitoKeyProvider.createNewKeyPair()
+
       dispatch(EncryptionActions.setKeyTag(tag))
+
       const jsonWebKey = await cogitoKeyProvider.getPublicKey({ tag })
       const cipherText = await cogitoEncryption.encrypt({ jsonWebKey, plainText })
+
       dispatch(EncryptionActions.setPlainText(''))
       dispatch(EncryptionActions.setCipherText(cipherText))
     }
