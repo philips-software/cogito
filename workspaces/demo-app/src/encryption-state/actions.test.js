@@ -48,4 +48,13 @@ describe('encrypt action', () => {
 
     expect(dispatch).toBeCalledWith(EncryptionActions.setPlainText(''))
   })
+
+  it('sets the cipher text', async () => {
+    const cipherText = 'Some ciphered text'
+    encryptMock.mockResolvedValue(cipherText)
+
+    await action(dispatch, getState)
+
+    expect(dispatch).toBeCalledWith(EncryptionActions.setCipherText(cipherText))
+  })
 })
