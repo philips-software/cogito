@@ -9,7 +9,7 @@ struct TelepathActions {
         return Thunk { dispatch, _ in
             do {
                 let channel = try TelepathChannel(connectUrl: url)
-                dispatch(Invalidate())
+                dispatch(InvalidateExistingChannels())
                 dispatch(ConnectFulfilled(channel: channel, identity: identity))
                 dispatch(Notify(message: "sendDidConnectNotification", on: channel))
                 AudioFeedback.default.playIdentitySelected()
@@ -29,8 +29,13 @@ struct TelepathActions {
         let identity: Identity
     }
 
+    // TODO: what does this do? "invalidate" is an internal technical term;
+    //       what purpose does this serve from the outside?
+    //       Furthermore: this seems to cause requests on existing channels
+    //       that are in progress, to be cancelled whenever a new channel
+    //       is setup. Why is that?
     // swiftlint:disable:next identifier_name
-    static func Invalidate() -> Thunk<AppState> {
+    static func InvalidateExistingChannels() -> Thunk<AppState> {
         return Thunk { _, getState in
             guard let channels = getState()?.telepath.channels else { return }
             for channel in channels.keys {
