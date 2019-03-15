@@ -32,7 +32,6 @@ describe('cogito-ethereum-react integration', () => {
       channelId: channel.id,
       channelKey: channel.key,
       appName: channel.appName,
-      notificationsDisabled: true,
       ...channelUpdates
     }
     return <CogitoEthereumReact
@@ -86,10 +85,11 @@ describe('cogito-ethereum-react integration', () => {
   })
 
   it('supports channel in Array-like object format', async () => {
-    render(cogitoReact({
-      channelKey: convertToArrayLikeObject(channel.key),
-      notificationsDisabled: true
-    }))
+    render(
+      cogitoReact({
+        channelKey: convertToArrayLikeObject(channel.key)
+      })
+    )
 
     await wait(() => {
       expect(renderProps.args.telepathChannel).toMatchObject(channel)
@@ -97,11 +97,12 @@ describe('cogito-ethereum-react integration', () => {
   })
 
   it('provides contracts correctly deployed with the given provider', async () => {
-    render(cogitoReact({
-      channelId: undefined,
-      channelKey: undefined,
-      notificationsDisabled: true
-    }))
+    render(
+      cogitoReact({
+        channelId: undefined,
+        channelKey: undefined
+      })
+    )
 
     await wait(() => {
       expect(renderProps.args.telepathChannel).toBeDefined()
@@ -113,11 +114,12 @@ describe('cogito-ethereum-react integration', () => {
   })
 
   it('provides correctly deployed contracts when channel changes', async () => {
-    const { rerender } = render(cogitoReact({
-      channelId: undefined,
-      channelKey: undefined,
-      notificationsDisabled: true
-    }))
+    const { rerender } = render(
+      cogitoReact({
+        channelId: undefined,
+        channelKey: undefined
+      })
+    )
 
     await wait(() => {
       expect(renderProps.args.telepathChannel).toBeDefined()
