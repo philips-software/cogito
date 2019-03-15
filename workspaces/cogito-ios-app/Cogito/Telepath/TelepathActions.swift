@@ -11,6 +11,7 @@ struct TelepathActions {
                 let channel = try TelepathChannel(connectUrl: url)
                 dispatch(Invalidate())
                 dispatch(ConnectFulfilled(channel: channel, identity: identity))
+                dispatch(Notify(message: "sendDidConnectNotification", on: channel))
                 AudioFeedback.default.playIdentitySelected()
             } catch let error {
                 dispatch(ConnectRejected(error: error, identity: identity))
@@ -164,6 +165,18 @@ struct TelepathActions {
                 ]
             ])
             dispatch(Send(message: response.rawString()!, on: channel))
+        }
+    }
+
+    // swiftlint:disable:next identifier_name
+    static func Notify(message: String,
+                       on channel: TelepathChannel) -> Thunk<AppState> {
+        return Thunk { _, _ in
+            let notification = [
+                "jsonrpc": "2.0",
+                "method": "connectionSetupDone"
+            ]
+            channel.notify(message: JSON(notification).rawString()!)
         }
     }
 
