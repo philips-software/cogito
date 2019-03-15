@@ -32,7 +32,10 @@ public struct SecureChannel {
 
     public func send(message: String, completion: @escaping (Error?) -> Void) {
         let plainText = message.data(using: .utf8)!
-        let cypherText = key.encrypt(plainText: plainText)
+        guard let cypherText = key.encrypt(plainText: plainText) else {
+            completion(Failure.invalidKey)
+            return
+        }
         queuing.send(queueId: sendingQueue, message: cypherText) { error in
             guard error == nil else {
                 completion(Failure.sendingFailed(cause: error!))
@@ -68,10 +71,10 @@ public struct SecureChannel {
     }
 
     public func notify(message: String) {
-        guard notificationsStarted else { return }
         let plainText = message.data(using: .utf8)!
-        let cypherText = key.encrypt(plainText: plainText)
-        socketIOService.notify(data: cypherText)
+        if let cypherText = key.encrypt(plainText: plainText) {
+            socketIOService.notify(data: cypherText)
+        }
     }
 
     func onEncryptedNotification(data: Data) {
@@ -83,6 +86,7 @@ public struct SecureChannel {
     }
 
     enum Failure: Error {
+        case invalidKey
         case sendingFailed (cause: Error)
         case receivingFailed (cause: Error)
         case decryptionFailed
@@ -90,9 +94,13 @@ public struct SecureChannel {
 }
 
 extension Array where Element == UInt8 {
-    func encrypt(plainText: Data) -> Data {
+    func encrypt(plainText: Data) -> Data? {
         let box = Sodium().secretBox
-        return Data(box.seal(message: [UInt8](plainText), secretKey: self)!)
+        guard let sealed: [UInt8] = box.seal(message: [UInt8](plainText),
+                                             secretKey: self) else {
+            return nil
+        }
+        return Data(sealed)
     }
 
     func decrypt(cypherText: Data) throws -> Data {
