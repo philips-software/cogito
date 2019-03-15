@@ -18,7 +18,12 @@ describe('CogitoEthereum', () => {
     const nonceAndCypherText = new Uint8Array(base64url.toBuffer(body))
     const nonce = nonceAndCypherText.slice(0, nonceSize)
     const cypherText = nonceAndCypherText.slice(nonceSize)
-    const requestString = await decrypt(cypherText, nonce, telepathChannel.key, 'text')
+    const requestString = await decrypt(
+      cypherText,
+      nonce,
+      telepathChannel.key,
+      'text'
+    )
     return {
       request: JSON.parse(requestString),
       nonce
@@ -29,22 +34,30 @@ describe('CogitoEthereum', () => {
     const response = {
       jsonrpc: '2.0',
       id: request.id,
-      result: [ ethereum.address ]
+      result: [ethereum.address]
     }
     const responseString = JSON.stringify(response)
     const plainText = new Uint8Array(Buffer.from(responseString))
     const cypherText = await encrypt(plainText, nonce, telepathChannel.key)
-    const nonceAndCypherText = Buffer.concat([Buffer.from(nonce), Buffer.from(cypherText)])
+    const nonceAndCypherText = Buffer.concat([
+      Buffer.from(nonce),
+      Buffer.from(cypherText)
+    ])
     return base64url.encode(Buffer.from(nonceAndCypherText))
   }
 
   const prepareChannelRequest = (telepathChannel, baseUrl) => {
-    return nock(baseUrl).post(`/${telepathChannel.id}.red`, async body => {
-      const request = await decodeChannelRequest(body, telepathChannel)
-      const encodedResponse = await encodeChannelResponse(request, telepathChannel)
-      expect(channelResponseCallback).toBeDefined()
-      channelResponseCallback(null, [200, encodedResponse])
-    }).reply(200)
+    return nock(baseUrl)
+      .post(`/${telepathChannel.id}.red`, async body => {
+        const request = await decodeChannelRequest(body, telepathChannel)
+        const encodedResponse = await encodeChannelResponse(
+          request,
+          telepathChannel
+        )
+        expect(channelResponseCallback).toBeDefined()
+        channelResponseCallback(null, [200, encodedResponse])
+      })
+      .reply(200)
   }
 
   const prepareChannelResponse = (telepathChannel, baseUrl) => {
@@ -111,9 +124,7 @@ describe('CogitoEthereum', () => {
 
     ethereum.useTelepathChannel(telepathChannel)
 
-    expect(await cogitoWeb3.eth.getAccounts()).toEqual([
-      ethereum.address
-    ])
+    expect(await cogitoWeb3.eth.getAccounts()).toEqual([ethereum.address])
   })
 
   it('provides a new telepath channel when no channel id and key are provided', async () => {

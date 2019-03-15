@@ -39,7 +39,7 @@ class CogitoEthereum {
     return channel
   }
 
-  getContext = async (channelParams) => {
+  getContext = async channelParams => {
     const telepathChannel = await this.getTelepathChannel(channelParams)
     const cogitoWeb3 = await this.getCogitoWeb3(telepathChannel)
     const contractsProxies = proxiesFromBlobs(this.contractBlobs, cogitoWeb3)
