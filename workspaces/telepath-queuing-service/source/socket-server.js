@@ -71,7 +71,11 @@ export class SocketServer {
     if (!clientSocket.queueId) {
       return /* investigate! */
     }
-    const remainingClients = this.clients[clientSocket.queueId].filter(c => {
+    const clientsForQueue = this.clients[clientSocket.queueId]
+    if (!clientsForQueue) {
+      return
+    }
+    const remainingClients = clientsForQueue.filter(c => {
       return clientSocket !== c
     })
     if (remainingClients.length === 0) {
@@ -82,7 +86,8 @@ export class SocketServer {
   }
 
   findReceiver (source) {
-    const receivers = this.clients[source.queueId].filter(c => {
+    const clientsForQueue = this.clients[source.queueId] || []
+    const receivers = clientsForQueue.filter(c => {
       return source !== c && source.queueId === c.queueId
     })
     return receivers.length === 1 ? receivers[0] : undefined
