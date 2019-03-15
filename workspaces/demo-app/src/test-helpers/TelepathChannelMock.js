@@ -29,6 +29,7 @@ class TelepathChannelMock {
       this.mockIdentityInfo.mockReturnValueOnce(identity)
     })
   }
+  startNotifications = jest.fn()
   subscribeForNotifications = jest.fn()
   unsubscribeForNotifications = jest.fn()
 }
