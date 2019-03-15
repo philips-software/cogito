@@ -7,15 +7,17 @@ import base64url
 class SocketIOServiceClientSpec: QuickSpec {
     override func spec() {
         let channelID = "testChannel"
-        var manager: SocketManager!
+        var manager: TestSocketManager!
         var socket: SocketMock!
         var client: SocketIOServiceClient!
 
         beforeEach {
-            manager = SocketManager(socketURL: URL(string: "http://example.com/")!, config: [.log(false)])
-            socket = SocketMock(manager: manager, nsp: "/")
+            manager = TestSocketManager(
+                socketURL: URL(string: "http://example.com/")!,
+                config: [.log(false)])
+            socket = manager.socketMock
             client = SocketIOServiceClient {
-                return socket
+                return manager
             }
         }
 
