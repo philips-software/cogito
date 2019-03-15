@@ -36,8 +36,7 @@ describe('cogito-ethereum-react', () => {
     channel = {
       id: exampleTelepathId,
       key: exampleTelepathKey,
-      appName,
-      notificationsDisabled: true
+      appName
     }
   }
 
@@ -71,7 +70,6 @@ describe('cogito-ethereum-react', () => {
       channelId: channel.id,
       channelKey: channel.key,
       appName: channel.appName,
-      notificationsDisabled: true,
       ...channelUpdates
     }
     return <CogitoEthereumReact
