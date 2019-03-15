@@ -127,7 +127,7 @@ class SecureChannelSpec: QuickSpec {
 
             it("decrypts and forwards incoming notifications") {
                 let plainText = message.data(using: .utf8)!
-                let cypherText = channelKey.encrypt(plainText: plainText)
+                let cypherText = channelKey.encrypt(plainText: plainText)!
                 socketIOService.fakeIncomingNotification(data: cypherText)
                 expect(notificationsSpy.lastReceivedNotification) == message
             }
