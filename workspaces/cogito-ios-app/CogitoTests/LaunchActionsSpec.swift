@@ -47,7 +47,7 @@ class LaunchActionsSpec: QuickSpec {
             }
 
             it("can process telepath requests") {
-                let linkString = "https://cogito.mobi/telepath/connect#" +
+                let linkString = "https://cogito.example.com/telepath/connect#" +
                     "I=imj6m8JJrjbpkHUof00dW86R&" +
                     "E=RsJzOXIOp5wufr406_bgMFX0krFC17T8j19RK2Eeawg&" +
                     "A=RXhhbXBsZUFwcA"

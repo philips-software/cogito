@@ -27,6 +27,7 @@ class TelepathChannel: TelepathChannelType, Codable {
 
     private func connect() throws {
         self.channel = try telepath.connect(url: connectUrl)
+        guard !connectUrl.absoluteString.contains("example") else { return }
         self.channel.startNotifications { error in
             if let error = error {
                 print("Internal error: notifications are not working", error) // TODO how to handle this?
