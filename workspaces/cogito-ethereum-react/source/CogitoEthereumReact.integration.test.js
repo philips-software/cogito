@@ -6,7 +6,9 @@ import { CogitoEthereumReact } from './CogitoEthereumReact'
 describe('cogito-ethereum-react integration', () => {
   const increment = 10
   const exampleTelepathId = 'IDN3oO-6rGSyqpMFDC6EfCQC'
-  const exampleTelepathKey = new Uint8Array([176, 8, 86, 89, 0, 33, 4, 124, 240, 249, 253, 251, 147, 56, 138, 54, 84, 144, 150, 125, 89, 4, 6, 6, 217, 246, 16, 163, 188, 247, 113, 134])
+  const exampleTelepathKey = new Uint8Array([
+    176, 8, 86, 89, 0, 33, 4, 124, 240, 249, 253, 251, 147, 56, 138, 54, 84,
+    144, 150, 125, 89, 4, 6, 6, 217, 246, 16, 163, 188, 247, 113, 134])
   let channel
   let renderProps
   let ethereum
@@ -28,6 +30,7 @@ describe('cogito-ethereum-react integration', () => {
       channelId: channel.id,
       channelKey: channel.key,
       appName: channel.appName,
+      notificationsDisabled: true,
       ...channelUpdates
     }
     return <CogitoEthereumReact
@@ -82,7 +85,8 @@ describe('cogito-ethereum-react integration', () => {
 
   it('supports channel in Array-like object format', async () => {
     render(cogitoReact({
-      channelKey: convertToArrayLikeObject(channel.key)
+      channelKey: convertToArrayLikeObject(channel.key),
+      notificationsDisabled: true
     }))
 
     await wait(() => {
@@ -93,7 +97,8 @@ describe('cogito-ethereum-react integration', () => {
   it('provides contracts correctly deployed with the given provider', async () => {
     render(cogitoReact({
       channelId: undefined,
-      channelKey: undefined
+      channelKey: undefined,
+      notificationsDisabled: true
     }))
 
     await wait(() => {
@@ -108,7 +113,8 @@ describe('cogito-ethereum-react integration', () => {
   it('provides correctly deployed contracts when channel changes', async () => {
     const { rerender } = render(cogitoReact({
       channelId: undefined,
-      channelKey: undefined
+      channelKey: undefined,
+      notificationsDisabled: true
     }))
 
     await wait(() => {

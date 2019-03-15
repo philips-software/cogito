@@ -109,14 +109,18 @@ export class CogitoEthereumReact extends React.Component {
   }
 
   getContextFromProps = props => {
-    const { channelId, channelKey, appName } = props
+    const {
+      channelId, channelKey, appName,
+      notificationsDisabled: notificationsDisabled = false
+    } = props
 
     const telepathKey = this.normalizeKey(channelKey)
 
     return this.cogitoEthereum.getContext({
       channelId,
       channelKey: telepathKey,
-      appName
+      appName,
+      notificationsDisabled
     })
   }
 
