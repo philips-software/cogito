@@ -1,6 +1,14 @@
 @testable import SocketIO
 @testable import Telepath
 
+class TestSocketManager: SocketManager {
+    lazy var socketMock: SocketMock = { SocketMock(manager: self, nsp: "/") }()
+
+    override func socket(forNamespace nsp: String) -> SocketIOClient {
+        return socketMock
+    }
+}
+
 class SocketMock: SocketIOClient {
     var connected = false
     var lastEmittedEventName: String?

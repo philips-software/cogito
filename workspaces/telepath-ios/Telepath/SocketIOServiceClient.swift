@@ -9,11 +9,15 @@ class SocketIOServiceClient: SocketIOService {
     var notificationHandler: EncryptedNotificationHandler!
     var errorHandler: ErrorHandler?
     var completion: CompletionHandler?
-    let socketFactoryMethod: () -> SocketIOClient
+    let socketManagerFactoryMethod: () -> SocketManager
     var started: Bool { return setupComplete }
 
-    init(socketFactoryMethod: @escaping () -> SocketIOClient) {
-        self.socketFactoryMethod = socketFactoryMethod
+    lazy var socketManager: SocketManager = {
+        return socketManagerFactoryMethod()
+    }()
+
+    init(socketManagerFactoryMethod: @escaping () -> SocketManager) {
+        self.socketManagerFactoryMethod = socketManagerFactoryMethod
     }
 
     deinit {
@@ -25,7 +29,7 @@ class SocketIOServiceClient: SocketIOService {
                onNotification: @escaping EncryptedNotificationHandler,
                onError: ErrorHandler?,
                completion: CompletionHandler?) {
-        let socket = socketFactoryMethod()
+        let socket = socketManager.defaultSocket
         self.socket = socket
         self.channelID = channelID
         self.notificationHandler = onNotification
