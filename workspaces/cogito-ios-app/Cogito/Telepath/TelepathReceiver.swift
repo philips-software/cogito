@@ -34,7 +34,7 @@ class TelepathReceiver: StoreSubscriber {
     func recreatePollingTimers(channels: [TelepathChannel: UUID]?) {
         self.timer?.invalidate()
 
-        self.store.dispatch(TelepathActions.Invalidate())
+        self.store.dispatch(TelepathActions.InvalidateExistingChannels())
 
         self.timer = Timer.scheduledTimer(withTimeInterval: pollInterval, repeats: true) { [weak self] _ in
             self?.store.dispatch(TelepathActions.Receive())
