@@ -73,7 +73,10 @@ describe('CogitoEthereum', () => {
     const baseUrl = 'https://alternative.telepath.provider'
     const cogitoEthereum = new CogitoEthereum(blobs, baseUrl)
 
-    const { cogitoWeb3, telepathChannel } = await cogitoEthereum.getContext({ appName })
+    const { cogitoWeb3, telepathChannel } = await cogitoEthereum.getContext({
+      appName,
+      notificationsDisabled: true
+    })
 
     const post = prepareChannel(telepathChannel, baseUrl)
 
@@ -86,7 +89,10 @@ describe('CogitoEthereum', () => {
     const baseUrl = 'https://telepath.cogito.mobi'
     const cogitoEthereum = new CogitoEthereum(blobs)
 
-    const { cogitoWeb3, telepathChannel } = await cogitoEthereum.getContext({ appName })
+    const { cogitoWeb3, telepathChannel } = await cogitoEthereum.getContext({
+      appName,
+      notificationsDisabled: true
+    })
 
     const post = prepareChannel(telepathChannel, baseUrl)
 
@@ -98,7 +104,10 @@ describe('CogitoEthereum', () => {
   it('provides Web3 object with CogitoProvider', async () => {
     const cogitoEthereum = new CogitoEthereum(blobs)
 
-    const { cogitoWeb3, telepathChannel } = await cogitoEthereum.getContext({ appName })
+    const { cogitoWeb3, telepathChannel } = await cogitoEthereum.getContext({
+      appName,
+      notificationsDisabled: true
+    })
 
     ethereum.useTelepathChannel(telepathChannel)
 
@@ -113,7 +122,8 @@ describe('CogitoEthereum', () => {
     const { telepathChannel } = await cogitoEthereum.getContext({
       channelId: exampleTelepathId,
       channelKey: exampleTelepathKey,
-      appName
+      appName,
+      notificationsDisabled: true
     })
 
     expect(telepathChannel.id).toBe(exampleTelepathId)
@@ -124,7 +134,10 @@ describe('CogitoEthereum', () => {
   it('provides a telepath channel with provided channel id and key', async () => {
     const cogitoEthereum = new CogitoEthereum(blobs)
 
-    const { telepathChannel } = await cogitoEthereum.getContext({ appName })
+    const { telepathChannel } = await cogitoEthereum.getContext({
+      appName,
+      notificationsDisabled: true
+    })
 
     expect(telepathChannel.id).toBeDefined()
     expect(telepathChannel.key).toBeDefined()
@@ -141,7 +154,13 @@ describe('CogitoEthereum', () => {
     })
 
     it('can execute contract using provided proxy and cogito provider', async () => {
-      const { contractsProxies, telepathChannel } = await cogitoEthereum.getContext({ appName })
+      const {
+        contractsProxies,
+        telepathChannel
+      } = await cogitoEthereum.getContext({
+        appName,
+        notificationsDisabled: true
+      })
 
       ethereum.useTelepathChannel(telepathChannel)
 

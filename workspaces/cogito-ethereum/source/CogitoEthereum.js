@@ -24,8 +24,19 @@ class CogitoEthereum {
     return new Web3(cogitoProvider)
   }
 
-  getTelepathChannel = ({ channelId: id, channelKey: key, appName }) => {
-    return this.telepath.createChannel({ id, key, appName })
+  getTelepathChannel = async ({
+    channelId: id,
+    channelKey: key,
+    appName,
+    notificationsDisabled: notificationsDisabled = false
+  }) => {
+    const channel = await this.telepath.createChannel({ id, key, appName })
+    if (id && !notificationsDisabled) {
+      // don't do this in unit tests
+      console.debug('Starting notifications for channel', id)
+      await channel.startNotifications()
+    }
+    return channel
   }
 
   getContext = async (channelParams) => {
