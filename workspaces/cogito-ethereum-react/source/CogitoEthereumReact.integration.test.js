@@ -22,7 +22,9 @@ describe('cogito-ethereum-react integration', () => {
   }
 
   const convertToArrayLikeObject = uint8Array => {
-    return uint8Array.reduce((acc, current, index) => { return { ...acc, [index]: current } }, {})
+    return uint8Array.reduce((acc, current, index) => {
+      return { ...acc, [index]: current }
+    }, {})
   }
 
   const cogitoReact = (channelUpdates = {}) => {
