@@ -29,7 +29,7 @@ public struct Telepath {
     public init(serviceUrl: URL) {
         queuing = QueuingServiceClient(url: serviceUrl)
         socketIOService = SocketIOServiceClient {
-            return SocketManager(socketURL: serviceUrl, config: [.log(true)])
+            return SocketManager(socketURL: serviceUrl, config: [/*.log(true)*/])
         }
     }
 
