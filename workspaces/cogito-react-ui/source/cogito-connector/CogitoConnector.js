@@ -26,7 +26,9 @@ class CogitoConnector extends React.Component {
             {...buttonStyling}
             disabled={buttonDisabled}
             onClick={async () => {
-              if (onOpen) { await onOpen() }
+              if (onOpen) {
+                await onOpen()
+              }
               this.subscribe()
             }}
           >
@@ -35,7 +37,9 @@ class CogitoConnector extends React.Component {
         }
         onClose={() => {
           this.unsubscribe()
-          if (onCancel) { onCancel() }
+          if (onCancel) {
+            onCancel()
+          }
         }}
         closeIcon
       >
@@ -56,12 +60,14 @@ class CogitoConnector extends React.Component {
 
   subscribe () {
     const { telepathChannel, onDone } = this.props
-    this.subscription = telepathChannel.subscribeForNotifications(notification => {
-      if (notification.method === 'didScanQRCode') {
-        telepathChannel.unsubscribeForNotifications(this.subscription)
-        onDone()
+    this.subscription = telepathChannel.subscribeForNotifications(
+      notification => {
+        if (notification.method === 'connectionSetupDone') {
+          telepathChannel.unsubscribeForNotifications(this.subscription)
+          onDone()
+        }
       }
-    })
+    )
   }
 
   unsubscribe () {
