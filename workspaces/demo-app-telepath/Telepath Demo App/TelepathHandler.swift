@@ -65,7 +65,7 @@ class TelepathHandler: NotificationHandler {
         guard let channel = channel else { return }
         let response = [
             "jsonrpc": "2.0",
-            "method": "didScanQRCode"
+            "method": "connectionSetupDone"
         ]
         channel.notify(message: JSON(response).rawString()!)
     }

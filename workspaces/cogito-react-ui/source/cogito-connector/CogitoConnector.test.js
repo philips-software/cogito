@@ -78,7 +78,7 @@ describe('Cogito Connector', () => {
 
     describe('when telepath notification is received', () => {
       beforeEach(() => {
-        const notification = { jsonrpc: '2.0', method: 'didScanQRCode' }
+        const notification = { jsonrpc: '2.0', method: 'connectionSetupDone' }
         const onNotification =
           telepathChannel.subscribeForNotifications.mock.calls[0][0]
         onNotification(notification)
