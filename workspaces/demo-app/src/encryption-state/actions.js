@@ -24,23 +24,21 @@ class EncryptionActions {
   static encrypt = ({ telepathChannel }) => {
     const cogitoEncryption = new CogitoEncryption({ telepathChannel })
     const cogitoKeyProvider = new CogitoKeyProvider({ telepathChannel })
-    return async (dispatch, getState) => {
-      const plainText = getState().encryption.plainText
-      let jsonWebKey
 
+    return async (dispatch, getState) => {
       try {
+        const plainText = getState().encryption.plainText
         const tag = await cogitoKeyProvider.createNewKeyPair()
         dispatch(EncryptionActions.setKeyTag(tag))
 
-        jsonWebKey = await cogitoKeyProvider.getPublicKey({ tag })
+        const jsonWebKey = await cogitoKeyProvider.getPublicKey({ tag })
+        const cipherText = await cogitoEncryption.encrypt({ jsonWebKey, plainText })
+
+        dispatch(EncryptionActions.setPlainText(''))
+        dispatch(EncryptionActions.setCipherText(cipherText))
       } catch (error) {
         dispatch(EncryptionActions.encryptionError(error.message))
       }
-
-      const cipherText = await cogitoEncryption.encrypt({ jsonWebKey, plainText })
-
-      dispatch(EncryptionActions.setPlainText(''))
-      dispatch(EncryptionActions.setCipherText(cipherText))
     }
   }
 

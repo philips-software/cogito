@@ -76,5 +76,13 @@ describe('encrypt action', () => {
 
       expect(dispatch).toBeCalledWith(EncryptionActions.encryptionError(error.message))
     })
+
+    it('when encrypting', async () => {
+      encryptMock.mockRejectedValue(error)
+
+      await action(dispatch, getState)
+
+      expect(dispatch).toBeCalledWith(EncryptionActions.encryptionError(error.message))
+    })
   })
 })
