@@ -57,4 +57,13 @@ describe('encrypt action', () => {
 
     expect(dispatch).toBeCalledWith(EncryptionActions.setCipherText(cipherText))
   })
+
+  it('handles exception when creating new key pair', async () => {
+    const errorMessage = 'Some error message'
+    createNewKeyPairMock.mockRejectedValue(new Error(errorMessage))
+
+    await action(dispatch, getState)
+
+    expect(dispatch).toBeCalledWith(EncryptionActions.encryptionError(errorMessage))
+  })
 })

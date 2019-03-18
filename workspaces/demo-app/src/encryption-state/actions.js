@@ -16,12 +16,23 @@ class EncryptionActions {
     tag
   })
 
+  static encryptionError = (message) => ({
+    type: 'ENCRYPTION_ERROR',
+    message
+  })
+
   static encrypt = ({ telepathChannel }) => {
     const cogitoEncryption = new CogitoEncryption({ telepathChannel })
     const cogitoKeyProvider = new CogitoKeyProvider({ telepathChannel })
     return async (dispatch, getState) => {
       const plainText = getState().encryption.plainText
-      const tag = await cogitoKeyProvider.createNewKeyPair()
+      let tag
+
+      try {
+        tag = await cogitoKeyProvider.createNewKeyPair()
+      } catch (error) {
+        dispatch(EncryptionActions.encryptionError(error.message))
+      }
 
       dispatch(EncryptionActions.setKeyTag(tag))
 
