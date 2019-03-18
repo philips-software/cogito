@@ -1,0 +1,74 @@
+@startuml
+
+package "Cogito Attestations" {
+  [AttestationsRetriever]
+}
+
+package "Cogito Encryption" {
+  [CogitoEncryption]
+  [CogitoKeyProvider]
+}
+
+package "Cogito Web3 Provider" {
+  [CogitoProvider] ..> TelepathJS
+}
+
+note left of [CogitoProvider]
+  Telepath is injected and
+  used through its APIs
+end note
+
+package "TelepathJS" {
+  () REST as TelepathREST
+  () "Socket.IO" as TelepathSocketIO
+  [Telepath] -u- TelepathREST
+  [Telepath] -u- TelepathSocketIO
+}
+
+package "Cogito Ethereum" {
+  [CogitoEthereum] -r-> CogitoProvider
+  [CogitoEthereum] --> TelepathREST
+  [CogitoEthereum] --> TelepathSocketIO
+}
+
+package "Cogito Ethereum React" {
+  [CogitoEthereumReact] --> CogitoEthereum
+}
+package "Cogito Identity" {
+  [CogitoIdentity]
+}
+
+package "Cogito React UI" {
+  [CogitoConnector]
+  [CogitoQRCode]
+  [CogitoConnector] -> CogitoQRCode
+}
+
+package "Demo App Contracts" {
+  [SimpleStorage]
+}
+
+package "Demo App" {
+  [Main] --> CogitoEthereumReact
+  CogitoEthereumReact ..> Main: Telepath channel
+  [Main] -r-> SimpleStorage
+  folder "Identity" {
+    [CogitoConnectorButton] --> CogitoConnector
+    [IdentityControls] -> CogitoConnectorButton
+    [CogitoAddress] -u-> CogitoIdentity
+    [CogitoAddress] -> IdentityControls
+    [CogitoId] -> CogitoAddress
+    [Main] -u-> CogitoId
+  }
+  folder "Attestations" {
+    [Attestations] --> AttestationsRetriever
+    [CogitoAttestations] --> CogitoQRCode
+    Attestations -> [CogitoAttestations]
+    [Main] -> Attestations
+  }
+  Main -> [EncryptionState]
+  [EncryptionState] -d-> CogitoEncryption
+  [EncryptionState] -d-> CogitoKeyProvider
+}
+
+@enduml
