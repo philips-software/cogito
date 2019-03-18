@@ -6,6 +6,8 @@ const encryptionReducer = (state = initialState, action) => {
       return { ...state, cipherText: action.cipherText }
     case 'ENCRYPTION_SET_KEY_TAG':
       return { ...state, keyTag: action.tag }
+    case 'ENCRYPTION_ERROR':
+      return { ...state, errorMessage: action.message }
     default:
       return { ...state }
   }
