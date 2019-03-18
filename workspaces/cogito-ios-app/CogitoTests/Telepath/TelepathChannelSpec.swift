@@ -9,17 +9,21 @@ class TelepathChannelSpec: QuickSpec {
         var channel: TelepathChannel!
 
         beforeEach {
-            channel = try? TelepathChannel(connectUrl: connectUrl)
+            channel = TelepathChannel(connectUrl: connectUrl)
+            channel.connect(disableNotifications: true, completion: nil)
         }
 
         it("encapsulates a secure channel") {
             expect(channel.channel).toNot(beNil())
         }
 
-        it("throws when connect url is invalid") {
-            expect {
-                try TelepathChannel(connectUrl: URL(string: "http://invalid.connect.url")!)
-            }.to(throwError())
+        it("errors when connect url is invalid") {
+            let channel = TelepathChannel(connectUrl: URL(string: "http://invalid.connect.url")!)
+            var raisedError: Error?
+            channel.connect(disableNotifications: true) { error in
+                raisedError = error
+            }
+            expect(raisedError).toEventuallyNot(beNil())
         }
 
         it("can be encoded") {
@@ -31,6 +35,12 @@ class TelepathChannelSpec: QuickSpec {
             let encoded = try? JSONEncoder().encode(channel)
             let decoded = try? JSONDecoder().decode(TelepathChannel.self, from: encoded!)
             expect(decoded) == channel
+        }
+
+        it("is connected after being decoded") {
+            let encoded = try? JSONEncoder().encode(channel)
+            let decoded = try? JSONDecoder().decode(TelepathChannel.self, from: encoded!)
+            expect(decoded?.channel).toNot(beNil())
         }
     }
 }

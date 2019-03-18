@@ -18,7 +18,7 @@ class URLActionsSpec: QuickSpec {
             }
 
             it("dispatches the telepath connect action") {
-                expect(store.firstAction(ofType: TelepathActions.ConnectFulfilled.self)).toNot(beNil())
+                expect(store.firstAction(ofType: TelepathActions.ConnectFulfilled.self)).toEventuallyNot(beNil())
             }
         }
 
