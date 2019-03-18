@@ -8,61 +8,85 @@ protocol TelepathChannelType {
 class TelepathChannel: TelepathChannelType, Codable {
     let connectUrl: URL
     let telepath: Telepath = Telepath()
-    var channel: SecureChannel!
+    private var actualChannel: SecureChannel?
+    var channel: SecureChannel? {
+        get {
+            if actualChannel == nil {
+                autoConnect()
+            }
+            return actualChannel
+        }
+        set { self.actualChannel = newValue }
+    }
+    var disableNotifications = false
 
-    init(connectUrl: URL) throws {
+    init(connectUrl: URL) {
         self.connectUrl = connectUrl
-        try connect()
     }
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         connectUrl = try container.decode(URL.self, forKey: .connectUrl)
-        try connect()
+        disableNotifications = try container.decode(Bool.self, forKey: .disableNotifications)
     }
 
     func invalidate() {
-        self.channel.invalidate()
+        self.channel?.invalidate()
     }
 
-    private func connect() throws {
-        self.channel = try telepath.connect(url: connectUrl)
-        guard !connectUrl.absoluteString.contains("example") else { return }
-        self.channel.startNotifications { error in
-            if let error = error {
-                print("Internal error: notifications are not working", error) // TODO: how to handle this?
-            }
+    func connect(disableNotifications: Bool = false,
+                 completion: CompletionHandler?) {
+        self.disableNotifications = disableNotifications
+        do {
+            self.channel = try telepath.connect(url: connectUrl)
+        } catch let error {
+            completion?(error)
+            return
+        }
+        if disableNotifications {
+            completion?(nil)
+            return
+        }
+        self.channel?.startNotifications { error in
+            completion?(error)
         }
     }
 
+    private func autoConnect() {
+        connect(disableNotifications: self.disableNotifications, completion: nil)
+    }
+
     func receive(completion: @escaping (String?, Error?) -> Void) {
-        self.channel.receive(completion: completion)
+        self.channel?.receive(completion: completion)
     }
 
     func send(message: String, completion: @escaping (Error?) -> Void) {
-        self.channel.send(message: message, completion: completion)
+        self.channel?.send(message: message, completion: completion)
     }
 
     func notify(message: String) {
-        self.channel.notify(message: message)
+        self.channel?.notify(message: message)
     }
 
-    var id: ChannelID { return channel.id }
-    var appName: String { return channel.appName }
+    var id: ChannelID? { return channel?.id }
+    var appName: String? { return channel?.appName }
 
     enum CodingKeys: String, CodingKey {
         case connectUrl
+        case disableNotifications
     }
 }
 
 extension TelepathChannel: Equatable {
     static func == (lhs: TelepathChannel, rhs: TelepathChannel) -> Bool {
         return lhs.connectUrl == rhs.connectUrl
+            && lhs.disableNotifications == rhs.disableNotifications
     }
 }
 
 extension TelepathChannel: Hashable {
-    var hashValue: Int {
-        return self.channel.id.hashValue
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.channel?.id)
+        hasher.combine(self.disableNotifications)
     }
 }

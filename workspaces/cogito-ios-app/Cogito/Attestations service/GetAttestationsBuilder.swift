@@ -113,7 +113,10 @@ struct GetAttestationsValid: GetAttestations {
                      state: AppState,
                      on channel: TelepathChannel) {
         dispatch(TelepathActions.Send(id: requestId, result: idToken, on: channel))
-        dispatch(OpenIDAttestationActions.Provided(idToken: idToken, channel: channel.id))
+        guard let channelId = channel.id else {
+            return
+        }
+        dispatch(OpenIDAttestationActions.Provided(idToken: idToken, channel: channelId))
     }
 
     func send(requestId: JsonRpcId, idToken: String, on channel: TelepathChannel) {
@@ -188,7 +191,8 @@ struct GetAttestationsValid: GetAttestations {
     private static func alreadyProvided(idToken: String,
                                         state: AppState,
                                         on channel: TelepathChannel) -> Bool {
-        guard let providedTokens = state.attestations.providedAttestations[channel.id] else {
+        guard let channelId = channel.id,
+            let providedTokens = state.attestations.providedAttestations[channelId] else {
             return false
         }
         return providedTokens.contains { $0 == idToken }

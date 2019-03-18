@@ -9,7 +9,8 @@ class TelepathChannelSpy: TelepathChannel {
 
     convenience init(id: String = "1234") {
         let url = URL(string: "http://example.com/telepath/connect#I=\(id)&E=abcd&A=QQ")!
-        try! self.init(connectUrl: url)
+        self.init(connectUrl: url)
+        self.connect(disableNotifications: true, completion: nil)
     }
 
     override func receive(completion: @escaping (String?, Error?) -> Void) {

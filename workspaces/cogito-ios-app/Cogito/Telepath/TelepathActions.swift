@@ -8,13 +8,17 @@ struct TelepathActions {
     static func Connect(url: URL, for identity: Identity) -> Thunk<AppState> {
         return Thunk { dispatch, _ in
             do {
-                let channel = try TelepathChannel(connectUrl: url)
-                dispatch(InvalidateExistingChannels())
-                dispatch(ConnectFulfilled(channel: channel, identity: identity))
-                dispatch(Notify(message: "sendDidConnectNotification", on: channel))
-                AudioFeedback.default.playIdentitySelected()
-            } catch let error {
-                dispatch(ConnectRejected(error: error, identity: identity))
+                let channel = TelepathChannel(connectUrl: url)
+                channel.connect { error in
+                    guard error == nil else {
+                        dispatch(ConnectRejected(error: error!, identity: identity))
+                        return
+                    }
+                    dispatch(InvalidateExistingChannels())
+                    dispatch(ConnectFulfilled(channel: channel, identity: identity))
+                    dispatch(Notify(message: "sendDidConnectNotification", on: channel))
+                    AudioFeedback.default.playIdentitySelected()
+               }
             }
         }
     }

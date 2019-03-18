@@ -19,8 +19,8 @@ class TelepathActionsSpec: QuickSpec {
 
             it("connects to a channel") {
                 store.dispatch(TelepathActions.Connect(url: connectUrl, for: identity))
-                let fulfilled = store.actions.last as? TelepathActions.ConnectFulfilled
-                expect(fulfilled).toNot(beNil())
+                expect(store.actions.last as? TelepathActions.ConnectFulfilled)
+                    .toEventuallyNot(beNil())
             }
 
             it("reports an error when connecting to a channel fails") {

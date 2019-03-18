@@ -62,12 +62,18 @@ struct TransactionSignerValid: TransactionSigner {
         let viewController = storyBoard.instantiateInitialViewController() as! UINavigationController
         let explanationViewController = viewController.topViewController! as! ExplanationViewController
         // swiftlint:enable force_cast
-        let state = self.getState()!
-        explanationViewController.appName = channel.appName
+        let signingDone = { viewController.dismiss(animated: true) }
+
+        guard let state = self.getState(), let appName = channel.appName else {
+            self.dispatch(TelepathActions.Send(id: self.responseId,
+                                               error: SignTransactionError.signingFailed,
+                                               on: self.channel))
+            signingDone()
+            return
+        }
+        explanationViewController.appName = appName
         explanationViewController.actionDescription = "sign a blockchain transaction"
         explanationViewController.identity = identity
-
-        let signingDone = { viewController.dismiss(animated: true) }
 
         explanationViewController.onReject = {
             self.dispatch(TelepathActions.Send(id: self.responseId,

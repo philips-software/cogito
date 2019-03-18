@@ -55,8 +55,8 @@ class LaunchActionsSpec: QuickSpec {
                 let startAction = LaunchActions.create(forLink: URL(string: linkString)!)! as! Thunk<AppState>
                 store.dispatch(startAction)
 
-                let action = store.lastAction(ofType: TelepathActions.ConnectFulfilled.self)
-                expect(action?.channel.connectUrl) == URL(string: linkString)
+                expect(store.lastAction(ofType: TelepathActions.ConnectFulfilled.self)?.channel.connectUrl)
+                    .toEventually(equal(URL(string: linkString)))
             }
 
             it("does nothing when the attestation link is corrupted") {

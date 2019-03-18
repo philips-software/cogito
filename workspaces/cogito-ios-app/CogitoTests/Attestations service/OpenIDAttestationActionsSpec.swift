@@ -161,7 +161,7 @@ class OpenIDAttestationActionsSpec: QuickSpec {
                             diamond: DiamondState(facets: [identityWithAttestation]),
                             telepath: telepathState,
                             attestations: AttestationsState(open: [:], providedAttestations: [
-                                channel.id: [idToken]
+                                channel.id!: [idToken]
                             ])
                         )
                     }
@@ -284,7 +284,7 @@ class OpenIDAttestationActionsSpec: QuickSpec {
                                 telepath: telepathState,
                                 attestations: AttestationsState(
                                     open: [
-                                        OpenIdExampleValues.validNonce: attestationInProgress(channelId: channel.id)
+                                        OpenIdExampleValues.validNonce: attestationInProgress(channelId: channel.id!)
                                     ],
                                     providedAttestations: [:])
                             )
