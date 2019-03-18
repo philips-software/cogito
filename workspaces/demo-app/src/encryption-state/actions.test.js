@@ -58,7 +58,7 @@ describe('encrypt action', () => {
     expect(dispatch).toBeCalledWith(EncryptionActions.setCipherText(cipherText))
   })
 
-  describe('handles exceptions', () => {
+  describe('handles errors', () => {
     const error = new Error('Some error message')
 
     it('when creating new key pair', async () => {
