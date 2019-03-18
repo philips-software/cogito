@@ -26,17 +26,17 @@ class EncryptionActions {
     const cogitoKeyProvider = new CogitoKeyProvider({ telepathChannel })
     return async (dispatch, getState) => {
       const plainText = getState().encryption.plainText
-      let tag
+      let jsonWebKey
 
       try {
-        tag = await cogitoKeyProvider.createNewKeyPair()
+        const tag = await cogitoKeyProvider.createNewKeyPair()
+        dispatch(EncryptionActions.setKeyTag(tag))
+
+        jsonWebKey = await cogitoKeyProvider.getPublicKey({ tag })
       } catch (error) {
         dispatch(EncryptionActions.encryptionError(error.message))
       }
 
-      dispatch(EncryptionActions.setKeyTag(tag))
-
-      const jsonWebKey = await cogitoKeyProvider.getPublicKey({ tag })
       const cipherText = await cogitoEncryption.encrypt({ jsonWebKey, plainText })
 
       dispatch(EncryptionActions.setPlainText(''))
