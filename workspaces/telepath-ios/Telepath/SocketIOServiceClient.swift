@@ -38,8 +38,14 @@ class SocketIOServiceClient: SocketIOService {
         socket.on(clientEvent: .connect) { [weak self] _, _ in self?.onConnect() }
         socket.on("notification") { [weak self] data, _ in self?.onNotification(data) }
         socket.on(clientEvent: .error) { [weak self] data, _ in
+            guard let self = self else { return }
             let error = data[0] as? Error ?? NotificationError.unknown(data: data)
-            self?.errorHandler?(error)
+            if let completion = self.completion, !self.started {
+                completion(error)
+                self.completion = nil
+            } else {
+                self.errorHandler?(error)
+            }
         }
         socket.on("server error") { [weak self] data, _ in
             let message = data[0] as? String ?? "unknown server error"
