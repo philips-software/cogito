@@ -49,6 +49,11 @@ Ethereum contracts using the well-known
 
 ![Cogito Deployment](./images/cogito-deployment.png)
 
+The following overview illustrates how Telepath is used throughout all the
+packages and the demo app.
+
+![Telepath Usage Overview](./images/telepath-usage.png)
+
 Development
 -----------
 
