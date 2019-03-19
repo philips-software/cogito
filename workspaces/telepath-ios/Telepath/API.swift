@@ -1,7 +1,8 @@
+import Foundation
 import Sodium
 
 public protocol Telepath {
-    init(serviceUrl: URL)
+    static func create(serviceUrl: URL) -> Telepath
 
     func connect(
         channel: ChannelID, key: ChannelKey, appName: String,

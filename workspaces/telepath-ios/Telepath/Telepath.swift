@@ -15,7 +15,13 @@ public enum NotificationError: Error, Equatable {
     }
 }
 
-public struct TelepathImpl: Telepath {
+extension Telepath {
+    public static func create(serviceUrl: URL) -> Telepath {
+        return TelepathImpl(serviceUrl: serviceUrl)
+    }
+}
+
+struct TelepathImpl: Telepath {
     let queuing: QueuingService
     let socketIOService: SocketIOService
 
