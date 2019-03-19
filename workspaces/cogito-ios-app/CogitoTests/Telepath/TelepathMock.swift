@@ -34,15 +34,15 @@ extension TelepathChannel {
         assert(
             savedCreateFunction == nil,
             "You can start mocking only once (forgot to stopMocking?)")
-        savedCreateFunction = TelepathChannel.createTelepathChannel
-        TelepathChannel.createTelepathChannel = {
+        savedCreateFunction = TelepathChannel.telepathFactory
+        TelepathChannel.telepathFactory = {
             return TelepathMock()
         }
     }
 
     static func stopMocking() {
         if let saved = savedCreateFunction {
-            TelepathChannel.createTelepathChannel = saved
+            TelepathChannel.telepathFactory = saved
             savedCreateFunction = nil
         }
     }

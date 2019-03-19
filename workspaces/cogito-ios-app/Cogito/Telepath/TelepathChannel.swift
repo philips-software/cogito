@@ -6,7 +6,7 @@ protocol TelepathChannelType {
 }
 
 class TelepathChannel: TelepathChannelType, Codable {
-    static var createTelepathChannel: () -> Telepath = { return createTelepath() }
+    static var telepathFactory: () -> Telepath = { return createTelepath() }
 
     let connectUrl: URL
     let telepath: Telepath
@@ -22,7 +22,7 @@ class TelepathChannel: TelepathChannelType, Codable {
     }
 
     init(connectUrl: URL,
-         telepath: Telepath = TelepathChannel.createTelepathChannel()) {
+         telepath: Telepath = TelepathChannel.telepathFactory()) {
         self.connectUrl = connectUrl
         self.telepath = telepath
     }
@@ -30,7 +30,7 @@ class TelepathChannel: TelepathChannelType, Codable {
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         connectUrl = try container.decode(URL.self, forKey: .connectUrl)
-        telepath = TelepathChannel.createTelepathChannel()
+        telepath = TelepathChannel.telepathFactory()
     }
 
     func invalidate() {
