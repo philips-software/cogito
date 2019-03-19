@@ -1,9 +1,11 @@
 import Foundation
 import Sodium
 
-public protocol Telepath {
-    static func create(serviceUrl: URL) -> Telepath
+public func createTelepath(serviceUrl: URL) -> Telepath {
+    return TelepathImpl(serviceUrl: serviceUrl)
+}
 
+public protocol Telepath {
     func connect(
         channel: ChannelID, key: ChannelKey, appName: String,
         notificationHandler: NotificationHandler?) -> SecureChannel
