@@ -10,6 +10,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "test": "shadow-cljs compile test",
+    "test:watch": "shadow-cljs watch test",
     "react-devtools": "react-devtools"
   },
   "dependencies": {
