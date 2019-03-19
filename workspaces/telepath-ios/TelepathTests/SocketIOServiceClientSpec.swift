@@ -44,9 +44,22 @@ class SocketIOServiceClientSpec: QuickSpec {
                              onNotification: notificationSpy.onNotification,
                              onError: errorSpy.onError,
                              completion: completionSpy.completion)
-                expect(errorSpy.lastRaisedError as? TestError)
+                expect(completionSpy.lastRaisedError as? TestError)
                     .toEventually(equal(TestError.someError))
-                expect(completionSpy.completionCalled).to(beFalse())
+                expect(completionSpy.completionCalled).to(beTrue())
+            }
+
+            it("calls completion only once on multiple errors") {
+                socket.connectTriggersError = TestError.someError
+                client.start(channelID: channelID,
+                             onNotification: notificationSpy.onNotification,
+                             onError: errorSpy.onError,
+                             completion: completionSpy.completion)
+                expect(completionSpy.lastRaisedError as? TestError)
+                    .toEventually(equal(TestError.someError))
+                socket.fakeError(TestError.otherError)
+                expect(errorSpy.lastRaisedError as? TestError)
+                    .toEventually(equal(TestError.otherError))
             }
 
             it("completes with error when identify times out") {
@@ -61,7 +74,7 @@ class SocketIOServiceClientSpec: QuickSpec {
             }
         }
 
-        context("when started") {
+        context("when start has been called") {
             var notificationSpy: NotificationsSpy!
             var errorSpy: ErrorSpy!
             var completionSpy: CompletionSpy!
@@ -185,4 +198,5 @@ private class ErrorSpy {
 
 private enum TestError: Error, Equatable {
     case someError
+    case otherError
 }
