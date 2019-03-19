@@ -7,8 +7,13 @@ class URLActionsSpec: QuickSpec {
         var store: RecordingStore!
 
         beforeEach {
+            TelepathChannel.startMocking()
             store = RecordingStore()
             store.state = appState(diamond: DiamondState(facets: [Identity.example]))
+        }
+
+        afterEach {
+            TelepathChannel.stopMocking()
         }
 
         context("when a telepath connect url is received") {

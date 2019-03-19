@@ -1,14 +1,21 @@
 import Quick
 import Nimble
 import SwiftyJSON
+import Telepath
 @testable import Cogito
 
 class TelepathActionsSpec: QuickSpec {
     override func spec() {
+
         var store: RecordingStore!
 
         beforeEach {
             store = RecordingStore()
+            TelepathChannel.startMocking()
+        }
+
+        afterEach {
+            TelepathChannel.stopMocking()
         }
 
         describe("connection") {
