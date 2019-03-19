@@ -1,6 +1,0 @@
-framework module Telepath {
-  umbrella header "Telepath-umbrella.h"
-
-  export *
-  module * { export * }
-}
