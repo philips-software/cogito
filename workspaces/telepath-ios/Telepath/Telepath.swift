@@ -22,7 +22,7 @@ public enum NotificationError: Error, Equatable {
 
 public typealias CompletionHandler = (Error?) -> Void
 
-public struct Telepath {
+public struct TelepathImpl: Telepath {
     let queuing: QueuingService
     let socketIOService: SocketIOService
 
@@ -39,13 +39,6 @@ public struct Telepath {
             queuing: queuing, socketIOService: socketIOService,
             notificationHandler: notificationHandler,
             id: channel, key: key, appName: appName)
-    }
-
-    public func connect(url: URL,
-                        notificationHandler: NotificationHandler? = nil) throws -> SecureChannel {
-        let (id, key, appName) = try UrlCodec().decode(url: url)
-        return connect(channel: id, key: key, appName: appName,
-                       notificationHandler: notificationHandler)
     }
 }
 
