@@ -8,10 +8,10 @@ class TelepathSpec: QuickSpec {
         let channelKey = ChannelKey.example()
         let appName = "example"
         let queuingServiceUrl = URL(string: "https://queuing.example.com")!
-        var telepath: Telepath!
+        var telepath: TelepathImpl!
 
         beforeEach {
-            telepath = Telepath(serviceUrl: queuingServiceUrl)
+            telepath = TelepathImpl(serviceUrl: queuingServiceUrl)
         }
 
         it("connects to the correct queuing service") {
