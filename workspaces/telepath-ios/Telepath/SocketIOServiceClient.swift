@@ -50,7 +50,8 @@ class SocketIOServiceClient: SocketIOService {
     }
 
     func onConnect() {
-        DispatchQueue.main.async { [unowned self] in
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.socket?
                 .emitWithAck("identify", self.channelID)
                 .timingOut(after: 30) { [weak self] items in
