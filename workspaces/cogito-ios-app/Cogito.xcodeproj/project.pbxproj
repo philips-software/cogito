@@ -65,6 +65,7 @@
 		02BB61FD20C0226100F03625 /* IdentityInfoServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BB61FC20C0226100F03625 /* IdentityInfoServiceSpec.swift */; };
 		02BB61FF20C0227A00F03625 /* IdentityInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BB61FE20C0227A00F03625 /* IdentityInfoService.swift */; };
 		02C7420A1F8F5B6E007AE227 /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C742091F8F5B6E007AE227 /* CameraButton.swift */; };
+		02C7A9BC2240EA8600E2851C /* TelepathMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C7A9BB2240EA8600E2851C /* TelepathMock.swift */; };
 		02CD30A41F73F251006BA756 /* StorePersister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A31F73F251006BA756 /* StorePersister.swift */; };
 		02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */; };
 		02CD80541F7D494900AA5C3A /* CreateIdentityReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */; };
@@ -261,6 +262,7 @@
 		02BB61FC20C0226100F03625 /* IdentityInfoServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityInfoServiceSpec.swift; sourceTree = "<group>"; };
 		02BB61FE20C0227A00F03625 /* IdentityInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityInfoService.swift; sourceTree = "<group>"; };
 		02C742091F8F5B6E007AE227 /* CameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
+		02C7A9BB2240EA8600E2851C /* TelepathMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelepathMock.swift; sourceTree = "<group>"; };
 		02CD30A31F73F251006BA756 /* StorePersister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersister.swift; sourceTree = "<group>"; };
 		02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersisterSpec.swift; sourceTree = "<group>"; };
 		02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityReducerSpec.swift; sourceTree = "<group>"; };
@@ -810,6 +812,7 @@
 				5C0C74F8200DF71D009463F9 /* JsonRpcIdSpec.swift */,
 				5CDB58DB203589CC00A28D60 /* TelepathSubscriberSpec.swift */,
 				5C3C8F2E208767790042AC2F /* JsonRcpRequestConvenience.swift */,
+				02C7A9BB2240EA8600E2851C /* TelepathMock.swift */,
 			);
 			path = Telepath;
 			sourceTree = "<group>";
@@ -1347,6 +1350,7 @@
 				02E90F4E1FDEC1D7008D81F9 /* AttestationServiceSpec.swift in Sources */,
 				5C4993C2219ACCE000BE9C4D /* AddressExample.swift in Sources */,
 				5C7C23981FA37CF9009E9CE7 /* ExampleError.swift in Sources */,
+				02C7A9BC2240EA8600E2851C /* TelepathMock.swift in Sources */,
 				5C7BCE69208647E9006E33A5 /* PublicKeyLoaderSpy.swift in Sources */,
 				5C9331981FA324460056869F /* TelepathChannelExample.swift in Sources */,
 				C00B57F3917E8EED3895AA50 /* CreateIdentityStateSpec.swift in Sources */,

@@ -6,8 +6,10 @@ protocol TelepathChannelType {
 }
 
 class TelepathChannel: TelepathChannelType, Codable {
+    static var createTelepathChannel: () -> Telepath = { return createTelepath() }
+
     let connectUrl: URL
-    let telepath: Telepath = Telepath()
+    let telepath: Telepath = TelepathChannel.createTelepathChannel()
     private var actualChannel: SecureChannel?
     var channel: SecureChannel? {
         get {

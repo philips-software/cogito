@@ -1,11 +1,20 @@
 import Quick
 import Nimble
 import Foundation
+import Telepath
 @testable import ReSwiftThunk
 @testable import Cogito
 
 class LaunchActionsSpec: QuickSpec {
     override func spec() {
+        beforeEach {
+            TelepathChannel.startMocking()
+        }
+
+        afterEach {
+             TelepathChannel.stopMocking()
+        }
+
         it("can parse URI fragment") {
             let fragment = "a=b&c=d"
             let parsed = LaunchActions.parse(fragment: fragment)!

@@ -1,7 +1,5 @@
 import Telepath
 
-extension Telepath {
-    init() {
-        self.init(serviceUrl: URL(string: "https://telepath.cogito.mobi")!)
-    }
+func createTelepath() -> Telepath {
+    return createTelepath(serviceUrl: URL(string: "https://telepath.cogito.mobi")!)
 }
