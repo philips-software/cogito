@@ -17,7 +17,7 @@ class SecureChannelSpec: QuickSpec {
             queuing = QueuingServiceMock()
             socketIOService = SocketIOServiceMock()
             notificationsSpy = NotificationHandlerSpy()
-            channel = SecureChannel(
+            channel = SecureChannelImpl(
                 queuing: queuing, socketIOService: socketIOService,
                 notificationHandler: notificationsSpy,
                 id: channelId, key: channelKey, appName: appName)

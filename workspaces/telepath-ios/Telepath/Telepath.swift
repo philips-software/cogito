@@ -1,11 +1,6 @@
 import Foundation
 import SocketIO
 
-public protocol NotificationHandler {
-    func on(notification: String)
-    func on(error: Error)
-}
-
 public enum NotificationError: Error, Equatable {
     case setupFailed
     case unknown(data: [Any])
@@ -20,8 +15,6 @@ public enum NotificationError: Error, Equatable {
     }
 }
 
-public typealias CompletionHandler = (Error?) -> Void
-
 public struct TelepathImpl: Telepath {
     let queuing: QueuingService
     let socketIOService: SocketIOService
@@ -35,11 +28,9 @@ public struct TelepathImpl: Telepath {
 
     public func connect(channel: ChannelID, key: ChannelKey, appName: String,
                         notificationHandler: NotificationHandler? = nil) -> SecureChannel {
-        return SecureChannel(
+        return SecureChannelImpl(
             queuing: queuing, socketIOService: socketIOService,
             notificationHandler: notificationHandler,
             id: channel, key: key, appName: appName)
     }
 }
-
-public typealias ChannelID = String
