@@ -1,7 +1,7 @@
 import Sodium
 import SocketIO
 
-public struct SecureChannel {
+public struct SecureChannelImpl: SecureChannel {
     public let id: ChannelID
     public let appName: String
 

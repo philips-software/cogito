@@ -1,4 +1,6 @@
-protocol Telepath {
+import Sodium
+
+public protocol Telepath {
     init(serviceUrl: URL)
 
     func connect(
@@ -19,4 +21,24 @@ extension Telepath {
         return connect(channel: id, key: key, appName: appName,
                        notificationHandler: notificationHandler)
     }
+}
+
+public protocol SecureChannel {
+    var id: ChannelID { get }
+    var appName: String { get }
+
+    func send(message: String, completion: @escaping (Error?) -> Void)
+    func receive(completion: @escaping (String?, Error?) -> Void)
+    func startNotifications(completion: CompletionHandler?)
+    func notify(message: String)
+}
+
+public typealias ChannelID = String
+public typealias ChannelKey = SecretBox.Key
+
+public typealias CompletionHandler = (Error?) -> Void
+
+public protocol NotificationHandler {
+    func on(notification: String)
+    func on(error: Error)
 }

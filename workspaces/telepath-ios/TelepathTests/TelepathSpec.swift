@@ -21,10 +21,10 @@ class TelepathSpec: QuickSpec {
         }
 
         it("can open a channel using a channel id and key") {
-            let channel = telepath.connect(channel: channelId, key: channelKey, appName: appName)
-            expect(channel.id) == channelId
-            expect(channel.key) == channelKey
-            expect(channel.appName) == appName
+            let channel = telepath.connect(channel: channelId, key: channelKey, appName: appName) as? SecureChannelImpl
+            expect(channel?.id) == channelId
+            expect(channel?.key) == channelKey
+            expect(channel?.appName) == appName
         }
 
         it("can open a channel using a telepath connection URL") {
@@ -34,10 +34,10 @@ class TelepathSpec: QuickSpec {
                 key: channelKey,
                 appName: appName
             )
-            let channel = try! telepath.connect(url: connectionUrl)
-            expect(channel.id) == channelId
-            expect(channel.key) == channelKey
-            expect(channel.appName) == appName
+            let channel = try! telepath.connect(url: connectionUrl) as? SecureChannelImpl
+            expect(channel?.id) == channelId
+            expect(channel?.key) == channelKey
+            expect(channel?.appName) == appName
         }
     }
 }
