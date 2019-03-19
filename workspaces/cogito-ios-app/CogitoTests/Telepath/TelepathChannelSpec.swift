@@ -9,8 +9,13 @@ class TelepathChannelSpec: QuickSpec {
         var channel: TelepathChannel!
 
         beforeEach {
+            TelepathChannel.startMocking()
             channel = TelepathChannel(connectUrl: connectUrl)
-            channel.connect(disableNotifications: true, completion: nil)
+            channel.connect(completion: nil)
+        }
+
+        afterEach {
+            TelepathChannel.stopMocking()
         }
 
         it("encapsulates a secure channel") {
@@ -20,7 +25,7 @@ class TelepathChannelSpec: QuickSpec {
         it("errors when connect url is invalid") {
             let channel = TelepathChannel(connectUrl: URL(string: "http://invalid.connect.url")!)
             var raisedError: Error?
-            channel.connect(disableNotifications: true) { error in
+            channel.connect { error in
                 raisedError = error
             }
             expect(raisedError).toEventuallyNot(beNil())
