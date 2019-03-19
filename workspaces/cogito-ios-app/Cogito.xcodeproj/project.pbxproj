@@ -460,7 +460,6 @@
 		027603E21F6ACD1600788B0A = {
 			isa = PBXGroup;
 			children = (
-				5C90206E220C331200C83DF5 /* JavascriptWrapper.framework */,
 				0276040E1F6BFF6D00788B0A /* Readme.md */,
 				027603ED1F6ACD1600788B0A /* Cogito */,
 				027604021F6ACD1600788B0A /* CogitoTests */,
@@ -885,6 +884,7 @@
 		8A1300A8F9378A77B9DDFBEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5C90206E220C331200C83DF5 /* JavascriptWrapper.framework */,
 				5C54A85B2199B0A40078DA36 /* Ethers.framework */,
 				8BD916EEEB5AFF9DB177462D /* Pods_Cogito.framework */,
 				53940EFC96526AFDFA7CD5FC /* Pods_Cogito_CogitoTests.framework */,
