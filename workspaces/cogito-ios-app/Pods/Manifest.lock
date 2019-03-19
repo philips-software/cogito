@@ -1,5 +1,5 @@
 PODS:
-  - base64url (1.0.1)
+  - base64url (1.1.0)
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - Differentiator (3.1.0)
@@ -108,11 +108,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Sodium:
-    :commit: f010f9e85065d818e84ba3680e4669107c9afb41
+    :commit: b81064aaf8d477019e7dc36f200685a57cb660eb
     :git: https://github.com/jedisct1/swift-sodium.git
 
 SPEC CHECKSUMS:
-  base64url: f570aaf9520657b63edb7414dcf8496c4d864326
+  base64url: 92e81bb256f2070359a34fc93a7a7d4b9a9d689f
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   FontAwesome.swift: 55291c7a334ffacf9b62793d27c14014ec09a11b
@@ -132,7 +132,7 @@ SPEC CHECKSUMS:
   RxSwift: 92fcf68dfef21f3e2ab1965363d9e7b3d787597e
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   Socket.IO-Client-Swift: 2b2720f14c92ff1237ced09bc2f2da2022624fee
-  Sodium: c5510cc6f5e1b27858e5f260b5cac80d4a3f9379
+  Sodium: c9f8ec9fd5f1754f354f06dbbb32d44337f6661e
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
