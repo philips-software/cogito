@@ -29,14 +29,12 @@ class CogitoConnector extends React.Component {
               if (onOpen) {
                 await onOpen()
               }
-              this.subscribe()
             }}
           >
             {buttonText || 'Show QR code'}
           </Button>
         }
         onClose={() => {
-          this.unsubscribe()
           if (onCancel) {
             onCancel()
           }
@@ -56,23 +54,6 @@ class CogitoConnector extends React.Component {
         </Modal.Content>
       </Modal>
     )
-  }
-
-  subscribe () {
-    const { telepathChannel, onDone } = this.props
-    this.subscription = telepathChannel.subscribeForNotifications(
-      notification => {
-        if (notification.method === 'connectionSetupDone') {
-          telepathChannel.unsubscribeForNotifications(this.subscription)
-          onDone()
-        }
-      }
-    )
-  }
-
-  unsubscribe () {
-    const { telepathChannel } = this.props
-    telepathChannel.unsubscribeForNotifications(this.subscription)
   }
 }
 
