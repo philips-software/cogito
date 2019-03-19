@@ -34,6 +34,7 @@ public protocol SecureChannel {
     func receive(completion: @escaping (String?, Error?) -> Void)
     func startNotifications(completion: CompletionHandler?)
     func notify(message: String)
+    mutating func invalidate()
 }
 
 public typealias ChannelID = String
