@@ -1,6 +1,9 @@
 # @cogitojs/crypto
 
-The `@cogitojs/crypto` package provides cryptographic utilities used by other cogito packages.
+This package provides cryptographic primitives that are used by other Cogito
+packages, such as the [Cogito Encryption][@cogitojs/cogito-encryption] package
+which provides support for encryption & decryption using keys that are managed
+by the Cogito mobile app.
 
 ## Usage
 
@@ -123,3 +126,5 @@ describe('Stream Encryption Decryption', () => {
 ## Using the tags
 
 If you are not interested in validating the final tag, you can decide not to use `end` for the final data chunk in encryption, and use `push` for all the data chunks. In the end the only difference between `push` and `end` is the tag value.
+
+[@cogitojs/cogito-encryption]: https://cogito.mobi/components/cogito-encryption
