@@ -1,6 +1,10 @@
 # @cogitojs/cogito-identity
 
-`@cogitojs/cogito-identity` allows retrieving identity information over [telepath] (e.g. from a Cogito app).
+Retrieve the username or Ethereum address of the connected Cogito user. This
+requires that a [Telepath][telepath] connection with the user's Cogito mobile
+app has already been set up. When setting up this connection, the user choses
+which identity to associate. You can only retrieve the details of this
+identity.
 
 ## Usage
 
@@ -10,7 +14,8 @@ Add `@cogitojs/cogito-identity` as a dependency:
 $ yarn add `@cogitojs/cogito-identity`
 ```
 
-The example below shows how to use telepath and `CogitoIdentity` in order to retrieve the user identity properties:
+The example below shows how to use [telepath] and `CogitoIdentity` in order to
+retrieve the user identity properties:
 
 ```javascript
 import { Telepath } from '@cogitojs/telepath-js'
@@ -29,7 +34,7 @@ if (!info) throw new Error('No identity found on the mobile device!')
 console.log(info.ethereumAddress, info.username)
 ```
 
-Currently, `ethereumAddress` and `username` are the only identity attributes supported
-by `CogitoIdentity`.
+Currently, `ethereumAddress` and `username` are the only identity attributes
+supported by `CogitoIdentity`.
 
 [telepath]: https://cogito.mobi/components/telepath-js
