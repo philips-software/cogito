@@ -1,6 +1,9 @@
 # @cogitojs/cogito-ethereum-react
 
-`@cogitojs/cogito-ethereum-react` is a React version of [@cogitojs/cogito-ethereum].
+Provides a React component that allows interaction with smart contracts on an
+Ethereum blockchain using the Cogito app. It provides the same functionality as
+the [Cogito Ethereum][@cogitojs/cogito-ethereum] package in a React friendly
+way.
 
 ## Usage
 
