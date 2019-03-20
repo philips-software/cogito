@@ -44,6 +44,12 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
+        path: `${__dirname}/../cogito-encryption`
+      }
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
         path: `${__dirname}/../cogito-web3-provider`
       }
     },
