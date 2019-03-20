@@ -1,8 +1,14 @@
 # @cogitojs/cogito-ethereum
 
-`@cogitojs/cogito-ethereum` is a high level convenience package that provides a
-more declarative way of working with [cogito-web3-provider], [telepath], and
-[Ethereum contracts].
+Provides a means to interact with smart contracts on an Ethereum blockchain
+using the Cogito app. Uses the accounts that are stored in the Cogito app on
+the user's phone. Whenever a blockchain transaction is initiated, the user is
+prompted to sign it using the Cogito app.
+
+This package aims to make working with [cogito-web3-provider], [telepath], and
+[Ethereum contracts] easier. You do not have know all the details about web3
+providers, cogito-web3-provider, and telepath, in order to setup a working
+cogito ecosystem.
 
 ## Usage
 
@@ -12,16 +18,9 @@ Add `@cogitojs/cogito-ethereum` as a dependency
 $ yarn add `@cogitojs/cogito-ethereum`
 ```
 
-`@cogitojs/cogito-ethereum` aims at making working with [cogito-web3-provider],
-[telepath], and [Ethereum contracts] easier. Using `@cogitojs/cogito-ethereum`
-you do not have know all the details about web3 providers,
-cogito-web3-provider, and telepath, in order to setup a working cogito
-ecosystem.
-
-`@cogitojs/cogito-ethereum`'s main abstraction is `CogitoEthereum`.
-
-Before we learn how to use `CogitoEthereum`, we need first make sure we have a
-good understanding how CogitoEthereum handles the Ethereum contracts.
+`@cogitojs/cogito-ethereum`'s main abstraction is `CogitoEthereum`. Before we
+learn how to use `CogitoEthereum`, we need first make sure we have a good
+understanding how CogitoEthereum handles the Ethereum contracts.
 
 ## Working with Contracts
 
