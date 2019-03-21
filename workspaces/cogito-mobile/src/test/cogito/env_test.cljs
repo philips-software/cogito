@@ -3,10 +3,10 @@
             [cogito.env :refer (register register-component)]))
 
 (deftest register-test
-  (testing "it calls register-component"
-    (let [register-count (atom 0)]
+  (testing "it calls register-component with the right key"
+    (let [registered-key (atom nil)]
       (with-redefs [register-component
                     (fn [key component]
-                      (swap! register-count inc))]
+                      (reset! registered-key key))]
         (register "Home")
-        (is (= 1 @register-count))))))
+        (is (= "Home" @registered-key))))))
