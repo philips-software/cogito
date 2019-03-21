@@ -8,7 +8,10 @@ class CogitoEthereum {
   contractBlobs
   telepath
 
-  constructor (contractBlobs, queuingServiceUrl = 'https://telepath.cogito.mobi') {
+  constructor (
+    contractBlobs,
+    queuingServiceUrl = 'https://telepath.cogito.mobi'
+  ) {
     this.contractBlobs = contractBlobs
     this.telepath = new Telepath(queuingServiceUrl)
   }
@@ -26,10 +29,7 @@ class CogitoEthereum {
 
   getTelepathChannel = async ({ channelId: id, channelKey: key, appName }) => {
     const channel = await this.telepath.createChannel({ id, key, appName })
-    if (process.env.NODE_ENV !== 'test') {
-      // don't do this in unit tests
-      await channel.startNotifications()
-    }
+    await channel.startNotifications()
     return channel
   }
 
