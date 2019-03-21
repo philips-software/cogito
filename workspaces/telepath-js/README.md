@@ -12,7 +12,7 @@ Because both the browser and phone are likely to be behind distinct [NAT], we us
 
 Setting up a secure channel is done using these steps:
 
-1. The web app requests a secure connection to the identity app by invoking the `createChannel` function on the javascript library.
+1. The web app requests a secure connection to the mobile app by invoking the `createChannel` function on the javascript library.
 2. The `createChannel` function generates a random channel id `I` and a symmetric encryption key `E`.
 3. The web app displays a QR code containing the channel id `I` and key `E`.
 4. The owner of the phone opens the app, points the camera to the QR code.
