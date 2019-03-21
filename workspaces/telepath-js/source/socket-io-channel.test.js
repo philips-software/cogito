@@ -50,12 +50,19 @@ describe('SocketIOChannel', () => {
 
   it('throws when identify times out', async () => {
     identifyTimesOut = true
-    await expect(service.start('', () => {}, () => {}, 100)).rejects.toThrow()
+    await expect(
+      service.start({
+        channelID: '',
+        onNotification: () => {},
+        onError: () => {},
+        timeout: 100
+      })
+    ).rejects.toThrow()
   })
 
   it('sends pending notifications after connection is complete', async () => {
     service.pendingNotifications = [Buffer.from([1, 2, 3, 4])]
-    await service.start()
+    await service.start({})
     expect(service.pendingNotifications.length).toBe(0)
     expect(socketStub.emit.mock.calls[1][0]).toBe('notification')
   })
@@ -68,7 +75,11 @@ describe('SocketIOChannel', () => {
     beforeEach(async () => {
       notificationSpy = jest.fn()
       errorSpy = jest.fn()
-      await service.start(channelID, notificationSpy, errorSpy)
+      await service.start({
+        channelID,
+        onNotification: notificationSpy,
+        onError: errorSpy
+      })
     })
 
     it('is correctly configured', () => {
@@ -132,7 +143,11 @@ describe('SocketIOChannel', () => {
       notificationSpy = jest.fn()
       errorSpy = jest.fn()
       socketStub.connected = true
-      await service.start(channelID, notificationSpy, errorSpy)
+      await service.start({
+        channelID,
+        onNotification: notificationSpy,
+        onError: errorSpy
+      })
     })
 
     it('does not try to connect again', () => {

@@ -8,11 +8,11 @@ export class SocketIOChannel {
     this.setupDone = false
   }
 
-  async start (channelID, onNotification, onError, timeout = 30000) {
+  async start ({ channelID, onNotification, onError, timeout = 30000 }) {
     this.socket = this.socketFactoryMethod()
     await this.waitUntilConnected()
-    await this.identify(channelID, timeout)
-    this.installEventHandlers(onNotification, onError)
+    await this.identify({ channelID, timeout })
+    this.installEventHandlers({ onNotification, onError })
   }
 
   waitUntilConnected () {
@@ -30,7 +30,7 @@ export class SocketIOChannel {
     })
   }
 
-  identify (channelID, timeout) {
+  identify ({ channelID, timeout }) {
     return new Promise((resolve, reject) => {
       this.socket.emit(
         'identify',
@@ -47,7 +47,7 @@ export class SocketIOChannel {
     })
   }
 
-  installEventHandlers (onNotification, onError) {
+  installEventHandlers ({ onNotification, onError }) {
     this.socket.on('notification', message => {
       onNotification(base64url.toBuffer(message))
     })
