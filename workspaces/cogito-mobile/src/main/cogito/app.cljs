@@ -13,9 +13,8 @@
      events
      #(.setRoot
        Navigation
-       #js {:root #js
-                   {:stack #js
-                            {:children #js [#js
-                                             {:component #js
-                                                          {:name "Home"}}]
-                             :options #js {:topBar #js {:visible "false"}}}}}))))
+       (cl->js {:root
+                {:stack
+                 {:children [{:component
+                              {:name "Home"}}]
+                  :options {:topBar {:visible "false"}}}}})))))
