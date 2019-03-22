@@ -163,6 +163,22 @@ Please note that the `channel.notify` promise being resolve only means
 that the notification was sent, not that it was received by the other
 party.
 
+### Unit Testing
+
+This module provides a test double that you can use in your unit tests. This
+test double prevents real network communication from happening. It is very
+limited in functionality but it will suffice for many purposes. Have a look at
+`telepath-mock.js` to review the exact capabilities.
+
+You can use the test double by creating a manual mock in your workspace. Put
+a file named `telepath-js.js` in the folder `your-project/src/__mocks__/@cogitojs`.
+Inside that file, put the following statement:
+
+```javascript
+export { Telepath } from '@cogitojs/telepath-js/source/telepath-mock'
+```
+
 ## Known Limitations
 
-Currently uses independent encryption of messages. A recipient can therefore not detect if some messages have been duplicated, deleted or reordered.
+Currently uses independent encryption of messages. A recipient can therefore not
+detect if some messages have been duplicated, deleted or reordered.
