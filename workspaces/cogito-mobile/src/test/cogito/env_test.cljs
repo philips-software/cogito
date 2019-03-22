@@ -40,9 +40,4 @@
         (reset! id-seq-ref 3)
         (create-wrapper "MyComponent")
         (let [initialState (.getInitialState @crc-arg)]
-          (is (= (-> initialState .-id) 4))))
-
-      (testing "keeps track of mounted components"
-        (create-wrapper "MyComponent")
-        (-> @crc-arg .componentDidMount)
-        (is (not (nil? (get @mounted-ref "MyComponent"))))))))
+          (is (= (-> initialState .-id) 4)))))))

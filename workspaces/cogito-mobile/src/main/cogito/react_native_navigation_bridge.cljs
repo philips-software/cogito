@@ -3,3 +3,7 @@
 
 (defn register-component [key component]
   (rnn/Navigation.registerComponent key component))
+
+(defn bind-component [component]
+  (-> (rnn/Navigation.events)
+      (.bindComponent this)))
