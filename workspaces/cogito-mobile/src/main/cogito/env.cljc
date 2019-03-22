@@ -82,6 +82,15 @@
                         (-> (render props)
                             (r/as-element)))))})))
 
+(defn reload {:dev/after-load true} []
+  (doseq [[key instances] @mounted-ref
+          [id inst] instances]
+    (js/console.log "forceUpdate" key id)
+    (.forceUpdate ^js inst)))
+
+(defn add-screen [key screen-def]
+  (swap! screens-ref assoc key screen-def))
+
 #?(:test
    (defn register-component [key component])
 
@@ -95,12 +104,3 @@
    :default
    (defn bind-component [component]
      (rnnbridge/bind-component component)))
-
-(defn reload {:dev/after-load true} []
-  (doseq [[key instances] @mounted-ref
-          [id inst] instances]
-    (js/console.log "forceUpdate" key id)
-    (.forceUpdate ^js inst)))
-
-(defn add-screen [key screen-def]
-  (swap! screens-ref assoc key screen-def))
