@@ -8,8 +8,7 @@
   (register-component key nil))
 
 #?(:test
-   (defn register-component [key component]
-     (println "register-component placeholder"))
+   (defn register-component [key component])
 
    :default
    (defn register-component [key component]
