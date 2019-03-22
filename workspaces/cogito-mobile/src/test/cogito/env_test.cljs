@@ -1,7 +1,9 @@
 (ns cogito.env-test
   (:require [cljs.test :refer (deftest is testing)]
             ["create-react-class" :as crc]
-            [cogito.env :refer (register register-component create-wrapper)]))
+            [cogito.env :refer (register
+                                register-component
+                                create-wrapper)]))
 
 (deftest register-test
   (testing "it calls register-component and create-wrapper"
@@ -19,25 +21,20 @@
         (is (= 1 @create-wrapper-count))))))
 
 (deftest create-wrapper-test
-  (testing "creates a react component"
-    (let [crc-arg (atom nil)]
-      (with-redefs [crc
-                    (fn [js-struct] (reset! crc-arg js-struct))]
-        (create-wrapper "MyComponent")
-        (is (fn? (-> @crc-arg .-render)))))) ;; has a 'render' method
+  (let [crc-arg (atom [nil])]
+    (with-redefs [crc
+                  (fn [js-struct] (reset! crc-arg js-struct))]
 
-  (testing "stores key in initial state"
-    (let [crc-arg (atom nil)]
-      (with-redefs [crc
-                    (fn [js-struct] (reset! crc-arg js-struct))]
+      (testing "creates a react component"
+        (create-wrapper "MyComponent")
+        (is (fn? (-> @crc-arg .-render)))) ;; has a 'render' method
+
+      (testing "stores key in initial state"
         (create-wrapper "MyComponent")
         (let [initialState (.getInitialState @crc-arg)]
-          (is (= (-> initialState .-key) "MyComponent"))))))
+          (is (= (-> initialState .-key) "MyComponent"))))
 
-  (testing "stores incrementing id in initial state"
-    (let [crc-arg (atom nil)]
-      (with-redefs [crc
-                    (fn [js-struct] (reset! crc-arg js-struct))]
+      (testing "stores incrementing id in initial state"
         (create-wrapper "MyComponent")
         (let [initialState (.getInitialState @crc-arg)]
           (is (= (-> initialState .-id) 1)))))))
