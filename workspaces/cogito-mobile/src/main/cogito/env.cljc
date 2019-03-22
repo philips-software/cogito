@@ -7,6 +7,8 @@
 (declare register-component)
 (declare create-wrapper)
 
+(defonce id-seq-ref (atom 0))
+
 (defn register [key]
   (register-component key (create-wrapper key)))
 
@@ -15,7 +17,7 @@
         {:getInitialState
          (fn []
            #js {:key key
-                :id 1})
+                :id (swap! id-seq-ref inc)})
 
          :render
          (fn [] (println "foo"))}))

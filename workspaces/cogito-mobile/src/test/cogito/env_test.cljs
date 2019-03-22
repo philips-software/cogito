@@ -3,7 +3,8 @@
             ["create-react-class" :as crc]
             [cogito.env :refer (register
                                 register-component
-                                create-wrapper)]))
+                                create-wrapper
+                                id-seq-ref)]))
 
 (deftest register-test
   (testing "it calls register-component and create-wrapper"
@@ -35,6 +36,7 @@
           (is (= (-> initialState .-key) "MyComponent"))))
 
       (testing "stores incrementing id in initial state"
+        (reset! id-seq-ref 3)
         (create-wrapper "MyComponent")
         (let [initialState (.getInitialState @crc-arg)]
-          (is (= (-> initialState .-id) 1)))))))
+          (is (= (-> initialState .-id) 4)))))))
