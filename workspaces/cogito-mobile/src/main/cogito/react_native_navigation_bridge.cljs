@@ -6,4 +6,4 @@
 
 (defn bind-component [component]
   (-> (rnn/Navigation.events)
-      (.bindComponent this)))
+      (.bindComponent component)))

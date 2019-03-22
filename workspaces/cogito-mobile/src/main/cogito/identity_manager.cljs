@@ -4,35 +4,27 @@
    ["react-native" :as rn]
    ["react-native-navigation" :as ReactNativeNavigation :refer (Navigation)]
    [cogito.create-identity :as create-identity]
-   [cogito.toolbar-button :as btn :refer [toolbar-button]]))
+   [cogito.toolbar-button :as btn :refer [toolbar-button]]
+   [cogito.env :as env]))
 
-(defn screen-layout []
-  [:> rn/View {:style {:flex-direction "column"
-                       :margin 40
-                       :align-items "center"}}
+(env/add-screen
+ "IdentityManager"
+ {:navigation-button-pressed
+  #(.showModal Navigation create-identity/modal-presentation-layout)
 
-   [:> rn/Text {:style {:font-size 30
-                        :font-weight "100"
-                        :margin-bottom 20
-                        :text-align "center"}}
-    "Identities"]])
+  :render
+  (fn [props]
+    [:> rn/View {:style {:flex-direction "column"
+                         :margin 40
+                         :align-items "center"}}
 
-(defn screen []
-  (r/create-class
-   {:display-name "identity-manager"
-
-    :get-initial-state
-    (fn [this]
-      (println "get initial state")
-      (let [events (.events Navigation)]
-        (.bindComponent events this)))
-
-    :reagent-render screen-layout
-
-    :navigation-button-pressed
-    #(.showModal Navigation create-identity/modal-presentation-layout)}))
+     [:> rn/Text {:style {:font-size 30
+                          :font-weight "100"
+                          :margin-bottom 20
+                          :text-align "center"}}
+      "Identities"]])})
 
 (def push-options
-  (clj->js {:topBar {:visible "true"
-                     :title {:text "Me, myself and I"}
-                     :rightButtons [(toolbar-button "add")]}}))
+  {:topBar {:visible "true"
+            :title {:text "Me, myself and I"}
+            :rightButtons [(toolbar-button "add")]}})
