@@ -4,7 +4,8 @@
             [cogito.env :refer (register
                                 register-component
                                 create-wrapper
-                                id-seq-ref)]))
+                                id-seq-ref
+                                mounted-ref)]))
 
 (deftest register-test
   (testing "it calls register-component and create-wrapper"
@@ -39,4 +40,9 @@
         (reset! id-seq-ref 3)
         (create-wrapper "MyComponent")
         (let [initialState (.getInitialState @crc-arg)]
-          (is (= (-> initialState .-id) 4)))))))
+          (is (= (-> initialState .-id) 4))))
+
+      (testing "keeps track of mounted components"
+        (create-wrapper "MyComponent")
+        (-> @crc-arg .componentDidMount)
+        (is (not (nil? (get @mounted-ref "MyComponent"))))))))

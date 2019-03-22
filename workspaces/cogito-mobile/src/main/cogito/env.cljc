@@ -8,6 +8,7 @@
 (declare create-wrapper)
 
 (defonce id-seq-ref (atom 0))
+(defonce mounted-ref (atom {}))
 
 (defn register [key]
   (register-component key (create-wrapper key)))
@@ -19,8 +20,12 @@
            #js {:key key
                 :id (swap! id-seq-ref inc)})
 
+         :componentDidMount
+         (fn [] (swap! mounted-ref
+                       assoc-in [key] "foo"))
+
          :render
-         (fn [] (println "foo"))}))
+         (fn [] (println "TODO: render"))}))
 
 #?(:test
    (defn register-component [key component])
