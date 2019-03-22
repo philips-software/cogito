@@ -1,27 +1,41 @@
 # @cogitojs/telepath-js
 
-Provides a secure channel for communication between a web app running in a browser and an app running on a mobile device.
+Provides a secure channel for communication between a web app running in a
+ browser and an app running on a mobile device.
 
-Setting up a secure channel between the mobile device and a browser is done using a QR code that is presented by the web app whenever a secure channel is required. The user can then open the secure channel by scanning the QR code using the app on the phone.
+Setting up a secure channel between the mobile device and a browser is done
+using a QR code that is presented by the web app whenever a secure channel is
+required. The user can then open the secure channel by scanning the QR code
+using the app on the phone.
 
 ## Description
 
-Telepath consists of a javascript library that can be used in web apps, and an iOS library for mobile apps.
+Telepath consists of a javascript library that can be used in web apps, and an
+iOS library for mobile apps.
 
-Because both the browser and phone are likely to be behind distinct [NAT], we use a service with a public ip address to facilitate peer-to-peer communication between them. This is a fairly simple service that only holds end-to-end encrypted messages in queues.
+Because both the browser and phone are likely to be behind distinct [NAT], we
+use a service with a public ip address to facilitate peer-to-peer communication
+between them. This is a fairly simple service that only holds end-to-end
+encrypted messages in queues.
 
 Setting up a secure channel is done using these steps:
 
-1. The web app requests a secure connection to the mobile app by invoking the `createChannel` function on the javascript library.
-2. The `createChannel` function generates a random channel id `I` and a symmetric encryption key `E`.
+1. The web app requests a secure connection to the mobile app by invoking the
+   `createChannel` function on the javascript library.
+2. The `createChannel` function generates a random channel id `I` and a
+   symmetric encryption key `E`.
 3. The web app displays a QR code containing the channel id `I` and key `E`.
 4. The owner of the phone opens the app, points the camera to the QR code.
 5. The phone app extracts the channel id and the key from the QR code.
-6. Both phone and web app can now communicate on channel `I`. They encrypt/decrypt their messages using key `E`.
+6. Both phone and web app can now communicate on channel `I`. They encrypt/decrypt
+   their messages using key `E`.
 
 ![Telepath Connection Sequence](images/telepath-connect.png)
 
-Telepath channels supports bi-directional communication; both from the web app to the mobile app, and vice-versa. A channel therefore consists of two queues, which we’ve named ‘blue’ and ‘red’. The red queue is used to send messages from the web app to the mobile app, and the blue queue is used for the reverse route.
+Telepath channels supports bi-directional communication; both from the web app
+to the mobile app, and vice-versa. A channel therefore consists of two queues,
+which we’ve named ‘blue’ and ‘red’. The red queue is used to send messages from
+the web app to the mobile app, and the blue queue is used for the reverse route.
 
     -------------                             ------------
     |    web    |  ---------- red ----------> |  mobile  |
@@ -32,7 +46,9 @@ Telepath channels supports bi-directional communication; both from the web app t
 
 ## QR Code
 
-The channel id `I` and key `E` are first encoded in a URL, and then the URL is encoded in a QR code. This allows a user to scan the QR code using the standard camera app in iOS and be directed to the telepath-enabled mobile app.
+The channel id `I` and key `E` are first encoded in a URL, and then the URL is
+encoded in a QR code. This allows a user to scan the QR code using the standard
+camera app in iOS and be directed to the telepath-enabled mobile app.
 
 An example of such a URL and its QR Code:
 
@@ -50,9 +66,11 @@ The URL is made up of the following components:
 
 where:
 
-* `<base url>` is the url that is registered to open the mobile app in [iOS](https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html) or [Android](https://developer.android.com/training/app-links/deep-linking.html)
-* `<channel id>` is the channel id string, [percent encoded](https://tools.ietf.org/html/rfc3986#section-2.1) for use in a URL fragment
-* `<encryption key>` is the encryption key, [base64url encoded](https://tools.ietf.org/html/rfc4648#section-5)
+* `<base url>` is the url that is registered to open the mobile app in [iOS][1]
+  or [Android][2]
+* `<channel id>` is the channel id string, [percent encoded][3] for use in a URL
+  fragment
+* `<encryption key>` is the encryption key, [base64url encoded][4]
 
 ## Usage
 
@@ -182,3 +200,9 @@ export { Telepath } from '@cogitojs/telepath-js/source/telepath-mock'
 
 Currently uses independent encryption of messages. A recipient can therefore not
 detect if some messages have been duplicated, deleted or reordered.
+
+
+[1]: https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html
+[2]: https://developer.android.com/training/app-links/deep-linking.html
+[3]: https://tools.ietf.org/html/rfc3986#section-2.1
+[4]: https://tools.ietf.org/html/rfc4648#section-5
