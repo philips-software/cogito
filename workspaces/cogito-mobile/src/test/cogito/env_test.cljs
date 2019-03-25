@@ -1,5 +1,5 @@
 (ns cogito.env-test
-  (:require [cljs.test :refer (deftest is testing)]
+  (:require [cljs.test :refer (deftest is testing use-fixtures)]
             ["create-react-class" :as crc]
             [cogito.env :refer (register register-component)]))
 
@@ -13,12 +13,16 @@
                   crc
                   (fn [js-struct] (reset! wrapper-def js-struct))]
 
-      (testing "it calls register-component"
-        (register "Home")
-        (is (= 1 @register-component-call-count)))
+      (use-fixtures :each
+        {:before [(reset! register-component-call-count 0)
+                  (reset! wrapper-def nil)]}
 
-      (testing "it gets an id"
-        (register "Home")
-        (let [getInitialState (-> @wrapper-def .-getInitialState)
-              initialState (getInitialState)]
-          (is (= 1 (-> initialState .-id))))))))
+        (testing "it calls register-component"
+          (register "Home")
+          (is (= 1 @register-component-call-count)))
+
+        (testing "it gets an id"
+          (register "Home")
+          (let [getInitialState (-> @wrapper-def .-getInitialState)
+                initialState (getInitialState)]
+            (is (= 1 (-> initialState .-id)))))))))
