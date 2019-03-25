@@ -1,15 +1,16 @@
 (ns cogito.env-test
   (:require [cljs.test :refer (deftest is testing use-fixtures)]
             ["create-react-class" :as crc]
-            [cogito.env :refer (register register-component)]))
+            [cogito.env :refer (register register-component reset-globals)]))
 
 (def wrapper-def (atom nil))
 
 (defn setup-test [test]
+  (reset-globals)
+  (reset! wrapper-def nil)
   (with-redefs [crc
-                (fn [js-struct] (reset! wrapper-def js-struct))]
-    (reset! wrapper-def nil)
-    (register "Home")
+                (fn [js-struct]
+                  (reset! wrapper-def js-struct))]
     (test)))
 
 (use-fixtures :each setup-test)
@@ -23,14 +24,18 @@
         (register "Home")
         (is (= 1 @register-component-call-count))))))
 
-(deftest register-tests
+(deftest register-assigns-initial-state
+  (register "Home")
   (let [getInitialState (-> @wrapper-def .-getInitialState)]
-    (testing "it gets an id"
-      (is (= 1 (-> (getInitialState) .-id))))
+    (is (= 1 (-> (getInitialState) .-id)))))
 
-    (testing "a second component gets the next id"
-      (register "SomeOtherComponent")
-      (is (= 2 (-> (getInitialState) .-id))))
+(deftest register-assignes-incrementing-id
+  (register "Home")
+  (register "SomeOtherComponent")
+  (let [getInitialState (-> @wrapper-def .-getInitialState)]
+    (is (= 2 (-> (getInitialState) .-id)))))
 
-    (testing "it gets the same key as the wrapped component"
-      (is (= "Home" (-> (getInitialState) .-key))))))
+(deftest register-assigns-same-key-as-wrapped-component
+  (register "Home")
+  (let [getInitialState (-> @wrapper-def .-getInitialState)]
+    (is (= "Home" (-> (getInitialState) .-key)))))

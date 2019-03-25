@@ -9,6 +9,11 @@
 (defonce mounted-ref (atom {}))
 (defonce screens-ref (atom {}))
 
+(defn reset-globals []
+  (reset! id-seq-ref 0)
+  (reset! mounted-ref {})
+  (reset! screens-ref {}))
+
 (declare register-component)
 (declare bind-component)
 
@@ -22,9 +27,10 @@
         wrapper
         (crc #js
               {:getInitialState
-               (fn []
-                 #js {:key key
-                      :id (swap! id-seq-ref inc)})
+               (let [id (swap! id-seq-ref inc)]
+                 (fn []
+                   #js {:key key
+                        :id id}))
 
                :componentDidMount
                (fn []
