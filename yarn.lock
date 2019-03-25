@@ -17169,10 +17169,10 @@ react-markdown@^3.3.4:
     unist-util-visit "^1.3.0"
     xtend "^4.0.1"
 
-react-native-navigation@^2.13.1:
-  version "2.13.1"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.13.1.tgz#1aefe56a8b92541f110120d2aa079c8c0cdc7213"
-  integrity sha512-hKjPxKP3rM2OqZek7JVflol8+btrKaQ6hHXkD43L86n6r+rrTx7g6ltjSCyci6a7p5xHh3q8kI09SmL3ONdWkQ==
+react-native-navigation@^2.15.0:
+  version "2.15.0"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.15.0.tgz#5c634d4cfe4b7c76534cbdb2ea04a85b20f9e9c0"
+  integrity sha512-wiSpR1w4zc+WVVAGL6V5l0MLZcf9p7ULq20Hak9gxAH3LJ/KXAwIQbc62Eaq6AysIcmNsEDdR3tWcsfjh0vvXw==
   dependencies:
     hoist-non-react-statics "3.x.x"
     lodash "4.17.x"
