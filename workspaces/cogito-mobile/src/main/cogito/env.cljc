@@ -1,18 +1,16 @@
 (ns cogito.env
   (:require
    ["create-react-class" :as crc]
-   [cogito.react-native-navigation-bridge :as rnn-bridge]
+   #?@(:test []
+       :default [[cogito.react-native-navigation-bridge :as rnn-bridge]])
    [reagent.core :as r]))
 
 (defonce id-seq-ref (atom 0))
 (defonce mounted-ref (atom {}))
 (defonce screens-ref (atom {}))
 
-(defn register-component [key component]
-  (rnn-bridge/register-component key component))
-
-(defn bind-component [component]
-  (rnn-bridge/bind-component component))
+(declare register-component)
+(declare bind-component)
 
 (defn register [key]
   (let [get-props
@@ -94,3 +92,17 @@
 
 (defn add-screen [key screen-def]
   (swap! screens-ref assoc key screen-def))
+
+#?(:test
+   (defn register-component [key component] [])
+
+   :default
+   (defn register-component [key component]
+     (rnn-bridge/register-component key component)))
+
+#?(:test
+   (defn bind-component [component] [])
+
+   :default
+   (defn bind-component [component]
+     (rnn-bridge/bind-component component)))
