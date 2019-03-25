@@ -29,6 +29,18 @@ describe('encryption', () => {
     expect(dispatch).toBeCalledWith(EncryptionActions.encrypt({ telepathChannel }))
   })
 
+  it('puts the plain text and cipher text in correct fields', () => {
+    const plainText = 'This is a plain text message'
+    const cipherText = 'This is a cipher text message'
+
+    const { queryByTestId } = render(
+      <CogitoSimpleEncryptionView plainText={plainText} cipherText={cipherText} />
+    )
+
+    expect(queryByTestId('plain-text').value).toBe(plainText)
+    expect(queryByTestId('cipher-text').value).toBe(cipherText)
+  })
+
   it('show an error message when encryption fails', () => {
     const errorMessage = 'This is an error message'
 
