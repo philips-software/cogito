@@ -73,3 +73,15 @@
     (goog/object.set wrapper "props" #js {:componentId 42})
     (.render wrapper)
     (is (= 42 @received-component-id))))
+
+(deftest wrapper-forwards-navigation-button-pressed
+  (register "Home")
+  (let [received-props (atom nil)
+        wrapper @wrapper-def
+        props #js {:componentId 42}]
+    (add-screen "Home" {:navigation-button-pressed
+                        (fn [props] (reset! received-props props))})
+    (goog/object.set wrapper "state" #js {:id 1})
+    (goog/object.set wrapper "props" props)
+    (.navigationButtonPressed wrapper)
+    (is (= 42 (get @received-props :component-id)))))
