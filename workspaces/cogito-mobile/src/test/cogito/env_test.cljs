@@ -15,14 +15,13 @@
 
       (use-fixtures :each
         {:before [(reset! register-component-call-count 0)
-                  (reset! wrapper-def nil)]}
+                  (reset! wrapper-def nil)
+                  (register "Home")]}
 
         (testing "it calls register-component"
-          (register "Home")
           (is (= 1 @register-component-call-count)))
 
         (testing "it gets an id"
-          (register "Home")
           (let [getInitialState (-> @wrapper-def .-getInitialState)
                 initialState (getInitialState)]
             (is (= 1 (-> initialState .-id)))))))))
