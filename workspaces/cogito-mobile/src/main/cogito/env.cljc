@@ -1,13 +1,19 @@
 (ns cogito.env
   (:require
    ["react-native" :as rn]
-   ["react-native-navigation" :as rnn]
    ["create-react-class" :as crc]
+   [cogito.react-native-navigation-bridge :as rnn-bridge]
    [reagent.core :as r]))
 
 (defonce id-seq-ref (atom 0))
 (defonce mounted-ref (atom {}))
 (defonce screens-ref (atom {}))
+
+(defn register-component [key component]
+  (rnn-bridge/register-component key component))
+
+(defn bind-component [component]
+  (rnn-bridge/bind-component component))
 
 (defn register [key]
   (let [get-props
@@ -26,8 +32,7 @@
                :componentDidMount
                (fn []
                  (this-as ^js this
-                          (-> (rnn/Navigation.events)
-                              (.bindComponent this))
+                          (bind-component this)
 
                           (swap! mounted-ref
                                  assoc-in [key (-> this .-state .-id)] this)))
@@ -80,7 +85,7 @@
                             (-> (render props)
                                 (r/as-element)))))})]
 
-    (rnn/Navigation.registerComponent key (fn [] wrapper))))
+    (register-component key (fn [] wrapper))))
 
 (defn reload {:dev/after-load true} []
   (doseq [[key instances] @mounted-ref
