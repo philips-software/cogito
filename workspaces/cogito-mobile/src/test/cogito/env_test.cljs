@@ -3,30 +3,34 @@
             ["create-react-class" :as crc]
             [cogito.env :refer (register register-component)]))
 
-(deftest register-test
-  (let [register-component-call-count (atom 0)
-        wrapper-def (atom nil)]
+(def wrapper-def (atom nil))
+
+(defn setup-test [test]
+  (with-redefs [crc
+                (fn [js-struct] (reset! wrapper-def js-struct))]
+    (reset! wrapper-def nil)
+    (register "Home")
+    (test)))
+
+(use-fixtures :each setup-test)
+
+(deftest register-calls-register-component
+  (let [register-component-call-count (atom 0)]
     (with-redefs [register-component
                   (fn [key wrapperFn]
-                    (swap! register-component-call-count inc))
+                    (swap! register-component-call-count inc))]
+      (testing "it calls register-component"
+        (register "Home")
+        (is (= 1 @register-component-call-count))))))
 
-                  crc
-                  (fn [js-struct] (reset! wrapper-def js-struct))]
+(deftest register-tests
+  (let [getInitialState (-> @wrapper-def .-getInitialState)]
+    (testing "it gets an id"
+      (is (= 1 (-> (getInitialState) .-id))))
 
-      (use-fixtures :each
-        {:before [(reset! register-component-call-count 0)
-                  (reset! wrapper-def nil)
-                  (register "Home")]}
+    (testing "a second component gets the next id"
+      (register "SomeOtherComponent")
+      (is (= 2 (-> (getInitialState) .-id))))
 
-        (testing "it calls register-component"
-          (is (= 1 @register-component-call-count)))
-
-        (testing "it gets an id"
-          (let [getInitialState (-> @wrapper-def .-getInitialState)
-                initialState (getInitialState)]
-            (is (= 1 (-> initialState .-id)))))
-
-        (testing "it gets the same key as the wrapped component"
-          (let [getInitialState (-> @wrapper-def .-getInitialState)
-                initialState (getInitialState)]
-            (is (= "Home" (-> initialState .-key)))))))))
+    (testing "it gets the same key as the wrapped component"
+      (is (= "Home" (-> (getInitialState) .-key))))))
