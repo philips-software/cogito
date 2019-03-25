@@ -20,7 +20,7 @@ class SecureChannel {
     this.notificationHandler = notificationHandler
     this.notificationErrorHandler = errorHandler
     await this.socketIOChannel.start({
-      channelID: this.id,
+      channelId: this.id,
       onNotification: this.onEncryptedNotification.bind(this),
       onError: errorHandler
     })
