@@ -3,6 +3,7 @@
             ["create-react-class" :as crc]
             [cogito.env :refer (register
                                 register-component
+                                add-screen
                                 reset-globals
                                 mounted-ref)]))
 
@@ -61,3 +62,14 @@
     (.componentDidMount wrapper)
     (.componentWillUnmount wrapper)
     (is (= {} (get @mounted-ref "Home")))))
+
+(deftest wrapped-component-is-rendered-with-component-id
+  (register "Home")
+  (let [received-component-id (atom nil)
+        wrapper @wrapper-def]
+    (add-screen "Home" {:render
+                        (fn [{:keys [component-id] :as props}] (reset! received-component-id component-id) {:div "bla"})})
+    (goog/object.set wrapper "state" #js {:id 1})
+    (goog/object.set wrapper "props" #js {:componentId 42})
+    (.render wrapper)
+    (is (= 42 @received-component-id))))
