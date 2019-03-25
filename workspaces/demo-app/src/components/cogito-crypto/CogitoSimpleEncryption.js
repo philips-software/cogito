@@ -30,6 +30,7 @@ const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, di
     <EncryptionGrid>
       <PlainTextGridItem>
         <TextInput
+          data-testid='plain-text'
           placeholder='Enter some text'
           value={plainText}
           onChange={(event) => dispatch(
@@ -63,6 +64,7 @@ const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, di
       </DecryptGridItem>
       <CipherTextGridItem>
         <TextInput
+          data-testid='cipher-text'
           placeholder='Encrypted text appears here'
           value={cipherText}
           onChange={(event) => dispatch(
