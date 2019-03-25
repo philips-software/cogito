@@ -26,7 +26,10 @@
 
         wrapper
         (crc #js
-              {:getInitialState
+              {:displayName
+               (str key "Wrapper")
+
+               :getInitialState
                (let [id (swap! id-seq-ref inc)]
                  (fn []
                    #js {:key key

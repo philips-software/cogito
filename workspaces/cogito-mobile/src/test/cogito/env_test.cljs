@@ -24,6 +24,10 @@
         (register "Home")
         (is (= 1 @register-component-call-count))))))
 
+(deftest wrapper-has-display-name
+  (register "Home")
+  (is (= "HomeWrapper" (-> @wrapper-def .-displayName))))
+
 (deftest register-assigns-initial-state
   (register "Home")
   (let [getInitialState (-> @wrapper-def .-getInitialState)]
