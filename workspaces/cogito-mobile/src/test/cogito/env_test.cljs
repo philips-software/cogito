@@ -24,4 +24,9 @@
         (testing "it gets an id"
           (let [getInitialState (-> @wrapper-def .-getInitialState)
                 initialState (getInitialState)]
-            (is (= 1 (-> initialState .-id)))))))))
+            (is (= 1 (-> initialState .-id)))))
+
+        (testing "it gets the same key as the wrapped component"
+          (let [getInitialState (-> @wrapper-def .-getInitialState)
+                initialState (getInitialState)]
+            (is (= "Home" (-> initialState .-key)))))))))
