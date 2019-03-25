@@ -1,6 +1,5 @@
 (ns cogito.env
   (:require
-   ["react-native" :as rn]
    ["create-react-class" :as crc]
    [cogito.react-native-navigation-bridge :as rnn-bridge]
    [reagent.core :as r]))
