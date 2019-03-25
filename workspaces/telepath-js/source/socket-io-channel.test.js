@@ -52,7 +52,7 @@ describe('SocketIOChannel', () => {
     identifyTimesOut = true
     await expect(
       service.start({
-        channelID: '',
+        channelId: '',
         onNotification: () => {},
         onError: () => {},
         timeout: 100
@@ -68,7 +68,7 @@ describe('SocketIOChannel', () => {
   })
 
   describe('when started with an unconnected socket', () => {
-    const channelID = 'channelID'
+    const channelId = 'channelId'
     let notificationSpy
     let errorSpy
 
@@ -76,7 +76,7 @@ describe('SocketIOChannel', () => {
       notificationSpy = jest.fn()
       errorSpy = jest.fn()
       await service.start({
-        channelID,
+        channelId,
         onNotification: notificationSpy,
         onError: errorSpy
       })
@@ -92,7 +92,7 @@ describe('SocketIOChannel', () => {
       const onConnectCallback = socketStub.on.mock.calls[0][1]
       onConnectCallback()
       expect(socketStub.emit.mock.calls[0][0]).toBe('identify')
-      expect(socketStub.emit.mock.calls[0][1]).toBe(channelID)
+      expect(socketStub.emit.mock.calls[0][1]).toBe(channelId)
     })
 
     describe('when setup is finished', () => {
@@ -135,7 +135,7 @@ describe('SocketIOChannel', () => {
   })
 
   describe('when started with a connected socket', () => {
-    const channelID = 'channelID'
+    const channelId = 'channelId'
     let notificationSpy
     let errorSpy
 
@@ -144,7 +144,7 @@ describe('SocketIOChannel', () => {
       errorSpy = jest.fn()
       socketStub.connected = true
       await service.start({
-        channelID,
+        channelId,
         onNotification: notificationSpy,
         onError: errorSpy
       })
@@ -160,7 +160,7 @@ describe('SocketIOChannel', () => {
 
     it('identifies itself', () => {
       expect(socketStub.emit.mock.calls[0][0]).toBe('identify')
-      expect(socketStub.emit.mock.calls[0][1]).toBe(channelID)
+      expect(socketStub.emit.mock.calls[0][1]).toBe(channelId)
     })
   })
 })

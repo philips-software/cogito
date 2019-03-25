@@ -128,7 +128,7 @@ functionality for displaying QR codes, you can use a QR code component such as
 
 ```javascript
 const connectUrl = channel.createConnectUrl('https://example.com')
-// returns: https://example.com/telepath/connect#I=<channelID>&E=<symmetricKey>
+// returns: https://example.com/telepath/connect#I=<channelId>&E=<symmetricKey>
 ```
 
 ### Sending messages through the channel
