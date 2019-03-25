@@ -1,7 +1,10 @@
 (ns cogito.env-test
   (:require [cljs.test :refer (deftest is testing use-fixtures)]
             ["create-react-class" :as crc]
-            [cogito.env :refer (register register-component reset-globals)]))
+            [cogito.env :refer (register
+                                register-component
+                                reset-globals
+                                mounted-ref)]))
 
 (def wrapper-def (atom nil))
 
@@ -43,3 +46,18 @@
   (register "Home")
   (let [getInitialState (-> @wrapper-def .-getInitialState)]
     (is (= "Home" (-> (getInitialState) .-key)))))
+
+(deftest wrapper-stores-mounted-component
+  (register "Home")
+  (let [wrapper @wrapper-def]
+    (goog/object.set wrapper "state" #js {:id 1})
+    (.componentDidMount wrapper)
+    (is (= wrapper (get-in @mounted-ref ["Home", 1])))))
+
+(deftest wrapper-removes-unmounted-component
+  (register "Home")
+  (let [wrapper @wrapper-def]
+    (goog/object.set wrapper "state" #js {:id 1})
+    (.componentDidMount wrapper)
+    (.componentWillUnmount wrapper)
+    (is (= {} (get @mounted-ref "Home")))))
