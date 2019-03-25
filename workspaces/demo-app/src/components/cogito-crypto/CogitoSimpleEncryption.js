@@ -5,17 +5,19 @@ import {
   EncryptionGrid, PlainTextGridItem, CipherTextGridItem,
   EncryptGridItem, DecryptGridItem
 } from './EncryptionGrid'
+import { StatusSegmentRow } from 'components/ui/layout'
 import { EncryptionActions } from 'encryption-state'
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 
 const CogitoSimpleEncryption = ({ telepathChannel }) => (
   <WithStore selector={state => state.encryption}>
     {
-      ({ plainText, cipherText }, dispatch) => (
+      ({ plainText, cipherText, errorMessage }, dispatch) => (
         <CogitoSimpleEncryptionView
           telepathChannel={telepathChannel}
           plainText={plainText}
           cipherText={cipherText}
+          errorMessage={errorMessage}
           dispatch={dispatch}
         />
       )
@@ -23,7 +25,7 @@ const CogitoSimpleEncryption = ({ telepathChannel }) => (
   </WithStore>
 )
 
-const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, dispatch }) => (
+const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, dispatch, errorMessage }) => (
   <Centered>
     <EncryptionGrid>
       <PlainTextGridItem>
@@ -69,6 +71,7 @@ const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, di
         />
       </CipherTextGridItem>
     </EncryptionGrid>
+    <StatusSegmentRow>{errorMessage}</StatusSegmentRow>
   </Centered>
 )
 
