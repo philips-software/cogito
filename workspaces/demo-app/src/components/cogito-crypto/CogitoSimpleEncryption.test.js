@@ -28,4 +28,14 @@ describe('encryption', () => {
 
     expect(dispatch).toBeCalledWith(EncryptionActions.encrypt({ telepathChannel }))
   })
+
+  it('show an error message when encryption fails', () => {
+    const errorMessage = 'This is an error message'
+
+    const { getByText } = render(
+      <CogitoSimpleEncryptionView dispatch={dispatch} telepathChannel={telepathChannel} errorMessage={errorMessage} />
+    )
+
+    expect(getByText(errorMessage)).not.toBeNull()
+  })
 })
