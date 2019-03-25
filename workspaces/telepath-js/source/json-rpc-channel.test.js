@@ -63,6 +63,12 @@ describe('JSON RPC Channel', () => {
     expect(await jsonrpc.send(request)).toEqual(response)
   })
 
+  it('throws when sending fails', async () => {
+    const error = new Error('some error')
+    channel.send.mockRejectedValue(error)
+    await expect(jsonrpc.send(request)).rejects.toThrow(error.message)
+  })
+
   it('throws when response times out', async () => {
     channel.receive.mockResolvedValue(null)
     await expect(jsonrpc.send(request)).rejects.toThrow()

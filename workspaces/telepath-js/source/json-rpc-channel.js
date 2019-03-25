@@ -19,7 +19,7 @@ class JsonRpcChannel {
 
   async send (request) {
     checkJsonRpcStructure(request, false)
-    this.channel.send(JSON.stringify(request))
+    await this.channel.send(JSON.stringify(request))
     let response
     do {
       response = parseResponse(await this.channel.receive())
