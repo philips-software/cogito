@@ -15,7 +15,8 @@ const encryptionReducer = (state = initialState, action) => {
 
 const initialState = {
   plainText: '',
-  cipherText: ''
+  cipherText: '',
+  errorMessage: null
 }
 
 export { encryptionReducer }

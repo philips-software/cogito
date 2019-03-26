@@ -17,6 +17,10 @@ describe('encryption state reducer', () => {
     it('has empty cipherText', () => {
       expect(initialState.cipherText).toBe('')
     })
+
+    it('has a null errorMessage', () => {
+      expect(initialState.errorMessage).toBeNull()
+    })
   })
 
   it('updates the plain text', () => {
