@@ -73,13 +73,21 @@ const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, di
         />
       </CipherTextGridItem>
     </EncryptionGrid>
-    { errorMessage &&
-      <div data-testid='error-message'>
-        <StatusSegmentRow>{errorMessage}</StatusSegmentRow>
-      </div>
-    }
+    <ErrorMessage message={errorMessage} />
   </Centered>
 )
+
+const ErrorMessage = ({ message }) => {
+  if (!message) {
+    return null
+  }
+
+  return (
+    <div data-testid='error-message'>
+      <StatusSegmentRow>{message}</StatusSegmentRow>
+    </div>
+  )
+}
 
 const TextInput = ({ ...args }) => (
   <TextArea {...args} style={{ width: '13rem', height: '10rem' }} />
