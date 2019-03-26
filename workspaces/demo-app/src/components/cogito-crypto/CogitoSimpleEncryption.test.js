@@ -50,4 +50,12 @@ describe('encryption', () => {
 
     expect(getByText(errorMessage)).not.toBeNull()
   })
+
+  it('does not show error box when there is no error', () => {
+    const { queryByTestId } = render(
+      <CogitoSimpleEncryptionView errorMessage={null} />
+    )
+
+    expect(queryByTestId('error-message')).toBeNull()
+  })
 })
