@@ -16,7 +16,7 @@ function createServer () {
 
   const app = express()
   const httpServer = http.Server(app)
-  const io = socketIO(httpServer)
+  const io = socketIO(httpServer, { serveClient: false })
   ioSocketServer = new IOSocketServer(io)
   ioSocketServer.start()
 
