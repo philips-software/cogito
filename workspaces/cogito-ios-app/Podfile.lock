@@ -3,7 +3,7 @@ PODS:
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - Differentiator (3.1.0)
-  - FontAwesome.swift (1.5.0)
+  - FontAwesome.swift (1.6.0)
   - JWTDecode (2.2.0)
   - KeychainAccess (3.1.2)
   - Mockingjay (2.0.1):
@@ -20,19 +20,19 @@ PODS:
     - ReSwift (~> 4.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - ReSwift (4.0.1)
+  - ReSwift (4.1.1)
   - ReSwiftThunk (1.1.0):
     - ReSwift (~> 4.0)
   - RichString (2.2.0)
-  - RxAtomic (4.4.1)
-  - RxCocoa (4.4.1):
-    - RxSwift (~> 4.0)
+  - RxAtomic (4.4.2)
+  - RxCocoa (4.4.2):
+    - RxSwift (>= 4.4.2, ~> 4.4)
   - RxDataSources (3.1.0):
     - Differentiator (~> 3.0)
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxSwift (4.4.1):
-    - RxAtomic (~> 4.4)
+  - RxSwift (4.4.2):
+    - RxAtomic (>= 4.4.2, ~> 4.4)
   - SipHash (1.2.2)
   - Socket.IO-Client-Swift (13.4.0):
     - Starscream (~> 3.0.2)
@@ -108,14 +108,14 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Sodium:
-    :commit: b81064aaf8d477019e7dc36f200685a57cb660eb
+    :commit: adc2c117bedf186cb4cdcd64c5b93b7f1f55e185
     :git: https://github.com/jedisct1/swift-sodium.git
 
 SPEC CHECKSUMS:
   base64url: 92e81bb256f2070359a34fc93a7a7d4b9a9d689f
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
-  FontAwesome.swift: 55291c7a334ffacf9b62793d27c14014ec09a11b
+  FontAwesome.swift: 71a422e7b209ee940c7c21a5d13964ecf2897ca4
   JWTDecode: 85a405ab16d5473e99bd89ded1d535090ebd6a0e
   KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
   Mockingjay: 11a621880d2887f1775bdcf824341eb68f218450
@@ -123,13 +123,13 @@ SPEC CHECKSUMS:
   QRCodeReader.swift: 74d0378eb0c7807828552b49626bbc8307495aee
   Quick: f4f7f063c524394c73ed93ac70983c609805d481
   ReRxSwift: a01b6dc4e9febabfa8c74b97bf8b38bd2007af5b
-  ReSwift: f4012c613e13da7398827fe5aebdb938eaed40a3
+  ReSwift: d925be0033558f55bd73d92869961230dfe19d52
   ReSwiftThunk: 727c1549dbd2949472e1c72bec44b1008d7c4f92
   RichString: a23d0edf6b1a8b92efc6065fe7ba0ef6d5c3a63d
-  RxAtomic: f8d6adc1ccb87a767811269e4875887bc74dbf19
-  RxCocoa: 2f35a76bf8887872e28a1914112395b11b8e0e64
+  RxAtomic: d00e97c10db88c6f08540e0bf2752fc5a2404167
+  RxCocoa: 477990dc3b4c3ff55fb0ac77e1cc06244e0aaec8
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
-  RxSwift: 92fcf68dfef21f3e2ab1965363d9e7b3d787597e
+  RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   Socket.IO-Client-Swift: 2b2720f14c92ff1237ced09bc2f2da2022624fee
   Sodium: c9f8ec9fd5f1754f354f06dbbb32d44337f6661e
@@ -142,4 +142,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: abdcf02d8044d03a3811234e463cbaec011ecdca
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.6.1
