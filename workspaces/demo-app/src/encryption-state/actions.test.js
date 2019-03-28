@@ -1,4 +1,4 @@
-import { createNewKeyPairMock, getPublicKeyMock, encryptMock } from '@cogitojs/cogito-encryption'
+import { createNewKeyPairMock, getPublicKeyMock, encryptMock, decryptMock } from '@cogitojs/cogito-encryption'
 import { EncryptionActions } from './actions'
 
 describe('encrypt action', () => {
@@ -84,5 +84,24 @@ describe('encrypt action', () => {
 
       expect(dispatch).toBeCalledWith(EncryptionActions.encryptionError(error.message))
     })
+  })
+})
+
+describe('decrypt action', () => {
+  const tag = 'Some tag'
+  const cipherText = 'Some plain text to be decrypted'
+
+  let dispatch, getState, action
+
+  beforeEach(() => {
+    dispatch = jest.fn()
+    getState = () => ({ encryption: { cipherText, keyTag: tag } })
+    action = EncryptionActions.decrypt({ telepathChannel: null })
+  })
+
+  it('decrypts the cipher text', async () => {
+    await action(dispatch, getState)
+
+    expect(decryptMock).toBeCalledWith({ tag, encryptionData: cipherText })
   })
 })
