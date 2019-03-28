@@ -113,4 +113,15 @@ describe('decrypt action', () => {
 
     expect(dispatch).toBeCalledWith(EncryptionActions.setPlainText(plainText))
   })
+
+  describe('handles errors', () => {
+    it('when decrypting', async () => {
+      const error = new Error('Some error message')
+      decryptMock.mockRejectedValue(error)
+
+      await action(dispatch, getState)
+
+      expect(dispatch).toBeCalledWith(EncryptionActions.encryptionError(error.message))
+    })
+  })
 })
