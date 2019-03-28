@@ -5,11 +5,10 @@ import { CogitoSimpleEncryptionView } from './CogitoSimpleEncryption'
 
 describe('CogitoSimpleEncryptionView', () => {
   const telepathChannel = 'Some telepath Channel'
-  let original, dispatch
+  let dispatch
 
   beforeEach(() => {
     dispatch = jest.fn()
-    original = EncryptionActions.encrypt
   })
 
   it('puts the plain text and cipher text in correct fields', () => {
@@ -24,8 +23,29 @@ describe('CogitoSimpleEncryptionView', () => {
     expect(queryByTestId('cipher-text').value).toBe(cipherText)
   })
 
+  it('does not show error box when there is no error', () => {
+    const { queryByTestId } = render(
+      <CogitoSimpleEncryptionView errorMessage={null} />
+    )
+
+    expect(queryByTestId('error-message')).toBeNull()
+  })
+
+  it('shows an error message', () => {
+    const errorMessage = 'This is an error message'
+
+    const { getByText } = render(
+      <CogitoSimpleEncryptionView dispatch={dispatch} telepathChannel={telepathChannel} errorMessage={errorMessage} />
+    )
+
+    expect(getByText(errorMessage)).not.toBeNull()
+  })
+
   describe('encryption', () => {
+    let original
+
     beforeEach(() => {
+      original = EncryptionActions.encrypt
       EncryptionActions.encrypt = jest.fn(
         ({ telepathChannel }) => ({ type: 'ENCRYPT', telepathChannel })
       )
@@ -43,31 +63,20 @@ describe('CogitoSimpleEncryptionView', () => {
 
       expect(dispatch).toBeCalledWith(EncryptionActions.encrypt({ telepathChannel }))
     })
-
-    it('show an error message when encryption fails', () => {
-      const errorMessage = 'This is an error message'
-
-      const { getByText } = render(
-        <CogitoSimpleEncryptionView dispatch={dispatch} telepathChannel={telepathChannel} errorMessage={errorMessage} />
-      )
-
-      expect(getByText(errorMessage)).not.toBeNull()
-    })
-
-    it('does not show error box when there is no error', () => {
-      const { queryByTestId } = render(
-        <CogitoSimpleEncryptionView errorMessage={null} />
-      )
-
-      expect(queryByTestId('error-message')).toBeNull()
-    })
   })
 
   describe('decryption', () => {
+    let original
+
     beforeEach(() => {
+      original = EncryptionActions.decrypt
       EncryptionActions.decrypt = jest.fn(
         ({ telepathChannel }) => ({ type: 'DECRYPT', telepathChannel })
       )
+    })
+
+    afterEach(() => {
+      EncryptionActions.decrypt = original
     })
 
     it('calls the decrypt action', () => {
