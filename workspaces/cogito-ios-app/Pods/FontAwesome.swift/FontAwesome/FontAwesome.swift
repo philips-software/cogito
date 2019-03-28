@@ -51,11 +51,11 @@ public enum FontAwesomeStyle: String {
     func fontName() -> String {
         switch self {
         case .solid:
-            return FontAwesomeConfig.usesProFonts ? "FontAwesome5ProSolid" : "FontAwesome5Free-Solid"
+            return FontAwesomeConfig.usesProFonts ? "FontAwesome5Pro-Solid" : "FontAwesome5Free-Solid"
         case .light:
-            return FontAwesomeConfig.usesProFonts ? "FontAwesome5ProLight" : "FontAwesome5Free-Regular"
+            return FontAwesomeConfig.usesProFonts ? "FontAwesome5Pro-Light" : "FontAwesome5Free-Regular"
         case .regular:
-            return FontAwesomeConfig.usesProFonts ? "FontAwesome5ProRegular" : "FontAwesome5Free-Regular"
+            return FontAwesomeConfig.usesProFonts ? "FontAwesome5Pro-Regular" : "FontAwesome5Free-Regular"
         case .brands:
             return "FontAwesome5Brands-Regular"
         }
@@ -106,6 +106,25 @@ public extension UIFont {
         }
 
         FontLoader.loadFont(style.fontFilename())
+    }
+    
+    /// Get a UIFont object of FontAwesome for a given text style
+    ///
+    /// - parameter forTextStyle: The preferred text style
+    /// - parameter style: FontAwesome font style
+    /// - returns: A UIFont object of FontAwesome
+    public class func fontAwesome(forTextStyle textStyle: UIFont.TextStyle, style: FontAwesomeStyle) -> UIFont {
+        let userFont = UIFontDescriptor.preferredFontDescriptor(withTextStyle: textStyle)
+        let pointSize = userFont.pointSize
+        loadFontAwesome(ofStyle: style)
+        let awesomeFont = UIFont(name: style.fontName(), size: pointSize)!
+        
+        if #available(iOS 11.0, *), #available(watchOSApplicationExtension 4.0, *), #available(tvOS 11.0, *) {
+            return UIFontMetrics.default.scaledFont(for: awesomeFont)
+        } else {
+            let scale = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .body).pointSize / 17
+            return awesomeFont.withSize(scale * awesomeFont.pointSize)
+        }
     }
 }
 
