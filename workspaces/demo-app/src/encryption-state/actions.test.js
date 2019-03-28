@@ -104,4 +104,13 @@ describe('decrypt action', () => {
 
     expect(decryptMock).toBeCalledWith({ tag, encryptionData: cipherText })
   })
+
+  it('sets the plain text', async () => {
+    const plainText = 'Some plain text'
+    decryptMock.mockResolvedValue(plainText)
+
+    await action(dispatch, getState)
+
+    expect(dispatch).toBeCalledWith(EncryptionActions.setPlainText(plainText))
+  })
 })
