@@ -44,6 +44,7 @@ class EncryptionActions {
 
   static decrypt = ({ telepathChannel }) => {
     const encryption = new CogitoEncryption({ telepathChannel })
+
     return async (dispatch, getState) => {
       const cipherText = getState().encryption.cipherText
       const tag = getState().encryption.keyTag
