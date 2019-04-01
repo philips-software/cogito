@@ -62,6 +62,20 @@ describe('encryption state reducer', () => {
     expect(encryptionReducer(state, action).pending).toBe(true)
   })
 
+  it('signals that encryption is completed', () => {
+    const state = deepFreeze({ pending: true })
+    const action = EncryptionActions.encryptCompleted()
+
+    expect(encryptionReducer(state, action).pending).toBe(false)
+  })
+
+  it('signals that decryption is completed', () => {
+    const state = deepFreeze({ pending: true })
+    const action = EncryptionActions.decryptCompleted()
+
+    expect(encryptionReducer(state, action).pending).toBe(false)
+  })
+
   it('clears the error message when encryption pending', () => {
     const state = deepFreeze({ errorMessage: 'Some error message' })
     const action = EncryptionActions.encryptPending()

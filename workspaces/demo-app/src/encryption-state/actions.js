@@ -16,17 +16,25 @@ class EncryptionActions {
     tag
   })
 
-  static encryptionError = (message) => ({
-    type: 'ENCRYPTION_ERROR',
-    message
-  })
-
   static encryptPending = () => ({
     type: 'ENCRYPTION_PENDING'
   })
 
   static decryptPending = () => ({
     type: 'DECRYPTION_PENDING'
+  })
+
+  static encryptCompleted = () => ({
+    type: 'ENCRYPTION_COMPLETED'
+  })
+
+  static decryptCompleted = () => ({
+    type: 'DECRYPTION_COMPLETED'
+  })
+
+  static encryptionError = (message) => ({
+    type: 'ENCRYPTION_ERROR',
+    message
   })
 
   static encrypt = ({ telepathChannel }) => {
