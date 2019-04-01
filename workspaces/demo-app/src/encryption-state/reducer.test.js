@@ -94,4 +94,10 @@ describe('encryption state reducer', () => {
     const action = EncryptionActions.encryptionError(errorMessage)
     expect(encryptionReducer(state, action).errorMessage).toBe(errorMessage)
   })
+
+  it('signals completion upon error', () => {
+    const state = deepFreeze({ pending: true })
+    const action = EncryptionActions.encryptionError('')
+    expect(encryptionReducer(state, action).pending).toBe(false)
+  })
 })
