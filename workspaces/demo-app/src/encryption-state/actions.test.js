@@ -20,6 +20,12 @@ describe('encrypt action', () => {
     expect(dispatch).toBeCalledWith(EncryptionActions.encryptPending())
   })
 
+  it('signals that encryption is completed', async () => {
+    await action(dispatch, getState)
+
+    expect(dispatch).toBeCalledWith(EncryptionActions.encryptCompleted())
+  })
+
   it('creates a new key pair', async () => {
     await action(dispatch, getState)
 
@@ -109,6 +115,12 @@ describe('decrypt action', () => {
     await action(dispatch, getState)
 
     expect(dispatch).toBeCalledWith(EncryptionActions.decryptPending())
+  })
+
+  it('signals that encryption is completed', async () => {
+    await action(dispatch, getState)
+
+    expect(dispatch).toBeCalledWith(EncryptionActions.decryptCompleted())
   })
 
   it('decrypts the cipher text', async () => {
