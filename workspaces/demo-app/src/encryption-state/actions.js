@@ -52,6 +52,8 @@ class EncryptionActions {
     const encryption = new CogitoEncryption({ telepathChannel })
 
     return async (dispatch, getState) => {
+      dispatch(EncryptionActions.encryptPending())
+
       try {
         const cipherText = getState().encryption.cipherText
         const tag = getState().encryption.keyTag

@@ -105,6 +105,12 @@ describe('decrypt action', () => {
     action = EncryptionActions.decrypt({ telepathChannel: null })
   })
 
+  it('signals that decryption is pending', async () => {
+    await action(dispatch, getState)
+
+    expect(dispatch).toBeCalledWith(EncryptionActions.encryptPending())
+  })
+
   it('decrypts the cipher text', async () => {
     await action(dispatch, getState)
 
