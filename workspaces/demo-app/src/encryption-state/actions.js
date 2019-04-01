@@ -25,6 +25,10 @@ class EncryptionActions {
     type: 'ENCRYPTION_PENDING'
   })
 
+  static decryptPending = () => ({
+    type: 'DECRYPTION_PENDING'
+  })
+
   static encrypt = ({ telepathChannel }) => {
     const cogitoEncryption = new CogitoEncryption({ telepathChannel })
     const cogitoKeyProvider = new CogitoKeyProvider({ telepathChannel })
@@ -52,7 +56,7 @@ class EncryptionActions {
     const encryption = new CogitoEncryption({ telepathChannel })
 
     return async (dispatch, getState) => {
-      dispatch(EncryptionActions.encryptPending())
+      dispatch(EncryptionActions.decryptPending())
 
       try {
         const cipherText = getState().encryption.cipherText
