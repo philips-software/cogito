@@ -28,28 +28,7 @@ const CogitoSimpleEncryption = ({ telepathChannel }) => (
 const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, dispatch, errorMessage }) => (
   <Centered>
     <EncryptionGrid>
-      <PlainTextGridItem>
-        <TextInput
-          data-testid='plain-text'
-          placeholder='Enter some text'
-          value={plainText}
-          onChange={(event) => dispatch(
-            EncryptionActions.setPlainText(event.target.value)
-          )}
-        />
-      </PlainTextGridItem>
-      <EncryptGridItem>
-        <Button
-          secondary color='black'
-          onClick={() => dispatch(
-            EncryptionActions.encrypt({
-              telepathChannel: telepathChannel
-            })
-          )}
-        >
-          ―Encrypt→
-        </Button>
-      </EncryptGridItem>
+      <EncryptionView plainText={plainText} telepathChannel={telepathChannel} dispatch={dispatch} />
       <DecryptGridItem>
         <Button
           secondary color='black'
@@ -75,6 +54,33 @@ const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, di
     </EncryptionGrid>
     <ErrorMessage message={errorMessage} />
   </Centered>
+)
+
+const EncryptionView = ({ plainText, telepathChannel, dispatch }) => (
+  <>
+    <PlainTextGridItem>
+      <TextInput
+        data-testid='plain-text'
+        placeholder='Enter some text'
+        value={plainText}
+        onChange={(event) => dispatch(
+          EncryptionActions.setPlainText(event.target.value)
+        )}
+      />
+    </PlainTextGridItem>
+    <EncryptGridItem>
+      <Button
+        secondary color='black'
+        onClick={() => dispatch(
+          EncryptionActions.encrypt({
+            telepathChannel: telepathChannel
+          })
+        )}
+      >
+        ―Encrypt→
+      </Button>
+    </EncryptGridItem>
+  </>
 )
 
 const ErrorMessage = ({ message }) => {
