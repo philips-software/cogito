@@ -37,7 +37,8 @@
     "lint": "yarn standard && (cd ./workspaces/demo-app-contracts && yarn lint)",
     "lint-fix": "yarn standard --fix --verbose",
     "build": "yarn lerna run --scope @cogitojs/** build",
-    "build:homepage": "yarn lerna run build --scope homepage"
+    "build:homepage": "yarn lerna run build --scope homepage",
+    "deploy": "yarn lerna run deploy --scope telepath-queuing-service"
   },
   "standard": {
     "parser": "babel-eslint",
