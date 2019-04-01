@@ -54,6 +54,7 @@ class EncryptionActions {
 
         dispatch(EncryptionActions.setPlainText(''))
         dispatch(EncryptionActions.setCipherText(cipherText))
+        dispatch(EncryptionActions.encryptCompleted())
       } catch (error) {
         dispatch(EncryptionActions.encryptionError(error.message))
       }
@@ -71,6 +72,7 @@ class EncryptionActions {
         const tag = getState().encryption.keyTag
         const plainText = await encryption.decrypt({ tag, encryptionData: cipherText })
         dispatch(EncryptionActions.setPlainText(plainText))
+        dispatch(EncryptionActions.decryptCompleted())
       } catch (error) {
         dispatch(EncryptionActions.encryptionError(error.message))
       }
