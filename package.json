@@ -1,64 +1,64 @@
 {
-    "private": true,
-    "license": "MIT",
-    "devDependencies": {
-        "@babel/cli": "^7.0.0",
-        "@babel/core": "^7.0.0",
-        "@babel/plugin-proposal-class-properties": "^7.0.0",
-        "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-        "@babel/preset-env": "^7.0.0",
-        "@babel/preset-react": "^7.0.0",
-        "babel-core": "^7.0.0-0",
-        "babel-eslint": "^10.0.1",
-        "babel-jest": "^23.6.0",
-        "eslint": "^5.9.0",
-        "gzip-size": "^5.0.0",
-        "jest": "^23.6.0",
-        "lerna": "^3.4.3",
-        "libsodium-wrappers": "^0.7.2",
-        "pretty-bytes": "^5.1.0",
-        "react": "^16.6.3",
-        "react-dom": "^16.6.3",
-        "prop-types": "^15.6.2",
-        "regenerator-runtime": "^0.11.1",
-        "standard": "^12.0.1",
-        "truffle-contract": "^3.0.5",
-        "web3": "^1.0.0-beta.36"
-    },
-    "workspaces": {
-        "packages": [
-            "workspaces/*"
-        ]
-    },
-    "scripts": {
-        "setup:dev": "yarn && (cd workspaces/demo-app-contracts && yarn compile) && yarn build",
-        "test": "yarn lint && yarn jest",
-        "test:watch": "yarn jest --watch",
-        "lint": "yarn standard && (cd ./workspaces/demo-app-contracts && yarn lint)",
-        "lint-fix": "yarn standard --fix --verbose",
-        "build": "yarn lerna run --scope @cogitojs/** build",
-        "build:homepage": "yarn lerna run build --scope homepage"
-    },
-    "standard": {
-        "parser": "babel-eslint",
-        "ignore": [
-            "workspaces/homepage/public/**",
-            "**/node_modules/**",
-            "**/umd/**",
-            "**/es/**",
-            "**/lib/**",
-            "**/build/**"
-        ],
-        "envs": [
-            "es6",
-            "browser",
-            "jest"
-        ],
-        "globals": [
-            "artifacts",
-            "contract",
-            "assert",
-            "context"
-        ]
-    }
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "eslint": "^5.9.0",
+    "gzip-size": "^5.0.0",
+    "jest": "^23.6.0",
+    "lerna": "^3.4.3",
+    "libsodium-wrappers": "^0.7.2",
+    "pretty-bytes": "^5.1.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "prop-types": "^15.6.2",
+    "regenerator-runtime": "^0.11.1",
+    "standard": "^12.0.1",
+    "truffle-contract": "^3.0.5",
+    "web3": "^1.0.0-beta.36"
+  },
+  "workspaces": {
+    "packages": [
+      "workspaces/*"
+    ]
+  },
+  "scripts": {
+    "setup:dev": "yarn && (cd workspaces/demo-app-contracts && yarn compile) && yarn build",
+    "test": "yarn lint && yarn jest",
+    "test:watch": "yarn jest --watch",
+    "lint": "yarn standard && (cd ./workspaces/demo-app-contracts && yarn lint)",
+    "lint-fix": "yarn standard --fix --verbose",
+    "build": "yarn lerna run --scope @cogitojs/** build",
+    "build:homepage": "yarn lerna run build --scope homepage"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "ignore": [
+      "workspaces/homepage/public/**",
+      "**/node_modules/**",
+      "**/umd/**",
+      "**/es/**",
+      "**/lib/**",
+      "**/build/**"
+    ],
+    "envs": [
+      "es6",
+      "browser",
+      "jest"
+    ],
+    "globals": [
+      "artifacts",
+      "contract",
+      "assert",
+      "context"
+    ]
+  }
 }
