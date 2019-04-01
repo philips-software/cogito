@@ -44,11 +44,16 @@ describe('encryption state reducer', () => {
     expect(encryptionReducer(state, action).keyTag).toBe(newKeyTag)
   })
 
+  it('clears the error message', () => {
+    const state = deepFreeze({ errorMessage: 'Some error message' })
+    const action = EncryptionActions.encryptPending()
+    expect(encryptionReducer(state, action).errorMessage).toBeNull()
+  })
+
   it('updates the error message', () => {
     const errorMessage = 'Some error message'
     const state = deepFreeze({ errorMessage: null })
     const action = EncryptionActions.encryptionError(errorMessage)
-
     expect(encryptionReducer(state, action).errorMessage).toBe(errorMessage)
   })
 })
