@@ -59,3 +59,8 @@ after_success:
   - ./cc-test-reporter sum-coverage --parts 4 coverage/codeclimate.*.json
   # Upload test coverage to Code Climate
   - ./cc-test-reporter upload-coverage
+deploy:
+  provider: script
+  script: yarn deploy
+  on:
+    branch: master
