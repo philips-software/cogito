@@ -8,7 +8,7 @@ const encryptionReducer = (state = initialState, action) => {
       return { ...state, keyTag: action.tag }
     case 'ENCRYPTION_PENDING':
     case 'DECRYPTION_PENDING':
-      return { ...state, errorMessage: null }
+      return { ...state, errorMessage: null, pending: true }
     case 'ENCRYPTION_ERROR':
       return { ...state, errorMessage: action.message }
     default:
