@@ -21,11 +21,17 @@ class EncryptionActions {
     message
   })
 
+  static encryptPending = () => ({
+    type: 'ENCRYPTION_PENDING'
+  })
+
   static encrypt = ({ telepathChannel }) => {
     const cogitoEncryption = new CogitoEncryption({ telepathChannel })
     const cogitoKeyProvider = new CogitoKeyProvider({ telepathChannel })
 
     return async (dispatch, getState) => {
+      dispatch(EncryptionActions.encryptPending())
+
       try {
         const plainText = getState().encryption.plainText
         const tag = await cogitoKeyProvider.createNewKeyPair()
