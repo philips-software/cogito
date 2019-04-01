@@ -19,6 +19,7 @@ const encryptionReducer = (state = initialState, action) => {
 const initialState = {
   plainText: '',
   cipherText: '',
+  pending: false,
   errorMessage: null
 }
 

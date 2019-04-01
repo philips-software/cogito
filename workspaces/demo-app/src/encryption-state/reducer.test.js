@@ -18,6 +18,10 @@ describe('encryption state reducer', () => {
       expect(initialState.cipherText).toBe('')
     })
 
+    it('is not pending', () => {
+      expect(initialState.pending).toBe(false)
+    })
+
     it('has a null errorMessage', () => {
       expect(initialState.errorMessage).toBeNull()
     })
