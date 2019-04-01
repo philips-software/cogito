@@ -14,6 +14,12 @@ describe('encrypt action', () => {
     action = EncryptionActions.encrypt({ telepathChannel: null })
   })
 
+  it('signals that encryption is pending', async () => {
+    await action(dispatch, getState)
+
+    expect(dispatch).toBeCalledWith(EncryptionActions.encryptPending())
+  })
+
   it('creates a new key pair', async () => {
     await action(dispatch, getState)
 
