@@ -108,7 +108,7 @@ describe('decrypt action', () => {
   it('signals that decryption is pending', async () => {
     await action(dispatch, getState)
 
-    expect(dispatch).toBeCalledWith(EncryptionActions.encryptPending())
+    expect(dispatch).toBeCalledWith(EncryptionActions.decryptPending())
   })
 
   it('decrypts the cipher text', async () => {
