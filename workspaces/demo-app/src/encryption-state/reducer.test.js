@@ -44,6 +44,20 @@ describe('encryption state reducer', () => {
     expect(encryptionReducer(state, action).keyTag).toBe(newKeyTag)
   })
 
+  it('signals that encryption is pending', () => {
+    const state = deepFreeze({ pending: false })
+    const action = EncryptionActions.encryptPending()
+
+    expect(encryptionReducer(state, action).pending).toBe(true)
+  })
+
+  it('signals that decryption is pending', () => {
+    const state = deepFreeze({ pending: false })
+    const action = EncryptionActions.decryptPending()
+
+    expect(encryptionReducer(state, action).pending).toBe(true)
+  })
+
   it('clears the error message when encryption pending', () => {
     const state = deepFreeze({ errorMessage: 'Some error message' })
     const action = EncryptionActions.encryptPending()
