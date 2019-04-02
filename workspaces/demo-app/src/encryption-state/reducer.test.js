@@ -41,61 +41,63 @@ describe('encryption state reducer', () => {
     expect(encryptionReducer(state, action).keyTag).toBe(newKeyTag)
   })
 
-  it('signals that encryption is pending', () => {
-    const state = deepFreeze({ pending: false })
-    const action = EncryptionActions.encryptPending()
-
-    expect(encryptionReducer(state, action).pending).toBe(true)
-  })
-
-  it('signals that decryption is pending', () => {
-    const state = deepFreeze({ pending: false })
-    const action = EncryptionActions.decryptPending()
-
-    expect(encryptionReducer(state, action).pending).toBe(true)
-  })
-
-  it('signals that encryption is completed', () => {
-    const state = deepFreeze({ pending: true })
+  describe('encryption', () => {
     const cipherText = 'Some cipher text'
-    const action = EncryptionActions.encryptCompleted({ cipherText })
+    let encryptPendingAction, encryptCompletedAction
 
-    expect(encryptionReducer(state, action).pending).toBe(false)
+    beforeEach(() => {
+      encryptCompletedAction = EncryptionActions.encryptCompleted({ cipherText })
+      encryptPendingAction = EncryptionActions.encryptPending()
+    })
+
+    it('signals that encryption is pending', () => {
+      const state = deepFreeze({ pending: false })
+      expect(encryptionReducer(state, encryptPendingAction).pending).toBe(true)
+    })
+
+    it('clears the error message when encryption pending', () => {
+      const state = deepFreeze({ errorMessage: 'Some error message' })
+      expect(encryptionReducer(state, encryptPendingAction).errorMessage).toBeNull()
+    })
+
+    it('signals that encryption is completed', () => {
+      const state = deepFreeze({ pending: true })
+      expect(encryptionReducer(state, encryptCompletedAction).pending).toBe(false)
+    })
+
+    it('clears the plain text when encryption is completed', () => {
+      const state = deepFreeze({ pending: true, plainText: 'Some plain text' })
+      expect(encryptionReducer(state, encryptCompletedAction).plainText).toBe('')
+    })
+
+    it('sets the cipher text when encryption is completed', () => {
+      const state = deepFreeze({ pending: true, cipherText: '' })
+      expect(encryptionReducer(state, encryptCompletedAction).cipherText).toBe(cipherText)
+    })
   })
 
-  it('clears the plain text when encryption is completed', () => {
-    const state = deepFreeze({ pending: true, plainText: 'Some plain text' })
-    const cipherText = 'Some cipher text'
-    const action = EncryptionActions.encryptCompleted({ cipherText })
+  describe('decryption', () => {
+    let decryptCompletedAction, decryptPendingAction
 
-    expect(encryptionReducer(state, action).plainText).toBe('')
-  })
+    beforeEach(() => {
+      decryptCompletedAction = EncryptionActions.decryptCompleted()
+      decryptPendingAction = EncryptionActions.decryptPending()
+    })
 
-  it('sets the cipher text when encryption is completed', () => {
-    const state = deepFreeze({ pending: true, cipherText: '' })
-    const cipherText = 'Some cipher text'
-    const action = EncryptionActions.encryptCompleted({ cipherText })
+    it('signals that decryption is pending', () => {
+      const state = deepFreeze({ pending: false })
+      expect(encryptionReducer(state, decryptPendingAction).pending).toBe(true)
+    })
 
-    expect(encryptionReducer(state, action).cipherText).toBe(cipherText)
-  })
+    it('clears the error message when decryption pending', () => {
+      const state = deepFreeze({ errorMessage: 'Some error message' })
+      expect(encryptionReducer(state, decryptPendingAction).errorMessage).toBeNull()
+    })
 
-  it('signals that decryption is completed', () => {
-    const state = deepFreeze({ pending: true })
-    const action = EncryptionActions.decryptCompleted()
-
-    expect(encryptionReducer(state, action).pending).toBe(false)
-  })
-
-  it('clears the error message when encryption pending', () => {
-    const state = deepFreeze({ errorMessage: 'Some error message' })
-    const action = EncryptionActions.encryptPending()
-    expect(encryptionReducer(state, action).errorMessage).toBeNull()
-  })
-
-  it('clears the error message when decryption pending', () => {
-    const state = deepFreeze({ errorMessage: 'Some error message' })
-    const action = EncryptionActions.decryptPending()
-    expect(encryptionReducer(state, action).errorMessage).toBeNull()
+    it('signals that decryption is completed', () => {
+      const state = deepFreeze({ pending: true })
+      expect(encryptionReducer(state, decryptCompletedAction).pending).toBe(false)
+    })
   })
 
   it('updates the error message', () => {
