@@ -54,7 +54,6 @@ class EncryptionActions {
         const cipherText = await cogitoEncryption.encrypt({ jsonWebKey, plainText })
 
         dispatch(EncryptionActions.setPlainText(''))
-        dispatch(EncryptionActions.setCipherText(cipherText))
         dispatch(EncryptionActions.encryptCompleted({ cipherText }))
       } catch (error) {
         dispatch(EncryptionActions.encryptionError(error.message))
