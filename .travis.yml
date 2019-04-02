@@ -18,10 +18,8 @@ before_install:
   - gem update --system
   - gem install bundler
   # Use recent NodeJS
-  # Temporarily use 11.10.1, see links below for more info
-  # https://github.com/facebook/jest/issues/8069 and https://stackoverflow.com/a/55060832
-  - nvm install 11.10.1
-  - nvm use 11.10.1
+  - nvm install 11
+  - nvm use 11
   # Use recent Yarn
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0
   - export PATH="$HOME/.yarn/bin:$PATH"
