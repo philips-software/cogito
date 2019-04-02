@@ -103,5 +103,14 @@ describe('CogitoSimpleEncryptionView', () => {
 
       expect(dispatch).toBeCalledWith(EncryptionActions.decrypt({ telepathChannel }))
     })
+
+    it('disables the cipher text field when pending', () => {
+      const cipherText = 'Some cipher text'
+      const { getByText } = render(
+        <CogitoSimpleEncryptionView cipherText={cipherText} pending />
+      )
+
+      expect(getByText(cipherText).disabled).toBe(true)
+    })
   })
 })
