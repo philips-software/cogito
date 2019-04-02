@@ -43,7 +43,7 @@
     "develop": "gatsby develop",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "netlify deploy --prod --dir=public"
+    "deploy": "yarn build && now --scope software-concepts --token $NOW_TOKEN --target production"
   },
   "devDependencies": {
     "gatsby-cli": "^2.0.0",

@@ -38,7 +38,7 @@
     "lint-fix": "yarn standard --fix --verbose",
     "build": "yarn lerna run --scope @cogitojs/** build",
     "build:homepage": "yarn lerna run build --scope homepage",
-    "deploy": "yarn lerna run deploy --scope telepath-queuing-service"
+    "deploy": "yarn lerna run deploy --scope telepath-queuing-service --scope homepage"
   },
   "standard": {
     "parser": "babel-eslint",
