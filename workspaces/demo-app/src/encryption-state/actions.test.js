@@ -20,15 +20,6 @@ describe('encrypt action', () => {
     expect(dispatch).toBeCalledWith(EncryptionActions.encryptPending())
   })
 
-  it('signals that encryption is completed', async () => {
-    const cipherText = 'Some ciphered text'
-    encryptMock.mockResolvedValue(cipherText)
-
-    await action(dispatch, getState)
-
-    expect(dispatch).toBeCalledWith(EncryptionActions.encryptCompleted({ cipherText }))
-  })
-
   it('creates a new key pair', async () => {
     await action(dispatch, getState)
 
@@ -56,6 +47,15 @@ describe('encrypt action', () => {
     await action(dispatch, getState)
 
     expect(dispatch).toBeCalledWith(EncryptionActions.setKeyTag(tag))
+  })
+
+  it('signals that encryption is completed', async () => {
+    const cipherText = 'Some ciphered text'
+    encryptMock.mockResolvedValue(cipherText)
+
+    await action(dispatch, getState)
+
+    expect(dispatch).toBeCalledWith(EncryptionActions.encryptCompleted({ cipherText }))
   })
 
   describe('handles errors', () => {
@@ -89,7 +89,8 @@ describe('encrypt action', () => {
 
 describe('decrypt action', () => {
   const tag = 'Some tag'
-  const cipherText = 'Some plain text to be decrypted'
+  const cipherText = 'Some cipher text to be decrypted'
+  const plainText = 'Some plain text'
 
   let dispatch, getState, action
 
@@ -105,25 +106,18 @@ describe('decrypt action', () => {
     expect(dispatch).toBeCalledWith(EncryptionActions.decryptPending())
   })
 
-  it('signals that encryption is completed', async () => {
-    await action(dispatch, getState)
-
-    expect(dispatch).toBeCalledWith(EncryptionActions.decryptCompleted())
-  })
-
   it('decrypts the cipher text', async () => {
     await action(dispatch, getState)
 
     expect(decryptMock).toBeCalledWith({ tag, encryptionData: cipherText })
   })
 
-  it('sets the plain text', async () => {
-    const plainText = 'Some plain text'
+  it('signals that decryption is completed', async () => {
     decryptMock.mockResolvedValue(plainText)
 
     await action(dispatch, getState)
 
-    expect(dispatch).toBeCalledWith(EncryptionActions.setPlainText(plainText))
+    expect(dispatch).toBeCalledWith(EncryptionActions.decryptCompleted({ plainText }))
   })
 
   describe('handles errors', () => {

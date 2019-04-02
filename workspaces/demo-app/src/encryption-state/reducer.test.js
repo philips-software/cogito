@@ -77,10 +77,11 @@ describe('encryption state reducer', () => {
   })
 
   describe('decryption', () => {
+    const plainText = 'Some plain text'
     let decryptCompletedAction, decryptPendingAction
 
     beforeEach(() => {
-      decryptCompletedAction = EncryptionActions.decryptCompleted()
+      decryptCompletedAction = EncryptionActions.decryptCompleted({ plainText })
       decryptPendingAction = EncryptionActions.decryptPending()
     })
 
@@ -102,6 +103,11 @@ describe('encryption state reducer', () => {
     it('clears the cipher text when decryption is completed', () => {
       const state = deepFreeze({ cipherText: 'Some cipher text' })
       expect(encryptionReducer(state, decryptCompletedAction).cipherText).toBe('')
+    })
+
+    it('sets the plain text when decryption is completed', () => {
+      const state = deepFreeze({ plainText: '' })
+      expect(encryptionReducer(state, decryptCompletedAction).plainText).toBe(plainText)
     })
   })
 
