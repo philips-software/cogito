@@ -58,12 +58,6 @@ describe('encrypt action', () => {
     expect(dispatch).toBeCalledWith(EncryptionActions.setKeyTag(tag))
   })
 
-  it('clears the plain text', async () => {
-    await action(dispatch, getState)
-
-    expect(dispatch).toBeCalledWith(EncryptionActions.setPlainText(''))
-  })
-
   describe('handles errors', () => {
     const error = new Error('Some error message')
 
