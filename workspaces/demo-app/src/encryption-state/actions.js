@@ -24,8 +24,9 @@ class EncryptionActions {
     cipherText
   })
 
-  static decryptCompleted = () => ({
-    type: 'DECRYPTION_COMPLETED'
+  static decryptCompleted = ({ plainText }) => ({
+    type: 'DECRYPTION_COMPLETED',
+    plainText
   })
 
   static encryptionError = (message) => ({
@@ -65,8 +66,8 @@ class EncryptionActions {
         const cipherText = getState().encryption.cipherText
         const tag = getState().encryption.keyTag
         const plainText = await encryption.decrypt({ tag, encryptionData: cipherText })
-        dispatch(EncryptionActions.setPlainText(plainText))
-        dispatch(EncryptionActions.decryptCompleted())
+
+        dispatch(EncryptionActions.decryptCompleted({ plainText }))
       } catch (error) {
         dispatch(EncryptionActions.encryptionError(error.message))
       }
