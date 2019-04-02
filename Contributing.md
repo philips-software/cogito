@@ -13,7 +13,6 @@ local environment:
 
 ```bash
 » yarn setup:dev
-» yarn build:homepage
 » yarn test
 » (cd workspaces/demo-app && yarn start:all)
 » (cd workspaces/cogito-ios-app-distribution && yarn start)
@@ -29,10 +28,6 @@ This installs dependencies, compiles contracts, and build all package workspaces
 Our monorepo contains a number of packages. They have to be build before client
 apps like `demo-app` and `cogito-ios-app-distribution` (both React) and
 `homepage` (Gatsby-based, so also React) can use them.
-
-### yarn build:homepage
-
-You need to do this every time you want to (re)deploy the homepage (we currently use netlify for that).
 
 ### Run tests
 
@@ -80,7 +75,7 @@ source code to use it for your own version of the iOS Cogito App if you like.
 
 ### Gatsby-based homepage
 
-This is our landing page. It uses [Confluenza](https://confluenza.now.sh), which is based on [Gatsby](https://www.gatsbyjs.org/). We currently deploy it with [Netlify](https://www.netlify.com/):
+This is our landing page. It uses [Confluenza](https://confluenza.now.sh), which is based on [Gatsby](https://www.gatsbyjs.org/).
 
 ```bash
 » cd workspaces/homepage
