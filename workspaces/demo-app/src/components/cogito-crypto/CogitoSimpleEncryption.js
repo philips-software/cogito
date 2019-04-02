@@ -75,6 +75,7 @@ const DecryptionView = ({ cipherText, pending, telepathChannel, dispatch }) => (
             telepathChannel: telepathChannel
           })
         )}
+        disabled={pending}
       >
        ←Decrypt―
       </Button>
