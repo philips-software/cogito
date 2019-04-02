@@ -83,40 +83,66 @@ default:
 Options:
 
 ```swift
-let totallyUniqueExamples = Regex("^(hello|foo).*$", options: [.IgnoreCase, .AnchorsMatchLines])
+let totallyUniqueExamples = Regex("^(hello|foo).*$", options: [.ignoreCase, .anchorsMatchLines])
 let multilineText = "hello world\ngoodbye world\nFOOBAR\n"
 let matchingLines = totallyUniqueExamples.allMatches(in: multilineText).map { $0.matchedString }
 // ["hello world", "FOOBAR"]
+```
+
+Decode:
+
+```swift
+let json = """
+  [
+    {
+      "name" : "greeting",
+      "pattern" : "^(\\\\w+) world!$"
+    }
+  ]
+  """.data(using: .utf8)!
+
+struct Validation: Codable {
+  var name: String
+  var pattern: Regex
+}
+
+let decoder = JSONDecoder()
+try decoder.decode(Validation.self, from: json)
+// Validation(name: "greeting", pattern: /^(\w+) world!/)
+```
+
+Ranges:
+
+```swift
+let lyrics = """
+  So it's gonna be forever
+  Or it's gonna go down in flames
+  """
+
+let possibleEndings = Regex("it's gonna (.+)")
+    .allMatches(in: lyrics)
+    .flatMap { $0.captureRanges[0] }
+    .map { lyrics[$0] }
+
+// it's gonna: ["be forever", "go down in flames"]
 ```
 
 
 
 ## Installation
 
+Regex supports Swift 4.2 and above, on all Swift platforms.
+
 #### Swift Package Manager
 
 Add a dependency to your `Package.swift`:
 
 ```swift
-// Swift 4
-
 let package = Package(
   name: "MyPackage",
   dependencies: [
     // other dependencies...
-    .package(url: "https://github.com/sharplet/Regex.git", from: "1.0.0"),
-  ]
-)
-```
-
-```swift
-// Swift 3
-
-let package = Package(
-  name: "MyPackage",
-  dependencies: [
-    // other dependencies...
-    .Package(url: "https://github.com/sharplet/Regex.git", majorVersion: 1),
+    .package(url: "https://github.com/sharplet/Regex.git", from: "2.0.0"),
   ]
 )
 ```
@@ -126,7 +152,7 @@ let package = Package(
 Put this in your Cartfile:
 
 ```
-github "sharplet/Regex" ~> 1.0
+github "sharplet/Regex" ~> 2.0
 ```
 
 #### CocoaPods
@@ -134,7 +160,7 @@ github "sharplet/Regex" ~> 1.0
 Put this in your Podfile:
 
 ```ruby
-pod "STRegex", "~> 1.0"
+pod "STRegex", "~> 2.0"
 ```
 
 
@@ -152,7 +178,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 Build and run the tests:
 
 ```
-export SWIFT_PACKAGE_TEST_REGEX=true
 swift test
 
 # or just
@@ -169,14 +194,7 @@ rake docker
 
 And run the tests via Swift Package Manager.
 
-### Carthage & Xcode
-
-Install Carthage via Homebrew and build the dependencies:
-
-```
-brew install carthage
-rake setup
-```
+### Xcode
 
 `xcpretty` is recommended, for prettifying test output:
 
@@ -193,16 +211,21 @@ rake test:ios
 rake test:tvos
 ```
 
-### Linting
+### Formatting & Linting
+
+Regex uses [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) to
+maintain consistent code formatting.
 
 Regex uses [SwiftLint](https://github.com/realm/SwiftLint) to validate code style.
 SwiftLint is automatically run against pull requests using [Hound CI](https://houndci.com/).
 
-You can also run it locally:
+When submitting a pull request, running these tools and addressing any issues
+is much appreciated!
 
 ```
-$ brew install swiftlint
-$ rake swiftlint
+brew bundle
+swiftformat .
+swiftlint
 ```
 
 

@@ -17,13 +17,17 @@
   },
   "platforms": {
     "ios": "8.0",
-    "osx": "10.10"
+    "osx": "10.10",
+    "watchos": "5.0"
   },
   "ios": {
     "vendored_libraries": "Sodium/libsodium/libsodium-ios.a"
   },
   "osx": {
     "vendored_libraries": "Sodium/libsodium/libsodium-osx.a"
+  },
+  "watchos": {
+    "vendored_libraries": "Sodium/libsodium/libsodium-watchos.a"
   },
   "source_files": "Sodium/**/*.{swift,h}",
   "private_header_files": "Sodium/libsodium/*.h",
