@@ -72,6 +72,13 @@ describe('CogitoSimpleEncryptionView', () => {
 
       expect(getByText(plainText).disabled).toBe(true)
     })
+
+    it('disables the button when pending', () => {
+      const { getByText } = render(
+        <CogitoSimpleEncryptionView pending />
+      )
+      expect(getByText('―Encrypt→').disabled).toBe(true)
+    })
   })
 
   describe('decryption', () => {
