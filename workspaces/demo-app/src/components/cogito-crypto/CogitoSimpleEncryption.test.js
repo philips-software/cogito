@@ -63,6 +63,15 @@ describe('CogitoSimpleEncryptionView', () => {
 
       expect(dispatch).toBeCalledWith(EncryptionActions.encrypt({ telepathChannel }))
     })
+
+    it('disables the plain text field when pending', () => {
+      const plainText = 'Some plain text'
+      const { getByText } = render(
+        <CogitoSimpleEncryptionView plainText={plainText} pending />
+      )
+
+      expect(getByText(plainText).disabled).toBe(true)
+    })
   })
 
   describe('decryption', () => {

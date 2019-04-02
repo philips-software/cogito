@@ -12,11 +12,12 @@ import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
 const CogitoSimpleEncryption = ({ telepathChannel }) => (
   <WithStore selector={state => state.encryption}>
     {
-      ({ plainText, cipherText, errorMessage }, dispatch) => (
+      ({ plainText, cipherText, pending, errorMessage }, dispatch) => (
         <CogitoSimpleEncryptionView
           telepathChannel={telepathChannel}
           plainText={plainText}
           cipherText={cipherText}
+          pending={pending}
           errorMessage={errorMessage}
           dispatch={dispatch}
         />
@@ -25,17 +26,17 @@ const CogitoSimpleEncryption = ({ telepathChannel }) => (
   </WithStore>
 )
 
-const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, dispatch, errorMessage }) => (
+const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, pending, dispatch, errorMessage }) => (
   <Centered>
     <EncryptionGrid>
-      <EncryptionView plainText={plainText} telepathChannel={telepathChannel} dispatch={dispatch} />
+      <EncryptionView plainText={plainText} pending={pending} telepathChannel={telepathChannel} dispatch={dispatch} />
       <DecryptionView cipherText={cipherText} telepathChannel={telepathChannel} dispatch={dispatch} />
     </EncryptionGrid>
     <ErrorMessage message={errorMessage} />
   </Centered>
 )
 
-const EncryptionView = ({ plainText, telepathChannel, dispatch }) => (
+const EncryptionView = ({ plainText, pending, telepathChannel, dispatch }) => (
   <>
     <PlainTextGridItem>
       <TextInput
@@ -45,6 +46,7 @@ const EncryptionView = ({ plainText, telepathChannel, dispatch }) => (
         onChange={(event) => dispatch(
           EncryptionActions.setPlainText(event.target.value)
         )}
+        disabled={pending}
       />
     </PlainTextGridItem>
     <EncryptGridItem>
