@@ -64,9 +64,26 @@ describe('encryption state reducer', () => {
 
   it('signals that encryption is completed', () => {
     const state = deepFreeze({ pending: true })
-    const action = EncryptionActions.encryptCompleted()
+    const cipherText = 'Some cipher text'
+    const action = EncryptionActions.encryptCompleted({ cipherText })
 
     expect(encryptionReducer(state, action).pending).toBe(false)
+  })
+
+  it('clears the plain text when encryption is completed', () => {
+    const state = deepFreeze({ pending: true, plainText: 'Some plain text' })
+    const cipherText = 'Some cipher text'
+    const action = EncryptionActions.encryptCompleted({ cipherText })
+
+    expect(encryptionReducer(state, action).plainText).toBe('')
+  })
+
+  it('sets the cipher text when encryption is completed', () => {
+    const state = deepFreeze({ pending: true, cipherText: '' })
+    const cipherText = 'Some cipher text'
+    const action = EncryptionActions.encryptCompleted({ cipherText })
+
+    expect(encryptionReducer(state, action).cipherText).toBe(cipherText)
   })
 
   it('signals that decryption is completed', () => {
