@@ -6,11 +6,6 @@ class EncryptionActions {
     plainText
   })
 
-  static setCipherText = (cipherText) => ({
-    type: 'ENCRYPTION_SET_CIPHERTEXT',
-    cipherText
-  })
-
   static setKeyTag = (tag) => ({
     type: 'ENCRYPTION_SET_KEY_TAG',
     tag
@@ -53,7 +48,6 @@ class EncryptionActions {
         const jsonWebKey = await cogitoKeyProvider.getPublicKey({ tag })
         const cipherText = await cogitoEncryption.encrypt({ jsonWebKey, plainText })
 
-        dispatch(EncryptionActions.setPlainText(''))
         dispatch(EncryptionActions.encryptCompleted({ cipherText }))
       } catch (error) {
         dispatch(EncryptionActions.encryptionError(error.message))
