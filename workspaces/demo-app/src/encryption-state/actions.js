@@ -6,6 +6,11 @@ class EncryptionActions {
     plainText
   })
 
+  static setCipherText = (cipherText) => ({
+    type: 'ENCRYPTION_SET_CIPHERTEXT',
+    cipherText
+  })
+
   static setKeyTag = (tag) => ({
     type: 'ENCRYPTION_SET_KEY_TAG',
     tag
