@@ -98,6 +98,11 @@ describe('encryption state reducer', () => {
       const state = deepFreeze({ pending: true })
       expect(encryptionReducer(state, decryptCompletedAction).pending).toBe(false)
     })
+
+    it('clears the cipher text when decryption is completed', () => {
+      const state = deepFreeze({ cipherText: 'Some cipher text' })
+      expect(encryptionReducer(state, decryptCompletedAction).cipherText).toBe('')
+    })
   })
 
   it('updates the error message', () => {
