@@ -60,6 +60,7 @@ after_success:
   # Upload test coverage to Code Climate
   - ./cc-test-reporter upload-coverage
 deploy:
+  skip_cleanup: true
   provider: script
   script: yarn deploy
   on:
