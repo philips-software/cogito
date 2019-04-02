@@ -1,5 +1,5 @@
 PODS:
-  - base64url (1.0.1)
+  - base64url (1.1.0)
   - Mockingjay (2.0.2):
     - Mockingjay/Core (= 2.0.2)
     - Mockingjay/XCTest (= 2.0.2)
@@ -7,14 +7,14 @@ PODS:
     - URITemplate (~> 2.0.2)
   - Mockingjay/XCTest (2.0.2):
     - Mockingjay/Core
-  - Nimble (7.3.3)
+  - Nimble (7.3.4)
   - Quick (1.3.4)
   - Socket.IO-Client-Swift (13.4.0):
     - Starscream (~> 3.0.2)
   - Sodium (0.7.0)
   - Starscream (3.0.6)
-  - STRegex (1.1.0)
-  - SwiftLint (0.30.1)
+  - STRegex (2.0.0)
+  - SwiftLint (0.31.0)
   - URITemplate (2.0.3)
 
 DEPENDENCIES:
@@ -24,7 +24,7 @@ DEPENDENCIES:
   - Quick (~> 1.3)
   - Socket.IO-Client-Swift (~> 13.3)
   - Sodium (from `https://github.com/jedisct1/swift-sodium.git`, branch `master`)
-  - STRegex (~> 1.1)
+  - STRegex (~> 2.0)
   - SwiftLint
 
 SPEC REPOS:
@@ -51,21 +51,21 @@ CHECKOUT OPTIONS:
     :commit: 121eb0ccb0ce282c23926ac78f2759a970e05588
     :git: https://github.com/metaltoad/Mockingjay.git
   Sodium:
-    :commit: f010f9e85065d818e84ba3680e4669107c9afb41
+    :commit: b1363c6e6e4e5925494adde6a051d0d10665f924
     :git: https://github.com/jedisct1/swift-sodium.git
 
 SPEC CHECKSUMS:
-  base64url: f570aaf9520657b63edb7414dcf8496c4d864326
+  base64url: 92e81bb256f2070359a34fc93a7a7d4b9a9d689f
   Mockingjay: e44b65b6b4b919ad228929db83cb6b1d69fff623
-  Nimble: 3b434b1e7d0a92603a13550a82880b0d952f518e
+  Nimble: 051e3d8912d40138fa5591c78594f95fb172af37
   Quick: f4f7f063c524394c73ed93ac70983c609805d481
   Socket.IO-Client-Swift: 2b2720f14c92ff1237ced09bc2f2da2022624fee
-  Sodium: c5510cc6f5e1b27858e5f260b5cac80d4a3f9379
+  Sodium: c9f8ec9fd5f1754f354f06dbbb32d44337f6661e
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
-  STRegex: eb1f4c2fe9e2f0265b8df8634774cd8cd8914018
-  SwiftLint: a54bf1fe12b55c68560eb2a7689dfc81458508f7
+  STRegex: dc7c8082a77c521315a6339f86abf125b8c3feb8
+  SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
   URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: 677106fb1a0cef03d4804b66d5ecbe42526c4e6a
+PODFILE CHECKSUM: be574de0838600756d75e0c039c3e0f0f1c3169c
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.6.1
