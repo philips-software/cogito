@@ -24,8 +24,9 @@ class EncryptionActions {
     type: 'DECRYPTION_PENDING'
   })
 
-  static encryptCompleted = () => ({
-    type: 'ENCRYPTION_COMPLETED'
+  static encryptCompleted = ({ cipherText }) => ({
+    type: 'ENCRYPTION_COMPLETED',
+    cipherText
   })
 
   static decryptCompleted = () => ({
@@ -54,7 +55,7 @@ class EncryptionActions {
 
         dispatch(EncryptionActions.setPlainText(''))
         dispatch(EncryptionActions.setCipherText(cipherText))
-        dispatch(EncryptionActions.encryptCompleted())
+        dispatch(EncryptionActions.encryptCompleted({ cipherText }))
       } catch (error) {
         dispatch(EncryptionActions.encryptionError(error.message))
       }

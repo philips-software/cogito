@@ -21,9 +21,12 @@ describe('encrypt action', () => {
   })
 
   it('signals that encryption is completed', async () => {
+    const cipherText = 'Some ciphered text'
+    encryptMock.mockResolvedValue(cipherText)
+
     await action(dispatch, getState)
 
-    expect(dispatch).toBeCalledWith(EncryptionActions.encryptCompleted())
+    expect(dispatch).toBeCalledWith(EncryptionActions.encryptCompleted({ cipherText }))
   })
 
   it('creates a new key pair', async () => {

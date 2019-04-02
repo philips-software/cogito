@@ -10,6 +10,7 @@ const encryptionReducer = (state = initialState, action) => {
     case 'DECRYPTION_PENDING':
       return { ...state, errorMessage: null, pending: true }
     case 'ENCRYPTION_COMPLETED':
+      return { ...state, pending: false, plainText: '', cipherText: action.cipherText }
     case 'DECRYPTION_COMPLETED':
       return { ...state, pending: false }
     case 'ENCRYPTION_ERROR':
