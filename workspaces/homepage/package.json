@@ -48,6 +48,7 @@
   "devDependencies": {
     "gatsby-cli": "^2.0.0",
     "gatsby-plugin-root-import": "^2.0.0",
-    "netlify-cli": "^2.6.0"
+    "netlify-cli": "^2.6.0",
+    "now": "^15.0.1"
   }
 }
