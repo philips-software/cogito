@@ -30,7 +30,7 @@ const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, pe
   <Centered>
     <EncryptionGrid>
       <EncryptionView plainText={plainText} pending={pending} telepathChannel={telepathChannel} dispatch={dispatch} />
-      <DecryptionView cipherText={cipherText} telepathChannel={telepathChannel} dispatch={dispatch} />
+      <DecryptionView cipherText={cipherText} pending={pending} telepathChannel={telepathChannel} dispatch={dispatch} />
     </EncryptionGrid>
     <ErrorMessage message={errorMessage} />
   </Centered>
@@ -65,7 +65,7 @@ const EncryptionView = ({ plainText, pending, telepathChannel, dispatch }) => (
   </>
 )
 
-const DecryptionView = ({ cipherText, telepathChannel, dispatch }) => (
+const DecryptionView = ({ cipherText, pending, telepathChannel, dispatch }) => (
   <>
     <DecryptGridItem>
       <Button
@@ -87,6 +87,7 @@ const DecryptionView = ({ cipherText, telepathChannel, dispatch }) => (
         onChange={(event) => dispatch(
           EncryptionActions.setCipherText(event.target.value)
         )}
+        disabled={pending}
       />
     </CipherTextGridItem>
   </>
