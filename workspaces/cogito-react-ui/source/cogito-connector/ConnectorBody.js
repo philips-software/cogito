@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Header } from 'semantic-ui-react'
+import { Header } from 'semantic-ui-react'
 import {
   Centered,
   Spacer
@@ -25,7 +25,7 @@ class ConnectorBody extends React.Component {
   }
 
   render () {
-    const { connectUrl, buttonStyling, onDone } = this.props
+    const { connectUrl } = this.props
     return (
       <Centered>
         <Header>Please scan the QR code below with your mobile device.</Header>
@@ -33,9 +33,6 @@ class ConnectorBody extends React.Component {
           margin='20px 0 50px 0'
           render={() => <CogitoQRCode key={connectUrl} connectUrl={connectUrl} />}
         />
-        <Button {...buttonStyling} onClick={onDone}>
-        Done
-        </Button>
       </Centered>
     )
   }

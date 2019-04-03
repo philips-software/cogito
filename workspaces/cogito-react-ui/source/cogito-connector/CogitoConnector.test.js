@@ -54,17 +54,11 @@ describe('Cogito Connector', () => {
       container = renderUtils.container
 
       fireEvent.click(getByText(/show qr code/i))
-      await waitForElement(() => getByText(/done/i))
+      await waitForElement(() => getByText(/connectUrl/i))
     })
 
     it('does show the dialog when opened', () => {
       expect(queryByText(/scan the qr code/i)).not.toBeNull()
-    })
-
-    it('fires onDone when close button is pressed', async () => {
-      const button = getByText(/done/i)
-      fireEvent.click(button)
-      expect(onDone).toHaveBeenCalled()
     })
 
     it('subscribes for notifications', async () => {
