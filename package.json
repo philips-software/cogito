@@ -23,7 +23,7 @@
     "regenerator-runtime": "^0.11.1",
     "standard": "^12.0.1",
     "truffle-contract": "^3.0.5",
-    "web3": "^1.0.0-beta.36"
+    "web3": "1.0.0-beta.36"
   },
   "workspaces": {
     "packages": [
