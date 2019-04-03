@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "@cogitojs/telepath-js": "^0.2.23",
-    "web3": "^1.0.0-beta.36"
+    "web3": "1.0.0-beta.36"
   },
   "devDependencies": {
     "lodash": "^4.17.11"
