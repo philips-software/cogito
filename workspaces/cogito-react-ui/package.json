@@ -28,8 +28,8 @@
     "react-dom": "^16.6.3"
   },
   "devDependencies": {
-    "react-testing-library": "^5.3.0",
-    "jest-canvas-mock": "^1.0.2"
+    "jest-canvas-mock": "^1.0.2",
+    "react-testing-library": "^5.3.0"
   },
   "publishConfig": {
     "access": "public"

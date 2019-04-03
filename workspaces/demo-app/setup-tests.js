@@ -4,4 +4,4 @@ import { createSerializer } from 'jest-emotion'
 import * as emotion from 'emotion'
 
 expect.addSnapshotSerializer(createSerializer(emotion))
-jest.setTimeout(7000)
+jest.setTimeout(9000)
