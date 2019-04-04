@@ -25,8 +25,8 @@ describe('Queuing Service', () => {
   })
 
   it('throws when sending fails', async () => {
-    nock(baseUrl).post(`/${queueId}`, encodedMessage).reply(500)
-    await expect(queuing.send(queueId, message)).rejects.toThrow()
+    nock(baseUrl).post(`/${queueId}`, encodedMessage).reply(500, 'message')
+    await expect(queuing.send(queueId, message)).rejects.toThrow(/message/)
   })
 
   it('can receive a message', async () => {
@@ -40,7 +40,7 @@ describe('Queuing Service', () => {
   })
 
   it('throws when receiving fails', async () => {
-    nock(baseUrl).get(`/${queueId}`).reply(500)
-    await expect(queuing.receive(queueId)).rejects.toThrow()
+    nock(baseUrl).get(`/${queueId}`).reply(500, 'message')
+    await expect(queuing.receive(queueId)).rejects.toThrow(/message/)
   })
 })
