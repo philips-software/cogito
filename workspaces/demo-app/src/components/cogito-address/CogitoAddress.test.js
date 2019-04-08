@@ -119,7 +119,7 @@ describe('CogitoAddress', () => {
       expect(getByText(/scan the qr code/i)).toBeInTheDocument()
     })
 
-    it('immediatelly fetches user identity if telepath channel is already established', async () => {
+    it('immediately fetches user identity if telepath channel is already established', async () => {
       const { getByText, getByTestId, store: { dispatch } } = render(cogitoAddress())
       const readButton = await waitForElement(() => getByText(/read your identity.../i))
       setActiveTelepathChannel(dispatch)
@@ -152,7 +152,7 @@ describe('CogitoAddress', () => {
       await wait(() => expect(store.getState().userData).toMatchObject(defaultIdentity))
     })
 
-    it('creates a new telepath channel if user explicitely requests a new QR Code', async () => {
+    it('creates a new telepath channel if user explicitly requests a new QR Code', async () => {
       const { id: initialId, key: initialKey } = telepathChannel
       const { getByText } = render(cogitoAddress())
       const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
@@ -164,7 +164,7 @@ describe('CogitoAddress', () => {
       })
     })
 
-    it('requests new identity if user explicitely requests a new QR Code', async () => {
+    it('requests new identity if user explicitly requests a new QR Code', async () => {
       const { getByText, store } = render(cogitoAddress())
       const readButton = await waitForElement(() => getByText(/read your identity.../i))
       fireEvent.click(readButton)
@@ -179,7 +179,7 @@ describe('CogitoAddress', () => {
       await wait(() => expect(store.getState().userData).toMatchObject(alternateIdentity))
     })
 
-    it('displays new identity if user explicitely requests a new QR Code', async () => {
+    it('displays new identity if user explicitly requests a new QR Code', async () => {
       const { getByText, getByTestId } = render(cogitoAddress())
       const readButton = await waitForElement(() => getByText(/read your identity.../i))
       fireEvent.click(readButton)
