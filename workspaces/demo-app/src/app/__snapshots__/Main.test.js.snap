@@ -247,6 +247,8 @@ exports[`Main when routing to contracts page renders correct page 1`] = `
 </div>
 `;
 
+exports[`Main when routing to home page can update identity when telepath changes 1`] = `<div />`;
+
 exports[`Main when routing to home page renders correct page 1`] = `
 .css-0,
 [data-css-0] {
