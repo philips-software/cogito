@@ -5,9 +5,9 @@ import {
   EncryptionGrid, PlainTextGridItem, CipherTextGridItem,
   EncryptGridItem, DecryptGridItem
 } from './EncryptionGrid'
-import { StatusSegmentRow } from 'components/ui/layout'
 import { EncryptionActions } from 'encryption-state'
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
+import { TelepathError } from 'components/telepath/TelepathError'
 
 const CogitoSimpleEncryption = ({ telepathChannel }) => (
   <WithStore selector={state => state.encryption}>
@@ -32,7 +32,7 @@ const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, pe
       <EncryptionView plainText={plainText} pending={pending} telepathChannel={telepathChannel} dispatch={dispatch} />
       <DecryptionView cipherText={cipherText} pending={pending} telepathChannel={telepathChannel} dispatch={dispatch} />
     </EncryptionGrid>
-    <ErrorMessage message={errorMessage} />
+    <TelepathError error={errorMessage} />
   </Centered>
 )
 
@@ -93,18 +93,6 @@ const DecryptionView = ({ cipherText, pending, telepathChannel, dispatch }) => (
     </CipherTextGridItem>
   </>
 )
-
-const ErrorMessage = ({ message }) => {
-  if (!message) {
-    return null
-  }
-
-  return (
-    <div data-testid='error-message'>
-      <StatusSegmentRow>{message}</StatusSegmentRow>
-    </div>
-  )
-}
 
 const TextInput = ({ ...args }) => (
   <TextArea {...args} style={{ width: '13rem', height: '10rem' }} />

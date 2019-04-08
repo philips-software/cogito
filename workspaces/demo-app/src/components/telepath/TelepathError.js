@@ -8,7 +8,9 @@ export const TelepathError = ({ children, error, onTimeout, timeout = 3000 }) =>
   }
   return (
     <TimedStatus timeout={timeout} onTimeout={onTimeout}>
-      <StatusSegmentRow>{error || children}</StatusSegmentRow>
+      <div data-testid='error-message'>
+        <StatusSegmentRow>{error || children}</StatusSegmentRow>
+      </div>
     </TimedStatus>
   )
 }

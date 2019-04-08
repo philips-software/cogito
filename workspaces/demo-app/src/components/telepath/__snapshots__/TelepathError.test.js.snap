@@ -9,19 +9,23 @@ exports[`TelepathError receives proper styling when error description (child) is
 
 <div>
   <div
-    style="margin: 10px; padding: 0px; box-sizing: border-box;"
+    data-testid="error-message"
   >
     <div
-      class="emotion-1 emotion-2"
+      style="margin: 10px; padding: 0px; box-sizing: border-box;"
     >
       <div
-        class="ui segment"
+        class="emotion-1 emotion-2"
       >
-        <p
-          class="css-0"
+        <div
+          class="ui segment"
         >
-          error description
-        </p>
+          <p
+            class="css-0"
+          >
+            error description
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -37,19 +41,23 @@ exports[`TelepathError receives proper styling when error description is rendere
 
 <div>
   <div
-    style="margin: 10px; padding: 0px; box-sizing: border-box;"
+    data-testid="error-message"
   >
     <div
-      class="emotion-1 emotion-2"
+      style="margin: 10px; padding: 0px; box-sizing: border-box;"
     >
       <div
-        class="ui segment"
+        class="emotion-1 emotion-2"
       >
-        <p
-          class="css-0"
+        <div
+          class="ui segment"
         >
-          error description
-        </p>
+          <p
+            class="css-0"
+          >
+            error description
+          </p>
+        </div>
       </div>
     </div>
   </div>
