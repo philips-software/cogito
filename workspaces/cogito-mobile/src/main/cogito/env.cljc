@@ -5,17 +5,12 @@
        :default [[cogito.react-native-navigation-bridge :as rnn-bridge]])
    [reagent.core :as r]))
 
+(declare register-component)
+(declare bind-component)
+
 (defonce id-seq-ref (atom 0))
 (defonce mounted-ref (atom {}))
 (defonce screens-ref (atom {}))
-
-(defn reset-globals []
-  (reset! id-seq-ref 0)
-  (reset! mounted-ref {})
-  (reset! screens-ref {}))
-
-(declare register-component)
-(declare bind-component)
 
 (defn register [key]
   (let [get-props
@@ -25,7 +20,7 @@
            :component-id (-> this .-props .-componentId)})
 
         wrapper
-        (crc #js
+        (crc #js                    ;; crc is create-react-class
               {:displayName
                (str key "Wrapper")
 
@@ -48,15 +43,14 @@
                  (this-as
                   ^js this
 
-                  (swap! mounted-ref
-                         update key dissoc (-> this .-state .-id))))
+                  (swap! mounted-ref update key dissoc (-> this .-state .-id))))
 
 
                ;; FIXME: forward other lifecycles the same way
                :navigationButtonPressed
                (fn []
                  (this-as
-                  this
+                  ^js this
 
                   (let [{:keys [navigation-button-pressed]}
                         (get @screens-ref key)
@@ -74,21 +68,21 @@
                :componentDidAppear
                (fn []
                  (this-as
-                  this
+                  ^js this
 
                   (js/console.log "componentDidAppear" key)))
 
                :componentDidDisappear
                (fn []
                  (this-as
-                  this
+                  ^js this
 
                   (js/console.log "componentDidDisappear" key)))
 
                :render
                (fn []
                  (this-as
-                  this
+                  ^js this
 
                   (let [{:keys [render]}
                         (get @screens-ref key)

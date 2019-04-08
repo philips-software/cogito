@@ -4,8 +4,14 @@
             [cogito.env :refer (register
                                 register-component
                                 add-screen
-                                reset-globals
+                                id-seq-ref
+                                screens-ref
                                 mounted-ref)]))
+
+(defn reset-globals []
+  (reset! id-seq-ref 0)
+  (reset! mounted-ref {})
+  (reset! screens-ref {}))
 
 (def wrapper-def (atom nil))
 
