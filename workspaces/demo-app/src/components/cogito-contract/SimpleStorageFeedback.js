@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
-import { TelepathError, TelepathStatus } from 'components/telepath'
+import { TimedErrorMessage, TelepathStatus } from 'components/telepath'
 
 import { AppEventsActions } from 'app-events'
 
@@ -12,7 +12,7 @@ class SimpleStorageFeedback extends Component {
   renderWithStore = ({ telepathError }, dispatch) => (
     <>
       <TelepathStatus>Executing contract...</TelepathStatus>
-      <TelepathError
+      <TimedErrorMessage
         error={telepathError}
         onTimeout={() => dispatch(AppEventsActions.telepathErrorClear())}
       />
