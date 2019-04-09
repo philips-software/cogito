@@ -7,7 +7,7 @@ import {
 } from './EncryptionGrid'
 import { EncryptionActions } from 'encryption-state'
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
-import { TimedErrorMessage } from 'components/telepath/TimedErrorMessage'
+import { TimedErrorMessage } from 'components/utils/TimedErrorMessage'
 
 const CogitoSimpleEncryption = ({ telepathChannel }) => (
   <WithStore selector={state => state.encryption}>
