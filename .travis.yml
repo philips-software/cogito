@@ -1,6 +1,11 @@
 language: swift
 os: osx
 osx_image: xcode10.2
+addons:
+  sonarcloud:
+    organization: "marcinczenko-github"
+    token:
+      secure: "yUbUf6sV26W0VxtzZioj9sHmJOcTbVncKI6VHxbqqdJlr4Btm80+CSWplP2kEtTVFG6SbYDXpi6tz+7Z0zfrcz8IN6YV4c6lqmLkTZEB7WZwGfsK/7LTbb4kW5tBO+p8sHTrp/jDwAgADmkrVqW65tFxgY5zN26aJX60EBtrVzs2v/SiapODkDYfp0NGVUtsIcSHguo2t07HCSwqy95npI+FMq6WAIdjONeFz3kaD101HJ2KFGj4TFCiGvy6UUaetnSYX8OrFti5vPzpMPFt9SYnNTn/px3efOT7kWhLVnvObBhnSGEyD7JCJD4hSe9cSGkqOHvH3fo4ACdAlmBniMPmO9D3biNttJUSLUURlxhUmHO+bf0tOlp2W9zWldUeuit6cy49LrdJCnoGSC8Ev3y8wVnBRL47mXIGZN9C8Gi1u2nHujw48orkGq5ihiTL3p7IGOTAuaXfs0ey2RWyFBhGCghat/XAcowhSUJi45MbWMlSxH9m1/lFK0BN8vhuCbISaEuwDUPKKxERK7atMqMf56UEY+FrFKxLrvH8F/kFMquiU/LbeAigXRaszvjbj9OkwN9/n4qWmW9WUvZi0YOfjJU0Js8JmwJxdkDB3YOwXOMEkSscRRwD7H5g5eteSlM94uHbgJEbYEa0yTbNUhckcAH9/Gho2rVqUfdIIvY="
 env:
   global:
     # Ruby setup
@@ -37,6 +42,7 @@ install:
 script:
   # Run NodeJS tests
   - yarn test --runInBand
+  - sonar-scanner
   # Run iOS app tests
   - (cd workspaces/cogito-ios-app && bundle exec fastlane tests)
   - (cd workspaces/telepath-ios && bundle exec fastlane tests)
