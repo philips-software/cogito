@@ -1,2 +1,2 @@
 export { TelepathStatus } from './TelepathStatus'
-export { TelepathError } from './TelepathError'
+export { TimedErrorMessage } from './TimedErrorMessage'

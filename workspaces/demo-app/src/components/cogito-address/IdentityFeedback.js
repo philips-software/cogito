@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
-import { TelepathError, TelepathStatus } from 'components/telepath'
+import { TimedErrorMessage, TelepathStatus } from 'components/telepath'
 
 import { AppEventsActions } from 'app-events'
 
@@ -8,7 +8,7 @@ class IdentityFeedback extends Component {
   renderWithStore = ({ telepathError }, dispatch) => (
     <>
       <TelepathStatus>Reading identity...</TelepathStatus>
-      <TelepathError
+      <TimedErrorMessage
         error={telepathError}
         onTimeout={() => dispatch(AppEventsActions.telepathErrorClear())}
       />
