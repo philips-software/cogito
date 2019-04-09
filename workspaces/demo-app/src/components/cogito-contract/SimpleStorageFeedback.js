@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { WithStore } from '@react-frontend-developer/react-redux-render-prop'
-import { TimedErrorMessage, TelepathStatus } from 'components/telepath'
+import { TelepathStatus } from 'components/telepath'
+import { TimedErrorMessage } from 'components/utils'
 
 import { AppEventsActions } from 'app-events'
 
