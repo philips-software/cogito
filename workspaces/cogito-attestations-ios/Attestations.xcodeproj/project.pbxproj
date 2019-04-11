@@ -472,6 +472,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 407CAC843A077FF7D12D9F2F /* Pods-Attestations.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -499,6 +500,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 60290FB2DADFA26A6FDD9BE2 /* Pods-Attestations.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -525,7 +527,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6946344988B8C7D2F405F219 /* Pods-AttestationsTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AttestationsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -544,7 +546,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 969FC319A9C689ADF68FACCB /* Pods-AttestationsTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = AttestationsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
