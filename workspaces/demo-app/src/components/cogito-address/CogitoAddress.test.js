@@ -1,6 +1,12 @@
 import React from 'react'
 import { InteractivePromise } from 'test-helpers'
-import { render, wait, waitForElement, fireEvent } from 'test-helpers/render-props'
+import {
+  render,
+  rerender,
+  wait,
+  waitForElement,
+  fireEvent
+} from 'test-helpers/render-props'
 import { Telepath } from '@cogitojs/telepath-js'
 import { CogitoAddress } from './CogitoAddress'
 import { UserDataActions } from 'user-data'
@@ -18,8 +24,8 @@ describe('CogitoAddress', () => {
     username: testUserName
   }
   const alternateIdentity = {
-    ethereumAddress: testAddress.toUpperCase(),
-    username: testUserName.toUpperCase()
+    ethereumAddress: '0xef12',
+    username: 'Alternate User'
   }
   let telepath
   let telepathChannel
@@ -43,9 +49,20 @@ describe('CogitoAddress', () => {
     telepathChannel = await telepath.createChannel({ appName })
   }
 
-  const cogitoAddress = () => (
-    <CogitoAddress telepathChannel={telepathChannel} newChannel={newChannel} />
-  )
+  const fakeConnectionSetupDone = () => {
+    telepathChannel.fakeIncomingNotification({
+      method: 'connectionSetupDone'
+    })
+  }
+
+  const cogitoAddress = () => {
+    return (
+      <CogitoAddress
+        telepathChannel={telepathChannel}
+        newChannel={newChannel}
+      />
+    )
+  }
 
   beforeEach(async () => {
     telepath = new Telepath('https://telepath.cogito.mobi')
@@ -67,7 +84,9 @@ describe('CogitoAddress', () => {
 
     it('has active "Read your identity..." button', async () => {
       const { getByText } = render(cogitoAddress())
-      const button = await waitForElement(() => getByText(/read your identity.../i))
+      const button = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       expect(button).not.toBeDisabled()
     })
 
@@ -91,14 +110,18 @@ describe('CogitoAddress', () => {
 
     it('opens the "Scan QR Code" dialog if telepath channel is not yet established', async () => {
       const { getByText } = render(cogitoAddress())
-      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      const readButton = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       fireEvent.click(readButton)
       expect(getByText(/scan the qr code/i)).toBeInTheDocument()
     })
 
     it('closes the "Scan QR Code" dialog when cancel button is clicked', async () => {
       const { getByText, queryByText } = render(cogitoAddress())
-      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      const readButton = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       fireEvent.click(readButton)
       expect(getByText(/scan the qr code/i)).toBeInTheDocument()
       const closeIcon = document.querySelector('i.close.icon')
@@ -106,22 +129,32 @@ describe('CogitoAddress', () => {
       expect(queryByText(/scan the qr code/i)).toBeNull()
     })
 
-    it('shows the "Scan QR Code" dialog when traying to Read after closing it', async () => {
+    it('shows the "Scan QR Code" dialog when trying to Read after closing it', async () => {
       const { getByText, queryByText } = render(cogitoAddress())
-      const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
+      const showQRCodeButton = await waitForElement(() =>
+        getByText(/show qr code/i)
+      )
       fireEvent.click(showQRCodeButton)
       expect(getByText(/scan the qr code/i)).toBeInTheDocument()
       const closeIcon = document.querySelector('i.close.icon')
       fireEvent.click(closeIcon)
       expect(queryByText(/scan the qr code/i)).toBeNull()
-      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      const readButton = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       fireEvent.click(readButton)
       expect(getByText(/scan the qr code/i)).toBeInTheDocument()
     })
 
     it('immediately fetches user identity if telepath channel is already established', async () => {
-      const { getByText, getByTestId, store: { dispatch } } = render(cogitoAddress())
-      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      const {
+        getByText,
+        getByTestId,
+        store: { dispatch }
+      } = render(cogitoAddress())
+      const readButton = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       setActiveTelepathChannel(dispatch)
       fireEvent.click(readButton)
       await wait(() => {
@@ -132,10 +165,11 @@ describe('CogitoAddress', () => {
 
     it('shows the "Scan QR Code" dialog and then reads identity after confirming', async () => {
       const { getByText, getByTestId, queryByText } = render(cogitoAddress())
-      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      const readButton = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       fireEvent.click(readButton)
-      const doneButton = getByText(/done/i)
-      fireEvent.click(doneButton)
+      fakeConnectionSetupDone()
       await wait(() => {
         expect(getByTestId(/current-address/i)).toHaveTextContent(testAddress)
         expect(getByTestId(/current-username/i)).toHaveTextContent(testUserName)
@@ -145,17 +179,22 @@ describe('CogitoAddress', () => {
 
     it('sets user identity and connection status in the redux store', async () => {
       const { getByText, store } = render(cogitoAddress())
-      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      const readButton = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       fireEvent.click(readButton)
-      const doneButton = getByText(/done/i)
-      fireEvent.click(doneButton)
-      await wait(() => expect(store.getState().userData).toMatchObject(defaultIdentity))
+      fakeConnectionSetupDone()
+      await wait(() =>
+        expect(store.getState().userData).toMatchObject(defaultIdentity)
+      )
     })
 
     it('creates a new telepath channel if user explicitly requests a new QR Code', async () => {
       const { id: initialId, key: initialKey } = telepathChannel
       const { getByText } = render(cogitoAddress())
-      const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
+      const showQRCodeButton = await waitForElement(() =>
+        getByText(/show qr code/i)
+      )
       fireEvent.click(showQRCodeButton)
 
       await wait(() => {
@@ -165,38 +204,57 @@ describe('CogitoAddress', () => {
     })
 
     it('requests new identity if user explicitly requests a new QR Code', async () => {
-      const { getByText, store } = render(cogitoAddress())
-      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      const {
+        getByText,
+        store,
+        rerender: rerenderFromReactTestingLibrary
+      } = render(cogitoAddress())
+      const readButton = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       fireEvent.click(readButton)
-      const doneButton = getByText(/done/i)
-      fireEvent.click(doneButton)
-      await wait(() => expect(store.getState().userData).toMatchObject(defaultIdentity))
-      setUserIdentity(alternateIdentity)
+      fakeConnectionSetupDone()
+      await wait(() =>
+        expect(store.getState().userData).toMatchObject(defaultIdentity)
+      )
       const showQRCodeButton = getByText(/show qr code/i)
       fireEvent.click(showQRCodeButton)
-      const rerenderedDoneButton = await waitForElement(() => getByText(/done/i))
-      fireEvent.click(rerenderedDoneButton)
-      await wait(() => expect(store.getState().userData).toMatchObject(alternateIdentity))
+      await waitForElement(() => getByText(/scan the qr code/i))
+      setUserIdentity(alternateIdentity)
+      rerender(rerenderFromReactTestingLibrary, cogitoAddress(), store)
+      fakeConnectionSetupDone()
+      await wait(() =>
+        expect(store.getState().userData).toMatchObject(alternateIdentity)
+      )
     })
 
     it('displays new identity if user explicitly requests a new QR Code', async () => {
       const { getByText, getByTestId } = render(cogitoAddress())
-      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      const readButton = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       fireEvent.click(readButton)
-      const doneButton = getByText(/done/i)
-      fireEvent.click(doneButton)
+      fakeConnectionSetupDone()
       await wait(() => {
-        expect(getByTestId(/current-address/i)).toHaveTextContent(defaultIdentity.ethereumAddress)
-        expect(getByTestId(/current-username/i)).toHaveTextContent(defaultIdentity.username)
+        expect(getByTestId(/current-address/i)).toHaveTextContent(
+          defaultIdentity.ethereumAddress
+        )
+        expect(getByTestId(/current-username/i)).toHaveTextContent(
+          defaultIdentity.username
+        )
       })
       setUserIdentity(alternateIdentity)
       const showQRCodeButton = getByText(/show qr code/i)
       fireEvent.click(showQRCodeButton)
-      const rerenderedDoneButton = await waitForElement(() => getByText(/done/i))
-      fireEvent.click(rerenderedDoneButton)
+      await waitForElement(() => getByText(/scan the qr code/i))
+      fakeConnectionSetupDone()
       await wait(() => {
-        expect(getByTestId(/current-address/i)).toHaveTextContent(alternateIdentity.ethereumAddress)
-        expect(getByTestId(/current-username/i)).toHaveTextContent(alternateIdentity.username)
+        expect(getByTestId(/current-address/i)).toHaveTextContent(
+          alternateIdentity.ethereumAddress
+        )
+        expect(getByTestId(/current-username/i)).toHaveTextContent(
+          alternateIdentity.username
+        )
       })
     })
   })
@@ -208,8 +266,13 @@ describe('CogitoAddress', () => {
     beforeEach(async () => {
       identityPromise = new InteractivePromise()
       renderingContext = render(cogitoAddress())
-      const { getByText, store: { dispatch } } = renderingContext
-      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      const {
+        getByText,
+        store: { dispatch }
+      } = renderingContext
+      const readButton = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       telepathChannel.send = () => identityPromise.get()
       setActiveTelepathChannel(dispatch)
       fireEvent.click(readButton)
@@ -243,8 +306,14 @@ describe('CogitoAddress', () => {
     })
 
     it('shows an error message when reading identity fails', async () => {
-      const { getByText, queryByText, store: { dispatch } } = render(cogitoAddress())
-      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      const {
+        getByText,
+        queryByText,
+        store: { dispatch }
+      } = render(cogitoAddress())
+      const readButton = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       setActiveTelepathChannel(dispatch)
       fireEvent.click(readButton)
       await waitForElement(() => getByText(/reading identity/i))
@@ -257,8 +326,14 @@ describe('CogitoAddress', () => {
     })
 
     it('shows an error message when telepath returns an error response', async () => {
-      const { getByText, queryByText, store: { dispatch } } = render(cogitoAddress())
-      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      const {
+        getByText,
+        queryByText,
+        store: { dispatch }
+      } = render(cogitoAddress())
+      const readButton = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       setActiveTelepathChannel(dispatch)
       fireEvent.click(readButton)
       await waitForElement(() => getByText(/reading identity/i))
@@ -272,8 +347,14 @@ describe('CogitoAddress', () => {
 
     it('shows an error message when telepath returns an empty response', async () => {
       const error = new Error('No identity found on the mobile device!')
-      const { getByText, queryByText, store: { dispatch } } = render(cogitoAddress())
-      const readButton = await waitForElement(() => getByText(/read your identity.../i))
+      const {
+        getByText,
+        queryByText,
+        store: { dispatch }
+      } = render(cogitoAddress())
+      const readButton = await waitForElement(() =>
+        getByText(/read your identity.../i)
+      )
       setActiveTelepathChannel(dispatch)
       fireEvent.click(readButton)
       await waitForElement(() => getByText(/reading identity/i))
