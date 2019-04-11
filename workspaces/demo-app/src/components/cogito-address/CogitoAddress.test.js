@@ -189,74 +189,74 @@ describe('CogitoAddress', () => {
       )
     })
 
-    it('creates a new telepath channel if user explicitly requests a new QR Code', async () => {
-      const { id: initialId, key: initialKey } = telepathChannel
-      const { getByText } = render(cogitoAddress())
-      const showQRCodeButton = await waitForElement(() =>
-        getByText(/show qr code/i)
-      )
-      fireEvent.click(showQRCodeButton)
+    describe('when explicitly requesting a new QR code', () => {
+      let getByText
+      let getByTestId
+      let store
+      let rerenderFromReactTestingLibrary
 
-      await wait(() => {
-        expect(telepathChannel.id).not.toEqual(initialId)
-        expect(telepathChannel.key).not.toEqual(initialKey)
+      const showQRCode = async () => {
+        const showQRCodeButton = await waitForElement(() =>
+          getByText(/show qr code/i)
+        )
+        fireEvent.click(showQRCodeButton)
+        await waitForElement(() => getByText(/scan the qr code/i))
+      }
+
+      const readIdentity = async () => {
+        const readButton = await waitForElement(() =>
+          getByText(/read your identity.../i)
+        )
+        fireEvent.click(readButton)
+        fakeConnectionSetupDone()
+      }
+
+      beforeEach(async () => {
+        ;({
+          getByText,
+          getByTestId,
+          store,
+          rerender: rerenderFromReactTestingLibrary
+        } = render(cogitoAddress()))
+        await readIdentity()
+        await wait(() =>
+          expect(store.getState().userData).toMatchObject(defaultIdentity)
+        )
+        await showQRCode()
       })
-    })
 
-    it('requests new identity if user explicitly requests a new QR Code', async () => {
-      const {
-        getByText,
-        store,
-        rerender: rerenderFromReactTestingLibrary
-      } = render(cogitoAddress())
-      const readButton = await waitForElement(() =>
-        getByText(/read your identity.../i)
-      )
-      fireEvent.click(readButton)
-      fakeConnectionSetupDone()
-      await wait(() =>
-        expect(store.getState().userData).toMatchObject(defaultIdentity)
-      )
-      const showQRCodeButton = getByText(/show qr code/i)
-      fireEvent.click(showQRCodeButton)
-      await waitForElement(() => getByText(/scan the qr code/i))
-      setUserIdentity(alternateIdentity)
-      rerender(rerenderFromReactTestingLibrary, cogitoAddress(), store)
-      fakeConnectionSetupDone()
-      await wait(() =>
-        expect(store.getState().userData).toMatchObject(alternateIdentity)
-      )
-    })
+      it('creates a new telepath channel', async () => {
+        const { id: initialId, key: initialKey } = telepathChannel
 
-    it('displays new identity if user explicitly requests a new QR Code', async () => {
-      const {
-        getByText,
-        store,
-        getByTestId,
-        rerender: rerenderFromReactTestingLibrary
-      } = render(cogitoAddress())
-      const readButton = await waitForElement(() =>
-        getByText(/read your identity.../i)
-      )
-      fireEvent.click(readButton)
-      fakeConnectionSetupDone()
-      await wait(() =>
-        expect(store.getState().userData).toMatchObject(defaultIdentity)
-      )
-      const showQRCodeButton = getByText(/show qr code/i)
-      fireEvent.click(showQRCodeButton)
-      await waitForElement(() => getByText(/scan the qr code/i))
-      setUserIdentity(alternateIdentity)
-      rerender(rerenderFromReactTestingLibrary, cogitoAddress(), store)
+        await wait(() => {
+          expect(telepathChannel.id).not.toEqual(initialId)
+          expect(telepathChannel.key).not.toEqual(initialKey)
+        })
+      })
 
-      fakeConnectionSetupDone()
-      await wait(() => {
-        expect(getByTestId(/current-address/i)).toHaveTextContent(
-          alternateIdentity.ethereumAddress
-        )
-        expect(getByTestId(/current-username/i)).toHaveTextContent(
-          alternateIdentity.username
-        )
+      describe('after scanning the code', () => {
+        beforeEach(() => {
+          setUserIdentity(alternateIdentity)
+          rerender(rerenderFromReactTestingLibrary, cogitoAddress(), store)
+          fakeConnectionSetupDone()
+        })
+
+        it('has stored the new identity', async () => {
+          await wait(() =>
+            expect(store.getState().userData).toMatchObject(alternateIdentity)
+          )
+        })
+
+        it('displays the new identity', async () => {
+          await wait(() => {
+            expect(getByTestId(/current-address/i)).toHaveTextContent(
+              alternateIdentity.ethereumAddress
+            )
+            expect(getByTestId(/current-username/i)).toHaveTextContent(
+              alternateIdentity.username
+            )
+          })
+        })
       })
     })
   })
