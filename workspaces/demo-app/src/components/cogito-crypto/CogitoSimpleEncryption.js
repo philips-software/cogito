@@ -32,7 +32,7 @@ const CogitoSimpleEncryptionView = ({ telepathChannel, plainText, cipherText, pe
       <EncryptionView plainText={plainText} pending={pending} telepathChannel={telepathChannel} dispatch={dispatch} />
       <DecryptionView cipherText={cipherText} pending={pending} telepathChannel={telepathChannel} dispatch={dispatch} />
     </EncryptionGrid>
-    <TimedErrorMessage error={errorMessage} />
+    <TimedErrorMessage error={errorMessage} timeout={5000} />
   </Centered>
 )
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { TimedStatus } from './TimedStatus'
+import { TimedStatus } from 'components/utils'
 import { StatusSegmentRow } from 'components/ui/layout'
 
 export const TimedErrorMessage = ({ children, error, onTimeout = () => {}, timeout = 3000 }) => {
