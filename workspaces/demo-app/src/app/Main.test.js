@@ -100,7 +100,7 @@ describe('Main', function () {
     const { initialId, initialKey } = await showQRCode(getByText)
     await wait(() => {
       expectTelepathChanged(initialId, initialKey, store)
-      expect(getByText(/done/i)).toBeInTheDocument()
+      expect(getByText(/scan the qr code/i)).toBeInTheDocument()
     })
   }
 
