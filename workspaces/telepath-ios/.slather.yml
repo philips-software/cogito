@@ -1,3 +1,5 @@
 xcodeproj: Telepath.xcodeproj
 workspace: Telepath.xcworkspace
 scheme: TelepathTests
+ignore:
+  - "Pods/**"

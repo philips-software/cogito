@@ -2,3 +2,5 @@ xcodeproj: Cogito.xcodeproj
 workspace: Cogito.xcworkspace
 scheme: CogitoTests
 binary_basename: Cogito
+ignore:
+  - "Pods/**"
