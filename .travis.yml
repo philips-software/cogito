@@ -56,16 +56,18 @@ after_success:
   - ./xccov-to-sonarqube-generic.sh workspaces/ethers-ios/Build/Logs/Test/*.xcresult/2_Test/*.xccovarchive/ > ./coverage/ethers-ios-coverage.xml
   - sonar-scanner
   # Code coverage reports for iOS
-  - (cd workspaces/cogito-ios-app && bundle exec slather coverage -x)
-  - (cd workspaces/telepath-ios && bundle exec slather coverage -x)
-  - (cd workspaces/cogito-attestations-ios && bundle exec slather coverage -x)
+  - (cd workspaces/cogito-ios-app && bundle exec slather coverage -x -b ./Build -t)
+  - (cd workspaces/telepath-ios && bundle exec slather coverage -x -b ./Build -t)
+  - (cd workspaces/ethers-ios && bundle exec slather coverage -x -b ./Build -t)
+  - (cd workspaces/cogito-attestations-ios && bundle exec slather coverage -x -b ./Build -t)
   # Convert coverage to Code Climate format
   - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.nodejs.json
   - ./cc-test-reporter format-coverage -t cobertura -o coverage/codeclimate.cogito-ios.json workspaces/cogito-ios-app/cobertura.xml
   - ./cc-test-reporter format-coverage -t cobertura -o coverage/codeclimate.telepath-ios.json workspaces/telepath-ios/cobertura.xml
+  - ./cc-test-reporter format-coverage -t cobertura -o coverage/codeclimate.ethers-ios.json workspaces/ethers-ios/cobertura.xml
   - ./cc-test-reporter format-coverage -t cobertura -o coverage/codeclimate.attestations-ios.json workspaces/cogito-attestations-ios/cobertura.xml
   # Combine code coverage reports
-  - ./cc-test-reporter sum-coverage --parts 4 coverage/codeclimate.*.json
+  - ./cc-test-reporter sum-coverage --parts 5 coverage/codeclimate.*.json
   # Upload test coverage to Code Climate
   - ./cc-test-reporter upload-coverage
 deploy:

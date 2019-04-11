@@ -1,0 +1,6 @@
+xcodeproj: Ethers.xcodeproj
+workspace: Ethers.xcworkspace
+scheme: EthersTests
+binary_basename: Ethers
+ignore:
+  - "Pods/**"
