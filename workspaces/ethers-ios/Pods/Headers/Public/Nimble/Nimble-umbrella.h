@@ -1,1 +1,1 @@
-/Users/nlv22930/Development/cogito/workspaces/ethers-ios/Pods/Target Support Files/Nimble/Nimble-umbrella.h
+../../../Target Support Files/Nimble/Nimble-umbrella.h
