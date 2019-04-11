@@ -229,24 +229,26 @@ describe('CogitoAddress', () => {
     })
 
     it('displays new identity if user explicitly requests a new QR Code', async () => {
-      const { getByText, getByTestId } = render(cogitoAddress())
+      const {
+        getByText,
+        store,
+        getByTestId,
+        rerender: rerenderFromReactTestingLibrary
+      } = render(cogitoAddress())
       const readButton = await waitForElement(() =>
         getByText(/read your identity.../i)
       )
       fireEvent.click(readButton)
       fakeConnectionSetupDone()
-      await wait(() => {
-        expect(getByTestId(/current-address/i)).toHaveTextContent(
-          defaultIdentity.ethereumAddress
-        )
-        expect(getByTestId(/current-username/i)).toHaveTextContent(
-          defaultIdentity.username
-        )
-      })
-      setUserIdentity(alternateIdentity)
+      await wait(() =>
+        expect(store.getState().userData).toMatchObject(defaultIdentity)
+      )
       const showQRCodeButton = getByText(/show qr code/i)
       fireEvent.click(showQRCodeButton)
       await waitForElement(() => getByText(/scan the qr code/i))
+      setUserIdentity(alternateIdentity)
+      rerender(rerenderFromReactTestingLibrary, cogitoAddress(), store)
+
       fakeConnectionSetupDone()
       await wait(() => {
         expect(getByTestId(/current-address/i)).toHaveTextContent(
