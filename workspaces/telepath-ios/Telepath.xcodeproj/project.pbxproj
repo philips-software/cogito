@@ -614,7 +614,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F4EBE1B79B6DF5C8C6647AF2 /* Pods-Telepath-TelepathTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWTEZ4CYM6;
 				INFOPLIST_FILE = TelepathTests/Info.plist;
@@ -630,7 +630,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 50E96DB6A72961DE52059338 /* Pods-Telepath-TelepathTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MWTEZ4CYM6;
 				INFOPLIST_FILE = TelepathTests/Info.plist;
