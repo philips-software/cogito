@@ -160,7 +160,7 @@ describe('Main', function () {
       })
     })
 
-    it('creates new telepath channel when user explicitely requests QR code', async () => {
+    it('creates new telepath channel when user explicitly requests QR code', async () => {
       await validateTelepathChanged('/')
     })
 
@@ -174,7 +174,7 @@ describe('Main', function () {
       await validateCorrectPageRendered('/contracts', 'Current value is:')
     })
 
-    it('creates new telepath channel when user explicitely requests QR code', async () => {
+    it('creates new telepath channel when user explicitly requests QR code', async () => {
       await validateTelepathChanged('/contracts')
     })
 
