@@ -3,6 +3,6 @@ default_platform(:ios)
 platform :ios do
   desc "Execute tests"
   lane :tests do
-    run_tests(scheme: "TelepathTests")
+    run_tests(scheme: "TelepathTests", derived_data_path: './Build')
   end
 end
