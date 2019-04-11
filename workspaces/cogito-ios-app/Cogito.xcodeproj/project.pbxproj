@@ -1556,7 +1556,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2DA9DD4F7CAA535BF4E32B61 /* Pods-Cogito-CogitoTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1576,7 +1576,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A51C652F88A1C505BE309FCA /* Pods-Cogito-CogitoTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
