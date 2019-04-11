@@ -10,19 +10,26 @@ const renderWithStore = (
   {
     reducer = rootReducer,
     initialState,
-    store = createStore(reducer,
+    store = createStore(
+      reducer,
       initialState,
       applyMiddleware(thunkMiddleware)
     )
-  } = {}) => {
+  } = {}
+) => {
   return {
-    ...render(
-      <WithStore.Provider value={{ store }}>
-        { ui }
-      </WithStore.Provider>
+    ...render(<WithStore.Provider value={{ store }}>{ui}</WithStore.Provider>),
+    store
+  }
+}
+
+const rerenderWithStore = (rerender, ui, store) => {
+  return {
+    ...rerender(
+      <WithStore.Provider value={{ store }}>{ui}</WithStore.Provider>
     ),
     store
   }
 }
 
-export { renderWithStore }
+export { renderWithStore, rerenderWithStore }
