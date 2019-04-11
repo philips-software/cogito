@@ -10,6 +10,10 @@ coverage/
 xcuserdata
 .idea/workspace.xml
 .idea/dictionaries/*
+Build
 
 # lerna
 lerna-debug.log
+
+# sonar
+.scannerwork
