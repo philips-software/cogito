@@ -16,6 +16,7 @@ var nextKey = 1
 class JsonRpcChannel {
   constructor ({ channel }) {
     this.channel = channel
+    this.subscriptions = []
   }
 
   createConnectUrl () {
@@ -35,8 +36,23 @@ class JsonRpcChannel {
   }
 
   startNotifications () {}
-  subscribeForNotifications () {}
-  unsubscribeForNotifications () {}
+
+  subscribeForNotifications (onNotification, onError) {
+    this.subscriptions.push({ onNotification, onError })
+    return this.subscriptions.length - 1
+  }
+
+  unsubscribeForNotifications (subscription) {
+    this.subscriptions[subscription] = null
+  }
+
+  fakeIncomingNotification (notification) {
+    this.subscriptions.forEach(subscription => {
+      if (subscription) {
+        subscription.onNotification(notification)
+      }
+    })
+  }
 
   async send (request) {
     this.sent = request
