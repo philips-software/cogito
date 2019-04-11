@@ -1,6 +1,11 @@
 import { Main } from './Main'
 import { inRouter, EthereumForSimpleStorage } from 'test-helpers'
-import { render, waitForElement, fireEvent, wait } from 'test-helpers/render-props'
+import {
+  render,
+  waitForElement,
+  fireEvent,
+  wait
+} from 'test-helpers/render-props'
 import { SimpleStorage } from '@cogitojs/demo-app-contracts'
 
 import { UserDataActions } from 'user-data'
@@ -50,15 +55,21 @@ describe('Main', function () {
   }
 
   const setupStore = () => {
-    store = createStore(rootReducer,
+    store = createStore(
+      rootReducer,
       undefined,
       applyMiddleware(thunkMiddleware)
     )
   }
 
   const showQRCode = async getByText => {
-    const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
-    const { channelId: initialId, channelKey: initialKey } = store.getState().userData
+    const showQRCodeButton = await waitForElement(() =>
+      getByText(/show qr code/i)
+    )
+    const {
+      channelId: initialId,
+      channelKey: initialKey
+    } = store.getState().userData
     fireEvent.click(showQRCodeButton)
     return { initialId, initialKey, getByText, store }
   }
@@ -110,8 +121,12 @@ describe('Main', function () {
   describe('when routing to home page', () => {
     const forInitialRendering = getByTestId => {
       return wait(() => {
-        expect(getByTestId(/current-address/i)).toHaveTextContent(defaultIdentity.ethereumAddress)
-        expect(getByTestId(/current-username/i)).toHaveTextContent(defaultIdentity.username)
+        expect(getByTestId(/current-address/i)).toHaveTextContent(
+          defaultIdentity.ethereumAddress
+        )
+        expect(getByTestId(/current-username/i)).toHaveTextContent(
+          defaultIdentity.username
+        )
       })
     }
 
@@ -136,8 +151,12 @@ describe('Main', function () {
       changeUserIdentity(getByText)
 
       await wait(() => {
-        expect(getByTestId(/current-address/i)).toHaveTextContent(alternateIdentity.ethereumAddress)
-        expect(getByTestId(/current-username/i)).toHaveTextContent(alternateIdentity.username)
+        expect(getByTestId(/current-address/i)).toHaveTextContent(
+          alternateIdentity.ethereumAddress
+        )
+        expect(getByTestId(/current-username/i)).toHaveTextContent(
+          alternateIdentity.username
+        )
       })
     })
 
@@ -164,9 +183,16 @@ describe('Main', function () {
     })
 
     it('rerenders the page when channel changes', async () => {
-      const { getByText, queryByText, store } = render(inRouter(Main, '/contracts'))
-      const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
-      const { channelId: initialId, channelKey: initialKey } = store.getState().userData
+      const { getByText, queryByText, store } = render(
+        inRouter(Main, '/contracts')
+      )
+      const showQRCodeButton = await waitForElement(() =>
+        getByText(/show qr code/i)
+      )
+      const {
+        channelId: initialId,
+        channelKey: initialKey
+      } = store.getState().userData
       fireEvent.click(showQRCodeButton)
       // By waiting for channel to change we can request the button *AFTER* the page
       // has been rerendered. If we do not do that, we will get the reference
