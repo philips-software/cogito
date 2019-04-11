@@ -130,34 +130,8 @@ describe('Main', function () {
       })
     }
 
-    const changeUserIdentity = getByText => {
-      setUserIdentity(alternateIdentity)
-      const showQRCodeButton = getByText(/show qr code/i)
-      fireEvent.click(showQRCodeButton)
-      const rerenderedDoneButton = getByText(/done/i)
-      fireEvent.click(rerenderedDoneButton)
-    }
-
     it('renders correct page', async () => {
       await validateCorrectPageRendered('/', 'Your Cogito account address is:')
-    })
-
-    it('can update identity when telepath changes', async () => {
-      store.dispatch(UserDataActions.setIdentityInfo(defaultIdentity))
-      const { getByText, getByTestId } = render(inRouter(Main, '/'), { store })
-
-      await forInitialRendering(getByTestId)
-
-      changeUserIdentity(getByText)
-
-      await wait(() => {
-        expect(getByTestId(/current-address/i)).toHaveTextContent(
-          alternateIdentity.ethereumAddress
-        )
-        expect(getByTestId(/current-username/i)).toHaveTextContent(
-          alternateIdentity.username
-        )
-      })
     })
 
     it('creates new telepath channel when user explicitly requests QR code', async () => {
