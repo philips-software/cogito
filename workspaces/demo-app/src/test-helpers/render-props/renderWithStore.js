@@ -17,10 +17,7 @@ const renderWithStore = (
     )
   } = {}
 ) => {
-  return {
-    ...render(<WithStore.Provider value={{ store }}>{ui}</WithStore.Provider>),
-    store
-  }
+  return rerenderWithStore(render, ui, store)
 }
 
 const rerenderWithStore = (rerender, ui, store) => {
