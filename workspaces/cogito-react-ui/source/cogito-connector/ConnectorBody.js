@@ -8,6 +8,17 @@ import { CogitoQRCode } from '../CogitoQRCode'
 
 class ConnectorBody extends React.Component {
   componentDidMount () {
+    this.subscribeToTelepath()
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.telepathChannel !== this.props.telepathChannel) {
+      prevProps.telepathChannel.unsubscribeForNotifications(this.subscription)
+      this.subscribeToTelepath()
+    }
+  }
+
+  subscribeToTelepath () {
     const { telepathChannel, onDone } = this.props
     this.subscription = telepathChannel.subscribeForNotifications(
       notification => {
