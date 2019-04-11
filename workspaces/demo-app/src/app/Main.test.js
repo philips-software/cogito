@@ -155,31 +155,5 @@ describe('Main', function () {
     it('keeps dialog open after the channel has changed and page rerendered', async () => {
       await validatePageRerendered('/contracts')
     })
-
-    it('rerenders the page when channel changes', async () => {
-      const { getByText, queryByText, store } = render(
-        inRouter(Main, '/contracts')
-      )
-      const showQRCodeButton = await waitForElement(() =>
-        getByText(/show qr code/i)
-      )
-      const {
-        channelId: initialId,
-        channelKey: initialKey
-      } = store.getState().userData
-      fireEvent.click(showQRCodeButton)
-      // By waiting for channel to change we can request the button *AFTER* the page
-      // has been rerendered. If we do not do that, we will get the reference
-      // to a wrong button, which will close the dialog by changing the redux state
-      // (AppEventsActions.setDialogClosed()), but react will warn that
-      // we try to update state on an unmounted component.
-      await wait(() => {
-        expect(store.getState().userData.channelId).not.toEqual(initialId)
-        expect(store.getState().userData.channelKey).not.toEqual(initialKey)
-      })
-      const doneButton = getByText(/done/i)
-      fireEvent.click(doneButton)
-      expect(queryByText(/scan the qr code/i)).toBeNull()
-    })
   })
 })
