@@ -8,7 +8,6 @@ import {
 } from 'test-helpers/render-props'
 import { SimpleStorage } from '@cogitojs/demo-app-contracts'
 
-import { UserDataActions } from 'user-data'
 import { IdentityActions } from 'components/cogito-address/actions'
 
 import { createStore, applyMiddleware } from 'redux'
@@ -30,10 +29,6 @@ describe('Main', function () {
   const defaultIdentity = {
     ethereumAddress: testAddress,
     username: testUserName
-  }
-  const alternateIdentity = {
-    ethereumAddress: testAddress.toUpperCase(),
-    username: testUserName.toUpperCase()
   }
 
   const mockChannel = (channel, identity) => {
@@ -119,17 +114,6 @@ describe('Main', function () {
   })
 
   describe('when routing to home page', () => {
-    const forInitialRendering = getByTestId => {
-      return wait(() => {
-        expect(getByTestId(/current-address/i)).toHaveTextContent(
-          defaultIdentity.ethereumAddress
-        )
-        expect(getByTestId(/current-username/i)).toHaveTextContent(
-          defaultIdentity.username
-        )
-      })
-    }
-
     it('renders correct page', async () => {
       await validateCorrectPageRendered('/', 'Your Cogito account address is:')
     })
