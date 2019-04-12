@@ -61,7 +61,7 @@ describe('CogitoContract', () => {
   })
 
   describe('when in initial state', async () => {
-    it('shows the intial contract value of zero', async () => {
+    it('shows the initial contract value of zero', async () => {
       const { getByText, getByTestId } = render(cogitoContract())
       await waitForElement(() => getByText(/current value is/i))
       expect(getByTestId(/current-value/i)).toHaveTextContent('0')
@@ -133,7 +133,7 @@ describe('CogitoContract', () => {
       )
     })
 
-    it('shows the "Scan QR Code" dialog and then inceases the contract value after confirming', async () => {
+    it('shows the "Scan QR Code" dialog and then increases the contract value after confirming', async () => {
       const { getByText, getByTestId, queryByText } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
@@ -158,7 +158,7 @@ describe('CogitoContract', () => {
       expect(queryByText(/scan the qr code/i)).toBeNull()
     })
 
-    it('shows the "Scan QR Code" dialog when traying to Increase after closing it', async () => {
+    it('shows the "Scan QR Code" dialog when trying to Increase after closing it', async () => {
       const { getByText, queryByText } = render(cogitoContract())
       const showQRCodeButton = await waitForElement(() =>
         getByText(/show qr code/i)
@@ -184,7 +184,7 @@ describe('CogitoContract', () => {
       )
     })
 
-    it('creates new telepath channel when user explicitely requests a new QR Code', async () => {
+    it('creates new telepath channel when user explicitly requests a new QR Code', async () => {
       const { getByText } = render(cogitoContract())
       const showQRCodeButton = await waitForElement(() =>
         getByText(/show qr code/i)
@@ -193,7 +193,7 @@ describe('CogitoContract', () => {
       expect(newChannel).toHaveBeenCalledTimes(1)
     })
 
-    it('refetches user idenity when user explicitely requests a new QR Code', async () => {
+    it('refetches user identity when user explicitly requests a new QR Code', async () => {
       const { getByText, store } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
