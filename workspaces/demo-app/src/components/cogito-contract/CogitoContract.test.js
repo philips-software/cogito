@@ -1,6 +1,15 @@
 import React from 'react'
-import { render, fireEvent, wait, waitForElement } from 'test-helpers/render-props'
-import { TelepathChannelMock, SimpleStorageMock, InteractivePromise } from 'test-helpers'
+import {
+  render,
+  fireEvent,
+  wait,
+  waitForElement
+} from 'test-helpers/render-props'
+import {
+  TelepathChannelMock,
+  SimpleStorageMock,
+  InteractivePromise
+} from 'test-helpers'
 import nock from 'nock'
 import { CogitoContract } from './CogitoContract'
 import { UserDataActions } from 'user-data'
@@ -22,14 +31,19 @@ describe('CogitoContract', () => {
 
   const initSimpleStorageProxy = () => {
     return class {
-      static deployed = jest.fn()
+      static deployed = jest
+        .fn()
         .mockResolvedValueOnce(simpleStorage)
         .mockResolvedValueOnce(simpleStorage)
     }
   }
 
   const cogitoContract = () => (
-    <CogitoContract telepathChannel={channel} SimpleStorage={simpleStorageProxy} newChannel={newChannel} />
+    <CogitoContract
+      telepathChannel={channel}
+      SimpleStorage={simpleStorageProxy}
+      newChannel={newChannel}
+    />
   )
 
   beforeEach(() => {
@@ -38,8 +52,12 @@ describe('CogitoContract', () => {
     simpleStorage = new SimpleStorageMock()
     simpleStorageProxy = initSimpleStorageProxy()
     process.env.REACT_APP_FAUCET_URL = 'https://faucet.url/donate'
-    nock(process.env.REACT_APP_FAUCET_URL).post(`/${channel.identities[0].ethereumAddress}`, '').reply(200)
-    nock(process.env.REACT_APP_FAUCET_URL).post(`/${channel.identities[1].ethereumAddress}`, '').reply(200)
+    nock(process.env.REACT_APP_FAUCET_URL)
+      .post(`/${channel.identities[0].ethereumAddress}`, '')
+      .reply(200)
+    nock(process.env.REACT_APP_FAUCET_URL)
+      .post(`/${channel.identities[1].ethereumAddress}`, '')
+      .reply(200)
   })
 
   describe('when in initial state', async () => {
@@ -99,12 +117,20 @@ describe('CogitoContract', () => {
 
     it('directly increases the contract value if telepath channel is already established', async () => {
       console.log = jest.fn()
-      const { getByText, getByTestId, store: { dispatch } } = render(cogitoContract())
+      const {
+        getByText,
+        getByTestId,
+        store: { dispatch }
+      } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       setActiveTelepathChannel(dispatch)
       fireEvent.click(increaseButton)
       simpleStorage.simulateValueChange(contractValueIncrement)
-      await wait(() => expect(getByTestId(/current-value/i)).toHaveTextContent(`${contractValueIncrement}`))
+      await wait(() =>
+        expect(getByTestId(/current-value/i)).toHaveTextContent(
+          `${contractValueIncrement}`
+        )
+      )
     })
 
     it('shows the "Scan QR Code" dialog and then inceases the contract value after confirming', async () => {
@@ -114,7 +140,11 @@ describe('CogitoContract', () => {
       const doneButton = getByText(/done/i)
       fireEvent.click(doneButton)
       simpleStorage.simulateValueChange(contractValueIncrement)
-      await wait(() => expect(getByTestId(/current-value/i)).toHaveTextContent(`${contractValueIncrement}`))
+      await wait(() =>
+        expect(getByTestId(/current-value/i)).toHaveTextContent(
+          `${contractValueIncrement}`
+        )
+      )
       expect(queryByText(/scan the qr code/i)).toBeNull()
     })
 
@@ -130,7 +160,9 @@ describe('CogitoContract', () => {
 
     it('shows the "Scan QR Code" dialog when traying to Increase after closing it', async () => {
       const { getByText, queryByText } = render(cogitoContract())
-      const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
+      const showQRCodeButton = await waitForElement(() =>
+        getByText(/show qr code/i)
+      )
       fireEvent.click(showQRCodeButton)
       expect(getByText(/scan the qr code/i)).toBeInTheDocument()
       const closeIcon = document.querySelector('i.close.icon')
@@ -147,12 +179,16 @@ describe('CogitoContract', () => {
       fireEvent.click(increaseButton)
       const doneButton = getByText(/done/i)
       fireEvent.click(doneButton)
-      await wait(() => expect(store.getState().userData).toMatchObject(channel.identities[0]))
+      await wait(() =>
+        expect(store.getState().userData).toMatchObject(channel.identities[0])
+      )
     })
 
     it('creates new telepath channel when user explicitely requests a new QR Code', async () => {
       const { getByText } = render(cogitoContract())
-      const showQRCodeButton = await waitForElement(() => getByText(/show qr code/i))
+      const showQRCodeButton = await waitForElement(() =>
+        getByText(/show qr code/i)
+      )
       fireEvent.click(showQRCodeButton)
       expect(newChannel).toHaveBeenCalledTimes(1)
     })
@@ -163,12 +199,16 @@ describe('CogitoContract', () => {
       fireEvent.click(increaseButton)
       const doneButton = getByText(/done/i)
       fireEvent.click(doneButton)
-      await wait(() => expect(store.getState().userData).toMatchObject(channel.identities[0]))
+      await wait(() =>
+        expect(store.getState().userData).toMatchObject(channel.identities[0])
+      )
       const showQRCodeButton = getByText(/show qr code/i)
       fireEvent.click(showQRCodeButton)
       fireEvent.click(doneButton)
       fireEvent.click(increaseButton)
-      await wait(() => expect(store.getState().userData).toMatchObject(channel.identities[1]))
+      await wait(() =>
+        expect(store.getState().userData).toMatchObject(channel.identities[1])
+      )
     })
   })
 
@@ -178,10 +218,15 @@ describe('CogitoContract', () => {
 
     beforeEach(async () => {
       increasePromise = new InteractivePromise()
-      simpleStorage = new SimpleStorageMock({ increase: () => increasePromise.get() })
+      simpleStorage = new SimpleStorageMock({
+        increase: () => increasePromise.get()
+      })
       simpleStorageProxy = initSimpleStorageProxy()
       renderingContext = render(cogitoContract())
-      const { getByText, store: { dispatch } } = renderingContext
+      const {
+        getByText,
+        store: { dispatch }
+      } = renderingContext
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       setActiveTelepathChannel(dispatch)
       fireEvent.click(increaseButton)
@@ -209,7 +254,9 @@ describe('CogitoContract', () => {
     beforeEach(() => {
       console.error = jest.fn()
       increasePromise = new InteractivePromise()
-      simpleStorage = new SimpleStorageMock({ increase: () => increasePromise.get() })
+      simpleStorage = new SimpleStorageMock({
+        increase: () => increasePromise.get()
+      })
       simpleStorageProxy = initSimpleStorageProxy()
     })
 
@@ -218,7 +265,11 @@ describe('CogitoContract', () => {
     })
 
     it('shows an error message when increasing contract value fails', async () => {
-      const { getByText, queryByText, store: { dispatch } } = render(cogitoContract())
+      const {
+        getByText,
+        queryByText,
+        store: { dispatch }
+      } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       setActiveTelepathChannel(dispatch)
       fireEvent.click(increaseButton)
@@ -230,7 +281,9 @@ describe('CogitoContract', () => {
     })
 
     it('shows an error message when fetching identity info fails', async () => {
-      channel = new TelepathChannelMock({ error: new Error('Error fetching identity info') })
+      channel = new TelepathChannelMock({
+        error: new Error('Error fetching identity info')
+      })
       const { getByText } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
@@ -246,7 +299,9 @@ describe('CogitoContract', () => {
       fireEvent.click(increaseButton)
       const doneButton = getByText(/done/i)
       fireEvent.click(doneButton)
-      await waitForElement(() => getByText('No identity found on the mobile device!'))
+      await waitForElement(() =>
+        getByText('No identity found on the mobile device!')
+      )
     })
 
     it('hides the error message after sometime', async () => {
