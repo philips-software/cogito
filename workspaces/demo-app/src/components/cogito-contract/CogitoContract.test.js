@@ -5,20 +5,18 @@ import {
   wait,
   waitForElement
 } from 'test-helpers/render-props'
-import {
-  TelepathChannelMock,
-  SimpleStorageMock,
-  InteractivePromise
-} from 'test-helpers'
+import { SimpleStorageMock, InteractivePromise } from 'test-helpers'
 import nock from 'nock'
 import { CogitoContract } from './CogitoContract'
 import { UserDataActions } from 'user-data'
 import { AppEventsActions } from 'app-events'
 import { ValueWatcher } from './ValueWatcher'
+import { Telepath } from '@cogitojs/telepath-js'
 
 jest.unmock('@react-frontend-developer/react-redux-render-prop')
 
 describe('CogitoContract', () => {
+  let telepath
   let channel
   let simpleStorage
   let simpleStorageProxy
@@ -46,8 +44,33 @@ describe('CogitoContract', () => {
     />
   )
 
-  beforeEach(() => {
-    channel = new TelepathChannelMock()
+  const fakeConnectionSetupDone = () => {
+    channel.fakeIncomingNotification({
+      method: 'connectionSetupDone'
+    })
+  }
+
+  const addTestStuffToChannel = () => {
+    channel.identities = [
+      {
+        ethereumAddress: '0xabcd',
+        username: 'Test User'
+      },
+      {
+        ethereumAddress: '0x1234',
+        username: 'Another Test User'
+      }
+    ]
+    channel.mockIdentityInfo = jest.fn()
+    channel.identities.forEach(identity => {
+      channel.mockIdentityInfo.mockReturnValueOnce(identity)
+    })
+  }
+
+  beforeEach(async () => {
+    telepath = new Telepath('https://telepath.cogito.mobi')
+    channel = await telepath.createChannel({ appName: 'test' })
+    addTestStuffToChannel()
     newChannel = jest.fn()
     simpleStorage = new SimpleStorageMock()
     simpleStorageProxy = initSimpleStorageProxy()
@@ -137,8 +160,7 @@ describe('CogitoContract', () => {
       const { getByText, getByTestId, queryByText } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
-      const doneButton = getByText(/done/i)
-      fireEvent.click(doneButton)
+      fakeConnectionSetupDone()
       simpleStorage.simulateValueChange(contractValueIncrement)
       await wait(() =>
         expect(getByTestId(/current-value/i)).toHaveTextContent(
@@ -174,11 +196,11 @@ describe('CogitoContract', () => {
     })
 
     it('sets user identity and connection status in the redux store', async () => {
-      const { getByText, store } = render(cogitoContract())
+      const { getByText, store, debug } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
-      const doneButton = getByText(/done/i)
-      fireEvent.click(doneButton)
+      debug()
+      fakeConnectionSetupDone()
       await wait(() =>
         expect(store.getState().userData).toMatchObject(channel.identities[0])
       )
@@ -197,14 +219,13 @@ describe('CogitoContract', () => {
       const { getByText, store } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
-      const doneButton = getByText(/done/i)
-      fireEvent.click(doneButton)
+      fakeConnectionSetupDone()
       await wait(() =>
         expect(store.getState().userData).toMatchObject(channel.identities[0])
       )
       const showQRCodeButton = getByText(/show qr code/i)
       fireEvent.click(showQRCodeButton)
-      fireEvent.click(doneButton)
+      fakeConnectionSetupDone()
       fireEvent.click(increaseButton)
       await wait(() =>
         expect(store.getState().userData).toMatchObject(channel.identities[1])
@@ -281,24 +302,22 @@ describe('CogitoContract', () => {
     })
 
     it('shows an error message when fetching identity info fails', async () => {
-      channel = new TelepathChannelMock({
-        error: new Error('Error fetching identity info')
-      })
+      channel.error = new Error('Error fetching identity info')
       const { getByText } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
-      const doneButton = getByText(/done/i)
-      fireEvent.click(doneButton)
+      fakeConnectionSetupDone()
       await waitForElement(() => getByText(channel.error.message))
     })
 
     it('shows an error message when fetching identity returns no identity', async () => {
-      channel = new TelepathChannelMock({ identities: [] })
+      channel = await telepath.createChannel({ appName: 'test' })
+      channel.mockIdentityInfo = jest.fn()
+      channel.identities = []
       const { getByText } = render(cogitoContract())
       const increaseButton = await waitForElement(() => getByText(/increase/i))
       fireEvent.click(increaseButton)
-      const doneButton = getByText(/done/i)
-      fireEvent.click(doneButton)
+      fakeConnectionSetupDone()
       await waitForElement(() =>
         getByText('No identity found on the mobile device!')
       )
