@@ -1,7 +1,6 @@
 export { inRouter, renderInRouter } from './router'
 export { EventWaiter } from './EventWaiter'
 export { GanacheTestNetwork } from './GanacheTestNetwork'
-export { TelepathChannelMock } from './TelepathChannelMock'
 export { SimpleStorageMock } from './SimpleStorageMock'
 export { InteractivePromise } from './InteractivePromise'
 export { EthereumForSimpleStorage } from './EthereumForSimpleStorage'
