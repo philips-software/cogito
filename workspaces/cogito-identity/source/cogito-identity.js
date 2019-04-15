@@ -1,11 +1,6 @@
 import uuidv4 from 'uuid/v4'
 
 class CogitoIdentity {
-  static Property = {
-    Username: 'username',
-    EthereumAddress: 'ethereumAddress'
-  }
-
   constructor ({ channel }) {
     this.channel = channel
   }
@@ -32,6 +27,11 @@ class CogitoIdentity {
   newRequestId () {
     return uuidv4()
   }
+}
+
+CogitoIdentity.Property = {
+  Username: 'username',
+  EthereumAddress: 'ethereumAddress'
 }
 
 export { CogitoIdentity }
