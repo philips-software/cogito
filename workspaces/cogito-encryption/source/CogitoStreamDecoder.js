@@ -3,12 +3,6 @@ import { StreamDecoder } from '@cogitojs/crypto'
 import { TypedArrays } from '@react-frontend-developer/buffers'
 
 class CogitoStreamDecoder {
-  telepath
-  tag
-  cryptoMaterial
-  streamKey
-  decoder
-
   checkArguments (telepath, tag, cryptoMaterial) {
     let errorMessage
     if (!telepath) {
