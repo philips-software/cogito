@@ -4,17 +4,12 @@
   "description": "Secure communication channel between mobile app and web app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "scripts": {
-    "build": "node ./tools/build.js"
-  },
+  "main": "source/main.js",
+  "module": "source/index.js",
   "engines": {
     "node": ">=8.0.0"
   },
   "files": [
-    "lib",
-    "es",
     "source"
   ],
   "devDependencies": {
@@ -24,6 +19,7 @@
     "@cogitojs/crypto": "^0.3.0",
     "base64url": "^2.0.0",
     "cross-fetch": "^2.1.1",
+    "esm": "^3.2.22",
     "libsodium-wrappers": "^0.7.3",
     "socket.io-client": "^2.1.1",
     "timeout-callback": "^2.0.2"
