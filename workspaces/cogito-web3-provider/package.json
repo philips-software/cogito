@@ -4,25 +4,18 @@
   "description": "An Ethereum web3 provider that signs transactions with the Cogito app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "scripts": {
-    "build": "node ./tools/build.js"
-  },
+  "main": "source/main.js",
+  "module": "source/index.js",
   "engines": {
     "node": ">=8.0.0"
   },
   "files": [
-    "lib",
-    "es",
     "source"
   ],
   "dependencies": {
     "@cogitojs/telepath-js": "^0.3.0",
+    "esm": "^3.2.22",
     "web3": "1.0.0-beta.36"
-  },
-  "devDependencies": {
-    "lodash": "^4.17.11"
   },
   "publishConfig": {
     "access": "public"
