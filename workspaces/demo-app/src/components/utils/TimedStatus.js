@@ -3,12 +3,12 @@ import React from 'react'
 class TimedStatus extends React.Component {
   constructor () {
     super()
-    this.state = { timedout: false }
+    this.state = { timedOut: false }
   }
 
   componentDidMount () {
     this.timer = setTimeout(() => {
-      this.setState({ timedout: true })
+      this.setState({ timedOut: true })
       this.props.onTimeout()
     }, this.props.timeout)
   }
@@ -18,7 +18,7 @@ class TimedStatus extends React.Component {
   }
 
   render () {
-    return this.state.timedout
+    return this.state.timedOut
       ? this.props.renderOnTimeout
         ? this.props.renderOnTimeout()
         : null
