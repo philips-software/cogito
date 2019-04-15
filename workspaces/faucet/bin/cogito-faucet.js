@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 require('@babel/polyfill')
-var program = require('commander')
-var FaucetServer = require('@cogitojs/faucet').default
+const program = require('commander')
+const { FaucetServer } = require('@cogitojs/faucet')
 
 program
   .usage('[options] <account>')

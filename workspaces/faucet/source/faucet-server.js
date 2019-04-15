@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import { Donator } from './donator'
 
-export default class FaucetServer {
+export class FaucetServer {
   constructor (config) {
     this.queue = []
     this.config = config

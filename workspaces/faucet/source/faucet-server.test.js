@@ -1,5 +1,5 @@
 import request from 'supertest'
-import FaucetServer from './faucet-server'
+import { FaucetServer } from './faucet-server'
 
 describe('Server', () => {
   const config = {
