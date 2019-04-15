@@ -4,18 +4,12 @@
   "description": "Allows retrieval of attestations through the Cogito app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
-  "main": "umd/cogito-attestations.min.js",
-  "module": "es/index.js",
-  "scripts": {
-    "build": "node ./tools/build.js"
-  },
+  "main": "source/main.js",
+  "module": "source/index.js",
   "engines": {
     "node": ">=8.0.0"
   },
   "files": [
-    "lib",
-    "es",
-    "umd",
     "source"
   ],
   "publishConfig": {
@@ -24,6 +18,7 @@
   "dependencies": {
     "@cogitojs/telepath-js": "^0.2.23",
     "base64url": "^3.0.0",
+    "esm": "^3.2.22",
     "ethereumjs-util": "^5.2.0"
   },
   "devDependencies": {
