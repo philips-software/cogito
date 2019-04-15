@@ -4,23 +4,19 @@
   "description": "Crypto utilities for cogito",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "scripts": {
-    "build": "node ./tools/build.js"
-  },
+  "main": "source/main.js",
+  "module": "source/index.js",
   "engines": {
     "node": ">=8.0.0"
   },
   "files": [
-    "lib",
-    "es",
     "source"
   ],
   "devDependencies": {
     "nock": "^9.2.5"
   },
   "dependencies": {
+    "esm": "^3.2.22",
     "libsodium-wrappers": "^0.7.2"
   },
   "publishConfig": {

@@ -1,8 +1,6 @@
 import sodium from 'libsodium-wrappers'
 
 class Sodium {
-  static ready = false
-
   static async wait () {
     if (!Sodium.ready) {
       await sodium.ready
@@ -26,5 +24,7 @@ class Sodium {
     return sodium.crypto_secretstream_xchacha20poly1305_TAG_FINAL
   }
 }
+
+Sodium.ready = false
 
 export { Sodium }
