@@ -3,16 +3,13 @@
   "version": "0.3.0",
   "private": true,
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "source/main.js",
+  "module": "source/index.js",
   "files": [
-    "lib",
-    "es",
     "source"
   ],
   "scripts": {
     "start": "(ganache-cli --account='0xc87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3,10000000000000000000000' -p 8545 --host 0.0.0.0) & wait",
-    "build": "node ./tools/build.js",
     "compile": "yarn truffle compile",
     "migrate": "yarn truffle migrate",
     "test": "yarn lint && yarn truffle test --network testing",
@@ -24,5 +21,8 @@
     "ganache-cli": "^6.3.0",
     "solium": "^1.1.7",
     "truffle": "^4.1.11"
+  },
+  "dependencies": {
+    "esm": "^3.2.22"
   }
 }

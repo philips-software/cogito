@@ -57,7 +57,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy:contracts": "(cd ../demo-app-contracts && yarn migrate && yarn build)",
+    "deploy:contracts": "(cd ../demo-app-contracts && yarn migrate)",
     "start:ganache": "(cd ../demo-app-contracts && yarn start)",
     "start:faucet": "(cd ../faucet && yarn start)",
     "start:with-faucet": "yarn start:faucet & react-scripts start & wait",
