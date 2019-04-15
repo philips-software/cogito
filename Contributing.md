@@ -88,28 +88,28 @@ We use Babel 7.
 Babel 7 has changed in how babel configuration is discovered.
 
 It allows three different configuration files: `babel.config.js`,
-`.babelrc.js`, and the familiar `.babelrc`. The semantics of file 
-discovery have changed. If `babel.config.js` is present at your 
-current working directory, only this file will be used and `.babelrc` 
-and `.babelrc.js` will be ignored (and it does not matter if they are 
+`.babelrc.js`, and the familiar `.babelrc`. The semantics of file
+discovery have changed. If `babel.config.js` is present at your
+current working directory, only this file will be used and `.babelrc`
+and `.babelrc.js` will be ignored (and it does not matter if they are
 in your `cwd` or in one of the subfolders).
 
-If `babel.config.js` is not present, you can decide to either use 
-`.babelrc` for static configuration or `.babelrc.js` if you prefer to 
+If `babel.config.js` is not present, you can decide to either use
+`.babelrc` for static configuration or `.babelrc.js` if you prefer to
 programmatically create your configuration. If you use the `.babelrc` variant, please notice that Babel 7 will look for a `.babelrc` in the current directory. If Babel finds
 other `.babelrc` files while transpiling files in a subfolder, it will merge the configurations together.
 
 Because our packages share the same Babel configuration, we chose
-to create a single top-level `babel.config.js` where we can 
-programmatically create the configuration based on the `BABEL_ENV` and 
-`NODE_ENV` environment variables. The same configuration file is used 
+to create a single top-level `babel.config.js` where we can
+programmatically create the configuration based on the `BABEL_ENV` and
+`NODE_ENV` environment variables. The same configuration file is used
 to run jest tests.
 
-We could not avoid having babel configurations in subfolders because 
-the Babel 7 does not continue searching above the first `package.json` that it finds, and we run the `yarn build` command for the packages via top-level `yarn lerna run build`, which means it will be executed from the package folder. 
+We could not avoid having babel configurations in subfolders because
+the Babel 7 does not continue searching above the first `package.json` that it finds, and we run the `yarn build` command for the packages via top-level `yarn lerna run build`, which means it will be executed from the package folder.
 
 Fortunately, we are able to reuse the top-level
-`babel.config.js` by having the package-specific `babel.config.js` 
+`babel.config.js` by having the package-specific `babel.config.js`
 with just the following content:
 
 ```javascript
@@ -170,3 +170,35 @@ responsibility to make sure your pull request contains the right set of commits.
 In other words, before making the pull request, please check whether your
 commits tell a clear story. If not, first squash / rebase commits as needed
 on your branch, and only then create the pull request.
+
+## Publishing Cogito packages
+
+When you want to publish Cogito packages, please do the following:
+
+Note: **ALWAYS PUBLISH ON MASTER**
+
+Make sure you've installed the latest packages and a clean git repository.
+```
+yarn
+```
+
+Build the application by running the setup:
+```
+yarn setup:dev
+```
+
+Rebuild to make sure:
+```
+yarn build
+```
+
+Login to npm:
+```
+npm login
+```
+
+Publish packages. Make sure you've updated the documentation.
+```
+yarn lerna publish
+```
+
