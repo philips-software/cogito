@@ -13,8 +13,6 @@ import {
 import { CogitoRequest } from './CogitoRequest'
 
 class CogitoEncryption {
-  channel
-
   constructor ({ telepathChannel }) {
     this.channel = telepathChannel
   }

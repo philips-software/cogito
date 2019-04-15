@@ -1,8 +1,6 @@
 import { CogitoRequest } from './CogitoRequest'
 
 class CogitoKeyProvider {
-  channel
-
   constructor ({ telepathChannel }) {
     this.channel = telepathChannel
   }

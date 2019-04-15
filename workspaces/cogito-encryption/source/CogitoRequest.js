@@ -1,6 +1,4 @@
 class CogitoRequest {
-  static id = Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER / 2))
-
   static create (method, params) {
     return {
       jsonrpc: '2.0',
@@ -14,5 +12,7 @@ class CogitoRequest {
     return this.id++
   }
 }
+
+CogitoRequest.id = Math.floor(Math.random() * (Number.MAX_SAFE_INTEGER / 2))
 
 export { CogitoRequest }

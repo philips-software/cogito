@@ -3,11 +3,6 @@ import { rsaEncrypt } from './rsa'
 import { createRsaPublicKey } from './jwk2rsa'
 
 class CogitoStreamEncoder {
-  jsonWebKey
-  encoder = new StreamEncoder()
-  encryptedStreamKey
-  streamHeader
-
   get cryptoMaterial () {
     if (!this.encryptedStreamingKey) {
       const {
@@ -44,6 +39,7 @@ class CogitoStreamEncoder {
   }
 
   constructor (args = {}) {
+    this.encoder = new StreamEncoder()
     this.checkArguments(args.jsonWebKey)
     this.jsonWebKey = args.jsonWebKey
   }
