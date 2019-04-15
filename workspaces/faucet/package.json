@@ -4,9 +4,9 @@
   "description": "Simple faucet with REST API",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
-  "main": "lib/faucet-server.js",
+  "main": "source/main.js",
+  "module": "source/index.js",
   "scripts": {
-    "build": "node ./tools/build.js",
     "start": "COGITO_FAUCET_PRIVATE_KEY=C87509A1C067BBDE78BEB793E6FA76530B6382A4C0241E5E4A9EC0A0F44DC0D3 cogito-faucet --donation 1 0x627306090abab3a6e1400e9345bc60c78a8bef57"
   },
   "engines": {
@@ -14,7 +14,6 @@
   },
   "files": [
     "bin",
-    "lib",
     "source"
   ],
   "bin": {
@@ -29,6 +28,7 @@
     "@babel/polyfill": "^7.0.0",
     "commander": "^2.16.0",
     "cors": "^2.8.4",
+    "esm": "^3.2.22",
     "ethereumjs-tx": "^1.3.4",
     "express": "^4.16.3",
     "web3": "1.0.0-beta.36"

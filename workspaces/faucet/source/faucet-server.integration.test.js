@@ -1,4 +1,4 @@
-import FaucetServer from './faucet-server'
+import { FaucetServer } from './faucet-server'
 import Web3 from 'web3'
 import ganache from 'ganache-cli'
 import request from 'supertest'
