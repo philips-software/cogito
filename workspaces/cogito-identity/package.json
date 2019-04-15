@@ -4,17 +4,12 @@
   "description": "Supports getting identity info from the Cogito app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "scripts": {
-    "build": "node ./tools/build.js"
-  },
+  "main": "source/main.js",
+  "module": "source/index.js",
   "engines": {
     "node": ">=8.0.0"
   },
   "files": [
-    "lib",
-    "es",
     "source"
   ],
   "publishConfig": {
@@ -22,6 +17,7 @@
   },
   "dependencies": {
     "@cogitojs/telepath-js": "^0.3.0",
+    "esm": "^3.2.22",
     "uuid": "^3.2.1"
   }
 }
