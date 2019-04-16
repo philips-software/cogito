@@ -36,6 +36,7 @@
     "test:watch": "yarn jest --watch",
     "lint": "yarn standard && (cd ./workspaces/demo-app-contracts && yarn lint)",
     "lint-fix": "yarn standard --fix --verbose",
+    "prepare": "lerna run prepare",
     "build": "yarn lerna run --scope @cogitojs/** build",
     "deploy": "yarn lerna run deploy --scope telepath-queuing-service --scope homepage"
   },
