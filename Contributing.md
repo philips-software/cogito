@@ -175,30 +175,28 @@ on your branch, and only then create the pull request.
 
 When you want to publish Cogito packages, please do the following:
 
-Note: **ALWAYS PUBLISH ON MASTER**
+> **ALWAYS PUBLISH ON MASTER** and make sure you do not have anything uncommited.
 
-Make sure you've installed the latest packages and a clean git repository.
-```
-yarn
-```
+Make sure your environment is up-to-date:
 
-Build the application by running the setup:
-```
-yarn setup:dev
+```bash
+$ yarn setup:dev
 ```
 
-Rebuild to make sure:
-```
-yarn build
+The above command builds all the packages, but if you like to deal with your internal fears, you can do it again just like this:
+
+```bash
+$ yarn build
 ```
 
-Login to npm:
-```
-npm login
+Login to npm (you will need to be added to the *cogitojs* organization - contact the team):
+
+```bash
+$ npm login
 ```
 
 Publish packages. Make sure you've updated the documentation.
-```
+
+```bash
 yarn lerna publish
 ```
-
