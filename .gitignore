@@ -17,3 +17,6 @@ lerna-debug.log
 
 # sonar
 .scannerwork
+
+# compute-churn
+codemaat.txt
