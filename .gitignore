@@ -20,3 +20,5 @@ lerna-debug.log
 
 # compute-churn
 codemaat.txt
+churn.txt
+abs-churn.txt
