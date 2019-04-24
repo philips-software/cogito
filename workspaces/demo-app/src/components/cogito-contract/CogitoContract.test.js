@@ -225,6 +225,7 @@ describe('CogitoContract', () => {
       )
       const showQRCodeButton = getByText(/show qr code/i)
       fireEvent.click(showQRCodeButton)
+      await waitForElement(() => getByText(/scan the qr code/i))
       fakeConnectionSetupDone()
       fireEvent.click(increaseButton)
       await wait(() =>

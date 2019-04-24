@@ -26,8 +26,9 @@ class SimpleStorageControls extends Component {
     )
   }
 
-  onOpen = dispatch => {
-    this.props.newChannel()
+  onOpen = async dispatch => {
+    const { newChannel } = this.props
+    await newChannel()
     this.setState({ forceFetchingIdentity: true })
     dispatch(AppEventsActions.setDialogOpen())
   }
