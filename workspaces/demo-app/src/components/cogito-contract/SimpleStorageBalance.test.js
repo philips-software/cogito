@@ -1,6 +1,6 @@
 import React from 'react'
 import { SimpleStorageMock } from 'test-helpers'
-import { render, wait } from 'test-helpers/render-props'
+import { render, rerender, wait } from 'test-helpers/render-props'
 import { createStore } from 'redux'
 import { rootReducer } from 'app-state/rootReducer'
 
@@ -23,6 +23,19 @@ describe('SimpleStorageBalance', () => {
     expect(getByTestId(/current-value/i)).toHaveTextContent('0')
     simpleStorage.simulateValueChange(value)
     expect(getByTestId(/current-value/i)).toHaveTextContent(`${value}`)
+  })
+
+  it('restarts watching when contract instance changes', async () => {
+    const { getByTestId, rerender: rerenderRtl } = render(<SimpleStorageBalance dispatch={store.dispatch} simpleStorage={simpleStorage} />, { store })
+    expect(getByTestId(/current-value/i)).toHaveTextContent('0')
+    simpleStorage.simulateValueChange(value)
+    expect(getByTestId(/current-value/i)).toHaveTextContent(`${value}`)
+
+    simpleStorage = new SimpleStorageMock()
+    rerender(rerenderRtl, <SimpleStorageBalance dispatch={store.dispatch} simpleStorage={simpleStorage} />, store)
+    expect(getByTestId(/current-value/i)).toHaveTextContent(`${value}`)
+    simpleStorage.simulateValueChange(value + 10)
+    expect(getByTestId(/current-value/i)).toHaveTextContent(`${value + 10}`)
   })
 
   it('stops watching value changes after component is unmounted', async () => {
