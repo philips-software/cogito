@@ -8,13 +8,26 @@ import { UserDataActions } from 'user-data'
 class SimpleStorageBalance extends Component {
   valueWatcher
 
-  componentDidMount () {
+  watchSimpleStorageEvents = () => {
     const { simpleStorage, dispatch } = this.props
     this.valueWatcher = new ValueWatcher({
       simpleStorage,
       onValueChanged: value => dispatch(UserDataActions.setBalance(value))
     })
     this.valueWatcher.start()
+  }
+
+  componentDidMount () {
+    this.watchSimpleStorageEvents()
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.simpleStorage !== prevProps.simpleStorage) {
+      if (this.valueWatcher) {
+        this.valueWatcher.stop()
+        this.watchSimpleStorageEvents()
+      }
+    }
   }
 
   componentWillUnmount () {
