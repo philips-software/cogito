@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-identity",
-  "version": "0.2.23",
+  "version": "0.3.0",
   "description": "Supports getting identity info from the Cogito app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@cogitojs/telepath-js": "^0.2.23",
+    "@cogitojs/telepath-js": "^0.3.0",
     "uuid": "^3.2.1"
   }
 }

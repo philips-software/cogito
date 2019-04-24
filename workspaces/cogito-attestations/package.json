@@ -1,6 +1,6 @@
 {
   "name": "@cogitojs/cogito-attestations",
-  "version": "0.2.23",
+  "version": "0.3.0",
   "description": "Allows retrieval of attestations through the Cogito app",
   "homepage": "https://cogito.mobi",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@cogitojs/telepath-js": "^0.2.23",
+    "@cogitojs/telepath-js": "^0.3.0",
     "base64url": "^3.0.0",
     "ethereumjs-util": "^5.2.0"
   },
