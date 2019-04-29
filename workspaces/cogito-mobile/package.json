@@ -1,0 +1,36 @@
+{
+  "name": "cogito",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "ios": "react-native run-ios",
+    "log-ios": "react-native-log-ios Cogito",
+    "android": "react-native run-android",
+    "test": "jest",
+    "react-devtools": "react-devtools"
+  },
+  "dependencies": {
+    "react": "16.6.3",
+    "react-native": "^0.58.5",
+    "react-native-navigation": "^2.12.0"
+  },
+  "devDependencies": {
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "24.1.0",
+    "jest": "24.1.0",
+    "metro-react-native-babel-preset": "0.52.0",
+    "react-devtools": "^3.6.1",
+    "react-native-log-ios": "^1.0.1",
+    "react-native-testing-library": "^1.5.0",
+    "react-test-renderer": "16.6.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "workspaces": {
+    "nohoist": [
+      "**"
+    ]
+  }
+}
