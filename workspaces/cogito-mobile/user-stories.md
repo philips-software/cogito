@@ -93,7 +93,7 @@ Acceptance criteria:
 - New Identity: Validate identity
 - New Identity: When succesfull go back to HomeScreen
 - Home Screen: Make new identity the active one?
-- Home Screen: Show name of new as active identity
+- Home Screen: Show name of new identity
 
 ## As a developer I want to make sure the back button works properly, so that it will improve the experience of the users when navigating the app
 
@@ -123,6 +123,8 @@ that are on the device. There is no possibility to recover any of it. When a use
 identity and has access to multiple services this is a real inconvenience.
 
 How are we going to handle this scenario?
+
+## Epic: Attestations
 
 
 Discussion topics and Questions
