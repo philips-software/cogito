@@ -66,6 +66,30 @@ able to use it. It needs to set up a connection (Telepath). It uses a QR code in
 The mobile application needs to have access to the camera and be able to scan and read a QR code and
 navigate to the URL that is in the QR code.
 
+## As a user I want to make sure that I am the only person to use my identity on my phone / Want to protect my identity
+
+Make sure that the user sets a pin code for his phone and redirect to the settings when possible.
+
+Acceptance criteria:
+- Check the settings when the user wants to create their first identity
+- Check the settings each time the Cogito app is opened and prompt when the protection has been
+turned off.
+- If technically possible; redirect the user to the specific settings on their phone
+
+## As a developer I want an icon for the mobile application, so that users can easily identify the mobile application on their phone
+
+Add an icon for the application and take note of the name it shows on the mobile device
+
+## As a developer I want to make sure the back button works properly, so that it will improve the experience of the users when navigating the app
+
+I hate it when the back button does unexpected things. This user story is a reminder to check that
+and improve when necessary. The back button should not be a stack of all the screens the user has
+navigated to before. But a logical tree. This might require updating the navigation stack. In
+Android the back button can also be used to go back to the phone's main screen when you are in the
+Main Screen of the application.
+
+How does this work for iOS? Swiping left and right?
+
 ## As a user I can use my identity, so <fill in reason>
 
 ## As I user I can edit my identity, so I can correct any typos in the metadata that I made
@@ -85,21 +109,9 @@ identity and has access to multiple services this is a real inconvenience.
 
 How are we going to handle this scenario?
 
-## As a user I want to make sure that I am the only person to use my identity on my phone / Want to protect my identity
 
-Make sure that the user sets a pin code for his phone and redirect to the settings when possible.
-
-Acceptance criteria:
-- Check the settings when the user wants to create their first identity
-- Check the settings each time the Cogito app is opened and prompt when the protection has been
-turned off.
-- If technically possible; redirect the user to the specific settings on their phone
-
-## As a developer I want an icon for the mobile application, so that users can easily identify the mobile application on their phone
-
-Add an icon for the application and take note of the name it shows on the mobile device
-
-# Discussion topics and Questions
+Discussion topics and Questions
+=====
 
 ## Do we need technical user stories to set up the details of communication with (demo) applications?
 
