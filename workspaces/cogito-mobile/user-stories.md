@@ -105,8 +105,6 @@ Main Screen of the application.
 
 How does this work for iOS? Swiping left and right?
 
-## As a user I can use my identity, so <fill in reason>
-
 ## As I user I can edit my identity, so I can correct any typos in the metadata that I made
 Updated_at? Keep track of history of edits?
 
