@@ -26,6 +26,20 @@ Acceptance criteria:
 - New Identity: When succesfull go back to HomeScreen
 - Home Screen: Show name of first / active identity
 
+Technical requirements:
+- Create keys (crypto) and store on device
+
+## As a user I want to make sure that I am the only person to use my identity on my phone / Want to protect my identity
+
+Make sure that the user sets a pin code for his phone and redirect to the settings when possible.
+
+Acceptance criteria:
+- Check the settings when the user wants to create their first identity
+- Check the settings each time the Cogito app is opened and prompt when the protection has been
+turned off.
+- If technically possible; redirect the user to the specific settings on their phone
+- Store keys encrypted on the device using the pass code?
+
 ## As a user I can see a list of digital identities, so I have an overview of the identities on my device
 
 Show all the identities in a list that are present on the device of the user. The user has an
@@ -65,16 +79,6 @@ In order to use a digital identity the user needs to connect it to an applicatio
 able to use it. It needs to set up a connection (Telepath). It uses a QR code in order to do that.
 The mobile application needs to have access to the camera and be able to scan and read a QR code and
 navigate to the URL that is in the QR code.
-
-## As a user I want to make sure that I am the only person to use my identity on my phone / Want to protect my identity
-
-Make sure that the user sets a pin code for his phone and redirect to the settings when possible.
-
-Acceptance criteria:
-- Check the settings when the user wants to create their first identity
-- Check the settings each time the Cogito app is opened and prompt when the protection has been
-turned off.
-- If technically possible; redirect the user to the specific settings on their phone
 
 ## As a developer I want an icon for the mobile application, so that users can easily identify the mobile application on their phone
 
