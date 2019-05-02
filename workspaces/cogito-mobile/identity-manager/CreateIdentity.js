@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import { layout } from './Layout'
-import styles from '../../Styles'
+import styles from '../Styles'
 
 export class CreateIdentity extends React.Component {
   static modalPresentationLayout = {
