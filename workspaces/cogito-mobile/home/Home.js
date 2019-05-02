@@ -11,15 +11,15 @@ export class Home extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text onPress={() => this.openIdentityManager()}>
-          I am.
+        <Text onPress={() => this.openCreateIdentityScreen()}>
+          Who am I?
         </Text>
       </View>
     )
   }
 
-  openIdentityManager () {
+  openCreateIdentityScreen () {
     const { componentId } = this.props
-    Navigation.push(componentId, { component: { name: 'IdentityManager' } })
+    Navigation.push(componentId, { component: { name: 'CreateIdentity' } })
   }
 }
