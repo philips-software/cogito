@@ -51,6 +51,11 @@ navigate to the URL that is in the QR code.
 
 Add an icon for the application and take note of the name it shows on the mobile device
 
+## As a user I can show my identity, so I can make use of a particular service
+
+## As a user I can sign
+
+## As a user I can encrypt/decrypt messages, so I can send secret messages
 
 ```
 In theory, after the first user stories you have an app that can work with one identity that can be
