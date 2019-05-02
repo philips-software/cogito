@@ -53,14 +53,14 @@ Add an icon for the application and take note of the name it shows on the mobile
 
 ## As a user I can show my identity, so I can make use of a particular service
 
-## As a user I can sign
-
-## As a user I can encrypt/decrypt messages, so I can send secret messages
-
 ```
 In theory, after the first user stories you have an app that can work with one identity that can be
 used with the demo app. A Minimal Viable Product of sorts.
 ```
+
+## As a user I can sign
+
+## As a user I can encrypt/decrypt messages, so I can send secret messages
 
 ## As a user I can see a list of digital identities, so I have an overview of the identities on my device
 
