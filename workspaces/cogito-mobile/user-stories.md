@@ -35,7 +35,7 @@ Make sure that the user sets a pin code for his phone and redirect to the settin
 
 Acceptance criteria:
 - Check the settings when the user wants to create their first identity
-- Check the settings each time the Cogito app is opened and prompt when the protection has been
+- Check the settings each time the user wants to do something with a key and prompt when the protection has been
 turned off.
 - If technically possible; redirect the user to the specific settings on their phone
 - Store keys encrypted on the device using the pass code?
@@ -52,10 +52,10 @@ navigate to the URL that is in the QR code.
 Add an icon for the application and take note of the name it shows on the mobile device
 
 
-----------
+```
 In theory, after the first user stories you have an app that can work with one identity that can be
 used with the demo app. A Minimal Viable Product of sorts.
-----------
+```
 
 ## As a user I can see a list of digital identities, so I have an overview of the identities on my device
 
