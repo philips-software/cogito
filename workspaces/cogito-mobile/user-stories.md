@@ -161,4 +161,8 @@ organization then has no information about you anymore.
 
 ## Why Cogito over Irma, or other Digital Identity providers? What is Cogito's unique selling point?
 
+- User Experience; playful and fun
+- Control to make multiple separate 'identities' / environments / facets that are connected to you as a person (work, home, parent)
+- Making signatures and digital signing
+- Encryption
 
