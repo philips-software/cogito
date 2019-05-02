@@ -3,7 +3,7 @@ import { Text, View } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import styles from '../Styles'
 import { toolbarButton } from '../navigation/ToolbarButton'
-import { CreateIdentity } from './create/CreateIdentity'
+import { CreateIdentity } from './CreateIdentity'
 
 export class IdentityManager extends React.Component {
   static options () {
