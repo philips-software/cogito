@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { TextInput, View } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import { layout } from './Layout'
 import styles from '../Styles'
@@ -25,7 +25,7 @@ export class CreateIdentity extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text>Create Identity Screen</Text>
+        <TextInput testID='identity-name' value='' />
       </View>
     )
   }

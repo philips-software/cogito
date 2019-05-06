@@ -11,3 +11,8 @@ it('can be cancelled', () => {
 
   expect(Navigation.dismissModal).toBeCalled()
 })
+
+it('has an empty name initially', () => {
+  const { getByTestId } = render(<CreateIdentity />)
+  expect(getByTestId('identity-name').props.value).toEqual('')
+})
