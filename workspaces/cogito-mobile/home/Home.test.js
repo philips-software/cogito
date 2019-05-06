@@ -1,6 +1,7 @@
 import React from 'react'
 import { render, fireEvent } from 'react-native-testing-library'
 import { Home } from './Home'
+import { CreateIdentity } from '../identity-manager/CreateIdentity'
 import { Navigation } from 'react-native-navigation'
 
 describe('HomeScreen', () => {
@@ -15,7 +16,7 @@ describe('HomeScreen', () => {
     const { getByText } = render(<Home />)
     fireEvent.press(getByText(welcomeText))
 
-    const layout = Navigation.push.mock.calls[0][1]
-    expect(layout.component.name).toEqual('CreateIdentity')
+    const layout = Navigation.showModal.mock.calls[0][0]
+    expect(layout).toEqual(CreateIdentity.modalPresentationLayout)
   })
 })
