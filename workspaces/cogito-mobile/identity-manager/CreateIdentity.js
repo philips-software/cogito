@@ -25,7 +25,7 @@ export class CreateIdentity extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text>Create</Text>
+        <Text>Create Identity Screen</Text>
       </View>
     )
   }

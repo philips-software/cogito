@@ -1,6 +1,7 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import { Navigation } from 'react-native-navigation'
+import { CreateIdentity } from '../identity-manager/CreateIdentity'
 import styles from '../Styles'
 
 export class Home extends React.Component {
@@ -19,7 +20,6 @@ export class Home extends React.Component {
   }
 
   openCreateIdentityScreen () {
-    const { componentId } = this.props
-    Navigation.push(componentId, { component: { name: 'CreateIdentity' } })
+    Navigation.showModal(CreateIdentity.modalPresentationLayout)
   }
 }
