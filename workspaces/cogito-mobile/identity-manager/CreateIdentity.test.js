@@ -15,7 +15,17 @@ describe('Create Identity', () => {
 
   it('has an empty name initially', () => {
     const { getByTestId } = render(<CreateIdentity />)
+
     expect(getByTestId('identity-name').props.value).toEqual('')
+  })
+
+  it('updates the state when name is changed', () => {
+    const { getByTestId } = render(<CreateIdentity />)
+
+    const newName = 'New Name'
+    fireEvent.changeText(getByTestId('identity-name'), newName)
+
+    expect(getByTestId('identity-name').props.value).toEqual(newName)
   })
 
   it('has a create button that can be pressed', () => {
