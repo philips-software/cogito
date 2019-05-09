@@ -21,7 +21,10 @@ export class CreateIdentity extends React.Component {
         <TextInput testID='identity-name'
           value={this.state.identityName}
           onChangeText={(text) => this.handleTextInput(text)} />
-        <Button title='Create' onPress={() => this.handleCreateButton()} />
+        <Button
+          title='Create'
+          onPress={() => this.handleCreateButton()}
+          disabled />
       </View>
     )
   }

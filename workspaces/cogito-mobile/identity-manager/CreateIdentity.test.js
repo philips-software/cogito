@@ -4,6 +4,9 @@ import { CreateIdentity } from './CreateIdentity'
 import { Navigation } from 'react-native-navigation'
 
 describe('Create Identity', () => {
+  const createButtonText = 'Create'
+  const identityFieldTestId = 'identity-name'
+
   it('can be cancelled', () => {
     render(<CreateIdentity />)
 
@@ -16,20 +19,25 @@ describe('Create Identity', () => {
   it('has an empty name initially', () => {
     const { getByTestId } = render(<CreateIdentity />)
 
-    expect(getByTestId('identity-name').props.value).toEqual('')
+    expect(getByTestId(identityFieldTestId).props.value).toEqual('')
+  })
+
+  it('disables the create button when name is empty', () => {
+    const { getByText } = render(<CreateIdentity />)
+
+    expect(getByText(createButtonText).props.disabled).toBe(true)
   })
 
   it('updates the state when name is changed', () => {
     const { getByTestId } = render(<CreateIdentity />)
 
     const newName = 'New Name'
-    fireEvent.changeText(getByTestId('identity-name'), newName)
+    fireEvent.changeText(getByTestId(identityFieldTestId), newName)
 
-    expect(getByTestId('identity-name').props.value).toEqual(newName)
+    expect(getByTestId(identityFieldTestId).props.value).toEqual(newName)
   })
 
   it('has a create button that can be pressed', () => {
-    const createButtonText = 'Create'
     const { getByText } = render(<CreateIdentity />)
 
     fireEvent.press(getByText(createButtonText))
