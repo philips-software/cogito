@@ -29,5 +29,11 @@
     "nohoist": [
       "**"
     ]
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "envs": [
+      "jest"
+    ]
   }
 }
