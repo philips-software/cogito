@@ -22,6 +22,12 @@ describe('Create Identity', () => {
     expect(getByTestId(identityFieldTestId).props.value).toEqual('')
   })
 
+  it('focuses on the name field', () => {
+    const { getByTestId } = render(<CreateIdentity />)
+
+    expect(getByTestId(identityFieldTestId).props.autoFocus).toBeTruthy()
+  })
+
   it('disables the create button when name is empty', () => {
     const { getByText } = render(<CreateIdentity />)
 
