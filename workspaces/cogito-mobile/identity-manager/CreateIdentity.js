@@ -9,7 +9,8 @@ export class CreateIdentity extends React.Component {
     super(props)
 
     this.state = {
-      identityName: ''
+      identityName: '',
+      buttonDisabled: true
     }
 
     Navigation.events().bindComponent(this)
@@ -24,13 +25,13 @@ export class CreateIdentity extends React.Component {
         <Button
           title='Create'
           onPress={() => this.handleCreateButton()}
-          disabled />
+          disabled={this.state.buttonDisabled} />
       </View>
     )
   }
 
   handleTextInput (text) {
-    this.setState({ identityName: text })
+    this.setState({ identityName: text, buttonDisabled: (text === '') })
   }
 
   handleCreateButton () {
