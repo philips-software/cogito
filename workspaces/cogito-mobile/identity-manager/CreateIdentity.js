@@ -21,7 +21,9 @@ export class CreateIdentity extends React.Component {
       <View style={styles.container}>
         <TextInput testID='identity-name'
           value={this.state.identityName}
-          onChangeText={(text) => this.handleTextInput(text)} />
+          onChangeText={(text) => this.handleTextInput(text)}
+          autoFocus
+        />
         <Button
           title='Create'
           onPress={() => this.handleCreateButton()}
