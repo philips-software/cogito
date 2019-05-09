@@ -28,6 +28,15 @@ describe('Create Identity', () => {
     expect(getByText(createButtonText).props.disabled).toBe(true)
   })
 
+  it('enables the create button when name is not empty', () => {
+    const { getByText, getByTestId } = render(<CreateIdentity />)
+
+    const newName = 'New Name'
+    fireEvent.changeText(getByTestId(identityFieldTestId), newName)
+
+    expect(getByText(createButtonText).props.disabled).toBe(false)
+  })
+
   it('updates the state when name is changed', () => {
     const { getByTestId } = render(<CreateIdentity />)
 
