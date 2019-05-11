@@ -11,8 +11,8 @@
     "react-devtools": "react-devtools"
   },
   "dependencies": {
-    "react": "16.6.3",
-    "react-native": "^0.58.5",
+    "react": "16.8.6",
+    "react-native": "^0.59.8",
     "react-native-navigation": "^2.12.0",
     "redux-starter-kit": "^0.5.1"
   },
