@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from 'react-native-testing-library'
-import { CurrentIdentity } from './CurrentIdentity'
+import { CurrentIdentityComponent as CurrentIdentity } from './CurrentIdentity'
 import { Navigation } from 'react-native-navigation'
 import { CreateIdentity } from '../identity-manager/CreateIdentity'
 
@@ -10,6 +10,12 @@ describe('CurrentIdentity', () => {
   it('shows the welcome text', () => {
     const { queryByText } = render(<CurrentIdentity />)
     expect(queryByText(welcomeText)).not.toBeNull()
+  })
+
+  it('shows the identity name in props if available', () => {
+    const { queryByText } = render(<CurrentIdentity identityName='superman' />)
+    expect(queryByText(welcomeText)).toBeNull()
+    expect(queryByText('superman')).not.toBeNull()
   })
 
   it('navigates to the create identity screen', () => {
