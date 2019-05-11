@@ -1,8 +1,7 @@
 import React from 'react'
-import { Text, View } from 'react-native'
-import { Navigation } from 'react-native-navigation'
-import { CreateIdentity } from '../identity-manager/CreateIdentity'
+import { View } from 'react-native'
 import styles from '../Styles'
+import { CurrentIdentity } from './CurrentIdentity'
 
 export class Home extends React.Component {
   static options () {
@@ -12,14 +11,8 @@ export class Home extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text onPress={() => this.openCreateIdentityScreen()}>
-          Who am I?
-        </Text>
+        <CurrentIdentity />
       </View>
     )
-  }
-
-  openCreateIdentityScreen () {
-    Navigation.showModal(CreateIdentity.modalPresentationLayout)
   }
 }
