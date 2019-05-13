@@ -2,6 +2,7 @@ import React from 'react'
 import { render, fireEvent } from 'react-native-testing-library'
 import { CreateIdentityComponent as CreateIdentity } from './CreateIdentity'
 import { Navigation } from 'react-native-navigation'
+import { KeyboardAvoidingContainer } from '../components'
 
 describe('Create Identity', () => {
   const createButtonText = 'Create'
@@ -73,5 +74,14 @@ describe('Create Identity', () => {
     fireEvent.press(getByText(createButtonText))
 
     expect(addIdentity.mock.calls[0][0]).toBe(newName)
+  })
+
+  it('prevents the keyboard from overlapping with the button', () => {
+    const addIdentity = jest.fn()
+    const { queryByType } = render(
+      <CreateIdentity addIdentity={addIdentity} />
+    )
+
+    expect(queryByType(KeyboardAvoidingContainer)).not.toBeNull()
   })
 })
