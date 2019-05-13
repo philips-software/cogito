@@ -61,4 +61,17 @@ describe('Create Identity', () => {
     expect(addIdentity).toHaveBeenCalled()
     expect(Navigation.dismissModal).toBeCalled()
   })
+
+  it('calls addIdentity with contents of text field', () => {
+    const addIdentity = jest.fn()
+    const { getByTestId, getByText } = render(
+      <CreateIdentity addIdentity={addIdentity} />
+    )
+
+    const newName = 'New Name'
+    fireEvent.changeText(getByTestId(identityFieldTestId), newName)
+    fireEvent.press(getByText(createButtonText))
+
+    expect(addIdentity.mock.calls[0][0]).toBe(newName)
+  })
 })
