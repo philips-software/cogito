@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from 'react-native-testing-library'
-import { CreateIdentity } from './CreateIdentity'
+import { CreateIdentityComponent as CreateIdentity } from './CreateIdentity'
 import { Navigation } from 'react-native-navigation'
 
 describe('Create Identity', () => {
@@ -53,10 +53,12 @@ describe('Create Identity', () => {
   })
 
   it('has a create button that can be pressed', () => {
-    const { getByText } = render(<CreateIdentity />)
+    const addIdentity = jest.fn()
+    const { getByText } = render(<CreateIdentity addIdentity={addIdentity} />)
 
     fireEvent.press(getByText(createButtonText))
 
+    expect(addIdentity).toHaveBeenCalled()
     expect(Navigation.dismissModal).toBeCalled()
   })
 })

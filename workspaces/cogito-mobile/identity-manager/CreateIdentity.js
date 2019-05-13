@@ -7,10 +7,12 @@ import {
   Platform
 } from 'react-native'
 import { Navigation } from 'react-native-navigation'
+import { connect } from 'react-redux'
 import { layout } from './Layout'
 import styles from '../Styles'
+import * as identityActions from '../identity-manager/actions'
 
-export class CreateIdentity extends React.Component {
+export class CreateIdentityComponent extends React.Component {
   constructor (props) {
     super(props)
 
@@ -56,6 +58,7 @@ export class CreateIdentity extends React.Component {
   }
 
   handleCreateButton () {
+    this.props.addIdentity(this.state.identityName)
     const { componentId } = this.props
     Navigation.dismissModal(componentId)
   }
@@ -75,3 +78,15 @@ export class CreateIdentity extends React.Component {
     return layout
   }
 }
+
+const mapStateToProps = state => ({})
+const mapDispatchToProps = dispatch => ({
+  addIdentity: name => {
+    dispatch(identityActions.add(name))
+  }
+})
+
+export const CreateIdentity = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateIdentityComponent)
