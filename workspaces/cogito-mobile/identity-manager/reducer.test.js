@@ -7,10 +7,10 @@ describe('IdentityManager reducer', () => {
   })
 
   it('can add an identity', () => {
-    const identityName = 'some name'
-    const action = identityActions.add(identityName)
+    const name = 'some name'
+    const action = identityActions.add({ name })
     const state = identityReducer(initialState, action)
     expect(state.identities).toHaveLength(1)
-    expect(state.identities[0]).toBe(identityName)
+    expect(state.identities[0]).toBe(name)
   })
 })

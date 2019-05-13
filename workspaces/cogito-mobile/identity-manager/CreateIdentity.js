@@ -82,7 +82,7 @@ export class CreateIdentityComponent extends React.Component {
 const mapStateToProps = state => ({})
 const mapDispatchToProps = dispatch => ({
   addIdentity: name => {
-    dispatch(identityActions.add(name))
+    dispatch(identityActions.add({ name }))
   }
 })
 
