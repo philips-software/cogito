@@ -2,10 +2,9 @@ import React from 'react'
 import {
   TextInput,
   Button,
-  Text,
-  KeyboardAvoidingView,
-  Platform
+  Text
 } from 'react-native'
+import { KeyboardAvoidingContainer } from '../components'
 import { Navigation } from 'react-native-navigation'
 import { connect } from 'react-redux'
 import { layout } from './Layout'
@@ -26,11 +25,7 @@ export class CreateIdentityComponent extends React.Component {
 
   render () {
     return (
-      <KeyboardAvoidingView
-        style={styles.container}
-        enabled
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      >
+      <KeyboardAvoidingContainer>
         <Text>I am more.</Text>
         <TextInput
           testID='identity-name'
@@ -49,7 +44,7 @@ export class CreateIdentityComponent extends React.Component {
           onPress={() => this.handleCreateButton()}
           disabled={this.state.buttonDisabled}
         />
-      </KeyboardAvoidingView>
+      </KeyboardAvoidingContainer>
     )
   }
 
