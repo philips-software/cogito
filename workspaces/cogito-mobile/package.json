@@ -26,7 +26,8 @@
     "react-devtools": "^3.6.1",
     "react-native-log-ios": "^1.0.1",
     "react-native-testing-library": "^1.5.0",
-    "react-test-renderer": "16.6.3"
+    "react-test-renderer": "16.6.3",
+    "remote-redux-devtools": "^0.5.16"
   },
   "workspaces": {
     "nohoist": [

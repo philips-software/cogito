@@ -1,5 +1,6 @@
 import { configureStore, getDefaultMiddleware } from 'redux-starter-kit'
 import { identityReducer } from '../identity-manager/reducer'
+import devToolsEnhancer from 'remote-redux-devtools'
 import logger from 'redux-logger'
 
 function configureAppStore (preloadedState) {
@@ -11,7 +12,9 @@ function configureAppStore (preloadedState) {
   const store = configureStore({
     reducer: { identity: identityReducer },
     middleware,
-    preloadedState
+    preloadedState,
+    devTools: false,
+    enhancers: [devToolsEnhancer({ realtime: true })]
   })
 
   // TODO: find out how to do this when you don't have a rootReducer explicitly
