@@ -77,9 +77,8 @@ describe('Create Identity', () => {
   })
 
   it('prevents the keyboard from overlapping with the button', () => {
-    const addIdentity = jest.fn()
     const { queryByType } = render(
-      <CreateIdentity addIdentity={addIdentity} />
+      <CreateIdentity />
     )
 
     expect(queryByType(KeyboardAvoidingContainer)).not.toBeNull()
