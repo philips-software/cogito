@@ -4,20 +4,33 @@ import { Navigation } from 'react-native-navigation'
 import { connect } from 'react-redux'
 import { CreateIdentity } from '../identity-manager/CreateIdentity'
 
-export const CurrentIdentityComponent = props => (
-  <Text onPress={() => openCreateIdentityScreen()}>
-    {props.identityName || 'Who am I?'}
-  </Text>
-)
+export class CurrentIdentityComponent extends React.Component {
+  render () {
+    if (this.props.identityName) {
+      return (
+        <Text>
+          {this.props.identityName}
+        </Text>
+      )
+    }
+
+    return (
+      <Text onPress={() => this.openCreateIdentityScreen()}>
+        {'Who am I?'}
+      </Text>
+    )
+  }
+
+  openCreateIdentityScreen () {
+    Navigation.showModal(CreateIdentity.modalPresentationLayout)
+  }
+}
 
 const mapStateToProps = state => ({
   identityName:
     state.identity.identities.length > 0 ? state.identity.identities[0] : null
 })
-export const CurrentIdentity = connect(mapStateToProps)(
-  CurrentIdentityComponent
-)
 
-function openCreateIdentityScreen () {
-  Navigation.showModal(CreateIdentity.modalPresentationLayout)
-}
+export const CurrentIdentity = connect(
+  mapStateToProps
+)(CurrentIdentityComponent)
