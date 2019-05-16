@@ -53,16 +53,6 @@ describe('Create Identity', () => {
     expect(getByTestId(identityFieldTestId).props.value).toEqual(newName)
   })
 
-  it('has a create button that can be pressed', () => {
-    const addIdentity = jest.fn()
-    const { getByText } = render(<CreateIdentity addIdentity={addIdentity} />)
-
-    fireEvent.press(getByText(createButtonText))
-
-    expect(addIdentity).toHaveBeenCalled()
-    expect(Navigation.dismissModal).toBeCalled()
-  })
-
   it('calls addIdentity with contents of text field', () => {
     const addIdentity = jest.fn()
     const { getByTestId, getByText } = render(
@@ -74,6 +64,16 @@ describe('Create Identity', () => {
     fireEvent.press(getByText(createButtonText))
 
     expect(addIdentity.mock.calls[0][0]).toBe(newName)
+  })
+
+  it('dismisses modal when add identity is successful', () => {
+    const addIdentity = jest.fn()
+    const { getByText } = render(<CreateIdentity addIdentity={addIdentity} />)
+
+    fireEvent.press(getByText(createButtonText))
+
+    expect(addIdentity).toHaveBeenCalled()
+    expect(Navigation.dismissModal).toBeCalled()
   })
 
   it('prevents the keyboard from overlapping with the button', () => {
