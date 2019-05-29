@@ -1,8 +1,13 @@
 import React from 'react'
 import { render, fireEvent } from 'react-native-testing-library'
 import { Navigation } from 'react-native-navigation'
-import { CurrentIdentityComponent } from './CurrentIdentity'
+import { CurrentIdentityComponent, CurrentIdentity } from './CurrentIdentity'
 import { CreateIdentity } from '../identity-manager/CreateIdentity'
+import { shallow } from 'enzyme'
+import '../enzyme.config'
+
+import configureMockStore from 'redux-mock-store'
+const mockStore = configureMockStore()
 
 describe('CurrentIdentityComponent', () => {
   const welcomeText = 'Who am I?'
@@ -33,5 +38,20 @@ describe('CurrentIdentityComponent', () => {
 
     const element = getByText(identityName)
     expect(() => fireEvent.press(element)).toThrow('No handler function found for event: press')
+  })
+
+  it('uses state for props in CurrentIdentityComponent', () => {
+    const state = {
+      identity: {
+        identities: [{
+          identityName: 'This is my name'
+        }]
+      }
+    }
+    const store = mockStore(state)
+    const wrapper = shallow(<CurrentIdentity store={store} />)
+
+    console.log(wrapper.props())
+    expect(wrapper.props().identityName).toEqual('This is my name')
   })
 })
