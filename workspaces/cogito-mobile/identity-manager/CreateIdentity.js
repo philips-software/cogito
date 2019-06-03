@@ -37,6 +37,7 @@ export class CreateIdentityComponent extends React.Component {
           placeholder='e.g. your name or "work"'
           value={this.state.identityName}
           onChangeText={text => this.handleTextInput(text)}
+          onSubmitEditing={() => this.handleCreateButton()}
           autoFocus
         />
         <Button
