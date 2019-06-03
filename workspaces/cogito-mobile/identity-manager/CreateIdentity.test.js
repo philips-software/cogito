@@ -66,6 +66,19 @@ describe('Create Identity', () => {
     expect(addIdentity.mock.calls[0][0]).toBe(newName)
   })
 
+  it('calls addIdentity when onSubmitEditing is called', () => {
+    const addIdentity = jest.fn()
+    const { getByTestId } = render(
+      <CreateIdentity addIdentity={addIdentity} />
+    )
+
+    const newName = 'New Name'
+    fireEvent.changeText(getByTestId(identityFieldTestId), newName)
+    fireEvent(getByTestId(identityFieldTestId), 'submitEditing')
+
+    expect(addIdentity.mock.calls[0][0]).toBe(newName)
+  })
+
   it('dismisses modal when add identity is successful', () => {
     const addIdentity = jest.fn()
     const { getByText } = render(<CreateIdentity addIdentity={addIdentity} />)
