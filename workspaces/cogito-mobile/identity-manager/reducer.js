@@ -1,9 +1,9 @@
 import { createReducer } from 'redux-starter-kit'
 import { add } from './actions'
 
-export const initialState = { identities: [] }
+export const initialState = {}
 export const identityReducer = createReducer(initialState, {
   [add]: (state, action) => {
-    state.identities.push(action.payload.name)
+    state.name = action.payload.name
   }
 })
