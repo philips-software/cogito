@@ -42,12 +42,10 @@ describe('CurrentIdentityComponent', () => {
 describe('CurrentIdentity', () => {
   it('maps the state to the props', () => {
     const mockStore = configureMockStore()
-    const identityName = 'This is my name'
+    const name = 'This is my name'
     const store = mockStore({
       identity: {
-        identities: [
-          identityName
-        ]
+        name
       }
     })
 
@@ -55,6 +53,6 @@ describe('CurrentIdentity', () => {
 
     // Note: I'm not convinced this is the correct way of verifying the props that are passed
     const props = wrapper.props().children.props
-    expect(props.identityName).toEqual(identityName)
+    expect(props.identityName).toBe(name)
   })
 })

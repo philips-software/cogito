@@ -28,7 +28,7 @@ export class CurrentIdentityComponent extends React.Component {
 
 const mapStateToProps = state => ({
   identityName:
-    state.identity.identities.length > 0 ? state.identity.identities[0] : null
+    state.identity.name
 })
 
 export const CurrentIdentity = connect(
