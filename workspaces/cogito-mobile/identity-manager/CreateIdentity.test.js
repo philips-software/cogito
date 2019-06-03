@@ -81,8 +81,10 @@ describe('CreateIdentityComponent', () => {
 
   it('dismisses modal when add identity is successful', () => {
     const addIdentity = jest.fn()
-    const { getByText } = render(<CreateIdentityComponent addIdentity={addIdentity} />)
+    const { getByText, getByTestId } = render(<CreateIdentityComponent addIdentity={addIdentity} />)
 
+    const newName = 'New Name'
+    fireEvent.changeText(getByTestId(identityFieldTestId), newName)
     fireEvent.press(getByText(createButtonText))
 
     expect(addIdentity).toHaveBeenCalled()
@@ -95,5 +97,20 @@ describe('CreateIdentityComponent', () => {
     )
 
     expect(queryByType(KeyboardAvoidingContainer)).not.toBeNull()
+  })
+
+  describe('validation', () => {
+    it('refuses an identity name with only whitespace', () => {
+      const addIdentity = jest.fn()
+      const { getByTestId, getByText } = render(
+        <CreateIdentityComponent addIdentity={addIdentity} />
+      )
+
+      const invalidName = ' \t\n'
+      fireEvent.changeText(getByTestId(identityFieldTestId), invalidName)
+      fireEvent.press(getByText(createButtonText))
+
+      expect(addIdentity).not.toHaveBeenCalled()
+    })
   })
 })

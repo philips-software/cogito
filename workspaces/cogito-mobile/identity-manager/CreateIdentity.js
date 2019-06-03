@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import { layout } from './Layout'
 import styles from '../Styles'
 import * as identityActions from '../identity-manager/actions'
+import _ from 'lodash'
 
 export class CreateIdentityComponent extends React.Component {
   constructor (props) {
@@ -50,7 +51,15 @@ export class CreateIdentityComponent extends React.Component {
   }
 
   handleCreateButton () {
-    this.props.addIdentity(this.state.identityName)
+    const name = this.state.identityName
+
+    if (!this.isValidName(name)) {
+      // Note: Replace with message in form
+      console.warn('Invalid name')
+      return
+    }
+
+    this.props.addIdentity(name)
     const { componentId } = this.props
     Navigation.dismissModal(componentId)
   }
@@ -58,6 +67,11 @@ export class CreateIdentityComponent extends React.Component {
   navigationButtonPressed () {
     const { componentId } = this.props
     Navigation.dismissModal(componentId)
+  }
+
+  isValidName (name) {
+    const trimmedName = name.trim()
+    return !_.isEmpty(trimmedName)
   }
 
   static modalPresentationLayout = {
