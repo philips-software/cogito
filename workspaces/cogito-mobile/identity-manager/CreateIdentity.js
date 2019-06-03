@@ -29,11 +29,7 @@ export class CreateIdentityComponent extends React.Component {
         <Text>I am more.</Text>
         <TextInput
           testID='identity-name'
-          style={Object.assign({}, styles.textInput, {
-            width: '100%',
-            margin: 40,
-            textAlign: 'center'
-          })}
+          style={[styles.textInput, styles.identityNameTextInput]}
           placeholder='e.g. your name or "work"'
           value={this.state.identityName}
           onChangeText={text => this.handleTextInput(text)}
