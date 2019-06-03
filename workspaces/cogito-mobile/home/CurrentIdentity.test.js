@@ -41,17 +41,19 @@ describe('CurrentIdentityComponent', () => {
   })
 
   it('uses state for props in CurrentIdentityComponent', () => {
-    const state = {
+    const identityName = 'This is my name'
+    const store = mockStore({
       identity: {
-        identities: [{
-          identityName: 'This is my name'
-        }]
+        identities: [
+          identityName
+        ]
       }
-    }
-    const store = mockStore(state)
+    })
+
     const wrapper = shallow(<CurrentIdentity store={store} />)
 
-    console.log(wrapper.props())
-    expect(wrapper.props().identityName).toEqual('This is my name')
+    // Note: I'm not convinced this is the correct way of verifying the props that are passed
+    const props = wrapper.props().children.props
+    expect(props.identityName).toEqual(identityName)
   })
 })
