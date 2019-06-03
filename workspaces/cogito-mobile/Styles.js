@@ -13,5 +13,10 @@ export default StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 3,
     padding: 5
+  },
+  identityNameTextInput: {
+    width: '100%',
+    margin: 40,
+    textAlign: 'center'
   }
 })
