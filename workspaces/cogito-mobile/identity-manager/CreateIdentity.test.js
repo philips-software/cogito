@@ -1,15 +1,15 @@
 import React from 'react'
 import { render, fireEvent } from 'react-native-testing-library'
-import { CreateIdentityComponent as CreateIdentity } from './CreateIdentity'
+import { CreateIdentityComponent } from './CreateIdentity'
 import { Navigation } from 'react-native-navigation'
 import { KeyboardAvoidingContainer } from '../components'
 
-describe('Create Identity', () => {
+describe('CreateIdentityComponent', () => {
   const createButtonText = 'Create'
   const identityFieldTestId = 'identity-name'
 
   it('can be cancelled', () => {
-    render(<CreateIdentity />)
+    render(<CreateIdentityComponent />)
 
     const identityManager = Navigation.events().boundComponents[0]
     identityManager.navigationButtonPressed({ buttonId: 'cancel' })
@@ -18,25 +18,25 @@ describe('Create Identity', () => {
   })
 
   it('has an empty name initially', () => {
-    const { getByTestId } = render(<CreateIdentity />)
+    const { getByTestId } = render(<CreateIdentityComponent />)
 
     expect(getByTestId(identityFieldTestId).props.value).toEqual('')
   })
 
   it('focuses on the name field', () => {
-    const { getByTestId } = render(<CreateIdentity />)
+    const { getByTestId } = render(<CreateIdentityComponent />)
 
     expect(getByTestId(identityFieldTestId).props.autoFocus).toBeTruthy()
   })
 
   it('disables the create button when name is empty', () => {
-    const { getByText } = render(<CreateIdentity />)
+    const { getByText } = render(<CreateIdentityComponent />)
 
     expect(getByText(createButtonText).props.disabled).toBe(true)
   })
 
   it('enables the create button when name is not empty', () => {
-    const { getByText, getByTestId } = render(<CreateIdentity />)
+    const { getByText, getByTestId } = render(<CreateIdentityComponent />)
 
     const newName = 'New Name'
     fireEvent.changeText(getByTestId(identityFieldTestId), newName)
@@ -45,7 +45,7 @@ describe('Create Identity', () => {
   })
 
   it('updates the state when name is changed', () => {
-    const { getByTestId } = render(<CreateIdentity />)
+    const { getByTestId } = render(<CreateIdentityComponent />)
 
     const newName = 'New Name'
     fireEvent.changeText(getByTestId(identityFieldTestId), newName)
@@ -56,7 +56,7 @@ describe('Create Identity', () => {
   it('calls addIdentity with contents of text field', () => {
     const addIdentity = jest.fn()
     const { getByTestId, getByText } = render(
-      <CreateIdentity addIdentity={addIdentity} />
+      <CreateIdentityComponent addIdentity={addIdentity} />
     )
 
     const newName = 'New Name'
@@ -69,7 +69,7 @@ describe('Create Identity', () => {
   it('calls addIdentity when onSubmitEditing is called', () => {
     const addIdentity = jest.fn()
     const { getByTestId } = render(
-      <CreateIdentity addIdentity={addIdentity} />
+      <CreateIdentityComponent addIdentity={addIdentity} />
     )
 
     const newName = 'New Name'
@@ -81,7 +81,7 @@ describe('Create Identity', () => {
 
   it('dismisses modal when add identity is successful', () => {
     const addIdentity = jest.fn()
-    const { getByText } = render(<CreateIdentity addIdentity={addIdentity} />)
+    const { getByText } = render(<CreateIdentityComponent addIdentity={addIdentity} />)
 
     fireEvent.press(getByText(createButtonText))
 
@@ -91,7 +91,7 @@ describe('Create Identity', () => {
 
   it('prevents the keyboard from overlapping with the button', () => {
     const { queryByType } = render(
-      <CreateIdentity />
+      <CreateIdentityComponent />
     )
 
     expect(queryByType(KeyboardAvoidingContainer)).not.toBeNull()
