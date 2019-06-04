@@ -1,11 +1,8 @@
 import React from 'react'
 import { render, fireEvent } from 'react-native-testing-library'
 import { Navigation } from 'react-native-navigation'
-import { CurrentIdentityComponent, CurrentIdentity } from './CurrentIdentity'
+import { CurrentIdentityComponent } from './CurrentIdentity'
 import { CreateIdentity } from '../identity-manager/CreateIdentity'
-import { shallow } from 'enzyme'
-import configureMockStore from 'redux-mock-store'
-import '../enzyme.config'
 
 describe('CurrentIdentityComponent', () => {
   const welcomeText = 'Who am I?'
@@ -36,23 +33,5 @@ describe('CurrentIdentityComponent', () => {
 
     const element = getByText(identityName)
     expect(() => fireEvent.press(element)).toThrow('No handler function found for event: press')
-  })
-})
-
-describe('CurrentIdentity', () => {
-  it('maps the state to the props', () => {
-    const mockStore = configureMockStore()
-    const name = 'This is my name'
-    const store = mockStore({
-      identity: {
-        name
-      }
-    })
-
-    const wrapper = shallow(<CurrentIdentity store={store} />)
-
-    // Note: I'm not convinced this is the correct way of verifying the props that are passed
-    const props = wrapper.props().children.props
-    expect(props.identityName).toBe(name)
   })
 })
