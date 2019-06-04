@@ -18,5 +18,8 @@ export default StyleSheet.create({
     width: '100%',
     margin: 40,
     textAlign: 'center'
+  },
+  errorMessageText: {
+    color: 'red'
   }
 })

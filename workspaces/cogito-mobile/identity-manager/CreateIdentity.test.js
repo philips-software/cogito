@@ -7,6 +7,7 @@ import { KeyboardAvoidingContainer } from '../components'
 describe('CreateIdentityComponent', () => {
   const createButtonText = 'Create'
   const identityFieldTestId = 'identity-name'
+  const addIdentity = jest.fn()
 
   it('can be cancelled', () => {
     render(<CreateIdentityComponent />)
@@ -53,7 +54,6 @@ describe('CreateIdentityComponent', () => {
     expect(getByTestId(identityFieldTestId).props.value).toEqual(newName)
   })
 
-    const addIdentity = jest.fn()
   it('adds identity when button is pressed', () => {
     const { getByTestId, getByText } = render(
       <CreateIdentityComponent addIdentity={addIdentity} />
@@ -66,7 +66,6 @@ describe('CreateIdentityComponent', () => {
     expect(addIdentity.mock.calls[0][0]).toBe(newName)
   })
 
-    const addIdentity = jest.fn()
   it('adds an identity when key is pressed', () => {
     const { getByTestId } = render(
       <CreateIdentityComponent addIdentity={addIdentity} />
@@ -80,7 +79,6 @@ describe('CreateIdentityComponent', () => {
   })
 
   it('dismisses modal when add identity is successful', () => {
-    const addIdentity = jest.fn()
     const { getByText, getByTestId } = render(<CreateIdentityComponent addIdentity={addIdentity} />)
 
     const newName = 'New Name'
@@ -100,17 +98,36 @@ describe('CreateIdentityComponent', () => {
   })
 
   describe('validation', () => {
+    const invalidName = ' \t\n'
+
     it('refuses an identity name with only whitespace', () => {
-      const addIdentity = jest.fn()
       const { getByTestId, getByText } = render(
         <CreateIdentityComponent addIdentity={addIdentity} />
       )
 
-      const invalidName = ' \t\n'
       fireEvent.changeText(getByTestId(identityFieldTestId), invalidName)
       fireEvent.press(getByText(createButtonText))
 
       expect(addIdentity).not.toHaveBeenCalled()
+    })
+
+    it('does not show an error initially', () => {
+      const { queryByText } = render(
+        <CreateIdentityComponent addIdentity={addIdentity} />
+      )
+
+      expect(queryByText('Name is invalid. It may not be only whitespaces')).toBeNull()
+    })
+
+    it('shows an error message when the name is refuses', () => {
+      const { getByTestId, getByText, queryByText } = render(
+        <CreateIdentityComponent addIdentity={addIdentity} />
+      )
+
+      fireEvent.changeText(getByTestId(identityFieldTestId), invalidName)
+      fireEvent.press(getByText(createButtonText))
+
+      expect(queryByText('Name is invalid. It may not be only whitespaces')).not.toBeNull()
     })
   })
 })
