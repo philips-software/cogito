@@ -53,8 +53,8 @@ describe('CreateIdentityComponent', () => {
     expect(getByTestId(identityFieldTestId).props.value).toEqual(newName)
   })
 
-  it('calls addIdentity with contents of text field', () => {
     const addIdentity = jest.fn()
+  it('adds identity when button is pressed', () => {
     const { getByTestId, getByText } = render(
       <CreateIdentityComponent addIdentity={addIdentity} />
     )
@@ -66,8 +66,8 @@ describe('CreateIdentityComponent', () => {
     expect(addIdentity.mock.calls[0][0]).toBe(newName)
   })
 
-  it('calls addIdentity when onSubmitEditing is called', () => {
     const addIdentity = jest.fn()
+  it('adds an identity when key is pressed', () => {
     const { getByTestId } = render(
       <CreateIdentityComponent addIdentity={addIdentity} />
     )
