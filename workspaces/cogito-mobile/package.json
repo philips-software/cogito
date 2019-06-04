@@ -21,8 +21,6 @@
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "24.1.0",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.13.2",
     "jest": "24.1.0",
     "metro-react-native-babel-preset": "0.52.0",
     "react-devtools": "^3.6.1",

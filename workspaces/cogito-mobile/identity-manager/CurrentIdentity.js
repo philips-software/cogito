@@ -3,6 +3,7 @@ import { Text } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import { connect } from 'react-redux'
 import { CreateIdentity } from '../identity-manager/CreateIdentity'
+import { getIdentityName } from './selectors'
 
 export class CurrentIdentityComponent extends React.Component {
   render () {
@@ -26,11 +27,6 @@ export class CurrentIdentityComponent extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  identityName:
-    state.identity.name
-})
-
-export const CurrentIdentity = connect(
-  mapStateToProps
-)(CurrentIdentityComponent)
+export const CurrentIdentity = connect(state => ({
+  identityName: getIdentityName(state)
+}))(CurrentIdentityComponent)
