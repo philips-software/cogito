@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-  TextInput,
-  Button,
-  Text
-} from 'react-native'
+import { Input, Button } from 'react-native-elements'
 import { KeyboardAvoidingContainer } from '../components'
 import { Navigation } from 'react-native-navigation'
 import { connect } from 'react-redux'
@@ -27,21 +23,22 @@ export class CreateIdentityComponent extends React.Component {
   render () {
     return (
       <KeyboardAvoidingContainer>
-        <Text>I am more.</Text>
-        <TextInput
+        <Input
           testID='identity-name'
-          style={[styles.textInput, styles.identityNameTextInput]}
-          placeholder='e.g. your name or "work"'
+          label='I am more.'
+          placeholder='E.g. your name or "work"'
           value={this.state.identityName}
           onChangeText={text => this.handleTextInput(text)}
           onSubmitEditing={() => this.handleCreateButton()}
+          errorStyle={styles.errorMessageText}
+          errorMessage={this.state.errorMessage}
+          shake={true}
           autoFocus
         />
-        { this.state.errorMessage !== null &&
-        <Text style={styles.errorMessageText}>{this.state.errorMessage}</Text>
-        }
         <Button
+          testID='create-button'
           title='Create'
+          type='outline'
           onPress={() => this.handleCreateButton()}
           disabled={this.state.buttonDisabled}
         />
