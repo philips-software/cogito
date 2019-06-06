@@ -5,7 +5,7 @@ import { Navigation } from 'react-native-navigation'
 import { KeyboardAvoidingContainer } from '../components'
 
 describe('CreateIdentityComponent', () => {
-  const createButtonText = 'Create'
+  const createButtonTestId = 'create-button'
   const identityFieldTestId = 'identity-name'
   const addIdentity = jest.fn()
 
@@ -31,18 +31,18 @@ describe('CreateIdentityComponent', () => {
   })
 
   it('disables the create button when name is empty', () => {
-    const { getByText } = render(<CreateIdentityComponent />)
+    const { getByTestId } = render(<CreateIdentityComponent />)
 
-    expect(getByText(createButtonText).props.disabled).toBe(true)
+    expect(getByTestId(createButtonTestId).props.disabled).toBe(true)
   })
 
   it('enables the create button when name is not empty', () => {
-    const { getByText, getByTestId } = render(<CreateIdentityComponent />)
+    const { getByTestId } = render(<CreateIdentityComponent />)
 
     const newName = 'New Name'
     fireEvent.changeText(getByTestId(identityFieldTestId), newName)
 
-    expect(getByText(createButtonText).props.disabled).toBe(false)
+    expect(getByTestId(createButtonTestId).props.disabled).toBe(false)
   })
 
   it('updates the state when name is changed', () => {
@@ -55,13 +55,13 @@ describe('CreateIdentityComponent', () => {
   })
 
   it('adds identity when button is pressed', () => {
-    const { getByTestId, getByText } = render(
+    const { getByTestId } = render(
       <CreateIdentityComponent addIdentity={addIdentity} />
     )
 
     const newName = 'New Name'
     fireEvent.changeText(getByTestId(identityFieldTestId), newName)
-    fireEvent.press(getByText(createButtonText))
+    fireEvent.press(getByTestId(createButtonTestId))
 
     expect(addIdentity.mock.calls[0][0]).toBe(newName)
   })
@@ -79,11 +79,11 @@ describe('CreateIdentityComponent', () => {
   })
 
   it('dismisses modal when add identity is successful', () => {
-    const { getByText, getByTestId } = render(<CreateIdentityComponent addIdentity={addIdentity} />)
+    const { getByTestId } = render(<CreateIdentityComponent addIdentity={addIdentity} />)
 
     const newName = 'New Name'
     fireEvent.changeText(getByTestId(identityFieldTestId), newName)
-    fireEvent.press(getByText(createButtonText))
+    fireEvent.press(getByTestId(createButtonTestId))
 
     expect(addIdentity).toHaveBeenCalled()
     expect(Navigation.dismissModal).toBeCalled()
@@ -101,12 +101,12 @@ describe('CreateIdentityComponent', () => {
     const invalidName = ' \t\n'
 
     it('refuses an identity name with only whitespace', () => {
-      const { getByTestId, getByText } = render(
+      const { getByTestId } = render(
         <CreateIdentityComponent addIdentity={addIdentity} />
       )
 
       fireEvent.changeText(getByTestId(identityFieldTestId), invalidName)
-      fireEvent.press(getByText(createButtonText))
+      fireEvent.press(getByTestId(createButtonTestId))
 
       expect(addIdentity).not.toHaveBeenCalled()
     })
@@ -120,12 +120,12 @@ describe('CreateIdentityComponent', () => {
     })
 
     it('shows an error message when the name is refuses', () => {
-      const { getByTestId, getByText, queryByText } = render(
+      const { getByTestId, queryByText } = render(
         <CreateIdentityComponent addIdentity={addIdentity} />
       )
 
       fireEvent.changeText(getByTestId(identityFieldTestId), invalidName)
-      fireEvent.press(getByText(createButtonText))
+      fireEvent.press(getByTestId(createButtonTestId))
 
       expect(queryByText('Name is invalid. It may not be only whitespaces')).not.toBeNull()
     })
