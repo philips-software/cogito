@@ -3,7 +3,7 @@
 # Symlink this precommit hook to your `.git/hooks` directory
 # From root directory (where .git is in)
 BRANCH=$(git symbolic-ref --short HEAD)
-WORKSPACE_COMMIT_MSG="\[cogito-mobile\] "
+WORKSPACE_COMMIT_MSG="\[📱\] "
 
 if [[ $BRANCH =~ ^(cogito-mobile|cm|mob|mobile) ]] ; then
   sed -i.bak -e "1s/^/$WORKSPACE_COMMIT_MSG/" "$1"
