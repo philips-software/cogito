@@ -54,7 +54,7 @@ export class CreateIdentityComponent extends React.Component {
     const name = this.state.identityName
 
     if (!this.isValidName(name)) {
-      this.setState({ errorMessage: 'Name is invalid. It may not be only whitespaces' })
+      this.setState({ errorMessage: 'Name is invalid; it consists of whitespace only' })
       return
     }
 
