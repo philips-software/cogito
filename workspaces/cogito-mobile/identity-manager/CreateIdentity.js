@@ -32,7 +32,6 @@ export class CreateIdentityComponent extends React.Component {
           onSubmitEditing={() => this.handleCreateButton()}
           errorStyle={styles.errorMessageText}
           errorMessage={this.state.errorMessage}
-          shake
           autoFocus
         />
         <Button
