@@ -1,3 +1,3 @@
 import { createAction } from 'redux-starter-kit'
 
-export const add = createAction('identity/add')
+export const store = createAction('identity/store')

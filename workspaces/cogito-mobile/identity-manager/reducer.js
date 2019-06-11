@@ -1,9 +1,9 @@
 import { createReducer } from 'redux-starter-kit'
-import { add } from './actions'
+import { store } from './actions'
 
 export const initialState = {}
 export const identityReducer = createReducer(initialState, {
-  [add]: (state, action) => {
+  [store]: (state, action) => {
     state.name = action.payload.name
   }
 })
