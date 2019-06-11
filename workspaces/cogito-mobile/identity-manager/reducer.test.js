@@ -13,4 +13,16 @@ describe('IdentityManager reducer', () => {
 
     expect(state.name).toBe(name)
   })
+
+  it('handles a pending addition', () => {
+    const action = identityActions.addIsPending()
+    const state = identityReducer(initialState, action)
+    expect(state.creating).toBeTruthy()
+  })
+
+  it('handles a finished addition', () => {
+    const action = identityActions.addIsFinished()
+    const state = identityReducer({ creating: true }, action)
+    expect(state.creating).toBeFalsy()
+  })
 })
