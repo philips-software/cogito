@@ -1,4 +1,9 @@
 import React from 'react'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 
-export const Input = ({ ...args }) => <View {...args} />
+export const Input = ({ label, errorMessage, ...args }) => (
+  <View {...args}>
+    { label && <Text>{ label } </Text> }
+    { errorMessage && <Text>{ errorMessage }</Text> }
+  </View>
+)
