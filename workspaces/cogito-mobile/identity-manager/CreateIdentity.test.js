@@ -119,7 +119,7 @@ describe('CreateIdentityComponent', () => {
       expect(queryByText('Name is invalid. It may not be only whitespaces')).toBeNull()
     })
 
-    it('shows an error message when the name is refuses', () => {
+    it('shows an error message when the name is refused', () => {
       const { getByTestId, queryByText } = render(
         <CreateIdentityComponent addIdentity={addIdentity} />
       )
@@ -127,7 +127,7 @@ describe('CreateIdentityComponent', () => {
       fireEvent.changeText(getByTestId(identityFieldTestId), invalidName)
       fireEvent.press(getByTestId(createButtonTestId))
 
-      expect(queryByText('Name is invalid. It may not be only whitespaces')).not.toBeNull()
+      expect(queryByText('Name is invalid; it consists of whitespace only')).not.toBeNull()
     })
   })
 })
