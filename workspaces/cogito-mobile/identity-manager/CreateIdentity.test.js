@@ -90,6 +90,7 @@ describe('CreateIdentityComponent', () => {
     expect(getByTestId(createButtonTestId).props.loading).toBe(true)
   })
 
+  // TODO: signal that identity is added by setting wallet
   it('dismisses modal when add identity is successful', () => {
     const { getByTestId } = render(<CreateIdentityComponent addIdentity={addIdentity} />)
 
