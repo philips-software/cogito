@@ -10,6 +10,7 @@ import * as identityActions from '../identity-manager/actions'
 export class CreateIdentityComponent extends React.Component {
   constructor (props) {
     super(props)
+    this.componentId = this.props.componentId
 
     this.state = {
       identityName: '',
@@ -58,13 +59,12 @@ export class CreateIdentityComponent extends React.Component {
     }
 
     this.props.addIdentity(name)
-    const { componentId } = this.props
-    Navigation.dismissModal(componentId)
+
+    Navigation.dismissModal(this.componentId)
   }
 
   navigationButtonPressed () {
-    const { componentId } = this.props
-    Navigation.dismissModal(componentId)
+    Navigation.dismissModal(this.componentId)
   }
 
   isValidName (name) {
