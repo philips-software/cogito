@@ -3,8 +3,11 @@ import { Wallet } from 'ethers'
 
 export const add = name => async dispatch => {
   dispatch(addIsPending())
+
   const wallet = await Wallet.createRandom()
-  dispatch(store({ name, wallet }))
+  const encryptedWallet = await wallet.encrypt('password')
+  dispatch(store({ name, wallet: encryptedWallet }))
+
   dispatch(addIsFinished())
 }
 
