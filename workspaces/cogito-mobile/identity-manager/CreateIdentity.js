@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { layout } from './Layout'
 import styles from '../Styles'
 import * as identityActions from '../identity-manager/actions'
+import { isCreatingIdentity } from './selectors'
 
 export class CreateIdentityComponent extends React.Component {
   constructor (props) {
@@ -84,7 +85,7 @@ export class CreateIdentityComponent extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  // loading: isCreatingIdentity(state)
+  loading: isCreatingIdentity(state)
 })
 const mapDispatchToProps = dispatch => ({
   addIdentity: name => {
