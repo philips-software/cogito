@@ -78,6 +78,18 @@ describe('CreateIdentityComponent', () => {
     expect(addIdentity.mock.calls[0][0]).toBe(newName)
   })
 
+  it('does not show a spinner initially', () => {
+    const { getByTestId } = render(<CreateIdentityComponent />)
+
+    expect(getByTestId(createButtonTestId).props.loading).toBeFalsy()
+  })
+
+  it('shows a spinner when loading', () => {
+    const { getByTestId } = render(<CreateIdentityComponent loading />)
+
+    expect(getByTestId(createButtonTestId).props.loading).toBe(true)
+  })
+
   it('dismisses modal when add identity is successful', () => {
     const { getByTestId } = render(<CreateIdentityComponent addIdentity={addIdentity} />)
 

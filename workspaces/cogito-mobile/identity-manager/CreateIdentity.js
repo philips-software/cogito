@@ -41,6 +41,7 @@ export class CreateIdentityComponent extends React.Component {
           type='outline'
           onPress={() => this.handleCreateButton()}
           disabled={this.state.buttonDisabled}
+          loading={this.props.loading}
         />
       </KeyboardAvoidingContainer>
     )
