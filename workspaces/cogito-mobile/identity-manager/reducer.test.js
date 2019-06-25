@@ -7,11 +7,11 @@ describe('IdentityManager reducer', () => {
   })
 
   it('can add an identity', () => {
-    const name = 'some name'
-    const action = identityActions.store({ name })
+    const identity = { some: 'identity' }
+    const action = identityActions.store(identity)
     const state = identityReducer(initialState, action)
 
-    expect(state.name).toBe(name)
+    expect(state).toEqual(identity)
   })
 
   it('handles a pending addition', () => {
