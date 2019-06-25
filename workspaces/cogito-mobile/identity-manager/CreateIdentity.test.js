@@ -90,15 +90,15 @@ describe('CreateIdentityComponent', () => {
     expect(getByTestId(createButtonTestId).props.loading).toBe(true)
   })
 
-  // TODO: signal that identity is added by setting wallet
-  it('dismisses modal when add identity is successful', () => {
+  it('adds an identity when create button is pressed', () => {
     const { getByTestId } = render(<CreateIdentityComponent addIdentity={addIdentity} />)
-
-    const newName = 'New Name'
-    fireEvent.changeText(getByTestId(identityFieldTestId), newName)
+    fireEvent.changeText(getByTestId(identityFieldTestId), 'some name')
     fireEvent.press(getByTestId(createButtonTestId))
-
     expect(addIdentity).toHaveBeenCalled()
+  })
+
+  it('dismisses modal when identity is created', () => {
+    render(<CreateIdentityComponent done />)
     expect(Navigation.dismissModal).toBeCalled()
   })
 

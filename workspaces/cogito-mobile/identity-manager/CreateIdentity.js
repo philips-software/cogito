@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { layout } from './Layout'
 import styles from '../Styles'
 import * as identityActions from '../identity-manager/actions'
-import { isCreatingIdentity } from './selectors'
+import { isCreatingIdentity, wasIdentityCreated } from './selectors'
 
 export class CreateIdentityComponent extends React.Component {
   constructor (props) {
@@ -20,6 +20,12 @@ export class CreateIdentityComponent extends React.Component {
     }
 
     Navigation.events().bindComponent(this)
+  }
+
+  componentWillMount () {
+    if (this.props.done) {
+      Navigation.dismissModal(this.componentId)
+    }
   }
 
   render () {
@@ -61,8 +67,6 @@ export class CreateIdentityComponent extends React.Component {
     }
 
     this.props.addIdentity(name)
-
-    Navigation.dismissModal(this.componentId)
   }
 
   navigationButtonPressed () {
@@ -85,7 +89,8 @@ export class CreateIdentityComponent extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  loading: isCreatingIdentity(state)
+  loading: isCreatingIdentity(state),
+  done: wasIdentityCreated(state)
 })
 const mapDispatchToProps = dispatch => ({
   addIdentity: name => {
