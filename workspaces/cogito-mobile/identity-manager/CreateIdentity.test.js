@@ -97,7 +97,8 @@ describe('CreateIdentityComponent', () => {
   })
 
   it('dismisses modal when identity is created', () => {
-    render(<CreateIdentityComponent done />)
+    const { rerender } = render(<CreateIdentityComponent />)
+    rerender(<CreateIdentityComponent done />)
     expect(Navigation.dismissModal).toBeCalled()
   })
 

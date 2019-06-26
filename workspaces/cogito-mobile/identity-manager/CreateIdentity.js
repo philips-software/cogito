@@ -22,7 +22,7 @@ export class CreateIdentityComponent extends React.Component {
     Navigation.events().bindComponent(this)
   }
 
-  componentWillMount () {
+  componentDidUpdate () {
     if (this.props.done) {
       Navigation.dismissModal(this.componentId)
     }
