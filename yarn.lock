@@ -2257,6 +2257,14 @@
     "@svgr/plugin-svgo" "^4.0.3"
     loader-utils "^1.1.0"
 
+"@testing-library/react-native@^4.0.6":
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/@testing-library/react-native/-/react-native-4.0.6.tgz#1bea14135c39a3e70130d60d23d0f8dea2903c8b"
+  integrity sha512-MhmLT7XYeEkJ4NolTk6MwlV9ilnGbnHco2/mTZpZq5MGCNt3N5f3GLn9NfjG6CDfrKQQgx/AX2cyAiq+xmkFtA==
+  dependencies:
+    pretty-format "^24.5.0"
+    wait-for-expect "^1.1.1"
+
 "@trust/keyto@^0.3.2":
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@trust/keyto/-/keyto-0.3.7.tgz#e251264e302a7a6be64a3e208dacb2ef6268c946"
@@ -16527,13 +16535,6 @@ react-native-status-bar-height@^2.2.0:
   resolved "https://registry.yarnpkg.com/react-native-status-bar-height/-/react-native-status-bar-height-2.3.1.tgz#b92ce9112c2367290847ac11284d9d84a6330169"
   integrity sha512-m9nGKYfFn6ljF1abafzF5cFaD9JCzXwj7kNE9CuF+g0TgtItH70eY2uHaCV9moENTftqd5XIS3Cx0mf4WfistA==
 
-react-native-testing-library@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-testing-library/-/react-native-testing-library-1.5.0.tgz#02762bf8cb5c1295a220d5e5d40ffc2ebecf31da"
-  integrity sha512-ivS0K0uu8PnAU1DPi2LobZMDcWqQFZUFFP2NiGA1wFKgsGuv2zIGuiBY8mJVAtU2FnPMyVDfg5rL6XoyyCj+jg==
-  dependencies:
-    pretty-format "^23.6.0"
-
 react-native-vector-icons@^6.4.2:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.4.2.tgz#ee0b097e783387544ed160a3192a437c097e551d"
@@ -20276,6 +20277,11 @@ wait-for-expect@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/wait-for-expect/-/wait-for-expect-1.1.1.tgz#9cd10e07d52810af9e0aaf509872e38f3c3d81ae"
   integrity sha512-vd9JOqqEcBbCDhARWhW85ecjaEcfBLuXgVBqatfS3iw6oU4kzAcs+sCNjF+TC9YHPImCW7ypsuQc+htscIAQCw==
+
+wait-for-expect@^1.1.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/wait-for-expect/-/wait-for-expect-1.2.0.tgz#fdab6a26e87d2039101db88bff3d8158e5c3e13f"
+  integrity sha512-EJhKpA+5UHixduMBEGhTFuLuVgQBKWxkFbefOdj2bbk2/OpA5Opsc4aUTGmF+qJ+v3kTGxDRNYwKaT4j6g5n8Q==
 
 walker@^1.0.7, walker@~1.0.5:
   version "1.0.7"

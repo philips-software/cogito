@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from 'react-native-testing-library'
+import { render, fireEvent } from '@testing-library/react-native'
 import { Navigation } from 'react-native-navigation'
 import { CurrentIdentityComponent } from './CurrentIdentity'
 import { CreateIdentity } from '../identity-manager/CreateIdentity'
@@ -32,6 +32,7 @@ describe('CurrentIdentityComponent', () => {
     const { getByText } = render(<CurrentIdentityComponent identityName={identityName} />)
 
     const element = getByText(identityName)
-    expect(() => fireEvent.press(element)).toThrow('No handler function found for event: press')
+    fireEvent.press(element)
+    expect(Navigation.showModal).not.toBeCalled()
   })
 })

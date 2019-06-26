@@ -22,13 +22,13 @@
     "redux-starter-kit": "^0.5.1"
   },
   "devDependencies": {
+    "@testing-library/react-native": "^4.0.6",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "24.1.0",
     "jest": "24.1.0",
     "metro-react-native-babel-preset": "0.52.0",
     "react-devtools": "^3.6.1",
     "react-native-log-ios": "^1.0.1",
-    "react-native-testing-library": "^1.5.0",
     "react-test-renderer": "16.6.3",
     "redux-mock-store": "^1.5.3",
     "remote-redux-devtools": "^0.5.16"

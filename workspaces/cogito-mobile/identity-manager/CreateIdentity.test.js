@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from 'react-native-testing-library'
+import { render, fireEvent } from '@testing-library/react-native'
 import { CreateIdentityComponent } from './CreateIdentity'
 import { Navigation } from 'react-native-navigation'
 import { KeyboardAvoidingContainer } from '../components'
