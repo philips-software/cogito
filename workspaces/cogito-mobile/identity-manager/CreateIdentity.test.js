@@ -2,7 +2,6 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react-native'
 import { CreateIdentityComponent } from './CreateIdentity'
 import { Navigation } from 'react-native-navigation'
-import { KeyboardAvoidingContainer } from '../components'
 
 describe('CreateIdentityComponent', () => {
   const createButtonTestId = 'create-button'
@@ -73,7 +72,7 @@ describe('CreateIdentityComponent', () => {
 
     const newName = 'New Name'
     fireEvent.changeText(getByTestId(identityFieldTestId), newName)
-    fireEvent(getByTestId(identityFieldTestId), 'submitEditing')
+    fireEvent.submitEditing(getByTestId(identityFieldTestId))
 
     expect(addIdentity.mock.calls[0][0]).toBe(newName)
   })
@@ -103,11 +102,11 @@ describe('CreateIdentityComponent', () => {
   })
 
   it('prevents the keyboard from overlapping with the button', () => {
-    const { queryByType } = render(
+    const { queryByTestId } = render(
       <CreateIdentityComponent />
     )
 
-    expect(queryByType(KeyboardAvoidingContainer)).not.toBeNull()
+    expect(queryByTestId('keyboard-avoiding-container')).not.toBeNull()
   })
 
   describe('validation', () => {
