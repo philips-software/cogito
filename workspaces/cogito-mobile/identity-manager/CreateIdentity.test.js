@@ -102,6 +102,13 @@ describe('CreateIdentityComponent', () => {
     expect(Navigation.dismissModal).toBeCalled()
   })
 
+  it('dismisses modal only once', () => {
+    const { rerender } = render(<CreateIdentityComponent />)
+    rerender(<CreateIdentityComponent done />)
+    rerender(<CreateIdentityComponent done />)
+    expect(Navigation.dismissModal).toBeCalledTimes(1)
+  })
+
   it('prevents the keyboard from overlapping with the button', () => {
     const { queryByTestId } = render(
       <CreateIdentityComponent />

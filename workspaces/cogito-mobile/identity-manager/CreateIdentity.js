@@ -16,15 +16,17 @@ export class CreateIdentityComponent extends React.Component {
     this.state = {
       identityName: '',
       buttonDisabled: true,
-      errorMessage: null
+      errorMessage: null,
+      dismissed: false
     }
 
     Navigation.events().bindComponent(this)
   }
 
   componentDidUpdate () {
-    if (this.props.done) {
+    if (this.props.done && !this.state.dismissed) {
       Navigation.dismissModal(this.componentId)
+      this.setState({ dismissed: true })
     }
   }
 
