@@ -80,13 +80,13 @@ describe('CreateIdentityComponent', () => {
   it('does not show a spinner initially', () => {
     const { getByTestId } = render(<CreateIdentityComponent />)
 
-    expect(getByTestId(createButtonTestId).props.loading).toBeFalsy()
+    expect(getByTestId('loading-indicator').props.animating).toBeFalsy()
   })
 
   it('shows a spinner when loading', () => {
     const { getByTestId } = render(<CreateIdentityComponent loading />)
 
-    expect(getByTestId(createButtonTestId).props.loading).toBe(true)
+    expect(getByTestId('loading-indicator').props.animating).toBe(true)
   })
 
   it('adds an identity when create button is pressed', () => {

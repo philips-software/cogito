@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Text, TextInput } from 'react-native'
+import { ActivityIndicator, Button, Text, TextInput, View } from 'react-native'
 import { KeyboardAvoidingContainer } from '../components'
 import { Navigation } from 'react-native-navigation'
 import { connect } from 'react-redux'
@@ -47,14 +47,19 @@ export class CreateIdentityComponent extends React.Component {
         { this.state.errorMessage !== null &&
           <Text style={styles.errorMessageText}>{this.state.errorMessage}</Text>
         }
-        <Button
-          testID='create-button'
-          title='Create'
-          type='outline'
-          onPress={() => this.handleCreateButton()}
-          disabled={this.state.buttonDisabled}
-          loading={this.props.loading}
-        />
+        <View style={{ flexDirection: 'row' }}>
+          <Button
+            testID='create-button'
+            title='Create'
+            type='outline'
+            onPress={() => this.handleCreateButton()}
+            disabled={this.state.buttonDisabled}
+          />
+          <ActivityIndicator
+            testID='loading-indicator'
+            animating={!!this.props.loading}
+          />
+        </View>
       </KeyboardAvoidingContainer>
     )
   }
