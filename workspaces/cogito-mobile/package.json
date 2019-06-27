@@ -14,9 +14,7 @@
     "ethers": "^4.0.30",
     "react": "16.8.6",
     "react-native": "^0.59.8",
-    "react-native-elements": "^1.1.0",
     "react-native-navigation": "^2.12.0",
-    "react-native-vector-icons": "^6.4.2",
     "react-redux": "^7.0.3",
     "redux-logger": "^3.0.6",
     "redux-starter-kit": "^0.5.1"

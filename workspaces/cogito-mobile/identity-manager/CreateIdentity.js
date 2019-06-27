@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Button } from 'react-native-elements'
+import { Button, Text, TextInput } from 'react-native'
 import { KeyboardAvoidingContainer } from '../components'
 import { Navigation } from 'react-native-navigation'
 import { connect } from 'react-redux'
@@ -33,7 +33,7 @@ export class CreateIdentityComponent extends React.Component {
   render () {
     return (
       <KeyboardAvoidingContainer>
-        <Input
+        <TextInput
           testID='identity-name'
           label='I am more.'
           placeholder='E.g. your name or "work"'
@@ -44,6 +44,9 @@ export class CreateIdentityComponent extends React.Component {
           errorMessage={this.state.errorMessage}
           autoFocus
         />
+        { this.state.errorMessage !== null &&
+          <Text style={styles.errorMessageText}>{this.state.errorMessage}</Text>
+        }
         <Button
           testID='create-button'
           title='Create'
