@@ -4,9 +4,7 @@ target 'Cogito' do
   use_frameworks!
   inhibit_all_warnings!
 
-  # Workaround for https://github.com/jedisct1/swift-sodium/issues/155:
-  pod 'Sodium', git: 'https://github.com/jedisct1/swift-sodium.git', branch: 'master'
-
+  pod 'Sodium', '~> 0.8'
   pod 'ReSwift', '~> 4.0'
   pod 'ReSwiftThunk', '~> 1.0'
   pod 'BigInt', '~> 3.0'

@@ -36,7 +36,7 @@ PODS:
   - SipHash (1.2.2)
   - Socket.IO-Client-Swift (13.4.0):
     - Starscream (~> 3.0.2)
-  - Sodium (0.7.0)
+  - Sodium (0.8.0)
   - Starscream (3.0.6)
   - SwiftLint (0.27.0)
   - SwiftyJSON (4.2.0)
@@ -64,7 +64,7 @@ DEPENDENCIES:
   - RxCocoa (~> 4.0)
   - RxDataSources (~> 3.0)
   - RxSwift (~> 4.0)
-  - Sodium (from `https://github.com/jedisct1/swift-sodium.git`, branch `master`)
+  - Sodium (~> 0.8)
   - SwiftLint (= 0.27.0)
   - SwiftyJSON (~> 4.0)
   - Telepath (from `../telepath-ios`)
@@ -93,6 +93,7 @@ SPEC REPOS:
     - RxSwift
     - SipHash
     - Socket.IO-Client-Swift
+    - Sodium
     - Starscream
     - SwiftLint
     - SwiftyJSON
@@ -100,16 +101,8 @@ SPEC REPOS:
     - URITemplate
 
 EXTERNAL SOURCES:
-  Sodium:
-    :branch: master
-    :git: https://github.com/jedisct1/swift-sodium.git
   Telepath:
     :path: "../telepath-ios"
-
-CHECKOUT OPTIONS:
-  Sodium:
-    :commit: adc2c117bedf186cb4cdcd64c5b93b7f1f55e185
-    :git: https://github.com/jedisct1/swift-sodium.git
 
 SPEC CHECKSUMS:
   base64url: 92e81bb256f2070359a34fc93a7a7d4b9a9d689f
@@ -132,7 +125,7 @@ SPEC CHECKSUMS:
   RxSwift: 74c29b693c8e42b0f64400e8b06564575742d649
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   Socket.IO-Client-Swift: 2b2720f14c92ff1237ced09bc2f2da2022624fee
-  Sodium: c9f8ec9fd5f1754f354f06dbbb32d44337f6661e
+  Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
@@ -140,6 +133,6 @@ SPEC CHECKSUMS:
   Toast-Swift: e42a638589a2f95036b4bb7626cfbdde7daf0393
   URITemplate: ace0c4c46dcf8afe6e89b4060621852886b15c3b
 
-PODFILE CHECKSUM: abe7719297781d4640291b8a9c7f71b5bc1bee4d
+PODFILE CHECKSUM: bedd79936fed6d6a169b79affae80cabfaf4277d
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.7.5
