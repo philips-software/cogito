@@ -1,4 +1,4 @@
-import { toolbarButton } from '../../navigation/ToolbarButton'
+import { toolbarButton } from '../navigation/ToolbarButton'
 
 export const layout = {
   topBar: {

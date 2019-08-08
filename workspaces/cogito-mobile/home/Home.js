@@ -1,7 +1,7 @@
 import React from 'react'
-import { Text, View } from 'react-native'
-import { Navigation } from 'react-native-navigation'
+import { View } from 'react-native'
 import styles from '../Styles'
+import { CurrentIdentity } from '../identity-manager/CurrentIdentity'
 
 export class Home extends React.Component {
   static options () {
@@ -11,15 +11,8 @@ export class Home extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <Text onPress={() => this.openIdentityManager()}>
-          I am.
-        </Text>
+        <CurrentIdentity />
       </View>
     )
-  }
-
-  openIdentityManager () {
-    const { componentId } = this.props
-    Navigation.push(componentId, { component: { name: 'IdentityManager' } })
   }
 }
