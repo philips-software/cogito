@@ -3,7 +3,7 @@
         "apps": [],
         "details": [
             {
-                "appID": "MWTEZ4CYM6.com.philips.Cogito",
+                "appID": "7EQ9KX3BR9.com.vandenoord.test.Cogito",
                 "paths": [ "/attestations/receive", "/telepath/connect" ]
             }
         ]
