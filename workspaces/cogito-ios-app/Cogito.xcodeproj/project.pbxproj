@@ -13,6 +13,7 @@
 		0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3661F7012E1003A9787 /* KeyStore.swift */; };
 		0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E3681F71481C003A9787 /* KeyStoreActions.swift */; };
 		0205E36D1F716251003A9787 /* KeyStoreReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */; };
+		020D296F2322837C0025C1E8 /* NameEntryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020D296E2322837C0025C1E8 /* NameEntryField.swift */; };
 		0212E0351F9E397C00EEDE34 /* SignTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */; };
 		022124191F82238D005A668A /* CreateIdentityActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */; };
 		022621291FAB1E1300692126 /* IdentityManager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 022621281FAB1E1300692126 /* IdentityManager.storyboard */; };
@@ -205,6 +206,7 @@
 		0205E3661F7012E1003A9787 /* KeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStore.swift; sourceTree = "<group>"; };
 		0205E3681F71481C003A9787 /* KeyStoreActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreActions.swift; sourceTree = "<group>"; };
 		0205E36C1F716251003A9787 /* KeyStoreReducerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreReducerSpec.swift; sourceTree = "<group>"; };
+		020D296E2322837C0025C1E8 /* NameEntryField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameEntryField.swift; sourceTree = "<group>"; };
 		0212E0301F99FFD300EEDE34 /* Cogito.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cogito.entitlements; sourceTree = "<group>"; };
 		0212E0341F9E397C00EEDE34 /* SignTransaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignTransaction.storyboard; sourceTree = "<group>"; };
 		022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityActionsSpec.swift; sourceTree = "<group>"; };
@@ -392,6 +394,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		020D296D232283550025C1E8 /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+				020D296E2322837C0025C1E8 /* NameEntryField.swift */,
+			);
+			path = "UI Components";
+			sourceTree = "<group>";
+		};
 		0212E0321F9E392500EEDE34 /* Sign transaction service */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,6 +511,7 @@
 				0295A01C2085E6900060400A /* Encryption service */,
 				02BB61FA20C0221500F03625 /* Identity info service */,
 				5C4D7F4E20AD71FC0008107C /* URL handler */,
+				020D296D232283550025C1E8 /* UI Components */,
 				027603EE1F6ACD1600788B0A /* AppDelegate.swift */,
 				0230F9461FA1E5F3006A36FC /* LaunchActions.swift */,
 				5CAC2D64206BD0CB00F74462 /* Configuration.swift */,
@@ -1252,6 +1263,7 @@
 				02A15B011F8672C000A94163 /* DiamondReducer.swift in Sources */,
 				02DB90E72045546C00C4817C /* FacetDetailsViewController.swift in Sources */,
 				0270D71A1F9F58CA00CC9038 /* OpenIDAttestationActions.swift in Sources */,
+				020D296F2322837C0025C1E8 /* NameEntryField.swift in Sources */,
 				028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
 				5C4D7F5720AD84460008107C /* AttestationActions.swift in Sources */,
