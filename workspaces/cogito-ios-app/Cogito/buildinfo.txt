@@ -1,0 +1,2 @@
+The contents of this file will be automatically set by a build
+script during builds.

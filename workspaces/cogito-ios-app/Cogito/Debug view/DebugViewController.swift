@@ -6,6 +6,19 @@ class DebugViewController: UIViewController, Connectable {
 
     @IBOutlet weak var oidcRealmUrlField: UITextField!
     @IBOutlet weak var oidcSubjectField: UITextField!
+    @IBOutlet weak var commitHash: UILabel!
+    @IBOutlet weak var branch: UILabel!
+
+    override func viewDidLoad() {
+        if let buildinfoPath = Bundle.main.path(forResource: "buildinfo", ofType: "txt"),
+            let data = FileManager.default.contents(atPath: buildinfoPath),
+            let contents = String(data: data, encoding: .utf8) {
+            let lines = contents.components(separatedBy: "\n")
+            commitHash.text = lines[0]
+            branch.text = lines[1]
+        }
+        super.viewDidLoad()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
