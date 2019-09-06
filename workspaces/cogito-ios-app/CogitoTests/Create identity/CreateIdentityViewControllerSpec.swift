@@ -8,7 +8,9 @@ class CreateIdentityViewControllerSpec: QuickSpec {
         var viewController: CreateIdentityViewController!
 
         beforeEach {
-            let storyboard = UIStoryboard(name: "Debug", bundle: Bundle(for: CreateIdentityViewController.self))
+            let storyboard = UIStoryboard(
+                name: "IdentityManager",
+                bundle: Bundle(for: CreateIdentityViewController.self))
             viewController = storyboard.instantiateViewController(withIdentifier: "CreateIdentity")
                 as? CreateIdentityViewController
             expect(viewController.view).toNot(beNil())

@@ -34,7 +34,6 @@
 		027603F41F6ACD1600788B0A /* Debug.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F21F6ACD1600788B0A /* Debug.storyboard */; };
 		027603F61F6ACD1600788B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027603F51F6ACD1600788B0A /* Assets.xcassets */; };
 		027603F91F6ACD1600788B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 027603F71F6ACD1600788B0A /* LaunchScreen.storyboard */; };
-		028F4EF51F7CF7EB0015C4AF /* DebugViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EF41F7CF7EB0015C4AF /* DebugViewControllerSpec.swift */; };
 		028F4EFA1F7D34280015C4AF /* CreateIdentityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EF91F7D34280015C4AF /* CreateIdentityViewController.swift */; };
 		028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EFC1F7D3B5C0015C4AF /* CreateIdentityActions.swift */; };
 		028F4F001F7D3B640015C4AF /* CreateIdentityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028F4EFF1F7D3B640015C4AF /* CreateIdentityState.swift */; };
@@ -233,7 +232,6 @@
 		027603FF1F6ACD1600788B0A /* CogitoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CogitoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		027604051F6ACD1600788B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0276040E1F6BFF6D00788B0A /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
-		028F4EF41F7CF7EB0015C4AF /* DebugViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugViewControllerSpec.swift; sourceTree = "<group>"; };
 		028F4EF91F7D34280015C4AF /* CreateIdentityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityViewController.swift; sourceTree = "<group>"; };
 		028F4EFC1F7D3B5C0015C4AF /* CreateIdentityActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityActions.swift; sourceTree = "<group>"; };
 		028F4EFF1F7D3B640015C4AF /* CreateIdentityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityState.swift; sourceTree = "<group>"; };
@@ -531,7 +529,6 @@
 				02E792361F6FFDD600DC5973 /* Key store */,
 				02A15AF91F86715800A94163 /* Diamond */,
 				02A15AEC1F864EAB00A94163 /* Home */,
-				02C305461F87592800351B4A /* Debug view */,
 				028F4EF81F7D340D0015C4AF /* Create identity */,
 				0212E0331F9E393A00EEDE34 /* Sign transaction service */,
 				0270D7181F9F446C00CC9038 /* Attestations service */,
@@ -709,14 +706,6 @@
 				02BB61FC20C0226100F03625 /* IdentityInfoServiceSpec.swift */,
 			);
 			path = "Identity info service";
-			sourceTree = "<group>";
-		};
-		02C305461F87592800351B4A /* Debug view */ = {
-			isa = PBXGroup;
-			children = (
-				028F4EF41F7CF7EB0015C4AF /* DebugViewControllerSpec.swift */,
-			);
-			path = "Debug view";
 			sourceTree = "<group>";
 		};
 		02D0C0D61F8B59C30001223E /* Initial setup wizard */ = {
@@ -1327,7 +1316,6 @@
 				6D423B772215C4C0002BF95A /* ValueStoreServiceSpec.swift in Sources */,
 				5C3C8F28208732C50042AC2F /* DecrypterSpy.swift in Sources */,
 				5CDB58DC203589CC00A28D60 /* TelepathSubscriberSpec.swift in Sources */,
-				028F4EF51F7CF7EB0015C4AF /* DebugViewControllerSpec.swift in Sources */,
 				026779B02007B49A00C2D45C /* TransactionSignerSpec.swift in Sources */,
 				5CC4D2C91FE7F5FA002F2450 /* TransactionSigningServiceSpec.swift in Sources */,
 				028F4F061F7D3ED60015C4AF /* CreateIdentityViewControllerSpec.swift in Sources */,
