@@ -26,6 +26,7 @@ class NameEntryField: UITextField {
     }
 
     override func awakeFromNib() {
+        super.awakeFromNib()
         self.configure()
     }
 
