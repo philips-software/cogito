@@ -23,6 +23,7 @@
 		0230F9471FA1E5F3006A36FC /* LaunchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F9461FA1E5F3006A36FC /* LaunchActions.swift */; };
 		0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */; };
 		023C34F2217DD324000953FB /* Attestation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023C34F1217DD324000953FB /* Attestation.swift */; };
+		0242C31B2322A42300427BAB /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242C31A2322A42300427BAB /* Button.swift */; };
 		026779AD2007B47E00C2D45C /* TransactionSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AC2007B47E00C2D45C /* TransactionSigner.swift */; };
 		026779B02007B49A00C2D45C /* TransactionSignerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */; };
 		0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
@@ -217,6 +218,7 @@
 		0230F9461FA1E5F3006A36FC /* LaunchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchActions.swift; sourceTree = "<group>"; };
 		0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchActionsSpec.swift; sourceTree = "<group>"; };
 		023C34F1217DD324000953FB /* Attestation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attestation.swift; sourceTree = "<group>"; };
+		0242C31A2322A42300427BAB /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		026779AC2007B47E00C2D45C /* TransactionSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigner.swift; sourceTree = "<group>"; };
 		026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSignerSpec.swift; sourceTree = "<group>"; };
 		0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				020D296E2322837C0025C1E8 /* NameEntryField.swift */,
+				0242C31A2322A42300427BAB /* Button.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -1292,6 +1295,7 @@
 				5C20A0F81FA1FBDD00B443C9 /* TelepathReducer.swift in Sources */,
 				5CDB58DE20358B4100A28D60 /* TelepathSubscriber.swift in Sources */,
 				029691551F7166EE00654BD0 /* KeyStoreState.swift in Sources */,
+				0242C31B2322A42300427BAB /* Button.swift in Sources */,
 				02C7420A1F8F5B6E007AE227 /* CameraButton.swift in Sources */,
 				02F0CA091F875515000C428F /* DebugGestureHandler.swift in Sources */,
 				027603EF1F6ACD1600788B0A /* AppDelegate.swift in Sources */,
