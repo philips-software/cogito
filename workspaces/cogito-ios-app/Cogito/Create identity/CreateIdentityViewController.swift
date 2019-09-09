@@ -17,8 +17,7 @@ class CreateIdentityViewController: UIViewController, Connectable {
 
     var onDone: () -> Void = {}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func setup(addingActions: Bool = false) {
         connection.bind(\Props.description, to: descriptionField.rx.text)
         connection.bind(\Props.createButtonEnabled, to: createButton.rx.isEnabled)
         connection.bind(\Props.pending, to: descriptionField.rx.isEnabled) { !$0 }
@@ -31,7 +30,23 @@ class CreateIdentityViewController: UIViewController, Connectable {
                 self.onDone()
             }
         }
+        if addingActions {
+            descriptionField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+            descriptionField.addTarget(self, action: #selector(editingDidEnd), for: .editingDidEnd)
+            createButton.addTarget(self, action: #selector(createTapped), for: .touchUpInside)
+        }
         handleErrors()
+    }
+
+    func tearDown() {
+        descriptionField.removeTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        descriptionField.removeTarget(self, action: #selector(editingDidEnd), for: .editingDidEnd)
+        createButton.removeTarget(self, action: #selector(createTapped), for: .touchUpInside)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setup()
     }
 
     private func handleErrors() {
