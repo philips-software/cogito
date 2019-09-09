@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Me, Myself and I-->
+        <!--Identity Manager View Controller-->
         <scene sceneID="Noh-Gt-SHn">
             <objects>
                 <tableViewController storyboardIdentifier="IdentityManager" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Zv-v9-37E" customClass="IdentityManagerViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
@@ -64,7 +64,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="facetLabel" destination="Rqr-xF-PdL" id="0jL-Ne-49E"/>
-                                    <segue destination="TNh-gt-zXW" kind="show" identifier="ShowIdentityDetails" trigger="accessoryAction" id="BgM-WR-DmX"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CreateIdentity" rowHeight="134" id="pdT-7h-M8d" customClass="CreateIdentityTableViewCell" customModule="Cogito" customModuleProvider="target">
@@ -75,12 +74,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcw-5F-ePU">
-                                            <rect key="frame" x="116" y="38" width="173" height="26"/>
+                                            <rect key="frame" x="116" y="38.5" width="173" height="26"/>
                                             <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="12"/>
                                             <state key="normal" title="Tap to create a digital identity"/>
                                         </button>
-                                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="Stefan" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zlU-Mz-ugP" customClass="NameEntryField" customModule="Cogito" customModuleProvider="target">
-                                            <rect key="frame" x="116" y="5" width="173" height="38"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zlU-Mz-ugP" customClass="NameEntryField" customModule="Cogito" customModuleProvider="target">
+                                            <rect key="frame" x="116" y="13.5" width="173" height="30"/>
                                             <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -91,7 +90,7 @@
                                             </connections>
                                         </textField>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZS-PV-zRP" customClass="Button" customModule="Cogito" customModuleProvider="target">
-                                            <rect key="frame" x="116" y="72" width="173" height="42"/>
+                                            <rect key="frame" x="116" y="72.5" width="173" height="41.5"/>
                                             <state key="normal" title="Create"/>
                                             <connections>
                                                 <action selector="createNewIdentity:" destination="1Zv-v9-37E" eventType="touchUpInside" id="ws3-Rz-7RD"/>
@@ -141,16 +140,17 @@
                             <outlet property="delegate" destination="1Zv-v9-37E" id="frt-XE-9oD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Me, Myself and I" id="ck6-H8-qtF">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="Gm6-Gd-4va">
-                            <connections>
-                                <segue destination="aui-nC-Exo" kind="show" identifier="CreateIdentity" id="wkF-Rx-o7A"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Pfc-jp-k8J">
-                            <connections>
-                                <action selector="share:" destination="1Zv-v9-37E" id="pAD-AX-dwq"/>
-                            </connections>
+                    <navigationItem key="navigationItem" id="ck6-H8-qtF">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Njf-kt-7O9">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uZX-XS-UWe">
+                                <rect key="frame" x="276" y="5.5" width="83" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelCreateNewIdentity:" destination="1Zv-v9-37E" eventType="touchUpInside" id="g6t-UV-uEv"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
@@ -185,13 +185,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am more." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CeB-9W-OFi">
-                                <rect key="frame" x="147" y="134" width="81" height="21"/>
+                                <rect key="frame" x="147" y="90" width="81" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. your name or &quot;work&quot;" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qvy-nl-rbr">
-                                <rect key="frame" x="16" y="208" width="343" height="30"/>
+                                <rect key="frame" x="16" y="164" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" enablesReturnKeyAutomatically="YES" textContentType="nickname"/>
@@ -201,7 +201,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VW-9w-gSg">
-                                <rect key="frame" x="158.5" y="278" width="58" height="36"/>
+                                <rect key="frame" x="158.5" y="234" width="58" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Create"/>
                                 <connections>
@@ -209,7 +209,7 @@
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="KhW-gx-Efj">
-                                <rect key="frame" x="224.5" y="286" width="20" height="20"/>
+                                <rect key="frame" x="224.5" y="242" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

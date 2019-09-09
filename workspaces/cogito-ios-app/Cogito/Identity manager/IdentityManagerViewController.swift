@@ -13,6 +13,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     var createIdentityCell: CreateIdentityTableViewCell?
 
     override func viewDidLoad() {
+        self.navigationController?.isNavigationBarHidden = true
         super.viewDidLoad()
         self.tableView.dataSource = nil
         dataSource = RxTableViewSectionedAnimatedDataSource(
@@ -133,11 +134,18 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     @IBAction func beginEditingNewIdentity(_ sender: Any) {
         self.createIdentityCell?.createButtonTopConstraint.isActive = true
         self.createIdentityCell?.createButton.isHidden = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     @IBAction func endEditingNewIdentity(_ sender: Any) {
         self.createIdentityCell?.createButtonTopConstraint.isActive = false
         self.createIdentityCell?.createButton.isHidden = true
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
+    @IBAction func cancelCreateNewIdentity(_ sender: Any) {
+        self.createIdentityCell?.nameEntryField.resignFirstResponder()
+        self.createIdentityCell?.nameEntryField.text = ""
     }
 
     @IBAction func createNewIdentity(_ sender: Any) {
