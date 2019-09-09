@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bHl-rf-6fF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bHl-rf-6fF">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,29 +14,117 @@
         <scene sceneID="Noh-Gt-SHn">
             <objects>
                 <tableViewController storyboardIdentifier="IdentityManager" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Zv-v9-37E" customClass="IdentityManagerViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="l6V-Tg-2bg">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="l6V-Tg-2bg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="Facet" textLabel="RQQ-IT-hDk" style="IBUITableViewCellStyleDefault" id="veq-fd-q3x" customClass="FacetTableViewCell" customModule="Cogito" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="Facet" rowHeight="75" id="veq-fd-q3x" customClass="FacetTableViewCell" customModule="Cogito" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="veq-fd-q3x" id="dgx-hb-DwM">
-                                    <rect key="frame" x="0.0" y="0.0" width="307" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="307" height="75"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RQQ-IT-hDk">
-                                            <rect key="frame" x="16" y="0.0" width="291" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBi-6V-qZ5">
+                                            <rect key="frame" x="16" y="21" width="91" height="33"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="91" id="7Ai-At-nYd"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="91" id="CY8-WK-0fU"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
+                                            <state key="normal" title="I am">
+                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="abcfjk" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqr-xF-PdL">
+                                            <rect key="frame" x="115" y="15" width="192" height="38"/>
+                                            <gestureRecognizers/>
+                                            <fontDescription key="fontDescription" name="SnellRoundhand" family="Snell Roundhand" pointSize="30"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Rqr-xF-PdL" firstAttribute="leading" secondItem="aBi-6V-qZ5" secondAttribute="trailing" constant="8" id="OXO-Mk-iMM"/>
+                                        <constraint firstItem="Rqr-xF-PdL" firstAttribute="firstBaseline" secondItem="aBi-6V-qZ5" secondAttribute="firstBaseline" id="R96-De-Dva"/>
+                                        <constraint firstItem="aBi-6V-qZ5" firstAttribute="top" secondItem="dgx-hb-DwM" secondAttribute="topMargin" constant="10" id="bo8-GY-B75"/>
+                                        <constraint firstItem="aBi-6V-qZ5" firstAttribute="leading" secondItem="dgx-hb-DwM" secondAttribute="leadingMargin" id="eCW-uE-Bzf"/>
+                                        <constraint firstAttribute="trailing" secondItem="Rqr-xF-PdL" secondAttribute="trailing" id="qcI-dF-0wS"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="aBi-6V-qZ5" secondAttribute="bottom" constant="10" id="snS-Tj-qwP"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="facetLabel" destination="Rqr-xF-PdL" id="0jL-Ne-49E"/>
                                     <segue destination="TNh-gt-zXW" kind="show" identifier="ShowIdentityDetails" trigger="accessoryAction" id="BgM-WR-DmX"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CreateIdentity" rowHeight="134" id="pdT-7h-M8d" customClass="CreateIdentityTableViewCell" customModule="Cogito" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="130.5" width="375" height="134"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pdT-7h-M8d" id="QAM-ZM-Tub">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcw-5F-ePU">
+                                            <rect key="frame" x="116" y="38" width="173" height="26"/>
+                                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="12"/>
+                                            <state key="normal" title="Tap to create a digital identity"/>
+                                        </button>
+                                        <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" text="Stefan" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zlU-Mz-ugP" customClass="NameEntryField" customModule="Cogito" customModuleProvider="target">
+                                            <rect key="frame" x="116" y="5" width="173" height="38"/>
+                                            <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go" textContentType="nickname"/>
+                                            <connections>
+                                                <action selector="beginEditingNewIdentity:" destination="1Zv-v9-37E" eventType="editingDidBegin" id="yhr-xV-LT9"/>
+                                                <action selector="endEditingNewIdentity:" destination="1Zv-v9-37E" eventType="editingDidEnd" id="gWL-4q-T89"/>
+                                            </connections>
+                                        </textField>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZS-PV-zRP" customClass="Button" customModule="Cogito" customModuleProvider="target">
+                                            <rect key="frame" x="116" y="72" width="173" height="42"/>
+                                            <state key="normal" title="Create"/>
+                                            <connections>
+                                                <action selector="createNewIdentity:" destination="1Zv-v9-37E" eventType="touchUpInside" id="ws3-Rz-7RD"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBn-cQ-uJx">
+                                            <rect key="frame" x="16" y="11" width="91" height="33"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="91" id="0AI-F9-GxY"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
+                                            <state key="normal" title="I am">
+                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="DZS-PV-zRP" firstAttribute="leading" secondItem="zlU-Mz-ugP" secondAttribute="leading" id="4K5-D3-7FT"/>
+                                        <constraint firstItem="DZS-PV-zRP" firstAttribute="width" secondItem="zlU-Mz-ugP" secondAttribute="width" id="6rO-Dw-f0Z"/>
+                                        <constraint firstItem="Wcw-5F-ePU" firstAttribute="width" secondItem="zlU-Mz-ugP" secondAttribute="width" id="74F-zy-4DZ"/>
+                                        <constraint firstItem="Wcw-5F-ePU" firstAttribute="top" secondItem="zlU-Mz-ugP" secondAttribute="bottom" constant="-5" id="F8t-BN-PqN"/>
+                                        <constraint firstItem="Wcw-5F-ePU" firstAttribute="leading" secondItem="zlU-Mz-ugP" secondAttribute="leading" id="HUI-dz-lxR"/>
+                                        <constraint firstItem="DZS-PV-zRP" firstAttribute="top" secondItem="zlU-Mz-ugP" secondAttribute="bottom" constant="29" id="QO1-N9-DyF"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Wcw-5F-ePU" secondAttribute="bottom" constant="8" id="ZPB-cK-pTm"/>
+                                        <constraint firstAttribute="bottom" secondItem="DZS-PV-zRP" secondAttribute="bottom" constant="20" id="dCN-R1-YcA"/>
+                                        <constraint firstItem="DZS-PV-zRP" firstAttribute="top" secondItem="Wcw-5F-ePU" secondAttribute="bottom" constant="8" id="dzm-G8-iQi"/>
+                                        <constraint firstItem="zBn-cQ-uJx" firstAttribute="top" secondItem="QAM-ZM-Tub" secondAttribute="topMargin" id="hzd-0p-jVG"/>
+                                        <constraint firstItem="zlU-Mz-ugP" firstAttribute="leading" secondItem="zBn-cQ-uJx" secondAttribute="trailing" constant="9" id="kzw-Fe-vrf"/>
+                                        <constraint firstItem="zBn-cQ-uJx" firstAttribute="leading" secondItem="QAM-ZM-Tub" secondAttribute="leadingMargin" id="meb-PF-Rny"/>
+                                        <constraint firstItem="zlU-Mz-ugP" firstAttribute="firstBaseline" secondItem="zBn-cQ-uJx" secondAttribute="firstBaseline" id="yBS-w6-1qT"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="QO1-N9-DyF"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="createButton" destination="DZS-PV-zRP" id="iTf-cV-1fQ"/>
+                                    <outlet property="createButtonTopConstraint" destination="dzm-G8-iQi" id="aK3-bG-If2"/>
+                                    <outlet property="nameEntryField" destination="zlU-Mz-ugP" id="dIx-ge-Xy0"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

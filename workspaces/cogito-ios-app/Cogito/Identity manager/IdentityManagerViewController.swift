@@ -10,21 +10,24 @@ class IdentityManagerViewController: UITableViewController, Connectable {
 
     var dataSource: RxTableViewSectionedAnimatedDataSource<ViewModel.FacetGroup>!
     let disposeBag = DisposeBag()
+    var createIdentityCell: CreateIdentityTableViewCell?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.tableView.dataSource = nil
         dataSource = RxTableViewSectionedAnimatedDataSource(
             configureCell: { _, tableView, indexPath, item in
-                let cell = tableView.dequeueReusableCell(withIdentifier: "Facet", for: indexPath)
-                if let facetCell = cell as? FacetTableViewCell {
-                    facetCell.textLabel?.attributedText = item.facet.formatted(addSpacePadding: 3)
-                    let addr = item.facet.address.description
-                    let range = addr.startIndex ..< addr.index(addr.startIndex, offsetBy: 10)
-                    facetCell.detailTextLabel?.text = addr[range] + "..."
-                    facetCell.accessoryType = .detailDisclosureButton
-                    facetCell.facet = item.facet
+                let cell: UITableViewCell
+                if let facet = item.facet {
+                    cell = tableView.dequeueReusableCell(withIdentifier: "Facet", for: indexPath)
+                    if let facetCell = cell as? FacetTableViewCell {
+                        facetCell.facetLabel?.attributedText = facet.formatted(addSpacePadding: 0)
+                        facetCell.accessoryType = .detailDisclosureButton
+                        facetCell.facet = item.facet
+                    }
+                } else {
+                    cell = tableView.dequeueReusableCell(withIdentifier: "CreateIdentity", for: indexPath)
+                    self.createIdentityCell = cell as? CreateIdentityTableViewCell
                 }
                 return cell
             },
@@ -43,12 +46,18 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     }
 
     func itemDeleted(at indexPath: IndexPath) {
-        let uuid = self.props.facetGroups[indexPath.section].items[indexPath.row].facet.identifier
+        let identity = self.props.facetGroups[indexPath.section].items[indexPath.row]
+        guard let uuid = identity.facet?.identifier else {
+            return
+        }
         self.actions.deleteIdentity(uuid)
     }
 
     func itemSelected(at indexPath: IndexPath) {
-        let uuid = self.props.facetGroups[indexPath.section].items[indexPath.row].facet.identifier
+        let identity = self.props.facetGroups[indexPath.section].items[indexPath.row]
+        guard let uuid = identity.facet?.identifier else {
+            return
+        }
         self.actions.selectIdentity(uuid)
         self.dismiss(animated: true)
     }
@@ -85,12 +94,16 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     @IBAction func share(_ sender: UIBarButtonItem) {
         let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("accounts.json")
         let content: [[[String: Any]]] = self.props.facetGroups.map { facetGroup in
-            return facetGroup.items.map { item in
-                return [
-                    "description": item.facet.description,
-                    "address": item.facet.address.value,
-                    "created": item.facet.created.description
-                ]
+            return facetGroup.items.compactMap { item in
+                if let facet = item.facet {
+                    return [
+                        "description": facet.description,
+                        "address": facet.address.value,
+                        "created": facet.created.description
+                    ]
+                } else {
+                    return nil
+                }
             }
         }
         let joinedContent = [[String: Any]](content.joined())
@@ -116,6 +129,24 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         }
     }
 
+    // MARK: - Create Identity
+
+    @IBAction func beginEditingNewIdentity(_ sender: Any) {
+        self.createIdentityCell?.createButtonTopConstraint.isActive = true
+        self.createIdentityCell?.createButton.isHidden = false
+    }
+
+    @IBAction func endEditingNewIdentity(_ sender: Any) {
+        self.createIdentityCell?.createButtonTopConstraint.isActive = false
+        self.createIdentityCell?.createButton.isHidden = true
+    }
+
+    @IBAction func createNewIdentity(_ sender: Any) {
+        self.createIdentityCell?.nameEntryField.resignFirstResponder()
+    }
+
+    // MARK: - Props and Actions
+
     struct Props {
         let facetGroups: [ViewModel.FacetGroup]
         let selectedFacetIndex: Int
@@ -132,12 +163,14 @@ class IdentityManagerViewController: UITableViewController, Connectable {
 }
 
 private func mapStateToProps(state: AppState) -> IdentityManagerViewController.Props {
-    let facets = state.diamond.facets.values.map { IdentityManagerViewController.ViewModel.Facet(facet: $0) }
+    var facets = state.diamond.facets.values
+        .map { IdentityManagerViewController.ViewModel.Facet(facet: $0) }
+    facets.append(IdentityManagerViewController.ViewModel.Facet.placeHolder)
     let group = IdentityManagerViewController.ViewModel.FacetGroup(items: facets).sorted()
 
     let selectedIndex: Int
     if let selectedFacet = state.diamond.selectedFacetId {
-        selectedIndex = group.items.map { $0.facet.identifier }.index(of: selectedFacet) ?? 0
+        selectedIndex = group.items.compactMap { $0.facet?.identifier }.index(of: selectedFacet) ?? 0
     } else {
         selectedIndex = 0
     }
@@ -181,7 +214,9 @@ extension IdentityManagerViewController {
 
             func sorted() -> FacetGroup {
                 return FacetGroup(items: items.sorted(by: { (lhs, rhs) -> Bool in
-                    return lhs.facet.created < rhs.facet.created
+                    guard let lhsFacet = lhs.facet else { return false }
+                    guard let rhsFacet = rhs.facet else { return true }
+                    return lhsFacet.created < rhsFacet.created
                 }))
             }
 
@@ -191,9 +226,11 @@ extension IdentityManagerViewController {
         }
 
         struct Facet: IdentifiableType, Equatable {
-            typealias Identity = String
-            var identity: String { return facet.identifier.uuidString }
-            var facet: CogitoIdentity
+            static let placeHolder = Facet(facet: nil)
+
+            typealias Identity = String?
+            var identity: String? { return facet?.identifier.uuidString }
+            var facet: CogitoIdentity?
 
             static func == (lhs: Facet, rhs: Facet) -> Bool {
                 return lhs.facet == rhs.facet
