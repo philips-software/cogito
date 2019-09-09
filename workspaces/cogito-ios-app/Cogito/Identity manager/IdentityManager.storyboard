@@ -19,11 +19,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="Facet" rowHeight="75" id="veq-fd-q3x" customClass="FacetTableViewCell" customModule="Cogito" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Facet" rowHeight="75" id="veq-fd-q3x" customClass="FacetTableViewCell" customModule="Cogito" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="veq-fd-q3x" id="dgx-hb-DwM">
-                                    <rect key="frame" x="0.0" y="0.0" width="307" height="75"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBi-6V-qZ5">
@@ -38,18 +38,26 @@
                                             </state>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="abcfjk" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqr-xF-PdL">
-                                            <rect key="frame" x="115" y="15" width="192" height="38"/>
+                                            <rect key="frame" x="115" y="15" width="260" height="38"/>
                                             <gestureRecognizers/>
                                             <fontDescription key="fontDescription" name="SnellRoundhand" family="Snell Roundhand" pointSize="30"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WdF-gF-Yaz">
+                                            <rect key="frame" x="115" y="47" width="260" height="26"/>
+                                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="12"/>
+                                            <state key="normal" title="Tap to enter digital identity"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="WdF-gF-Yaz" firstAttribute="top" secondItem="Rqr-xF-PdL" secondAttribute="bottom" constant="-6" id="Bij-1w-3fx"/>
                                         <constraint firstItem="Rqr-xF-PdL" firstAttribute="leading" secondItem="aBi-6V-qZ5" secondAttribute="trailing" constant="8" id="OXO-Mk-iMM"/>
                                         <constraint firstItem="Rqr-xF-PdL" firstAttribute="firstBaseline" secondItem="aBi-6V-qZ5" secondAttribute="firstBaseline" id="R96-De-Dva"/>
                                         <constraint firstItem="aBi-6V-qZ5" firstAttribute="top" secondItem="dgx-hb-DwM" secondAttribute="topMargin" constant="10" id="bo8-GY-B75"/>
                                         <constraint firstItem="aBi-6V-qZ5" firstAttribute="leading" secondItem="dgx-hb-DwM" secondAttribute="leadingMargin" id="eCW-uE-Bzf"/>
+                                        <constraint firstItem="WdF-gF-Yaz" firstAttribute="width" secondItem="Rqr-xF-PdL" secondAttribute="width" id="nbP-rJ-hMO"/>
+                                        <constraint firstItem="WdF-gF-Yaz" firstAttribute="leading" secondItem="Rqr-xF-PdL" secondAttribute="leading" id="pGz-SO-aML"/>
                                         <constraint firstAttribute="trailing" secondItem="Rqr-xF-PdL" secondAttribute="trailing" id="qcI-dF-0wS"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="aBi-6V-qZ5" secondAttribute="bottom" constant="10" id="snS-Tj-qwP"/>
                                     </constraints>

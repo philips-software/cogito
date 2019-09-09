@@ -21,8 +21,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
                 if let facet = item.facet {
                     cell = tableView.dequeueReusableCell(withIdentifier: "Facet", for: indexPath)
                     if let facetCell = cell as? FacetTableViewCell {
-                        facetCell.facetLabel?.attributedText = facet.formatted(addSpacePadding: 0)
-                        facetCell.accessoryType = .detailDisclosureButton
+                        facetCell.facetLabel?.attributedText = facet.formatted()
                         facetCell.facet = item.facet
                     }
                 } else {
