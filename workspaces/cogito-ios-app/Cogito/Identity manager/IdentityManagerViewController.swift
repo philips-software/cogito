@@ -10,7 +10,6 @@ class IdentityManagerViewController: UITableViewController, Connectable {
 
     var dataSource: RxTableViewSectionedAnimatedDataSource<ViewModel.FacetGroup>!
     let disposeBag = DisposeBag()
-    var createIdentityCell: CreateIdentityTableViewCell?
     @IBOutlet weak var explanationView: UIView!
     @IBOutlet weak var explanationLabel: UILabel!
 
@@ -30,7 +29,9 @@ class IdentityManagerViewController: UITableViewController, Connectable {
                     }
                 } else {
                     cell = tableView.dequeueReusableCell(withIdentifier: "CreateIdentity", for: indexPath)
-                    self.createIdentityCell = cell as? CreateIdentityTableViewCell
+                    if let createCell = cell as? CreateIdentityTableViewCell {
+                        createCell.activityView.isHidden = true
+                    }
                 }
                 return cell
             },
@@ -48,8 +49,14 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         }
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let numberOfRows = tableView.numberOfRows(inSection: 0)
+        let isLast = indexPath.row == numberOfRows - 1
+        return isLast ? 134 : 75
+    }
+
     override func viewWillLayoutSubviews() {
-        updateTableViewContentInset()
+//        updateTableViewContentInset()
     }
 
     func updateTableViewContentInset() {
@@ -146,36 +153,90 @@ class IdentityManagerViewController: UITableViewController, Connectable {
 
     // MARK: - Create Identity
 
+    var createIdentityController: CreateIdentityViewController?
+
+    func findCreateIdentityCell() -> CreateIdentityTableViewCell? {
+        let numberOfRows = tableView.numberOfRows(inSection: 0)
+        let indexPath = IndexPath(row: numberOfRows - 1, section: 0)
+        let cell = self.tableView.cellForRow(at: indexPath) as? CreateIdentityTableViewCell
+        return cell
+    }
+
+    func hookupCreateIdentityController() {
+        if let cell = findCreateIdentityCell() {
+            self.actions.resetCreateIdentity()
+            createIdentityController = CreateIdentityViewController()
+            createIdentityController!.descriptionField = cell.nameEntryField
+            createIdentityController!.createButton = cell.createButton
+            createIdentityController!.activityView = cell.activityView
+            createIdentityController!.onDone = { [weak self] in
+                DispatchQueue.main.async {
+                    self?.actions.resetCreateIdentity()
+                    self?.unhookCreateIdentityController()
+                    self?.tableView.reloadData()
+                }
+            }
+            createIdentityController!.setup(addingActions: true)
+            createIdentityController!.viewWillAppear(false)
+        }
+    }
+
+    func unhookCreateIdentityController() {
+        createIdentityController?.viewDidDisappear(false)
+        createIdentityController?.tearDown()
+        createIdentityController = nil
+    }
+
     @IBAction func beginEditingNewIdentity(_ sender: Any) {
-        self.createIdentityCell?.createButtonTopConstraint.isActive = true
-        self.createIdentityCell?.createButton.isHidden = false
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        if let cell = findCreateIdentityCell() {
+            cell.createButtonTopConstraint.isActive = true
+            cell.createButton.isHidden = false
+            cell.createButton.isEnabled = false
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            hookupCreateIdentityController()
+        }
     }
 
     @IBAction func endEditingNewIdentity(_ sender: Any) {
-        self.createIdentityCell?.createButtonTopConstraint.isActive = false
-        self.createIdentityCell?.createButton.isHidden = true
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     @IBAction func cancelCreateNewIdentity(_ sender: Any) {
-        self.createIdentityCell?.nameEntryField.resignFirstResponder()
-        self.createIdentityCell?.nameEntryField.text = ""
+        if let cell = findCreateIdentityCell() {
+            cell.createButtonTopConstraint.isActive = false
+            cell.createButton.isHidden = true
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            cell.nameEntryField.resignFirstResponder()
+            cell.nameEntryField.text = ""
+        }
     }
 
     @IBAction func createNewIdentity(_ sender: Any) {
-        self.createIdentityCell?.nameEntryField.resignFirstResponder()
+        if let cell = findCreateIdentityCell() {
+            cell.createButtonTopConstraint.isActive = false
+            cell.createButton.isHidden = true
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            cell.nameEntryField.resignFirstResponder()
+        }
     }
 
     // MARK: - Explanation label
 
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return explanationView
+        if props.numberOfFacets == 0 {
+            return explanationView
+        } else {
+            return nil
+        }
     }
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        let width = tableView.frame.size.width - 32 // margins of the view
-        return explanationLabel.sizeThatFits(CGSize(width: width, height: 1000)).height
+        if props.numberOfFacets == 0 {
+            let width = tableView.frame.size.width - 32 // margins of the view
+            return explanationLabel.sizeThatFits(CGSize(width: width, height: 1000)).height
+                + 50  // just some extra space
+        } else {
+            return 0
+        }
     }
 
     static let typewriter = UIFont(name: "American Typewriter", size: 15)!
@@ -208,6 +269,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     struct Props {
         let facetGroups: [ViewModel.FacetGroup]
         let selectedFacetIndex: Int
+        let numberOfFacets: Int
     }
     struct Actions {
         let resetCreateIdentity: () -> Void
@@ -236,7 +298,8 @@ private func mapStateToProps(state: AppState) -> IdentityManagerViewController.P
     let groups = [group]
     return IdentityManagerViewController.Props(
         facetGroups: groups,
-        selectedFacetIndex: selectedIndex
+        selectedFacetIndex: selectedIndex,
+        numberOfFacets: state.diamond.facets.count
     )
 }
 
