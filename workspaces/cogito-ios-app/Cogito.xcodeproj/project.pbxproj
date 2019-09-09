@@ -88,6 +88,8 @@
 		02E90F521FE03348008D81F9 /* DialogPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90F511FE03348008D81F9 /* DialogPresenter.swift */; };
 		02E90F561FE2755B008D81F9 /* DialogPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E90F551FE2755B008D81F9 /* DialogPresenterSpec.swift */; };
 		02EBC812232277B800F28DC7 /* buildinfo.txt in Resources */ = {isa = PBXBuildFile; fileRef = 02EBC811232277B800F28DC7 /* buildinfo.txt */; };
+		02F04B68232653DC0023918B /* CreateIdentityTableViewCell .swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F04B67232653DC0023918B /* CreateIdentityTableViewCell .swift */; };
+		02F04B6A232678E10023918B /* UIImage+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F04B69232678E10023918B /* UIImage+Color.swift */; };
 		02F0CA091F875515000C428F /* DebugGestureHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F0CA081F875515000C428F /* DebugGestureHandler.swift */; };
 		5C014F521FAA07FF00F95071 /* RecordingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C014F511FAA07FF00F95071 /* RecordingStore.swift */; };
 		5C04E4471FA77C0D00A70C60 /* StoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C04E4461FA77C0C00A70C60 /* StoreSpy.swift */; };
@@ -286,6 +288,8 @@
 		02E90F511FE03348008D81F9 /* DialogPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogPresenter.swift; sourceTree = "<group>"; };
 		02E90F551FE2755B008D81F9 /* DialogPresenterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogPresenterSpec.swift; sourceTree = "<group>"; };
 		02EBC811232277B800F28DC7 /* buildinfo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = buildinfo.txt; sourceTree = "<group>"; };
+		02F04B67232653DC0023918B /* CreateIdentityTableViewCell .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreateIdentityTableViewCell .swift"; sourceTree = "<group>"; };
+		02F04B69232678E10023918B /* UIImage+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Color.swift"; sourceTree = "<group>"; };
 		02F0CA081F875515000C428F /* DebugGestureHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugGestureHandler.swift; sourceTree = "<group>"; };
 		2DA9DD4F7CAA535BF4E32B61 /* Pods-Cogito-CogitoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito-CogitoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito-CogitoTests/Pods-Cogito-CogitoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4E01CAF19EC1DDC9775320D9 /* Pods-Cogito.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cogito.release.xcconfig"; path = "Pods/Target Support Files/Pods-Cogito/Pods-Cogito.release.xcconfig"; sourceTree = "<group>"; };
@@ -433,6 +437,7 @@
 				022621281FAB1E1300692126 /* IdentityManager.storyboard */,
 				0226212F1FAB1FF100692126 /* FacetTableViewCell.swift */,
 				02DB90E62045546C00C4817C /* FacetDetailsViewController.swift */,
+				02F04B67232653DC0023918B /* CreateIdentityTableViewCell .swift */,
 			);
 			path = "Identity manager";
 			sourceTree = "<group>";
@@ -526,7 +531,7 @@
 				C00B5B1891702007BD67637B /* Encodable+json.swift */,
 				02D4F344204835DA00196820 /* 198414__divinux__infobleep.wav */,
 				C00B5B3C1E5A12284EE52C34 /* Foundation extensions */,
-				02B9A681203C75FB00ADB44F /* UIKit reference */,
+				02B9A681203C75FB00ADB44F /* Utils */,
 				0291A3F92208457700AFC6D6 /* AudioFeedback.swift */,
 			);
 			path = Cogito;
@@ -698,12 +703,12 @@
 			path = Diamond;
 			sourceTree = "<group>";
 		};
-		02B9A681203C75FB00ADB44F /* UIKit reference */ = {
+		02B9A681203C75FB00ADB44F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				02B9A682203C762100ADB44F /* UIWindow+CurrentViewController.swift */,
 			);
-			path = "UIKit reference";
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		02BB61FA20C0221500F03625 /* Identity info service */ = {
@@ -1307,6 +1312,7 @@
 				6D1A40582208E57E009F3557 /* ValueStoreService.swift in Sources */,
 				6D1A404D2208D5B5009F3557 /* ValueStoreState.swift in Sources */,
 				C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */,
+				02F04B68232653DC0023918B /* CreateIdentityTableViewCell .swift in Sources */,
 				5C04E44D1FA77D1C00A70C60 /* AccountService.swift in Sources */,
 				02A15AFE1F8671D200A94163 /* Identity.swift in Sources */,
 				C00B5D39FC0D970348A5E0C6 /* DiamondActions.swift in Sources */,
