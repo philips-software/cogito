@@ -153,8 +153,32 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="explanationLabel" destination="CSK-D4-Nkc" id="oau-PZ-bxO"/>
+                        <outlet property="explanationView" destination="iIB-81-f6s" id="d0u-wR-Bge"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z7N-1T-l23" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="iIB-81-f6s">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(content set in code)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSK-D4-Nkc">
+                            <rect key="frame" x="16" y="0.0" width="343" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="CSK-D4-Nkc" secondAttribute="bottom" id="Bdv-nl-HCD"/>
+                        <constraint firstItem="CSK-D4-Nkc" firstAttribute="top" secondItem="iIB-81-f6s" secondAttribute="top" id="bKy-I7-VdX"/>
+                        <constraint firstItem="JM6-mR-6nN" firstAttribute="trailing" secondItem="CSK-D4-Nkc" secondAttribute="trailing" constant="16" id="bON-hr-XTy"/>
+                        <constraint firstItem="CSK-D4-Nkc" firstAttribute="leading" secondItem="JM6-mR-6nN" secondAttribute="leading" constant="16" id="tzU-ur-MVA"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="JM6-mR-6nN"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="-740" y="63.418290854572717"/>
         </scene>

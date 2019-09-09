@@ -11,10 +11,13 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     var dataSource: RxTableViewSectionedAnimatedDataSource<ViewModel.FacetGroup>!
     let disposeBag = DisposeBag()
     var createIdentityCell: CreateIdentityTableViewCell?
+    @IBOutlet weak var explanationView: UIView!
+    @IBOutlet weak var explanationLabel: UILabel!
 
     override func viewDidLoad() {
-        self.navigationController?.isNavigationBarHidden = true
         super.viewDidLoad()
+        explanationLabel.attributedText = IdentityManagerViewController.explanationText
+        self.navigationController?.isNavigationBarHidden = true
         self.tableView.dataSource = nil
         dataSource = RxTableViewSectionedAnimatedDataSource(
             configureCell: { _, tableView, indexPath, item in
@@ -151,6 +154,42 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     @IBAction func createNewIdentity(_ sender: Any) {
         self.createIdentityCell?.nameEntryField.resignFirstResponder()
     }
+
+    // MARK: - Explanation label
+
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return explanationView
+    }
+
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let width = tableView.frame.size.width - 32 // margins of the view
+        return explanationLabel.sizeThatFits(CGSize(width: width, height: 1000)).height
+    }
+
+    static let typewriter = UIFont(name: "American Typewriter", size: 15)!
+    static var boldTypewriter: UIFont = {
+        let bold = typewriter.fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits.traitBold)!
+        return UIFont(descriptor: bold, size: 15)
+    }()
+    static let cogito = "Cogito".font(IdentityManagerViewController.boldTypewriter)
+    static let explanationText = NSAttributedString(string: "Why do you need this?\n"
+        + "\n"
+        + "As an employee of the Red Cross, you need to access many platforms"
+        + "  that require different personal information. Red Cross offers ")
+        + cogito
+        + NSAttributedString(string: " to help you:\n"
+            + "\n"
+            + "Manage your various digital identities, ensuring your personal"
+            + " information stays personal.\n"
+            + "\n"
+            + "With ")
+        + cogito
+        + NSAttributedString(string: " you can create your"
+            + " digital identities for access to\n"
+            + "\n"
+            + "• RC Health Insurance\n"
+            + "• RC Travel\n"
+            + "• RC Security")
 
     // MARK: - Props and Actions
 
