@@ -48,6 +48,18 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         }
     }
 
+    override func viewWillLayoutSubviews() {
+        updateTableViewContentInset()
+    }
+
+    func updateTableViewContentInset() {
+        let viewHeight: CGFloat = view.frame.size.height
+        let tableViewContentHeight: CGFloat = tableView.contentSize.height
+        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 2.0
+
+        self.tableView.contentInset = UIEdgeInsets(top: marginHeight, left: 0, bottom:  -marginHeight, right: 0)
+    }
+
     func itemDeleted(at indexPath: IndexPath) {
         let identity = self.props.facetGroups[indexPath.section].items[indexPath.row]
         guard let uuid = identity.facet?.identifier else {
