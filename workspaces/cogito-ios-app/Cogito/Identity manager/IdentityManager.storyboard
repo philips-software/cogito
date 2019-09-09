@@ -17,7 +17,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="l6V-Tg-2bg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Facet" rowHeight="75" id="veq-fd-q3x" customClass="FacetTableViewCell" customModule="Cogito" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="55.5" width="375" height="75"/>
@@ -74,30 +74,33 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcw-5F-ePU">
-                                            <rect key="frame" x="116" y="38.5" width="173" height="26"/>
+                                            <rect key="frame" x="116" y="48" width="243" height="26"/>
                                             <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="12"/>
                                             <state key="normal" title="Tap to create a digital identity"/>
                                         </button>
                                         <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zlU-Mz-ugP" customClass="NameEntryField" customModule="Cogito" customModuleProvider="target">
-                                            <rect key="frame" x="116" y="13.5" width="173" height="30"/>
+                                            <rect key="frame" x="116" y="15" width="243" height="38"/>
                                             <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="go" textContentType="nickname"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="go" textContentType="nickname"/>
                                             <connections>
                                                 <action selector="beginEditingNewIdentity:" destination="1Zv-v9-37E" eventType="editingDidBegin" id="yhr-xV-LT9"/>
                                                 <action selector="endEditingNewIdentity:" destination="1Zv-v9-37E" eventType="editingDidEnd" id="gWL-4q-T89"/>
                                             </connections>
                                         </textField>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZS-PV-zRP" customClass="Button" customModule="Cogito" customModuleProvider="target">
-                                            <rect key="frame" x="116" y="72.5" width="173" height="41.5"/>
+                                            <rect key="frame" x="116" y="82" width="243" height="41"/>
                                             <state key="normal" title="Create"/>
                                             <connections>
                                                 <action selector="createNewIdentity:" destination="1Zv-v9-37E" eventType="touchUpInside" id="ws3-Rz-7RD"/>
                                             </connections>
                                         </button>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5b1-d3-naL">
+                                            <rect key="frame" x="227.5" y="92.5" width="20" height="20"/>
+                                        </activityIndicatorView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBn-cQ-uJx">
-                                            <rect key="frame" x="16" y="11" width="91" height="33"/>
+                                            <rect key="frame" x="16" y="21" width="91" height="33"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="91" id="0AI-F9-GxY"/>
                                             </constraints>
@@ -111,15 +114,18 @@
                                         <constraint firstItem="DZS-PV-zRP" firstAttribute="leading" secondItem="zlU-Mz-ugP" secondAttribute="leading" id="4K5-D3-7FT"/>
                                         <constraint firstItem="DZS-PV-zRP" firstAttribute="width" secondItem="zlU-Mz-ugP" secondAttribute="width" id="6rO-Dw-f0Z"/>
                                         <constraint firstItem="Wcw-5F-ePU" firstAttribute="width" secondItem="zlU-Mz-ugP" secondAttribute="width" id="74F-zy-4DZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="zlU-Mz-ugP" secondAttribute="trailing" constant="16" id="E7N-lX-UmI"/>
+                                        <constraint firstItem="5b1-d3-naL" firstAttribute="centerX" secondItem="DZS-PV-zRP" secondAttribute="centerX" id="EPZ-6Q-8Qb"/>
                                         <constraint firstItem="Wcw-5F-ePU" firstAttribute="top" secondItem="zlU-Mz-ugP" secondAttribute="bottom" constant="-5" id="F8t-BN-PqN"/>
                                         <constraint firstItem="Wcw-5F-ePU" firstAttribute="leading" secondItem="zlU-Mz-ugP" secondAttribute="leading" id="HUI-dz-lxR"/>
                                         <constraint firstItem="DZS-PV-zRP" firstAttribute="top" secondItem="zlU-Mz-ugP" secondAttribute="bottom" constant="29" id="QO1-N9-DyF"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Wcw-5F-ePU" secondAttribute="bottom" constant="8" id="ZPB-cK-pTm"/>
-                                        <constraint firstAttribute="bottom" secondItem="DZS-PV-zRP" secondAttribute="bottom" constant="20" id="dCN-R1-YcA"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="DZS-PV-zRP" secondAttribute="bottom" id="dCN-R1-YcA"/>
                                         <constraint firstItem="DZS-PV-zRP" firstAttribute="top" secondItem="Wcw-5F-ePU" secondAttribute="bottom" constant="8" id="dzm-G8-iQi"/>
-                                        <constraint firstItem="zBn-cQ-uJx" firstAttribute="top" secondItem="QAM-ZM-Tub" secondAttribute="topMargin" id="hzd-0p-jVG"/>
+                                        <constraint firstItem="zBn-cQ-uJx" firstAttribute="top" secondItem="QAM-ZM-Tub" secondAttribute="topMargin" constant="10" id="hzd-0p-jVG"/>
                                         <constraint firstItem="zlU-Mz-ugP" firstAttribute="leading" secondItem="zBn-cQ-uJx" secondAttribute="trailing" constant="9" id="kzw-Fe-vrf"/>
                                         <constraint firstItem="zBn-cQ-uJx" firstAttribute="leading" secondItem="QAM-ZM-Tub" secondAttribute="leadingMargin" id="meb-PF-Rny"/>
+                                        <constraint firstItem="5b1-d3-naL" firstAttribute="centerY" secondItem="DZS-PV-zRP" secondAttribute="centerY" id="xRT-cS-V0V"/>
                                         <constraint firstItem="zlU-Mz-ugP" firstAttribute="firstBaseline" secondItem="zBn-cQ-uJx" secondAttribute="firstBaseline" id="yBS-w6-1qT"/>
                                     </constraints>
                                     <variation key="default">
@@ -129,6 +135,7 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="activityView" destination="5b1-d3-naL" id="hnb-fq-cmC"/>
                                     <outlet property="createButton" destination="DZS-PV-zRP" id="iTf-cV-1fQ"/>
                                     <outlet property="createButtonTopConstraint" destination="dzm-G8-iQi" id="aK3-bG-If2"/>
                                     <outlet property="nameEntryField" destination="zlU-Mz-ugP" id="dIx-ge-Xy0"/>
@@ -142,7 +149,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="ck6-H8-qtF">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="Njf-kt-7O9">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uZX-XS-UWe">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uZX-XS-UWe">
                                 <rect key="frame" x="276" y="5.5" width="83" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
