@@ -139,6 +139,7 @@
                                     <outlet property="createButton" destination="DZS-PV-zRP" id="iTf-cV-1fQ"/>
                                     <outlet property="createButtonTopConstraint" destination="dzm-G8-iQi" id="aK3-bG-If2"/>
                                     <outlet property="nameEntryField" destination="zlU-Mz-ugP" id="dIx-ge-Xy0"/>
+                                    <outlet property="tapToCreateButton" destination="Wcw-5F-ePU" id="Obj-76-MZm"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
