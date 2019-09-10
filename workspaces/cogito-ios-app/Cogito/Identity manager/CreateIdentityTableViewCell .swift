@@ -16,14 +16,16 @@ class CreateIdentityTableViewCell: UITableViewCell {
         createButtonTopConstraint.isActive = true
         createButton.isHidden = false
         createButton.isEnabled = false
-        tapToCreateLabel.isHidden = true
+        tapToCreateLabel.textColor = .black
+        tapToCreateLabel.text = "e.g. your name or \"Travel\""
         iamLabel.textColor = .tinted
     }
 
     func deactivate() {
         createButtonTopConstraint.isActive = false
         createButton.isHidden = true
-        tapToCreateLabel.isHidden = false
+        tapToCreateLabel.textColor = .tinted
+        tapToCreateLabel.text = "Tap to create a digital identity"
         nameEntryField.resignFirstResponder()
         iamLabel.textColor = .black
     }
