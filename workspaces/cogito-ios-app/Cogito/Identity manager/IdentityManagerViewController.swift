@@ -47,6 +47,10 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         connection.subscribe(\Props.selectedFacetIndex) { [unowned self] newIndex in
             self.updateSelectedRow(facetIndex: newIndex)
         }
+        connection.subscribe(\Props.numberOfFacets) { [unowned self] newNumber in
+            self.findCreateIdentityCell()?.iamLabel.text
+                = newNumber > 0 ? "I am also" : "I am"
+        }
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
