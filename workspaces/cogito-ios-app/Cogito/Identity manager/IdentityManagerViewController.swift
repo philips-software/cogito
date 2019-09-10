@@ -97,7 +97,6 @@ class IdentityManagerViewController: UITableViewController, Connectable {
             return
         }
         self.actions.selectIdentity(uuid)
-        self.dismiss(animated: true)
     }
 
     func updateSelectedRow(facetIndex: Int) {
@@ -107,11 +106,6 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         self.tableView.selectRow(at: IndexPath(row: facetIndex, section: 0),
                                  animated: true,
                                  scrollPosition: .middle)
-    }
-
-    func showIdentityDetails(for indexPath: IndexPath) {
-        let identity = self.props.facetGroups[indexPath.section].items[indexPath.row].facet
-        performSegue(withIdentifier: "ShowIdentityDetails", sender: identity)
     }
 
     override func viewWillAppear(_ animated: Bool) {
