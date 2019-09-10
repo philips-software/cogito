@@ -109,6 +109,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         super.viewWillAppear(animated)
         connection.connect()
         updateSelectedRow(facetIndex: self.props.selectedFacetIndex)
+        self.actions.resetCreateIdentity()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
