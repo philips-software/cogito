@@ -79,6 +79,8 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     func itemSelected(at indexPath: IndexPath) {
         let identity = self.props.facetGroups[indexPath.section].items[indexPath.row]
         guard let uuid = identity.facet?.identifier else {
+            findCreateIdentityCell()?.nameEntryField.becomeFirstResponder()
+            self.tableView.deselectRow(at: indexPath, animated: true)
             return
         }
         self.actions.selectIdentity(uuid)
