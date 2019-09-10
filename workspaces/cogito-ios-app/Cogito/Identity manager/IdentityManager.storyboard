@@ -100,7 +100,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to enter digital identity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ac6-gj-ajx">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to create a digital identity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ac6-gj-ajx">
                                             <rect key="frame" x="115" y="54.5" width="244" height="14"/>
                                             <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="12"/>
                                             <color key="textColor" red="0.004876548443" green="0.31133502190000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
