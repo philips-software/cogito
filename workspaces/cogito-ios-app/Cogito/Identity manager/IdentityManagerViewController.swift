@@ -60,16 +60,21 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     }
 
     override func viewWillLayoutSubviews() {
-//        updateTableViewContentInset()
+        updateTableViewContentInset()
     }
 
     func updateTableViewContentInset() {
-        let viewHeight: CGFloat = view.frame.size.height
-        let tableViewContentHeight: CGFloat = tableView.contentSize.height
-        let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 2.0
+        if self.props.numberOfFacets == 0 {
+            let viewHeight: CGFloat = view.frame.size.height
+            let tableViewContentHeight: CGFloat = tableView.contentSize.height
+            let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 2.0
 
-        self.tableView.contentInset = UIEdgeInsets(
-            top: marginHeight, left: 0, bottom: -marginHeight, right: 0)
+            self.tableView.contentInset = UIEdgeInsets(
+                top: marginHeight, left: 0, bottom: -marginHeight, right: 0)
+        } else {
+            self.tableView.contentInset = UIEdgeInsets(
+                top: 0, left: 0, bottom: 0, right: 0)
+        }
     }
 
     func itemDeleted(at indexPath: IndexPath) {
@@ -181,6 +186,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
                 self?.actions.resetCreateIdentity()
                 self?.unhookCreateIdentityController()
                 self?.tableView.reloadData()
+                self?.updateTableViewContentInset()
             }
         }
         createIdentityController!.setup(addingActions: true)
@@ -245,7 +251,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         return UIFont(descriptor: bold, size: 15)
     }()
     static let cogito = "Cogito".font(IdentityManagerViewController.boldTypewriter)
-    static let explanationText = NSAttributedString(string: "Why do you need this?\n"
+    static let explanationText = NSAttributedString(string: "\n\nWhy do you need this?\n"
         + "\n"
         + "As an employee of the Red Cross, you need to access many platforms"
         + "  that require different personal information. Red Cross offers ")
