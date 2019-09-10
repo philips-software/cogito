@@ -113,6 +113,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         connection.connect()
         updateSelectedRow(facetIndex: self.props.selectedFacetIndex)
         self.actions.resetCreateIdentity()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -159,6 +160,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
                   let cell = sender as? FacetTableViewCell,
                   let facet = cell.facet {
             destination.facet = facet
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }
 
