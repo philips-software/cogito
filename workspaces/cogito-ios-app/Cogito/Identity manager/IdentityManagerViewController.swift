@@ -192,6 +192,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
             cell.createButtonTopConstraint.isActive = true
             cell.createButton.isHidden = false
             cell.createButton.isEnabled = false
+            cell.tapToCreateButton.isHidden = true
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             hookupCreateIdentityController()
         }
@@ -204,6 +205,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         if let cell = findCreateIdentityCell() {
             cell.createButtonTopConstraint.isActive = false
             cell.createButton.isHidden = true
+            cell.tapToCreateButton.isHidden = false
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             cell.nameEntryField.resignFirstResponder()
             cell.nameEntryField.text = ""
@@ -213,6 +215,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     @IBAction func createNewIdentity(_ sender: Any) {
         if let cell = findCreateIdentityCell() {
             cell.createButtonTopConstraint.isActive = false
+            cell.tapToCreateButton.isHidden = false
             cell.createButton.isHidden = true
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             cell.nameEntryField.resignFirstResponder()
