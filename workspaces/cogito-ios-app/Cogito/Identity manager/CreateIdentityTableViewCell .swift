@@ -10,4 +10,19 @@ class CreateIdentityTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         createButtonTopConstraint.isActive = false
     }
+
+    func activate() {
+        createButtonTopConstraint.isActive = true
+        createButton.isHidden = false
+        createButton.isEnabled = false
+        tapToCreateLabel.isHidden = true
+        
+    }
+
+    func deactivate() {
+        createButtonTopConstraint.isActive = false
+        createButton.isHidden = true
+        tapToCreateLabel.isHidden = false
+        nameEntryField.resignFirstResponder()
+    }
 }

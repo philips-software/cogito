@@ -162,23 +162,21 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         return cell
     }
 
-    func hookupCreateIdentityController() {
-        if let cell = findCreateIdentityCell() {
-            self.actions.resetCreateIdentity()
-            createIdentityController = CreateIdentityViewController()
-            createIdentityController!.descriptionField = cell.nameEntryField
-            createIdentityController!.createButton = cell.createButton
-            createIdentityController!.activityView = cell.activityView
-            createIdentityController!.onDone = { [weak self] in
-                DispatchQueue.main.async {
-                    self?.actions.resetCreateIdentity()
-                    self?.unhookCreateIdentityController()
-                    self?.tableView.reloadData()
-                }
+    func hookupCreateIdentityController(cell: CreateIdentityTableViewCell) {
+        self.actions.resetCreateIdentity()
+        createIdentityController = CreateIdentityViewController()
+        createIdentityController!.descriptionField = cell.nameEntryField
+        createIdentityController!.createButton = cell.createButton
+        createIdentityController!.activityView = cell.activityView
+        createIdentityController!.onDone = { [weak self] in
+            DispatchQueue.main.async {
+                self?.actions.resetCreateIdentity()
+                self?.unhookCreateIdentityController()
+                self?.tableView.reloadData()
             }
-            createIdentityController!.setup(addingActions: true)
-            createIdentityController!.viewWillAppear(false)
         }
+        createIdentityController!.setup(addingActions: true)
+        createIdentityController!.viewWillAppear(false)
     }
 
     func unhookCreateIdentityController() {
@@ -188,38 +186,29 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     }
 
     @IBAction func beginEditingNewIdentity(_ sender: Any) {
-        if let cell = findCreateIdentityCell() {
-            cell.createButtonTopConstraint.isActive = true
-            cell.createButton.isHidden = false
-            cell.createButton.isEnabled = false
-            cell.tapToCreateButton.isHidden = true
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-            hookupCreateIdentityController()
-        }
-    }
-
-    @IBAction func endEditingNewIdentity(_ sender: Any) {
+        activateCreateNewIdentity()
     }
 
     @IBAction func cancelCreateNewIdentity(_ sender: Any) {
-        if let cell = findCreateIdentityCell() {
-            cell.createButtonTopConstraint.isActive = false
-            cell.createButton.isHidden = true
-            cell.tapToCreateButton.isHidden = false
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
-            cell.nameEntryField.resignFirstResponder()
-            cell.nameEntryField.text = ""
-        }
+        self.actions.resetCreateIdentity()
+        deactivateCreateNewIdentity()
     }
 
     @IBAction func createNewIdentity(_ sender: Any) {
+        deactivateCreateNewIdentity()
+    }
+
+    func activateCreateNewIdentity() {
         if let cell = findCreateIdentityCell() {
-            cell.createButtonTopConstraint.isActive = false
-            cell.tapToCreateButton.isHidden = false
-            cell.createButton.isHidden = true
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
-            cell.nameEntryField.resignFirstResponder()
+            cell.activate()
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            hookupCreateIdentityController(cell: cell)
         }
+    }
+
+    func deactivateCreateNewIdentity() {
+        findCreateIdentityCell()?.deactivate()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     // MARK: - Explanation label
