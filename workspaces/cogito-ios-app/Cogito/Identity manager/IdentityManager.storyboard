@@ -26,17 +26,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBi-6V-qZ5">
-                                            <rect key="frame" x="16" y="21" width="91" height="33"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="91" id="7Ai-At-nYd"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="91" id="CY8-WK-0fU"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
-                                            <state key="normal" title="I am">
-                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="abcfjk" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rqr-xF-PdL">
                                             <rect key="frame" x="115" y="15" width="260" height="38"/>
                                             <gestureRecognizers/>
@@ -44,22 +33,31 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WdF-gF-Yaz">
-                                            <rect key="frame" x="115" y="47" width="260" height="26"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dj-md-F6X">
+                                            <rect key="frame" x="16" y="27" width="91" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="91" id="631-aa-3j3"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to enter digital identity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xd5-Cw-60M">
+                                            <rect key="frame" x="115" y="53" width="260" height="14"/>
                                             <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="12"/>
-                                            <state key="normal" title="Tap to enter digital identity"/>
-                                        </button>
+                                            <color key="textColor" red="0.004876548443" green="0.31133502190000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="WdF-gF-Yaz" firstAttribute="top" secondItem="Rqr-xF-PdL" secondAttribute="bottom" constant="-6" id="Bij-1w-3fx"/>
-                                        <constraint firstItem="Rqr-xF-PdL" firstAttribute="leading" secondItem="aBi-6V-qZ5" secondAttribute="trailing" constant="8" id="OXO-Mk-iMM"/>
-                                        <constraint firstItem="Rqr-xF-PdL" firstAttribute="firstBaseline" secondItem="aBi-6V-qZ5" secondAttribute="firstBaseline" id="R96-De-Dva"/>
-                                        <constraint firstItem="aBi-6V-qZ5" firstAttribute="top" secondItem="dgx-hb-DwM" secondAttribute="topMargin" constant="10" id="bo8-GY-B75"/>
-                                        <constraint firstItem="aBi-6V-qZ5" firstAttribute="leading" secondItem="dgx-hb-DwM" secondAttribute="leadingMargin" id="eCW-uE-Bzf"/>
-                                        <constraint firstItem="WdF-gF-Yaz" firstAttribute="width" secondItem="Rqr-xF-PdL" secondAttribute="width" id="nbP-rJ-hMO"/>
-                                        <constraint firstItem="WdF-gF-Yaz" firstAttribute="leading" secondItem="Rqr-xF-PdL" secondAttribute="leading" id="pGz-SO-aML"/>
+                                        <constraint firstItem="Xd5-Cw-60M" firstAttribute="leading" secondItem="Rqr-xF-PdL" secondAttribute="leading" id="6nI-9Z-ClE"/>
+                                        <constraint firstItem="1dj-md-F6X" firstAttribute="top" secondItem="dgx-hb-DwM" secondAttribute="topMargin" constant="16" id="6pF-a0-NNr"/>
+                                        <constraint firstItem="1dj-md-F6X" firstAttribute="firstBaseline" secondItem="Rqr-xF-PdL" secondAttribute="firstBaseline" id="EyK-TF-EEI"/>
+                                        <constraint firstItem="1dj-md-F6X" firstAttribute="leading" secondItem="dgx-hb-DwM" secondAttribute="leadingMargin" id="YFS-zo-JpZ"/>
+                                        <constraint firstItem="Xd5-Cw-60M" firstAttribute="top" secondItem="Rqr-xF-PdL" secondAttribute="bottom" id="jJq-Ev-UFy"/>
+                                        <constraint firstItem="Rqr-xF-PdL" firstAttribute="leading" secondItem="1dj-md-F6X" secondAttribute="trailing" constant="8" id="mWL-Di-4DB"/>
                                         <constraint firstAttribute="trailing" secondItem="Rqr-xF-PdL" secondAttribute="trailing" id="qcI-dF-0wS"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="aBi-6V-qZ5" secondAttribute="bottom" constant="10" id="snS-Tj-qwP"/>
+                                        <constraint firstItem="Xd5-Cw-60M" firstAttribute="width" secondItem="Rqr-xF-PdL" secondAttribute="width" id="v57-GB-41m"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -73,60 +71,59 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcw-5F-ePU">
-                                            <rect key="frame" x="116" y="48" width="243" height="26"/>
-                                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="12"/>
-                                            <state key="normal" title="Tap to create a digital identity"/>
-                                        </button>
                                         <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zlU-Mz-ugP" customClass="NameEntryField" customModule="Cogito" customModuleProvider="target">
-                                            <rect key="frame" x="116" y="15" width="243" height="38"/>
+                                            <rect key="frame" x="115" y="15" width="244" height="38"/>
                                             <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="go" textContentType="nickname"/>
                                             <connections>
                                                 <action selector="beginEditingNewIdentity:" destination="1Zv-v9-37E" eventType="editingDidBegin" id="yhr-xV-LT9"/>
-                                                <action selector="endEditingNewIdentity:" destination="1Zv-v9-37E" eventType="editingDidEnd" id="gWL-4q-T89"/>
                                             </connections>
                                         </textField>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZS-PV-zRP" customClass="Button" customModule="Cogito" customModuleProvider="target">
-                                            <rect key="frame" x="116" y="82" width="243" height="41"/>
+                                            <rect key="frame" x="115" y="82" width="244" height="41"/>
                                             <state key="normal" title="Create"/>
                                             <connections>
                                                 <action selector="createNewIdentity:" destination="1Zv-v9-37E" eventType="touchUpInside" id="ws3-Rz-7RD"/>
                                             </connections>
                                         </button>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="5b1-d3-naL">
-                                            <rect key="frame" x="227.5" y="92.5" width="20" height="20"/>
+                                            <rect key="frame" x="227" y="92.5" width="20" height="20"/>
                                         </activityIndicatorView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBn-cQ-uJx">
-                                            <rect key="frame" x="16" y="21" width="91" height="33"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bga-3V-Rfv">
+                                            <rect key="frame" x="16" y="27" width="91" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="91" id="0AI-F9-GxY"/>
+                                                <constraint firstAttribute="width" constant="91" id="Ju1-6s-3gw"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="17"/>
-                                            <state key="normal" title="I am">
-                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to enter digital identity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ac6-gj-ajx">
+                                            <rect key="frame" x="115" y="54.5" width="244" height="14"/>
+                                            <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="12"/>
+                                            <color key="textColor" red="0.004876548443" green="0.31133502190000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="DZS-PV-zRP" firstAttribute="leading" secondItem="zlU-Mz-ugP" secondAttribute="leading" id="4K5-D3-7FT"/>
+                                        <constraint firstItem="Ac6-gj-ajx" firstAttribute="leading" secondItem="zlU-Mz-ugP" secondAttribute="leading" id="5fs-Zg-TLn"/>
                                         <constraint firstItem="DZS-PV-zRP" firstAttribute="width" secondItem="zlU-Mz-ugP" secondAttribute="width" id="6rO-Dw-f0Z"/>
-                                        <constraint firstItem="Wcw-5F-ePU" firstAttribute="width" secondItem="zlU-Mz-ugP" secondAttribute="width" id="74F-zy-4DZ"/>
+                                        <constraint firstItem="Bga-3V-Rfv" firstAttribute="leading" secondItem="QAM-ZM-Tub" secondAttribute="leadingMargin" id="DTB-g1-KV6"/>
                                         <constraint firstAttribute="trailing" secondItem="zlU-Mz-ugP" secondAttribute="trailing" constant="16" id="E7N-lX-UmI"/>
                                         <constraint firstItem="5b1-d3-naL" firstAttribute="centerX" secondItem="DZS-PV-zRP" secondAttribute="centerX" id="EPZ-6Q-8Qb"/>
-                                        <constraint firstItem="Wcw-5F-ePU" firstAttribute="top" secondItem="zlU-Mz-ugP" secondAttribute="bottom" constant="-5" id="F8t-BN-PqN"/>
-                                        <constraint firstItem="Wcw-5F-ePU" firstAttribute="leading" secondItem="zlU-Mz-ugP" secondAttribute="leading" id="HUI-dz-lxR"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ac6-gj-ajx" secondAttribute="bottom" constant="8" id="GUg-WH-l6K"/>
+                                        <constraint firstItem="Bga-3V-Rfv" firstAttribute="top" secondItem="QAM-ZM-Tub" secondAttribute="topMargin" constant="16" id="JBe-TH-1Xl"/>
+                                        <constraint firstItem="zlU-Mz-ugP" firstAttribute="leading" secondItem="Bga-3V-Rfv" secondAttribute="trailing" constant="8" id="JCZ-m5-UUJ"/>
+                                        <constraint firstItem="Bga-3V-Rfv" firstAttribute="firstBaseline" secondItem="zlU-Mz-ugP" secondAttribute="firstBaseline" id="MLf-5H-NLQ"/>
                                         <constraint firstItem="DZS-PV-zRP" firstAttribute="top" secondItem="zlU-Mz-ugP" secondAttribute="bottom" constant="29" id="QO1-N9-DyF"/>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Wcw-5F-ePU" secondAttribute="bottom" constant="8" id="ZPB-cK-pTm"/>
+                                        <constraint firstItem="Ac6-gj-ajx" firstAttribute="top" secondItem="zlU-Mz-ugP" secondAttribute="bottom" constant="1.5" id="cLl-N4-h5J"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="DZS-PV-zRP" secondAttribute="bottom" id="dCN-R1-YcA"/>
-                                        <constraint firstItem="DZS-PV-zRP" firstAttribute="top" secondItem="Wcw-5F-ePU" secondAttribute="bottom" constant="8" id="dzm-G8-iQi"/>
-                                        <constraint firstItem="zBn-cQ-uJx" firstAttribute="top" secondItem="QAM-ZM-Tub" secondAttribute="topMargin" constant="10" id="hzd-0p-jVG"/>
-                                        <constraint firstItem="zlU-Mz-ugP" firstAttribute="leading" secondItem="zBn-cQ-uJx" secondAttribute="trailing" constant="9" id="kzw-Fe-vrf"/>
-                                        <constraint firstItem="zBn-cQ-uJx" firstAttribute="leading" secondItem="QAM-ZM-Tub" secondAttribute="leadingMargin" id="meb-PF-Rny"/>
+                                        <constraint firstItem="Ac6-gj-ajx" firstAttribute="width" secondItem="zlU-Mz-ugP" secondAttribute="width" id="eKB-aC-7ZR"/>
+                                        <constraint firstItem="DZS-PV-zRP" firstAttribute="top" secondItem="Ac6-gj-ajx" secondAttribute="bottom" constant="13.5" id="w4Q-Cc-43R"/>
                                         <constraint firstItem="5b1-d3-naL" firstAttribute="centerY" secondItem="DZS-PV-zRP" secondAttribute="centerY" id="xRT-cS-V0V"/>
-                                        <constraint firstItem="zlU-Mz-ugP" firstAttribute="firstBaseline" secondItem="zBn-cQ-uJx" secondAttribute="firstBaseline" id="yBS-w6-1qT"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -137,9 +134,9 @@
                                 <connections>
                                     <outlet property="activityView" destination="5b1-d3-naL" id="hnb-fq-cmC"/>
                                     <outlet property="createButton" destination="DZS-PV-zRP" id="iTf-cV-1fQ"/>
-                                    <outlet property="createButtonTopConstraint" destination="dzm-G8-iQi" id="aK3-bG-If2"/>
+                                    <outlet property="createButtonTopConstraint" destination="w4Q-Cc-43R" id="Xmi-lh-LR7"/>
                                     <outlet property="nameEntryField" destination="zlU-Mz-ugP" id="dIx-ge-Xy0"/>
-                                    <outlet property="tapToCreateButton" destination="Wcw-5F-ePU" id="Obj-76-MZm"/>
+                                    <outlet property="tapToCreateLabel" destination="Ac6-gj-ajx" id="810-y3-d5I"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
