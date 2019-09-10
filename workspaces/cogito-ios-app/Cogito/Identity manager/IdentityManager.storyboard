@@ -135,6 +135,7 @@
                                     <outlet property="activityView" destination="5b1-d3-naL" id="hnb-fq-cmC"/>
                                     <outlet property="createButton" destination="DZS-PV-zRP" id="iTf-cV-1fQ"/>
                                     <outlet property="createButtonTopConstraint" destination="w4Q-Cc-43R" id="Xmi-lh-LR7"/>
+                                    <outlet property="iamLabel" destination="Bga-3V-Rfv" id="8x9-L4-PBQ"/>
                                     <outlet property="nameEntryField" destination="zlU-Mz-ugP" id="dIx-ge-Xy0"/>
                                     <outlet property="tapToCreateLabel" destination="Ac6-gj-ajx" id="810-y3-d5I"/>
                                 </connections>

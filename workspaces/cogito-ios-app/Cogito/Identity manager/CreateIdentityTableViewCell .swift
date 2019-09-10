@@ -6,6 +6,7 @@ class CreateIdentityTableViewCell: UITableViewCell {
     @IBOutlet weak var createButtonTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityView: UIActivityIndicatorView!
     @IBOutlet weak var tapToCreateLabel: UILabel!
+    @IBOutlet weak var iamLabel: UILabel!
 
     override func awakeFromNib() {
         createButtonTopConstraint.isActive = false
@@ -16,7 +17,7 @@ class CreateIdentityTableViewCell: UITableViewCell {
         createButton.isHidden = false
         createButton.isEnabled = false
         tapToCreateLabel.isHidden = true
-        
+        iamLabel.textColor = .tinted
     }
 
     func deactivate() {
@@ -24,5 +25,6 @@ class CreateIdentityTableViewCell: UITableViewCell {
         createButton.isHidden = true
         tapToCreateLabel.isHidden = false
         nameEntryField.resignFirstResponder()
+        iamLabel.textColor = .black
     }
 }
