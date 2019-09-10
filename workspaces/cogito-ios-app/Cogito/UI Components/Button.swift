@@ -2,12 +2,10 @@ import UIKit
 
 @IBDesignable
 class Button: UIButton {
-    let normalColor = UIColor(red: 1/255.0, green: 79/255.0, blue: 1, alpha: 1)
-    let disabledColor = UIColor(white: 185/255.0, alpha: 1)
 
     func configure() {
-        setBackgroundImage(UIImage.with(color: normalColor), for: .normal)
-        setBackgroundImage(UIImage.with(color: disabledColor), for: .disabled)
+        setBackgroundImage(UIImage.with(color: UIColor.tinted), for: .normal)
+        setBackgroundImage(UIImage.with(color: UIColor.disabled), for: .disabled)
         self.titleLabel?.textColor = .white
         let font = UIFont(name: "American Typewriter", size: 17)!
         let bold = font.fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits.traitBold)!
