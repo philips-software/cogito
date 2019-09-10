@@ -147,7 +147,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="ck6-H8-qtF">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Njf-kt-7O9">
+                        <barButtonItem key="rightBarButtonItem" id="Njf-kt-7O9">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uZX-XS-UWe">
                                 <rect key="frame" x="276" y="5.5" width="83" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
