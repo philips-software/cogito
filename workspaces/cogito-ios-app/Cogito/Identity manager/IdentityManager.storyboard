@@ -322,11 +322,19 @@
                                     <constraint firstItem="AJf-pJ-G6e" firstAttribute="leading" secondItem="JRh-ma-FTw" secondAttribute="leading" id="hO5-FS-GdF"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hold to activate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ynS-fU-7eU">
+                                <rect key="frame" x="142" y="621" width="91" height="14"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ynS-fU-7eU" firstAttribute="centerX" secondItem="Q1X-4g-Imc" secondAttribute="centerX" id="6x4-8o-bi3"/>
                             <constraint firstItem="tns-da-jTd" firstAttribute="bottom" secondItem="mRu-4Z-V1X" secondAttribute="bottom" constant="54" id="BmL-ki-hDQ"/>
                             <constraint firstItem="7gI-lu-jAH" firstAttribute="top" secondItem="JRh-ma-FTw" secondAttribute="bottom" constant="16" id="JYX-Kt-sx0"/>
+                            <constraint firstItem="ynS-fU-7eU" firstAttribute="top" secondItem="mRu-4Z-V1X" secondAttribute="bottom" constant="8" id="M0E-aP-Uzb"/>
                             <constraint firstItem="7gI-lu-jAH" firstAttribute="centerX" secondItem="Q1X-4g-Imc" secondAttribute="centerX" id="bnx-k9-ecq"/>
                             <constraint firstItem="tns-da-jTd" firstAttribute="trailing" secondItem="JRh-ma-FTw" secondAttribute="trailing" constant="16" id="dub-gR-b0g"/>
                             <constraint firstItem="mRu-4Z-V1X" firstAttribute="centerX" secondItem="Q1X-4g-Imc" secondAttribute="centerX" id="tBz-5B-0Wo"/>
