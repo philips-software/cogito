@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 
+@IBDesignable
 class CameraButton: UIButton {
 
     var normalColor: UIColor = .darkGray
