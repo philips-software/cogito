@@ -156,10 +156,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
                     self?.actions.resetCreateIdentity()
                 }
             }
-        } else if let destination = segue.destination as? FacetDetailsViewController,
-                  let cell = sender as? FacetTableViewCell,
-                  let facet = cell.facet {
-            destination.facet = facet
+        } else if segue.destination is CurrentIdentityViewController {
             self.navigationController?.setNavigationBarHidden(false, animated: true)
         }
     }

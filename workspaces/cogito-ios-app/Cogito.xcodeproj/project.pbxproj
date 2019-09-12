@@ -24,6 +24,7 @@
 		0230F94B1FA1E875006A36FC /* LaunchActionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */; };
 		023C34F2217DD324000953FB /* Attestation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023C34F1217DD324000953FB /* Attestation.swift */; };
 		0242C31B2322A42300427BAB /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242C31A2322A42300427BAB /* Button.swift */; };
+		02624FC0232A486C009C62F7 /* CurrentIdentityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624FBF232A486C009C62F7 /* CurrentIdentityViewController.swift */; };
 		026779AD2007B47E00C2D45C /* TransactionSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AC2007B47E00C2D45C /* TransactionSigner.swift */; };
 		026779B02007B49A00C2D45C /* TransactionSignerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */; };
 		0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
@@ -222,6 +223,7 @@
 		0230F94A1FA1E875006A36FC /* LaunchActionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchActionsSpec.swift; sourceTree = "<group>"; };
 		023C34F1217DD324000953FB /* Attestation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attestation.swift; sourceTree = "<group>"; };
 		0242C31A2322A42300427BAB /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		02624FBF232A486C009C62F7 /* CurrentIdentityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentIdentityViewController.swift; sourceTree = "<group>"; };
 		026779AC2007B47E00C2D45C /* TransactionSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigner.swift; sourceTree = "<group>"; };
 		026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSignerSpec.swift; sourceTree = "<group>"; };
 		0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 				0226212F1FAB1FF100692126 /* FacetTableViewCell.swift */,
 				02DB90E62045546C00C4817C /* FacetDetailsViewController.swift */,
 				02F04B67232653DC0023918B /* CreateIdentityTableViewCell .swift */,
+				02624FBF232A486C009C62F7 /* CurrentIdentityViewController.swift */,
 			);
 			path = "Identity manager";
 			sourceTree = "<group>";
@@ -1291,6 +1294,7 @@
 				0270D7211F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift in Sources */,
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
 				5C4D7F5020AD72340008107C /* URLActions.swift in Sources */,
+				02624FC0232A486C009C62F7 /* CurrentIdentityViewController.swift in Sources */,
 				029CDFFD1FA22DEB00281369 /* AttestationsReducer.swift in Sources */,
 				027603F11F6ACD1600788B0A /* DebugViewController.swift in Sources */,
 				0295A02820863B370060400A /* KeyPairCreator.swift in Sources */,
