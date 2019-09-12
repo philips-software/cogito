@@ -8,6 +8,7 @@ class CreateIdentityViewController: UIViewController, Connectable {
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var closeButton: UIButton?
     @IBOutlet weak var activityView: UIActivityIndicatorView!
+    @IBOutlet weak var activityLabel: UILabel?
 
     @IBInspectable var showCloseButton: Bool = false {
         didSet {
@@ -22,6 +23,9 @@ class CreateIdentityViewController: UIViewController, Connectable {
         connection.bind(\Props.createButtonEnabled, to: createButton.rx.isEnabled)
         connection.bind(\Props.pending, to: descriptionField.rx.isEnabled) { !$0 }
         connection.bind(\Props.pending, to: activityView.rx.isHidden) { !$0 }
+        if let activityLabel = activityLabel {
+            connection.bind(\Props.pending, to: activityLabel.rx.isHidden) { !$0 }
+        }
         connection.bind(\Props.pending, to: createButton.rx.title()) {
             $0 ? "Creating" : "Create"
         }

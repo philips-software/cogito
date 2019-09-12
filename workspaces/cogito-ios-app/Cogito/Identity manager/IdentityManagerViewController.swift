@@ -6,6 +6,8 @@ import ReSwift
 import ReRxSwift
 import RichString
 
+// TODO: Debug controller
+
 class IdentityManagerViewController: UITableViewController, Connectable {
 
     var dataSource: RxTableViewSectionedAnimatedDataSource<ViewModel.FacetGroup>!
@@ -31,6 +33,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
                     cell = tableView.dequeueReusableCell(withIdentifier: "CreateIdentity", for: indexPath)
                     if let createCell = cell as? CreateIdentityTableViewCell {
                         createCell.activityView.isHidden = true
+                        createCell.creatingLabel.isHidden = true
                     }
                 }
                 return cell
@@ -178,6 +181,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         createIdentityController!.descriptionField = cell.nameEntryField
         createIdentityController!.createButton = cell.createButton
         createIdentityController!.activityView = cell.activityView
+        createIdentityController!.activityLabel = cell.creatingLabel
         createIdentityController!.onDone = { [weak self] in
             DispatchQueue.main.async {
                 self?.actions.resetCreateIdentity()
