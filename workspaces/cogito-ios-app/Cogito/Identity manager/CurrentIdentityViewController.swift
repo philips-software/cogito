@@ -2,6 +2,13 @@ import UIKit
 import ReSwift
 import RxSwift
 import ReRxSwift
+import RichString
+
+private let typewriter = UIFont(name: "American Typewriter", size: 17)!
+private let boldTypewriter: UIFont = {
+    let bold = typewriter.fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits.traitBold)!
+    return UIFont(descriptor: bold, size: 17)
+}()
 
 class CurrentIdentityViewController: UIViewController, Connectable {
     @IBOutlet weak var nameLabel: UILabel!
@@ -14,7 +21,8 @@ class CurrentIdentityViewController: UIViewController, Connectable {
         super.viewDidLoad()
 
         connection.bind(\Props.selectedFacet, to: nameLabel.rx.attributedText) {
-            $0?.formatted()
+            "I am ".font(boldTypewriter) +
+            ($0?.formatted() ?? NSAttributedString())
         }
     }
 
