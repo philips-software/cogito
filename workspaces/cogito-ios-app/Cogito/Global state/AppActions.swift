@@ -1,6 +1,8 @@
 import ReSwift
 import ReSwiftThunk
 
+let resetAppNotification = Notification.Name("ResetApp")
+
 // swiftlint:disable identifier_name
 func ResetApp() -> Thunk<AppState> {
     return Thunk { (dispatch, getState) in
@@ -10,6 +12,8 @@ func ResetApp() -> Thunk<AppState> {
             print("failed to reset app state: \(e)")
             abort()
         }
+        NotificationCenter.default.post(
+            name: resetAppNotification, object: nil, userInfo: nil)
         dispatch(ResetAppState())
         dispatch(KeyStoreActions.Create())
     }

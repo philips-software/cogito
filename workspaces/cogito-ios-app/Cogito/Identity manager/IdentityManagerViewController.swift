@@ -9,6 +9,7 @@ import RichString
 class IdentityManagerViewController: UITableViewController, Connectable {
 
     var creatingIdentity = false
+    var resetAppSubscription: NSObjectProtocol?
     var dataSource: RxTableViewSectionedAnimatedDataSource<ViewModel.FacetGroup>!
     let disposeBag = DisposeBag()
     @IBOutlet weak var explanationView: UIView!
@@ -54,6 +55,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
             self.findCreateIdentityCell()?.iamLabel.text
                 = newNumber > 0 ? "I am also" : "I am"
         }
+        subscribeToResetAppNotification()
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -131,6 +133,23 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         connection.disconnect()
     }
 
+    func subscribeToResetAppNotification() {
+        resetAppSubscription =  NotificationCenter.default.addObserver(
+            forName: resetAppNotification, object: nil, queue: .main) { _ in
+                self.navigationController?.popToRootViewController(animated: false)
+                if self.creatingIdentity {
+                    self.deactivateCreateNewIdentity()
+                    self.createIdentityDone()
+                }
+            }
+    }
+
+    func unsubscribeFromResetAppNotification() {
+        if let subscription = resetAppSubscription {
+            NotificationCenter.default.removeObserver(subscription)
+        }
+    }
+
     @IBAction func done(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
@@ -191,14 +210,18 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         createIdentityController!.activityLabel = cell.creatingLabel
         createIdentityController!.onDone = { [weak self] in
             DispatchQueue.main.async {
-                self?.actions.resetCreateIdentity()
-                self?.unhookCreateIdentityController()
-                self?.tableView.reloadData()
-                self?.updateTableViewContentInset()
+                self?.createIdentityDone()
             }
         }
         createIdentityController!.setup(addingActions: true)
         createIdentityController!.viewWillAppear(false)
+    }
+
+    func createIdentityDone() {
+        self.actions.resetCreateIdentity()
+        self.unhookCreateIdentityController()
+        self.tableView.reloadData()
+        self.updateTableViewContentInset()
     }
 
     func unhookCreateIdentityController() {
