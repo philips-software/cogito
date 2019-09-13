@@ -8,7 +8,7 @@ class CreateIdentityTableViewCell: UITableViewCell {
     @IBOutlet weak var tapToCreateLabel: UILabel!
     @IBOutlet weak var iamLabel: UILabel!
     @IBOutlet weak var creatingLabel: UILabel!
-    
+
     override func awakeFromNib() {
         createButtonTopConstraint.isActive = false
     }

@@ -30,6 +30,8 @@
 		02624FC6232B937C009C62F7 /* IdentityManagerViewController+VerticalCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624FC5232B937C009C62F7 /* IdentityManagerViewController+VerticalCenter.swift */; };
 		02624FC8232B9423009C62F7 /* IdentityManagerViewController+ExplanationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624FC7232B9423009C62F7 /* IdentityManagerViewController+ExplanationLabel.swift */; };
 		02624FCA232B947F009C62F7 /* IdentityManagerViewController+CreateIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624FC9232B947F009C62F7 /* IdentityManagerViewController+CreateIdentity.swift */; };
+		02624FCC232B98FD009C62F7 /* IdentityManagerViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624FCB232B98FD009C62F7 /* IdentityManagerViewController+DataSource.swift */; };
+		02624FCE232B997F009C62F7 /* IdentityManagerViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624FCD232B997F009C62F7 /* IdentityManagerViewController+Delegate.swift */; };
 		026779AD2007B47E00C2D45C /* TransactionSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AC2007B47E00C2D45C /* TransactionSigner.swift */; };
 		026779B02007B49A00C2D45C /* TransactionSignerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */; };
 		0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
@@ -234,6 +236,8 @@
 		02624FC5232B937C009C62F7 /* IdentityManagerViewController+VerticalCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityManagerViewController+VerticalCenter.swift"; sourceTree = "<group>"; };
 		02624FC7232B9423009C62F7 /* IdentityManagerViewController+ExplanationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityManagerViewController+ExplanationLabel.swift"; sourceTree = "<group>"; };
 		02624FC9232B947F009C62F7 /* IdentityManagerViewController+CreateIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityManagerViewController+CreateIdentity.swift"; sourceTree = "<group>"; };
+		02624FCB232B98FD009C62F7 /* IdentityManagerViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityManagerViewController+DataSource.swift"; sourceTree = "<group>"; };
+		02624FCD232B997F009C62F7 /* IdentityManagerViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityManagerViewController+Delegate.swift"; sourceTree = "<group>"; };
 		026779AC2007B47E00C2D45C /* TransactionSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigner.swift; sourceTree = "<group>"; };
 		026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSignerSpec.swift; sourceTree = "<group>"; };
 		0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
@@ -457,6 +461,8 @@
 				02624FC5232B937C009C62F7 /* IdentityManagerViewController+VerticalCenter.swift */,
 				02624FC7232B9423009C62F7 /* IdentityManagerViewController+ExplanationLabel.swift */,
 				02624FC9232B947F009C62F7 /* IdentityManagerViewController+CreateIdentity.swift */,
+				02624FCB232B98FD009C62F7 /* IdentityManagerViewController+DataSource.swift */,
+				02624FCD232B997F009C62F7 /* IdentityManagerViewController+Delegate.swift */,
 			);
 			path = "Identity manager";
 			sourceTree = "<group>";
@@ -1298,6 +1304,7 @@
 				028F4EFD1F7D3B5C0015C4AF /* CreateIdentityActions.swift in Sources */,
 				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
 				5C4D7F5720AD84460008107C /* AttestationActions.swift in Sources */,
+				02624FCC232B98FD009C62F7 /* IdentityManagerViewController+DataSource.swift in Sources */,
 				02A15AEF1F864F0900A94163 /* HomeViewController.swift in Sources */,
 				5C8CFD3E2007993500D383C0 /* JsonRpcRequest.swift in Sources */,
 				02E90F4C1FDEC1C4008D81F9 /* AttestationService.swift in Sources */,
@@ -1306,6 +1313,7 @@
 				02E90F521FE03348008D81F9 /* DialogPresenter.swift in Sources */,
 				5C48E2401FA1F8BB00B8BF6E /* TelepathActions.swift in Sources */,
 				028F4F031F7D3B6C0015C4AF /* CreateIdentityReducer.swift in Sources */,
+				02624FCE232B997F009C62F7 /* IdentityManagerViewController+Delegate.swift in Sources */,
 				02624FC8232B9423009C62F7 /* IdentityManagerViewController+ExplanationLabel.swift in Sources */,
 				0270D7211F9F6C7E00CC9038 /* OpenIDAttestationStarter.swift in Sources */,
 				0205E3691F71481C003A9787 /* KeyStoreActions.swift in Sources */,
