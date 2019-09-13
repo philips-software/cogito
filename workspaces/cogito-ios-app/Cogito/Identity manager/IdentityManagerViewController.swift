@@ -70,7 +70,8 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         dataSource: TableViewSectionedDataSource<ViewModel.FacetGroup>,
         indexPath: IndexPath
     ) -> Bool {
-        return true
+        let createCellIndex = props.numberOfFacets
+        return indexPath.row < createCellIndex
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
