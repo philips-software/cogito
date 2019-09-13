@@ -14,6 +14,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     let disposeBag = DisposeBag()
     @IBOutlet weak var explanationView: UIView!
     @IBOutlet weak var explanationLabel: UILabel!
+    var createIdentityController: CreateIdentityViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,28 +63,6 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         let numberOfRows = tableView.numberOfRows(inSection: 0)
         let isLast = indexPath.row == numberOfRows - 1
         return isLast ? 134 : 75
-    }
-
-    override func viewWillLayoutSubviews() {
-        updateTableViewContentInset()
-    }
-
-    func updateTableViewContentInset() {
-        let insets: UIEdgeInsets
-        if self.props.numberOfFacets == 0 {
-            let viewHeight: CGFloat = view.frame.size.height
-            let tableViewContentHeight: CGFloat = tableView.contentSize.height
-            let marginHeight: CGFloat = (viewHeight - tableViewContentHeight) / 2.0
-
-            insets = UIEdgeInsets(
-                top: marginHeight, left: 0, bottom: -marginHeight, right: 0)
-        } else {
-            insets = UIEdgeInsets(
-                top: 0, left: 0, bottom: 0, right: 0)
-        }
-        UIView.animate(withDuration: 0.3) {
-            self.tableView.contentInset = insets
-        }
     }
 
     func itemDeleted(at indexPath: IndexPath) {
@@ -190,131 +169,6 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         }
     }
 
-    // MARK: - Create Identity
-
-    var createIdentityController: CreateIdentityViewController?
-
-    func findCreateIdentityCell() -> CreateIdentityTableViewCell? {
-        let numberOfRows = tableView.numberOfRows(inSection: 0)
-        let indexPath = IndexPath(row: numberOfRows - 1, section: 0)
-        let cell = self.tableView.cellForRow(at: indexPath) as? CreateIdentityTableViewCell
-        return cell
-    }
-
-    func hookupCreateIdentityController(cell: CreateIdentityTableViewCell) {
-        self.actions.resetCreateIdentity()
-        createIdentityController = CreateIdentityViewController()
-        createIdentityController!.descriptionField = cell.nameEntryField
-        createIdentityController!.createButton = cell.createButton
-        createIdentityController!.activityView = cell.activityView
-        createIdentityController!.activityLabel = cell.creatingLabel
-        createIdentityController!.onDone = { [weak self] in
-            DispatchQueue.main.async {
-                self?.createIdentityDone()
-            }
-        }
-        createIdentityController!.setup(addingActions: true)
-        createIdentityController!.viewWillAppear(false)
-    }
-
-    func createIdentityDone() {
-        self.actions.resetCreateIdentity()
-        self.unhookCreateIdentityController()
-        self.tableView.reloadData()
-        self.updateTableViewContentInset()
-    }
-
-    func unhookCreateIdentityController() {
-        createIdentityController?.viewDidDisappear(false)
-        createIdentityController?.tearDown()
-        createIdentityController = nil
-    }
-
-    @IBAction func beginEditingNewIdentity(_ sender: Any) {
-        activateCreateNewIdentity()
-    }
-
-    @IBAction func cancelCreateNewIdentity(_ sender: Any) {
-        self.actions.resetCreateIdentity()
-        deactivateCreateNewIdentity()
-    }
-
-    @IBAction func createNewIdentity(_ sender: Any) {
-        deactivateCreateNewIdentity()
-    }
-
-    func activateCreateNewIdentity() {
-        if let cell = findCreateIdentityCell() {
-            creatingIdentity = true
-            setExistingFacets(enabled: false)
-            cell.activate()
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-            hookupCreateIdentityController(cell: cell)
-        }
-    }
-
-    func deactivateCreateNewIdentity() {
-        findCreateIdentityCell()?.deactivate()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        setExistingFacets(enabled: true)
-        creatingIdentity = false
-    }
-
-    func setExistingFacets(enabled: Bool) {
-        for row in 0..<props.numberOfFacets {
-            let indexPath = IndexPath(row: row, section: 0)
-            let cell = tableView.cellForRow(at: indexPath)
-            if let cell = cell as? FacetTableViewCell {
-                cell.enabled = enabled
-            }
-        }
-    }
-
-    // MARK: - Explanation label
-
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if props.numberOfFacets == 0 {
-            return explanationView
-        } else {
-            return nil
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if props.numberOfFacets == 0 {
-            let width = tableView.frame.size.width - 32 // margins of the view
-            return explanationLabel.sizeThatFits(CGSize(width: width, height: 1000)).height
-                + 50  // just some extra space
-        } else {
-            return 0
-        }
-    }
-
-    static let typewriter = UIFont(name: "American Typewriter", size: 15)!
-    static var boldTypewriter: UIFont = {
-        let bold = typewriter.fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits.traitBold)!
-        return UIFont(descriptor: bold, size: 15)
-    }()
-    static let cogito = "Cogito".font(IdentityManagerViewController.boldTypewriter)
-    static let explanationText = NSAttributedString(string: "\n\nWhy do you need this?\n"
-        + "\n"
-        + "As an employee of the Red Cross, you need to access many platforms"
-        + "  that require different personal information. Red Cross offers ")
-        + cogito
-        + NSAttributedString(string: " to help you:\n"
-            + "\n"
-            + "Manage your various digital identities, ensuring your personal"
-            + " information stays personal.\n"
-            + "\n"
-            + "With ")
-        + cogito
-        + NSAttributedString(string: " you can create your"
-            + " digital identities for access to\n"
-            + "\n"
-            + "• RC Health Insurance\n"
-            + "• RC Travel\n"
-            + "• RC Security")
-
     // MARK: - Props and Actions
 
     struct Props {
@@ -363,50 +217,3 @@ private func mapDispatchToActions(dispatch: @escaping DispatchFunction) -> Ident
 }
 
 typealias CogitoIdentity = Identity
-
-extension IdentityManagerViewController {
-    struct ViewModel {
-        // swiftlint:disable nesting
-
-        struct FacetGroup: AnimatableSectionModelType, IdentifiableType, Equatable {
-            typealias Identity = String
-            typealias Item = Facet
-
-            var identity = "only one"
-            var items: [Facet]
-
-            init(items: [Facet]) {
-                self.items = items
-            }
-
-            init(original: FacetGroup, items: [Facet]) {
-                self = original
-                self.items = items
-            }
-
-            func sorted() -> FacetGroup {
-                return FacetGroup(items: items.sorted(by: { (lhs, rhs) -> Bool in
-                    guard let lhsFacet = lhs.facet else { return false }
-                    guard let rhsFacet = rhs.facet else { return true }
-                    return lhsFacet.created < rhsFacet.created
-                }))
-            }
-
-            static func == (lhs: FacetGroup, rhs: FacetGroup) -> Bool {
-                return lhs.items == rhs.items
-            }
-        }
-
-        struct Facet: IdentifiableType, Equatable {
-            static let placeHolder = Facet(facet: nil)
-
-            typealias Identity = String?
-            var identity: String? { return facet?.identifier.uuidString }
-            var facet: CogitoIdentity?
-
-            static func == (lhs: Facet, rhs: Facet) -> Bool {
-                return lhs.facet == rhs.facet
-            }
-        }
-    }
-}
