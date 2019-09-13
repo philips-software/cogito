@@ -34,6 +34,11 @@ class CurrentIdentityViewController: UIViewController, QRCodeReaderViewControlle
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? FacetDetailsViewController {
+            destination.facet = props.selectedFacet
+        }
+    }
     // MARK: - QR Code Reading
 
     lazy var readerVC: QRCodeReaderViewController = {

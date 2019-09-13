@@ -346,6 +346,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tns-da-jTd"/>
                     </view>
+                    <navigationItem key="navigationItem" id="C38-Rz-spo">
+                        <barButtonItem key="rightBarButtonItem" title="Details" id="xyl-rf-uw4">
+                            <connections>
+                                <segue destination="TNh-gt-zXW" kind="show" id="bay-1f-iG5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="cameraButton" destination="mRu-4Z-V1X" id="AZk-uG-f01"/>
                         <outlet property="leftShutter" destination="pSc-Zs-x0f" id="f1f-m3-xLH"/>
