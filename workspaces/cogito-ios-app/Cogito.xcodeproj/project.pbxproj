@@ -32,6 +32,7 @@
 		02624FCA232B947F009C62F7 /* IdentityManagerViewController+CreateIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624FC9232B947F009C62F7 /* IdentityManagerViewController+CreateIdentity.swift */; };
 		02624FCC232B98FD009C62F7 /* IdentityManagerViewController+DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624FCB232B98FD009C62F7 /* IdentityManagerViewController+DataSource.swift */; };
 		02624FCE232B997F009C62F7 /* IdentityManagerViewController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624FCD232B997F009C62F7 /* IdentityManagerViewController+Delegate.swift */; };
+		02624FD0232B9BA9009C62F7 /* CreateIdentitySpec.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02624FCF232B9BA9009C62F7 /* CreateIdentitySpec.storyboard */; };
 		026779AD2007B47E00C2D45C /* TransactionSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AC2007B47E00C2D45C /* TransactionSigner.swift */; };
 		026779B02007B49A00C2D45C /* TransactionSignerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */; };
 		0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
@@ -238,6 +239,7 @@
 		02624FC9232B947F009C62F7 /* IdentityManagerViewController+CreateIdentity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityManagerViewController+CreateIdentity.swift"; sourceTree = "<group>"; };
 		02624FCB232B98FD009C62F7 /* IdentityManagerViewController+DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityManagerViewController+DataSource.swift"; sourceTree = "<group>"; };
 		02624FCD232B997F009C62F7 /* IdentityManagerViewController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IdentityManagerViewController+Delegate.swift"; sourceTree = "<group>"; };
+		02624FCF232B9BA9009C62F7 /* CreateIdentitySpec.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateIdentitySpec.storyboard; sourceTree = "<group>"; };
 		026779AC2007B47E00C2D45C /* TransactionSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigner.swift; sourceTree = "<group>"; };
 		026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSignerSpec.swift; sourceTree = "<group>"; };
 		0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 				02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */,
 				022124181F82238D005A668A /* CreateIdentityActionsSpec.swift */,
 				C00B5412CBC3B026E362474C /* CreateIdentityStateSpec.swift */,
+				02624FCF232B9BA9009C62F7 /* CreateIdentitySpec.storyboard */,
 			);
 			path = "Create identity";
 			sourceTree = "<group>";
@@ -1064,6 +1067,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02E678E21FEC056D00C634E2 /* Assets.xcassets in Resources */,
+				02624FD0232B9BA9009C62F7 /* CreateIdentitySpec.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

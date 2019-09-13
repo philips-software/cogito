@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Create Identity View Controller-->
+        <scene sceneID="hLO-cK-qXU">
+            <objects>
+                <viewController storyboardIdentifier="CreateIdentity" id="uSq-sU-IGw" customClass="CreateIdentityViewController" customModule="Cogito" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="u4h-1O-cOj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Mbg-7y-E2n">
+                                <rect key="frame" x="20" y="371.5" width="374" height="153"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRZ-Hi-irT">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XVs-si-A6g">
+                                        <rect key="frame" x="0.0" y="28.5" width="374" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czx-qf-run">
+                                        <rect key="frame" x="0.0" y="66.5" width="374" height="30"/>
+                                        <state key="normal" title="Create"/>
+                                    </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FPb-wB-KeI">
+                                        <rect key="frame" x="0.0" y="104.5" width="374" height="20"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Creating..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLQ-pe-4qs">
+                                        <rect key="frame" x="0.0" y="132.5" width="374" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Mbg-7y-E2n" firstAttribute="centerX" secondItem="u4h-1O-cOj" secondAttribute="centerX" id="BFN-r5-UUx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Mbg-7y-E2n" secondAttribute="trailing" id="RnZ-lg-iva"/>
+                            <constraint firstItem="Mbg-7y-E2n" firstAttribute="centerY" secondItem="u4h-1O-cOj" secondAttribute="centerY" id="X9e-hU-nrU"/>
+                            <constraint firstItem="Mbg-7y-E2n" firstAttribute="leading" secondItem="u4h-1O-cOj" secondAttribute="leadingMargin" id="muF-ho-yJ4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6vY-Fb-dYr"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityLabel" destination="ZLQ-pe-4qs" id="QyD-CV-izc"/>
+                        <outlet property="activityView" destination="FPb-wB-KeI" id="N89-yK-b6E"/>
+                        <outlet property="createButton" destination="czx-qf-run" id="g9t-82-4sx"/>
+                        <outlet property="descriptionField" destination="XVs-si-A6g" id="LbJ-Nu-6nw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HYf-LF-9Oh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-7" y="82"/>
+        </scene>
+    </scenes>
+</document>

@@ -44,7 +44,8 @@ class IdentityManagerViewControllerSpec: QuickSpec {
                 ])]
                 identityManagerController.props = IdentityManagerViewController.Props(
                     facetGroups: model,
-                    selectedFacetIndex: 0
+                    selectedFacetIndex: 0,
+                    numberOfFacets: model[0].items.count
                 )
             }
 
