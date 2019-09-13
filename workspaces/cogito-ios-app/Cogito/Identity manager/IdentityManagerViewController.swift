@@ -14,22 +14,38 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     let disposeBag = DisposeBag()
     @IBOutlet weak var explanationView: UIView!
     @IBOutlet weak var explanationLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     var createIdentityController: CreateIdentityViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         explanationLabel.attributedText = IdentityManagerViewController.explanationText
-        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.isTranslucent = true
+        setCancelButton(visible: false, animated: false)
+
         configureDataSource()
         setupConnection()
         subscribeToResetAppNotification()
+    }
+
+    func setCancelButton(visible: Bool, animated: Bool) {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.rightBarButtonItem = visible ? cancelButton : nil
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         connection.connect()
         self.actions.resetCreateIdentity()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        setCancelButton(visible: false, animated: true)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        setCancelButton(visible: false, animated: animated)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -55,7 +71,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
                 }
             }
         } else if segue.destination is CurrentIdentityViewController {
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.setCancelButton(visible: true, animated: true)
         }
     }
 

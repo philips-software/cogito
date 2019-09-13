@@ -55,14 +55,14 @@ extension IdentityManagerViewController {
             creatingIdentity = true
             setExistingFacets(enabled: false)
             cell.activate()
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.setCancelButton(visible: true, animated: true)
             hookupCreateIdentityController(cell: cell)
         }
     }
 
     func deactivateCreateNewIdentity() {
         findCreateIdentityCell()?.deactivate()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.setCancelButton(visible: false, animated: true)
         setExistingFacets(enabled: true)
         creatingIdentity = false
     }

@@ -23,6 +23,9 @@ class CurrentIdentityViewController: UIViewController, QRCodeReaderViewControlle
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        self.navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.shadowImage = nil
         super.viewWillAppear(animated)
         connection.connect()
     }
