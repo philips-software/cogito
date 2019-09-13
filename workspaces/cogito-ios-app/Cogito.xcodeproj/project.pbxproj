@@ -524,13 +524,13 @@
 		027603ED1F6ACD1600788B0A /* Cogito */ = {
 			isa = PBXGroup;
 			children = (
+				02A15AF31F864F4B00A94163 /* Home.storyboard */,
 				6D1A404B2208D4D6009F3557 /* ValueStore service */,
 				5C04E44B1FA77D0400A70C60 /* Accounts service */,
 				028F4EF21F7CE37E0015C4AF /* Global state */,
 				0298D4331F7A45040070998D /* Geth */,
 				02E792371F6FFDF000DC5973 /* Key store */,
 				02A15AF81F86714800A94163 /* Diamond */,
-				02A15AEB1F864E9D00A94163 /* Home */,
 				02D0C0D61F8B59C30001223E /* Initial setup wizard */,
 				02F0CA071F8754F5000C428F /* Debug view */,
 				028F4EF71F7D34030015C4AF /* Create identity */,
@@ -680,14 +680,6 @@
 				C00B535ED8937C7ED5FC8495 /* Transaction.swift */,
 			);
 			path = Geth;
-			sourceTree = "<group>";
-		};
-		02A15AEB1F864E9D00A94163 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				02A15AF31F864F4B00A94163 /* Home.storyboard */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		02A15AEC1F864EAB00A94163 /* Home */ = {
