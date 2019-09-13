@@ -6,8 +6,6 @@ import ReSwift
 import ReRxSwift
 import RichString
 
-// TODO: Debug controller
-
 class IdentityManagerViewController: UITableViewController, Connectable {
 
     var creatingIdentity = false
