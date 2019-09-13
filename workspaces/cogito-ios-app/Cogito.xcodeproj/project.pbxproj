@@ -453,18 +453,18 @@
 		022621261FAB1CE700692126 /* Identity manager */ = {
 			isa = PBXGroup;
 			children = (
-				0226212A1FAB1E6800692126 /* IdentityManagerViewController.swift */,
-				022621281FAB1E1300692126 /* IdentityManager.storyboard */,
-				0226212F1FAB1FF100692126 /* FacetTableViewCell.swift */,
-				02DB90E62045546C00C4817C /* FacetDetailsViewController.swift */,
 				02F04B67232653DC0023918B /* CreateIdentityTableViewCell .swift */,
 				02624FBF232A486C009C62F7 /* CurrentIdentityViewController.swift */,
-				02624FC3232B9342009C62F7 /* IdentityManagerViewController+ViewModel.swift */,
-				02624FC5232B937C009C62F7 /* IdentityManagerViewController+VerticalCenter.swift */,
-				02624FC7232B9423009C62F7 /* IdentityManagerViewController+ExplanationLabel.swift */,
+				02DB90E62045546C00C4817C /* FacetDetailsViewController.swift */,
+				0226212F1FAB1FF100692126 /* FacetTableViewCell.swift */,
+				022621281FAB1E1300692126 /* IdentityManager.storyboard */,
+				0226212A1FAB1E6800692126 /* IdentityManagerViewController.swift */,
 				02624FC9232B947F009C62F7 /* IdentityManagerViewController+CreateIdentity.swift */,
 				02624FCB232B98FD009C62F7 /* IdentityManagerViewController+DataSource.swift */,
 				02624FCD232B997F009C62F7 /* IdentityManagerViewController+Delegate.swift */,
+				02624FC7232B9423009C62F7 /* IdentityManagerViewController+ExplanationLabel.swift */,
+				02624FC5232B937C009C62F7 /* IdentityManagerViewController+VerticalCenter.swift */,
+				02624FC3232B9342009C62F7 /* IdentityManagerViewController+ViewModel.swift */,
 			);
 			path = "Identity manager";
 			sourceTree = "<group>";
