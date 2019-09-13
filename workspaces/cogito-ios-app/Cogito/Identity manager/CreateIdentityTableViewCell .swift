@@ -20,6 +20,7 @@ class CreateIdentityTableViewCell: UITableViewCell {
         tapToCreateLabel.textColor = .black
         tapToCreateLabel.text = "e.g. your name or \"Traveling\""
         iamLabel.textColor = .tinted
+        activityView.startAnimating()
     }
 
     func deactivate() {
