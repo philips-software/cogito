@@ -62,9 +62,8 @@
 		029691551F7166EE00654BD0 /* KeyStoreState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029691541F7166EE00654BD0 /* KeyStoreState.swift */; };
 		029CDFFC1FA22DEB00281369 /* AttestationsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CDFFA1FA22DEB00281369 /* AttestationsState.swift */; };
 		029CDFFD1FA22DEB00281369 /* AttestationsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029CDFFB1FA22DEB00281369 /* AttestationsReducer.swift */; };
-		02A15AEF1F864F0900A94163 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AED1F864F0900A94163 /* HomeViewController.swift */; };
 		02A15AF41F864F4B00A94163 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02A15AF31F864F4B00A94163 /* Home.storyboard */; };
-		02A15AF71F864F8700A94163 /* HomeViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AF61F864F8700A94163 /* HomeViewControllerSpec.swift */; };
+		02A15AF71F864F8700A94163 /* CurrentIdentityViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AF61F864F8700A94163 /* CurrentIdentityViewControllerSpec.swift */; };
 		02A15AFB1F86719400A94163 /* DiamondState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AFA1F86719400A94163 /* DiamondState.swift */; };
 		02A15AFE1F8671D200A94163 /* Identity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15AFD1F8671D200A94163 /* Identity.swift */; };
 		02A15B011F8672C000A94163 /* DiamondReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A15B001F8672C000A94163 /* DiamondReducer.swift */; };
@@ -80,10 +79,8 @@
 		02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */; };
 		02CD80541F7D494900AA5C3A /* CreateIdentityReducerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */; };
 		02CD80581F7E30D100AA5C3A /* ActionLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CD80571F7E30D100AA5C3A /* ActionLogger.swift */; };
-		02D0C0D41F8B59790001223E /* SelectedFacetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0D31F8B59790001223E /* SelectedFacetViewController.swift */; };
 		02D0C0D81F8B59E80001223E /* InitialSetup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02D0C0D71F8B59E80001223E /* InitialSetup.storyboard */; };
 		02D0C0DB1F8B6A410001223E /* InitialExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */; };
-		02D0C0E11F8B73B20001223E /* SelectedFacetViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D0C0E01F8B73B20001223E /* SelectedFacetViewControllerSpec.swift */; };
 		02D4F345204835DA00196820 /* 198414__divinux__infobleep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 02D4F344204835DA00196820 /* 198414__divinux__infobleep.wav */; };
 		02DB90E420453E3A00C4817C /* Identity+Formatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB90E320453E3A00C4817C /* Identity+Formatted.swift */; };
 		02DB90E72045546C00C4817C /* FacetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DB90E62045546C00C4817C /* FacetDetailsViewController.swift */; };
@@ -274,9 +271,8 @@
 		029691541F7166EE00654BD0 /* KeyStoreState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreState.swift; sourceTree = "<group>"; };
 		029CDFFA1FA22DEB00281369 /* AttestationsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttestationsState.swift; sourceTree = "<group>"; };
 		029CDFFB1FA22DEB00281369 /* AttestationsReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttestationsReducer.swift; sourceTree = "<group>"; };
-		02A15AED1F864F0900A94163 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		02A15AF31F864F4B00A94163 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		02A15AF61F864F8700A94163 /* HomeViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewControllerSpec.swift; sourceTree = "<group>"; };
+		02A15AF61F864F8700A94163 /* CurrentIdentityViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentIdentityViewControllerSpec.swift; sourceTree = "<group>"; };
 		02A15AFA1F86719400A94163 /* DiamondState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondState.swift; sourceTree = "<group>"; };
 		02A15AFD1F8671D200A94163 /* Identity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identity.swift; sourceTree = "<group>"; };
 		02A15B001F8672C000A94163 /* DiamondReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondReducer.swift; sourceTree = "<group>"; };
@@ -291,10 +287,8 @@
 		02CD30A51F73F27B006BA756 /* StorePersisterSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePersisterSpec.swift; sourceTree = "<group>"; };
 		02CD80531F7D494900AA5C3A /* CreateIdentityReducerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdentityReducerSpec.swift; sourceTree = "<group>"; };
 		02CD80571F7E30D100AA5C3A /* ActionLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionLogger.swift; sourceTree = "<group>"; };
-		02D0C0D31F8B59790001223E /* SelectedFacetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFacetViewController.swift; sourceTree = "<group>"; };
 		02D0C0D71F8B59E80001223E /* InitialSetup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialSetup.storyboard; sourceTree = "<group>"; };
 		02D0C0DA1F8B6A410001223E /* InitialExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialExplanationViewController.swift; sourceTree = "<group>"; };
-		02D0C0E01F8B73B20001223E /* SelectedFacetViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFacetViewControllerSpec.swift; sourceTree = "<group>"; };
 		02D4F344204835DA00196820 /* 198414__divinux__infobleep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = 198414__divinux__infobleep.wav; sourceTree = "<group>"; };
 		02DB90E320453E3A00C4817C /* Identity+Formatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Identity+Formatted.swift"; sourceTree = "<group>"; };
 		02DB90E62045546C00C4817C /* FacetDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacetDetailsViewController.swift; sourceTree = "<group>"; };
@@ -423,6 +417,7 @@
 		020D296D232283550025C1E8 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				02C742091F8F5B6E007AE227 /* CameraButton.swift */,
 				020D296E2322837C0025C1E8 /* NameEntryField.swift */,
 				0242C31A2322A42300427BAB /* Button.swift */,
 			);
@@ -473,6 +468,7 @@
 			isa = PBXGroup;
 			children = (
 				0226212D1FAB1EC200692126 /* IdentityManagerViewControllerSpec.swift */,
+				02A15AF61F864F8700A94163 /* CurrentIdentityViewControllerSpec.swift */,
 			);
 			path = "Identity manager";
 			sourceTree = "<group>";
@@ -689,10 +685,7 @@
 		02A15AEB1F864E9D00A94163 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				02A15AED1F864F0900A94163 /* HomeViewController.swift */,
 				02A15AF31F864F4B00A94163 /* Home.storyboard */,
-				02D0C0D31F8B59790001223E /* SelectedFacetViewController.swift */,
-				02C742091F8F5B6E007AE227 /* CameraButton.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -700,8 +693,6 @@
 		02A15AEC1F864EAB00A94163 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				02A15AF61F864F8700A94163 /* HomeViewControllerSpec.swift */,
-				02D0C0E01F8B73B20001223E /* SelectedFacetViewControllerSpec.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1309,7 +1300,6 @@
 				0205E3671F7012E1003A9787 /* KeyStore.swift in Sources */,
 				5C4D7F5720AD84460008107C /* AttestationActions.swift in Sources */,
 				02624FCC232B98FD009C62F7 /* IdentityManagerViewController+DataSource.swift in Sources */,
-				02A15AEF1F864F0900A94163 /* HomeViewController.swift in Sources */,
 				5C8CFD3E2007993500D383C0 /* JsonRpcRequest.swift in Sources */,
 				02E90F4C1FDEC1C4008D81F9 /* AttestationService.swift in Sources */,
 				6D1A40522208DC83009F3557 /* ValueStoreReducer.swift in Sources */,
@@ -1331,7 +1321,6 @@
 				5CB28FFD21A4638E00AEA16C /* KeyStoreDirectory.swift in Sources */,
 				02E792331F6FFBF700DC5973 /* AppReducer.swift in Sources */,
 				02B9A683203C762100ADB44F /* UIWindow+CurrentViewController.swift in Sources */,
-				02D0C0D41F8B59790001223E /* SelectedFacetViewController.swift in Sources */,
 				02CD80581F7E30D100AA5C3A /* ActionLogger.swift in Sources */,
 				02624FCA232B947F009C62F7 /* IdentityManagerViewController+CreateIdentity.swift in Sources */,
 				02DB90E420453E3A00C4817C /* Identity+Formatted.swift in Sources */,
@@ -1393,7 +1382,6 @@
 				5C7C238F1FA3501C009E9CE7 /* TelepathReceiverSpec.swift in Sources */,
 				5C014F521FAA07FF00F95071 /* RecordingStore.swift in Sources */,
 				0270D71F1F9F6C6D00CC9038 /* OpenIDAttestationStarterSpec.swift in Sources */,
-				02D0C0E11F8B73B20001223E /* SelectedFacetViewControllerSpec.swift in Sources */,
 				5C48E2421FA1F98200B8BF6E /* TelepathReducerSpec.swift in Sources */,
 				02CD30A61F73F27B006BA756 /* StorePersisterSpec.swift in Sources */,
 				02B9A684203C7B9200ADB44F /* UIWindow+CurrentViewController.swift in Sources */,
@@ -1409,7 +1397,7 @@
 				0295A026208639600060400A /* KeyPairCreatorSpec.swift in Sources */,
 				C00B558B846161B2B4EC795F /* KeyStoreStateSpec.swift in Sources */,
 				0292451D1F7AA3B100F2C0C1 /* AppStateHelper.swift in Sources */,
-				02A15AF71F864F8700A94163 /* HomeViewControllerSpec.swift in Sources */,
+				02A15AF71F864F8700A94163 /* CurrentIdentityViewControllerSpec.swift in Sources */,
 				5C04E44A1FA77CA400A70C60 /* AccountServiceSpec.swift in Sources */,
 				5C61A0042088A01100867747 /* DecrypterSpec.swift in Sources */,
 				5C61A0022088871E00867747 /* PublicKeyLoaderSpec.swift in Sources */,

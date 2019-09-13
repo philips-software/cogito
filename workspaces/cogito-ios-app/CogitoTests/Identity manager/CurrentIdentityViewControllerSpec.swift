@@ -4,9 +4,9 @@ import ReSwift
 import ReSwiftThunk
 @testable import Cogito
 
-class HomeViewControllerSpec: QuickSpec {
+class CurrentIdentityViewControllerSpec: QuickSpec {
     override func spec() {
-        var home: HomeViewController!
+        var home: CurrentIdentityViewController!
         var store: Store<AppState>!
 
         beforeEach {
@@ -36,10 +36,10 @@ class HomeViewControllerSpec: QuickSpec {
         }
     }
 
-    func instantiateViewController() -> HomeViewController? {
-        let bundle = Bundle(for: HomeViewController.self)
-        let storyboard = UIStoryboard(name: "Home", bundle: bundle)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "Home")
-        return viewController as? HomeViewController
+    func instantiateViewController() -> CurrentIdentityViewController? {
+        let bundle = Bundle(for: CurrentIdentityViewController.self)
+        let storyboard = UIStoryboard(name: "IdentityManager", bundle: bundle)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "CurrentIdentity")
+        return viewController as? CurrentIdentityViewController
     }
 }

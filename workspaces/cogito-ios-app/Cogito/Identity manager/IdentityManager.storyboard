@@ -260,7 +260,7 @@
         <!--Current Identity View Controller-->
         <scene sceneID="YSB-a1-8PM">
             <objects>
-                <viewController storyboardIdentifier="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="90M-QE-H5W" customClass="CurrentIdentityViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CurrentIdentity" useStoryboardIdentifierAsRestorationIdentifier="YES" id="90M-QE-H5W" customClass="CurrentIdentityViewController" customModule="Cogito" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q1X-4g-Imc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
