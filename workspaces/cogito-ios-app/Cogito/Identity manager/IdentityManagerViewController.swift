@@ -76,10 +76,6 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         }
     }
 
-    @IBAction func done(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
-    }
-
     @IBAction func share(_ sender: UIBarButtonItem) {
         let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("accounts.json")
         let content: [[[String: Any]]] = self.props.facetGroups.map { facetGroup in
