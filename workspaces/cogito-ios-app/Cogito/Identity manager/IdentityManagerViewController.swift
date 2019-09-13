@@ -10,6 +10,7 @@ import RichString
 
 class IdentityManagerViewController: UITableViewController, Connectable {
 
+    var creatingIdentity = false
     var dataSource: RxTableViewSectionedAnimatedDataSource<ViewModel.FacetGroup>!
     let disposeBag = DisposeBag()
     @IBOutlet weak var explanationView: UIView!
@@ -28,6 +29,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
                     if let facetCell = cell as? FacetTableViewCell {
                         facetCell.facetLabel?.attributedText = facet.formatted()
                         facetCell.facet = item.facet
+                        facetCell.enabled = !self.creatingIdentity
                     }
                 } else {
                     cell = tableView.dequeueReusableCell(withIdentifier: "CreateIdentity", for: indexPath)
@@ -92,7 +94,14 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         self.actions.deleteIdentity(uuid)
     }
 
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        guard !creatingIdentity else { return nil }
+        return indexPath
+    }
+
     func itemSelected(at indexPath: IndexPath) {
+        guard !creatingIdentity else { return }
+
         let identity = self.props.facetGroups[indexPath.section].items[indexPath.row]
         guard let uuid = identity.facet?.identifier else {
             findCreateIdentityCell()?.nameEntryField.becomeFirstResponder()
@@ -215,6 +224,8 @@ class IdentityManagerViewController: UITableViewController, Connectable {
 
     func activateCreateNewIdentity() {
         if let cell = findCreateIdentityCell() {
+            creatingIdentity = true
+            setExistingFacets(enabled: false)
             cell.activate()
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             hookupCreateIdentityController(cell: cell)
@@ -224,6 +235,18 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     func deactivateCreateNewIdentity() {
         findCreateIdentityCell()?.deactivate()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        setExistingFacets(enabled: true)
+        creatingIdentity = false
+    }
+
+    func setExistingFacets(enabled: Bool) {
+        for row in 0..<props.numberOfFacets {
+            let indexPath = IndexPath(row: row, section: 0)
+            let cell = tableView.cellForRow(at: indexPath)
+            if let cell = cell as? FacetTableViewCell {
+                cell.enabled = enabled
+            }
+        }
     }
 
     // MARK: - Explanation label

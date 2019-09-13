@@ -62,6 +62,8 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="facetLabel" destination="Rqr-xF-PdL" id="0jL-Ne-49E"/>
+                                    <outlet property="iamLabel" destination="1dj-md-F6X" id="VKR-K2-BOI"/>
+                                    <outlet property="tapToEnterLabel" destination="Xd5-Cw-60M" id="Jmc-4f-vhJ"/>
                                     <segue destination="90M-QE-H5W" kind="show" identifier="SelectIdentity" id="G8o-tM-W6G"/>
                                 </connections>
                             </tableViewCell>
