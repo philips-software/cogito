@@ -18,7 +18,7 @@ class CreateIdentityTableViewCell: UITableViewCell {
         createButton.isHidden = false
         createButton.isEnabled = false
         tapToCreateLabel.textColor = .black
-        tapToCreateLabel.text = "e.g. your name or \"Travel\""
+        tapToCreateLabel.text = "e.g. your name or \"Traveling\""
         iamLabel.textColor = .tinted
     }
 

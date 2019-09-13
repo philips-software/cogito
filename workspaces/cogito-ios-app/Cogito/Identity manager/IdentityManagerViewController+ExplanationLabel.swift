@@ -14,7 +14,7 @@ extension IdentityManagerViewController {
         if props.numberOfFacets == 0 {
             let width = tableView.frame.size.width - 32 // margins of the view
             return explanationLabel.sizeThatFits(CGSize(width: width, height: 1000)).height
-                + 50  // just some extra space
+                + 40  // just some extra space
         } else {
             return 0
         }
@@ -26,7 +26,7 @@ extension IdentityManagerViewController {
         return UIFont(descriptor: bold, size: 15)
     }()
     static let cogito = "Cogito".font(IdentityManagerViewController.boldTypewriter)
-    static let explanationText = NSAttributedString(string: "\n\nWhy do you need this?\n"
+    static let explanationText = NSAttributedString(string: "Why do you need this?\n"
         + "\n"
         + "As an employee of the Red Cross, you need to access many platforms"
         + "  that require different personal information. Red Cross offers ")
