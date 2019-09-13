@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PGr-nm-ghX">
-                                <rect key="frame" x="16" y="212" width="288" height="144"/>
+                                <rect key="frame" x="16" y="193" width="288" height="182"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UM-XJ-ZOF">
                                         <rect key="frame" x="90.5" y="0.0" width="107" height="30"/>
@@ -69,16 +69,22 @@
                                             <action selector="startOidcAttestation" destination="BYZ-38-t0r" eventType="touchUpInside" id="dIk-6A-lLt"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0T8-ja-IT1">
+                                        <rect key="frame" x="69" y="152" width="150" height="30"/>
+                                        <state key="normal" title="Export identity details"/>
+                                        <connections>
+                                            <action selector="shareFacets" destination="BYZ-38-t0r" eventType="touchUpInside" id="PRu-ll-Qi0"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="ESy-qP-gRx" firstAttribute="width" secondItem="Nnu-Hw-Ldp" secondAttribute="width" id="K7V-9m-6UE"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="0e1-GC-5gV">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="0e1-GC-5gV">
                                 <rect key="frame" x="16" y="519" width="63.5" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sw9-YF-5m1">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sw9-YF-5m1">
                                         <rect key="frame" x="0.0" y="0.0" width="63.5" height="13.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commit:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGS-ZX-KxR">
@@ -95,7 +101,7 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sGR-Bq-NQz">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sGR-Bq-NQz">
                                         <rect key="frame" x="0.0" y="15.5" width="63.5" height="13.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Branch:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lvs-6Q-bmK">
@@ -138,7 +144,9 @@
                             <constraint firstItem="PGr-nm-ghX" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="47e-fl-XId"/>
                             <constraint firstItem="up2-rU-YT4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="CP7-1M-Nk3"/>
                             <constraint firstItem="up2-rU-YT4" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="GIc-Xa-JZ4"/>
+                            <constraint firstItem="0e1-GC-5gV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="O83-a5-e7Q"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PGr-nm-ghX" secondAttribute="trailing" id="w9V-GT-7A2"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="0e1-GC-5gV" secondAttribute="bottom" constant="20" id="yKa-b1-LGh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

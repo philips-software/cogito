@@ -76,29 +76,6 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         }
     }
 
-    @IBAction func share(_ sender: UIBarButtonItem) {
-        let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("accounts.json")
-        let content: [[[String: Any]]] = self.props.facetGroups.map { facetGroup in
-            return facetGroup.items.compactMap { item in
-                if let facet = item.facet {
-                    return [
-                        "description": facet.description,
-                        "address": facet.address.value,
-                        "created": facet.created.description
-                    ]
-                } else {
-                    return nil
-                }
-            }
-        }
-        let joinedContent = [[String: Any]](content.joined())
-        let data = try? JSONSerialization.data(withJSONObject: joinedContent, options: .prettyPrinted)
-        try? data?.write(to: url)
-
-        let activityController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-        present(activityController, animated: true)
-    }
-
     // MARK: - Connection
 
     struct Props {
