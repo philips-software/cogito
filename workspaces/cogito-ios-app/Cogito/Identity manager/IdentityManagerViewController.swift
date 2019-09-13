@@ -22,24 +22,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         self.navigationController?.isNavigationBarHidden = true
         self.tableView.dataSource = nil
         dataSource = RxTableViewSectionedAnimatedDataSource(
-            configureCell: { _, tableView, indexPath, item in
-                let cell: UITableViewCell
-                if let facet = item.facet {
-                    cell = tableView.dequeueReusableCell(withIdentifier: "Facet", for: indexPath)
-                    if let facetCell = cell as? FacetTableViewCell {
-                        facetCell.facetLabel?.attributedText = facet.formatted()
-                        facetCell.facet = item.facet
-                        facetCell.enabled = !self.creatingIdentity
-                    }
-                } else {
-                    cell = tableView.dequeueReusableCell(withIdentifier: "CreateIdentity", for: indexPath)
-                    if let createCell = cell as? CreateIdentityTableViewCell {
-                        createCell.activityView.isHidden = true
-                        createCell.creatingLabel.isHidden = true
-                    }
-                }
-                return cell
-            },
+            configureCell: configureCell,
             canEditRowAtIndexPath: { _, _ in return true }
         )
         connection.bind(\Props.facetGroups, to: tableView.rx.items(dataSource: dataSource))
@@ -57,6 +40,30 @@ class IdentityManagerViewController: UITableViewController, Connectable {
                 = newNumber > 0 ? "I am also" : "I am"
         }
         subscribeToResetAppNotification()
+    }
+
+    func configureCell(
+        dataSource: TableViewSectionedDataSource<ViewModel.FacetGroup>,
+        tableView: UITableView,
+        indexPath: IndexPath,
+        item: ViewModel.FacetGroup.Item
+    ) -> UITableViewCell {
+        let cell: UITableViewCell
+        if let facet = item.facet {
+            cell = tableView.dequeueReusableCell(withIdentifier: "Facet", for: indexPath)
+            if let facetCell = cell as? FacetTableViewCell {
+                facetCell.facetLabel?.attributedText = facet.formatted()
+                facetCell.facet = item.facet
+                facetCell.enabled = !self.creatingIdentity
+            }
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "CreateIdentity", for: indexPath)
+            if let createCell = cell as? CreateIdentityTableViewCell {
+                createCell.activityView.isHidden = true
+                createCell.creatingLabel.isHidden = true
+            }
+        }
+        return cell
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
