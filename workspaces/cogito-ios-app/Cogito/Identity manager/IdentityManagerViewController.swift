@@ -23,7 +23,7 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         self.tableView.dataSource = nil
         dataSource = RxTableViewSectionedAnimatedDataSource(
             configureCell: configureCell,
-            canEditRowAtIndexPath: { _, _ in return true }
+            canEditRowAtIndexPath: canEditRow
         )
         connection.bind(\Props.facetGroups, to: tableView.rx.items(dataSource: dataSource))
         tableView.rx.itemDeleted.subscribe(onNext: { [unowned self] indexPath in
@@ -64,6 +64,13 @@ class IdentityManagerViewController: UITableViewController, Connectable {
             }
         }
         return cell
+    }
+
+    func canEditRow(
+        dataSource: TableViewSectionedDataSource<ViewModel.FacetGroup>,
+        indexPath: IndexPath
+    ) -> Bool {
+        return true
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
