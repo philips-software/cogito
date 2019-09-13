@@ -44,7 +44,6 @@ class IdentityManagerViewControllerSpec: QuickSpec {
                 ])]
                 identityManagerController.props = IdentityManagerViewController.Props(
                     facetGroups: model,
-                    selectedFacetIndex: 0,
                     numberOfFacets: model[0].items.count
                 )
             }
@@ -73,14 +72,15 @@ class IdentityManagerViewControllerSpec: QuickSpec {
         }
 
         describe("Map state to props") {
-            it("maps selectedFacetIndex") {
+            it("maps facet groups") {
                 let identity0 = Identity(description: "id0", address: Address.testAddress)
                 let identity1 = Identity(description: "id1", address: Address.testAddress1)
                 var diamond = DiamondState(facets: [identity0, identity1])
                 diamond.selectedFacetId = identity1.identifier
                 let state = appState(diamond: diamond)
                 identityManagerController.connection.newState(state: state)
-                expect(identityManagerController.props.selectedFacetIndex) == 1
+                expect(identityManagerController.props.facetGroups[0].items.count)
+                    == 3 // two identities plus create row
             }
         }
 

@@ -28,7 +28,6 @@ class IdentityManagerViewController: UITableViewController, Connectable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         connection.connect()
-        updateSelectedRow(facetIndex: self.props.selectedFacetIndex)
         self.actions.resetCreateIdentity()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
@@ -108,7 +107,6 @@ class IdentityManagerViewController: UITableViewController, Connectable {
 
     struct Props {
         let facetGroups: [ViewModel.FacetGroup]
-        let selectedFacetIndex: Int
         let numberOfFacets: Int
     }
     struct Actions {
@@ -129,9 +127,6 @@ class IdentityManagerViewController: UITableViewController, Connectable {
         tableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
             self.itemSelected(at: indexPath)
         }).disposed(by: disposeBag)
-        connection.subscribe(\Props.selectedFacetIndex) { [unowned self] newIndex in
-            self.updateSelectedRow(facetIndex: newIndex)
-        }
         connection.subscribe(\Props.numberOfFacets) { [unowned self] newNumber in
             self.findCreateIdentityCell()?.iamLabel.text
                 = newNumber > 0 ? "I am also" : "I am"
@@ -153,17 +148,9 @@ private func mapStateToProps(state: AppState) -> IdentityManagerViewController.P
     facets.append(IdentityManagerViewController.ViewModel.Facet.placeHolder)
     let group = IdentityManagerViewController.ViewModel.FacetGroup(items: facets).sorted()
 
-    let selectedIndex: Int
-    if let selectedFacet = state.diamond.selectedFacetId {
-        selectedIndex = group.items.compactMap { $0.facet?.identifier }.index(of: selectedFacet) ?? 0
-    } else {
-        selectedIndex = 0
-    }
-
     let groups = [group]
     return IdentityManagerViewController.Props(
         facetGroups: groups,
-        selectedFacetIndex: selectedIndex,
         numberOfFacets: state.diamond.facets.count
     )
 }
