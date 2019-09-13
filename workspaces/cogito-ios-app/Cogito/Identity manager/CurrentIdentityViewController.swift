@@ -6,12 +6,6 @@ import RichString
 import QRCodeReader
 import FontAwesome_swift
 
-private let typewriter = UIFont(name: "American Typewriter", size: 17)!
-private let boldTypewriter: UIFont = {
-    let bold = typewriter.fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits.traitBold)!
-    return UIFont(descriptor: bold, size: 17)
-}()
-
 class CurrentIdentityViewController: UIViewController, QRCodeReaderViewControllerDelegate, Connectable {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var cameraButton: UIButton!
@@ -23,7 +17,7 @@ class CurrentIdentityViewController: UIViewController, QRCodeReaderViewControlle
         super.viewDidLoad()
 
         connection.bind(\Props.selectedFacet, to: nameLabel.rx.attributedText) {
-            "I am ".font(boldTypewriter) +
+            "I am ".font(boldTypewriter17) +
             ($0?.formatted() ?? NSAttributedString())
         }
     }

@@ -25,6 +25,7 @@
 		023C34F2217DD324000953FB /* Attestation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023C34F1217DD324000953FB /* Attestation.swift */; };
 		0242C31B2322A42300427BAB /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0242C31A2322A42300427BAB /* Button.swift */; };
 		02624FC0232A486C009C62F7 /* CurrentIdentityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624FBF232A486C009C62F7 /* CurrentIdentityViewController.swift */; };
+		02624FC2232B7A07009C62F7 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624FC1232B7A07009C62F7 /* Appearance.swift */; };
 		026779AD2007B47E00C2D45C /* TransactionSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AC2007B47E00C2D45C /* TransactionSigner.swift */; };
 		026779B02007B49A00C2D45C /* TransactionSignerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */; };
 		0270D7131F9E3BBE00CC9038 /* ExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */; };
@@ -224,6 +225,7 @@
 		023C34F1217DD324000953FB /* Attestation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attestation.swift; sourceTree = "<group>"; };
 		0242C31A2322A42300427BAB /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		02624FBF232A486C009C62F7 /* CurrentIdentityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentIdentityViewController.swift; sourceTree = "<group>"; };
+		02624FC1232B7A07009C62F7 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		026779AC2007B47E00C2D45C /* TransactionSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSigner.swift; sourceTree = "<group>"; };
 		026779AF2007B49A00C2D45C /* TransactionSignerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSignerSpec.swift; sourceTree = "<group>"; };
 		0270D7121F9E3BBE00CC9038 /* ExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationViewController.swift; sourceTree = "<group>"; };
@@ -714,6 +716,7 @@
 				02B9A682203C762100ADB44F /* UIWindow+CurrentViewController.swift */,
 				02F04B69232678E10023918B /* UIImage+Color.swift */,
 				02F04B6B2327797E0023918B /* Colors.swift */,
+				02624FC1232B7A07009C62F7 /* Appearance.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1319,6 +1322,7 @@
 				5C20A1031FA224C000B443C9 /* TelepathChannel.swift in Sources */,
 				5C7C23911FA3502C009E9CE7 /* TelepathReceiver.swift in Sources */,
 				6D1A40582208E57E009F3557 /* ValueStoreService.swift in Sources */,
+				02624FC2232B7A07009C62F7 /* Appearance.swift in Sources */,
 				6D1A404D2208D5B5009F3557 /* ValueStoreState.swift in Sources */,
 				C00B5F118A7084D1D3845A15 /* AppPassword.swift in Sources */,
 				02F04B68232653DC0023918B /* CreateIdentityTableViewCell .swift in Sources */,
