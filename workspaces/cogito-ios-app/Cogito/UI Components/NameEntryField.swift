@@ -37,7 +37,7 @@ class NameEntryField: UITextField {
         if let ctx = UIGraphicsGetCurrentContext() {
             let color = self.textColor ?? .black
             ctx.setStrokeColor(color.cgColor)
-            ctx.setLineWidth(2)
+            ctx.setLineWidth(1)
             let ypos = effectiveAscender + 2
             ctx.move(to: CGPoint(x: 0, y: ypos))
             ctx.addLine(to: CGPoint(x: self.frame.size.width, y: ypos))
