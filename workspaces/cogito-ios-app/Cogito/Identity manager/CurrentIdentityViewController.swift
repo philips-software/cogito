@@ -17,7 +17,7 @@ class CurrentIdentityViewController: UIViewController, QRCodeReaderViewControlle
         super.viewDidLoad()
 
         connection.bind(\Props.selectedFacet, to: nameLabel.rx.attributedText) {
-            "I am ".font(boldTypewriter17) +
+            "I am ".font(UIFont.systemFont(ofSize: 17)) +
             ($0?.formatted() ?? NSAttributedString())
         }
     }

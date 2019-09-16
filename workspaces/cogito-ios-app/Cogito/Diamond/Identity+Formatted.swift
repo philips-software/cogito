@@ -3,8 +3,7 @@ import RichString
 import FontAwesome_swift
 
 private let formattedIdentityFontSize = CGFloat(30)
-private let formattedIdentityFont = UIFont(name: "Snell Roundhand", size: formattedIdentityFontSize)
-                                    ?? UIFont.italicSystemFont(ofSize: formattedIdentityFontSize)
+private let formattedIdentityFont = boldTypewriter17
 
 extension Identity {
     func formatted(addSpacePadding: Int = 0) -> NSAttributedString {

@@ -35,8 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         debugGestureHandler = DebugGestureHandler()
         debugGestureHandler.installGestureRecognizer(on: window!)
 
-        setupAppearance()
-        
         return true
     }
 

@@ -172,7 +172,7 @@ struct GetAttestationsValid: GetAttestations {
     func textFieldConfigurator(facet: Identity) -> ((UITextField) -> Void) {
         return { (textField: UITextField) in
             textField.isUserInteractionEnabled = false
-            textField.font = UIFont(name: "Snell Roundhand", size: 30)
+            textField.font = boldTypewriter17
             textField.text = facet.description
             textField.textAlignment = .center
         }

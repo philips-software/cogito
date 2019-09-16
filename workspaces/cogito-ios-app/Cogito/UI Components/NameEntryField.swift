@@ -2,9 +2,7 @@ import UIKit
 
 @IBDesignable
 class NameEntryField: UITextField {
-    static let scriptNameFont = UIFont(name: "Snell Roundhand", size: 30)!
-    static let normalNameFont = UIFont.systemFont(ofSize: 17)
-    static var nameFont = scriptNameFont
+    static var nameFont = boldTypewriter17
 
     var effectiveAscender: CGFloat = 0
 
