@@ -2,7 +2,7 @@ import UIKit
 
 @IBDesignable
 class NameEntryField: UITextField {
-    static var nameFont = boldTypewriter17
+    static var nameFont = boldTypewriter
 
     var effectiveAscender: CGFloat = 0
 

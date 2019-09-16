@@ -1,7 +1,7 @@
 import UIKit
 
-let typewriter17 = UIFont(name: "American Typewriter", size: 17)!
-let boldTypewriter17: UIFont = {
-    let bold = typewriter17.fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits.traitBold)!
-    return UIFont(descriptor: bold, size: 17)
+let typewriter = UIFont(name: "American Typewriter", size: 19)!
+let boldTypewriter: UIFont = {
+    let bold = typewriter.fontDescriptor.withSymbolicTraits(UIFontDescriptor.SymbolicTraits.traitBold)!
+    return UIFont(descriptor: bold, size: 19)
 }()

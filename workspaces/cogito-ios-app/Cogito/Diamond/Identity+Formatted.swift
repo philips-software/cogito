@@ -3,7 +3,7 @@ import RichString
 import FontAwesome_swift
 
 private let formattedIdentityFontSize = CGFloat(30)
-private let formattedIdentityFont = boldTypewriter17
+private let formattedIdentityFont = boldTypewriter
 
 extension Identity {
     func formatted(addSpacePadding: Int = 0) -> NSAttributedString {
