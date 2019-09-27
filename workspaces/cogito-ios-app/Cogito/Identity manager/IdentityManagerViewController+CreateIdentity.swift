@@ -61,7 +61,7 @@ extension IdentityManagerViewController {
     }
 
     func deactivateCreateNewIdentity() {
-        findCreateIdentityCell()?.deactivate()
+        findCreateIdentityCell()?.deactivate(isFirst: props.numberOfFacets == 0)
         self.setCancelButton(visible: false, animated: true)
         setExistingFacets(enabled: true)
         creatingIdentity = false

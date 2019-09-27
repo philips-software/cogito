@@ -29,6 +29,7 @@ extension IdentityManagerViewController {
             if let createCell = cell as? CreateIdentityTableViewCell {
                 createCell.activityView.isHidden = true
                 createCell.creatingLabel.isHidden = true
+                createCell.configureTapToCreateLabel(isFirst: props.numberOfFacets == 0)
             }
         }
         return cell

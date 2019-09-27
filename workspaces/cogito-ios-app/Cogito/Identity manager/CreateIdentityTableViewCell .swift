@@ -13,6 +13,13 @@ class CreateIdentityTableViewCell: UITableViewCell {
         createButtonTopConstraint.isActive = false
     }
 
+    func configureTapToCreateLabel(isFirst: Bool) {
+        tapToCreateLabel.text =
+            isFirst
+            ? "Tap to create an identity"
+            : "Tap to create another identity"
+    }
+
     func activate() {
         createButtonTopConstraint.isActive = true
         createButton.isHidden = false
@@ -23,12 +30,12 @@ class CreateIdentityTableViewCell: UITableViewCell {
         activityView.startAnimating()
     }
 
-    func deactivate() {
+    func deactivate(isFirst: Bool) {
         createButtonTopConstraint.isActive = false
         createButton.isHidden = true
         tapToCreateLabel.textColor = .tinted
-        tapToCreateLabel.text = "Tap to create an identity"
         nameEntryField.resignFirstResponder()
         iamLabel.textColor = .black
+        configureTapToCreateLabel(isFirst: isFirst)
     }
 }
