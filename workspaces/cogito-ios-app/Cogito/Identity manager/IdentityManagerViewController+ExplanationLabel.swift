@@ -39,9 +39,9 @@ extension IdentityManagerViewController {
             + "With ")
         + cogito
         + NSAttributedString(string: " you can create your"
-            + " digital identities for access to\n"
+            + " digital identities for access as an\n"
             + "\n"
-            + "• RC Health Insurance\n"
-            + "• RC Travel\n"
-            + "• RC Security")
+            + "• Aid worker at home\n"
+            + "• Aid worker in field\n"
+            + "• Aid worker in office")
 }

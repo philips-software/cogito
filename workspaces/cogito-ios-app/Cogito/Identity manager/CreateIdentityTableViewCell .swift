@@ -18,7 +18,7 @@ class CreateIdentityTableViewCell: UITableViewCell {
         createButton.isHidden = false
         createButton.isEnabled = false
         tapToCreateLabel.textColor = .black
-        tapToCreateLabel.text = "e.g. your name or \"Traveling\""
+        tapToCreateLabel.text = "e.g. \"Aid worker at ...\""
         iamLabel.textColor = .tinted
         activityView.startAnimating()
     }
@@ -27,7 +27,7 @@ class CreateIdentityTableViewCell: UITableViewCell {
         createButtonTopConstraint.isActive = false
         createButton.isHidden = true
         tapToCreateLabel.textColor = .tinted
-        tapToCreateLabel.text = "Tap to create a digital identity"
+        tapToCreateLabel.text = "Tap to create an identity"
         nameEntryField.resignFirstResponder()
         iamLabel.textColor = .black
     }
