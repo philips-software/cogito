@@ -40,8 +40,31 @@ class CurrentIdentityViewController: UIViewController, QRCodeReaderViewControlle
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? FacetDetailsViewController {
             destination.facet = props.selectedFacet
+            destination.destroyAction = destroyIdentity
         }
     }
+
+    func destroyIdentity() {
+        let alert = UIAlertController(
+            title: "Destroy identity",
+            message: "You will forever loose access to this identity. You cannot undo this.",
+            preferredStyle: .alert)
+        alert.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel,
+            handler: nil))
+        alert.addAction(UIAlertAction(
+            title: "Destroy",
+            style: .destructive,
+            handler: { _ in
+                if let uuid = self.props.selectedFacet?.identifier {
+                    self.actions.destroyIdentity(uuid)
+                    self.navigationController?.popToRootViewController(animated: true)
+                }
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
     // MARK: - QR Code Reading
 
     lazy var readerVC: QRCodeReaderViewController = {
@@ -140,6 +163,7 @@ class CurrentIdentityViewController: UIViewController, QRCodeReaderViewControlle
 
     struct Actions {
         let handleScannedQRCode: (String) -> Void
+        let destroyIdentity: (UUID) -> Void
     }
 }
 
@@ -156,6 +180,9 @@ private func mapDispatchToActions(dispatch: @escaping DispatchFunction)
                 if let url = URL(string: qrCodeString) {
                     dispatch(URLActions.HandleIncomingURL(url: url))
                 }
+            },
+            destroyIdentity: { uuid in
+                dispatch(DiamondActions.DeleteFacet(uuid: uuid))
             }
         )
 }

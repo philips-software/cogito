@@ -13,6 +13,7 @@ class FacetDetailsViewController: UITableViewController {
             updateViewModel()
         }
     }
+    var destroyAction: (() -> Void)?
 
     var sections: [ViewModel.SectionModel] = []
     let disposeBag = DisposeBag()
@@ -78,6 +79,10 @@ class FacetDetailsViewController: UITableViewController {
                                  detail: facet.created.description(with: Locale.autoupdatingCurrent)),
                 .facetDetailItem(title: "Address:",
                                  detail: facet.address.description)
+            ]),
+            .facetDetailsSection(title: "", items: [
+                .controlItem(title: "Destroy Identity",
+                             action: { self.destroyAction?() })
             ])
         ]
 
@@ -116,6 +121,10 @@ class FacetDetailsViewController: UITableViewController {
                     cell.detailTextLabel?.text = detail
                     cell.selectionStyle = title == "Address:" ? .default : .none
                     return cell
+                case let .controlItem(title, _):
+                    let cell = table.dequeueReusableCell(withIdentifier: "Control", for: indexPath)
+                    cell.textLabel?.text = title
+                    return cell
                 }
             },
             titleForHeaderInSection: { dataSource, index in
@@ -125,10 +134,18 @@ class FacetDetailsViewController: UITableViewController {
         )
         tableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
             self.tableView.deselectRow(at: indexPath, animated: true)
-            guard let text = self.facet?.address.description else { return }
-            let pasteBoard = UIPasteboard.general
-            pasteBoard.setValue(text, forPasteboardType: kUTTypeUTF8PlainText as String)
-            self.view.makeToast("Copied!", duration: 1, position: .center)
+            if self.tableView.cellForRow(at: indexPath)?.reuseIdentifier == "Control" {
+                let row = self.sections[indexPath.section].items[indexPath.row]
+                switch row {
+                case let .controlItem(_, action): action()
+                default: return
+                }
+            } else {
+                guard let text = self.facet?.address.description else { return }
+                let pasteBoard = UIPasteboard.general
+                pasteBoard.setValue(text, forPasteboardType: kUTTypeUTF8PlainText as String)
+                self.view.makeToast("Copied!", duration: 1, position: .center)
+            }
         }).disposed(by: disposeBag)
 
         Observable.just(sections)
@@ -148,6 +165,7 @@ extension FacetDetailsViewController {
 
         enum SectionItem {
             case facetDetailItem(title: String, detail: String)
+            case controlItem(title: String, action: () -> Void)
         }
     }
 }
