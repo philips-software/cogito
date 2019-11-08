@@ -89,7 +89,13 @@ class CurrentIdentityViewController: UIViewController, QRCodeReaderViewControlle
             .fontAwesomeIcon(name: .video)
             .font(Font.fontAwesome(ofSize: frame.size.width/2, style: .solid))
         cameraIconLabel.attributedText = icon
-        cameraIconLabel.textColor = .white
+        if #available(iOS 13.0, *) {
+            readerVC.view.backgroundColor = .label
+            cameraIconLabel.textColor = .systemBackground
+        } else {
+            readerVC.view.backgroundColor = .black
+            cameraIconLabel.textColor = .white
+        }
         readerVC.view.insertSubview(cameraIconLabel, at: 0)
         return readerVC
     }()

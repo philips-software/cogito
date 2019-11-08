@@ -5,7 +5,13 @@ class FacetTableViewCell: UITableViewCell {
     var facet: Identity?
     var enabled: Bool = true {
         didSet {
-            iamLabel.textColor = enabled ? .black : .disabled
+            let enabledColor: UIColor
+            if #available(iOS 13.0, *) {
+                enabledColor = UIColor.label
+            } else {
+                enabledColor = UIColor.black
+            }
+            iamLabel.textColor = enabled ? enabledColor : .disabled
             tapToEnterLabel.textColor = enabled ? .tinted : .disabled
             selectionStyle = enabled ? .default : .none
 

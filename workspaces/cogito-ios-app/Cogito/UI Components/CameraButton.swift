@@ -4,7 +4,13 @@ import UIKit
 @IBDesignable
 class CameraButton: UIButton {
 
-    var normalColor: UIColor = .darkGray
+    var normalColor: UIColor = {
+        if #available(iOS 13.0, *) {
+            return .placeholderText
+        } else {
+            return .darkGray
+        }
+    }()
     @IBInspectable var highlightColor: UIColor = .lightGray
 
     override func awakeFromNib() {
@@ -40,5 +46,9 @@ class CameraButton: UIButton {
             layer.borderColor = newValue ? highlightColor.cgColor : normalColor.cgColor
             tintColor = newValue ? highlightColor : normalColor
         }
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        configure()
     }
 }
