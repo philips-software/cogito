@@ -110,9 +110,6 @@ class IdentityManagerViewController: UITableViewController, Connectable {
 
     func setupConnection() {
         connection.bind(\Props.facetGroups, to: tableView.rx.items(dataSource: dataSource))
-        tableView.rx.itemDeleted.subscribe(onNext: { [unowned self] indexPath in
-            self.itemDeleted(at: indexPath)
-        }).disposed(by: disposeBag)
         tableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
             self.itemSelected(at: indexPath)
         }).disposed(by: disposeBag)
@@ -120,14 +117,6 @@ class IdentityManagerViewController: UITableViewController, Connectable {
             self.findCreateIdentityCell()?.iamLabel.text
                 = newNumber > 0 ? "I am also" : "I am"
         }
-    }
-
-    func itemDeleted(at indexPath: IndexPath) {
-        let identity = self.props.facetGroups[indexPath.section].items[indexPath.row]
-        guard let uuid = identity.facet?.identifier else {
-            return
-        }
-        self.actions.deleteIdentity(uuid)
     }
 }
 
