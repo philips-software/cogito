@@ -81,7 +81,7 @@ class FacetDetailsViewController: UITableViewController {
                                  detail: facet.address.description)
             ]),
             .facetDetailsSection(title: "", items: [
-                .controlItem(title: "Destroy Identity",
+                .controlItem(title: "Delete Identity",
                              action: { self.destroyAction?() })
             ])
         ]

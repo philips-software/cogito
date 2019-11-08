@@ -46,7 +46,7 @@ class CurrentIdentityViewController: UIViewController, QRCodeReaderViewControlle
 
     func destroyIdentity() {
         let alert = UIAlertController(
-            title: "Destroy identity",
+            title: "Delete identity",
             message: "You will forever loose access to this identity. You cannot undo this.",
             preferredStyle: .alert)
         alert.addAction(UIAlertAction(
@@ -54,7 +54,7 @@ class CurrentIdentityViewController: UIViewController, QRCodeReaderViewControlle
             style: .cancel,
             handler: nil))
         alert.addAction(UIAlertAction(
-            title: "Destroy",
+            title: "Delete",
             style: .destructive,
             handler: { _ in
                 if let uuid = self.props.selectedFacet?.identifier {
