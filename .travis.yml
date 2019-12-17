@@ -20,6 +20,7 @@ branches:
   - master
 before_install:
   # Use bundler 2.0
+  - gem uninstall --force bundler
   - gem update --system --force
   - gem install --force bundler
   # Use recent NodeJS
