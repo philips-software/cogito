@@ -20,8 +20,8 @@ branches:
   - master
 before_install:
   # Use bundler 2.0
-  - gem update --system
-  - gem install bundler
+  - gem update --system --force
+  - gem install --force bundler
   # Use recent NodeJS
   - nvm install 11
   - nvm use 11
