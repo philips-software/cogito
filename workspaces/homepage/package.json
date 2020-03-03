@@ -30,6 +30,7 @@
     "react-dom": "^16.6.3",
     "react-helmet": "^5.2.0",
     "react-typography": "0.16.13",
+    "sharp": "^0.24.1",
     "typography": "^0.16.17",
     "typography-theme-moraga": "^0.15.10"
   },
@@ -46,9 +47,9 @@
     "deploy": "yarn build && now --scope software-concepts --token $NOW_TOKEN --target production"
   },
   "devDependencies": {
+    "eslint-config-react-app": "^4.0.0",
     "gatsby-cli": "^2.0.0",
     "gatsby-plugin-root-import": "^2.0.0",
-    "eslint-config-react-app": "^4.0.0",
     "now": "^15.0.1"
   }
 }
