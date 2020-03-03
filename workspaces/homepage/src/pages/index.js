@@ -7,16 +7,15 @@ import cogitoScanVideo from './video/cogito-scan.mp4'
 
 const page = () => <Page>
   <Helmet title='Cogito' />
-  <h1>Cogito - <Smaller>safe, simple blockchain transactions</Smaller></h1>
+  <h1>Cogito - <Smaller>friendly and private identities</Smaller></h1>
   <Section>
     <RightVideo autoPlay>
-      <source src={cogitoSignVideo} type='video/mp4' />
+      <source src={cogitoScanVideo} type='video/mp4' />
     </RightVideo>
-    <h3>Signing</h3>
+    <h3>Easy login</h3>
     <p>
-      With Cogito you can quickly sign Ethereum transactions without the hassle.
-      Your keys will remain safely on your phone. You remain in control of your
-      identity.
+      Simply scan a QR code once. That is all it takes to use your Cogito
+      identity on a website.
     </p>
   </Section>
   <Section>
@@ -29,12 +28,13 @@ const page = () => <Page>
   </Section>
   <Section>
     <LeftVideo autoPlay>
-      <source src={cogitoScanVideo} type='video/mp4' />
+      <source src={cogitoSignVideo} type='video/mp4' />
     </LeftVideo>
-    <h3>Easy pairing</h3>
+    <h3>Blockchain transactions</h3>
     <p>
-      Simply scan a QR code once. That is all it takes to use your Cogito identity
-      on a website.
+      With Cogito you can quickly sign Ethereum transactions without the hassle.
+      Your keys will remain safely on your phone. You remain in control of your
+      identity.
     </p>
   </Section>
   <Section>
