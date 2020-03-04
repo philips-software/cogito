@@ -2,7 +2,7 @@ import UIKit
 import ReSwift
 import ReRxSwift
 
-class CreateIdentityViewController: UIViewController, Connectable {
+class CreateIdentityViewController: UIViewController, UITextFieldDelegate, Connectable {
 
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var createButton: UIButton!
@@ -19,6 +19,7 @@ class CreateIdentityViewController: UIViewController, Connectable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.descriptionField.delegate = self
         connection.bind(\Props.description, to: descriptionField.rx.text)
         connection.bind(\Props.createButtonEnabled, to: createButton.rx.isEnabled)
         connection.bind(\Props.pending, to: descriptionField.rx.isEnabled) { !$0 }
@@ -79,6 +80,11 @@ class CreateIdentityViewController: UIViewController, Connectable {
 
     @IBAction func cancelTapped() {
         onDone()
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
     struct Props {
