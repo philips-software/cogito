@@ -1,36 +1,31 @@
-const path = require('path')
-
-exports.createPages = async ({ actions, graphql }) => {
-  const { createPage } = actions
-  const markdownTemplate = path.resolve(`src/templates/markdownTemplate.js`)
-
-  const queryResult = await graphql(`
-    {
-      allMarkdownRemark(
-        limit: 1000
-      ) {
-        edges {
-          node {
-            frontmatter {
-              path
-            }
-          }
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes, createFieldExtension } = actions
+  createFieldExtension({
+    name: 'noMdx',
+    extend: () => ({
+      resolve (source, args, context, info) {
+        if (source[info.fieldName]) {
+          return context.defaultFieldResolver(
+            source,
+            args,
+            context,
+            info
+          )
+        } else {
+          return ''
         }
       }
-    }
-  `)
-
-  if (queryResult.errors) {
-    throw new Error(queryResult.errors)
-  }
-
-  queryResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    if (node.frontmatter.path) {
-      createPage({
-        path: node.frontmatter.path,
-        component: markdownTemplate,
-        context: {}
-      })
-    }
+    })
   })
+  const typeDefs = `
+    type Mdx implements Node @infer {
+      frontmatter: MdxFrontmatter,
+    }
+    type MdxFrontmatter @infer {
+      title: String @noMdx,
+      path: String @noMdx,
+      tag: String @noMdx
+    }
+  `
+  createTypes(typeDefs)
 }
