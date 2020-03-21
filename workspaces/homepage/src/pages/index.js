@@ -52,7 +52,9 @@ const Page = glamorous.div({
   marginTop: '3rem',
   marginLeft: 'auto',
   marginRight: 'auto',
-  maxWidth: '40rem'
+  maxWidth: '40rem',
+  paddingLeft: '2rem',
+  paddingRight: '2rem'
 })
 
 const Smaller = glamorous.span({
