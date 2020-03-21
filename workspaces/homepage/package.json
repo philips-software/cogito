@@ -3,36 +3,22 @@
   "name": "homepage",
   "description": "Cogito homepage",
   "version": "0.3.0",
-  "author": "Marcin Czenko <mczenko@me.com>",
+  "author": "Marcin Czenko <marcin@everydayproductive.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/philips-software/cogito.git"
   },
   "dependencies": {
-    "@react-frontend-developer/css-grid-helper": "^1.0.6",
-    "gatsby": "^2.0.0",
-    "gatsby-plugin-catch-links": "^2.0.0",
-    "gatsby-plugin-glamor": "^2.0.0",
-    "gatsby-plugin-layout": "^1.0.2",
-    "gatsby-plugin-react-helmet": "^3.0.0",
-    "gatsby-plugin-sharp": "^2.0.0",
-    "gatsby-plugin-typography": "^2.0.0",
-    "gatsby-remark-autolink-headers": "^2.0.0",
-    "gatsby-remark-images": "^2.0.1",
-    "gatsby-remark-prismjs": "^3.0.0",
-    "gatsby-source-filesystem": "^2.0.0",
-    "gatsby-transformer-remark": "^2.0.0",
-    "github-slugger": "^1.2.0",
-    "glamor": "^2.20.40",
-    "glamorous": "^4.12.5",
-    "prismjs": "^1.13.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-helmet": "^5.2.0",
-    "react-typography": "0.16.13",
-    "sharp": "^0.24.1",
-    "typography": "^0.16.17",
-    "typography-theme-moraga": "^0.15.10"
+    "@confluenza/gatsby-theme-confluenza": "^1.0.22",
+    "@emotion/core": "^10.0.15",
+    "@emotion/styled": "^10.0.15",
+    "gatsby": "^2.18.11",
+    "gatsby-plugin-catch-links": "^2.1.21",
+    "gatsby-plugin-emotion": "^4.1.18",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1",
+    "react-media": "^1.9.2"
   },
   "keywords": [
     "gatsby"
@@ -47,9 +33,11 @@
     "deploy": "yarn build && now --scope software-concepts --token $NOW_TOKEN --target production"
   },
   "devDependencies": {
+    "babel-jest": "^25.1.0",
     "eslint-config-react-app": "^4.0.0",
-    "gatsby-cli": "^2.0.0",
-    "gatsby-plugin-root-import": "^2.0.0",
-    "now": "^15.0.1"
+    "gatsby-cli": "^2.8.18",
+    "gatsby-plugin-root-import": "^2.0.5",
+    "now": "^17.0.4",
+    "regenerator-runtime": "^0.13.5"
   }
 }
