@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/philips-software/cogito.git"
   },
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "dependencies": {
     "@confluenza/gatsby-theme-confluenza": "^1.0.22",
     "@emotion/core": "^10.0.15",
@@ -28,6 +31,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "now-build": "yarn build",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "yarn build && now --scope software-concepts --token $NOW_TOKEN --target production"

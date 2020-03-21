@@ -1,7 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import Link from 'gatsby-link'
-import glamorous from 'glamorous'
+import styled from '@emotion/styled'
 import cogitoSignVideo from './video/cogito-sign.mp4'
 import cogitoScanVideo from './video/cogito-scan.mp4'
 
@@ -48,7 +48,7 @@ const page = () => <Page>
   </Section>
 </Page>
 
-const Page = glamorous.div({
+const Page = styled.div({
   marginTop: '3rem',
   marginLeft: 'auto',
   marginRight: 'auto',
@@ -57,13 +57,13 @@ const Page = glamorous.div({
   paddingRight: '2rem'
 })
 
-const Smaller = glamorous.span({
+const Smaller = styled.span({
   fontSize: 'smaller'
 })
 
-const Section = glamorous.div({ clear: 'both', marginTop: '2rem', marginBottom: '2rem' })
+const Section = styled.div({ clear: 'both', marginTop: '2rem', marginBottom: '2rem' })
 
-const LeftVideo = glamorous.video({
+const LeftVideo = styled.video({
   float: 'left',
   height: '8rem',
   marginRight: '3rem',
@@ -71,7 +71,7 @@ const LeftVideo = glamorous.video({
   marginBottom: '2rem'
 })
 
-const RightVideo = glamorous.video({
+const RightVideo = styled.video({
   float: 'right',
   height: '8rem',
   marginLeft: '3rem',

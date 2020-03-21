@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "builds": [
+    { 
+      "src": "workspaces/homepage/package.json",
+      "use": "@now/static-build",
+      "config": {"distDir": "public"}
+    }
+  ],
+  "routes": [
+    {
+      "src": "(.*)",
+      "dest": "/workspaces/homepage$1",
+      "continue": true
+    },
+    { "handle": "filesystem" },
+    { 
+      "src": "/.*",
+      "status": 404,
+      "dest": "/workspaces/homepage/404"
+    }
+  ],
+  "scope": "software-concepts"
+}
