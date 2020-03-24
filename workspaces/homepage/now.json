@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "name": "Cogito Homepage",
+  "alias": [
+    "cogito.mobi",
+    "www.cogito.mobi"
+  ],
+  "builds": [
+    {
+      "src": "public/**",
+      "use": "@now/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(?<path>.*)",
+      "dest": "/public/$path"
+    }
+  ]
+}
