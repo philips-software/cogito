@@ -62,12 +62,6 @@ script:
 » yarn start:all
 ```
 
-### Working on the mobile app
-
-For setting up the mobile app for iOS and Android using React Native please see
-the [Readme](workspaces/cogito-mobile/Readme.md) in the `workspaces/cogito-mobile`
-directory.
-
 ### Starting the cogito-ios-app-distribution
 
 This is the app we use to make downloading and installing our Cogito iOS App
