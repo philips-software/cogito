@@ -1,5 +1,4 @@
 import base64url from 'base64url'
-import timeoutCallback from 'timeout-callback'
 
 export class SocketIOChannel {
   constructor (socketFactoryMethod) {
@@ -32,18 +31,23 @@ export class SocketIOChannel {
 
   identify ({ channelId, timeout }) {
     return new Promise((resolve, reject) => {
+      var called = false
+      const callback = e => {
+        if (called) { return }
+        called = true
+        if (e instanceof Error) {
+          reject(e)
+        } else {
+          this.sendPendingNotifications()
+          resolve()
+        }
+      }
       this.socket.emit(
         'identify',
         channelId,
-        timeoutCallback(timeout, e => {
-          if (e instanceof Error) {
-            reject(e)
-          } else {
-            this.sendPendingNotifications()
-            resolve()
-          }
-        })
+        callback
       )
+      setTimeout(() => { callback(new Error('Timeout')) }, timeout)
     })
   }
 
