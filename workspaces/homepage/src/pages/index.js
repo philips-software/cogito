@@ -9,6 +9,18 @@ const page = () => <Page>
   <Helmet title='Cogito' />
   <h1>Cogito - <Smaller>friendly and private identities</Smaller></h1>
   <Section>
+    <h3>⚠ Deprecation ⚠</h3>
+    <p>
+      We've learned a lot from creating Cogito, and decided to apply our
+      learnings in a new project called <a href='https://idbox.online/'>Identity
+      Box</a>. Since we're only a small team, that unfortunately means that we
+      won't be updating Cogito for the foreseeable future. Should you be in need
+      of updates to Cogito, feel free to reach out to us on
+      <a href='https://philips-software-slackin.now.sh'>Slack</a>, and we'll see
+      what we can do to help you out.
+    </p>
+  </Section>
+  <Section>
     <RightVideo autoPlay>
       <source src={cogitoScanVideo} type='video/mp4' />
     </RightVideo>
