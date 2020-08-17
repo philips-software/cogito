@@ -3,6 +3,20 @@ title: Introduction
 path: /developer-documentation/introduction
 tag: developer-documentation
 ---
+
+⚠ Deprecation ⚠
+----------------
+
+We've learned a lot from creating Cogito, and decided to apply our learnings in
+a new project called [Identity Box](https://idbox.online/). Since we're only a
+small team, that unfortunately means that we won't be updating Cogito for the
+foreseeable future. Should you be in need of updates to Cogito, feel free to
+reach out to us on [Slack](https://philips-software-slackin.now.sh), and we'll
+see what we can do to help you out.
+
+Introduction
+------------
+
 Cogito is an open-source identity management system. For a quick introduction,
 visit [cogito.mobi] or watch an [introduction video][fosdem]. You may want to start by
 following the [Tutorial](/developer-documentation/tutorial) or by browsing
