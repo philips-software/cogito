@@ -74,6 +74,6 @@ after_success:
 deploy:
   skip_cleanup: true
   provider: script
-  script: ulimit -n 4096 && yarn deploy
+  script: ulimit -n 10240 && yarn deploy
   on:
     branch: master
