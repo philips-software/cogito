@@ -34,7 +34,7 @@
     "now-build": "yarn build",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "yarn build && vercel --scope software-concepts --token $NOW_TOKEN --target production"
+    "deploy": "yarn build && vercel --scope software-concepts --token $NOW_TOKEN --target production --confirm"
   },
   "devDependencies": {
     "babel-jest": "^25.1.0",
