@@ -8,7 +8,7 @@
   "builds": [
     {
       "src": "public/**",
-      "use": "@now/static"
+      "use": "@vercel/static"
     }
   ],
   "routes": [

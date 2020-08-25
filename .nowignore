@@ -8,11 +8,11 @@ node_modules
 !*.mdx
 .DS_Store
 !/package.json
-!/now.json
+!/vercel.json
 !/yarn.lock
 !/babel.config.js
 !/lerna.json
-                
+
 !tools/**
 !**/images/**
 
