@@ -71,6 +71,12 @@ after_success:
   - ./cc-test-reporter sum-coverage --parts 5 coverage/codeclimate.*.json
   # Upload test coverage to Code Climate
   - ./cc-test-reporter upload-coverage
+before_deploy:
+  # Workaround for 'too many open files' in deploy step
+  - rm -rf workspaces/cogito-ios-app/Build
+  - rm -rf workspaces/telepath-ios/Build
+  - rm -rf workspaces/cogito-attestations-ios/Build
+  - rm -rf workspaces/ethers-ios/Build
 deploy:
   skip_cleanup: true
   provider: script
