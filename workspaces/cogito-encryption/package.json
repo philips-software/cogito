@@ -23,6 +23,6 @@
     "base64url": "^2.0.0",
     "esm": "^3.2.22",
     "libsodium-wrappers": "^0.7.2",
-    "node-forge": "^0.7.5"
+    "node-forge": "^0.10.0"
   }
 }
