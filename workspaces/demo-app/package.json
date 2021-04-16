@@ -19,7 +19,7 @@
     "ganache-cli": "^6.3.0",
     "glamor": "^2.20.40",
     "glamorous": "^4.13.1",
-    "jsrsasign": "^8.0.12",
+    "jsrsasign": "^10.2.0",
     "libsodium-wrappers": "^0.7.3",
     "prop-types": "^15.6.2",
     "qrcode.react": "^0.8.0",
